@@ -152,9 +152,9 @@ SimpleGridObj.prototype = {
 				//console.log( arr[i].company.charAt(0) === matches[0]); //compere first letter in 'arr' and inputValue
 					if (matches === null) { 
 						console.log('matches  null');
-						try{
+						try{}catch(err) {console.log('catch : ',err);	}
 						SimpleGridObj.prototype.clearTable("form-search","SearchTable");
-						}catch(err) {console.log('catch : ',err);	}
+						
 						//var parentSearch = document.getElementById("form-search");
 						//var childSearch = document.getElementById("SearchTable");
 						//parentSearch.removeChild(childSearch);
