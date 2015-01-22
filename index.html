@@ -4,7 +4,7 @@
   <title>Grid test task</title>
   <meta charset="utf-8"></meta>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
+   <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->  
     
   <style> 
   #demo{
@@ -42,24 +42,33 @@
 	align-items: center;
 	justify-content: center;
 	height: 500px;
-	 background-color: #D2C6C6; 
+	background-color: #D2C6C6; 
 	opacity: 0;
   }
   .flexItem{
-   flex: 0 1;
+    flex: 0 1;
 	min-width: 50%;
+	border-radius: 6px;
+	padding: 10px;
+	box-shadow: 0px 0px 8px rgb(155,155,155);
+	background-color: ghostwhite;
   }
   </style>
   <script> window.addEventListener("load", 
   function(){ 
-  var load_screen = document.getElementById("demo");
   
+  var load_screen = document.getElementById("demo");
 	
+	var ss = document.createElement("link");
+			ss.type = "text/css";
+			ss.rel = "stylesheet";
+			ss.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css";			
+			 //ss.href = "http://www.json-generator.com/api/json/get/cdJeVpvdIO?indent=2";			
+			document.getElementsByTagName("head")[0].appendChild(ss);
+  
+  var tmpVal = setInterval(function () {myTimer()}, 0);
 	var count =0;
-  var tmpVal = setInterval(function () {myTimer(count)}, 0);
-	
-	function myTimer() {
-	   	
+	function myTimer() {	   	
 	  if (count === 100)
 	  {		
 		document.getElementById("flexCenter").style.opacity = 1;
@@ -67,16 +76,14 @@
 		document.body.removeChild(load_screen);		
 		console.log('loader done in: ' + count + '%');	
 	  }else{
-		count++;
-			
+		count++;			
 		document.getElementById('txt').innerHTML = count;	
-		if (count < 100) {
-		//document.getElementById("loader").style.opacity = (1.4-(count/100));
-		//console.log();
+		if (count < 100) {		
 		document.getElementById("demo").style.background = "rgba(255,0,0 ,"+(1-(count/100)).toFixed(2)  +")";
+			}
 		}
 	}
-	}		
+			
   }); 
 
   </script>
