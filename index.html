@@ -13,7 +13,8 @@
 	  z-index:10; 
 	  top: 0px; 
 	  width: 100%; 
-	  min-height: 500px;
+	  min-height: 115px;
+	  
 	  display: flex;
 	  align-items: center;
 	  justify-content: center;
@@ -42,7 +43,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 500px;
-	background-color: #D2C6C6; 
+	/* background-color: #D2C6C6;  */
 	opacity: 0;
   }
   .flexItem{
@@ -66,7 +67,7 @@
 			 //ss.href = "http://www.json-generator.com/api/json/get/cdJeVpvdIO?indent=2";			
 			document.getElementsByTagName("head")[0].appendChild(ss);
   
-  var tmpVal = setInterval(function () {myTimer()}, 0);
+  var tmpVal = setInterval(function () {myTimer()}, 110);
 	var count =0;
 	function myTimer() {	   	
 	  if (count === 100)
@@ -80,6 +81,7 @@
 		document.getElementById('txt').innerHTML = count;	
 		if (count < 100) {		
 		document.getElementById("demo").style.background = "rgba(255,0,0 ,"+(1-(count/100)).toFixed(2)  +")";
+		document.getElementById("demo").style.height = count +"%";
 			}
 		}
 	}
