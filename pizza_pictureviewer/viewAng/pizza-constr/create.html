@@ -1,0 +1,82 @@
+hallo ...<=here should be pizza size select
+<div ng-controller="pizzaConstructorCtrl" class="container row">
+    <div class="col-sm-6">
+        <tabset>
+            <tab heading="{{tabs[0].title}}">
+                <span class="badge" style="display: inline-block; position: relative; bottom: 55px; left: 95px;" 
+                      ng-if="finalPriceModel[0]">{{finalPriceModel.length}}</span>                
+                <ul class="list-group">
+                    <li ng-repeat="meat in meats" class="list-group-item">
+                        ID: {{meat.id}}
+                        <img class="slide" 
+                             ng-swipe-right="showPrev()" ng-swipe-left="showNext()"  
+                             ng-src="{{meat.picture}}"/>
+                        Name: {{meat.name}}
+                        Price: {{meat.price | currency}}
+<div ng-controller="DropdownCtrl">
+                        <!-- Single button -->
+<!--                        <div class="btn-group" dropdown is-open="status.isopen">
+                            <button ng-click="setMultiplaer(1)" type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                Full <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-click="setMultiplaer(0.5)"><a>Right half</a></li>
+                                <li ng-click="setMultiplaer(0.5)"><a>Left half</a></li>
+                            </ul>
+                        </div>-->
+    <hr>                    
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+    </div><pre>{{radioModel || 'null'}}</pre>
+    
+    <button ng-click="add(meat.price , meat.id , meat.name ,radioModel)" class="btn btn-success">add</button>
+</div>
+                    </li>
+                </ul>
+            </tab>
+<!--chees tab-->
+            <tab heading="{{tabs[1].title}}" active="tab.active" disabled="tab.disabled">
+                {{tab.content}}
+                <ul class="list-group">
+                    <li ng-repeat="chees in cheese" class="list-group-item">
+                        ID: {{chees.id}};  
+                        <img class="slide" 
+                             ng-swipe-right="showPrev()" ng-swipe-left="showNext()"  
+                             ng-src="{{chees.picture}}"/>
+                        <b> Name:</b> {{chees.name}} ,Price:{{chees.price | currency}}
+<div ng-controller="DropdownCtrl">
+    <hr>                    
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+    </div><pre>{{radioModel || 'null'}}</pre>
+    
+    <button ng-click="add(chees.price , chees.id , chees.name ,radioModel)" class="btn btn-success">add</button>
+</div>
+                    </li>
+                </ul>
+            </tab>
+
+        </tabset>
+        
+    </div>
+    
+    <div class='col-sm-6'>
+        <ol>
+            <b>Final pizza components:</b>
+            <li ng-repeat="item in finalPriceModel"> 
+                <b>{{item.name}}</b>: {{item.price | currency}} <br/>
+                Fill: {{item.radioModel}} <br/>
+            </li>
+        </ol>
+    </div>
+    <div class="blockquote-reverse">
+        <button class="btn btn-warning " ng-if="finalPriceModel[0]" ng-click="sentPost()">Order</button>
+        <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel)">Reset pizza</button>
+    </div>
+    <hr>
+    <pre ng-if="finalPriceModel[0]">finalPriceModel:<br/> {{finalPriceModel}}</pre>
+</div>
