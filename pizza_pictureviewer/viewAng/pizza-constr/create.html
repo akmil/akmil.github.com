@@ -65,16 +65,20 @@ hallo ...<=here should be pizza size select
     </div>
     
     <div class='col-sm-6'>
-        <ol>
-            <b>Final pizza components:</b>
-            <li ng-repeat="item in finalPriceModel"> 
+         <b>Final pizza components:</b>
+        <ol>           
+            <li ng-repeat="item in finalPriceModel" 
+                style ="border-bottom: 1px solid rgb(153, 153, 153);padding: 5px;"> 
                 <b>{{item.name}}</b>: {{item.price | currency}} <br/>
                 Fill: {{item.radioModel}} <br/>
+                <button type="button" ng-click="deleteItem(item)" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                </button>
             </li>
         </ol>
     </div>
     <div class="blockquote-reverse">
-        <button class="btn btn-warning " ng-if="finalPriceModel[0]" ng-click="sentPost()">Order</button>
+        <button class="btn btn-warning " ng-if="finalPriceModel[0]" ng-click="sentPost()">Order : {{finalPrice | currency}}</button>
         <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel)">Reset pizza</button>
     </div>
     <hr>

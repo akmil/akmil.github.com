@@ -9,8 +9,8 @@ appNameMy.controller('pizzaConstructorCtrl', function($scope, factoryPizza,$wind
   ];
   
 //  $scope.multiplier = 1;
-  
-  $scope.fullRightLeftHalf = ['full','left','right'];
+$scope.finalPriceModel =[];//array of objects
+$scope.finalPrice = 0;
   
 function init(){
         
@@ -34,7 +34,7 @@ function init(){
             $scope.multiplier = multiplier;
         };
         
-     $scope.finalPriceModel =[];//array of objects
+    
      
      $scope.add = function (_price, _id, _name ,_radioModel){  
          console.log(" radioModel: "+ _radioModel);
@@ -44,15 +44,23 @@ function init(){
          
          $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel});
          
-         //$scope.finalPriceModel =$scope.finalPriceModel + price * $scope.multiplier ;
+         $scope.finalPrice =$scope.finalPrice + _price;
+         
          console.log('price:',_price,' multiplief:', $scope.multiplier ," add is "+$scope.finalPriceModel);
          
      };   
      $scope.clear = function (){
-         $scope.finalPriceModel =[];
+        $scope.finalPriceModel =[];
+     };
+     $scope.deleteItem = function (row){  
+            var index = $scope.finalPriceModel.indexOf(row);
+            console.log('index is ', index);
+            if (index !== -1) {
+                $scope.finalPriceModel.splice(index, 1);            
+            };
      };
      $scope.sentPost = function (){
-         alert('pizza in your basket');
+         alert('pizza in your basket total price is'+ $scope.finalPrice);
      };
      //return $scope.pizzaConstructorCtrl = this;
 });
