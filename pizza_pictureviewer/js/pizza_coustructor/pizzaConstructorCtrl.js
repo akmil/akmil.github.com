@@ -77,6 +77,7 @@ function init(){
      
      $scope.clear = function (){
         $scope.finalPriceModel =[];
+        $scope.finalPrice = 0;
      };
      
      $scope.deleteItem = function (row){  
