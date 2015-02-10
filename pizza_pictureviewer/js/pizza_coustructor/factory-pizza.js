@@ -2,13 +2,9 @@
 appNameMy.factory('factoryPizza', function($http ,$q) {
     var factoryPizza = {};
     var jsonURL = 'http://www.json-generator.com/api/json/get/cbgpJYnybm?indent=2';
-    var factoryPizzaArr = [];
+    var factoryPizzaArr = []; //not used
 
 
-//
-//    factoryPizza.putCustomer = function putCustomer(customerPutName) {
-//        factoryPizza.push({name: customerPutName, city: 'someCity'});
-//    };
 factoryPizza.getData = function(){
         var deferred = $q.defer();
         $http.get(jsonURL).success(function(data, s){
@@ -18,7 +14,7 @@ factoryPizza.getData = function(){
         });
         return deferred.promise;
     };
-    
+ /*
     factoryPizza.getData_my = function() {
         console.log('factory loaded');
         return $http.get(jsonURL)
@@ -41,11 +37,12 @@ factoryPizza.getData = function(){
                 });
 
     };
-
+*/
     factoryPizza.factoryPizzaArr = function() {
         console.log(factoryPizzaArr);
         return factoryPizzaArr;
     };
+    
     return factoryPizza;
 });
 

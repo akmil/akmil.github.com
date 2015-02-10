@@ -1,10 +1,19 @@
-hallo ...<=here should be pizza size select
-<div ng-controller="pizzaConstructorCtrl" class="container row">
+<div ng-controller="pizzaConstructorCtrl" >
+   Select sizePizza: 
+    <ul>
+        <li ng-repeat="pizzaSizze in sizePizza">
+            {{pizzaSizze.name}}: <a class="" ng-click="setSize(pizzaSizze.price)">{{pizzaSizze.price | currency}}</a>
+        </li>        
+    </ul>
+
+
+  <div class="container row">
     <div class="col-sm-6">
+        <span class="badge" 
+                      ng-if="finalPriceModel[0]">{{finalPriceModel.length}}</span>
         <tabset>
             <tab heading="{{tabs[0].title}}">
-                <span class="badge" 
-                      ng-if="finalPriceModel[0]">{{finalPriceModel.length}}</span>                
+                                
                 <ul class="list-group">
                     <li ng-repeat="meat in meats" class="list-group-item">
                         ID: {{meat.id}}
@@ -65,22 +74,24 @@ hallo ...<=here should be pizza size select
     </div>
     
     <div class='col-sm-6'>
-         <b>Final pizza components:</b>
+        <b>Final pizza components: </b> <i ng-class="" ng-init="pizzaSize = 'please select size'"> pizzaSize size:</i>  {{pizzaSize}} 
         <ol>           
             <li ng-repeat="item in finalPriceModel" 
                 style ="border-bottom: 1px solid rgb(153, 153, 153);padding: 5px;"> 
                 <b>{{item.name}}</b>: {{item.price | currency}} <br/>
                 Fill: {{item.radioModel}} <br/>
                 <button type="button" ng-click="deleteItem(item)" class="btn btn-sm btn-danger">
-                    <i class="glyphicon glyphicon-remove-circle"></i>
+                   DeleteItem <i class="glyphicon glyphicon-remove-circle"></i>
                 </button>
             </li>
         </ol>
     </div>
     <div class="blockquote-reverse">
-        <button class="btn btn-warning " ng-if="finalPriceModel[0]" ng-click="sentPost()">Order : {{finalPrice | currency}}</button>
+        <button class="btn btn-warning " ng-if="finalPriceModel[0] || pizzaSize" ng-click="sentPost()">Order : {{finalPrice + pizzaSize | currency}}</button>
         <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel)">Reset pizza</button>
     </div>
     <hr>
     <pre ng-if="finalPriceModel[0]">finalPriceModel:<br/> {{finalPriceModel}}</pre>
+  </div>
 </div>
+
