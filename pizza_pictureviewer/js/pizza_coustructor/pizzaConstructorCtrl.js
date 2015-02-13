@@ -12,6 +12,9 @@ appNameMy.controller('pizzaConstructorCtrl', function($scope, factoryPizza,$wind
 $scope.finalPriceModel =[];//array of objects
 $scope.finalPrice = 0;
 $scope.pizzaSize = 0;
+var bool = false; //used in isArrElem
+$scope.totalCounter=  0;
+
 
 function init(){
         
@@ -37,42 +40,67 @@ function init(){
         
     // should be singleton
     $scope.setSize = function (_size){
-    console.log('you choose size ' , _size);
+    console.log('you choose size ' , _size);    
+       return $scope.pizzaSize = _size;
+    };
     
-    //$scope.finalPriceModel.push({sizePizza: _size});
-//    console.log('$scope.finalPriceModel[0].sizePizza' , $scope.finalPriceModel[0].sizePizza);
-
-/*
-    var i= 0;
-    for(i=0;i< $scope.finalPriceModel.length; i++){
-    if ($scope.finalPriceModel.sizePizza === 'undefined'){        
-        $scope.finalPriceModel[0].push({sizePizza: _size});
-    }else{
-        console.log('else ');
-        $scope.finalPriceModel.unshift({sizePizza: _size});
-    }
-    }
- */
+    function isArrElem(_arrayElem, _model) {        
+        bool = false;
+        console.log('_arrayElem:', _arrayElem);            
+        for (var i = 0; i < $scope.finalPriceModel.length; i++) {
+            console.log('$scope.finalPriceModel[i].name:',$scope.finalPriceModel[i].name);
+            if (_arrayElem === $scope.finalPriceModel[i].name) {                
+                $scope.finalPriceModel[i].quantity++;                 
+                $scope.finalPriceModel[i].radioModel=_model;
+                bool = true;                
+                //document.getElementById("console").innerHTML = 'found: ' + $scope.finalPriceModel[i] + ' ,index is ' + $scope.finalPriceModel.indexOf(_arrayElem) + ' ,isArrElem(bool): ' + bool + '; counter' + $scope.totalCounter;
+            }
+            //do none
+            /* else {                
+                document.getElementById("info").innerHTML = 'else found: ' + $scope.finalPriceModel[i] + ' ,index is ' + $scope.finalPriceModel.indexOf(_arrayElem) + ' ,isArrElem(bool): ' + bool + '; counter' + $scope.totalCounter;
+            }*/
+        }
+    };
+    $scope.minusItem = function (){
         
-//        else{ 
-//            $scope.finalPriceModel[0].push({sizePizza: _size}); 
-//
-//        }
-
-        
-        //console.log('$scope.finalPriceModel.sizePizza ' , $scope.finalPriceModel[0].sizePizza);
-        return $scope.pizzaSize = _size;
-    };    
-     
-     $scope.add = function (_price, _id, _name ,_radioModel){  
-         //console.log(" radioModel: "+ _radioModel,'pizzaSize: ', $scope.pizzaSize);
-         var _size  = 0;
+    };
+     $scope.add = function (_price, _id, _name ,_radioModel , _quantity){  
+         var i =0;
+         ++$scope.totalCounter;
+         
+         //console.log("_quantity++",_quantity );
+         
          if (_radioModel === 'Full'){
              _price = _price * 1;
          }else _price = _price * 0.5;
-         $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel});
+         
+         //$scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity});            
+        isArrElem(_name, _radioModel);
+        if (!bool) {         
+            $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity}); 
+        }
+        
+         /*  
+         //if first time select item
+         if($scope.finalPriceModel.length === 0){
+            $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity});            
+         }
+// console.log('$scope.finalPriceModel.length: ',$scope.finalPriceModel.length); // 1,2          
+          if ($scope.finalPriceModel[$scope.finalPriceModel.length-1].name === _name){
+              $scope.finalPriceModel.pop();
+              //$scope.finalPriceModel.pop();              
+               //$scope.quantity = ++_quantity;               
+               $scope.finalPriceModel.quantity = _quantity;
+               $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity});
+              console.log("_quantity: ",_quantity);
+               
+          }else {
+                $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity});            
+            }
+            
+         */     
          $scope.finalPrice =$scope.finalPrice + _price;
-         console.log('price:',_price,' multiplief(radioModel):', _radioModel ," add is " + $scope.finalPriceModel[$scope.finalPriceModel.length-1].price);
+         //console.log( $scope.finalPriceModel );
      };
      
      $scope.clear = function (){
@@ -106,7 +134,19 @@ function init(){
 //  };
   
   $scope.radioModel = 'Full';
+//  $scope.setSizeItem = function (_size){
+//    console.log('you choose sizeItem ' , _size);    
+//       return $scope.radioModel = _size;
+//    };
+  $scope.quantity = 0;
   
+  $scope.increaseQuantity = function(){
+      $scope.quantity++;
+  };
+  
+  $scope.clearQuantity = function(){
+      $scope.quantity=0;
+  };
   
 });
 
