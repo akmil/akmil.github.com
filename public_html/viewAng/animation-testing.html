@@ -1,0 +1,32 @@
+<div>testing two layers character slide-animation </div>
+<div ng-controller="sliderCtrl" class="col-left">
+
+    <div class="container-slider slider " style="background-color: {{selected}}; width: 270px">
+
+        <!-- enumerate all photos -->
+        <div ng-repeat="armor in armor_layer01" class="centeredItem">
+            <img class="slide" 
+                 ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" 
+                 ng-src="{{ armor.imgUrl}}"/>
+        </div>
+
+        <div ng-repeat="leyer02Weapon in layer02" class="centeredItem layer02-shift">
+            <img class="slide"  
+                 ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" 
+                 ng-src="{{ leyer02Weapon.imgUrl}}"/>
+        </div>
+
+    </div>
+
+    <a class="arrow prev" href="" ng-click="showPrev()">showPrev</a>      
+    <a class="arrow next" href="" ng-click="showNext()">showNext</a>
+
+    <div class="row">   
+        <div class="col-md-6">
+            delay: {{speedRange/1000}}s <input type="range" name="speed" value="500" min="100" max="5000" ng-model="speedRange"/> 
+            <button  ng-click="play(speedRange)" class="btn btn-success">play {{speedRange/1000}}s</button>
+            <button ng-click="stop()" class="btn btn-success">stop</button>
+        </div>
+        <div class="col-md-6"></div>
+    </div>    
+</div>
