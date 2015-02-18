@@ -1,0 +1,99 @@
+<div ng-controller="pizzaConstructorCtrl" >
+   Select sizePizza: 
+    <ul>
+        <li ng-repeat="pizzaSizze in sizePizza">
+            {{pizzaSizze.name}}: <a class="" ng-click="setSize(pizzaSizze.price)">{{pizzaSizze.price | currency}}</a>
+            
+        </li>        
+    </ul>
+
+
+  <div class="container row">
+    <div class="col-sm-6">
+        <span class="badge" 
+                      ng-if="finalPriceModel[0]">{{finalPriceModel.length}}</span>
+        <tabset>
+            <tab heading="{{tabs[0].title}}">
+                                
+                <ul class="list-group">
+                    <li ng-repeat="meat in meats" class="list-group-item">
+                        ID: {{meat.id}}
+                        <img class="slide" 
+                             ng-swipe-right="showPrev()" ng-swipe-left="showNext()"  
+                             ng-src="{{meat.picture}}"/>
+                        Name: {{meat.name}}
+                        Price: {{meat.price | currency}}
+<div ng-controller="DropdownCtrl">                       
+    <hr>                    
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>        
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+    </div>
+    <!--<pre>{{radioModel || 'null'}}</pre>-->
+    <b ng-model="quantity">x {{quantity}}</b>
+    <button  ng-click="increaseQuantity();add(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">add</button>
+    
+</div>
+                    </li>
+                </ul>
+            </tab>
+<!--chees tab-->
+            <tab heading="{{tabs[1].title}}" active="tab.active" disabled="tab.disabled">
+                {{tab.content}}
+                <ul class="list-group">
+                    <li ng-repeat="chees in cheese" class="list-group-item">
+                        ID: {{chees.id}};  
+                        <img class="slide" 
+                             ng-swipe-right="showPrev()" ng-swipe-left="showNext()"  
+                             ng-src="{{chees.picture}}"/>
+                        <b> Name:</b> {{chees.name}} ,Price:{{chees.price | currency}}
+<div ng-controller="DropdownCtrl">
+    <hr>                    
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+    </div>
+    <!--<pre>{{radioModel || 'null'}}</pre>-->
+    
+    <button ng-click="add(chees.price , chees.id , chees.name ,radioModel, 1)" class="btn btn-success">add</button>
+</div>
+                    </li>
+                </ul>
+            </tab>
+
+        </tabset>
+        
+    </div>
+    
+    <div class='col-sm-6'>
+        <b>Final pizza components: </b> <i ng-class="" ng-init="pizzaSize = 'please select size'"> pizzaSize size:</i>  {{pizzaSize}} 
+        <ol>           
+            <li ng-repeat="item in finalPriceModel" 
+                style ="border-bottom: 1px solid rgb(153, 153, 153);padding: 5px;"> 
+                <b>{{item.name}}</b>: {{item.price | currency}} <br/>
+                Fill: {{item.radioModel}} 
+                <b>x {{item.quantity}}</b>
+                <br/>
+                <button type="button" ng-click="deleteItem(item); clearQuantity(item);" class="btn btn-sm btn-danger">
+                   DeleteItem <i class="glyphicon glyphicon-remove-circle"></i>
+                </button>
+            </li>
+        </ol>
+    </div>
+    <div class="blockquote-reverse">
+        <button class="btn btn-warning " ng-if="finalPriceModel[0] || pizzaSize" ng-click="sentPost()">Order : {{finalPrice + pizzaSize | currency}}</button>
+        <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel);  clearQuantity(item);">Reset pizza</button>
+    </div>
+    <hr>
+    <div ng-if="finalPriceModel[0]">total item order ({{totalCounter}}) , finalPriceModel:<br/> {{finalPriceModel}}</div>
+  </div>
+   
+<!--   <p id="demo"></p>
+   <h4 id="info-myFunction">info-myFunction</h4>
+   <h3 id="info" style="color:red;">info</h3>
+   <p id="console" style="color:green;">h3</p>-->
+
+</div>
+

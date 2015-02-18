@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#myDIV {
+    height: 250px;
+    width: 250px;
+  
+    overflow-y: auto;
+display: block;
+}
+
+#content {
+    height: 800px;
+    
+    background-color: coral;
+}
+</style>
+</head>
+<body>
+
+<p>Scroll inside the div element to display the number of pixels the content of div is scrolled horizontally and vertically.</p>
+
+<div id="myDIV" onscroll="myFunction()">
+  <div id="content">Scroll inside me! Scroll inside the div element to display the number of pixels the content of div is scrolled horizontally and vertically.</div>
+
+<p id="active">Scroll inside the div element to display the number of pixels the content of div is scrolled horizontally and vertically.</p>
+<p>Scroll inside the div element to display the number of pixels the content of div is scrolled horizontally and vertically.</p>
+
+<p>Scroll inside the div element to display the number of pixels the content of div is scrolled horizontally and vertically.</p>
+</div>
+
+<button onclick="scrollBot(100)"> scroll horizontally!</button>
+<button onclick="divScrollTo('active')"> scroll To Active</button>
+<p id="demo"></p>
+
+<script>
+
+function scrollBot(n) {
+var elmnt = document.getElementById("myDIV");    
+    elmnt.scrollTop +=n;
+     
+}
+
+function divScrollTo(id)
+{
+    var element = document.getElementById(id)
+    element.parentNode.scrollTop =
+    element.offsetTop - element.parentNode.offsetTop;
+}
+
+function myFunction() {
+    var elmnt = document.getElementById("myDIV");
+    var x = elmnt.scrollLeft;
+    var y = elmnt.scrollTop;
+    document.getElementById ("demo").innerHTML = "Horizontally: " + x + "px<br>Vertically: " + y + "px";
+}
+
+</script>
+
+</body>
+</html>

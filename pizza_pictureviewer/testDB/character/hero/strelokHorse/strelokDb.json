@@ -1,0 +1,49 @@
+{
+    "armor_0walk": [
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00004.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00005.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00006.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00007.png"
+
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00008.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00009.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00010.png"
+        },
+        {
+            "name": "camera01",
+            "snippet": "0walk",
+            "imageUrl": "/testDB/character/hero/strelokHorse/armor_0walk/a_00011.png"
+        }
+
+    ]
+
+}
+
+ 
