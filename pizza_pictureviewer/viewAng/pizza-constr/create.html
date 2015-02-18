@@ -13,6 +13,7 @@
         <span class="badge" 
                       ng-if="finalPriceModel[0]">{{finalPriceModel.length}}</span>
         <tabset>
+            <!--meat tab-->
             <tab heading="{{tabs[0].title}}">
                                 
                 <ul class="list-group">
@@ -32,7 +33,8 @@
     </div>
     <!--<pre>{{radioModel || 'null'}}</pre>-->
     <b ng-model="quantity">x {{quantity}}</b>
-    <button  ng-click="increaseQuantity();add(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">add</button>
+    <button  ng-click="increaseQuantity();add(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">+</button>
+    <button  ng-click="decreaseQuantity(); decreaseItem(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">-</button>
     
 </div>
                     </li>
@@ -76,7 +78,7 @@
                 Fill: {{item.radioModel}} 
                 <b>x {{item.quantity}}</b>
                 <br/>
-                <button type="button" ng-click="deleteItem(item); clearQuantity(item);" class="btn btn-sm btn-danger">
+                <button type="button" ng-click="clearQuantity(item); deleteItem(item); " class="btn btn-sm btn-danger">
                    DeleteItem <i class="glyphicon glyphicon-remove-circle"></i>
                 </button>
             </li>
