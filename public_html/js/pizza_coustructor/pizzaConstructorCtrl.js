@@ -44,13 +44,18 @@ function init(){
        return $scope.pizzaSize = _size;
     };
     
-    function isArrElem(_arrayElem, _model) {        
+    function isArrElem(_arrayElem, _model,incORdec) {        
         bool = false;
         console.log('_arrayElem:', _arrayElem);            
         for (var i = 0; i < $scope.finalPriceModel.length; i++) {
             console.log('$scope.finalPriceModel[i].name:',$scope.finalPriceModel[i].name);
-            if (_arrayElem === $scope.finalPriceModel[i].name) {                
-                $scope.finalPriceModel[i].quantity++;                 
+            if (_arrayElem === $scope.finalPriceModel[i].name) { 
+                if(incORdec){
+                     $scope.finalPriceModel[i].quantity++;
+                 }else if($scope.finalPriceModel[i].quantity >= 0){                    
+                    $scope.finalPriceModel[i].quantity--;  
+                     console.log('if quantity  :',$scope.finalPriceModel[i].quantity);
+                     }else $scope.finalPriceModel[i].quantity = 0;  
                 $scope.finalPriceModel[i].radioModel=_model;
                 bool = true;                
                 //document.getElementById("console").innerHTML = 'found: ' + $scope.finalPriceModel[i] + ' ,index is ' + $scope.finalPriceModel.indexOf(_arrayElem) + ' ,isArrElem(bool): ' + bool + '; counter' + $scope.totalCounter;
@@ -61,22 +66,32 @@ function init(){
             }*/
         }
     };
-    $scope.minusItem = function (){
-        
+    
+    $scope.decreaseItem = function (_price, _id, _name ,_radioModel , _quantity){
+        var i =0;
+        console.log('_quantity: ',_quantity);
+         $scope.totalCounter--;
+         if (_radioModel === 'Full'){
+             _price = _price * 1;
+         }else _price = _price * 0.5;
+         isArrElem(_name, _radioModel,false);//true - is quantity--
+        if (!bool) { 
+            $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity}); 
+        }
+        $scope.finalPrice =$scope.finalPrice - _price;
     };
+    
      $scope.add = function (_price, _id, _name ,_radioModel , _quantity){  
          var i =0;
-         ++$scope.totalCounter;
-         
+         ++$scope.totalCounter; 
          //console.log("_quantity++",_quantity );
-         
          if (_radioModel === 'Full'){
              _price = _price * 1;
          }else _price = _price * 0.5;
          
          //$scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity});            
-        isArrElem(_name, _radioModel);
-        if (!bool) {         
+        isArrElem(_name, _radioModel,true); //true - is quantity++
+        if (!bool) {
             $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity}); 
         }
         
@@ -143,10 +158,16 @@ function init(){
   $scope.increaseQuantity = function(){
       $scope.quantity++;
   };
-  
-  $scope.clearQuantity = function(){
-      $scope.quantity=0;
+  $scope.decreaseQuantity = function(){
+      $scope.quantity--;
   };
   
+  $scope.clearQuantity = function(row){
+      var index = $scope.finalPriceModel.indexOf(row);//imet in final Array
+        
+      $scope.quantity=0;
+      console.log('index is quantoty:', index , '$scope.quantity: ',$scope.quantity);
+  };
+ 
 });
 
