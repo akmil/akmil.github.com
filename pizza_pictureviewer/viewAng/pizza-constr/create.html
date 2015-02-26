@@ -34,7 +34,7 @@
     <!--<pre>{{radioModel || 'null'}}</pre>-->
     <b ng-model="quantity">x {{quantity}}</b>
     <button  ng-click="increaseQuantity();add(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">+</button>
-    <button  ng-click="decreaseQuantity(); decreaseItem(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">-</button>
+    <button  ng-click="decreaseQuantity(); decreaseItem(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success" ng-disabled="quantity === 0">-</button>
     
 </div>
                     </li>
@@ -89,7 +89,7 @@
         <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel);  clearQuantity(item);">Reset pizza</button>
     </div>
     <hr>
-    <div ng-if="finalPriceModel[0]">total item order ({{totalCounter}}) , finalPriceModel:<br/> {{finalPriceModel}}</div>
+    <div ng-if="finalPriceModel[0]">total item order ({{finalPriceModel.length}}) , finalPriceModel:<br/> {{finalPriceModel}}</div>
   </div>
    
 <!--   <p id="demo"></p>
