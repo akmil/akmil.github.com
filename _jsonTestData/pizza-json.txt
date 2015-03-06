@@ -1,0 +1,137 @@
+[
+  {
+    "meatAndFish": [
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/bekon.jpg", 
+        "price": 15, 
+        "id": 0, 
+        "name": "meatName 0 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/bekon.jpg", 
+        "price": 9, 
+        "id": 1, 
+        "name": "meatName 1 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/bekon.jpg", 
+        "price": 12, 
+        "id": 2, 
+        "name": "meatName 2 "
+      }
+    ], 
+    "sizePizza": [
+      {
+        "price": 33, 
+        "id": 0, 
+        "name": "sizePizza 0 "
+      }, 
+      {
+        "price": 28, 
+        "id": 1, 
+        "name": "sizePizza 1 "
+      }, 
+      {
+        "price": 25, 
+        "id": 2, 
+        "name": "sizePizza 2 "
+      }
+    ], 
+    "fruits": [
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/zalen_perec.jpg", 
+        "price": 8, 
+        "id": 0, 
+        "name": "fruitName 0 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/zalen_perec.jpg", 
+        "price": 8, 
+        "id": 1, 
+        "name": "fruitName 1 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/zalen_perec.jpg", 
+        "price": 5, 
+        "id": 2, 
+        "name": "fruitName 2 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/zalen_perec.jpg", 
+        "price": 6, 
+        "id": 3, 
+        "name": "fruitName 3 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/zalen_perec.jpg", 
+        "price": 10, 
+        "id": 4, 
+        "name": "fruitName 4 "
+      }
+    ], 
+    "souse": [
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/souse_dom.png", 
+        "price": 4, 
+        "id": 0, 
+        "name": "souseName 0 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/souse_dom.png", 
+        "price": 12, 
+        "id": 1, 
+        "name": "souseName 1 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/souse_dom.png", 
+        "price": 9, 
+        "id": 2, 
+        "name": "souseName 2 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/souse_dom.png", 
+        "price": 10, 
+        "id": 3, 
+        "name": "souseName 3 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/souse_dom.png", 
+        "price": 7, 
+        "id": 4, 
+        "name": "souseName 4 "
+      }
+    ], 
+    "cheese": [
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/parmezan.jpg", 
+        "price": 19, 
+        "id": 0, 
+        "name": "cheeseName0 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/parmezan.jpg", 
+        "price": 18, 
+        "id": 1, 
+        "name": "cheeseName1 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/parmezan.jpg", 
+        "price": 18, 
+        "id": 2, 
+        "name": "cheeseName2 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/parmezan.jpg", 
+        "price": 13, 
+        "id": 3, 
+        "name": "cheeseName3 "
+      }, 
+      {
+        "picture": "http://dominos.ua/media/dominos/topping/small/2013/07/24/parmezan.jpg", 
+        "price": 15, 
+        "id": 4, 
+        "name": "cheeseName4 "
+      }
+    ]
+  }
+]
