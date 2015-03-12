@@ -12,5 +12,5 @@ appNameMy.config(function($routeProvider) {
             .when('/character-animation',{controller:'sliderCtrl', templateUrl:'viewAng/animation-testing.html'})
             .when('/pizza-constructor',{controller:'pizzaConstructorCtrl', templateUrl:'viewAng/pizza-constr/create.html'})
 //            .when('/character-animation',{controller:'characterAnimationController' ,template:'<div>welcome in characterAnimationController <p><a href="#">go to view1.html</a></p></div>'})
-            .otherwise({redirectTo: '/cornerScroller'});
+            .otherwise({redirectTo: '/pizza-constructor'});
 });
