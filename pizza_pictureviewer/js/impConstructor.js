@@ -1,6 +1,6 @@
 'use strict';
 
-var appNameMy = angular.module('basicApp', ['ngRoute','ngColorPicker','ui.bootstrap']);
+var appNameMy = angular.module('basicApp', ['ngRoute','ngColorPicker','ui.bootstrap','ActiveLink']);
 
 //    controller       
 
