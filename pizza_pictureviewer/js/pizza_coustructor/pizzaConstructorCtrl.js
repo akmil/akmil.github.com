@@ -99,16 +99,19 @@ function init(){
     
     $scope.decreaseItem = function (_price, _id, _name ,_radioModel , _quantity){
         //check if exist element for decrease 
+        bool = false;  
+        console.log('_$scope.finalPriceModel.length',$scope.finalPriceModel.length);
         for (i = 0; i < $scope.finalPriceModel.length; i++) {
                 if (_name !== $scope.finalPriceModel[i].name) {                
-//                    console.log('_name not found',_name);                                    
-                    return;
-                    }
+                    //console.log(_name + '_name found',_name !== $scope.finalPriceModel[i].name);                                    
+                      
+                    return;                    
+                    }else break;
         }
          if (_radioModel === 'Full'){
              _price = _price * 1;
          }//else _price = _price * 0.5;
-         isArrElem(_name, _radioModel,false);//false: is quantity--
+         isArrElem(_name, _radioModel,bool);//false: is quantity--
         if (!bool) {
             //push new val of quantity
             $scope.finalPriceModel.push({ name: _name, id: _id ,price: _price , radioModel: _radioModel, quantity : _quantity}); 
