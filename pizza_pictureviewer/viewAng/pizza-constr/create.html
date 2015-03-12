@@ -75,7 +75,8 @@
     
     <div class='col-sm-6' >
         
-        <b>Final pizza components: </b> <i ng-class="" ng-init="pizzaSize = 'please select size'"> pizzaSize size:</i>  {{pizzaSize}} 
+        <b>Final pizza components: </b> <i ng-class="" ng-init="pizzaSize = 0"> pizzaSize size:</i>  {{pizzaSize | currency}}
+        <b ng-if="pizzaSize === 0" style="color : red"> <-please select size</b> 
         <ol>           
             <li ng-repeat="item in finalPriceModel" 
                 style ="border-bottom: 1px solid rgb(153, 153, 153);padding: 5px;"> 
@@ -92,7 +93,7 @@
         </ol>
     </div>
     <div class="blockquote-reverse">
-        <button class="btn btn-warning " ng-if="finalPriceModel[0] || pizzaSize" ng-click="sentPost()">Order : {{finalPrice + pizzaSize | currency}}</button>
+        <button class="btn btn-warning " ng-if="true" ng-click="sentPost()" ng-disabled="pizzaSize === 0">Order : {{finalPrice + pizzaSize | currency}}</button>
         
         <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear();">Reset pizza{{finalPriceModel.length}}</button>
     </div>
