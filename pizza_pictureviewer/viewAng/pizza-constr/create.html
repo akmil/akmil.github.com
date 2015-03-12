@@ -27,14 +27,17 @@
 <div ng-controller="DropdownCtrl">                       
     <hr>                    
     <div class="btn-group">
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>        
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Half Left'" >Left</label>        
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Half Right'">Right</label>
     </div>
     <!--<pre>{{radioModel || 'null'}}</pre>-->
-    <b ng-model="quantity">x {{quantity}}</b>
-    <button  ng-click="increaseQuantity();add(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success">+</button>
-    <button  ng-click="decreaseQuantity(); decreaseItem(meat.price , meat.id , meat.name ,radioModel, quantity);" class="btn btn-success" ng-disabled="quantity === 0">-</button>
+<!--    <b>x{{quantity}}</b>-->
+<!--    <b ng-init="item in finalPriceModel">x{{item.quantity}}</b>-->
+    
+<!--    <b>x{{finalPriceModel[meat.id].quantity}}</b>-->
+    <button  ng-click=" add(meat.price , meat.id , meat.name ,radioModel.size, 1);" class="btn btn-success">+</button>
+    <button  ng-click=" decreaseItem(meat.price , meat.id , meat.name ,radioModel.size, 1);" class="btn btn-success" ng-disabled="finalPriceModel.length === 0">-</button>
     
 </div>
                     </li>
@@ -53,14 +56,15 @@
 <div ng-controller="DropdownCtrl">
     <hr>                    
     <div class="btn-group">
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Left'" >Left</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Full'">Full size fill</label>
-        <label class="btn btn-primary" ng-model="radioModel" btn-radio="'Half Right'">Right</label>
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Half Left'" >Left</label>
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Full'">Full size fill</label>
+        <label class="btn btn-primary" ng-model="radioModel.size" btn-radio="'Half Right'">Right</label>
     </div>
     <!--<pre>{{radioModel || 'null'}}</pre>-->
     
-    <button ng-click="add(chees.price , chees.id , chees.name ,radioModel, 1)" class="btn btn-success">add</button>
-</div>
+    <button ng-click="add(chees.price , chees.id , chees.name ,radioModel.size, 1)" class="btn btn-success">add</button>
+    <button  ng-click="decreaseItem(chees.price , chees.id , chees.name ,radioModel.size, 1);" class="btn btn-success" ng-disabled="finalPriceModel.length === 0">decrease</button>
+    </div>
                     </li>
                 </ul>
             </tab>
@@ -69,7 +73,8 @@
         
     </div>
     
-    <div class='col-sm-6'>
+    <div class='col-sm-6' >
+        
         <b>Final pizza components: </b> <i ng-class="" ng-init="pizzaSize = 'please select size'"> pizzaSize size:</i>  {{pizzaSize}} 
         <ol>           
             <li ng-repeat="item in finalPriceModel" 
@@ -77,16 +82,19 @@
                 <b>{{item.name}}</b>: {{item.price | currency}} <br/>
                 Fill: {{item.radioModel}} 
                 <b>x {{item.quantity}}</b>
-                <br/>
-                <button type="button" ng-click="clearQuantity(item); deleteItem(item); " class="btn btn-sm btn-danger">
-                   DeleteItem <i class="glyphicon glyphicon-remove-circle"></i>
+                
+                <button type="button" ng-click="quantity =0; deleteItem(item);  " class="btn btn-sm btn-danger">
+                   DeleteItem {{item.quantity}} <i class="glyphicon glyphicon-remove-circle"></i>
                 </button>
+<!--                <span class="badge-red" 
+                      ng-if="item.quantity">{{item.quantity}}</span>-->
             </li>
         </ol>
     </div>
     <div class="blockquote-reverse">
         <button class="btn btn-warning " ng-if="finalPriceModel[0] || pizzaSize" ng-click="sentPost()">Order : {{finalPrice + pizzaSize | currency}}</button>
-        <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear(finalPriceModel);  clearQuantity(item);">Reset pizza</button>
+        
+        <button class="btn btn-danger" ng-if="finalPriceModel[0]" ng-click="clear();">Reset pizza{{finalPriceModel.length}}</button>
     </div>
     <hr>
     <div ng-if="finalPriceModel[0]">total item order ({{finalPriceModel.length}}) , finalPriceModel:<br/> {{finalPriceModel}}</div>

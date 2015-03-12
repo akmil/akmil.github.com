@@ -1,9 +1,12 @@
 //data access
 appNameMy.factory('factoryPizza', function($http ,$q) {
     var factoryPizza = {};
-    var jsonURL = 'http://www.json-generator.com/api/json/get/cbgpJYnybm?indent=2';
-    var factoryPizzaArr = []; //not used
-
+    //var jsonURL = 'http://www.json-generator.com/api/json/get/cbgpJYnybm?indent=2';
+    var jsonURL = 'http://beta.json-generator.com/api/json/get/HuVYMbc';
+   // 
+//    var factoryPizzaArr = []; //not used
+//    var tmp = 0;
+//    console.log('tmp',tmp);
 
 factoryPizza.getData = function(){
         var deferred = $q.defer();
@@ -14,36 +17,22 @@ factoryPizza.getData = function(){
         });
         return deferred.promise;
     };
- /*
-    factoryPizza.getData_my = function() {
-        console.log('factory loaded');
-        return $http.get(jsonURL)
-                .success(function(data, status) {
-                    factoryPizzaArr.push({
-                        data: data,
-                        meatAndFish: data.meatAndFish,
-                        sizePizza: data.sizePizza,
-                        fruits: data.fruits,
-                        souse: data.souse,
-                        picture: data.picture,
-                        prise: data.picture
-                    });
-                    this.data= data,
-                    //console.log(data[0].meatAndFish[0].name + " has " + fruits + " public repositories!");
-                    console.log('hey'+this.data);
-                })
-                .error(function(status) {
-                    console.log(data + " (error) json", status);
-                });
-
-    };
-*/
-    factoryPizza.factoryPizzaArr = function() {
-        console.log(factoryPizzaArr);
-        return factoryPizzaArr;
-    };
+    
+//    factoryPizza.shareFiller = function() {
+//        //var quantityVar = 0
+//        this.share = {
+//            quantityFiller: 0
+//        };
+//        //console.log('shareFiller',this.share.quantityFiller);
+//        return this;
+//    };
     
     return factoryPizza;
+})
+.factory('shareFiller', function() {
+    this.quantityFiller = 0;
+    //console.log('shareFiller',this.share.quantityFiller);
+    return this;
 });
 
 
