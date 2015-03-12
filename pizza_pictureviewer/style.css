@@ -293,3 +293,15 @@ margin: 0px 10px -2px 0px;
     left: 116px;
     top: 0px;
 }
+.badge-red{
+    position: absolute;
+    z-index: 1;
+    left: 116px;
+    top: 0px;
+}
+
+button.btn.btn-sm.btn-danger{
+position: relative;
+bottom: 16px;
+float: right;
+}
