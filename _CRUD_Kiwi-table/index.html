@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <html ng-app="CRUD_Test_Kiwi">
+        <head>
+            <link rel="stylesheet" href = "styles/bootstrap3.2.0.css">
+            <link rel="stylesheet" href = "styles/slider-nav.css">
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            
+            <!-- Latest compiled and minified CSS -->
+<!--            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">-->
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            
+            <script src="js/lib/jasmine.js"></script>
+            <script src="js/lib/jasmine-html.js"></script>
+            
+            <script src= "js/lib/angular1.3.5.js"></script>
+            <script src= "https://code.angularjs.org/1.3.5/angular-resource.min.js"></script>
+            
+            <!--angular-mocks.js-->
+            <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-mocks.js"></script>
+            <!--<script src= "https://code.angularjs.org/1.3.5/angular-resource.min.js"></script>-->
+            <title>CRUD Kiwi</title>
+        </head>
+
+        <body >
+            
+                <div class="col-md-12">
+                    <h3>Users CRUD</h3>
+        
+                    <div class="col-md-12 sidebar-offcanvas"                          
+                        ng-include=" 'table.html' " ></div>
+                </div>
+            
+            
+            <script src= "js/main.js"></script>
+            <script src= "js/factoryUserDAO.js"></script>
+            <script src= "js/controllerTable.js"></script>
+            <script src= "js/directiveModalWindow.js"></script>
+            <script src= "js/filterPagination.js"></script>
+            
+
+        </body>
+    </html>
+
