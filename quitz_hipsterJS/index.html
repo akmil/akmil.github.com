@@ -1,85 +1,89 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="js/libs/twitter-bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
-        <link href="js/libs/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <script src="js/libs/twitter-bootstrap/js/bootstrap.js" type="text/javascript"></script>
-
-    </head>
+  <head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="js/libs/twitter-bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+	<link href="js/libs/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<script src="js/libs/twitter-bootstrap/js/bootstrap.js" type="text/javascript"></script>
     <style>
-        /*h2{text-transform: lowercase; }*/
-        h2:first-letter{text-transform: uppercase;}
+              /*h2{text-transform: lowercase; }*/
+              h2.qustions:first-letter{text-transform: uppercase;}
     </style>
-    <body ng-app="quitz" ng-controller="qiutzController" class='col-lg-12'>
-        <h4>
-            <button class='btn btn-block btn-primary' ng-click='watch("q1");
-                        toggle();' 
-                    ng-if="isShowFlag.flagBtn">Start</button>      
+  </head>
 
-            <!--<div >{{questions[0][2]}}</div>ng-show="!isShowFlag.flagBtn"-->
-            <div ng-show="!isShowFlag.flagBtn" >parent: {{parent}} <br/>
-                <h2 style=""> {{ result.diagnoz}}</h2>
-            </div>
+  <body ng-app="quitz" ng-controller="qiutzController" class='col-lg-12'>
+      
+	<div class="h4">
+	  <button class='btn btn-block btn-primary' ng-click='resetNextParentLvl();watch("q1");toggle();' 
+		ng-if="isShowFlag.flagBtn">Start</button>      
 
+	  <div ng-show="!isShowFlag.flagBtn" >
+		<h2 class="qustions" >{{ result.diagnoz }}</h2>
+	  </div>
+	  <div class="radio">                
+		<div ng-repeat="qestion in chield">
+		  <input ng-model="qestionRadiomedel.ansver" 
+			value="{{qestion.curChield}}"              
+			type="radio" >{{qestion.currentQ}}
+		  <!--value set as: qestion.curChield, but in view user see: qestion.currentQ-->
+		</div> 
+              
+		<button class='btn btn-info' 
+		  ng-click='watch(qestionRadiomedel.ansver);' 
+		  ng-disabled="qestionRadiomedel.ansver === 'none'" ng-if="!isShowFlag.flagBtn">
+<!--		  Set parent as: {{qestionRadiomedel.ansver}}-->
+                    Next
+                </button>
+                
+	  </div>
+	  <div class="jumbotron alert-warning" ng-if="isShowFlag.flFinalAlert">
+		<h2>{{result.diagnoz}}</h2><p>Press Start to try again</p>
+	  </div>
+	</div>
+      
+	<button class='btn btn-sm btn-blpck'
+	  ng-model="txt"
+	  ng-init="txt='show'"
+	  ng-click ="toggleInfo(); txt = (isShowFlag.flagQuestion)?'hide':'show'">{{txt}} info panel</button> 
 
-            <div class="radio">
-                <div ng-repeat="qestion in chield">        
-                    <input ng-model="qestionRadiomedel.ansver" 
-                           value="{{qestion.curChield}}"              
-                           type="radio" >{{qestion.currentQ}}
-                    <!--value set as: qestion.curChield, but in view user see: qestion.currentQ-->
-                </div> 
-                <button class='btn btn-info' 
-                        ng-click='watch(qestionRadiomedel.ansver);
-                                    AddResult(qestionRadiomedel.ansver);' 
-                        ng-disabled="qestionRadiomedel.ansver === 'none'" ng-if="!isShowFlag.flagBtn">
-                    Set parent as: {{qestionRadiomedel.ansver}}</button>
-            </div>
-            <div class="jumbotron alert-warning" ng-if="isShowFlag.flFinalAlert"> <h2>{{result.diagnoz}}</h2><p>Press Start to try again</p>
-            </div>
-        </h4>
-        <button class='btn btn-sm btn-blpck'
-                ng-model="txt"
-                ng-init="txt = 'show'"
-                ng-click ="toggleInfo();
-                            txt = (isShowFlag.flagQuestion) ? 'hide' : 'show'">{{txt}} info panel</button> 
+	<div class="panel" style="opacity:.6" ng-if="isShowFlag.flagQuestion"><h1>Info panel here</h1>
+<!--	  last childs:{{chield}}-->
+	  <br/>
+	  <ul class="alert-success" ng-show="result.show"> 
+		Your path of answers is:
+		<li ng-repeat="res in result.finresult"> 
+		  {{res}}</li>
+		<li class="alert-warning"> diagnoz: {{result.diagnoz }}</li>
+	  </ul>
+	  <br/>
 
-        <div class="panel" style="opacity:.6" ng-if="isShowFlag.flagQuestion"><h1>Info panel here</h1>
-            <a ng-href="https://drive.google.com/file/d/0B1NG21fmtRt8clBDV0pIZktDakk/view?usp=sharing" target="blank">read task (pdf)</a>
-            
-            <ul class="alert-success" ng-show="result.show"> 
-                Your path of answers is:
-                <li ng-repeat="res in result.finresult"> 
-                    {{res}}</li>
-                <li class="alert-warning"> diagnoz: {{result.diagnoz}}</li>
-            </ul>
-            <br/>
-            <br/>last childs:{{chield}}<br/>
-            <table class="table table-striped table-hover ">
-                <thead>
-                    <tr>
-                        <th>cheld</th>
-                        <th>parent</th>
-                        <th>question/result</th>
-                        <th>answer</th>
-                    </tr>
-                </thead>   
-                <tbody>
-                    <tr ng-repeat="qestion in questions">
-                        <td > {{qestion[0]}} </td>
-                        <td > {{qestion[1]}} </td>
-                        <td > {{qestion[2]}} </td>
-                        <td > {{qestion[3]}} </td>
-                    </tr>
-                </tbody>
-            </table>    
+	  <table class="table table-striped table-hover ">
+		<thead>
+		  <tr>
+			<th>cheld</th>
+			<th>parent</th>
+			<th>question/result</th>
+			<th>answer</th>
+		  </tr>
+		</thead>
 
-        </div>
+		<tbody>
+		  <tr ng-repeat="qestion in questions">
+			<td > {{qestion[0]}} </td>
+			<td > {{qestion[1]}} </td>
+			<td > {{qestion[2]}} </td>
+			<td > {{qestion[3]}} </td>
+		  </tr>
+		</tbody>
+	  </table>
+	  <!-- <div >{{node}}</div>
+	  <div >{{chield}}</div>-->      
 
-        <script src="js/libs/angular.js" type="text/javascript"></script>
-        <script src="treeQuestions.js"></script>
-    </body>
+	</div>
+
+	<script src="js/libs/angular.js" type="text/javascript"></script>
+	<script src="treeQuestions.js"></script>
+  </body>
 </html>
