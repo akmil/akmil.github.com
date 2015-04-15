@@ -2,7 +2,8 @@
 appNameMy.factory('factoryPizza', function($http ,$q) {
     var factoryPizza = {};
     var jsonURL = 'http://www.json-generator.com/api/json/get/bHwcvXHhsO?indent=2';
-   
+    //var jsonURL = 'http://beta.json-generator.com/api/json/get/HuVYMbc';
+   // 
 //    var factoryPizzaArr = []; //not used
 //    var tmp = 0;
 //    console.log('tmp',tmp);
