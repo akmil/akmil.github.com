@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet/less" type="text/css" href="css/style.less"/>
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>-->
+    <script type="text/javascript" src="js/less.js"></script>
+
+    <script type="text/javascript" src="js/slider/script_text_slider.js"></script>
+
+    <title>test</title>
+</head>
+<body>
+
+
+<div class="product-view">
+    <div class="product-main-info"><h1>NAUTICAl T-SHirt</h1></div>
+
+    <div class="product-img-box">
+        <img id="image" src="images/big_img_1.jpg" alt="some alt" title="big_img_1 title">
+    </div>
+
+
+    <div class="product-shop">
+        <form action="http://product" method="post" id="product_addtocart_form">
+            <div class="color-select">
+                <span>Color</span>
+                <ul>
+                    <li class="color-pick1"></li>
+                    <li class="color-pick2"></li>
+                    <li class="color-pick3"></li>
+                    <li class="color-pick4"></li>
+                </ul>
+
+            </div>
+            <div class="size-select-wrap">
+                <span>Size</span>
+
+                <div class="size-quantity-wrap">
+                    <select name="size-select" id="">
+                        <option value="1">select one</option>
+                        <option value="2">select two</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="quantity">
+                <span>Quantity</span>
+
+                <div class="size-quantity-wrap">
+                    <select name="size-quantity" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="price-box">
+                <span class="availability">
+                    availability:
+                    <span class="in-stok">In stock</span>
+                </span>
+                <span class="old-price">
+                    <span class="price">$37,57</span>
+                </span>
+                <span class="regular-price">
+                    <span class="price">$30,00$</span>
+                </span>
+            </div>
+
+            <div class="add-to-box">
+                <div class="add-to-cart">
+                    <button type="button" title="Buy this" class="button" onclick="">
+                        <span>Add to cart</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="share-box">
+            <div class="title"><span>Share:</span></div>
+            <div class="fb"><span></span></div>
+            <div class="twitter"><span></span></div>
+            <div class="gplus"><span></span></div>
+            <div class="pinterest"><span></span></div>
+        </div>
+    </div>
+
+
+    <div class="short-description">
+        <h2>Nautical print T-shirt</h2>
+        <span>TH3863-00 </span>
+
+        <p>An anchor and marine flags accent the chest of this nautical-inspired Lacoste T-shirt. A comfortable piece
+            perfect for urban adventures.</p>
+        <span id="hideBtn" class="toggle-text" onclick="toggleCurrent('hideBtn','toggle-description',true)">
+            Read more<span class="arrow-icon"></span>
+        </span>
+        <ul id="toggle-description">
+            <li>Regular fit</li>
+            <li>Crew neck</li>
+            <li>Lacoste Yachting branding on chest</li>
+            <li>Other</li>
+            <li>Round neck</li>
+            <li>COTTON (100%)</li>
+        </ul>
+
+    </div>
+
+    <div class="more-views">
+        <ul>
+            <li id="1" class="swipebox" style="display: inline-block;">
+                <img src="images/sm_img_1.jpg" alt="alt sm_img_1" title="sm_img_1 title">
+                    <span class="overlay">
+                        <span>Our iconic blazer 1
+                            <p><a class="btn-link" href="">read the story</a></p>
+                        </span>
+                    </span>
+            </li>
+            <li id="2" class="swipebox">
+                <img src="images/sm_img_2.jpg" alt="alt sm_img_2" title="sm_img_2 title">
+
+                    <span class="overlay">
+                        <span>Our iconic blazer 2
+                            <p><a class="btn-link" href="">read the story</a></p>
+                        </span>
+                    </span>
+            </li>
+            <li id="3" class="swipebox">
+                <img src="images/sm_img_3.jpg" alt="alt sm_img_3" title="sm_img_3 title">
+
+                    <span class="overlay">
+                        <span>Our iconic blazer 3
+                            <p><a class="btn-link" href="">read the story</a></p>
+                        </span>
+                    </span>
+            </li>
+
+        </ul>
+        <div class="nav-arrows">
+            <a class="prev" value="Prev" onclick="toggleSlide(true)">
+                <img alt="Right pointing arrow" src="images/slider-nav/lightbox-btn-prev.png"/>
+            </a>
+            <a class="next" value="Next" onclick="toggleSlide(false)">
+                <img alt="Right pointing arrow" src="images/slider-nav/lightbox-btn-next.png"/>
+            </a>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
