@@ -38,7 +38,7 @@ function resize() {
     var elements = document.getElementsByClassName("swipebox");
     var len = elements.length;
 
-    //ckeck Slider
+    //check Slider
     if (screen.width >= 320) {
         var visibleID = -1;
         for (var i = 0; i < len; i++) {
@@ -49,13 +49,16 @@ function resize() {
         }
     }
 
-    //ckeck "READ MORE"
-    if ((screen.width >= 820) || (screen.width <= 380)) {
-        document.getElementById("toggle-description").style.display = "block";
-
-    }else {
-        document.getElementById("toggle-description").style.display = "none";
+    //check "READ MORE"
+    if (screen.width <= 780 && screen.width >= 380) {
+        document.getElementById("hideBtn").style.display = "inline";
         document.getElementById("hideBtn").innerHTML = 'read more' + '<span class="arrow-icon"></span>';
+        document.getElementById("toggle-description").style.display = "none";
+        console.log('width',screen.width );
+        console.log('screen.width <= 780 && screen.width >= 380',screen.width <= 780 && screen.width >= 380 );
+    }else {
+        document.getElementById("toggle-description").style.display = "block";
+        document.getElementById("hideBtn").style.display = "none";
     }
 }
 /*toggle READ MORE*/
