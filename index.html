@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Grid test task</title>
+  <title>CV</title>
   <meta charset="utf-8"></meta> 
     
   <style> 
@@ -38,19 +38,28 @@
   
   #flexCenter{
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
 	height: 500px;
-	/* background-color: #D2C6C6;  */
+	margin: 5%;
 	opacity: 0;
   }
   .flexItem{
-    flex: 0 1;
-	min-width: 50%;
+    flex: 0 auto;
+	width: 50%;
+	min-width: 385px;
+	min-height: 600px;
 	border-radius: 6px;
 	padding: 10px;
 	box-shadow: 0px 0px 8px rgb(155,155,155);
 	background-color: ghostwhite;
+  }
+  .flexItem h4 {
+	padding-top: 20px;
+  }
+  .flexItem:first-child{
+	  min-width: 130px;
+	  width: 20%;
   }
 
   @keyframes clip {
@@ -103,7 +112,7 @@
 			ss.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css";					
 			document.getElementsByTagName("head")[0].appendChild(ss);
   
-  var tmpVal = setInterval(function () {myTimer()}, 10);
+  var tmpVal = setInterval(function () {myTimer()}, 5);
 	var count =0;
 	function myTimer() {	   	
 	  if (count === 100)
@@ -132,13 +141,33 @@
 		<div id="txt">0</div>
 	</div>
 	<div id = "flexCenter">
+	<div class = "flexItem">
+		<p>About me
+			<a href="https://docs.google.com/document/d/1FKQffAV3cLFVFyGd3mOLDy7Wg0-IZfuajd4YU4rOc_s/edit?usp=sharing">show</a>
+		</p>
+		</div>
+		
 		<div class = "flexItem">
 		<span>
-				<h2>Welcome!</h2><h2>Welcome!</h2>			
+			<h2>Welcome!</h2><h2>Welcome!</h2>			
 		</span>
+		<h4>JavaScript example:</h4>
 		<p>Table JSON data parse using JS from url
 		<a href="/jsonTable/index-table.html">show</a></p>
 		
+		
+		<h4>Angular example:</h4>
+		<p>Example of pizza constuctor
+		<a href="/pizza_pictureviewer/index.html">show</a>
+		</p>		
+		<p>CRUD_Kiwi-table
+		<a href="/CRUD_Kiwi-table/index.html">show</a>
+		</p>
+		<p>UA Webchalange (Multi-graph quitz)
+		<a href="/quitz_hipsterJS/index.html">show</a>
+		</p>
+		
+		<h4>CSS/LESS/SCSS example:</h4>
 		<p>Example of mobileApp (flip your mobile to check it)
 		<a href="/mobileApp/index.html">show</a>
 		</p>
@@ -146,23 +175,25 @@
 		<a href="/scrollToElement/scrollbyid.html">show</a>
 		</p>
 		
-		<p>Example of pizza constuctor
-		<a href="/pizza_pictureviewer/index.html">show</a>
-		</p>
-		
-		<p>CRUD_Kiwi-table
-		<a href="/CRUD_Kiwi-table/index.html">show</a>
-		</p>
-
-		<p>UA Webchalange (Multi-graph quitz)
-		<a href="/quitz_hipsterJS/index.html">show</a>
-		</p>
-		
 		<p>Astound Test (responsive @mediaQueries)
 		<a href="/responsiveTestAstound/index.html">show</a>
 		</p>
+		
+		<p>Examples of CSS(for Magento CMS):
+		<ul>
+		<li><a href="http://mirotof-bags.com/">http://mirotof-bags.com/</a></li>
+		<li>	<a href="http://makeup.com.ua/">http://makeup.com.ua/</a></li>
+		<li>	<a href="http://opt-parfum.com.ua/">http://opt-parfum.com.ua/</a></li>
+		<li>	<a href="http://labelmaster.com.ua">http://labelmaster.com.ua</a></li>
+		<li>	<a href="http://plitkanadom.com.ua/">http://plitkanadom.com.ua/</a></li>
+		</p>
+
 
 		</div>
+	
+	
+		
+	
 	</div>
 	
 </div>
