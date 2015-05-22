@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "AGLettericaCondensed";
+    src: url('../font/aglcb__(1).ttf') format("truetype");
+}
+@font-face {
+    font-family: "Sansation";
+    src: url('../font/Sansation_Light_0.ttf') format("truetype");
+}
+/*vars*/
+$phone: "(min-width: 320px) and (max-width: 768px)";
+$tablet: "(min-width: 768px) and (max-width: 1023px)";
+$desktop: "(min-width: 1024px)";
+
+$font-stack: Arial, Helvetica, sans-serif;
+
+$c-text-white: #FFFFFF;
+$c-text: $c-text-white;
+$c-text-blue: #125588;
+$c-text-blue-light: #2c84c8;
+$c-text-gray: #9b9b9b;
+$c-text-black: #000000;
+
+$c-action: #000000;
+
+$c-nav-bg: #f4f4f4;
+$c-nav-border: gray;
+$c-nav-bg-active: darken($c-nav-border ,10%);
+
+$box-spacing: 2%;
+
+$menu-width-li: 20%;
+
+@mixin h1-bg {
+    font-family: 'AGLettericaCondensed', serif;
+    text-decoration: none;
+    top: 170px;
+    line-height: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/**/
+@import "custom";
+@import "buttons";
+@import "header-nav";
+@import "footer";
+
+
