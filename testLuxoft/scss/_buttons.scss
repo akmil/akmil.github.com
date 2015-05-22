@@ -85,7 +85,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     padding: 0px 7px;
     font-size: 23px;
     font-weight: bold;
-    font-family: 'Sansation';
+    font-family: 'Sansation', serif;
     background-position:  0px -110px;
     text-shadow: 0px -1px 0px #013E76;
 }
@@ -121,7 +121,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     font-weight: bold;
     font-style: italic;
     color: $c-text-blue;
-    font-family: $font-stack;
+    font-family: 'Sansation', serif;
     background-position: 0px -79px;
 
 }
