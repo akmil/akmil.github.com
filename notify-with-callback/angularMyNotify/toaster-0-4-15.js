@@ -160,8 +160,8 @@
         //callbackEvent fon OK, delete buttons
         var callbackEvent = {
           callback : {
-              body: {deleted:'toast was deleted callback' , success:'toast added to inbox'},
-              type:{deleted:'warning' , success:'success'},
+              body: {deleted:'toast was deleted callback' , success:'toast reded and added to inbox', info:'toast added to inbox'},
+              type:{deleted:'warning' , success:'success', error: 'error', info: 'info'},
               id:'uid-callback-500'
             },
           callbackFunc: function(){
@@ -173,15 +173,7 @@
                 body: callbackEvent.callback.body.deleted
               });
               console.log('say to server: ==== deleted ====');
-            }else {//otherwise add to inbox
-              toasterService.pop('id-callback', {
-                title: 'A toast',
-                type: callbackEvent.callback.type.success,
-                body: callbackEvent.callback.body.success
-              });
-              console.log('say to server: ==== added to inbox ====');
-            }
-            if(toasterService._isReaded){
+            }else if(toasterService._isReaded){
               toasterService.pop('id-callback', {
                 title: 'A toast',
                 type: callbackEvent.callback.type.success,
@@ -190,6 +182,15 @@
               console.log('say to server: ==== reded and added to inbox ====');
               toasterService._isReaded = false;
             }
+            else {//otherwise add to inbox
+              toasterService.pop('id-callback', {
+                title: 'A toast',
+                type: callbackEvent.callback.type.info,
+                body: callbackEvent.callback.body.info
+              });
+              console.log('say to server: ==== added to inbox ====');
+            }
+            
             console.log('callback end');
           }
         };
