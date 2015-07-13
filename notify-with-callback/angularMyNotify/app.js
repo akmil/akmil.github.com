@@ -16,13 +16,13 @@ angular.module('main', ['ngAnimate', 'toaster'])
       type: 'info',
       title: 'A toast',
       body: "myTemplate.html",
-      timeout: null,
+      timeout: 2000,
       bodyOutputType: 'template',
       onHideCallback: toasterEventRegistry.callbackEvent.callbackFunc
     };
 
     $scope.pop = function() {
-      $scope.text = type;
+      $scope.text = type.title;
 
       toasterService.pop('toastId-777', type); //show
       console.log('process... adding to inbox');
