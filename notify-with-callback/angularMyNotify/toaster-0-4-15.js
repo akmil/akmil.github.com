@@ -82,9 +82,11 @@
           //if inbox empty then nothing to delete
           if(this.inbox.length == 0){
             this._isDelete = true;
+
             return false;
           };
           this.inbox.splice(currentToast, 1);
+          console.log('say to server: ==== removeThisToast ====',this.inbox);
         };
 
         this.pop = function (toastId, type, title, body, timeout, bodyOutputType, clickHandler, toasterId, showCloseButton,  onHideCallback) {
