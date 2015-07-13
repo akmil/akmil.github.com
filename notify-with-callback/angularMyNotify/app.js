@@ -79,7 +79,7 @@ angular.module('main', ['ngAnimate', 'toaster'])
       //render inbox toasts
       for(var i =0; i< $scope.inbox.length;i++) {
         var toastCurrent = $scope.inbox[i];
-        console.log('showed:', toastCurrent);
+        // console.log('showed:', toastCurrent);
         toasterService.pop(toastCurrent.toastId, toastCurrent.type, toastCurrent.title, toastCurrent.body, toastCurrent.timeout, toastCurrent.bodyOutputType);
       }
         return toasterEventRegistry.allToastInbox;
