@@ -69,9 +69,10 @@
         this._isReaded = false;
 
         this.addToInbox = function(currentToast){
-          if(this._isDelete){return};
+          if(this._isDelete){console.log('this._isDelete is',this._isDelete); return};
 
-          this.inbox.push(currentToast);          
+          this.inbox.push(currentToast); 
+          console.log('adding is finish');
         };
         this.removeById = function(currentToast){
           console.log('currentToast',currentToast);
@@ -85,10 +86,10 @@
             this._isDelete = false;
             return false;
           };
-          this._isDelete = true; //need for callback
-          console.log('say to server: ==== remove lastToast ====', this.inbox[length]);
-          this.inbox.splice(currentToast, 1);
           
+          console.log('say to server: ==== remove lastToast ====', this.inbox[length]);
+          this._isDelete = true; //need for callback
+          this.inbox.splice(currentToast, 1);
         };
 
         this.pop = function (toastId, type, title, body, timeout, bodyOutputType, clickHandler, toasterId, showCloseButton,  onHideCallback) {
@@ -172,6 +173,7 @@
                 type: callbackEvent.callback.type.deleted,
                 body: callbackEvent.callback.body.deleted
               });
+              toasterService._isDelete = false;
               console.log('say to server: ==== deleted ====');
             }else if(toasterService._isReaded){
               toasterService.pop('id-callback', {
@@ -179,8 +181,8 @@
                 type: callbackEvent.callback.type.success,
                 body: callbackEvent.callback.body.success
               });
-              console.log('say to server: ==== reded and added to inbox ====');
               toasterService._isReaded = false;
+              console.log('say to server: ==== reded and added to inbox ====');
             }
             else {//otherwise add to inbox
               toasterService.pop('id-callback', {

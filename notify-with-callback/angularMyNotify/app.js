@@ -25,10 +25,11 @@ angular.module('main', ['ngAnimate', 'toaster'])
       $scope.text = type;
 
       toasterService.pop('toastId-777', type); //show
+      console.log('process... adding to inbox');
       toasterService.addToInbox(type);  //add
 
       
-      toasterService._isDelete = false;
+      //toasterService._isDelete = false; <- this set in callbaxk
 
       //key in this toaster
       //console.log(toasterService);
