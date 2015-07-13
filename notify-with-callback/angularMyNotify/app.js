@@ -110,8 +110,9 @@ angular.module('main', ['ngAnimate', 'toaster'])
       })
     };
 
-    $scope.close=function(txt){
+    $scope.readed=function(txt){
       console.log(txt + ' pressed' );
+      toasterService._isReaded = true;
     };
     $scope.save=function(txt){$scope.alertMy(txt)};
     $scope.delete=function(txt){$scope.alertMy(txt)};
