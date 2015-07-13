@@ -70,7 +70,7 @@ angular.module('main', ['ngAnimate', 'toaster'])
       toasterService.clear();
     };
 
-    $scope.showInbox = function() {
+    $scope.showInboxMsg = function() {
       //console.log ('server toasts:', toasterEventRegistry.allToastInbox );
       //$scope.text = 'total number of notofication on server: ' + toasterEventRegistry.allToastInbox.length;
 

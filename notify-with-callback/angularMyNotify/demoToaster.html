@@ -16,7 +16,7 @@
 
 <div>
     <div ng-controller="myController">
-        <div class="btn btn-default" ng-click="showInbox=!showInbox">
+        <div class="btn btn-default" ng-click="toggleInboxBtn.showInbox=!toggleInboxBtn.showInbox">
             Inbox messages <span class="badge" ng-if="inbox.length">{{inbox.length}}</span>
         </div>
         <p>Ifto: {{text | json}}</p>
@@ -34,8 +34,8 @@
         <br />
         <button class="btn btn-primary" style="margin: 25px 0 0 150px;" ng-click="showById(1);">show #1 and add inbox</button>-->
         <br /> 
-        <button class="btn btn-success" style="margin: 15px 0 0 150px;" ng-click="showInbox();">showInbox</button>
-        <pre ng-if="!showInbox">inbox:{{inbox | json}}</pre>
+        <button class="btn btn-success" style="margin: 15px 0 0 150px;" ng-click="showInboxMsg();">showInbox</button>
+        <pre ng-if="toggleInboxBtn.showInbox">inbox:{{inbox | json}}</pre>
     </div>
 </div>
 
