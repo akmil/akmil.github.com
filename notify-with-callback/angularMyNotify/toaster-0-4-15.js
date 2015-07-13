@@ -168,15 +168,16 @@
                 type: callbackEvent.callback.type.deleted,
                 body: callbackEvent.callback.body.deleted
               });
-              $scope.text = 'deleted';
+              console.log('say to server: ==== deleted ====');
             }else {//otherwise add to inbox
               toasterService.pop('id-callback', {
                 title: 'A toast',
                 type: callbackEvent.callback.type.success,
                 body: callbackEvent.callback.body.success
               });
+              console.log('say to server: ==== added to inbox ====');
             }
-            // console.log('callback end');
+            console.log('callback end');
           }
         };
 
