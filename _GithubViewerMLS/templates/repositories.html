@@ -1,0 +1,31 @@
+
+<div>
+    <button class = "btn" ng-click ="goBack()">goBack</button>
+    <div>
+        <h2>информация о репозитории</h2>
+        <h3> имя автора: {{reposDetailList.name}}</h3>
+    </div>
+    <div >
+
+        <div class="repolist clearfix">
+
+            <div >
+                <p><strong>список веток:</strong></p>
+
+                <ul>
+                    <li ng-repeat="branch in branches track by $index">{{$index}}:  {{branch.name}} </li>
+                </ul>
+            </div>
+            <div >
+                <p> <strong>список веток:</strong></p>
+
+                <ul>
+                    <li ng-repeat="commit in commits track by $index"># {{$index}}, commit-author: {{commit.commit.author.name}} </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
