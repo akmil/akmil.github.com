@@ -1,2 +1,3 @@
-# akmil.github.com
-Demo: http://akmil.github.io/
+# developers.ticketmaster.com
+
+The home of the Ticketmaster Developer Portal
