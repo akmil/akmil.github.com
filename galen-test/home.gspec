@@ -1,6 +1,10 @@
-@objects
-    heading     .page-heading
 
-= Dummy test =
-    heading:
-        text is "Posts"
+
+@objects
+    header-logo     #header-logo
+    header-text     #header h1
+
+
+= Header =
+    header-logo:
+        left-of header-text 22 px

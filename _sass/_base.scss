@@ -204,3 +204,34 @@ pre {
         }
     }
 }
+
+#stage{
+    border: 1px solid yellowgreen;
+    padding: 20px;
+}
+
+#info{
+    font-weight: 700 ;
+}
+#count{
+    padding-top: 20px;
+}
+.auction-wrapper {
+    #count{
+        padding-top: 0px;
+    }
+    border: 2px solid orange;
+    padding: 20px;
+}
+button{
+    background-color: cornflowerblue;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: lighten(cornflowerblue, 10% );
+        cursor: pointer;
+    }
+}

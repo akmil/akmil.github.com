@@ -1,0 +1,19 @@
+{
+  "tests" : [ {
+    "name" : "home.gspec",
+    "startedAt" : 1447943226999,
+    "endedAt" : 1447943227006,
+    "failed" : true,
+    "statistic" : {
+      "passed" : 0,
+      "errors" : 1,
+      "warnings" : 0,
+      "total" : 1
+    },
+    "testId" : "1-home.gspec",
+    "exceptionStacktrace" : "java.lang.RuntimeException: Unknown browser type: \"phantomJs\"\r\n\tat com.galenframework.browser.SeleniumBrowserFactory.getDriver(SeleniumBrowserFactory.java:113)\r\n\tat com.galenframework.browser.SeleniumBrowserFactory.createLocalBrowser(SeleniumBrowserFactory.java:89)\r\n\tat com.galenframework.browser.SeleniumBrowserFactory.openBrowser(SeleniumBrowserFactory.java:65)\r\n\tat com.galenframework.runner.GalenBasicTestRunner.runTest(GalenBasicTestRunner.java:73)\r\n\tat com.galenframework.tests.GalenBasicTest.execute(GalenBasicTest.java:55)\r\n\tat com.galenframework.TestRunnable.runTest(TestRunnable.java:75)\r\n\tat com.galenframework.TestRunnable.run(TestRunnable.java:101)\r\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)\r\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)\r\n\tat java.lang.Thread.run(Unknown Source)\r\n",
+    "exceptionMessage" : "RuntimeException: Unknown browser type: \"phantomJs\"",
+    "failed" : true,
+    "duration" : 7
+  } ]
+}

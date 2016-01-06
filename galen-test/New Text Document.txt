@@ -1,0 +1,11 @@
+galen config
+is
+Created config file
+------
+
+galen test home.gspec -Dwebdriver.chrome.driver=/opt/chromedriver/chromedriver
+galen test home.gspec --url http://testapp.galenframework.com/
+
+galen check home.gspec --url http://testapp.galenframework.com/ --size 1024x768 --htmlreport reports
+
+
