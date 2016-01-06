@@ -76,9 +76,11 @@ $(document).ready(function () {
                     .append('set your price(more then '+price+'.00$ ): <input type="number"> <button id="newPrice">send my price offer</button>');
 
                 auction.wrapAll('<div class="auction-wrapper"></div>');
+                $('.auction-wrapper').css("border" ," 2px solid orange" );
 
                 $("#newPrice").click(function(){
                     $("#count").append('new price is send');
+                    return false;
                 });
             }
 
