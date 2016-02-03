@@ -24,31 +24,30 @@
  */
 var Strategy = {
     zIndex : 0, //default
-    showLayer: function(selectedImgElem){
-        console.log("abstract showLayerAbove");
-        return "abstract showLayerAbove";
+    moveLayer: function(selectedImgElem){
+        console.log("abstract moveLayer");
     }
 };
 
 var Bottom = Object.create(Strategy);
-    Bottom.showLayer = function(selectedImgElem){
+    Bottom.moveLayer = function(selectedImgElem){
         if (!selectedImgElem ) { alert('select some image'); return;}
         this.zIndex--;
         selectedImgElem.style.zIndex = this.zIndex;
-        return "Bottom class showLayerAbove" + this.zIndex + selectedImgElem;
+        //return "Bottom class moveLayerBottom" + this.zIndex + selectedImgElem;
     };
 
 var Top = Object.create(Strategy);
-    Top.showLayer = function(selectedImgElem){
+    Top.moveLayer = function(selectedImgElem){
         if (!selectedImgElem ) { alert('select some image'); return;}
         this.zIndex++;
         selectedImgElem.style.zIndex = this.zIndex;
-        return "Bottom showLayerBottom" + this.zIndex + selectedImgElem;
+        //return "Bottom moveLayerTop" + this.zIndex + selectedImgElem;
     };
 
 var Caller = function(Strategy){
   this.callStrategy = function(selectedImgElem){
-      Strategy.showLayer(selectedImgElem);
+      Strategy.moveLayer(selectedImgElem);
   }
 };
 
