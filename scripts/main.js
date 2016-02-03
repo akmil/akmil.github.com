@@ -57,11 +57,11 @@ $(document).ready(function () {
 
     $("#button").click(function(){
 
-        /*$.getJSON( "http://www.ticketmaster.com/json/search/event?aid=852425" ,
+        $.getJSON( "https://app.ticketmaster.com/commerce/v2/events/3A004EFFFBB168E6/offers.json?apikey="+apikey ,
+        //$.getJSON( "https://app.ticketmaster.com/commerce/v2/events/05004F24E0B864B3/offers.json?apikey="+apikey ,
             function(result){
-                console.log('search/event?aid=852425', result);
-                console.log('numFound: ', result.response.numFound);
-        });*/
+                console.log('\n search/event?aid=852425', result);
+        });
 
         var MIN_COUNT =200;
         var count = Math.round( Math.random(1)*500 );
@@ -69,7 +69,7 @@ $(document).ready(function () {
         var showCount = function (){
             $("#count").html('<p><b>'+count+'</b> price is: <b>'+price+'$</b></p>');
             if(count < MIN_COUNT){
-                console.log(count , 'less ten 100');
+                console.log(count , 'less ten '+ MIN_COUNT );
                 var auction = $("#count")
                     .html('<p>There are less then <b style="color: #2a7ae2" >'+MIN_COUNT+'</b> tickets left, so you can set your price in auction</p>')
                     .append('<p><b>'+count+'</b> price is: <b>'+price+'.00$</b></p>')

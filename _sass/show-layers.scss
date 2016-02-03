@@ -1,0 +1,20 @@
+
+.show-layers {
+   img {
+        position: absolute;
+       margin: 0px;
+    }
+    #img1{
+        margin: 40px 0 0 40px;
+    }
+    #img3{
+        margin: 80px 0 0 80px ;
+    }
+    #offset {
+        padding-top: 180px;
+    }
+    .active {
+        border: 2px solid orange;
+    }
+}
+

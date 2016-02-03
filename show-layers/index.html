@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="show-layers home">
+  <h3 >Strategy test</h3>
+
+  <p>Set active img:</p>
+  <p>imgage 1:<input type="radio" id="r-img-1" value="img1" name="imageGroup"  onchange="getRadioGroup('imageGroup')"></p>
+  <p>imgage 2:<input type="radio" id="r-img-2" value="img2" name="imageGroup" onchange="getRadioGroup('imageGroup')"></p>
+  <p>imgage 3:<input type="radio" id="r-img-3" value="img3" name="imageGroup" onchange="getRadioGroup('imageGroup')" ></p>
+
+
+  <img src="img1.png" alt="alt img1.png" id="img1">
+  <img src="img2.png" alt="alt img2.png" id="img2">
+  <img src="img3.png" alt="alt img3.png" id="img3">
+
+  <p id="offset" >Change img position</p>
+
+  <button id="set-top">Top</button>
+  <button id="set-bottom">Bottom</button>
+
+</div>
+<script src="{{ site.baseurl }}/scripts/strategy.js"></script>
