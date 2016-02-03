@@ -31,7 +31,8 @@ var Strategy = {
 };
 
 var Bottom = Object.create(Strategy);
-Bottom.showLayer = function(selectedImgElem){
+    Bottom.showLayer = function(selectedImgElem){
+        if (!selectedImgElem ) { alert('select some image'); return;}
         this.zIndex--;
         selectedImgElem.style.zIndex = this.zIndex;
         return "Bottom class showLayerAbove" + this.zIndex + selectedImgElem;
@@ -39,6 +40,7 @@ Bottom.showLayer = function(selectedImgElem){
 
 var Top = Object.create(Strategy);
     Top.showLayer = function(selectedImgElem){
+        if (!selectedImgElem ) { alert('select some image'); return;}
         this.zIndex++;
         selectedImgElem.style.zIndex = this.zIndex;
         return "Bottom showLayerBottom" + this.zIndex + selectedImgElem;

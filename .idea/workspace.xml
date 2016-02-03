@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/show-layers/img1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/show-layers/img2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/show-layers/img3.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/show-layers/index.html" afterPath="$PROJECT_DIR$/show-layers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/strategy.js" afterPath="$PROJECT_DIR$/scripts/strategy.js" />
     </list>
     <ignored path="blogPasha.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,31 +25,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="strategy.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strategy.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/strategy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.080474935">
+              <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+              <folding>
+                <element signature="n#!!block;n#getRadioGroup#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/show-layers/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3134752">
+            <state vertical-scroll-proportion="-4.1698112">
               <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show-layers.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_sass/show-layers.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -96,9 +85,9 @@
         <option value="$PROJECT_DIR$/css/main.scss" />
         <option value="$PROJECT_DIR$/_includes/head.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/scripts/strategy.js" />
         <option value="$PROJECT_DIR$/_sass/show-layers.scss" />
         <option value="$PROJECT_DIR$/show-layers/index.html" />
+        <option value="$PROJECT_DIR$/scripts/strategy.js" />
       </list>
     </option>
   </component>
@@ -314,7 +303,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454508840953</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add: img files move to assets 3">
+      <created>1454508913008</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1454508913008</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -359,7 +354,8 @@
     <MESSAGE value="add: img files" />
     <MESSAGE value="add: img files move to assets" />
     <MESSAGE value="add: img files move to assets 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: img files move to assets 2" />
+    <MESSAGE value="add: img files move to assets 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: img files move to assets 3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -695,14 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/strategy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_sass/show-layers.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5">
@@ -711,11 +699,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/feed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/show-layers/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3134752">
+        <state vertical-scroll-proportion="-4.1698112">
           <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/strategy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080474935">
+          <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+          <folding>
+            <element signature="n#!!block;n#getRadioGroup#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
