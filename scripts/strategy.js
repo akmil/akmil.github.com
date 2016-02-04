@@ -62,18 +62,15 @@ var selectedImgElem;
 function getRadioGroup(grouopName) {
     var i, radios = document.getElementsByName(grouopName);
 
-    //clear class border
-    for (i = 0; i < imgList.length; i++) {
-        imgList[i].className = "";
-    }
+    for (i = 0; i < radios.length, i < imgList.length; i++) {
+        if (imgList.length === radios.length) { imgList[i].className = ""; }
 
-    for (i = 0; i < radios.length; i++) {
         if (radios[i].checked) {
             //console.log('selected value  : '+radios[i].value );
             selectedImgElem = document.getElementById(radios[i].value);
             selectedImgElem.className = 'active';
             console.log('actimeElement: ' + selectedImgElem.className + 'radios[i].value '+ radios[i].value );
-            return radios[i].value;
+            //return radios[i].value;
         }
     }
     return '';
