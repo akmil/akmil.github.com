@@ -1,29 +1,36 @@
-/**
- * Created by Pavlo_Oliinyk1 on 2/11/2016.
- */
 var prorab =
 {
-    brickMen: new BrickWorker(),
+    brickMen: new BrickWorker('John'),
     windowMen: new WindowWorker(),
-    refrigerator: new PartsStorage(3),
-    stash: new PartsStorage(2),
+    roofMen: new RoofWorker('Vlad'),
+    brickStorage: new BrickStorage(),
+    roofStorage: new BrickStorage(),
 
-    tryToGetBeer: function ()
-    {
-        if (this.refrigerator.takeOneBeerAway()) return true;
-        if (this.stash.takeOneBeerAway()) return true;
-
+    tryToGetPart: function () {
+        if (this.brickStorage.takeOneBrickAway() || this.roofStorage.takeOneBrickAway()) return true;
+        //if () return true;
         return false
     },
-    oneBeerHasGone: function (){ this.windowMen.argue(); },
-    disputeStarted: function (){ this.brickMen.argue_back(); }
-}
+    oneBrickHasGone: function (){
+        console.log('this.brickStorage._brick_count: ' + this.brickStorage.getBrickCount() );
+        this.windowMen.argue( this.brickStorage.getBrickCount() ); },
+
+    disputeStarted: function (){ this.brickMen.argue_back(); },
+
+    roofBuildStart: function (){
+
+        console.log('this.roofStorage._brick_count: ' + this.roofStorage.getBrickCount() );
+        this.roofMen.getPartFromWindow( this.roofStorage.getBrickCount() ); }
+    //oneRoofPartHasGone: function (){ this.roofMen.argue( this.roofStorage._brick_count ); }
+};
 
 
 /*testing mediator*/
 var round_counter = 0;
-while (prorab.daddy.getBeer())
+prorab.brickStorage.setBrickCount(5);
+prorab.roofStorage.setBrickCount(3);
+while (prorab.brickMen.getPart() && prorab.roofMen.getPartFromWindow())
 {
-    round_counter++
-    console.log( round_counter + " round passed");
+    round_counter++;
+    console.log( '\t' + round_counter + " step");
 }
