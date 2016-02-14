@@ -1,3 +1,5 @@
+Sandbox.modules.builders = function (box) {}
+
 function BrickWorker(name) {
     this.name = name || '=some brick worker=';
 }
@@ -103,3 +105,6 @@ BrickStorage.prototype =
         return true;
     }
 };
+
+
+

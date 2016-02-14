@@ -1,6 +1,6 @@
-Sandbox.modules.prorab = function (prorab) {
-console.log(prorab);
-prorab =
+Sandbox.modules.prorab = function (prorab) {}
+
+var prorab =
 {
     brickMen: new BrickWorker('John'),
     windowMen: new WindowWorker(),
@@ -38,7 +38,9 @@ prorab =
         }
     }
 };
-    console.log(prorab);
+
+
+console.log(prorab);
     /*testing mediator*/
     var round_counter = 0;
     prorab.brickStorage.setBrickCount(5); //brickStorage setter
@@ -46,6 +48,4 @@ prorab =
 
     prorab.roofMen.getPartFromRoof(); //roofMen wait until prorab let him do it
 
-};
 
-Sandbox();

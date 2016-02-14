@@ -6,6 +6,8 @@ function Sandbox() {
     // или в виде отдельных параметров
         modules = (args[0] && typeof args[0] === 'string') ? args : args[0],
         i;
+    console.log('callback ', callback );
+
     // проверить, была ли функция вызвана
     // как конструктор
     if (!(this instanceof Sandbox)) {
@@ -31,7 +33,7 @@ function Sandbox() {
     for (i = 0; i < modules.length; i++) {
         console.log('modules ', modules[i] );
         //modules[i](this);
-        //Sandbox.modules[modules[i]](this);
+        Sandbox.modules[modules[i]](this);
 
     }
     // вызвать функцию обратного вызова
@@ -45,11 +47,11 @@ Sandbox.prototype = {
         return this.name;
     }
 };
-Sandbox.modules = {};
-Sandbox.modules.prorab2 = function (prorab) {
-    prorab = 'prorab say module'
-    console.log(prorab);
-};
+
+Sandbox.modules = {}
+
+
+
 
 /*
 var run = Sandbox.prototype.mediator = function(prorab){
