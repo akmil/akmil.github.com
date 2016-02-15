@@ -1,4 +1,4 @@
-Sandbox.modules.builders = function (box) {}
+app.module = (function () {
 
 function BrickWorker(name) {
     this.name = name || '=some brick worker=';
@@ -12,14 +12,14 @@ BrickWorker.prototype =
     getPart: function () {
         if (this.isDoneFlag) return; //check by flag to prevent alert after last loop
 
-        if (!prorab.tryToGetPart()) {
+        if (!app.module.prorabObj.tryToGetPart()) {
             console.log(this.name + ": no bricks left? Iam finnish.");
             this.isDoneFlag = 1;
             return;
         }
 
         console.log(this.name + " (BrickWorker): take and install a bricks!");
-        prorab.oneBrickHasGone();
+        app.module.prorabObj.oneBrickHasGone();
         return true;
     },
     argue_back: function () { console.log(this.name +  "(BrickWorker): hold on,wall is not ready "); }
@@ -44,7 +44,7 @@ WindowWorker.prototype =
                 console.info("bricks left" + startSetup + ". Start to setup all windows!", '\n \t isWindowDone-> ' + this.isWindowDone());
             } else {
                 console.log("WindowWorker: wait untill X-bricks <=200 for setup window." + this.isWindowDone());
-                prorab.disputeStarted();  //recive answer from BrickWorker
+                app.module.prorabObj.disputeStarted();  //recive answer from BrickWorker
             }
         }
     }
@@ -61,20 +61,22 @@ RoofWorker.prototype ={
 
     getPartFromRoof: function () {
 
-
         if (this.isDoneFlag) return; //check by flag to prevent alert after last loop
 
-        if (!prorab.tryToGetPartWindow()) {
+        if (!app.module.prorabObj.tryToGetPartWindow()) {
             console.warn(this.name + ": no Roof parts left? Iam finnish.");
             this.isDoneFlag = true;
             return false;
         }
 
-        //if  brickMen have no bricks RoofWorker can start build
-        //if( !prorab.brickMen.getPart() ) {}
 
-        console.warn(this.name + "^(RoofWorker): take and install \n roof #" + this.count++);
-        prorab.roofBuildStart();
+        //if  brickMen have no bricks RoofWorker can start build
+        if( !app.module.prorabObj.brickMen.getPart() ) {
+            console.warn(this.name + "^(RoofWorker): take and install \n roof #" + this.count++);
+            console.warn('!app.module.prorabObj.brickMen.getPart()' + !app.module.prorabObj.brickMen.getPart());
+            app.module.prorabObj.roofBuildStart();
+        }
+
 
         return true;
     },
@@ -107,4 +109,10 @@ BrickStorage.prototype =
 };
 
 
-
+    return {
+        BrickWorker: BrickWorker,
+        WindowWorker: WindowWorker,
+        RoofWorker: RoofWorker,
+        BrickStorage: BrickStorage
+    }
+})();

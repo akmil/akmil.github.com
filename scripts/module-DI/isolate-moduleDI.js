@@ -48,22 +48,21 @@ Sandbox.prototype = {
     }
 };
 
-Sandbox.modules = {}
+Sandbox.modules = {};
 
+console.log('**module tests', Sandbox.modules);
 
-
-
-/*
-var run = Sandbox.prototype.mediator = function(prorab){
-    console.log('prorab ', prorab );
-    */
-/*testing mediator*//*
-
-    var round_counter = 0;
-    prorab.brickStorage.setBrickCount(5); //brickStorage setter
-    prorab.roofStorage.setBrickCount(3);
-
-    prorab.roofMen.getPartFromRoof(); //roofMen wait until prorab let him do it
+Sandbox.modules.prorab2 = function (prorab) {
+    prorab = 'prorab say module'
+    console.log(prorab);
 };
 
-run();*/
+Sandbox.modules.prorab2 = function (prorab) {
+    prorab = 'prorab say module'
+    console.log(prorab);
+};
+
+
+Sandbox();
+
+
