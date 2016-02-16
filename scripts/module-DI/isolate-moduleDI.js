@@ -1,3 +1,7 @@
+
+Sandbox.modules = {};
+
+
 function Sandbox() {
     // преобразовать аргументы в массив
     var args = Array.prototype.slice.call(arguments),    // последний аргумент ­ функция обратного вызова
@@ -6,7 +10,6 @@ function Sandbox() {
     // или в виде отдельных параметров
         modules = (args[0] && typeof args[0] === 'string') ? args : args[0],
         i;
-    console.log('callback ', callback );
 
     // проверить, была ли функция вызвана
     // как конструктор
@@ -29,15 +32,16 @@ function Sandbox() {
         }
     }
     // инициализировать необходимые модули
-    console.log('modules.length ', modules[0] );
+    console.log('modules.length ', modules.length );
     for (i = 0; i < modules.length; i++) {
-        console.log('modules ', modules[i] );
-        //modules[i](this);
+        console.log('modules:: ', modules[i] );
+        //this.modules[i](this);
         Sandbox.modules[modules[i]](this);
 
     }
     // вызвать функцию обратного вызова
-    callback(this);
+    //console.log('start run callback(this)');
+    //callback(this);
 }
 // добавить свойства к прототипу, если это необходимо
 Sandbox.prototype = {
@@ -48,21 +52,35 @@ Sandbox.prototype = {
     }
 };
 
-Sandbox.modules = {};
-
 console.log('**module tests', Sandbox.modules);
 
-Sandbox.modules.prorab2 = function (prorab) {
-    prorab = 'prorab say module'
-    console.log(prorab);
-};
 
 Sandbox.modules.prorab2 = function (prorab) {
-    prorab = 'prorab say module'
+    prorab = '\t prorab say module2';
     console.log(prorab);
+    var callBack = function () { console.log('***callBack'); };
 };
 
 
+
+
+
+
+//var callBack = function () { console.log('***callBack'); };
+
+Sandbox.modules.prorab4 = function (prorab ) {
+    prorab = '\t prorab say module4';
+    console.log(prorab);
+};
+
+console.log('**module tests', Sandbox.modules);
 Sandbox();
+
+/*
+Sandbox('prorab3' ,function (prorab) {
+    prorab = 'prorab say module3';
+    console.log(prorab);
+});
+*/
 
 
