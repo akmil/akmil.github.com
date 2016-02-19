@@ -81,7 +81,7 @@ app.module = (function () {
             //if  brickMen have no bricks RoofWorker can start build
             if (!app.module.prorabObj.brickMen.getPart()) {
                 console.warn(this.name + "^(RoofWorker): take and install \n roof #" + this.count++);
-                console.warn('!app.module.prorabObj.brickMen.getPart()' + !app.module.prorabObj.brickMen.getPart());
+                console.warn('brickMen have no bricks, RoofWorker can start build' , !app.module.prorabObj.brickMen.getPart());
                 app.module.prorabObj.roofBuildStart();
             }
 
