@@ -1,6 +1,4 @@
-
-Sandbox.modules = {};
-
+console.log('start');
 
 function Sandbox() {
     // преобразовать аргументы в массив
@@ -41,7 +39,7 @@ function Sandbox() {
     }
     // вызвать функцию обратного вызова
     //console.log('start run callback(this)');
-    //callback(this);
+    callback(this);
 }
 // добавить свойства к прототипу, если это необходимо
 Sandbox.prototype = {
@@ -52,35 +50,33 @@ Sandbox.prototype = {
     }
 };
 
+Sandbox.modules = {};
+
 console.log('**module tests', Sandbox.modules);
 
+var callBack = function () { console.log('***callBack'); };
 
-Sandbox.modules.prorab2 = function (prorab) {
+
+
+
+Sandbox.modules.prorab2 = function (prorab, callBack) {
     prorab = '\t prorab say module2';
     console.log(prorab);
-    var callBack = function () { console.log('***callBack'); };
+    //var callBack = function () { console.log('***callBack'); };
 };
 
-
-
-
-
-
-//var callBack = function () { console.log('***callBack'); };
-
-Sandbox.modules.prorab4 = function (prorab ) {
+Sandbox.modules.prorab4 = function (prorab) {
     prorab = '\t prorab say module4';
     console.log(prorab);
-};
-
+}
 console.log('**module tests', Sandbox.modules);
 Sandbox();
 
-/*
-Sandbox('prorab3' ,function (prorab) {
-    prorab = 'prorab say module3';
+
+Sandbox('prorab99' ,function (prorab) {
+    prorab = 'prorab 99 say module99';
     console.log(prorab);
 });
-*/
+
 
 

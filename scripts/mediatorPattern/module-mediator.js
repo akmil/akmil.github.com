@@ -56,4 +56,3 @@ app.module = (function () {
 })();
 
 
-app.module.runMediator();
