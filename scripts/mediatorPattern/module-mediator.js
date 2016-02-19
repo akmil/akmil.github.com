@@ -19,10 +19,10 @@ app.module = (function () {
         },
 
         oneBrickHasGone: function (){
-
-            //check if bricks less then 200
-            this.windowMen.argue( this.brickStorage.getBrickCount() );
-            console.log('  ++ brickStorage brick count: ' + this.brickStorage.getBrickCount()*100 );
+            var bricksLeft = this.brickStorage.getBrickCount();
+            //check if bricks less then 200 start install window
+            this.windowMen.argue( bricksLeft );
+            console.log('  ++ brickStorage brick count: ' + bricksLeft*100 );
 
             //if brickMen have brick===false then start to build roof
             if ( !prorab.brickMen.getPart() ) {

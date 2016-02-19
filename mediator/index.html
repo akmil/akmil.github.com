@@ -4,11 +4,22 @@ layout: default
 
 <div class="show-layers home">
   <h3>Mediator + module паттерн </h3>
+  <hr>
   <p>Результат выполнения: в консоли</p>
-  <p>Задача: Создать обьект который </p>
+  <p>Задача: Создать обьект который будет распределять связи/задачи с другими обьектами (которые не должны быть связаны между собой)</p>
+  <hr>
+  <p><b>Практический пример:</b></p>
+  <p> Есть "Прораб"(медиатор), укладчик кирпича, установщик окон, установщик крыши. Также есть склад кирпича и склад для крыши.</p>
+  <p>Нужно:</p>
+    <ul>
+      <li> Началась постройка из кирпичачтоб после постройки стены до уровня</li>
+      <li> Если каркас дома готов к установке окон, то начать установку окон и продолжить дальше постройку дома</li>
+      <li> После окончания постройки "короби" начать установку крыши</li>
+    </ul>
+  <p><b>Входные данные: </b>Склад из 5*100 кирпичей(brickStorage), roofStorage: 3 детали . Установка окон начинается после изпользования 200 кирпичей.</p>
 
 </div>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/app-init.js"></script>
-<script src="{{ site.baseurl }}/scripts/mediatorPattern/builders.js"></script>
+<script src="{{ site.baseurl }}/scripts/mediatorPattern/module-builders.js"></script>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/module-test.js"></script>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/app-runner.js"></script>
