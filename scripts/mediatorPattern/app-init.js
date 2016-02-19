@@ -1,2 +1,3 @@
-var app ={};
-app.module = '';
+var app = {
+    module : ''
+};

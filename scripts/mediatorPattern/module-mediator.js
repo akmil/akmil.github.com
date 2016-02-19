@@ -9,29 +9,35 @@ app.module = (function () {
         roofStorage: new app.module.BrickStorage('window'),
 
         tryToGetPart: function () {
-            if (this.brickStorage.takeOnePartkAway()) { return true; }
+            if (this.brickStorage.takeOnePartkAway()) {
+                return true;
+            }
             return false;
         },
 
         tryToGetPartWindow: function () {
-            if ( this.roofStorage.takeOnePartkAway() ) { return true; }
+            if (this.roofStorage.takeOnePartkAway()) {
+                return true;
+            }
             return false;
         },
 
-        oneBrickHasGone: function (){
+        oneBrickHasGone: function () {
             var bricksLeft = this.brickStorage.getBrickCount();
             //check if bricks less then 200 start install window
-            this.windowMen.argue( bricksLeft );
-            console.log('  ++ brickStorage brick count: ' + bricksLeft*100 );
+            this.windowMen.argue(bricksLeft);
+            console.log('  ++ brickStorage brick count: ' + bricksLeft * 100);
 
             //if brickMen have brick===false then start to build roof
-            if ( !prorab.brickMen.getPart() ) {
+            if (!prorab.brickMen.getPart()) {
                 this.roofBuildStart();
                 return false;
             }
         },
 
-        disputeStarted: function (){ this.brickMen.argue_back(); },
+        disputeStarted: function () {
+            this.brickMen.argue_back();
+        },
 
         roofBuildStart: function () {
             if (!this.brickMen.getPart()) {
