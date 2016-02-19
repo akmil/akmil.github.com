@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/mediatorPattern/prorab-mediator.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mediator/index.html" afterPath="$PROJECT_DIR$/mediator/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js" afterPath="$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js" />
     </list>
     <ignored path="blogPasha.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="isolate-moduleDI.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="isolate-moduleDI.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/moduleInject/isolate-moduleDI.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="1.1309329">
               <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
               <folding />
             </state>
@@ -91,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mediator/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63931626">
+            <state vertical-scroll-proportion="-14.384615">
               <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
               <folding />
             </state>
@@ -507,7 +506,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455895675987</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add: task description&#10;&#10;">
+      <created>1455897150443</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1455897150443</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -562,7 +567,8 @@
     <MESSAGE value="add: isolate-module111" />
     <MESSAGE value="add: isolate-module-DI" />
     <MESSAGE value="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;" />
+    <MESSAGE value="add: task description&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: task description&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -842,13 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/prorab-mediator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/downloads/vakata-jstree-8ea6ce7/demo/filebrowser/data/root/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-24.20627">
@@ -893,7 +892,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/moduleInject/isolate-moduleDI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="1.1309329">
           <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
           <folding />
         </state>
@@ -946,7 +945,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mediator/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63931626">
+        <state vertical-scroll-proportion="-14.384615">
           <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
           <folding />
         </state>
