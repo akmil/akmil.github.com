@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mediator/index.html" afterPath="$PROJECT_DIR$/mediator/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" afterPath="$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" />
     </list>
     <ignored path="blogPasha.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,16 +25,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="module-builders.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="module-builders.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6121113">
+              <caret line="83" column="84" selection-start-line="83" selection-start-column="84" selection-end-line="83" selection-end-column="84" />
               <folding>
                 <element signature="e#60#118#0" expanded="false" />
                 <element signature="e#1748#1805#0" expanded="false" />
-                <element signature="e#2898#2931#0" expanded="false" />
-                <element signature="e#2966#3480#0" expanded="false" />
+                <element signature="e#2909#2942#0" expanded="false" />
+                <element signature="e#2977#3491#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,10 +70,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mediator/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4068376">
+            <state vertical-scroll-proportion="-9.153846">
               <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
               <folding />
             </state>
@@ -144,10 +144,10 @@
         <option value="$PROJECT_DIR$/scripts/moduleInject/isolate-moduleDI.js" />
         <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-test.js" />
         <option value="$PROJECT_DIR$/scripts/mediatorPattern/main.js" />
-        <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" />
         <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js" />
         <option value="$PROJECT_DIR$/scripts/mediatorPattern/app-init.js" />
         <option value="$PROJECT_DIR$/mediator/index.html" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" />
       </list>
     </option>
   </component>
@@ -517,7 +517,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455898557623</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="mod: file link">
+      <created>1455900917039</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1455900917039</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -913,27 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#60#118#0" expanded="false" />
-            <element signature="e#1748#1805#0" expanded="false" />
-            <element signature="e#2898#2931#0" expanded="false" />
-            <element signature="e#2966#3480#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/app-runner.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -952,9 +937,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mediator/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4068376">
+        <state vertical-scroll-proportion="-9.153846">
           <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6121113">
+          <caret line="83" column="84" selection-start-line="83" selection-start-column="84" selection-end-line="83" selection-end-column="84" />
+          <folding>
+            <element signature="e#60#118#0" expanded="false" />
+            <element signature="e#1748#1805#0" expanded="false" />
+            <element signature="e#2909#2942#0" expanded="false" />
+            <element signature="e#2977#3491#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
