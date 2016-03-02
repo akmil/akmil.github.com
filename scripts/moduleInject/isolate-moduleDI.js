@@ -32,7 +32,7 @@ function Sandbox() {
     // инициализировать необходимые модули
     console.log('modules.length ', modules.length );
     for (i = 0; i < modules.length; i++) {
-        console.log('modules:: ', modules[i] );
+        //console.log('modules:: ', modules[i] );
         //this.modules[i](this);
         Sandbox.modules[modules[i]](this);
 
@@ -56,27 +56,28 @@ console.log('**module tests', Sandbox.modules);
 
 var callBack = function () { console.log('***callBack'); };
 
-
-
-
-Sandbox.modules.prorab2 = function (prorab, callBack) {
-    prorab = '\t prorab say module2';
-    console.log(prorab);
-    //var callBack = function () { console.log('***callBack'); };
+Sandbox.modules.moduleAdd = function () {
+    console.log('\t run module1');
+    var args = [].call.slice(arguments);
+    var args2  = Array.prototype.slice.call(arguments);
+    return args +=args;
 };
 
 Sandbox.modules.prorab4 = function (prorab) {
     prorab = '\t prorab say module4';
     console.log(prorab);
 }
-console.log('**module tests', Sandbox.modules);
-Sandbox();
 
 
-Sandbox('prorab99' ,function (prorab) {
+
+
+/*Sandbox('prorab99' ,function (prorab) {
     prorab = 'prorab 99 say module99';
     console.log(prorab);
-});
+});*/
 
+/*run module*/
+console.log('**module tests', Sandbox.modules);
+console.log('**module tests', Sandbox.modules.moduleAdd(1,2,3,4,5));
 
 
