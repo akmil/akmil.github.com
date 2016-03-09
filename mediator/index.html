@@ -1,6 +1,29 @@
 ---
 layout: default
 ---
+<div id="cloack">
+  <marquee behavior="scroll" direction="right" scrollamount="20">
+    <spant>contents loading here</spant>
+  </marquee>
+
+</div>
+
+<progress max="100" value="80">
+  <div class="progress-bar">
+    <span style="width: 80%;">Progress: 80%</span>
+  </div>
+</progress>
+
+<div role="application">
+
+  <h3>Progressbar Example 1</h3>
+
+  <button id="pb1_control">Start Example</button>
+  <div id="pb1_label" class="hidden">Example 1 Progressbar</div>
+  <div id="pb1" class="progress" role="progressbar" aria-labelledby="pb1_label" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" tabindex="0"></div>
+
+</div>
+
 
 <div class="show-layers home">
   <h3>Mediator + module паттерн </h3>
@@ -19,7 +42,10 @@ layout: default
   <p><b>Входные данные: </b>Склад из 5*100 кирпичей(brickStorage), roofStorage: 3 детали . Установка окон начинается после изпользования 200 кирпичей.</p>
 
 </div>
+<script src="{{ site.baseurl }}/scripts/progressbarRole/progressbar.js"></script>
+
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/app-init.js"></script>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/module-builders.js"></script>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/module-mediator.js"></script>
 <script src="{{ site.baseurl }}/scripts/mediatorPattern/app-runner.js"></script>
+
