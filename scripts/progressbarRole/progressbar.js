@@ -1,3 +1,27 @@
+'use strict';
+var scripts = document.scripts;
+
+function afterLoad() {
+    console.log( "Загрузка завершена: " + typeof(this) );
+}
+for (var i = 0; i < scripts.length; i++) {
+    scripts[i].onload = scripts.onerror = function () {
+        if (!this.executed) { // выполнится только один раз
+            this.executed = true;
+            afterLoad();
+        }
+    };
+
+    scripts[i].onreadystatechange = function () {
+        var self = this;
+        if (this.readyState == "complete" || this.readyState == "loaded") {
+            setTimeout(function () {
+                self.onload()
+            }, 0); // сохранить "this" для onload
+        }
+    };
+}
+/**/
 for(var i = 0; i< 500000; i++){
     setTimeout (function(){
         i++;
@@ -7,8 +31,12 @@ for(var i = 0; i< 500000; i++){
 }
 
 document.onreadystatechange = function () {
+    var scriptList = [];
+
     if (document.readyState == "interactive") {
+        scriptList = document.scripts;
         initApplication();
+        scriptProgress( scriptList );
     }
     if (document.readyState == "loading") {
         console.log('loading');
@@ -21,14 +49,46 @@ document.onreadystatechange = function () {
     console.log('document.readyState:', document.readyState);
 };
 
+
+
 var body = document.getElementsByTagName('body')[0];
 function initApplication() {
-    var cloack = document.getElementById('cloack');
+    var scriptList = document.scripts ;
+    console.log( '\n **** \n **** \n scriptList to load:', scriptList.length, scriptList );
 
+
+    var cloack = document.getElementById('cloack');
     cloack.style.display = 'block';
-    //body.appendChild(cloack);
-    //body.insertBefore(cloack, window.document.body.firstChild);
+
     console.log('initApplication - display:', document.getElementById('cloack').style.display);
+}
+function scriptProgress(scriptArr){
+    console.log("scriptArr.length: ", scriptArr.length);
+    var para ;
+    var t = document.createTextNode("This is a paragraph.");
+
+    if(scriptArr.length > 0) {
+        for (var i = 0; i < scriptArr.length; i++) {
+            para = document.createElement('p');
+            t = document.createTextNode("This is a paragraph." + scriptArr[i].outerHTML);
+            para.appendChild(t);
+            document.getElementById('cloack').appendChild(para);
+            console.log("[i]: p" , scriptArr[i] , para);
+        }
+    }
+}
+
+function loadIncr(script){
+    script.onload = script.onerror = function() {
+        if (!this.executed) { // выполнится только один раз
+            this.executed = true;
+            afterLoad(script);
+        }
+    };
+}
+
+function afterLoad(script) {
+    console.log( "Загрузка завершена: " + script );
 }
 
 function hideCloack() {
