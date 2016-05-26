@@ -1,0 +1,48 @@
+{
+  "tests" : [ {
+    "name" : "Support(ContactUs) page on desktop 1456x1220",
+    "startedAt" : 1459155054750,
+    "endedAt" : 1459155079086,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 3,
+      "errors" : 0,
+      "warnings" : 1,
+      "total" : 4
+    },
+    "testId" : "1-support-contactus-page-on-desktop-1456x1220",
+    "groups" : [ "SupportContactUs" ],
+    "failed" : false,
+    "duration" : 24336
+  }, {
+    "name" : "Support(ContactUs) page on tablet 784x1024",
+    "startedAt" : 1459155079087,
+    "endedAt" : 1459155095278,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 5,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 5
+    },
+    "testId" : "2-support-contactus-page-on-tablet-784x1024",
+    "groups" : [ "SupportContactUs" ],
+    "failed" : false,
+    "duration" : 16191
+  }, {
+    "name" : "Support(ContactUs) page on mobile 336x480",
+    "startedAt" : 1459155095278,
+    "endedAt" : 1459155122831,
+    "failed" : false,
+    "statistic" : {
+      "passed" : 4,
+      "errors" : 0,
+      "warnings" : 0,
+      "total" : 4
+    },
+    "testId" : "3-support-contactus-page-on-mobile-336x480",
+    "groups" : [ "SupportContactUs" ],
+    "failed" : false,
+    "duration" : 27553
+  } ]
+}
