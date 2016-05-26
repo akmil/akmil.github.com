@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e79816e-e94f-44fe-b744-d794596ed0b0" name="Default" comment="add new doc">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/products-and-docs/apis/season-tix/index.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/products-and-docs/apis/arcthics-new/new-doc.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/partials/expanded-menu-header.html" afterPath="$PROJECT_DIR$/_includes/partials/expanded-menu-header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/pd-side-menu.html" afterPath="$PROJECT_DIR$/_includes/pd-side-menu.html" />
     </list>
     <list id="aaf21b59-a97e-480c-86cf-59bb345d215c" name="Failed commit: Default" comment="merge from dev" />
     <ignored path="ticketmaster.iws" />
@@ -26,12 +26,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/products-and-docs/apis/archtics/index.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
+              <first_editor relative-caret-position="136">
+                <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -43,11 +43,31 @@
         <entry file="file://$PROJECT_DIR$/products-and-docs/apis/season-tix/index.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="170">
-                <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+              <first_editor relative-caret-position="68">
+                <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
                 <folding />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pd-side-menu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/pd-side-menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="161" column="65" selection-start-line="156" selection-start-column="20" selection-end-line="161" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expanded-menu-header.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_includes/partials/expanded-menu-header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -104,8 +124,6 @@
         <option value="$PROJECT_DIR$/_data/swagger-pim-api.json" />
         <option value="$PROJECT_DIR$/_site/products-and-docs/apis/swagger/index" />
         <option value="$PROJECT_DIR$/_site/products-and-docs/apis/swagger/v2/index.html" />
-        <option value="$PROJECT_DIR$/_includes/partials/expanded-menu-header.html" />
-        <option value="$PROJECT_DIR$/_includes/pd-side-menu.html" />
         <option value="$PROJECT_DIR$/scripts/api-explorer.js" />
         <option value="$PROJECT_DIR$/_data/discovery-api-docs.json" />
         <option value="$PROJECT_DIR$/_data/orgs/swagger/v2/methods-metadata.json" />
@@ -151,6 +169,8 @@
         <option value="$PROJECT_DIR$/products-and-docs/apis/arcthics-new/index.md" />
         <option value="$PROJECT_DIR$/products-and-docs/apis/season-tix/index.md" />
         <option value="$PROJECT_DIR$/products-and-docs/apis/archtics/index.md" />
+        <option value="$PROJECT_DIR$/_includes/pd-side-menu.html" />
+        <option value="$PROJECT_DIR$/_includes/partials/expanded-menu-header.html" />
       </list>
     </option>
   </component>
@@ -351,7 +371,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_site" />
+              <option name="myItemId" value="_includes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -365,59 +385,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="_site" />
+              <option name="myItemId" value="_includes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="products-and-docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticketmaster" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="products-and-docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ticketmaster" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="products-and-docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="season-tix" />
+              <option name="myItemId" value="partials" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -621,14 +593,7 @@
       <workItem from="1464085120175" duration="15604000" />
       <workItem from="1464163685841" duration="21708000" />
       <workItem from="1464246260401" duration="2306000" />
-      <workItem from="1464251507973" duration="10663000" />
-    </task>
-    <task id="LOCAL-00484" summary="add: POC pick ltd/lng using google map">
-      <created>1462541785480</created>
-      <option name="number" value="00484" />
-      <option name="presentableId" value="LOCAL-00484" />
-      <option name="project" value="LOCAL" />
-      <updated>1462541785480</updated>
+      <workItem from="1464251507973" duration="10977000" />
     </task>
     <task id="LOCAL-00485" summary="mod: markup">
       <created>1462542085328</created>
@@ -966,11 +931,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464255647052</updated>
     </task>
-    <option name="localTasksCounter" value="533" />
+    <task id="LOCAL-00533" summary="add new doc">
+      <created>1464270569108</created>
+      <option name="number" value="00533" />
+      <option name="presentableId" value="LOCAL-00533" />
+      <option name="project" value="LOCAL" />
+      <updated>1464270569108</updated>
+    </task>
+    <option name="localTasksCounter" value="534" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="829833000" />
+    <option name="totallyTimeSpent" value="830147000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1042,9 +1014,9 @@
     <MESSAGE value="add: show smallest picture &#10;" />
     <MESSAGE value="update prj" />
     <MESSAGE value="Merge branch 'master' into constact-us-reset&#10;&#10;# Conflicts:&#10;#&#9;.travis.yml&#10;#&#9;Rakefile&#10;" />
-    <MESSAGE value="add new doc" />
     <MESSAGE value="add new doc2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new doc2" />
+    <MESSAGE value="add new doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new doc" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.8622754" />
   </component>
   <component name="XDebuggerManager">
@@ -1054,8 +1026,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_layouts/events.html" />
-    <entry file="file://$PROJECT_DIR$/_includes/apis-code-examples/discovery-api-codes/reqres-search-events.md" />
     <entry file="file://$PROJECT_DIR$/_includes/apis-code-examples/discovery-api-codes/search-events.md" />
     <entry file="file://$PROJECT_DIR$/_data/orgs/swagger/v1/methods-metadata.json" />
     <entry file="file://$PROJECT_DIR$/_includes/apis-code-examples/pim-api-codes/v1/reqres-search-events.md" />
@@ -1253,25 +1223,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/products-and-docs/apis/season-tix/index.md">
+    <entry file="file://$PROJECT_DIR$/products-and-docs/apis/archtics/index.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="170">
-            <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <first_editor relative-caret-position="136">
+            <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/products-and-docs/apis/archtics/index.md">
+    <entry file="file://$PROJECT_DIR$/products-and-docs/apis/season-tix/index.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/pd-side-menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="161" column="65" selection-start-line="156" selection-start-column="20" selection-end-line="161" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/partials/expanded-menu-header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>
