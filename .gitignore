@@ -1,6 +1,17 @@
-/_site
+/scripts/vendors/jquery-1.11.3.js
 _site
+.idea
 .sass-cache
 .jekyll-metadata
-.idea
-/.idea
+
+tests/galen/reports-local
+
+# NodeJS libs
+node_modules
+npm-debug.log
+
+
+# Ignore Mac DS_Store files
+.DS_Store
+Gemfile.lock
+

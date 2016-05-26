@@ -1,0 +1,89 @@
+{
+  "testId" : "1-support-contactus-page-on-desktop-1456x1220",
+  "name" : "Support(ContactUs) page on desktop 1456x1220",
+  "report" : {
+    "nodes" : [ {
+      "name" : "http://127.0.0.1:4000//support/contact-us/ 1456x1220",
+      "status" : "info",
+      "nodes" : [ {
+        "name" : "wait 10s",
+        "status" : "info",
+        "time" : 1459155060937,
+        "type" : "node"
+      }, {
+        "name" : "check tests/galen/support/contact-us/desktop.gspec --include \"desktop\"",
+        "status" : "info",
+        "nodes" : [ {
+          "name" : "Check layout: tests/galen/support/contact-us/desktop.gspec included tags: desktop",
+          "status" : "info",
+          "time" : 1459155078989,
+          "includedTags" : [ "desktop" ],
+          "excludedTags" : [ ],
+          "sections" : [ {
+            "name" : "Support page content test",
+            "objects" : [ {
+              "name" : "base-content-wrapper",
+              "specs" : [ {
+                "status" : "warn",
+                "place" : {
+                  "filePath" : "tests/galen/support/contact-us/desktop.gspec",
+                  "lineNumber" : 9
+                },
+                "name" : "image file etalonImg/dumpsDesktop/objects/base-content-wrapper.png, error 2%",
+                "errors" : [ "Element does not look like \"tests/galen/support/contact-us/etalonImg/dumpsDesktop/objects/base-content-wrapper.png\". There are 3.52% mismatching pixels but max allowed is 2%" ],
+                "highlight" : [ "base-content-wrapper" ],
+                "imageComparison" : {
+                  "actualImage" : "layout-2-base-content-wrapper-actual.png",
+                  "expectedImage" : "layout-3-base-content-wrapper-expected.png",
+                  "comparisonMapImage" : "layout-4-base-content-wrapper-map.png"
+                }
+              } ]
+            } ]
+          }, {
+            "name" : "Navigation test",
+            "objects" : [ {
+              "name" : "header",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "tests/galen/support/contact-us/desktop.gspec",
+                  "lineNumber" : 13
+                },
+                "name" : "visible",
+                "highlight" : [ "header" ]
+              } ]
+            }, {
+              "name" : "footer",
+              "specs" : [ {
+                "status" : "info",
+                "place" : {
+                  "filePath" : "tests/galen/support/contact-us/desktop.gspec",
+                  "lineNumber" : 13
+                },
+                "name" : "visible",
+                "highlight" : [ "footer" ]
+              } ]
+            } ]
+          } ],
+          "objects" : {
+            "footer" : {
+              "area" : [ 0, 1859, 1440, 499 ]
+            },
+            "base-content-wrapper" : {
+              "area" : [ 147, 233, 1146, 1626 ]
+            },
+            "header" : {
+              "area" : [ 0, 0, 1440, 209 ]
+            }
+          },
+          "screenshot" : "layout-1-screenshot.png",
+          "type" : "layout"
+        } ],
+        "time" : 1459155070940,
+        "type" : "node"
+      } ],
+      "time" : 1459155054757,
+      "type" : "node"
+    } ]
+  }
+}
