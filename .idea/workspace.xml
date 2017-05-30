@@ -2,37 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_sass/common/footer.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_sass/common/header.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/ic-bugre-menu.svg" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/_syntax-highlighting.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/explorer/api-explorer-v2.0.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/explorer/components/panels.component.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/explorer/introjs.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/explorer/scroll.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/explorer/style.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/pages/blogs.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/slick/slick-theme.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/slick/slick.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_sass/swagger/_swagger.scss" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/colorNamer/color-namer.html" afterPath="$PROJECT_DIR$/_includes/colorNamer/color-namer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="$PROJECT_DIR$/_includes/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/head.html" afterPath="$PROJECT_DIR$/_includes/head.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/header.html" afterPath="$PROJECT_DIR$/_includes/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/default.html" afterPath="$PROJECT_DIR$/_layouts/default.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_sass/_base.scss" afterPath="$PROJECT_DIR$/_sass/_base.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_sass/_layout.scss" afterPath="$PROJECT_DIR$/_sass/_layout.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_sass/components/color-pick-box.scss" afterPath="$PROJECT_DIR$/_sass/components/color-pick-box.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.md" afterPath="$PROJECT_DIR$/about.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/color-namer/index.md" afterPath="$PROJECT_DIR$/color-namer/index.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.scss" afterPath="$PROJECT_DIR$/css/main.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/colorNamer/dist/preload.bundle.js" afterPath="$PROJECT_DIR$/scripts/colorNamer/dist/preload.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js" afterPath="$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/colorNamer/src/nameThatColor.js" afterPath="$PROJECT_DIR$/scripts/colorNamer/src/nameThatColor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_includes/icon-github.svg" afterPath="$PROJECT_DIR$/assets/icon-github.svg" />
     </list>
     <ignored path="blogPasha.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,8 +28,18 @@
       <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/main.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="-34">
               <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_base.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_sass/_base.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -97,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="extract-colors.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="extract-colors.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="214">
@@ -198,7 +179,6 @@
         <option value="$PROJECT_DIR$/_sass/common/header.scss" />
         <option value="$PROJECT_DIR$/_includes/footer.html" />
         <option value="$PROJECT_DIR$/_sass/common/footer.scss" />
-        <option value="$PROJECT_DIR$/_sass/_base.scss" />
         <option value="$PROJECT_DIR$/color-namer/index.md" />
         <option value="$PROJECT_DIR$/_layouts/default.html" />
         <option value="$PROJECT_DIR$/index.html" />
@@ -209,6 +189,7 @@
         <option value="$PROJECT_DIR$/css/main.scss" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js" />
+        <option value="$PROJECT_DIR$/_sass/_base.scss" />
       </list>
     </option>
   </component>
@@ -366,88 +347,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_sass" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_sass" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_sass" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="akmil.github.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="colorNamer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -562,14 +461,7 @@
       <workItem from="1495704007385" duration="52149000" />
       <workItem from="1496142582404" duration="521000" />
       <workItem from="1496143260100" duration="10000" />
-      <workItem from="1496145123912" duration="11078000" />
-    </task>
-    <task id="LOCAL-00130" summary="add: click test in jquery 8">
-      <created>1453384476033</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1453384476033</updated>
+      <workItem from="1496145123912" duration="11471000" />
     </task>
     <task id="LOCAL-00131" summary="add: click test in jquery 9">
       <created>1453384592769</created>
@@ -907,11 +799,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496149563179</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="mod styles&#10;">
+      <created>1496159608651</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1496159608651</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108818000" />
+    <option name="totallyTimeSpent" value="109211000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -953,7 +852,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: image compare" />
     <MESSAGE value="add: image compare1" />
     <MESSAGE value="add: image compare2" />
     <MESSAGE value="add: image compare3" />
@@ -978,7 +876,8 @@
     <MESSAGE value="add: color namer1" />
     <MESSAGE value="Merge branch 'master' into color-namer&#10;&#10;# Conflicts:&#10;#&#9;CNAME&#10;" />
     <MESSAGE value="add color namer&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add color namer&#10;" />
+    <MESSAGE value="mod styles&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="mod styles&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -987,7 +886,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dist/preload.bundle.js" />
     <entry file="file://$PROJECT_DIR$/src/cat.js" />
     <entry file="file://$PROJECT_DIR$/target/zoo.js" />
     <entry file="file://$PROJECT_DIR$/src/zoo.js" />
@@ -1250,14 +1148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/_base.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_sass/_layout.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1306,14 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
@@ -1334,6 +1216,33 @@
             <marker date="1496159497877" expanded="false" signature="3934:3952" ph="..." />
             <marker date="1496159497877" expanded="true" signature="4710:4821" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_site/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#318#432#0" expanded="false" />
+            <element signature="e#446#568#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_sass/_base.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
