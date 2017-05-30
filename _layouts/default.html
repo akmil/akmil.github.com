@@ -1,41 +1,177 @@
 <!DOCTYPE html>
 <html>
-    {% include head.html %}
-    <body>
-        <!-- Qualaroo for ticketmaster.com -->
-        <!-- Paste this code right after the <body> tag on every page of your site. -->
-        <script type="text/javascript">
-          var _kiq = _kiq || [];
-          (function(){
-            setTimeout(function(){
-            var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
-            s.async = true; s.src = '//s3.amazonaws.com/ki.js/62776/euc.js'; f.parentNode.insertBefore(s, f);
-            }, 1);
-          })();
-        </script>
-        {{ content }}
-        <div id="back-top">
-            <a href="javascript:void(0)"><span></span></a>
-        </div>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-72344127-1', 'auto');
-            ga('send', 'pageview');
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+  {% include head.html %}
 
-            if( sessionStorage.getItem('tk-api-email') && typeof sessionStorage.getItem('tk-api-email') === "string" ) {
-                document.getElementsByClassName("apigee-login")[0].textContent = (sessionStorage.getItem('tk-api-email') != undefined) ?  sessionStorage.getItem('tk-api-email') : "Login";
+  <body>
+
+    {% include header.html %}
+
+    <div class="page-content">
+      <div class="wrapper">
+        {{content}}
+
+      </div>
+    </div>
+
+    {% include footer.html %}
+    <div id="info">
+    </div>
+    <div>
+      <input class="search-input form-control"/>
+    </div>
+    <div id="jstree">
+    </div>
+
+  </body>
+  {% if page.includeFarbtastic != true %}
+  <script src="{{'/scripts/vendors/jquery-1.11.3.min.js' | prepend: site.baseurl }}"></script>
+  <script src="{{'/scripts/vendors/jquery-migrate-1.3.0.min.js' | prepend: site.baseurl }}"></script>
+  <script src="{{'/scripts/components/intro.js' | prepend: site.baseurl }}"></script>
+  <script src="{{'/scripts/vendors/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+  <script src="{{'/scripts/vendors/jstree.min.js' | prepend: site.baseurl }}"></script>
+
+  <script>
+    $(function() {
+      var url = "https://app.ticketmaster.com/discovery/v2/classifications.json?apikey=B0JQHemR4Q569W9GcjHfhygRBRU3RvrL";
+      function setChildren(data) {
+        var newArrObj =[];
+        data = rename(data);
+
+        //rename parent(genres)
+        data.map(function(item){
+         newArrObj.push( {
+            children:item.segment._embedded.genres,
+            text : item.segment.text
+//            aAttributes: null,
+//            liAttributes: null,
+//            icon:""
+          } );
+        });
+        //rename/copy child(subgenres) field
+        newArrObj.map(function(item){
+          item.children.map(function(item) {
+            if(item._embedded && item._embedded.subgenres){
+              item['children'] = item._embedded.subgenres ;
+              delete item._embedded;
+            }else {
+              console.log('else:' );
             }
+          });
+        });
 
-        </script>
-        <script src="{{"/scripts/components/scroll-top.js" | prepend: site.baseurl }}"></script>
-        <script src="{{'/scripts/vendors/bootstrap.min.js' | prepend: site.baseurl }}"></script>
-        {% include feedback.html %}
-        <script src="{{'/scripts/components/custom-select.js' | prepend: site.baseurl }}"></script>
-        <script src="{{'/scripts/components/numeric-input.js' | prepend: site.baseurl }}"></script>
-        <script src="{{'/scripts/components/feedback.js' | prepend: site.baseurl }}"></script>
-        <script src="{{'/scripts/load-api-key.js' | prepend: site.baseurl }}"></script>
-    </body>
+        console.log('newArrObj', newArrObj);
+
+        return newArrObj;
+      }
+      function rename(json) {
+
+        function replaceAtoB(arr,opt) {
+          for (var i = 0; i<arr.length; i++) {
+            arr[i][opt.root.fieldName][opt.root.val] = arr[i][opt.root.fieldName][opt.root.to];
+            delete arr[i][opt.root.fieldName][opt.root.to];
+
+            var genresArr = arr[i][opt.root.fieldName]['_embedded'][opt.parent.fieldName];
+            if( 0<genresArr.length ) {
+              for (var ii = 0; ii < genresArr.length; ii++) {
+                genresArr[ii][opt.parent.val] = genresArr[ii][opt.parent.to];
+                delete genresArr[ii][opt.parent.to];
+
+                var subgenresArr = genresArr[ii]['_embedded'][opt.child.fieldName];
+                if( 0<subgenresArr.length ) {
+                  for (var j = 0; j < subgenresArr.length; j++) {
+                    subgenresArr[j][opt.child.val] = subgenresArr[j][opt.child.to];
+                    delete subgenresArr[j][opt.child.to];
+                  }
+                }
+
+              }
+            }
+          }
+        }
+
+        console.log('json:' , json[0]);
+
+        var arr = JSON.stringify(json);//convert array to string
+        arr = JSON.parse(arr);
+        var opt ={
+          root: {fieldName:['segment'], val:'text', to:'name' },
+          parent: {fieldName:['genres'],'_embedded':true ,  val:'text', to:'name' },
+          child: {fieldName:['subgenres'],'_embedded':true,   val:'text', to:'name'}
+        };
+
+        replaceAtoB(arr,opt);
+
+
+
+        console.log('rename arr:' , arr);
+        return arr;
+      }
+
+      function request() {
+        $.ajax({
+          dataType: 'json',
+          async: true,
+          url: url
+        }).done(function (result) {
+          if (result) {
+            obj = setChildren(result['_embedded']['classifications']);
+            initTree(obj);
+          } else {
+            console.log('no result found');
+          }
+        }).fail(function (e) {
+          console.log('There was an fail status - ' , e.status);
+        });
+
+      }
+      request();
+      var obj;
+
+      function  initTree(json) {
+        $("#jstree").jstree({
+          "core" : {'data' : json} ,
+          "plugins" : [ "search" ] ,
+          "search": {
+            "show_only_matches_children" : true,
+            /**
+             * Indicates if all nodes opened to reveal the search result, should be closed when the search is cleared or a new search is performed. Default is `true`.
+             * @name $.jstree.defaults.search.close_opened_onclear
+             * @plugin search
+             */
+            "case_sensitive" : false
+          }
+        }).on('select_node.jstree', function (event, data) {
+          data.instance.toggle_node(data.node); //set open on one click
+        }).on('changed.jstree', function (e, data) {
+          var i, j, r = [];
+          for (i = 0, j = data.selected.length; i < j; i++) {
+            r.push(
+              {
+                text: data.instance.get_node(data.selected[i]).text,
+                id: data.instance.get_node(data.selected[i]).id
+              }
+            );
+          }
+          $('#info').html('Selected: ' + r[0].text + ',' + r[0].id);
+        });
+
+      }
+
+
+      var to = false;
+       $(".search-input").keyup(function () {
+       if(to) { clearTimeout(to); }
+       to = setTimeout(function () {
+       var v = $('.search-input').val();
+          $('#jstree').jstree(true).search(v);
+          to = true;
+          }, 250);
+       });
+
+
+    });
+  </script>
+  {%endif%}
+
 </html>

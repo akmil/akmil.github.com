@@ -16,4 +16,3 @@ You can find the source code for Jekyll at
 [jekyll](https://github.com/jekyll/jekyll)
 {: #with-an-id}
 
-showComments: {{ page.showComments }}

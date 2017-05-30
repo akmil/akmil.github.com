@@ -35,6 +35,11 @@
     $(document).ready(function(){
         var header = $('#instructions-header'),
             instructions = $('#console-instructions'),
+            getKeyButton = $('#get-key-callout'),
+            loggedUserKeyContainer = $('#pantheon-api-key'),
+            loggedUserKey = $( 'span' , loggedUserKeyContainer),
+            copyButton = $('.copy-btn'),
+            userApiKeySessionStorage = null,
             iframe = $('#console-iframe');
 
         if (getQueryVariable('id') && consoleUrls[getQueryVariable('id')]){
@@ -46,6 +51,57 @@
             header.addClass('expanded');
             sessionStorage.setItem('console_visited', 'true');
         }
+        function showUserApiKeySessionStorage(isResized) {
+            //userApiKeySessionStorage = sessionStorage.getItem('tk-api-key');
+            function checkCookie() {
+                var userApiKey;
+                var apiKeys = JSON.parse("[" + window.atob(getCookie("tk-api-key")) + "]"); //decode and convert string to array
+                if (getCookie("tk-api-key") === "") {return null}
+                if (apiKeys != "") {
+                    userApiKey = apiKeys[apiKeys.length-1];
+                    userApiKey = userApiKey[userApiKey.length-1];
+                }
+                return userApiKey;
+            }
+
+            //get Cookie by name
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length,c.length);
+                    }
+                }
+                return "";
+            }
+
+            userApiKeySessionStorage = checkCookie();
+            
+            if(userApiKeySessionStorage !== null) {
+                if(isResized) {
+                    getKeyButton.hide();
+                }
+                getKeyButton.fadeOut();
+                loggedUserKey.text(userApiKeySessionStorage);
+                copyButton.attr('data-clipboard-text',userApiKeySessionStorage);
+                loggedUserKeyContainer.fadeIn();
+            }
+        }
+        showUserApiKeySessionStorage();
+
+        /**
+         * check if user logged
+         */
+        $(window).on('login', function (e, data) {
+            showUserApiKeySessionStorage();
+        });
+
+        $(window).on('resize', function(){showUserApiKeySessionStorage(true)} );
 
         header.on('click', function(){
             if (!$(this).hasClass('expanded')){
@@ -56,6 +112,71 @@
                 $(this).removeClass('expanded');
                 instructions.slideUp(500)
             }
+        });
+
+        function CreateElementForExecCommand (textToClipboard) {
+            var forExecElement = document.createElement ("div");
+            // place outside the visible area
+            forExecElement.style.position = "absolute";
+            forExecElement.style.left = "-10000px";
+            forExecElement.style.top = "-10000px";
+            // write the necessary text into the element and append to the document
+            forExecElement.textContent = textToClipboard;
+            document.body.appendChild (forExecElement);
+            // the contentEditable mode is necessary for the  execCommand method in Firefox
+            forExecElement.contentEditable = true;
+
+            return forExecElement;
+        }
+
+        function SelectContent (element) {
+            // first create a range
+            var rangeToSelect = document.createRange ();
+            rangeToSelect.selectNodeContents (element);
+
+            // select the contents
+            var selection = window.getSelection ();
+            selection.removeAllRanges ();
+            selection.addRange (rangeToSelect);
+        }
+        
+        // Copy button click
+        loggedUserKeyContainer.on("click", ".copy-btn", function() {
+            var copyBtn = this;
+            var content = copyBtn.dataset !== undefined ? this.dataset.clipboardText : copyBtn.getAttribute("data-clipboard-text");
+
+            if (window.clipboardData) {
+                window.clipboardData.setData("Text", content);
+            } else {
+                // create a temporary element for the execCommand method
+                var forExecElement = CreateElementForExecCommand (content);
+                // var forExecElement = $('#copy-clip').html(content);
+
+                /* Select the contents of the element
+                 (the execCommand for 'copy' method works on the selection) */
+                SelectContent(forExecElement);
+
+                // console.log('$(#copy-clip).text() : ', $('#copy-clip').text() ) ;
+                //
+                // var copyTextarea = document.querySelector('#copy-clip');
+                // copyTextarea.select();
+
+                try {
+                    var successful = document.execCommand('copy', false, null);
+                    var msg = successful ? 'successful' : 'unsuccessful';
+                    // console.log('Copying text command was ' + msg + successful);
+                } catch (err) {
+                    console.log('Oops, unable to copy');
+                }
+            }
+
+
+            $(this).addClass('copied').delay(2000).queue(function(){
+                $(this).removeClass('copied');
+            });
+
+            // $('#copy-clip').html('');
+
         });
     });
 
