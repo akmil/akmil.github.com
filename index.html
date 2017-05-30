@@ -2,31 +2,12 @@
 layout: default
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts NONONO</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-  <ul class="post-list">
-    <li>
-      <h2>
-        <a class="post-link" href="{{ '/color-namer' | prepend: site.baseurl }}">color-namer</a>
-      </h2>
-    </li>
-  </ul>
-
-
+<div class="home row mt-5 h-100">
+  <div class="col-sm-12 my-auto">
+    <div class="card-block w-50 mx-auto text-white text-center">
+      <h1 class="page-heading">Utilit</h1>
+      <p class="lead mb-3">Colors auto-name in one click. Over <b>2500</b> names of colors.</p>
+      <a class="btn btn-lg btn-secondary" href="{{ '/color-namer' | prepend: site.baseurl }}">Learn more</a>
+    </div>
+  </div>
 </div>

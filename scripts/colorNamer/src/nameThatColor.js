@@ -57,9 +57,9 @@ export var ntc = {
         ndf2 = 0,
         ndf = 0;
       var checkOpacity = (opacity)=> {
-        if (parseFloat(opacity) >= 0.1 && parseFloat(opacity) <= 0.99) {
+        if (parseFloat(opacity) >= 0 && parseFloat(opacity) <= 0.99) {
           opacity = '-' + parseFloat(opacity * 100);
-        } else if (opacity == 0 || opacity == 1) {
+        } else if ( opacity == 1 ) {
           opacity = '';
         } else {
           opacity = '-' + parseFloat(opacity);
@@ -99,7 +99,7 @@ export var ntc = {
       for (var i = 0; i < ntc.names.length; i++) {
         if (color == "#" + ntc.names[i][0]) {
           opacity = checkOpacity(opacity);
-          return ["#" + ntc.names[i][0], ntc.names[i][1] + opacity, true , (parseFloat(opacity)) ? Math.abs(opacity/100) : -1];
+          return ["#" + ntc.names[i][0], ntc.names[i][1] + opacity, true , (parseFloat(opacity) || parseFloat(opacity) === 0) ? Math.abs(opacity/100) : -1];
         }
 
         ndf1 = Math.pow(r - ntc.names[i][2], 2) + Math.pow(g - ntc.names[i][3], 2) + Math.pow(b - ntc.names[i][4], 2);
@@ -119,9 +119,9 @@ export var ntc = {
       return (cl < 0
         ? ["#000000", "Invalid Color: " + color, false, -1]
         : ["#" + ntc.names[cl][0],
-          (!parseFloat(opacity)) ? ntc.names[cl][1] : ntc.names[cl][1] + '-' + opacity,
+          (!parseFloat(opacity) || parseFloat(opacity) === 0) ? ntc.names[cl][1] : ntc.names[cl][1] + '-' + opacity,
           false ,
-          (parseFloat(opacity))? Math.abs(opacity/100) : -1
+          (parseFloat(opacity) || parseFloat(opacity) === 0)? Math.abs(opacity/100) : -1
           ]);
     },
 
