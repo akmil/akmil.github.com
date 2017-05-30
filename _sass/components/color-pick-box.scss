@@ -1,0 +1,25 @@
+.color-pick-box {
+  .custom_select__list {
+    margin-left: 0;
+    padding-left: 0;
+    .color-number {
+      display: inline-block;
+      width:80px;
+      height: 20px;
+      border: 1px solid gold;
+    }
+  }
+  .prepared {
+    border: 1px solid darkgray;
+    padding: 1rem;
+  }
+}
+
+#colorbox {
+  width: 50px;
+  height: 50px;
+
+}
+textarea[name="colorsList"] {
+  width: 100%;
+}

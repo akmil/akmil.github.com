@@ -1,0 +1,40 @@
+<script>
+  window.globalJson = {{site.data.colorsListWikipedia | jsonify}};
+</script>
+
+<div id="ntc" class="row">
+  <div id="picker" class="float-left mr-1"></div>
+  <div id="colortag" class="float-left  ml-4">
+    <h2 id="colorname">El Salva<sup>approx.</sup></h2>
+    <div id="colorpick">
+      <select id="colorop">
+        <option value="">Select a Color:</option>
+      </select>
+    </div>
+    <div id="colorbox" style="background-color: rgb(137, 62, 51);"><div id="colorsolid" style="background-color: rgb(143, 62, 51);"></div></div>
+    <div id="colorpanel">
+      <div id="colorhex">Your Color:</div>
+      <input type="text" id="colorinp" class="inputbox" name="color" value="#123456" maxlength="8">
+      <div id="colorrgb">RGB: 137, 62, 51</div>
+    </div>
+    <p id="colorlegend">Outer box: Your selected color. Inner box: Actual color of closest match.</p>
+  </div>
+
+  <div class="clear"></div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="mb-2">
+      <button class="btn btn-info js_btn-add-text">att testing text</button>
+      <button class="btn btn-primary js_btn-set-colors">set colors</button>
+    </div>
+    <textarea name="colorsList" id="" cols="30" rows="20"></textarea>
+  </div>
+
+  <div class="color-pick-box col-md-6">
+    <div class="js__list-wrapper mt-5"></div>
+    <div class="js__list-resulting-scss"></div>
+  </div>
+</div>
+
+<script src="{{'/scripts/colorNamer/dist/preload.bundle.js' | prepend: site.baseurl}}"></script>

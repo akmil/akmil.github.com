@@ -45,43 +45,6 @@ describe("Player", function() {
     expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
   });
 
-
-  describe("Мой тест", function() {
-
-    it("summ test", function () {
-      expect(player.isPlaying).toBeFalsy();
-      player.summa(5, 3);
-      expect( player.pausedIn ).toEqual(8);
-
-      //console.log('this.pausedIn' , player.isPlaying , player.pausedIn);
-    });
-
-    it("сравнеение обьектов", function() {
-      var foo = {
-        a: 12,
-        b: 34
-      };
-      var bar = {
-        a: 12,
-        b: 34
-      };
-      expect(foo).toEqual(bar);
-
-      //console.log('this.pausedIn' , foo , bar);
-    });
-
-    it("The 'toMatch' matcher is for regular expressions", function() {
-      var message = "foo bar baz";
-
-      expect(message).toMatch(/bar/);
-      expect(message).toMatch("bar");
-      expect(message).not.toMatch(/quux/);
-
-      console.log('message' , message );
-    });
-
-  });
-
   //demonstrates use of expected exceptions
   describe("#resume", function() {
     it("should throw an exception if song is already playing", function() {
