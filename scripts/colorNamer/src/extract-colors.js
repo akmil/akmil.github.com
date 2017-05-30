@@ -18,8 +18,8 @@ function remove_duplicates_es6(arr) {
 
 export function addText() {
   var tarea = $('textarea'),
-    tval = "  $b2: rgba(0, 0, 0, 0.6);\n  $p1a: #158cd2;\n  $p1-90: rgb(0, 155, 222);";
-    // tval = " $b0: rgba(0, 0, 0, 0);\n $b1: rgba(0, 0, 0, 1);\n $b2: rgba(0, 0, 0, 0.6);\n $b3: rgba(0, 0, 0, 60);\n $white-70: rgba(255, 255, 255, 0.7);\n $s1:  rgba(200, 224, 213, 0.32);\n $p1a: #158cd2;\n $p1b: #2a7cc7;\n $s1b: #a61f84;\n $s1a: #ba1079;\n $p1-90: rgb(0, 155, 222);\n $steel-20: rgba(118, 134, 146, 52);\n $silver: #dadddf;\n $cerulean: #009cde;\n$deep-lavender-90: rgba(115, 86, 165, 90);\n$n3: #b7c9d3;";
+    // tval = "  $b1: rgba(0, 0, 0, 0.6);\n    $b2: rgba(0, 0, 0, 1);\n $p1a: #158cd2;\n  $p1-90: rgb(0, 155, 222);";
+    tval = " $b0: rgba(0, 0, 0, 0);\n $b1: rgba(0, 0, 0, 1);\n $b2: rgba(0, 0, 0, 0.6);\n $b3: rgba(0, 0, 0, 60);\n $white-70: rgba(255, 255, 255, 0.7);\n $s1:  rgba(200, 224, 213, 0.32);\n $p1a: #158cd2;\n $p1b: #2a7cc7;\n $s1b: #a61f84;\n $s1a: #ba1079;\n $p1-90: rgb(0, 155, 222);\n $steel-20: rgba(118, 134, 146, 52);\n $silver: #dadddf;\n $cerulean: #009cde;\n$deep-lavender-90: rgba(115, 86, 165, 90);\n$n3: #b7c9d3;";
   tarea.val(tval);
 }
 
@@ -36,10 +36,12 @@ export function createCustomList() {
 }
 
 function addCustomList(outColor, className) {
-  let $cityWrapper = $('.js__list-wrapper');
-    $cityWrapper.empty();
+  let $listWrapper = $('.js__list-wrapper'),
+    $finalListWrapper = $('.js__list-resulting-scss');
+  $listWrapper.empty();
+  $finalListWrapper.empty();
 
-  let $ul = $('<ol class="' + className + ' custom_select__list">').appendTo($cityWrapper),//create ul
+  let $ul = $('<ol class="' + className + ' custom_select__list">').appendTo($listWrapper),//create ul
     colorsSet=[],
     setRGBA = (item)=>{
     let val, //arr or string
@@ -50,15 +52,12 @@ function addCustomList(outColor, className) {
     if(isHEX){
       //corol is HEX, convert to rgb
       val = ntc.rgb(item);
-      //val[3] = 1;//add alpha=1
-      console.log('isHEX' , ntc.name(item)[3]);
       val[3] = (ntc.name(item)[3] === false)?-1:ntc.name(item)[3]
     }
     if(isRGBA || isRGB){
       val = ntc.rgba(item);
     }
     if(isRGB){
-      console.log('isRGB', ntc.name(item)[3] );
       val[3] = (ntc.name(item)[3] === false)?-1:ntc.name(item)[3]
     }
     return val;
@@ -91,7 +90,7 @@ function addCustomList(outColor, className) {
         strRGB = ' RGB:',
         _hex,_rgb,_rgba,_hls;
       var colorsOnly ,red , green, blue;
-
+      
       if(isRGB){
         strRGB = ' ';
         colorsOnly = item.substring(item.indexOf('(') + 1, item.lastIndexOf(')')).split(/,\s*/);
@@ -134,18 +133,9 @@ function addCustomList(outColor, className) {
     `<button class="btn btn-sm btn-outline-info mb-3 js_to-scss">to scss</button>`
   );
 
-  /*if($('.js_to-scss').length < 1) {
-    $('.named-colors-container').after(
-      `<button class="btn btn-sm btn-outline-info mb-3 js_to-scss">to scss</button>`
-    );
-  }
-  if($('.custom_select__list').length > 1) {
-    $('.custom_select__list').get(0).remove();
-  }*/
-
 
   var scssBtnHandler = ()=>{
-    console.log('ok',colorsSet);
+    // console.log(colorsSet);
     var $wrapper = $('.js__list-resulting-scss'),
      $ulSCSS = $('<ul class="list-group prepared">').appendTo($wrapper);//create ul
 
