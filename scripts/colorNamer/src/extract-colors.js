@@ -19,7 +19,7 @@ function remove_duplicates_es6(arr) {
 export function addText() {
   var tarea = $('textarea'),
     // tval = "  $b1: rgba(0, 0, 0, 0.6);\n    $b2: rgba(0, 0, 0, 1);\n $p1a: #158cd2;\n  $p1-90: rgb(0, 155, 222);";
-    tval = " $b0: rgba(0, 0, 0, 0);\n $b1: rgba(0, 0, 0, 1);\n $b2: rgba(0, 0, 0, 0.6);\n $b3: rgba(0, 0, 0, 60);\n $white-70: rgba(255, 255, 255, 0.7);\n $s1:  rgba(200, 224, 213, 0.32);\n $p1a: #158cd2;\n $p1b: #2a7cc7;\n $s1b: #a61f84;\n $s1a: #ba1079;\n $p1-90: rgb(0, 155, 222);\n $steel-20: rgba(118, 134, 146, 52);\n $silver: #dadddf;\n $cerulean: #009cde;\n$deep-lavender-90: rgba(115, 86, 165, 90);\n$n3: #b7c9d3;";
+    tval = " $s1:  rgba(200, 224, 213, 0.32);\n $p1a: #158cd2;\n $s1c: rgba(118, 134, 146, 52);\n h1 {\n\tfont-family: InterstateWGL;\n\tfont-size: 54px;\n\tfont-weight: 900;\n\tcolor: #61EDC5;\n }";
   tarea.val(tval);
 }
 
@@ -130,7 +130,7 @@ function addCustomList(outColor, className) {
     });
 
   $ul.after(
-    `<button class="btn btn-sm btn-outline-info mb-3 js_to-scss">to scss</button>`
+    `<button class="btn btn-sm btn-outline-info text-uppercase mb-3 js_to-scss">to scss</button>`
   );
 
 

@@ -4,8 +4,8 @@
     <div class="inner">
       <h3 class="masthead-brand">{{ site.title }}</h3>
       <nav class="nav nav-masthead">
-        <a class="nav-link active" href="{{ site.baseurl }}/">Home</a>
-        <a class="nav-link" href="{{ '/about' | prepend: site.baseurl }}">About</a>
+        <a class="nav-link {%if page.category == 'home'%}active{%endif%}" href="{{ site.baseurl }}/">Home</a>
+        <a class="nav-link {%if page.category == 'about'%}active{%endif%}" href="{{ '/about' | prepend: site.baseurl }}">About</a>
       </nav>
     </div>
 
