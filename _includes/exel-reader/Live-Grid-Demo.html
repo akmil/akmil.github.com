@@ -1,0 +1,65 @@
+
+<script src="../../scripts/exel-reader/life-grid/alertify.js"></script>
+<script src="../../scripts/exel-reader/life-grid/jquery.min.js"></script>
+<script src="../../scripts/exel-reader/life-grid/jquery.handsontable.full.js"></script>
+
+<link rel="stylesheet" href="../../scripts/exel-reader/life-grid/sheetjs.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/jquery.handsontable.full.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/samples.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/alertify.css">
+
+<div id="body" class="container-fluid">
+    <div id="left">
+        <div id="drop">Drop a file here</div>
+        <p class="text-center">or</p>
+        <div>
+            <button id="load-demo-file" class="btn btn-success mt-1 mb-3 w-100">load-demo-file</button>
+        </div>
+        <h3> Choose a worksheet:</h3>
+        <div id="buttons"></div>
+    </div>
+    <div id="right">
+        <div id="hot" style="overflow: scroll" class="handsontable"></div>
+
+        <div class="js_calculate-box container" style="display: none">
+            <section class="section section--vesi form-check form-check-inline">
+                <button class="btn btn-warning js_calculate">calculate</button>
+                <div class="toggle-button toggle-button--vesi">
+                    <input id="toggleIsMale" type="checkbox" checked>
+                    <label for="toggleIsMale" data-on-text="boys" data-off-text="girls"></label>
+                    <div class="toggle-button__icon"></div>
+                </div>
+                <div class="d-inline">
+                    Belt:
+                    <select id="single" class="form-control-sm d-inline">
+                        <option>White</option>
+                        <option>Yellow</option>
+                        <option>Green</option>
+                        <option>Blue</option>
+                        <option>Red</option>
+                        <option>Black</option>
+                    </select>
+                </div>
+                <div class="d-inline-block ml-4">
+                    <h4>
+                        filter by: {"from":23,"to":31},
+                        <span class="filter-genre"></span>,
+                        <span class="filter-belt"></span>
+                    </h4>
+                </div>
+            </section>
+        </div>
+
+        <div id="calc-result" class="mt-4 mb-4"></div>
+    </div>
+
+    <script src="../../scripts/exel-reader/life-grid/shim.js"></script>
+    <script src="../../scripts/exel-reader/life-grid/xlsx.full.min.js"></script>
+    <script src="../../scripts/exel-reader/life-grid/dropsheet.js"></script>
+    <script src="../../scripts/exel-reader/life-grid/src/generatePairs.js"></script>
+    <script src="../../scripts/exel-reader/life-grid/src/main.js"></script>
+
+    <script src="../../scripts/exel-reader/life-grid/spin.js"></script>
+
+
+</div>
