@@ -4,7 +4,9 @@ title: About
 permalink: /about/
 category: about
 ---
+ 
+Choose one of 2500+ colors name.
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/){: .class-name2} 
-{: .class-name1}
+This is extension of [Chirag Mehta tool](http://chir.ag/projects/name-that-color/) which is allows to get colors from any text. 
+
 

@@ -3,7 +3,7 @@ layout: default
 title:  "Colors namer"
 date:   2017-05-30 10:00:29 +0200
 category: app
-showComments: false
+showComments: true
 includeFarbtastic : true
 ---
 
