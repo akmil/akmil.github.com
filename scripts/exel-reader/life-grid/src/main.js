@@ -69,7 +69,6 @@ var createList = function($wrapper, dataArr){
   // console.log(dataArr);
   var $ulSCSS = $('<ul class="list-group mb-4">').appendTo($wrapper);
   // if($('.list-group.prepared').length > 1){ $('.list-group').empty(); }
-
   dataArr
     .map(function (item) {
       var date = item[3], team = item[5], weight = item[2];
@@ -80,7 +79,6 @@ var createList = function($wrapper, dataArr){
         "</li>"
       )
     });
-
 
   var buildStageOneHandler = function (e) {
     console.log(dataArr);
