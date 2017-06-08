@@ -8,6 +8,6 @@ showComments: false
 ---
 
 
-{%include exel-reader/live-grid-demo.html%}
+{%include exel-reader2/live-grid-demo.html%}
 
 
