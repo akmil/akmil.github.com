@@ -1,4 +1,3 @@
-
 <script src="../../scripts/exel-reader/life-grid/alertify.js"></script>
 <script src="../../scripts/exel-reader/life-grid/jquery.min.js"></script>
 <script src="../../scripts/exel-reader/life-grid/jquery.handsontable.full.js"></script>
@@ -22,33 +21,59 @@
     </div>
     <div id="right">
         <div id="hot" style="overflow: scroll" class="handsontable"></div>
-        <div class="js_calculate-box container" style="display: none">
-            <section class="section section--vesi form-check form-check-inline">
-                <button class="btn btn-warning js_calculate">calculate</button>
-                <div class="toggle-button toggle-button--vesi">
-                    <input id="toggleIsMale" type="checkbox" checked>
-                    <label for="toggleIsMale" data-on-text="boys" data-off-text="girls"></label>
-                    <div class="toggle-button__icon"></div>
+        <div class="js_calculate-box calculate-box" style="display: none">
+            <div class="row">
+                <div class="col-md-6 pr-0">
+                    <div class="weight-filter-group">
+                        <div class="input-group w-50 float-left">
+                            <span class="input-group-addon">Вес: </span>
+                            <span class="input-group-addon">от</span>
+                            <input type="number" class="form-control" aria-label="от" value="21" min="10">
+                        </div>
+                        <div class="input-group w-50">
+                            <span class="input-group-addon">до</span>
+                            <input type="number" class="form-control" aria-label="до" value="31" max="200">
+                        </div>
+                    </div>
                 </div>
-                <div class="d-inline">
-                    Belt:
-                    <select id="single" class="form-control-sm d-inline">
-                        <option>White</option>
-                        <option>Yellow</option>
-                        <option>Green</option>
-                        <option>Blue</option>
-                        <option>Red</option>
-                        <option>Black</option>
-                    </select>
+                <div class="col-md-6">
+                    <div class="input-group float-left w-50 pr-4">
+                        <label for="single" class="mr-2">Пояс:</label>
+                        <select id="single" class="form-control">
+                            <option>White</option>
+                            <option selected>Yellow</option>
+                            <option>Green</option>
+                            <option>Blue</option>
+                            <option>Red</option>
+                            <option>Black</option>
+                        </select>
+                    </div>
+                    <div class="toggle-button toggle-button--vesi ml-0 mr-0 w-50">
+                        <input id="toggleIsMale" type="checkbox" checked>
+                        <label class="w-100" for="toggleIsMale" data-on-text="boys" data-off-text="girls"></label>
+                        <div class="toggle-button__icon"></div>
+                    </div>
                 </div>
-                <div class="d-inline-block ml-4">
-                    <h4>
-                        filter by: {"from":23,"to":31},
-                        <span class="filter-genre"></span>,
-                        <span class="filter-belt"></span>
-                    </h4>
+
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="input-group float-left w-50">
+                        <label for="player-age" class="mr-2">Возраст:</label>
+                        <select id="player-age" class="form-control">
+                            <option>0-6</option>
+                            <option selected>7-8</option>
+                            <option>9-11</option>
+                            <option>9-14</option>
+                            <option>14-99</option>
+                        </select>
+                    </div>
                 </div>
-            </section>
+                <div class="col-md-6">
+                    <button class="btn btn-warning js_calculate w-100">calculate</button>
+                </div>
+            </div>
+
         </div>
         <div id="calc-result" class="mt-4 mb-4"></div>
     </div>
@@ -58,6 +83,7 @@
     <script src="../../scripts/exel-reader/life-grid/xlsx.full.min.js"></script>
     <script src="../../scripts/exel-reader/life-grid/dropsheet.js"></script>
     <script src="../../scripts/exel-reader/life-grid/src/generatePairs.js"></script>
+    <script src="../../scripts/exel-reader/life-grid/src/ui-handle.js"></script>
     <script src="../../scripts/exel-reader/life-grid/src/main.js"></script>
 
     <script src="../../scripts/exel-reader/life-grid/spin.js"></script>

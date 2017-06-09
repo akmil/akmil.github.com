@@ -5,4 +5,20 @@
   ~.footer {
     display: none;
   }
+  .calculate-box {
+    position: relative;
+    padding: 1rem;
+    //margin: 1rem -1rem;
+    border: solid #f7f7f9;
+    border-width: .2rem;
+  }
+  .weight-filter-group {
+    .input-group input {
+      border-radius: 0;
+    }
+    .input-group:nth-child(2) .input-group-addon {
+      border-radius: 0;
+      border-left: 0;
+    }
+  }
 }

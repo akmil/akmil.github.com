@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_includes/exel-reader/Live-Grid-Demo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/ui-handle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/testTeams.xlsx" afterPath="$PROJECT_DIR$/assets/testTeams.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/exel-reader2/live-grid-demo.html" afterPath="$PROJECT_DIR$/_includes/exel-reader2/live-grid-demo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_sass/components/exel-reader.scss" afterPath="$PROJECT_DIR$/_sass/components/exel-reader.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js" afterPath="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js" afterPath="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js" />
     </list>
     <ignored path="blogPasha.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,35 +31,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="live-grid-demo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_includes/exel-reader/live-grid-demo.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
+            <state relative-caret-position="153">
+              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live-grid-demo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/exel-reader2/live-grid-demo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#select#0;n#div#1;n#section#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js">
+      <file leaf-file-name="exel-reader.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_sass/components/exel-reader.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="106" column="50" selection-start-line="106" selection-start-column="50" selection-end-line="106" selection-end-column="50" />
-              <folding>
-                <element signature="e#1938#2296#0" expanded="false" />
-                <element signature="e#3304#3669#0" expanded="false" />
-                <element signature="e#4407#5453#0" expanded="false" />
-                <element signature="e#5515#6077#0" expanded="false" />
-                <element signature="e#6120#6356#0" expanded="false" />
-                <element signature="e#6390#8850#0" expanded="false" />
-                <element signature="e#6504#8819#0" expanded="false" />
-                <marker date="1496930522690" expanded="true" signature="3095:3113" ph="..." />
-              </folding>
+            <state relative-caret-position="204">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="color-pick-box.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_sass/components/color-pick-box.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,33 +78,33 @@
       <file leaf-file-name="generatePairs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+            <state relative-caret-position="455">
+              <caret line="121" column="22" selection-start-line="121" selection-start-column="2" selection-end-line="121" selection-end-column="22" />
               <folding>
                 <element signature="e#38#181#0" expanded="false" />
-                <element signature="e#2458#2532#0" expanded="false" />
-                <element signature="e#4617#4896#0" expanded="false" />
+                <element signature="n#!!block;n#pairsSplit#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.html">
+      <file leaf-file-name="ui-handle.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/ui-handle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_includes/header.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="109" selection-start-line="6" selection-start-column="109" selection-end-line="6" selection-end-column="109" />
-              <folding />
+            <state relative-caret-position="472">
+              <caret line="168" column="3" selection-start-line="168" selection-start-column="3" selection-end-line="168" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#49#0" expanded="false" />
+                <element signature="n#!!block;n#displayValsBelt#0;n#displayValsBelt#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#displayValsGender#0;n#displayValsGender#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#sortByWeight#0;n#!!block;n#makeCalculateButton#0;n#makeCalculateButton#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#createList#0;n#createList#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="e#2044#2439#0" expanded="false" />
+                <element signature="n#!!block;n#showCheckedRounds#0;n#showCheckedRounds#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#callTestDataDropSheet#0;n#callTestDataDropSheet#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+                <element signature="e#4358#6728#0" expanded="false" />
+                <marker date="1497005453449" expanded="true" signature="1824:1842" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,8 +114,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
-        <option value="Sass File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -108,64 +122,64 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="update" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dist/0.bundle.js" />
-        <option value="$PROJECT_DIR$/src/zoo.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/src/main.js" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/target/eventDetectNTC.js" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/dist/preload.bundle.js" />
-        <option value="$PROJECT_DIR$/_posts/2015-11-13-welcome-to-jekyll.markdown" />
-        <option value="$PROJECT_DIR$/_posts/2017-05-30-color-namer.md" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/src/eventDetectNTC.js" />
-        <option value="$PROJECT_DIR$/_sass/_syntax-highlighting.scss" />
-        <option value="$PROJECT_DIR$/_sass/common/header.sass" />
-        <option value="$PROJECT_DIR$/_includes/head.html" />
-        <option value="$PROJECT_DIR$/_sass/common/header.scss" />
-        <option value="$PROJECT_DIR$/_sass/common/footer.scss" />
-        <option value="$PROJECT_DIR$/_sass/_layout.scss" />
-        <option value="$PROJECT_DIR$/_sass/components/color-pick-box.scss" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/src/nameThatColor.js" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
-        <option value="$PROJECT_DIR$/_includes/footer.html" />
+        <option value="$PROJECT_DIR$/jasmine-test/src/Player.js" />
+        <option value="$PROJECT_DIR$/jasmine-test/spec/PlayerSpec.js" />
+        <option value="$PROJECT_DIR$/galen-test/galen.gspec" />
+        <option value="$PROJECT_DIR$/galen-test/reports/report.html" />
+        <option value="$PROJECT_DIR$/galen-test/configg" />
+        <option value="$PROJECT_DIR$/galen-test/home.gspec" />
+        <option value="$PROJECT_DIR$/galen-test/config" />
+        <option value="$PROJECT_DIR$/galen-test/New Text Document.txt" />
         <option value="$PROJECT_DIR$/_config.yml" />
-        <option value="$PROJECT_DIR$/_includes/header.html" />
-        <option value="$PROJECT_DIR$/_includes/colorNamer/color-namer.html" />
-        <option value="$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js" />
-        <option value="$PROJECT_DIR$/CNAME" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/about.md" />
-        <option value="$PROJECT_DIR$/_layouts/post.html" />
-        <option value="$PROJECT_DIR$/_includes/comments.html" />
-        <option value="$PROJECT_DIR$/exel-reader/JS-XLSX Live Demo.html" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/main.js" />
-        <option value="$PROJECT_DIR$/exel-reader/ajax-exel.html" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/xlsx.full.min.js" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/main.js" />
-        <option value="$PROJECT_DIR$/exel-reader/Live-Grid-Demo.html" />
-        <option value="$PROJECT_DIR$/color-namer/index.md" />
-        <option value="$PROJECT_DIR$/_layouts/app.html" />
-        <option value="$PROJECT_DIR$/_layouts/default.html" />
+        <option value="$PROJECT_DIR$/_includes/footer.html" />
         <option value="$PROJECT_DIR$/_sass/_base.scss" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/samples.css" />
-        <option value="$PROJECT_DIR$/_sass/components/exel-reader.scss" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs1.js" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/sheetjs.css" />
-        <option value="$PROJECT_DIR$/exel-reader/index.md" />
+        <option value="$PROJECT_DIR$/scripts/main.js" />
+        <option value="$PROJECT_DIR$/_includes/head.html" />
+        <option value="$PROJECT_DIR$/_sass/show-layers.scss" />
+        <option value="$PROJECT_DIR$/show-layers/index.html" />
+        <option value="$PROJECT_DIR$/scripts/strategy.js" />
+        <option value="$PROJECT_DIR$/scripts/strategy-character.js" />
+        <option value="$PROJECT_DIR$/scripts/abscharacter.js" />
+        <option value="$PROJECT_DIR$/scripts/msg-noty.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/isolate-module.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/AppInit.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/prorab-mediator.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/builders.js" />
+        <option value="$PROJECT_DIR$/show-notification/index.html" />
+        <option value="D:/downloads/vakata-jstree-8ea6ce7/demo/basic/style.css" />
+        <option value="D:/downloads/vakata-jstree-8ea6ce7/demo/basic/index.html" />
+        <option value="$PROJECT_DIR$/scripts/module-DI/isolate-moduleDI.js" />
+        <option value="$PROJECT_DIR$/scripts/moduleDI/isolate-moduleDI.js" />
+        <option value="$PROJECT_DIR$/mediator/moduleDI/index.html" />
+        <option value="$PROJECT_DIR$/moduleDI/index.html" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-test.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/main.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/app-init.js" />
+        <option value="$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" />
+        <option value="$PROJECT_DIR$/scripts/moduleInject/isolate-moduleDI.js" />
         <option value="$PROJECT_DIR$/css/main.scss" />
-        <option value="$PROJECT_DIR$/_includes/exel-reader/live-grid-demo.html" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js" />
-        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js" />
-        <option value="$PROJECT_DIR$/_sass/common/checkbox.scss" />
+        <option value="$PROJECT_DIR$/_sass/progressbar.scss" />
+        <option value="$PROJECT_DIR$/mediator/index.html" />
+        <option value="$PROJECT_DIR$/scripts/progressbarRole/progressbar.js" />
+        <option value="$PROJECT_DIR$/scripts/inherit/inherit-world.js" />
+        <option value="$PROJECT_DIR$/sandbox-di/inherit-ptoto/index.html" />
+        <option value="$PROJECT_DIR$/sandbox-di/index.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/_site/scripts/exel-reader/life-grid/src/main.js" />
+        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js" />
+        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/ui-handle.js" />
+        <option value="$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js" />
+        <option value="$PROJECT_DIR$/_sass/components/exel-reader.scss" />
+        <option value="$PROJECT_DIR$/_includes/exel-reader2/live-grid-demo.html" />
       </list>
     </option>
   </component>
@@ -175,41 +189,6 @@
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <gulpfiles>
-      <GulpfileState>
-        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
-        <tasks>
-          <GulpTaskState>
-            <task-name>default-watch</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="webpack" />
-            </dependencies>
-            <task-name>build</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <task-name>babel</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="babel" />
-            </dependencies>
-            <task-name>test</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <dependencies>
-              <dependency value="babel" />
-              <dependency value="test" />
-            </dependencies>
-            <task-name>webpack</task-name>
-          </GulpTaskState>
-          <GulpTaskState>
-            <task-name>jekyll-server</task-name>
-          </GulpTaskState>
-        </tasks>
-      </GulpfileState>
-    </gulpfiles>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpServers">
@@ -247,10 +226,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files" />
-      </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -279,7 +255,101 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exel-reader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exel-reader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="life-grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exel-reader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="life-grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exel-reader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -311,7 +381,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,8 +399,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="akmil.github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="exel-reader2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -338,33 +427,23 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="D:\programs\nodeJS\node.exe" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="nodejs_interpreter_path" value="D:/programs/nodeJS/node" />
-    <property name="js.buildTools.gulp.gulp_package_dir" value="D:\projects\blogTestGalenTravis\node_modules\gulp" />
     <property name="nodejs.mocha.mocha_node_package_dir" value="D:\projects\akmil.github.com\node_modules\mocha" />
-    <property name="list.type.of.created.stylesheet" value="Sass" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\akmil.github.com\_sass\common" />
-      <recent name="D:\projects\akmil.github.com\assets" />
-      <recent name="D:\projects\akmil.github.com\scripts\exel-reader\life-grid\src" />
-      <recent name="D:\projects\akmil.github.com\_layouts" />
-      <recent name="D:\projects\akmil.github.com\_sass\components" />
+      <recent name="D:\projects\akmil.github.com\scripts\inherit" />
+      <recent name="D:\projects\akmil.github.com\sandbox-di\inherit-ptoto" />
+      <recent name="D:\projects\akmil.github.com\_sass" />
+      <recent name="D:\projects\akmil.github.com\mediator\moduleDI" />
+      <recent name="D:\projects\akmil.github.com\mediator" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\projects\akmil.github.com\assets" />
-      <recent name="D:\projects\akmil.github.com\_includes\exel-reader" />
-      <recent name="D:\projects\akmil.github.com\scripts\exel-reader\life-grid\src" />
-      <recent name="D:\projects\akmil.github.com\exel-reader" />
-      <recent name="D:\projects\akmil.github.com\scripts\exel-reader" />
+      <recent name="D:\projects\akmil.github.com" />
+      <recent name="D:\projects\akmil.github.com\scripts\module-DI" />
+      <recent name="D:\projects\akmil.github.com\show-layers" />
+      <recent name="D:\projects\blogPasha\galen-test" />
+      <recent name="D:\projects\blogPasha\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -444,386 +523,223 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1447429542334</updated>
-      <workItem from="1495449116124" duration="45060000" />
-      <workItem from="1495704007385" duration="52149000" />
-      <workItem from="1496142582404" duration="521000" />
-      <workItem from="1496143260100" duration="10000" />
-      <workItem from="1496145123912" duration="50894000" />
-      <workItem from="1496738136314" duration="42696000" />
+      <workItem from="1458918998654" duration="142000" />
+      <workItem from="1496932577405" duration="347000" />
+      <workItem from="1496932943807" duration="11019000" />
+      <workItem from="1497012368520" duration="6235000" />
     </task>
-    <task id="LOCAL-00134" summary="add: click test in jquery 12&#10;">
-      <created>1453385380963</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
+    <task id="LOCAL-00001" summary="add: strategy pattern example">
+      <created>1454508106816</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1453385380963</updated>
+      <updated>1454508106816</updated>
     </task>
-    <task id="LOCAL-00135" summary="add: click test in jquery 13&#10;">
-      <created>1453385587791</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
+    <task id="LOCAL-00002" summary="add: img files">
+      <created>1454508366188</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1453385587791</updated>
+      <updated>1454508366188</updated>
     </task>
-    <task id="LOCAL-00136" summary="add: logger&#10;">
-      <created>1453451079292</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
+    <task id="LOCAL-00003" summary="add: img files move to assets">
+      <created>1454508720113</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1453451079292</updated>
+      <updated>1454508720113</updated>
     </task>
-    <task id="LOCAL-00137" summary="add: logger&#10;">
-      <created>1453451193816</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
+    <task id="LOCAL-00004" summary="add: img files move to assets 2">
+      <created>1454508840953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1453451193816</updated>
+      <updated>1454508840953</updated>
     </task>
-    <task id="LOCAL-00138" summary="add: logger 2&#10;">
-      <created>1453454633628</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
+    <task id="LOCAL-00005" summary="add: img files move to assets 3">
+      <created>1454508913008</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1453454633628</updated>
+      <updated>1454508913008</updated>
     </task>
-    <task id="LOCAL-00139" summary="add: off all">
-      <created>1453463494218</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
+    <task id="LOCAL-00006" summary="add: add warnings">
+      <created>1454509135137</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1453463494218</updated>
+      <updated>1454509135137</updated>
     </task>
-    <task id="LOCAL-00140" summary="add: off all1">
-      <created>1453463533184</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
+    <task id="LOCAL-00007" summary="add: gitignore .idea">
+      <created>1454509165142</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1453463533184</updated>
+      <updated>1454509165142</updated>
     </task>
-    <task id="LOCAL-00141" summary="add: off all1">
-      <created>1453463554181</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
+    <task id="LOCAL-00008" summary="add: commit some">
+      <created>1454510871332</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1453463554181</updated>
+      <updated>1454510871332</updated>
     </task>
-    <task id="LOCAL-00142" summary="add: off all1">
-      <created>1453463748069</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
+    <task id="LOCAL-00009" summary="add: validator">
+      <created>1454884935208</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1453463748069</updated>
+      <updated>1454884935208</updated>
     </task>
-    <task id="LOCAL-00143" summary="add: off all1">
-      <created>1453464716319</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
+    <task id="LOCAL-00010" summary="add: isolate-module">
+      <created>1455478961674</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1453464716319</updated>
+      <updated>1455478961674</updated>
     </task>
-    <task id="LOCAL-00144" summary="add: file://">
-      <created>1453464971517</created>
-      <option name="number" value="00144" />
-      <option name="presentableId" value="LOCAL-00144" />
+    <task id="LOCAL-00011" summary="add: isolate-module111">
+      <created>1455482805215</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1453464971517</updated>
+      <updated>1455482805215</updated>
     </task>
-    <task id="LOCAL-00145" summary="add: file:// -1">
-      <created>1453465126603</created>
-      <option name="number" value="00145" />
-      <option name="presentableId" value="LOCAL-00145" />
+    <task id="LOCAL-00012" summary="add: isolate-module111">
+      <created>1455482838795</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1453465126603</updated>
+      <updated>1455482838795</updated>
     </task>
-    <task id="LOCAL-00146" summary="add: file:// -1">
-      <created>1453474451559</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
+    <task id="LOCAL-00013" summary="add: isolate-module-DI">
+      <created>1455541906901</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1453474451559</updated>
+      <updated>1455541906901</updated>
     </task>
-    <task id="LOCAL-00147" summary="add: file:// -2">
-      <created>1453474643817</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
+    <task id="LOCAL-00014" summary="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;">
+      <created>1455541962066</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1453474643817</updated>
+      <updated>1455541962066</updated>
     </task>
-    <task id="LOCAL-00148" summary="add: file:// -3">
-      <created>1453474756643</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
+    <task id="LOCAL-00015" summary="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;">
+      <created>1455616370010</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1453474756643</updated>
+      <updated>1455616370010</updated>
     </task>
-    <task id="LOCAL-00149" summary="add: image compare">
-      <created>1453726733624</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
+    <task id="LOCAL-00016" summary="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;">
+      <created>1455895675987</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1453726733634</updated>
+      <updated>1455895675987</updated>
     </task>
-    <task id="LOCAL-00150" summary="add: image compare1">
-      <created>1453726809989</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
+    <task id="LOCAL-00017" summary="add: task description&#10;&#10;">
+      <created>1455897150443</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1453726809989</updated>
+      <updated>1455897150443</updated>
     </task>
-    <task id="LOCAL-00151" summary="add: image compare2">
-      <created>1453727920019</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
+    <task id="LOCAL-00018" summary="add: task description&#10;&#10;">
+      <created>1455897171814</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1453727920019</updated>
+      <updated>1455897171814</updated>
     </task>
-    <task id="LOCAL-00152" summary="add: image compare3">
-      <created>1453728905880</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
+    <task id="LOCAL-00019" summary="add: task description">
+      <created>1455897189953</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1453728905880</updated>
+      <updated>1455897189953</updated>
     </task>
-    <task id="LOCAL-00153" summary="add: image compare4">
-      <created>1453729217096</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
+    <task id="LOCAL-00020" summary="mod: file link">
+      <created>1455897447008</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1453729217096</updated>
+      <updated>1455897447008</updated>
     </task>
-    <task id="LOCAL-00154" summary="add: image compare5">
-      <created>1453729520741</created>
-      <option name="number" value="00154" />
-      <option name="presentableId" value="LOCAL-00154" />
+    <task id="LOCAL-00021" summary="mod: file link">
+      <created>1455898557623</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1453729520741</updated>
+      <updated>1455898557623</updated>
     </task>
-    <task id="LOCAL-00155" summary="add: image compare6">
-      <created>1453729887533</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
+    <task id="LOCAL-00022" summary="mod: file link">
+      <created>1455900917039</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1453729887533</updated>
+      <updated>1455900917039</updated>
     </task>
-    <task id="LOCAL-00156" summary="add: image compare6">
-      <created>1453729963190</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
+    <task id="LOCAL-00023" summary="mod: di run">
+      <created>1456933995057</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1453729963190</updated>
+      <updated>1456933995057</updated>
     </task>
-    <task id="LOCAL-00157" summary="add: image compare7">
-      <created>1453730507965</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
+    <task id="LOCAL-00024" summary="add pre load&#10;">
+      <created>1457540637975</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1453730507966</updated>
+      <updated>1457540637975</updated>
     </task>
-    <task id="LOCAL-00158" summary="add: image compare8">
-      <created>1453730582654</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
+    <task id="LOCAL-00025" summary="progree bar">
+      <created>1458215320237</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1453730582654</updated>
+      <updated>1458215320237</updated>
     </task>
-    <task id="LOCAL-00159" summary="add: image compare8">
-      <created>1453730683550</created>
-      <option name="number" value="00159" />
-      <option name="presentableId" value="LOCAL-00159" />
+    <task id="LOCAL-00026" summary="progree bar">
+      <created>1458919049753</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1453730683550</updated>
+      <updated>1458919049753</updated>
     </task>
-    <task id="LOCAL-00160" summary="add: image compare8">
-      <created>1453730786630</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1453730786630</updated>
-    </task>
-    <task id="LOCAL-00161" summary="add: image compare9">
-      <created>1453730851982</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1453730851982</updated>
-    </task>
-    <task id="LOCAL-00162" summary="add: image compare 10">
-      <created>1453731191937</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1453731191937</updated>
-    </task>
-    <task id="LOCAL-00163" summary="add: image compare 11">
-      <created>1453731571744</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1453731571744</updated>
-    </task>
-    <task id="LOCAL-00164" summary="add: image compare 12">
-      <created>1453731858083</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1453731858083</updated>
-    </task>
-    <task id="LOCAL-00165" summary="add: image compare sudo apt-get install html2text">
-      <created>1453739003906</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739003906</updated>
-    </task>
-    <task id="LOCAL-00166" summary="add: image compare sudo apt-get install html2text 22">
-      <created>1453739116008</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739116008</updated>
-    </task>
-    <task id="LOCAL-00167" summary="add: image compare sudo apt-get install html2text 23">
-      <created>1453739377785</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739377785</updated>
-    </task>
-    <task id="LOCAL-00168" summary="add: image compare sudo apt-get install html2text 24">
-      <created>1453739670038</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739670038</updated>
-    </task>
-    <task id="LOCAL-00169" summary="add: image compare sudo apt-get install html2text 25">
-      <created>1453739732207</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739732207</updated>
-    </task>
-    <task id="LOCAL-00170" summary="add: image compare sudo apt-get install html2text 26">
-      <created>1453739865010</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1453739865010</updated>
-    </task>
-    <task id="LOCAL-00171" summary="add: image compare sudo apt-get install html2text 27">
-      <created>1453740165533</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1453740165533</updated>
-    </task>
-    <task id="LOCAL-00172" summary="add: image compare sudo apt-get install html2text 28">
-      <created>1453740190281</created>
-      <option name="number" value="00172" />
-      <option name="presentableId" value="LOCAL-00172" />
-      <option name="project" value="LOCAL" />
-      <updated>1453740190281</updated>
-    </task>
-    <task id="LOCAL-00173" summary="add: color namer">
-      <created>1495449762197</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1495449762213</updated>
-    </task>
-    <task id="LOCAL-00174" summary="add: color namer1">
-      <created>1495452894524</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1495452894524</updated>
-    </task>
-    <task id="LOCAL-00175" summary="add: color namer1">
-      <created>1495545372719</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1495545372719</updated>
-    </task>
-    <task id="LOCAL-00176" summary="Merge branch 'master' into color-namer&#10;&#10;# Conflicts:&#10;#&#9;CNAME&#10;">
-      <created>1495545436628</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1495545436628</updated>
-    </task>
-    <task id="LOCAL-00177" summary="Merge branch 'master' into color-namer&#10;&#10;# Conflicts:&#10;#&#9;CNAME&#10;">
-      <created>1495545763308</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1495545763308</updated>
-    </task>
-    <task id="LOCAL-00178" summary="add color namer&#10;">
-      <created>1496149563178</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1496149563179</updated>
-    </task>
-    <task id="LOCAL-00179" summary="mod styles&#10;">
-      <created>1496159608651</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1496159608651</updated>
-    </task>
-    <task id="LOCAL-00180" summary="mod styles1&#10;">
-      <created>1496159990882</created>
-      <option name="number" value="00180" />
-      <option name="presentableId" value="LOCAL-00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1496159990882</updated>
-    </task>
-    <task id="LOCAL-00181" summary="add readme&#10;">
-      <created>1496221152163</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1496221152163</updated>
-    </task>
-    <task id="LOCAL-00182" summary="add exel-reader/&#10;">
-      <created>1496931525301</created>
-      <option name="number" value="00182" />
-      <option name="presentableId" value="LOCAL-00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1496931525309</updated>
-    </task>
-    <option name="localTasksCounter" value="183" />
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191330000" />
+    <option name="totallyTimeSpent" value="17743000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35394457" sideWeight="0.3680352" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29051173" sideWeight="0.6319648" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35021323" sideWeight="0.35976505" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2383532" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21668473" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22654584" sideWeight="0.7284144" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2850575" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22654584" sideWeight="0.27158555" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24702059" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3109426" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6413868" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20842217" sideWeight="0.42735043" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21536796" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3434453" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -840,85 +756,56 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add: image compare4" />
-    <MESSAGE value="add: image compare5" />
-    <MESSAGE value="add: image compare6" />
-    <MESSAGE value="add: image compare7" />
-    <MESSAGE value="add: image compare8" />
-    <MESSAGE value="add: image compare9" />
-    <MESSAGE value="add: image compare 10" />
-    <MESSAGE value="add: image compare 11" />
-    <MESSAGE value="add: image compare 12" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 22" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 23" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 24" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 25" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 26" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 27" />
-    <MESSAGE value="add: image compare sudo apt-get install html2text 28" />
-    <MESSAGE value="add: color namer" />
-    <MESSAGE value="add: color namer1" />
-    <MESSAGE value="Merge branch 'master' into color-namer&#10;&#10;# Conflicts:&#10;#&#9;CNAME&#10;" />
-    <MESSAGE value="add color namer&#10;" />
-    <MESSAGE value="mod styles&#10;" />
-    <MESSAGE value="mod styles1&#10;" />
-    <MESSAGE value="add readme&#10;" />
-    <MESSAGE value="add exel-reader/&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add exel-reader/&#10;" />
+    <MESSAGE value="add: strategy pattern example" />
+    <MESSAGE value="add: img files" />
+    <MESSAGE value="add: img files move to assets" />
+    <MESSAGE value="add: img files move to assets 2" />
+    <MESSAGE value="add: img files move to assets 3" />
+    <MESSAGE value="add: add warnings" />
+    <MESSAGE value="add: gitignore .idea" />
+    <MESSAGE value="add: commit some" />
+    <MESSAGE value="add: validator" />
+    <MESSAGE value="add: isolate-module" />
+    <MESSAGE value="add: isolate-module111" />
+    <MESSAGE value="add: isolate-module-DI" />
+    <MESSAGE value="Merge branch 'master' into mediator-isolate&#10;&#10;# Conflicts:&#10;#&#9;mediator/index.html&#10;" />
+    <MESSAGE value="add: task description&#10;&#10;" />
+    <MESSAGE value="add: task description" />
+    <MESSAGE value="mod: file link" />
+    <MESSAGE value="mod: di run" />
+    <MESSAGE value="add pre load&#10;" />
+    <MESSAGE value="progree bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="progree bar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_sass/common/header.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/nameThatColor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="101" column="96" selection-start-line="101" selection-start-column="96" selection-end-line="101" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_site/css/main.css">
+    <entry file="file://$PROJECT_DIR$/_layouts/page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
+    <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CNAME">
+    <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -927,13 +814,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/about.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="37" />
         </state>
       </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jasmine-test/spec/SpecHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jasmine-test/spec/PlayerSpec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="82" column="5" selection-start-line="48" selection-start-column="2" selection-end-line="82" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jasmine-test/SpecRunner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/galen-test/home.gspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/vendors/jquery-1.11.3.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/page.html">
@@ -945,362 +870,180 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/comments.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/colorNamer/color-namer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/ga.js.download" />
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/xlsx.full.min.js.download" />
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/ajax/xlsx.js">
+    <entry file="file://$PROJECT_DIR$/_includes/footer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/alertify.js">
+    <entry file="file://$PROJECT_DIR$/_includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/xlsx.full.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="1" column="29478" selection-start-line="1" selection-start-column="29478" selection-end-line="1" selection-end-column="29478" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/downloads/tmp/read data from excel worksheet using javascript SQL ADO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exel-reader/ajax-exel.html" />
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="36" column="14" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exel-reader/JS-XLSX Live Demo.html" />
-    <entry file="file://$PROJECT_DIR$/color-namer/index.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_layouts/app.html" />
     <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        <state relative-caret-position="0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_sass/show-layers.scss" />
+    <entry file="file://$PROJECT_DIR$/feed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/_layout.scss">
+    <entry file="file://$PROJECT_DIR$/scripts/abscharacter.js" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-          <folding>
-            <element signature="e#240#437#0" expanded="false" />
-            <element signature="e#449#1824#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/downloads/vakata-jstree-8ea6ce7/demo/filebrowser/data/root/index.html" />
+    <entry file="file://$PROJECT_DIR$/scripts/vendors/jstree.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/downloads/vakata-jstree-8ea6ce7/demo/basic/style.css" />
+    <entry file="file://D:/downloads/vakata-jstree-8ea6ce7/demo/basic/index.html" />
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-mediator.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/app-runner.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/module-builders.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/mediatorPattern/app-init.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/moduleInject/isolate-moduleDI.js" />
+    <entry file="file://$PROJECT_DIR$/_sass/_base.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_sass/progressbar.scss" />
+    <entry file="file://$PROJECT_DIR$/scripts/progressbarRole/progressbar.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/inherit/inherit-car.js" />
+    <entry file="file://$PROJECT_DIR$/mediator/index.html" />
+    <entry file="file://$PROJECT_DIR$/sandbox-di/inherit-ptoto/index.html" />
+    <entry file="file://$PROJECT_DIR$/sandbox-di/index.html" />
+    <entry file="file://$PROJECT_DIR$/show-layers/index.html" />
+    <entry file="file://$PROJECT_DIR$/scripts/strategy.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/msg-noty.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/fnAsData.js" />
+    <entry file="file://$PROJECT_DIR$/scripts/main.js" />
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_sass/components/color-pick-box.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/main.js">
+    <entry file="file://$PROJECT_DIR$/_site/scripts/exel-reader/life-grid/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="54" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="54" />
+        <state relative-caret-position="410">
+          <caret line="126" column="18" selection-start-line="126" selection-start-column="18" selection-end-line="126" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_sass/components/exel-reader.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/extract-colors.js">
+    <entry file="file://$PROJECT_DIR$/_includes/exel-reader2/live-grid-demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="137" column="12" selection-start-line="137" selection-start-column="10" selection-end-line="137" selection-end-column="12" />
+        <state relative-caret-position="159">
+          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
           <folding>
-            <element signature="e#2138#2507#0" expanded="false" />
-            <element signature="e#4700#5632#0" expanded="false" />
-            <marker date="1496220567143" expanded="true" signature="3657:3870" ph="..." />
-            <marker date="1496220567143" expanded="true" signature="3674:3856" ph="..." />
-            <marker date="1496220567143" expanded="false" signature="3709:3727" ph="..." />
-            <marker date="1496220567143" expanded="true" signature="4500:4611" ph="..." />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+        <state relative-caret-position="455">
+          <caret line="121" column="22" selection-start-line="121" selection-start-column="2" selection-end-line="121" selection-end-column="22" />
           <folding>
             <element signature="e#38#181#0" expanded="false" />
-            <element signature="e#2458#2532#0" expanded="false" />
-            <element signature="e#4617#4896#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/eventDetectNTC.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="51" column="63" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="63" />
-          <folding>
-            <marker date="1496143071159" expanded="true" signature="868:880" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/dropsheet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="71" column="51" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="51" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#872#1107#0" expanded="false" />
-            <element signature="e#1148#1804#0" expanded="false" />
-            <element signature="e#1849#2140#0" expanded="false" />
-            <element signature="e#2447#3356#0" expanded="false" />
-            <element signature="e#3386#3473#0" expanded="false" />
-            <element signature="e#3507#3699#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/samples.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/sheetjs.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/sheetjsw.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/shim.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/spin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/components/exel-reader.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/_base.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/api-explorer/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1495545408108" expanded="true" signature="33821:33843" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/ajax/jszip.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/ajax/iemagic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/ajax/shim.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exel-reader/index.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/exel-reader/live-grid-demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#select#0;n#div#1;n#section#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pairsSplit#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="106" column="50" selection-start-line="106" selection-start-column="50" selection-end-line="106" selection-end-column="50" />
+        <state relative-caret-position="492">
+          <caret line="104" column="48" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="48" />
           <folding>
+            <element signature="e#1544#1698#0" expanded="false" />
+            <element signature="e#1730#1852#0" expanded="false" />
             <element signature="e#1938#2296#0" expanded="false" />
-            <element signature="e#3304#3669#0" expanded="false" />
-            <element signature="e#4407#5453#0" expanded="false" />
-            <element signature="e#5515#6077#0" expanded="false" />
-            <element signature="e#6120#6356#0" expanded="false" />
-            <element signature="e#6390#8850#0" expanded="false" />
-            <element signature="e#6504#8819#0" expanded="false" />
-            <marker date="1496930522690" expanded="true" signature="3095:3113" ph="..." />
+            <element signature="e#2358#2930#0" expanded="false" />
+            <element signature="e#2701#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/common/checkbox.scss">
+    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/ui-handle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="96" column="13" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="47" column="16" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/exel-reader/life-grid/src/generatePairs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+        <state relative-caret-position="472">
+          <caret line="168" column="3" selection-start-line="168" selection-start-column="3" selection-end-line="168" selection-end-column="3" />
           <folding>
-            <element signature="e#38#181#0" expanded="false" />
-            <element signature="e#2458#2532#0" expanded="false" />
-            <element signature="e#4617#4896#0" expanded="false" />
+            <element signature="e#0#49#0" expanded="false" />
+            <element signature="n#!!block;n#displayValsBelt#0;n#displayValsBelt#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#displayValsGender#0;n#displayValsGender#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#sortByWeight#0;n#!!block;n#makeCalculateButton#0;n#makeCalculateButton#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#createList#0;n#createList#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="e#2044#2439#0" expanded="false" />
+            <element signature="n#!!block;n#showCheckedRounds#0;n#showCheckedRounds#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#callTestDataDropSheet#0;n#callTestDataDropSheet#0;n#!!block;n#uiHandler#0;n#!!top" expanded="false" />
+            <element signature="e#4358#6728#0" expanded="false" />
+            <marker date="1497005453449" expanded="true" signature="1824:1842" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="109" selection-start-line="6" selection-start-column="109" selection-end-line="6" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
