@@ -102,10 +102,10 @@ DropSheet({
 });
 
 /** filter listeners **/
-$( "#single" ).change( uiHandler.displayValsBelt );
-$( "#toggleIsMale" ).change( uiHandler.displayValsGender );
-uiHandler.displayValsBelt();
-uiHandler.displayValsGender();
+// $( "#single" ).change( uiHandler.getValsBelt );
+// $( "#toggleIsMale" ).change( uiHandler.getValsGender );
+uiHandler.getValsBelt();
+uiHandler.getValsGender();
 
 /** Handler fo load-demo-file button **/
 uiHandler.callTestDataDropSheet(_onsheet);
