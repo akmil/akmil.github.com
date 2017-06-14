@@ -35,8 +35,8 @@ function uniqueNames(json) {
   return itemToSplice
 }
 
-function removeDublicateItems(arr, idx) {
-  idx.forEach(function (i) {
+function removeDublicateItems(arr, itemToSplice) {
+  itemToSplice.forEach(function (i) {
     arr.splice(arr[i], 1);
   });
 }
@@ -57,13 +57,11 @@ function pairsSplit(arr , teamIdx) {
 
     for (var j = 0; j < len; j++) {
       if (second[j] && first[j][teamIdx] !== second[j][teamIdx] || typeof second[j] === 'undefined') {
-      } else {
-        // console.log('11no opp' , first[j][1], second[j]);
+      } else { // console.log('11no opp' , first[j][1], second[j]);
         isReshuffle = true;
         break;
       }
-      if (!second[j]) {
-        // console.log('\t 1- second[j]' , second[j]);
+      if (!second[j]) { // console.log('\t 1- second[j]' , second[j]);
         isReshuffle = false;
       }
     }
