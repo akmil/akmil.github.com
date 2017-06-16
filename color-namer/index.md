@@ -7,6 +7,6 @@ showComments: true
 includeFarbtastic : true
 ---
 
-### Color names 
+### Available color names 
 
 {%include colorNamer/color-namer.html%}
