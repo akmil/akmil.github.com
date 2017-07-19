@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="816837ea-8bdd-4c2c-8b80-35a5529eb57f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.bithoundrc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
@@ -68,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="144" selection-start-line="0" selection-start-column="144" selection-end-line="0" selection-end-column="144" />
+              <caret line="0" column="154" selection-start-line="0" selection-start-column="154" selection-end-line="0" selection-end-column="154" />
               <folding />
             </state>
           </provider>
@@ -81,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".bithoundrc" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".bithoundrc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.bithoundrc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -207,8 +206,8 @@
         <option value="$PROJECT_DIR$/electron-tutorial/index.html" />
         <option value="$PROJECT_DIR$/color-namer/index.md" />
         <option value="$PROJECT_DIR$/_includes/colorNamer/color-namer.html" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.bithoundrc" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -454,7 +453,7 @@
       <workItem from="1497272843415" duration="646000" />
       <workItem from="1497357439981" duration="2599000" />
       <workItem from="1497603682772" duration="2474000" />
-      <workItem from="1500470207239" duration="1199000" />
+      <workItem from="1500470207239" duration="1982000" />
     </task>
     <task id="LOCAL-00001" summary="add: strategy pattern example">
       <created>1454508106816</created>
@@ -666,11 +665,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497605217755</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="add: bithoundrc">
+      <created>1500474184268</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1500474184268</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32723000" />
+    <option name="totallyTimeSpent" value="33506000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -736,7 +742,8 @@
     <MESSAGE value="add: date filter" />
     <MESSAGE value="rem: redundend css loading" />
     <MESSAGE value="add: description" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: description" />
+    <MESSAGE value="add: bithoundrc" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: bithoundrc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -976,23 +983,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="144" selection-start-line="0" selection-start-column="144" selection-end-line="0" selection-end-column="144" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.bithoundrc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="154" selection-start-line="0" selection-start-column="154" selection-end-line="0" selection-end-column="154" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
