@@ -1,3 +1,5 @@
+[![bitHound Code](https://www.bithound.io/github/akmil/akmil.github.com/badges/code.svg)](https://www.bithound.io/github/akmil/akmil.github.com)
+
 # Name Color Automaticaly
  
 [Demo](http://akmil.github.io/color-namer/)
