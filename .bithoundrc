@@ -6,7 +6,10 @@
     "**/widgets/main/lib/**",
     "**/karma.conf.js",
     "**/products-and-docs/apis/commerce-api/**",
-    "**/tests/**"
+    "**/products-and-docs/**",
+    "**/tests/**",
+    "**/galen-test/**",
+    "**/jasmine-test/**"    
   ],
   "critics": {
     "wc": { "limit": 5000 }
