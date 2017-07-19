@@ -1,0 +1,17 @@
+{
+  "ignore": [
+    "**/node_modules/**",
+    "**/scripts/vendors/**",
+    "**/scripts/**",
+    "**/widgets/main/lib/**",
+    "**/karma.conf.js",
+    "**/products-and-docs/apis/commerce-api/**",
+    "**/tests/**"
+  ],
+  "critics": {
+    "wc": { "limit": 5000 }
+  },
+  "test": [
+    "**/tests/**"
+  ]
+}
