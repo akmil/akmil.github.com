@@ -1,7 +1,9 @@
 {
   "ignore": [
     "**/node_modules/**",
-    "**/scripts/vendors/**",    
+    "**/scripts/vendors/**",
+    "**/scripts/api-explorer/**",
+    "**/scripts/components/**",
     "**/widgets/main/lib/**",
     "**/karma.conf.js",
     "**/products-and-docs/apis/commerce-api/**",
