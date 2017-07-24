@@ -2,11 +2,17 @@
   "ignore": [
     "**/node_modules/**",
     "**/scripts/vendors/**",
-    "**/scripts/**",
+    "**/scripts/api-explorer/**",
+    "**/scripts/components/**",
+    "**/scripts/exel-reader/**",
     "**/widgets/main/lib/**",
     "**/karma.conf.js",
     "**/products-and-docs/apis/commerce-api/**",
-    "**/tests/**"
+    "**/products-and-docs/**",
+    "**/tests/**",
+    "**/galen-test/**",
+    "**/jasmine-test/**",
+    "webpack.config.js"
   ],
   "critics": {
     "wc": { "limit": 5000 }

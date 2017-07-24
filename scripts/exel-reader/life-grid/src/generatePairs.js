@@ -110,7 +110,7 @@ function pairsSplit(arr , teamIdx) {
     resultingPairs.push([first[j], second[j]]);
   }
   return resultingPairs;
-};
+}
 
 
 function init(json) {
