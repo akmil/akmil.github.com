@@ -4,13 +4,16 @@
     "**/scripts/vendors/**",
     "**/scripts/api-explorer/**",
     "**/scripts/components/**",
+    "**/scripts/exel-reader/**",
     "**/widgets/main/lib/**",
     "**/karma.conf.js",
     "**/products-and-docs/apis/commerce-api/**",
     "**/products-and-docs/**",
     "**/tests/**",
     "**/galen-test/**",
-    "**/jasmine-test/**"    
+    "**/jasmine-test/**",
+    "webpack.config.js"
+
   ],
   "critics": {
     "wc": { "limit": 5000 }

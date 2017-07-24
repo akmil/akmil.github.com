@@ -4,8 +4,8 @@ var _target = document.getElementById('drop');
 /** Spinner **/
 var spinner;
 
-var _workstart = function() { spinner = new Spinner().spin(_target); }
-var _workend = function() { spinner.stop(); }
+var _workstart = function() { spinner = new Spinner().spin(_target); };
+var _workend = function() { spinner.stop(); };
 
 /** Alerts **/
 var _badfile = function() {
@@ -25,7 +25,9 @@ var _failed = function(e) {
   alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the <a href="/js-xlsx/">raw parser</a>.  If there are issues with the file processor, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
 };
 
-/** Handsontable magic **/
+/** 
+ * Handsontable magic 
+ **/
 var boldRenderer = function (instance, td, row, col, prop, value, cellProperties) {
   Handsontable.TextCell.renderer.apply(this, arguments);
   $(td).css({'font-weight': 'bold'});
