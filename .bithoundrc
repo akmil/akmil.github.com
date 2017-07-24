@@ -13,6 +13,7 @@
     "**/galen-test/**",
     "**/jasmine-test/**",
     "webpack.config.js"
+
   ],
   "critics": {
     "wc": { "limit": 5000 }
