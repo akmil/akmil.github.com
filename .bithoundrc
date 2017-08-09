@@ -17,7 +17,7 @@
 
   ],
   "critics": {
-    "wc": { "limit": 5000 }
+    "wc": { "limit": 4000 }
   },
   "test": [
     "**/tests/**"
