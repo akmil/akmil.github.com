@@ -1,7 +1,6 @@
 {
   "ignore": [
-    "**/node_modules/**",
-    "**/scripts/**",
+    "**/node_modules/**",    
     "**/scripts/vendors/**",
     "**/scripts/api-explorer/**",
     "**/scripts/components/**",
@@ -13,7 +12,8 @@
     "**/tests/**",
     "**/galen-test/**",
     "**/jasmine-test/**",
-    "webpack.config.js"
+    "webpack.config.js",
+    "gulp.js"
 
   ],
   "critics": {
