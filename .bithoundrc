@@ -5,6 +5,7 @@
     "**/scripts/api-explorer/**",
     "**/scripts/components/**",
     "**/scripts/exel-reader/**",
+    "**/scripts/colorNamer/src/nameThatColor.js"
     "**/widgets/main/lib/**",
     "**/karma.conf.js",
     "**/products-and-docs/apis/commerce-api/**",
