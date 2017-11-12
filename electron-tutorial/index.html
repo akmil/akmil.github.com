@@ -1,1 +1,70 @@
-none
+<!DOCTYPE>
+<html>
+
+<head>
+
+    <title>Audio kit</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Muli&amp;v2">
+
+    <link href="flexboxStyle.css" rel="stylesheet" type="text/css"></link>
+    <style>
+      button {        
+        transition: 0.5s;
+        height: 41px;
+      }
+      .playing {
+        padding: 10px;
+      }
+    </style>
+
+</head>
+
+<body>
+    <header>header</header>
+    <button data-key="65">A</button>
+    <button data-key="83">S</button>
+    <button data-key="68">D</button>
+    <button data-key="70">F</button>
+    <button data-key="71">G</button>
+    <button data-key="72">H</button>
+
+    <button data-key="74">J</button>
+    <button data-key="75">K</button>
+    <button data-key="76">L</button>
+
+    <audio data-key="65" src="sounds/Dinner-triangle.mp3"></audio>
+    <audio data-key="83" src="sounds/Blooper-sound-effect.mp3"></audio>
+    <audio data-key="68" src="sounds/Button-beep-tone.mp3"></audio>
+    <audio data-key="70" src="sounds/Fart-sound-effect.mp3"></audio>
+    <audio data-key="71" src="sounds/Police-radio-sound.mp3"></audio>
+    <audio data-key="72" src="sounds/Rooster-ringtone.mp3"></audio>
+
+    <audio data-key="74" src="sounds/Electric-shock-audio-logo.mp3"></audio>
+    <audio data-key="75" src="sounds/Fire-whoosh-sound-effect.mp3"></audio>
+    <audio data-key="76" src="sounds/Man-walking-on-creepy-wooden-floor-sound-effect.mp3"></audio>
+    
+    <script>
+      window.addEventListener('keydown', function(e){
+        const audio =  document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key =  document.querySelector(`button[data-key="${e.keyCode}"]`);
+        if(!audio){ return };
+        console.log(e.keyCode);
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add('playing');
+        // setTimeout(function(){
+        //   key.classList.remove('playing');
+        // }, 2000)
+      });
+      const keys =  document.querySelectorAll('button');
+      console.log('keys', keys)
+      keys.forEach(key => key.addEventListener('transitionend', function(e){
+        console.log('remove', e.keyCode);
+        this.classList.remove('playing');
+      }))
+    </script>
+</body>
+
+</html>
+
+<body>
