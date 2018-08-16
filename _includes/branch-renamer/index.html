@@ -1,4 +1,5 @@
 <div class="container">
+  <form>
   <label for="branch-separator" class="input-group">separator</label>
   <input type="text" id="branch-separator" value='-'/>
   <br>
@@ -21,6 +22,7 @@
   
   <button id='calculate'>rename</button>
   <br>
+    </form>
   
   <div id="result"></div>
 </div>
@@ -45,6 +47,7 @@
   $( "select" ).change( showValues );
   $( "input" ).change( showValues );
   
+  $('#calculate').click( showValues );
   showValues();
    
 </script>
