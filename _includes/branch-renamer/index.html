@@ -1,11 +1,10 @@
 <div class="container">
-  <form>
-  <label for="branch-separator" class="input-group">separator</label>
-  <input type="text" id="branch-separator" value='-'/>
+  <form >
+  <label for="branch-separator">separator</label>
+  <input type="text" class="input-group" id="branch-separator" value='-' name="single-separator"/>
   <br>
-   
-  <label for="type">type</label>
-  <select name="" id="type">
+  
+  <select name="single-type" id="type">
     <option value="bug">bug</option>
     <option value="feature">feature</option>
     <option value="PBI">PBI</option>    
@@ -13,18 +12,18 @@
   <br>
   
   <label for="branch-number">number</label>
-  <input type="text" id="branch-number" class="input-group" value='000'/>
+  <input type="text" class="input-group" id="branch-number" name="single-number" value='000'/>
   <br>
   
   <label for="branch-title">title</label>
-  <input type="text" id="branch-title" class="input-group" value='branch-title'/>  
-  <br>
+  <input type="text" class="input-group" id="branch-title" name="single-title" value='branch-title'/>  
+  </form>
   
   <button id='calculate'>rename</button>
   <br>
-    </form>
   
-  <div id="result"></div>
+  
+  <div id="results"></div>
 </div>
 <script>
   function getNameFor(type, str, number, separator){
