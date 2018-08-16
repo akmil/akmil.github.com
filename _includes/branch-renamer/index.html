@@ -25,21 +25,26 @@
   <div id="result"></div>
 </div>
 <script>
-   function getNameFor(type, str, number, separator){
+  function getNameFor(type, str, number, separator){
      return type + '/' + number + separator + str.replace(/\]+|\s+|\W+/g, separator);
    }
-
-   //Dom manupulation
-   var button = document.getElementById('calculate');
-
-   button.addEventListener("click", function(){
-     var type = document.getElementById("type").value;
-     var separator = document.getElementById("branch-separator").value;
-     var str = document.getElementById("branch-title").value;
-     var number = document.getElementById("branch-number").value;
-
-     var nameBranch = getNameFor(type, str, number, separator);
-       document.getElementById("result").innerHTML = nameBranch;
-   });
+  
+  function showValues() {
+    var fields = $( ":input" ).serializeArray();    
+    var separator = fields[0].value;
+    var type = fields[1].value;
+    var number = fields[2].value;
+    var str = fields[3].value;
+    
+    $( "#results" ).empty();    
+    $( "#results" ).append( getNameFor(type, str, number, separator) );    
+  }
+ 
+  //handlers
+  $( ":checkbox, :radio" ).click( showValues );
+  $( "select" ).change( showValues );
+  $( "input" ).change( showValues );
+  
+  showValues();
    
 </script>
