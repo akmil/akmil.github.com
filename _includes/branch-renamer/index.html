@@ -1,4 +1,25 @@
 <div class="container">
-    <input type='text' />
-    <span class="text-muted">awesome footer <a href='/branch-renamer'>with branch rename</a></span>
-  </div>
+   <label for="branch-separator">separator</label>
+  <input type="text" id="branch-separator" value='-'/>
+  <br>
+  
+  <select name="" id="type">
+    <option value="bug">bug</option>
+    <option value="feature">feature</option>
+    <option value="PBI">PBI</option>    
+  </select>  
+  <br>
+  
+  <label for="branch-number">number</label>
+  <input type="text" id="branch-number" value='000'/>
+  <br>
+  
+  <label for="branch-title">title</label>
+  <input type="text" id="branch-title"  value='branch-title'/>  
+  <br>
+  
+  <button id='calculate'>rename</button>
+  <br>
+  
+  <div id="result"></div>
+</div>
