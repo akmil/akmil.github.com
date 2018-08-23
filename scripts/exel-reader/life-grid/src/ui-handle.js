@@ -1,5 +1,5 @@
 /**
- * Created by Pavlo_Oliinyk1 on 6/9/2017.
+ * Created by Pavlo_Oliinyk.
  */
 
 var uiHandler = {
@@ -48,6 +48,7 @@ var uiHandler = {
 
       $wrapper.empty();
       me.createList($wrapper, boys);
+      me.scrollTo($wrapper);      
     });
   },
   getAge: function(dateString) {
@@ -59,6 +60,13 @@ var uiHandler = {
       age--;
     }
     return age;
+  },
+  
+  /*el - jQuery element*/
+  scrollTo: function(el){
+    $('html, body').animate({
+        scrollTop: el.offset().top
+      }, 1000);
   },
 
   createList: function($wrapper, dataArr){
@@ -79,7 +87,7 @@ var uiHandler = {
       });
 
     var buildStageOneHandler = function (e) {
-      console.log(dataArr);
+      //console.log(dataArr);
       function toObj(arr){
         var arrOfobj = [];
         arr.forEach(function(item){
@@ -101,6 +109,7 @@ var uiHandler = {
       var pairs = pairsHandler.init(dataArr);
 
       me.showCheckedRounds(pairs, $wrapper);
+      me.scrollTo($wrapper);
     };
 
     this.addButton($wrapper,buildStageOneHandler, 'To pairs');
