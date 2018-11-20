@@ -32,7 +32,7 @@
     console.log(id, charCount);
   }
 
-  function submitForm() {
+  function submitForm(e) {
     var $textAreaDescription = $('#description'),
       email = $form.find("input[name='mail']").val(),
       password = $form.find("input[name='pass']").val(),
@@ -63,6 +63,7 @@
         }).catch(function(jqXHR, textStatus) {
           console.log("catch Request failed: " + textStatus);
         });
+        e.preventDefault();
           // $.ajax({
           // 	// dataType: 'jsonp',
           // type: "POST",
@@ -80,13 +81,13 @@
   }
 
   // EVENTS
-  $btn.on('click', function() {
+  $btn.on('click', function(e) {
     var form = $form.get(0);
 
     if(!$btn.is(':disabled')) {
       if(form.checkValidity()) {
         // $btn.attr('disabled', true);
-        submitForm();
+        submitForm(e);
       }else{
               // Highlight errors
         if(form.reportValidity) form.reportValidity();
