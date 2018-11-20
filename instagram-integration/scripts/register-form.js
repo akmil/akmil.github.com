@@ -2,7 +2,7 @@
 (function($) {
   var CONST = {
     url: {
-      base: 'https://104.248.46.68:8080/api/v1',
+      base: 'http://104.248.46.68:8080/api/v1',
       registration: '/registration/basic/'
     }  
   };
@@ -11,7 +11,7 @@
   var $form = $('#js_form'),				
     $email = $form.find('#email'),
     $btn = $('#js_feedback_btn'),
-    errorDescriptionID = 'some-error',
+    // errorDescriptionID = 'some-error',
     cssValidationClass = 'form-validation';
 
   // function resetForm() {
@@ -38,7 +38,7 @@
       password = $form.find("input[name='pass']").val(),
       formData = {'email': email, 'password': password};
           
-    sendRequest = function (formData) {
+    var sendRequest = function (formData) {
       console.log('sending', regUrl, formData);
           
       // var posting = $.post(regUrl, formData);
@@ -60,6 +60,8 @@
           showMsgError(data);
         }).fail(function(jqXHR, textStatus) {
           console.log("Request failed: " + textStatus);
+        }).catch(function(jqXHR, textStatus) {
+          console.log("catch Request failed: " + textStatus);
         });
           // $.ajax({
           // 	// dataType: 'jsonp',
