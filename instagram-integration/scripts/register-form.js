@@ -71,7 +71,7 @@
 
     if(!$btn.is(':disabled')) {
       if(form.checkValidity()) {
-        $btn.attr('disabled', true);
+        // $btn.attr('disabled', true);
         submitForm();
       }else{
               // Highlight errors
