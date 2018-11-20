@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--  Meta  -->
+  <meta charset="UTF-8" />
+  <title>My New Pen!</title>
+  
+  <!--  Styles  -->
+  
+<!--   <link rel="stylesheet" href="styles/index.processed.css"> -->
+</head>
+<body>
+  
+  <div class="container">
+
+    <header class="header-logo">
+        <div>&nbsp;</div>
+        <div style="text-align: center">
+          <!--<img src="/Content/images/Logo_black.png" class="img-responsive brand "> -->
+          Company Logo
+        </div>
+
+    </header>
+
+<form action="/Login/Registration" id="js_form" method="post">            
+  <div class="control-group" style="display: flow-root;">
+                <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right: 5px" class="pull-right">
+                    ENG
+                </a>
+                <a class="pull-right" style="margin-right: 5px">|</a>
+                <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right: 5px" class="pull-right">
+                    RU
+                </a>
+            </div>
+        <p class="class-header">
+            <strong>Регистрация</strong>
+        </p>
+        <div class="fields">            
+            <div class="field">
+                <div style="color: red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </div>
+                <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="text" value="">
+            </div>
+          
+          <div class="field">
+                <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">
+            </div>
+            
+        </div>
+        <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
+    </form>    
+    <div id="some-error"></div>
+    <div id="description"></div>
+    <p align="center" class="block-info">
+        Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
+
+        Если он у вас есть  <a href="/Login">Войти</a>
+    </p>
+</div>
+  
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+<!--   <script src="scripts/index.js"></script> -->
+  <script src="scripts/register-form.js"></script>
+</body>
+</html>
