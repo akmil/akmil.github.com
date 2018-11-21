@@ -76,6 +76,7 @@
           console.log(result);
           $textAreaDescription.text('succsess, status' + result.status);
           $('.login-box').show();
+
           if (!formDataObj) {
             showMsgError(result);
             saveToken(result.token);
