@@ -44,8 +44,7 @@
       $.ajax({
         method: "POST",
         url: regUrl,
-        data: formData,
-        dataType: "json",
+        data: {email: "pas@h.com", password: "pass"},
         contentType: 'application/json'
       })
         .done(function(data) {
@@ -57,7 +56,6 @@
         }).catch(function(jqXHR, textStatus) {
           console.log("catch Request failed: " + textStatus);
         });
-        e.preventDefault();
     };
 
     $email.val($email.val().toLocaleLowerCase());
