@@ -40,19 +40,12 @@
           
     var sendRequest = function (formData) {
       console.log('sending', regUrl, formData);
-          
-      // var posting = $.post(regUrl, formData);
 
-          // Put the results in a div
-      // posting.done(function(data) {
-      //   console.log('succsess', data);
-      //   $textAreaDescription.text('succsess');
-      //   showMsgError(data);
-      // });
       $.ajax({
         method: "POST",
         url: regUrl,
-        data: formData
+        data: formData,
+        dataType: 'application/json'
       })
         .done(function(data) {
           console.log('succsess', data);
@@ -64,15 +57,6 @@
           console.log("catch Request failed: " + textStatus);
         });
         e.preventDefault();
-          // $.ajax({
-          // 	// dataType: 'jsonp',
-          // type: "POST",
-          // 	url: regUrl,
-          // 	data: {formData}
-          // }).done(function() {
-          // console.log('succsess');
-          // 	// Show message
-          // });
     };
 
     $email.val($email.val().toLocaleLowerCase());
