@@ -78,9 +78,10 @@
           $textAreaDescription.text('succsess, status' + result.status.state);
           $('.login-box').show();
 
+          // todo: delete me
           if (!formDataObj) {
-            showMsgError(result);
-            saveToken(result.token);
+            showMsgError(result.data);
+            saveToken(result.data.token);
           }
         });
     };
