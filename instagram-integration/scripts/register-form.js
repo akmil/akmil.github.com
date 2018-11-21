@@ -45,7 +45,8 @@
         method: "POST",
         url: regUrl,
         data: formData,
-        dataType: 'application/json'
+        dataType: "json",
+        contentType: 'application/json'
       })
         .done(function(data) {
           console.log('succsess', data);
