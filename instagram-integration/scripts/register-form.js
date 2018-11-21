@@ -55,8 +55,12 @@
           console.log("Request failed: " + textStatus);
         }).catch(function(jqXHR, textStatus) {
           console.log("catch Request failed: " + textStatus);
+        }).always(function(data) {
+          console.log('always', data);
         });
     };
+
+    e.preventDefault();
 
     $email.val($email.val().toLocaleLowerCase());
 
