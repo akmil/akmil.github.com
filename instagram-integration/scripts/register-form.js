@@ -74,10 +74,11 @@
       }).then((result) => result.json())
         .then((result) => {
           console.log(result);
-          $textAreaDescription.text('succsess' + result);
+          $textAreaDescription.text('succsess, status' + result.status);
+          $('.login-box').show();
           if (!formDataObj) {
-            showMsgError(data);
-            saveToken(data.token);
+            showMsgError(result);
+            saveToken(result.token);
           }
         });
     };
