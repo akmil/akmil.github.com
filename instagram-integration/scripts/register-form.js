@@ -32,31 +32,53 @@
     console.log(id, charCount);
   }
 
-  function submitForm(e) {
+  function saveToken(token) {
+    CONST.token = token;
+    CONST.user = {'email': email, 'password': password};
+  }
+
+  function submitForm(e, formDataObj) {
     var $textAreaDescription = $('#description'),
       email = $form.find("input[name='mail']").val(),
       password = $form.find("input[name='pass']").val(),
-      formData = {'email': email, 'password': password};
+      formData = formDataObj || {'email': email, 'password': password};
           
     var sendRequest = function (formData) {
       console.log('sending', regUrl, formData);
 
-      $.ajax({
-        method: "POST",
-        url: regUrl,
-        data: {email: "pas@h.com", password: "pass"},
-        contentType: 'application/json'
-      })
-        .done(function(data) {
-          console.log('succsess', data);
-          $textAreaDescription.text('succsess');
-          showMsgError(data);
-        }).fail(function(jqXHR, textStatus) {
-          console.log("Request failed: " + textStatus);
-        }).catch(function(jqXHR, textStatus) {
-          console.log("catch Request failed: " + textStatus);
-        }).always(function(data) {
-          console.log('always', data);
+      // $.ajax({
+      //   method: "POST",
+      //   url: regUrl,
+      //   data: {email: "pas@h.com", password: "pass"},
+      //   contentType: 'application/json'
+      // })
+      //   .done(function(data) {
+      //     console.log('succsess', data);
+      //     $textAreaDescription.text('succsess');
+      //     showMsgError(data);
+      //   }).fail(function(jqXHR, textStatus) {
+      //     console.log("Request failed: " + textStatus);
+      //   }).catch(function(jqXHR, textStatus) {
+      //     console.log("catch Request failed: " + textStatus);
+      //   }).always(function(data) {
+      //     console.log('always', data);
+      //   });
+
+      fetch(regUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      }).then((result) => result.json())
+        .then((result) => {
+          console.log(result);
+          $textAreaDescription.text('succsess' + result);
+          if (!formDataObj) {
+            showMsgError(data);
+            saveToken(data.token);
+          }
         });
     };
 
@@ -68,6 +90,9 @@
   }
 
   // EVENTS
+  $('.login').on('click', function(e) {
+    submitForm(e, CONST.user, CONST.token);
+  });
   $btn.on('click', function(e) {
     var form = $form.get(0);
 
