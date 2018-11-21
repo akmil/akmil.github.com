@@ -81,7 +81,8 @@
           // todo: delete me
           if (!formDataObj) {
             showMsgError(result.data);
-            saveToken(result.data.token);
+            formData.token = token;
+            saveToken(formData);
           }
         });
     };
