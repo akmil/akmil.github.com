@@ -1,0 +1,21 @@
+// vendors
+@import '../node_modules/normalize-scss/sass/normalize/import-now';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css');
+
+// common
+//@import './common/reboot';
+@import './common/variables';
+@import './common/general';
+@import './common/dashbordBootstrap';
+
+
+// blocks
+@import './blocks/header/header';
+
+// components
+@import './blocks/product-tile-card/product-tile-card';
+@import './blocks/register-form/register-form';
+
+//pages
+@import './pages/_product-tile/product-tile';

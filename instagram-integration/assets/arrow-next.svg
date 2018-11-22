@@ -1,0 +1,18 @@
+<svg width="40" height="66" viewBox="0 0 40 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Arrow</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-8289 447)">
+<g id="Arrow" opacity="0.1">
+<g id="Path">
+<use xlink:href="#path0_fill" transform="translate(8289.8 -415.26)" fill="#007BBA"/>
+</g>
+<g id="Path">
+<use xlink:href="#path1_fill" transform="matrix(1 0 -0 -1 8289.81 -415.229)" fill="#007BBA"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 12.7052 33.3598L 0 33.3598L 26.3683 1.90141e-14L 39.1529 0"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 12.7008 31.7713L 0 31.7713L 26.3177 0.0475502L 39.1628 0"/>
+</defs>
+</svg>

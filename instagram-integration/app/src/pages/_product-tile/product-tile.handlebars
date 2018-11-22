@@ -1,0 +1,58 @@
+{{#> base }}
+
+  <div class="container-fluid product-card-list">
+
+    {{> product-tile-card
+      bonus='assets/component/product-tile/bonus.png'
+      image = 'assets/component/product-tile/Product_Tiles_mobile.jpg'
+      prePrice='$ 5,999.9'
+      price='$ 9,999.9'
+      inStoreText='In store clearance'
+      description='Core charge pricing and fees can go here'
+      sku='#000-0000-0'
+      title='Product Title Area That Accouts For Very Long Tittles That Wrap to Multiple Lines'
+    }}
+    {{> product-tile-card
+      bonus='assets/component/product-tile/bonus.png'
+      image = 'assets/component/product-tile/Product_Tiles_mobile.jpg'
+      prePrice='$ 6,999.9'
+      price='$ 8,999.9'
+      inStoreText='In store clearance'
+      description='Core charge pricing and fees can go here'
+      sku='#000-0000-1'
+      title='2Product Title Area That Accouts For Very Long Tittles That Wrap to Multiple Lines'
+    }}
+    {{> product-tile-card
+      bonus='assets/component/product-tile/bonus.png'
+      image = 'assets/component/product-tile/Product_Tiles_mobile.jpg'
+      prePrice='$ 7,999.9'
+      price='$ 7,999.9'
+      inStoreText='In store clearance'
+      description='Core charge pricing and fees can go here'
+      sku='#000-0000-2'
+      title='3Product Title Area That Accouts For Very Long Tittles That Wrap to Multiple Lines'
+    }}
+
+
+
+  </div>
+
+
+{{/ base }}
+
+<div class="col-half w-40">
+  <div class="product-card__bonus"></div>
+  <img src="{{image}}" class="product-card__image">
+</div>
+
+<div class="col-half w-60">
+  <div class="product-card__text">
+    <h3 class="product-card__title product-card__pre-price">{{prePrice}}</h3>
+    <h1 class="product-card__title product-card__price">{{price}}</h1>
+    <p class="product-card__title product-card__in-store">{{inStoreText}}</p>
+    <p class="product-card__title product-card__description">{{description}}</p>
+    <p class="product-card__title product-card__sku">{{sku}}</p>
+    <p class="product-card__title product-card__title">{{title}}</p>
+    <div class="product-card__title product-card__stars"></div>
+  </div>
+</div>

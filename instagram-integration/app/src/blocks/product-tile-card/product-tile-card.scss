@@ -1,0 +1,77 @@
+$productCardHeight: 225px;
+$productCardPadding: 10px;
+$colorYellow: #fbde00;
+$gray-border-color: #dbdbdb;
+$starH: 16px;
+
+@mixin svgBackground($svgName, $width, $height) {
+  background: url('assets/' + $svgName) no-repeat;
+  background-size: $width $height;
+  width: $width;
+  height: $height;
+}
+
+.product-card-list {
+  .product-card {
+    min-height: $productCardHeight;
+    padding: 10px;
+    border: 1px solid $gray-border-color;
+    &:not(:last-child){
+      border-bottom-width: 0;
+    }
+    .col-half {
+      position: relative;
+      &:not(:first-child){
+        padding: 0 25px 0 12px;
+      }
+    }
+    &__bonus {
+      //margin-top: 10px;
+      //margin-left: 10px;
+    }
+    &__badge {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      &--50-off{
+        @include svgBackground('/component/product-tile/discount.png', 56px, 56px);
+      }
+    }
+
+    &__pre-price {
+      margin: 0;
+    }
+    &__price {
+      margin-top: 0;
+    }
+    &__in-store {
+      background-color: $colorYellow;
+      display: inline-block;
+      padding: 6px;
+      text-transform: uppercase;
+    }
+    &__description {
+      text-transform: uppercase;
+    }
+    &__sku {
+     font-style: italic;
+      color: $gray-border-color;
+    }
+    &__title {
+      font-weight: 700;
+    }
+    &__stars {
+      height: $starH;
+      .star {
+        display: inline-block;
+        @include svgBackground('/component/product-tile/stars.png', $starH, $starH);
+        background-size: $starH * 2 15px;
+        &--empty {
+          @include svgBackground('/component/product-tile/stars.png', $starH, $starH);
+          background-size: $starH * 2 15px;
+          background-position-x: -16px;
+        }
+      }
+    }
+  }
+}
