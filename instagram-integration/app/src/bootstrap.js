@@ -1,9 +1,10 @@
 import './base.scss';
-// import * as header from './blocks/header/header';
+import RegisterForm from './blocks/register-form/register-form';
 
 const init = () => {
-  // header.init();
-  console.log('init js here');
+    const registerForm = new RegisterForm();
+    registerForm.init();
+    console.log('init js here');
 };
 
 (() => init())();

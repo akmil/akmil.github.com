@@ -83,7 +83,7 @@ module.exports = {
     "id-blacklist": "error",
     "id-length": "off",
     "id-match": "error",
-    "indent": ["error", 2, {"SwitchCase": 1}],
+    "indent": ["error", 4, {"SwitchCase": 1}],
     "init-declarations": "error",
     "jsx-quotes": [
       "error",
@@ -231,7 +231,7 @@ module.exports = {
       "single"
     ],
     "radix": "error",
-    "require-jsdoc": "error",
+    "require-jsdoc": "off",
     "rest-spread-spacing": "error",
     "semi": "error",
     "semi-spacing": "error",
