@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
-// import {CONST} from '../../common/js-services/consts';
 
 export default class RegisterForm {
     constructor() {
@@ -14,6 +13,7 @@ export default class RegisterForm {
 
     init() {
         this.bindEvents();
+        $('.login-box').show(); // remove me
     }
 
     submitForm(formDataObj) {
@@ -31,6 +31,13 @@ export default class RegisterForm {
                         password: this.formData.password,
                         token: result.data.token
                     };
+
+                    // save the item
+                    sessionStorage.setItem('user', JSON.stringify(CONST.user));
+
+                    // retrieve the object in a string form
+                    const customersDataString = sessionStorage.getItem('customersData');
+                    console.log(customersDataString);
                     console.log('request succeeded with JSON response', result);
                 } else {
                     this.$textAreaDescription
@@ -51,9 +58,9 @@ export default class RegisterForm {
     }
 
     bindEvents() {
-        // $('.login').on('click', function (e) {
-        //     this.submitForm(e, CONST.user, loginUrl);
-        // });
+        $('.login').on('click', function (e) {
+            this.submitForm(e, CONST.user, 'loginUrl');
+        });
 
         const $btn = $('#js_feedback_btn'),
             cssValidationClass = 'form-validation';

@@ -8,9 +8,9 @@ body {
   line-height: $lineHeight;
   color: $primaryColor;
 
-  @media (min-width: $desktopBreakpoint) {
-    font-size: $desktopFontSize;
-  }
+  // @media (min-width: $desktopBreakpoint) {
+  //   font-size: $desktopFontSize;
+  // }
 }
 
 p {

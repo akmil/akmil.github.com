@@ -1,0 +1,6 @@
+@mixin svgBackground($svgName, $width, $height) {
+  background: url('assets/' + $svgName) no-repeat;
+  background-size: $width $height;
+  width: $width;
+  height: $height;
+}
