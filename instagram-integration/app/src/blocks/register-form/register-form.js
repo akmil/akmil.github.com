@@ -27,13 +27,15 @@ export default class RegisterForm {
             .then((result) => {
                 if (result.data && result.data.token) {
                     CONST.user = {
-                        email: this.formData.email,
-                        password: this.formData.password,
+                        // email: this.formData.email,
+                        // password: this.formData.password,
                         token: result.data.token
                     };
 
                     // save the item
                     sessionStorage.setItem('user', JSON.stringify(CONST.user));
+
+                    // window.location = confirm-registration.html?token='from server';
 
                     // retrieve the object in a string form
                     const customersDataString = sessionStorage.getItem('customersData');
