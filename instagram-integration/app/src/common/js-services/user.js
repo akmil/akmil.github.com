@@ -16,8 +16,17 @@ class CookieStorage {
     }
 }
 
-export default class User {
+// let instance = null;
+
+class User {
+    static instance = 'instance';
+
     constructor() {
+        // // eslint-disable-next-line no-undef
+        // if (!instance) {
+        //     instance = this;
+        // }
+        this.instance1 = this;
         this.network = new Network();
         this.cookieStorage = new CookieStorage();
         this.regUrl = CONST.getPath('registration');
@@ -29,6 +38,9 @@ export default class User {
                 'Accept': 'application/json'
             }
         };
+        // eslint-disable-next-line no-undef
+        // console.log(instance);
+        // return instance;
     }
 
     isLoggedIn() {
@@ -54,3 +66,5 @@ export default class User {
         return this.network.sendRequest(CONST.getPath('registration'), setting);
     }
 }
+
+export default User;
