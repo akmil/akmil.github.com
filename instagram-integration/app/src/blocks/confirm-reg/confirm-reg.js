@@ -1,5 +1,5 @@
 /* eslint-disable sort-vars */
-// import $ from 'jquery';
+import $ from 'jquery';
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
 
@@ -24,7 +24,7 @@ export function confirmationWithRedirect() {
 
     const sendConfirm = function (token) {
         user.confirm(token).then((result) => {
-            if (result && result.data) {
+            if (result.status && result.status.state === 'ok') {
                 CONST.user = {
                     // email: _formData.email,
                     // password: _formData.password,
@@ -35,14 +35,16 @@ export function confirmationWithRedirect() {
                 // save the item
                 sessionStorage.setItem('email_confirm', 'confirmed');
 
-                window.location = CONST.getPath('confirmation');
-
                 // window.location = confirm-registration.html?token='from server';
 
                 // retrieve the object in a string form
                 const customersDataString = sessionStorage.getItem('customersData');
                 console.log(customersDataString);
                 console.log('request succeeded with JSON response', result);
+                $('.confirm-registration').append(`<p>confirmation status: ${result.status.state}</p>`);
+                setTimeout(() => {
+                    window.location = './';
+                }, 1000);
             } else if (result.status) {
                 console.log(result);
             } else {

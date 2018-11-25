@@ -33,7 +33,7 @@ export function LoginForm() {
                   // window.location = confirm-registration.html?token='from server';
 
                   // retrieve the object in a string form
-                  const customersDataString = sessionStorage.getItem('customersData');
+                  const customersDataString = sessionStorage.getItem('user_logged');
                   console.log(customersDataString);
                   console.log('request succeeded with JSON response', result);
               } else if (result.status) {

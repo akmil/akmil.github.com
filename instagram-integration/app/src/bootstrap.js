@@ -1,15 +1,21 @@
 import './base.scss';
+import $ from 'jquery';
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
 
 const init = () => {
-    const registerForm = new RegisterForm();
-    registerForm.init();
-    // const loginForm = new LoginForm();
-    console.log('init js here', LoginForm());
+    console.log('init js here');
+    (new RegisterForm()).init();
     LoginForm().init();
     confirmationWithRedirect().init();
+
+    // check is logged
+    const $header = $('h1');
+    const isLogged = sessionStorage.getItem('user_logged');
+    if ($header.length && isLogged) {
+        $header.append('<span style="color: lightcoral"> вы залогинились успешно</span>');
+    }
 };
 
 (() => init())();
