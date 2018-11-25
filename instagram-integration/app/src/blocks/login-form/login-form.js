@@ -36,6 +36,9 @@ export function LoginForm() {
                   const customersDataString = sessionStorage.getItem('user_logged');
                   console.log(customersDataString);
                   console.log('request succeeded with JSON response', result);
+                  $textAreaDescription.empty()
+                      .append(`<p>status: ${result.status.state}</p>`)
+                      .append(`<p> message: ${result.status.message} </p>`);
               } else if (result.status) {
                   console.log(result);
                   $textAreaDescription
