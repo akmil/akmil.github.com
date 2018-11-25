@@ -1,4 +1,4 @@
-<form id="js_form" method="post">
+<form id="js_form">
     <div class="control-group" style="display: flow-root;">
         <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right: 5px" class="">
             ENG
@@ -33,7 +33,4 @@
     Если он у вас есть  <a href="/Login">Войти</a>
 </p>
 
-<div class="login-box" style="display: none">
-    Вы зарегистрировались, Ваш и-майл <span class="username"></span>
-    <button class="login">Login</button>
-</div>
+{{>login-form}}

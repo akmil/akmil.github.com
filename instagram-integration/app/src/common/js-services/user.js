@@ -22,39 +22,38 @@ export default class User {
         this.cookieStorage = new CookieStorage();
         this.regUrl = CONST.getPath('registration');
         this.loginUrl = CONST.getPath('login');
+        this.settingPost = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        };
     }
 
     isLoggedIn() {
         return !!this.cookieStorage.read('CTC.COOKIES.SESSION_ALIVE');
     }
 
-    signup(formData) {
-        const setting = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        };
-        console.log('consts', this.loginUrl);
-        return this.network.sendRequest(this.loginUrl, setting)
-            .then(function(data) {
-                console.log('request succeeded with JSON response', data);
-            });
+    login(formData) {
+        const setting = {...this.settingPost, body: JSON.stringify(formData)};
+        return this.network.sendRequest(this.loginUrl, setting);
+    }
 
+    confirm(token) {
+        const setting = {
+            ...this.settingPost,
+            method: 'GET'
+        };
+        const confirmUrl = CONST.getPath('confirmation');
+        return this.network.sendRequest(`${confirmUrl}?${token}`, setting);
     }
 
     register(formData) {
         const setting = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            ...this.settingPost,
             body: JSON.stringify(formData)
         };
-        console.log('consts', this.regUrl);
         return this.network.sendRequest(CONST.getPath('registration'), setting);
     }
 }

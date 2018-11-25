@@ -13,7 +13,6 @@ export default class RegisterForm {
 
     init() {
         this.bindEvents();
-        $('.login-box').show(); // remove me
     }
 
     submitForm(formDataObj) {
@@ -33,7 +32,7 @@ export default class RegisterForm {
                     };
 
                     // save the item
-                    sessionStorage.setItem('user', JSON.stringify(CONST.user));
+                    sessionStorage.setItem('user', JSON.stringify(CONST.user.token));
 
                     // window.location = confirm-registration.html?token='from server';
 
