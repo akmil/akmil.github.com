@@ -41,12 +41,8 @@ export default class User {
     }
 
     confirm(token) {
-        const setting = {
-            ...this.settingPost,
-            method: 'GET'
-        };
-        const confirmUrl = CONST.getPath('confirmation');
-        return this.network.sendRequest(`${confirmUrl}?${token}`, setting);
+        // const confirmUrl = CONST.getPath('confirmation');
+        return this.network.sendRequest(`${CONST.getPath('confirmation')}?${token}`);
     }
 
     register(formData) {
