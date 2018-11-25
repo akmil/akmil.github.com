@@ -3,7 +3,7 @@ export const CONST = {
         base: 'http://104.248.46.68:8080/api/v1',
         registration: '/registration/basic/',
         login: '/registration/basic/login',
-        confirmation: '/registration/basic/confirmation?token='
+        confirmation: '/registration/basic/confirmation?token'
     },
     user: {
         email: '',

@@ -42,7 +42,7 @@ export default class User {
 
     confirm(token) {
         // const confirmUrl = CONST.getPath('confirmation');
-        return this.network.sendRequest(`${CONST.getPath('confirmation')}?${token}`);
+        return this.network.sendRequest(`${CONST.getPath('confirmation') + token}`);
     }
 
     register(formData) {

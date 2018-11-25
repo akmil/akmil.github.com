@@ -40,6 +40,9 @@ export default class RegisterForm {
                     const customersDataString = sessionStorage.getItem('customersData');
                     console.log(customersDataString);
                     console.log('request succeeded with JSON response', result);
+                    this.$textAreaDescription
+                        .append(`<p>status: ${result.status.state}</p>`)
+                        .append(`<p> message: ${result.status.message} </p>`);
                 } else {
                     this.$textAreaDescription
                         .append(`<p>status: ${result.status.state}</p>`)
