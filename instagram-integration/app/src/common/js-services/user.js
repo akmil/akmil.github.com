@@ -32,7 +32,8 @@ export default class User {
     }
 
     isLoggedIn() {
-        return !!this.cookieStorage.read('CTC.COOKIES.SESSION_ALIVE');
+        // sessionStorage.getItem('user_logged')
+        return !!this.cookieStorage.read('user_logged');
     }
 
     login(formData) {
