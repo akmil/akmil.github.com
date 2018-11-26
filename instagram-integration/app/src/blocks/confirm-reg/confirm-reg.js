@@ -34,6 +34,7 @@ export function confirmationWithRedirect() {
 
                 // save the item
                 sessionStorage.setItem('email_confirm', 'confirmed');
+                sessionStorage.setItem('user_logged', 'logged');
 
                 // window.location = confirm-registration.html?token='from server';
 
