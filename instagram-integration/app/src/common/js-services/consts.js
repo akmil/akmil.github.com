@@ -12,5 +12,8 @@ export const CONST = {
     },
     getPath(name) {
         return this.url.base + this.url[name];
+    },
+    setUser(obj) {
+        this.user = {...this.user, obj};
     }
 };

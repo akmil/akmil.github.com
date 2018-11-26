@@ -4,7 +4,7 @@ import {CONST} from '../../common/js-services/consts';
 
 export default class RegisterForm {
     constructor() {
-        this.user = new User();
+        this.user = User;
         this.$form = $('#js_form');
         this.$email = this.$form.find('input[name="mail"]');
         this.$textAreaDescription = $('#description');

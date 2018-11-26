@@ -18,7 +18,7 @@ const parseQueryString = function() {
 };
 
 export function confirmationWithRedirect() {
-    const user = new User();
+    const user = User;
     const params = parseQueryString();
     // Example how to use it:
 
