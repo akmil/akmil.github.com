@@ -1,36 +1,35 @@
-<form id="js_form">
-    <div class="control-group" style="display: flow-root;">
-        <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right: 5px" class="">
-            ENG
-        </a>
-        <a class="" style="margin-right: 5px">|</a>
-        <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right: 5px" class="">
-            RU
-        </a>
-    </div>
-    <p class="class-header">
-        <strong>Регистрация</strong>
-    </p>
-    <div class="fields">
-        <div class="field">
-            <div style="color: red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-            </div>
-            <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="text" value="">
-        </div>
+<div class="register-box" style="display: none">
+  <form id="js_form">
+      <div class="control-group" style="display: flow-root;">
+          <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right: 5px" class="">
+              ENG
+          </a>
+          <a class="" style="margin-right: 5px">|</a>
+          <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right: 5px" class="">
+              RU
+          </a>
+      </div>
+      <p class="class-header">
+          <strong>Регистрация</strong>
+      </p>
+      <div class="fields">
+          <div class="field">
+              <div style="color: red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+              </div>
+              <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="text" value="">
+          </div>
 
-        <div class="field">
-            <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">
-        </div>
+          <div class="field">
+              <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">
+          </div>
 
-    </div>
-    <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
-</form>
-<div id="some-error"></div>
-<div id="description"></div>
-<p align="center" class="block-info">
-    Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
+      </div>
+      <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
+  </form>
+  <p align="center" class="block-info">
+      Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
 
-    Если он у вас есть  <a href="/Login">Войти</a>
-</p>
+      Если он у вас есть  <a href="/Login">Войти</a>
+  </p>
+</div>
 
-{{>login-form}}

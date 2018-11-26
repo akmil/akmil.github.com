@@ -89,7 +89,6 @@ export function LoginForm() {
 
     function init() {
         bindEvents();
-        $('.login-box').show(); // remove me
     }
 
     return {

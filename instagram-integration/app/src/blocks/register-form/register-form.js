@@ -36,8 +36,6 @@ export default class RegisterForm {
                     sessionStorage.setItem('user', JSON.stringify(CONST.user.token));
 
                     sessionStorage.setItem('user_logged', 'logged');
-
-
                     // retrieve the object in a string form
                     // const customersDataString = sessionStorage.getItem('user_logged');
                     // console.log(customersDataString);
