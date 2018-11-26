@@ -37,7 +37,6 @@ export default class RegisterForm {
 
                     sessionStorage.setItem('user_logged', 'logged');
 
-                    $('.nav-link.js_logOut').parent().show();
 
                     // retrieve the object in a string form
                     // const customersDataString = sessionStorage.getItem('user_logged');

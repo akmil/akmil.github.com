@@ -16,6 +16,9 @@ const init = () => {
     if ($header.length && isLogged) {
         $header.append('<span style="color: lightcoral"> вы залогинились успешно</span>');
     }
+    if (isLogged) {
+        $('.nav-link.js_logOut').parent().show();
+    }
 };
 
 (() => init())();
