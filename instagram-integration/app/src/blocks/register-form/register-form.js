@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
+import viewUtils from '../../common/js-services/view';
 
 export default class RegisterForm {
     constructor() {
@@ -34,15 +35,17 @@ export default class RegisterForm {
                     // save the item
                     sessionStorage.setItem('user', JSON.stringify(CONST.user.token));
 
-                    // window.location = confirm-registration.html?token='from server';
+                    sessionStorage.setItem('user_logged', 'logged');
+
+                    $('.nav-link.js_logOut').parent().show();
 
                     // retrieve the object in a string form
-                    const customersDataString = sessionStorage.getItem('customersData');
-                    console.log(customersDataString);
+                    // const customersDataString = sessionStorage.getItem('user_logged');
+                    // console.log(customersDataString);
                     console.log('request succeeded with JSON response', result);
-                    this.$textAreaDescription
-                        .append(`<p>status: ${result.status.state}</p>`)
-                        .append(`<p> message: ${result.status.message} </p>`);
+                    viewUtils.showInfoMessage(this.$textAreaDescription,
+                        result.status.state,
+                        result.status.message || 'Register and Login succsess');
                 } else {
                     this.$textAreaDescription
                         .append(`<p>status: ${result.status.state}</p>`)
