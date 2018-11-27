@@ -24,7 +24,7 @@ const init = () => {
             .append('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
         const oldURL = document.referrer;
         console.log(oldURL);
-        if(oldURL.includes('confirm-registration')){
+        if (oldURL.includes('confirm-registration')) {
             $('.profile-user')
                 .append('<p class="js_message_logged" style="color: #536caf">вы подтвердили регистрацию</p>');
         }

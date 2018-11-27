@@ -17,9 +17,17 @@ export default class RegisterForm {
     }
 
     submitForm(formDataObj) {
-        const email = this.$email.val(),
-            password = this.$form.find('input[name="pass"]').val();
+        const email = this.$email.val();
+        const $password = this.$form.find('input[name="pass"]'),
+            $passwordConfirm = this.$form.find('input[name="pass-confirm"]'),
+            password = this.$form.find('input[name="pass"]').val(),
+            passwordConfirm = this.$form.find('input[name="pass-confirm"]').val();
 
+        if (passwordConfirm !== password) {
+            $password.css('borderColor', '#E34234');
+            $passwordConfirm.css('borderColor', '#E34234');
+            return;
+        }
         this.$email.val(this.$email.val().toLocaleLowerCase());
         this.formData = formDataObj || {email, password};
 
