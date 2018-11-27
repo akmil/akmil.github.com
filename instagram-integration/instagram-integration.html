@@ -10,9 +10,15 @@
       <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">Company name</a>
           
-          <ul class="navbar-nav px-3">
-              <li class="nav-item text-nowrap" style="display:none">
-                  <a class="nav-link js_logOut" href="#">Sign out</a>
+          <ul class="navbar-nav navbar-expand-md px-3">
+              <li class="nav-item text-nowrap mr-3">
+                  <a class="nav-link js_register" href="#">Регистрация</a>
+              </li>
+              <li class="nav-item text-nowrap mr-3">
+                  <a class="nav-link js_login" href="#">Логин</a>
+              </li>
+              <li class="nav-item text-nowrap mr-3" style="display:none">
+                  <a class="nav-link js_logOut" href="#">Выход</a>
               </li>
           </ul>
       </nav>
@@ -99,43 +105,44 @@
                       </div>
                   </nav>
       
-                  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                      <form id="js_form">
-                          <div class="control-group" style="display:flow-root">
-                              <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
-                                  ENG
-                              </a>
-                              <a style="margin-right:5px">|</a>
-                              <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right:5px">
-                                  RU
-                              </a>
-                          </div>
-                          <p class="class-header">
-                              <strong>Регистрация</strong>
-                          </p>
-                          <div class="fields">
-                              <div class="field">
-                                  <div style="color:red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-                                  </div>
-                                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
-                              </div>
+                  <main role="main" class="js_main col-md-9 ml-sm-auto col-lg-10 px-4">
+                      <h3 class="mb-5">Отслеживайте все комментарии и ведите переписку в Инстаграм через браузер с компьютера.</h3>
+                      <div class="register-box" style="display:none">
+                        <form id="js_form">
+                            <div class="control-group" style="display:flow-root">
+                                <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
+                                    ENG
+                                </a>
+                                <a style="margin-right:5px">|</a>
+                                <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right:5px">
+                                    RU
+                                </a>
+                            </div>
+                            <p class="class-header">
+                                <strong>Регистрация</strong>
+                            </p>
+                            <div class="fields">
+                                <div class="field">
+                                    <div style="color:red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+                                </div>
                       
-                              <div class="field">
-                                  <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
-                              </div>
+                                <div class="field">
+                                    <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                                </div>
                       
-                          </div>
-                          <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
-                      </form>
-                      <div id="some-error"></div>
-                      <div id="description"></div>
-                      <p align="center" class="block-info">
-                          Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
+                            </div>
+                            <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
+                        </form>
+                        <p align="center" class="block-info">
+                            Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
                       
-                          Если он у вас есть  <a href="/Login">Войти</a>
-                      </p>
+                            Если он у вас есть  <a href="/Login">Войти</a>
+                        </p>
+                      </div>
                       
-                      <div class="login-box">
+                      <div class="login-box mw-50 mx-auto" style="display:none">
                       <form id="js_login-form">
                           <p class="class-header">
                               <strong>Логин</strong>
@@ -158,7 +165,9 @@
                       <div id="some-error"></div>
                       <div id="description"></div>
                       
-                      </div>            </main>
+                      </div>                <div id="some-error"></div>
+                      <div id="description"></div>
+                  </main>
       
                   </div>
               </div>

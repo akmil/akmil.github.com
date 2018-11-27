@@ -44,7 +44,7 @@ export function confirmationWithRedirect() {
                 console.log('request succeeded with JSON response', result);
                 $('.confirm-registration').append(`<p>confirmation status: ${result.status.state}</p>`);
                 setTimeout(() => {
-                    window.location = './';
+                    window.location = './profile.html';
                 }, 1000);
             } else if (result.status) {
                 console.log(result);

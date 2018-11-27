@@ -15,10 +15,19 @@ const init = () => {
     const $header = $('.js_main');
     const isLogged = sessionStorage.getItem('user_logged');
     if ($header.length && isLogged) {
-        $header.prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
+        $header
+            .prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
     }
-    if (isLogged) {
+    if (isLogged === 'logged') {
         $('.nav-link.js_logOut').parent().show();
+        $('.profile-user')
+            .append('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
+        const oldURL = document.referrer;
+        console.log(oldURL);
+        if(oldURL.includes('confirm-registration')){
+            $('.profile-user')
+                .append('<p class="js_message_logged" style="color: #536caf">вы подтвердили регистрацию</p>');
+        }
     }
 
     header.initHeader();
