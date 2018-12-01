@@ -18,7 +18,6 @@ class User {
     }
 
     isLoggedIn() {
-        // sessionStorage.getItem('user_logged')
         return !!this.cookieStorage.get('user_logged');
     }
 
