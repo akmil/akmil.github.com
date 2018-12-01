@@ -1,19 +1,13 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import {CONST} from './consts';
 import Network from './network';
-
-class CookieStorage {
-    read(key) {
-        const value = $.cookie(key);
-        return value === undefined ? null : value;
-    }
-}
+import CookieStorage from './cookie';
 
 class User {
 
     constructor() {
         this.network = new Network();
-        this.cookieStorage = new CookieStorage();
+        this.cookieStorage = CookieStorage;
         this.settingPost = {
             method: 'POST',
             headers: {
@@ -25,7 +19,7 @@ class User {
 
     isLoggedIn() {
         // sessionStorage.getItem('user_logged')
-        return !!this.cookieStorage.read('user_logged');
+        return !!this.cookieStorage.get('user_logged');
     }
 
     login(formData) {

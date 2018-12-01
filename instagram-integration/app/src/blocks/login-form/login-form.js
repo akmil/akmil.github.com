@@ -1,6 +1,7 @@
 /* eslint-disable sort-vars */
 import $ from 'jquery';
 import User from '../../common/js-services/user';
+import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 
@@ -9,7 +10,6 @@ export function LoginForm() {
         $form = $('#js_login-form'),
         $email = $form.find('input[name="mail"]'),
         $textAreaDescription = $('#description');
-        // formData = {'email': 'test1_email@m.ru', 'password': 'password'};
 
     const submitForm = function(formDataObj) {
         const email = $email.val(),
@@ -17,8 +17,6 @@ export function LoginForm() {
             _formData = formDataObj || {email, password};
 
         $email.val($email.val().toLocaleLowerCase());
-
-        // console.log('viewUtils', viewUtils);
 
         user.login(_formData)
           .then((result) => {
@@ -30,20 +28,13 @@ export function LoginForm() {
                       logged: true
                   };
 
-                  // test
-                  // CONST.setUser({
-                  //     email: _formData.email,
-                  //     token: result.data.token,
-                  //     logged: true
-                  // });
-
                   // save the item
-                  sessionStorage.setItem('user_logged', 'logged');
+                  cookieStorage.set('user_logged', result.data.token);
 
                   $('.nav-link.js_logOut').parent().show();
 
                   // retrieve the object in a string form
-                  // const customersDataString = sessionStorage.getItem('user_logged');
+                  // const customersDataString = cookieStorage.get('user_logged');
                   // console.log(customersDataString);
                   console.log('request succeeded with JSON response', result);
                   viewUtils.showInfoMessage($textAreaDescription,
@@ -51,8 +42,8 @@ export function LoginForm() {
                       result.status.message || 'Login succsess');
               } else if (result.status) {
                   console.log(result);
-                  $textAreaDescription
-                      .append(`<p>status: ${result.status.state}</p><p> message: ${result.status.message} </p>`);
+                  viewUtils.showInfoMessage(this.$textAreaDescription,
+                    `<p>status: ${result.status.state}</p><p> message: ${result.status.message} </p>`);
               } else {
                   console.log(result);
               }
@@ -62,17 +53,16 @@ export function LoginForm() {
                   viewUtils.showInfoMessage($textAreaDescription,
                       result.status.state,
                       result.status.message || 'Login error');
-                  $('.login-box').show();
               }
           }).catch((error) => {
               console.log('request failed', error);
-              $textAreaDescription.text(error.message);
+              viewUtils.showInfoMessage($textAreaDescription, error.message);
               console.log('do something');
           });
     };
 
     const logOut = function() {
-        sessionStorage.removeItem('user_logged');
+        cookieStorage.remove('user_logged');
     };
 
     const bindEvents = function() {
