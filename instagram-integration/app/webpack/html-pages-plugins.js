@@ -8,6 +8,31 @@ const pages = [
         source: 'index'
     },
     {
+        title: 'User _autogreeting',
+        name: 'autogreeting',
+        source: '_autogreeting/autogreeting'
+    },
+    {
+        title: 'User _autoposting',
+        name: 'autoposting',
+        source: '_autoposting/autoposting'
+    },
+    {
+        title: 'User bot-cleaner',
+        name: 'bot-cleaner',
+        source: '_bot-cleaner/bot-cleaner'
+    },
+    {
+        title: 'User chat-bot',
+        name: 'chat-bot',
+        source: '_chat-bot/chat-bot'
+    },
+    {
+        title: 'User comments',
+        name: 'comments',
+        source: '_comments/comments'
+    },
+    {
         title: 'Confirm registration',
         name: 'confirm-registration',
         source: '_confirm-registration/confirm-registration'
@@ -18,68 +43,38 @@ const pages = [
         source: '_instagram-integration/instagram-integration'
     },
     {
+        title: 'User messages',
+        name: 'messages',
+        source: '_messages/messages'
+    },
+    {
+        title: 'User _newsletter',
+        name: 'newsletter',
+        source: '_newsletter/newsletter'
+    },
+    {
+        title: 'User notifications',
+        name: 'notifications',
+        source: '_notifications/notifications'
+    },
+    {
         title: 'User profile',
         name: 'profile',
         source: '_profile/profile-page'
     },
     {
         title: 'User profile',
-        name: 'profile',
-        source: '_autogreeting/autogreeting'
-    },
-    {
-        title: 'User profile',
-        name: 'profile',
-        source: '_autoposting/autoposting'
-    },
-    {
-        title: 'User profile',
-        name: 'profile',
-        source: '_bot-cleaner/bot-cleaner'
-    },
-    {
-        title: 'User profile',
-        name: '_chat-bot',
-        source: '_chat-bot/chat-bot'
-    },
-    {
-        title: 'User _comments',
-        name: '_comments',
-        source: '_comments/comments'
-    },
-    {
-        title: 'User _messages',
-        name: '_messages',
-        source: '_messages/messages'
-    },
-    {
-        title: 'User profile',
-        name: '_newsletter',
-        source: '_newsletter/newsletter'
-    },
-    {
-        title: 'User _notifications',
-        name: '_notifications',
-        source: '_notifications/notifications'
-    },
-    {
-        title: 'User profile',
-        name: '_newsletter',
-        source: '_newsletter/newsletter'
-    },
-    {
-        title: 'User profile',
-        name: '_sibscribe',
+        name: 'sibscribe',
         source: '_sibscribe/sibscribe'
     },
     {
         title: 'User profile',
-        name: '_stories',
+        name: 'stories',
         source: '_stories/stories'
     },
     {
-        title: 'User profile',
-        name: '_unsibscribe',
+        title: 'User profile -- unsibscribe',
+        name: 'unsibscribe',
         source: '_unsibscribe/unsibscribe'
     }
 ];

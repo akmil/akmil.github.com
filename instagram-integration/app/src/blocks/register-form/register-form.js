@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
+import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
 
@@ -41,9 +42,9 @@ export default class RegisterForm {
                     };
 
                     // save the item
-                    sessionStorage.setItem('user', JSON.stringify(CONST.user.token));
+                    cookieStorage.set('user', JSON.stringify(CONST.user.token));
 
-                    sessionStorage.setItem('user_logged', 'logged');
+                    cookieStorage.set('user_logged', 'logged');
                     // retrieve the object in a string form
                     // const customersDataString = sessionStorage.getItem('user_logged');
                     // console.log(customersDataString);

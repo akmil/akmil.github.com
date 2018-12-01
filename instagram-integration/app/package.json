@@ -1,13 +1,13 @@
 {
-  "name": "technal-professional-prototype",
+  "name": "luxgram",
   "version": "0.0.1",
-  "description": "Technal professional prototype",
+  "description": "Luxgram instagram integration",
   "scripts": {
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "build": "SET NODE_ENV=production & webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src"
   },
-  "author": "Andrii Mukhin",
+  "author": "Pavlo Oliinyk",
   "dependencies": {
     "babel-polyfill": "^6.23.0"
   },
