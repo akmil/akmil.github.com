@@ -21,6 +21,66 @@ const pages = [
         title: 'User profile',
         name: 'profile',
         source: '_profile/profile-page'
+    },
+    {
+        title: 'User profile',
+        name: 'profile',
+        source: '_autogreeting/autogreeting'
+    },
+    {
+        title: 'User profile',
+        name: 'profile',
+        source: '_autoposting/autoposting'
+    },
+    {
+        title: 'User profile',
+        name: 'profile',
+        source: '_bot-cleaner/bot-cleaner'
+    },
+    {
+        title: 'User profile',
+        name: '_chat-bot',
+        source: '_chat-bot/chat-bot'
+    },
+    {
+        title: 'User _comments',
+        name: '_comments',
+        source: '_comments/comments'
+    },
+    {
+        title: 'User _messages',
+        name: '_messages',
+        source: '_messages/messages'
+    },
+    {
+        title: 'User profile',
+        name: '_newsletter',
+        source: '_newsletter/newsletter'
+    },
+    {
+        title: 'User _notifications',
+        name: '_notifications',
+        source: '_notifications/notifications'
+    },
+    {
+        title: 'User profile',
+        name: '_newsletter',
+        source: '_newsletter/newsletter'
+    },
+    {
+        title: 'User profile',
+        name: '_sibscribe',
+        source: '_sibscribe/sibscribe'
+    },
+    {
+        title: 'User profile',
+        name: '_stories',
+        source: '_stories/stories'
+    },
+    {
+        title: 'User profile',
+        name: '_unsibscribe',
+        source: '_unsibscribe/unsibscribe'
     }
 ];
 
