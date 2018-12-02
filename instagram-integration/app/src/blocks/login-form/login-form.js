@@ -5,9 +5,10 @@ import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 
-export function LoginForm() {
+export function LoginForm(selectorCSS = {}) {
+    const {_formId, _buttonSubmitId, _showLoginBoxBtnId} = selectorCSS;
     const user = User, // service
-        $form = $('#js_login-form'),
+        $form = (!_formId) ? $('#js_login-form') : $(`#${_formId}`),
         $email = $form.find('input[name="mail"]'),
         $textAreaDescription = $('#description');
 
@@ -17,6 +18,24 @@ export function LoginForm() {
             _formData = formDataObj || {email, password};
 
         $email.val($email.val().toLocaleLowerCase());
+
+        if (_buttonSubmitId) {
+            const username = 'pasha.oliinyk';
+            const password = 'leacin47';
+            const newFormData = {username, password};
+
+            user.addInstagramAccount(newFormData).then((result) => {
+                if (result && result.status) {
+                    console.log(result);
+                    viewUtils.showInfoMessage($textAreaDescription,
+                        result.status.state,
+                        result.status.message || 'Login error');
+                }
+            });
+
+            console.log('submit by ', _buttonSubmitId);
+            return;
+        }
 
         user.login(_formData)
           .then((result) => {
@@ -29,12 +48,12 @@ export function LoginForm() {
                   };
 
                   // save the item
-                  cookieStorage.set('user_logged', result.data.token);
+                  cookieStorage.set(CONST.cookieStorage.token, result.data.token);
 
                   $('.nav-link.js_logOut').parent().show();
 
                   // retrieve the object in a string form
-                  // const customersDataString = cookieStorage.get('user_logged');
+                  // const customersDataString = cookieStorage.get(CONST.cookieStorage.token);
                   // console.log(customersDataString);
                   console.log('request succeeded with JSON response', result);
                   viewUtils.showInfoMessage($textAreaDescription,
@@ -62,11 +81,20 @@ export function LoginForm() {
     };
 
     const logOut = function() {
-        cookieStorage.remove('user_logged');
+        cookieStorage.remove(CONST.cookieStorage.token);
     };
 
     const bindEvents = function() {
-        $('#js_login_btn').on('click', (e) => {
+        if (_showLoginBoxBtnId) {
+            const $showLoginBoxBtnId = $(`#${_showLoginBoxBtnId}`);
+            const $loginBox = $('.login-box');
+            $showLoginBoxBtnId.on('click', () => {
+                $loginBox.show();
+            });
+        }
+        const $buttonSubmit = (!_buttonSubmitId) ? $('#js_login_btn') : $(_buttonSubmitId);
+        // console.log($buttonSubmit);
+        $buttonSubmit.on('click', (e) => {
             e.preventDefault();
             submitForm();
         });

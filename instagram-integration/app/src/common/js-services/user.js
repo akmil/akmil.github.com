@@ -18,12 +18,44 @@ class User {
     }
 
     isLoggedIn() {
-        return !!this.cookieStorage.get('user_logged');
+        return !!this.getToken();
+    }
+
+    getToken() {
+        const cookieToken = this.cookieStorage.get(CONST.cookieStorage.token);
+        // const token = cookieToken.substring(1, cookieToken.length - 1);
+        // console.log(cookieToken);
+        // console.log(token);
+        return cookieToken;
     }
 
     login(formData) {
         const setting = {...this.settingPost, body: JSON.stringify(formData)};
         return this.network.sendRequest(CONST.getPath('login'), setting);
+    }
+
+    addInstagramAccount(formData) {
+        const setting = {
+            ...this.settingPost,
+            body: JSON.stringify(formData),
+            headers: {
+                ...this.settingPost.headers,
+                token: this.getToken()
+            }
+        };
+        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting);
+    }
+
+    getInstagramAccount(formData) {
+        const setting = {
+            ...this.settingPost,
+            method: 'GET',
+            headers: {
+                ...this.settingPost.headers,
+                token: this.getToken()
+            }
+        };
+        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting);
     }
 
     confirm(token) {

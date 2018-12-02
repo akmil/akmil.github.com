@@ -44,9 +44,9 @@ export default class RegisterForm {
                     // save the item
                     cookieStorage.set('user', JSON.stringify(CONST.user.token));
 
-                    cookieStorage.set('user_logged', 'logged');
+                    cookieStorage.set(CONST.cookieStorage.token, 'logged');
                     // retrieve the object in a string form
-                    // const customersDataString = sessionStorage.getItem('user_logged');
+                    // const customersDataString = sessionStorage.getItem(CONST.cookieStorage.token);
                     // console.log(customersDataString);
                     console.log('request succeeded with JSON response', result);
                     viewUtils.showInfoMessage(this.$textAreaDescription,

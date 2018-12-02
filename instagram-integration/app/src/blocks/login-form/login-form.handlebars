@@ -1,5 +1,5 @@
 <div class="login-box mw-50 mx-auto" style="display: none">
-<form id="js_login-form">
+<form id="{{#if idForm}}{{idForm}}{{else}}js_login-form{{/if}}">
     <p class="class-header">
         <strong>Логин</strong>
     </p>
@@ -16,7 +16,7 @@
 
     </div>
     <button class="btn btn-block btn-primary my-button"
-        id="js_login_btn">Логин</button>
+        id="{{#if idBtn}}{{idBtn}}{{else}}js_login_btn{{/if}}">Логин</button>
 </form>
 
 <div id="some-error"></div>
