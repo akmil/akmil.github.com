@@ -11,6 +11,7 @@ function viewUtils() {
     function fillList($list, dataArray) {
         const items = dataArray;
         const cList = $list;
+        cList.empty();
         items.forEach((item, i) => {
             const li = $('<li/>')
                 .addClass('ui-menu-item')
@@ -18,7 +19,7 @@ function viewUtils() {
                 .appendTo(cList);
             const aaa = $('<a/>')
                 .addClass('ui-all')
-                .text(i + ': ' + item.name)
+                .text(i + ': ' + item.username)
                 .appendTo(li);
             });
     }
