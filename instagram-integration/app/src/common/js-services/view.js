@@ -8,8 +8,24 @@ function viewUtils() {
             .append(`<p> message: ${message2} </p>`);
     }
 
+    function fillList($list, dataArray) {
+        const items = dataArray;
+        const cList = $list;
+        items.forEach((item, i) => {
+            const li = $('<li/>')
+                .addClass('ui-menu-item')
+                .attr('role', 'menuitem')
+                .appendTo(cList);
+            const aaa = $('<a/>')
+                .addClass('ui-all')
+                .text(i + ': ' + item.name)
+                .appendTo(li);
+            });
+    }
+
     return {
-        showInfoMessage
+        showInfoMessage,
+        fillList
     };
 }
 

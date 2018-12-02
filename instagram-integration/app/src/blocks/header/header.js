@@ -1,16 +1,17 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 import cookieStorage from '../../common/js-services/cookie';
+import {CONST} from '../../common/js-services/consts';
 
 function showLogout() {
     // check is logged
-    const isLogged = cookieStorage.get('user_logged');
-    if (isLogged === 'logged') {
+    const isLogged = cookieStorage.get(CONST.cookieStorage.token);
+    if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
         $('.profile-user')
             .append('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
         const oldURL = document.referrer;
-        console.log(oldURL);
+        // console.log(oldURL);
         if (oldURL.includes('confirm-registration')) {
             $('.profile-user')
                 .append('<p class="js_message_logged" style="color: #536caf">вы подтвердили регистрацию</p>');
@@ -23,7 +24,7 @@ function showLogout() {
  */
 export function initHeader() {
     const user = User;
-    console.info('init headere js');
+    // console.info('init headere js');
     const $main = $('.js_main');
     const isLogged = user.isLoggedIn();
     if ($main.length && isLogged) {
