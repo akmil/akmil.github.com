@@ -10,28 +10,37 @@ export default class Network {
         }
     }
 
+    sendRequest(URL, OPTS, cbError) {
+        return fetch(URL, OPTS)
+            .then(response => Promise.all([response, response.json()]))
+            .then(([response, json]) => {
+                if (!response.ok) {
+                    cbError(json); //update view
+                    this.checkStatus(response);
+                    // throw new Error(json.status.message);
+                }
+                return json;
+            });
+    };
+
+    /*
     parseJSON(response) {
         return response.json();
     }
 
-    // sendRequest1(url, formData) {
-    //     return fetch(url, formData)
-    //         .then(this.checkStatus)
-    //         .then(this.parseJSON)
-    //         .then(function (data) {
-    //             console.log('request succeeded with JSON response', data);
-    //         }).catch(function (error) {
-    //             console.log('request failed', error);
-    //         });
-    // }
-
-    sendRequest(url, formData) {
+    sendRequest1(url, formData, cbError) {
         console.log('sending', url, formData);
-
+        this.cbError = cbError;
         return fetch(url, formData)
-            .then(this.checkStatus)
+            .then(function(response) {
+                if (response.status === 400) {
+                    cbError(response.json());
+                    return response.json()
+                }
+            })
+            .then(this.checkStatus.bind(this))
             .then(this.parseJSON);
-
     }
+    */
 }
 

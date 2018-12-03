@@ -17,11 +17,10 @@ function viewUtils() {
                 .addClass('ui-menu-item')
                 .attr('role', 'menuitem')
                 .appendTo(cList);
-            const aaa = $('<a/>')
-                .addClass('ui-all')
-                .text(i + ': ' + item.username)
+            $('<a/>').addClass('ui-all')
+                .text(`${i}:  ${item.username}`)
                 .appendTo(li);
-            });
+        });
     }
 
     return {
