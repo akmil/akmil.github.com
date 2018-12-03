@@ -69,7 +69,7 @@ module.exports = webpackMerge(webpackCommon, {
 
   devServer: {
     host: 'localhost',
-    port: 3000,
+    port: 3003,
     open: true,
     historyApiFallback: true,
     watchOptions: {

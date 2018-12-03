@@ -34,7 +34,7 @@ class User {
         return this.network.sendRequest(CONST.getPath('login'), setting);
     }
 
-    addInstagramAccount(formData) {
+    addInstagramAccount(formData, cbError) {
         const setting = {
             ...this.settingPost,
             body: JSON.stringify(formData),
@@ -43,7 +43,7 @@ class User {
                 token: this.getToken()
             }
         };
-        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting);
+        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
     }
 
     getInstagramAccount(formData) {

@@ -15,6 +15,12 @@ export const CONST = {
     cookieStorage: {
         token: 'user_logged'
     },
+    uiSelectors: {
+        headerLoginBox: 'nav .login-box',
+        headerNavLoginBtn: 'nav ul li .js_login',
+        headerRegBox: 'nav .register-box',
+        headerRegBtn: 'nav ul li .js_register'
+    },
     getPath(name) {
         return this.url.base + this.url[name];
     },

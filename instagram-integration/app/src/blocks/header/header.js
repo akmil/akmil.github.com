@@ -29,17 +29,23 @@ export function initHeader() {
     const isLogged = user.isLoggedIn();
     if ($main.length && isLogged) {
         $main
-            .prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
+            .prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились в Luxgram успешно</span>');
+    } else {
+        $main
+            .prepend('<span class="js_message_logged" style="color: lightcoral">Сначало надо залогинится в Luxgram</span>');
     }
 
-    const $loginBox = $('.login-box');
-    const $registerBox = $('.register-box');
-    $('.js_register').on('click', () => {
+   // check other handler in login-form.js
+    const $loginBox = $(CONST.uiSelectors.headerLoginBox);
+    const $registerBox = $(CONST.uiSelectors.headerRegBox);
+    $(CONST.uiSelectors.headerRegBtn).on('click', () => {
         $loginBox.hide();
-        $registerBox.show();
+        $registerBox.css({'top': 0, 'right': 0})
+            .addClass('bg-light border mt-5 mx-auto position-absolute px-3')
+            .show();
     });
 
-    $('.js_login').on('click', () => {
+    $(CONST.uiSelectors.headerNavLoginBtn).on('click', () => {
         $loginBox.show();
         $registerBox.hide();
     });
