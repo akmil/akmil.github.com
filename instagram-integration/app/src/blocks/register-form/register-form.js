@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 import User from '../../common/js-services/user';
 import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
