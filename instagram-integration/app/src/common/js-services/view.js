@@ -13,12 +13,10 @@ function viewUtils() {
         const cList = $list;
         cList.empty();
         items.forEach((item, i) => {
-            const li = $('<li/>')
-                .addClass('ui-menu-item')
-                .attr('role', 'menuitem')
+            const li = $('<li class="list-group-item"></li>')
                 .appendTo(cList);
             $('<a/>').addClass('ui-all')
-                .text(`${i}:  ${item.username}`)
+                .text(item.username)
                 .appendTo(li);
         });
     }

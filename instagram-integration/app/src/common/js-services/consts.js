@@ -21,6 +21,9 @@ export const CONST = {
         headerRegBox: 'nav .register-box',
         headerRegBtn: 'nav ul li .js_register'
     },
+    events: {
+        USER_LOGGED: 'user_logged'
+    },
     getPath(name) {
         return this.url.base + this.url[name];
     },

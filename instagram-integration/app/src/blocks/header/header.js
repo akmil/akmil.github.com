@@ -1,11 +1,22 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
+import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
+
+function onLoginSubscribe(msg, data) {
+    console.log(data);
+    const $main = $('.js_main');
+    $(CONST.uiSelectors.headerNavLoginBtn).hide();
+    $(CONST.uiSelectors.headerRegBtn).hide();
+    $(CONST.uiSelectors.headerLoginBox).hide();
+    $('.js_message_logged', $main).empty().prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились в Luxgram успешно</span>');
+}
 
 function showLogout() {
     // check is logged
     const isLogged = cookieStorage.get(CONST.cookieStorage.token);
+
     if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
         $('.profile-user')
@@ -51,4 +62,5 @@ export function initHeader() {
     });
 
     showLogout();
+    PubSub.subscribe(CONST.events.USER_LOGGED, onLoginSubscribe);
 }

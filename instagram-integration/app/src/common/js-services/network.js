@@ -15,13 +15,13 @@ export default class Network {
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
                 if (!response.ok) {
-                    cbError(json); //update view
+                    cbError(json); // update view
                     this.checkStatus(response);
                     // throw new Error(json.status.message);
                 }
                 return json;
             });
-    };
+    }
 
     /*
     parseJSON(response) {

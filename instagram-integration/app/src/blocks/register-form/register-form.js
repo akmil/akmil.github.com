@@ -50,6 +50,7 @@ export default class RegisterForm {
                     // const customersDataString = sessionStorage.getItem(CONST.cookieStorage.token);
                     // console.log(customersDataString);
                     console.log('request succeeded with JSON response', result);
+                    PubSub.publish(CONST.events.USER_LOGGED);
                     viewUtils.showInfoMessage(this.$textAreaDescription,
                         result.status.state,
                         result.status.message || 'Register and Login succsess');
