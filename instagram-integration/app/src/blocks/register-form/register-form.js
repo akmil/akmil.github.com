@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
