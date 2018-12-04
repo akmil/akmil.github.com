@@ -2,6 +2,11 @@ $headerHeight: 50px;
 $headerHeightTablet: 70px;
 $headerHeightDesktop: 140px;
 
+nav.navbar {
+  a {
+      text-decoration: none;
+  }
+}
 .header {
   position: fixed;
   left: 0;

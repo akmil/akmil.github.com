@@ -1,4 +1,13 @@
+import $ from 'jquery';
+import viewUtils from './view';
+
 export default class Network {
+
+    cbErrorDefault(result) {
+        viewUtils.showInfoMessage($('#description'),
+            result.status.state,
+            result.status.message || 'Login error');
+    }
 
     checkStatus(response) {
         if (response.status && response.status >= 200 && response.status < 300) {
@@ -15,7 +24,11 @@ export default class Network {
             .then(response => Promise.all([response, response.json()]))
             .then(([response, json]) => {
                 if (!response.ok) {
-                    cbError(json); // update view
+                    if (!cbError) {
+                        this.cbErrorDefault(json);
+                    } else {
+                        cbError(json); // update view
+                    }
                     this.checkStatus(response);
                     // throw new Error(json.status.message);
                 }
