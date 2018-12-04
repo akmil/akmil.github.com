@@ -38,11 +38,6 @@ const pages = [
         source: '_confirm-registration/confirm-registration'
     },
     {
-        title: 'Instagram integration',
-        name: 'instagram-integration',
-        source: '_instagram-integration/instagram-integration'
-    },
-    {
         title: 'User messages',
         name: 'messages',
         source: '_messages/messages'
