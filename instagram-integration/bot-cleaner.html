@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,6 +21,65 @@
               <a class="nav-link js_logOut" href="#">Выход</a>
           </li>
       </ul>
+      <div class="login-box mw-50 mx-auto" style="display:none">
+      <form id="js_login-form">
+          <p class="class-header">
+              <strong>Логин</strong>
+          </p>
+          <div class="fields">
+              <div class="field">
+                  <div style="color:red">
+                      <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                  </div>
+                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+              </div>
+      
+              <div class="field">
+                  <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+              </div>
+      
+          </div>
+          <button class="btn btn-block btn-primary my-button" id="js_login_btn">Логин</button>
+      </form>
+      
+      </div>
+      <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3" style="display:none;top:0;right:0">
+        <form id="js_form">
+            <div class="control-group" style="display:flow-root">
+                <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
+                    ENG
+                </a>
+                <a style="margin-right:5px">|</a>
+                <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right:5px">
+                    RU
+                </a>
+            </div>
+            <p class="class-header">
+                <strong>Регистрация</strong>
+            </p>
+            <div class="fields">
+                <div class="field">
+                    <div style="color:red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                    <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+                </div>
+                <div class="field">
+                    <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                </div>
+                <div class="field">
+                    <input class="padding form-control text" id="loginform-pass-confirm" name="pass-confirm" placeholder="Ваш пароль еще раз" required="true">
+                </div>
+      
+            </div>
+            <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
+        </form>
+        <p align="center" class="block-info">
+            Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
+      
+            Если он у вас есть  <a href="/Login">Войти</a>
+        </p>
+      </div>
+      
   </nav>
 
 <div class="wrapper__content">
@@ -30,42 +89,33 @@
       <nav class="col-md-2 d-none d-md-block bg-light s">
                       <div class="sidebar-sticky">
                           <ul class="nav flex-column">
-                              <li class="nav-item">
-                                  <a class="nav-link active" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                      Dashboard <span class="sr-only">(current)</span>
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                                      Orders
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                                      Products
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                      Customers
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                                      Reports
-                                  </a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="#">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                      Integrations
-                                  </a>
-                              </li>
+                              <li class="nav-item"><a class="nav-link" href="./autogreeting.html">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                  autogreeting</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./autoposting.html">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                  autoposting</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./bot-cleaner.html">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                  bot-cleaner</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./chat-bot.html">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                  chat-bot</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./comments.html">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                                  comments</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./confirm-registration.html?token=token-from%20server">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                  confirm-registration--test-page</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./messages.html">messages</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./newsletter.html">newsletter</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./notifications.html">notifications</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./profile.html">profile</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./sibscribe.html">sibscribe</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./stories.html">stories</a></li>
+                              <li class="nav-item"><a class="nav-link" href="./unsibscribe.html">unsibscribe</a></li>
+                              <li class="nav-item"></li>
+                              <li class="nav-item"><a class="nav-link" href="./instagram.html">instagram</a></li>
                           </ul>
       
                           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -104,6 +154,10 @@
                   </nav>
 
       <main role="main" class="js_main col-md-9 ml-sm-auto col-lg-10 px-4">
+        
+            <p class="js_message_logged--text"></p>
+            <p class="js_email-confirm--text"></p>
+        
         
             
               <div class="container-fluid bot-cleaner-page">
@@ -146,5 +200,6 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript" src="index.js"></script></body>
 </html>
