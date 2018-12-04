@@ -1,54 +1,66 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
-import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
 
+const selectorLoginState = '.js_message_logged--text';
+const selectorEmailConfirmState = '.js_email-confirm--text';
+
+function emailNotConfirmed() {
+    const $emailnMsg = $(selectorEmailConfirmState);
+    $emailnMsg.text('**emailNotConfirmed** Email не подтвержден.').css('color', 'lightcoral');
+}
+
 function onLoginSubscribe(msg, data) {
-    console.log(data);
-    const $main = $('.js_main');
+    // console.log(msg, data);
     $(CONST.uiSelectors.headerNavLoginBtn).hide();
     $(CONST.uiSelectors.headerRegBtn).hide();
     $(CONST.uiSelectors.headerLoginBox).hide();
-    $('.js_message_logged', $main).empty().prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились в Luxgram успешно</span>');
+    const $loginMsg = $(selectorLoginState);
+    $loginMsg.text('**onLoginSubscribe** вы залогинились в Luxgram успешно').css('color', 'lightblue');
+    const isEmailConfirmed = User.isEmailConfirmed();
+    if (!isEmailConfirmed) {
+        emailNotConfirmed();
+    }
 }
 
 function showLogout() {
     // check is logged
-    const isLogged = cookieStorage.get(CONST.cookieStorage.token);
-
+    const isLogged = User.isLoggedIn();
+    const isEmailConfirmed = User.isEmailConfirmed();
+    if (!isEmailConfirmed) {
+        emailNotConfirmed();
+    }
     if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
         $('.profile-user')
-            .append('<span class="js_message_logged" style="color: lightcoral"> вы залогинились успешно</span>');
+            .append('<span class="js_email-confirm--text" style="color: lightcoral"> вы залогинились успешно ---</span>');
         const oldURL = document.referrer;
         // console.log(oldURL);
         if (oldURL.includes('confirm-registration')) {
             $('.profile-user')
-                .append('<p class="js_message_logged" style="color: #536caf">вы подтвердили регистрацию</p>');
+                .append('<p class="js_message_logged--text" style="color: #536caf">вы подтвердили регистрацию</p>');
         }
+        onLoginSubscribe();
+    } else {
+        $(selectorLoginState).text('Привет анонимный пользователь');
+        $(selectorEmailConfirmState).empty();
     }
+
 }
 
 /**
  * Init header
  */
 export function initHeader() {
-    const user = User;
-    // console.info('init headere js');
-    const $main = $('.js_main');
-    const isLogged = user.isLoggedIn();
-    if ($main.length && isLogged) {
-        $main
-            .prepend('<span class="js_message_logged" style="color: lightcoral"> вы залогинились в Luxgram успешно</span>');
-    } else {
-        $main
-            .prepend('<span class="js_message_logged" style="color: lightcoral">Сначало надо залогинится в Luxgram</span>');
-    }
-
    // check other handler in login-form.js
     const $loginBox = $(CONST.uiSelectors.headerLoginBox);
     const $registerBox = $(CONST.uiSelectors.headerRegBox);
+
+    PubSub.subscribe(CONST.events.USER_LOGGED, onLoginSubscribe);
+
+    showLogout();
+
     $(CONST.uiSelectors.headerRegBtn).on('click', () => {
         $loginBox.hide();
         $registerBox.css({'top': 0, 'right': 0})
@@ -60,7 +72,4 @@ export function initHeader() {
         $loginBox.show();
         $registerBox.hide();
     });
-
-    showLogout();
-    PubSub.subscribe(CONST.events.USER_LOGGED, onLoginSubscribe);
 }

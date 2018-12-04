@@ -80,11 +80,10 @@ export function LoginForm(selectorCss) {
             password = $form.find('input[name="pass"]').val(),
             _formData = formDataObj || {email, password};
 
-        $email.val($email.val().toLocaleLowerCase());
-
         if (selectorCss.isLoginInstagram) {
-            addInstagramAccount(_formData);
+            addInstagramAccount({username: $form.find('input[name="username"]').val(), password});
         } else {
+            $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData);
             PubSub.publish(CONST.events.USER_LOGGED, 'login');
         }
@@ -121,6 +120,8 @@ export function LoginForm(selectorCss) {
             $(CONST.uiSelectors.headerNavLoginBtn).show();
             $(CONST.uiSelectors.headerRegBtn).show();
             $('.nav-link.js_logOut').hide();
+            const selectorLoginState = '.js_message_logged--text';
+            $(selectorLoginState).text('Вы вышли из аккаунта');
         });
     };
 

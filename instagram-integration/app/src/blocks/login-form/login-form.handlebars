@@ -4,11 +4,21 @@
         <strong>Логин</strong>
     </p>
     <div class="fields">
+        {{#if addInstagramAccount}}
+            <div class="field">
+                <div style="color: red">
+                    <span class="field-validation-valid validator" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+                </div>
+                <input class="padding form-control text" id="username" name="username" placeholder="Ваш instagram username*" required="true" type="text" value="">
+            </div>
+        {{else}}
         <div class="field">
-            <div style="color: red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            <div style="color: red">
+                <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
             </div>
             <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="text" value="">
         </div>
+        {{/if}}
 
         <div class="field">
             <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">

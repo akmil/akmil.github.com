@@ -13,7 +13,8 @@ export const CONST = {
         token: ''
     },
     cookieStorage: {
-        token: 'user_logged'
+        token: 'user_logged',
+        emailConfirmed: 'false'
     },
     uiSelectors: {
         headerLoginBox: 'nav .login-box',
@@ -22,7 +23,9 @@ export const CONST = {
         headerRegBtn: 'nav ul li .js_register'
     },
     events: {
-        USER_LOGGED: 'user_logged'
+        USER_LOGGED: 'user_logged',
+        USER_LOGOUT: 'user_logout',
+        USER_EMAIL_CONFIRMED: 'user_email_confirmed'
     },
     getPath(name) {
         return this.url.base + this.url[name];

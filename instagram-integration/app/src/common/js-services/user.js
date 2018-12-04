@@ -21,6 +21,10 @@ class User {
         return !!this.getToken();
     }
 
+    isEmailConfirmed() {
+        return (this.cookieStorage.get(CONST.cookieStorage.emailConfirmed) === 'true');
+    }
+
     getToken() {
         const cookieToken = this.cookieStorage.get(CONST.cookieStorage.token);
         // const token = cookieToken.substring(1, cookieToken.length - 1);
