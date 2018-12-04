@@ -48,13 +48,11 @@ export function LoginForm(selectorCss) {
     };
 
     const addInstagramAccount = (newFormData) => {
-        // const username = 'pasha.oliinyk';
-        // const password = 'leacin47';
-        // const newFormData = {username, password};
         const cbError = (result) => {
             viewUtils.showInfoMessage($textAreaDescription,
                 result.status.state,
                 result.status.message || 'Login error');
+            $(_loginBox).hide();
         };
 
         user.addInstagramAccount(newFormData, cbError).then((result) => {
@@ -63,12 +61,7 @@ export function LoginForm(selectorCss) {
                 viewUtils.showInfoMessage($textAreaDescription,
                     result.status.state,
                     result.status.message || 'Login error');
-            }
-            if (result && result.status) {
-                console.log(result);
-                viewUtils.showInfoMessage($textAreaDescription,
-                    result.status.state,
-                    result.status.message || 'Login error');
+                $(_loginBox).hide();
             }
         });
 

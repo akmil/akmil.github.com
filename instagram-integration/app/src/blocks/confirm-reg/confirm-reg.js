@@ -2,6 +2,7 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
+import cookieStorage from '../../common/js-services/cookie';
 
 const parseQueryString = function() {
 
@@ -33,8 +34,8 @@ export function confirmationWithRedirect() {
                 };
 
                 // save the item
-                sessionStorage.setItem('email_confirm', 'confirmed');
-                sessionStorage.setItem(CONST.cookieStorage.token, 'logged');
+                cookieStorage.set(CONST.cookieStorage.emailConfirmed, 'confirmed');
+                cookieStorage.set(CONST.cookieStorage.token, 'logged');
 
                 // window.location = confirm-registration.html?token='from server';
 
