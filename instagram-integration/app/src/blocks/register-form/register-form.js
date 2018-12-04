@@ -33,14 +33,10 @@ export default class RegisterForm {
         this.$email.val(this.$email.val().toLocaleLowerCase());
         this.formData = formDataObj || {email, password};
 
+        // todo: handle results via PubSub
         this.user.register(this.formData)
             .then((result) => {
                 if (result.data && result.data.token) {
-                    CONST.user = {
-                        // email: this.formData.email,
-                        // password: this.formData.password,
-                        token: result.data.token
-                    };
 
                     // save the item
                     cookieStorage.set('user', JSON.stringify(CONST.user.token));
@@ -55,19 +51,21 @@ export default class RegisterForm {
                         result.status.state,
                         result.status.message || 'Register and Login succsess');
                 } else {
-                    this.$textAreaDescription
-                        .append(`<p>status: ${result.status.state}</p>`)
-                        .append(`<p> message: ${result.status.message} </p>`);
+                    viewUtils.showInfoMessage(this.$textAreaDescription,
+                        result.status.state,
+                        result.status.message || 'no result.data found');
                 }
             }).then((result) => {
                 if (result && result.status) {
                     console.log(result);
-                    this.$textAreaDescription.text(`succsess, status ${result.status.state}`);
+                    viewUtils.showInfoMessage(this.$textAreaDescription,
+                        result.status.state);
                     $('.login-box').show();
                 }
             }).catch((error) => {
                 console.log('request failed', error);
-                this.$textAreaDescription.text(error.message);
+                viewUtils.showInfoMessage(this.$textAreaDescription,
+                    error.message);
                 console.log('do something');
             });
     }
