@@ -38,7 +38,7 @@ module.exports = webpackMerge(webpackCommon, {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            'css-loader?modules=false&localIdentName=[local]&importLoaders=2&url=true', // &minimize // &sourceMap
+            'css-loader?modules=false&localIdentName=[local]&minimize&sourceMap&importLoaders=2&url=true', // &sourceMap
             'postcss-loader',
             'sass-loader?outputStyle=expanded' // &sourceMap&sourceMapContents
           ]

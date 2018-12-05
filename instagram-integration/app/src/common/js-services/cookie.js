@@ -15,7 +15,7 @@ const CookieSrv = {
         opts = Object.entries(opts).reduce((str, [k, v]) => `${str}; ${k}=${v}`, '');
         document.cookie = `${name}=${encodeURIComponent(value) + opts}`;
     },
-    remove: (name, opts) => CookieSrv.set(name, '', {'max-age': -1, ...opts})
+    remove: (name, opts) => CookieSrv.set(name, '', {'max-age': -1, path: '/', days: 0, ...opts})
     // path & domain must match cookie being deleted
 };
 
