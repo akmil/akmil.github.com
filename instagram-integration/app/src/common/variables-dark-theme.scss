@@ -10,11 +10,6 @@ $modalBreakpoint: 1325px;
 
 $primaryTransitionDelay: .4s;
 
-$primaryColor: #000;
-$secondaryColor: #FFF;
-$thirdlyColor: #70bcbc;
-$dark: #536caf;
-
 $fontSize: 10px;
 $desktopFontSize: 16px;
 
@@ -52,9 +47,17 @@ bootstrap vars:
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 */
+$primaryColor: #FFF;
+$secondaryColor: #000;
+$thirdlyColor: #84dddd;
+$dark: #666666;
+
+// Settings for the `<body>` element.
+$body-bg: #292929;
+$body-color: #292929;
 
 $colors: (
-  "blue": $thirdlyColor,
+  //"blue": $thirdlyColor,
   //"indigo": $indigo,
   //"purple": $purple,
   //"pink": $pink,
@@ -69,15 +72,12 @@ $colors: (
   //"gray-dark": $gray-800
 ) !default;
 
-$enable-rounded: false;
-$enable-shadows: false;
-//$spacer: 2rem;
-
-//Button
-$btn-padding-y: .5rem;
-$btn-padding-x: 1rem;
-
 $theme-colors: (
-    "primary": $thirdlyColor,
-    "danger": #f27cff
+  "primary": $thirdlyColor,
+  "danger": #f27cff,
+  "bg-light": #333222,
+  "light": #373737,
+  "white": #f27cff,
+  "body-bg": #292929,
+  "body-color": #232323
 );

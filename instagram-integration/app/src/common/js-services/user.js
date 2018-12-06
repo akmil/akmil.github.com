@@ -33,9 +33,9 @@ class User {
         return cookieToken;
     }
 
-    login(formData) {
+    login(formData, cbError) {
         const setting = {...this.settingPost, body: JSON.stringify(formData)};
-        return this.network.sendRequest(CONST.getPath('login'), setting);
+        return this.network.sendRequest(CONST.getPath('login'), setting, cbError);
     }
 
     addInstagramAccount(formData, cbError) {

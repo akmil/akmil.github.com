@@ -13,9 +13,9 @@ function emailNotConfirmed() {
 
 function onLoginSubscribe(msg, data) {
     // console.log(msg, data);
-    $(CONST.uiSelectors.headerNavLoginBtn).hide();
-    $(CONST.uiSelectors.headerRegBtn).hide();
-    $(CONST.uiSelectors.headerLoginBox).hide();
+    $(CONST.uiSelectors.headerNavLoginBtn).addClass('d-none').removeClass('d-block');
+    $(CONST.uiSelectors.headerRegBtn).addClass('d-none').removeClass('d-block');
+    $(CONST.uiSelectors.headerLoginBox).addClass('d-none').removeClass('d-block');
     const $loginMsg = $(selectorLoginState);
     $loginMsg.text('**onLoginSubscribe** вы залогинились в Luxgram успешно').css('color', 'lightblue');
     const isEmailConfirmed = User.isEmailConfirmed();
@@ -64,12 +64,12 @@ export function initHeader() {
     $(CONST.uiSelectors.headerRegBtn).on('click', () => {
         $loginBox.hide();
         $registerBox.css({'top': 0, 'right': 0})
-            .addClass('bg-light border mt-5 mx-auto position-absolute px-3')
-            .show();
+            .addClass('bg-light border mt-5 mx-auto position-absolute px-3 d-block')
+            .removeClass('d-none');
     });
 
     $(CONST.uiSelectors.headerNavLoginBtn).on('click', () => {
-        $loginBox.show();
-        $registerBox.hide();
+        $loginBox.addClass('d-block').removeClass('d-none');
+        $registerBox.addClass('d-none').removeClass('d-block');
     });
 }

@@ -26,14 +26,13 @@ export default class RegisterForm {
             passwordConfirm = this.$form.find('input[name="pass-confirm"]').val();
 
         if (passwordConfirm !== password) {
-            $password.css('borderColor', '#E34234');
-            $passwordConfirm.css('borderColor', '#E34234');
+            $password.addClass('input-error');
+            $passwordConfirm.addClass('input-error');
             return;
         }
         this.$email.val(this.$email.val().toLocaleLowerCase());
         this.formData = formDataObj || {email, password};
 
-        // todo: handle results via PubSub
         this.user.register(this.formData)
             .then((result) => {
                 if (result.data && result.data.token) {
@@ -42,10 +41,7 @@ export default class RegisterForm {
                     cookieStorage.set('user', JSON.stringify(CONST.user.token));
 
                     cookieStorage.set(CONST.cookieStorage.token, 'logged');
-                    // retrieve the object in a string form
-                    // const customersDataString = sessionStorage.getItem(CONST.cookieStorage.token);
-                    // console.log(customersDataString);
-                    console.log('request succeeded with JSON response', result);
+                    // console.log('request succeeded with JSON response', result);
                     PubSub.publish(CONST.events.USER_LOGGED);
                     viewUtils.showInfoMessage(this.$textAreaDescription,
                         result.status.state,
@@ -70,7 +66,18 @@ export default class RegisterForm {
             });
     }
 
+    // toggleRegForm() {
+    //     const registerBox = '.register-box';
+    //     const registerBoxClose = '.register-box-close';
+    //     $(registerBox).toggleClass(hamburgerButtonCloseClass);
+    //     $(hamburgerMenuCls).toggleClass(hamburgerMenuOpenedClass);
+    // }
+
     bindEvents() {
+        const registerBox = CONST.uiSelectors.headerRegBox; // 'nav .register-box';
+        const openedClass = 'd-block';
+        const closeClass = 'd-none';
+
         $('.login').on('click', function (e) {
             this.submitForm(e, CONST.user, 'loginUrl');
         });
@@ -93,6 +100,16 @@ export default class RegisterForm {
                     }
                     this.$form.addClass(cssValidationClass);
                 }
+            }
+        });
+
+        $(document).on('click', (event) => {
+            const isRegBtnClick = $(event.target).closest('nav.navbar').find('.register-box').length;
+            // console.log('hasClass', $(registerBox).hasClass(openedClass));
+            // console.log('isRegClick', isRegClick);
+
+            if (!isRegBtnClick && $(registerBox).hasClass(openedClass)) {
+                $(registerBox).addClass(closeClass).removeClass(openedClass);
             }
         });
     }

@@ -20,7 +20,11 @@ export const CONST = {
         headerLoginBox: 'nav .login-box',
         headerNavLoginBtn: 'nav ul li .js_login',
         headerRegBox: 'nav .register-box',
-        headerRegBtn: 'nav ul li .js_register'
+        headerRegBtn: 'nav ul li .js_register',
+        instagram: {
+            addAccountBtnSelector: '#js_show-login-box',
+            addAccountBtnId: 'js_show-login-box'
+        }
     },
     events: {
         USER_LOGGED: 'user_logged',

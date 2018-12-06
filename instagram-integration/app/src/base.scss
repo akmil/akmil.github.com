@@ -1,10 +1,11 @@
 // vendors
 @import '../node_modules/normalize-scss/sass/normalize/import-now';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css');
 
 // common
 @import './common/variables';
+//@import './common/variables-dark-theme';
+@import "../node_modules/bootstrap/scss/bootstrap";
 @import './common/mixins.scss';
 @import './common/general';
 @import './common/dashbordBootstrap';
