@@ -21,7 +21,7 @@
               <a class="nav-link js_logOut" href="#">Выход</a>
           </li>
       </ul>
-      <div class="login-box mw-50 mx-auto" style="display:none">
+      <div class="login-box mw-50 mx-auto d-none">
       <form id="js_login-form">
           <p class="class-header">
               <strong>Логин</strong>
@@ -31,7 +31,7 @@
                   <div style="color:red">
                       <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                   </div>
-                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="email">
               </div>
       
               <div class="field">
@@ -43,7 +43,7 @@
       </form>
       
       </div>
-      <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3" style="display:none;top:0;right:0">
+      <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3 d-none" style="top:0;right:0">
         <form id="js_form">
             <div class="control-group" style="display:flow-root">
                 <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
