@@ -10,7 +10,6 @@ import {CONST} from '../../common/js-services/consts';
 window.$ = $;
 
 export function LoginForm(selectorCss) {
-    // const selectorCss = selectorCssLoginForm || selectorCssLoginFormInstagram;
     const {_formId, _buttonSubmitId, _showLoginBoxBtnId, _loginBox} = selectorCss;
     const user = User, // service
         $form = $(_formId),
@@ -108,15 +107,13 @@ export function LoginForm(selectorCss) {
 
         const $buttonSubmit = $(_buttonSubmitId),
             cssValidationClass = 'form-validation';
-        // console.log($buttonSubmit);
+
         $buttonSubmit.on('click', (e) => {
             e.preventDefault();
             const form = $form.get(0);
             // const validator = new Validator($form);
             // console.log(validator.validate());
             if (form.checkValidity() && viewUtils.isEmail($email.val())) {
-                console.log($email.val());
-
                 submitForm();
             } else {
                 // Highlight errors
@@ -126,12 +123,14 @@ export function LoginForm(selectorCss) {
                 $form.addClass(cssValidationClass);
             }
         });
+
         $('.nav-link.js_logOut').on('click', (e) => {
             e.preventDefault();
             logOut();
             $(e.target).parent().hide();
             viewUtils.showInfoMessage($textAreaDescription, 'Logged out');
         });
+
         PubSub.subscribe(CONST.events.USER_LOGOUT, (msg) => {
             $(CONST.uiSelectors.headerNavLoginBtn).addClass(openedClass).removeClass(closeClass); // .show();
             $(CONST.uiSelectors.headerRegBtn).addClass(openedClass).removeClass(closeClass);
