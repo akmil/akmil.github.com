@@ -1,6 +1,6 @@
 export const CONST = {
     url: {
-        base: 'http://luxgram.ru/api/v1',
+        base: 'https://luxgram.ru/api/v1',
         registration: '/registration/basic/',
         login: '/registration/basic/login',
         confirmation: '/registration/basic/confirmation?token',
