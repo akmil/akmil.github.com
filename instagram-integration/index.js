@@ -10355,7 +10355,7 @@ var CONST = exports.CONST = {
     },
     cookieStorage: {
         token: 'user_logged',
-        emailConfirmed: 'false'
+        emailConfirmed: 'email_confirmed'
     },
     uiSelectors: {
         headerLoginBox: 'nav .login-box',
@@ -10433,15 +10433,12 @@ var User = function () {
     }, {
         key: 'isEmailConfirmed',
         value: function isEmailConfirmed() {
-            return this.cookieStorage.get(_consts.CONST.cookieStorage.emailConfirmed) === 'true';
+            return this.cookieStorage.get(_consts.CONST.cookieStorage.emailConfirmed) === 'confirmed';
         }
     }, {
         key: 'getToken',
         value: function getToken() {
             var cookieToken = this.cookieStorage.get(_consts.CONST.cookieStorage.token);
-            // const token = cookieToken.substring(1, cookieToken.length - 1);
-            // console.log(cookieToken);
-            // console.log(token);
             return cookieToken;
         }
     }, {
@@ -11038,16 +11035,10 @@ function confirmationWithRedirect() {
     var sendConfirm = function sendConfirm(token) {
         user.confirm(token).then(function (result) {
             if (result.status && result.status.state === 'ok') {
-                _consts.CONST.user = {
-                    // email: _formData.email,
-                    // password: _formData.password,
-                    // token: result.data.token,
-                    email_confirm: true
-                };
 
                 // save the item
                 _cookie2.default.set(_consts.CONST.cookieStorage.emailConfirmed, 'confirmed');
-                _cookie2.default.set(_consts.CONST.cookieStorage.token, 'logged');
+                _cookie2.default.set(_consts.CONST.cookieStorage.token, result.data.token);
 
                 // window.location = confirm-registration.html?token='from server';
 
@@ -11447,9 +11438,9 @@ var RegisterForm = function () {
                 if (result.data && result.data.token) {
 
                     // save the item
-                    _cookie2.default.set('user', JSON.stringify(_consts.CONST.user.token));
+                    _cookie2.default.set(_consts.CONST.cookieStorage.emailConfirmed, 'false');
 
-                    _cookie2.default.set(_consts.CONST.cookieStorage.token, 'logged');
+                    _cookie2.default.set(_consts.CONST.cookieStorage.token, result.data.token);
                     // console.log('request succeeded with JSON response', result);
                     _pubsubJs2.default.publish(_consts.CONST.events.USER_LOGGED);
                     _view2.default.showInfoMessage(_this.$textAreaDescription, result.status.state, result.status.message || 'Register and Login succsess');
@@ -11485,9 +11476,9 @@ var RegisterForm = function () {
             var openedClass = 'd-block';
             var closeClass = 'd-none';
 
-            (0, _jquery2.default)('.login').on('click', function (e) {
-                this.submitForm(e, _consts.CONST.user, 'loginUrl');
-            });
+            // $('.login').on('click', function (e) {
+            //     this.submitForm(e, CONST.user, 'loginUrl');
+            // });
 
             var $btn = (0, _jquery2.default)('#js_feedback_btn'),
                 cssValidationClass = 'form-validation';

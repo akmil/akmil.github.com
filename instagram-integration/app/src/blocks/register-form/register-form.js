@@ -38,9 +38,9 @@ export default class RegisterForm {
                 if (result.data && result.data.token) {
 
                     // save the item
-                    cookieStorage.set('user', JSON.stringify(CONST.user.token));
+                    cookieStorage.set(CONST.cookieStorage.emailConfirmed, 'false');
 
-                    cookieStorage.set(CONST.cookieStorage.token, 'logged');
+                    cookieStorage.set(CONST.cookieStorage.token, result.data.token);
                     // console.log('request succeeded with JSON response', result);
                     PubSub.publish(CONST.events.USER_LOGGED);
                     viewUtils.showInfoMessage(this.$textAreaDescription,
@@ -78,9 +78,9 @@ export default class RegisterForm {
         const openedClass = 'd-block';
         const closeClass = 'd-none';
 
-        $('.login').on('click', function (e) {
-            this.submitForm(e, CONST.user, 'loginUrl');
-        });
+        // $('.login').on('click', function (e) {
+        //     this.submitForm(e, CONST.user, 'loginUrl');
+        // });
 
         const $btn = $('#js_feedback_btn'),
             cssValidationClass = 'form-validation';

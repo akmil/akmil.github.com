@@ -22,14 +22,11 @@ class User {
     }
 
     isEmailConfirmed() {
-        return (this.cookieStorage.get(CONST.cookieStorage.emailConfirmed) === 'true');
+        return (this.cookieStorage.get(CONST.cookieStorage.emailConfirmed) === 'confirmed');
     }
 
     getToken() {
         const cookieToken = this.cookieStorage.get(CONST.cookieStorage.token);
-        // const token = cookieToken.substring(1, cookieToken.length - 1);
-        // console.log(cookieToken);
-        // console.log(token);
         return cookieToken;
     }
 

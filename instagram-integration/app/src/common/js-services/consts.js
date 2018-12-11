@@ -14,7 +14,7 @@ export const CONST = {
     },
     cookieStorage: {
         token: 'user_logged',
-        emailConfirmed: 'false'
+        emailConfirmed: 'email_confirmed'
     },
     uiSelectors: {
         headerLoginBox: 'nav .login-box',

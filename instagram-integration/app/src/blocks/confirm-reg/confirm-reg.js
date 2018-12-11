@@ -26,16 +26,10 @@ export function confirmationWithRedirect() {
     const sendConfirm = function (token) {
         user.confirm(token).then((result) => {
             if (result.status && result.status.state === 'ok') {
-                CONST.user = {
-                    // email: _formData.email,
-                    // password: _formData.password,
-                    // token: result.data.token,
-                    email_confirm: true
-                };
 
                 // save the item
                 cookieStorage.set(CONST.cookieStorage.emailConfirmed, 'confirmed');
-                cookieStorage.set(CONST.cookieStorage.token, 'logged');
+                cookieStorage.set(CONST.cookieStorage.token, result.data.token);
 
                 // window.location = confirm-registration.html?token='from server';
 
