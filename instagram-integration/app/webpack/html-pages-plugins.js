@@ -104,5 +104,5 @@ const getHtmlPagesPlugins = (isMinify = false) => {
 
 module.exports = {
     dev: getHtmlPagesPlugins(),
-    prod: getHtmlPagesPlugins(true)
+    prod: getHtmlPagesPlugins(false)
 };

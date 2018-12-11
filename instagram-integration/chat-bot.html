@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>User chat-bot</title>
-  <link rel="shortcut icon" href="/favicon.ico"/>
+  <link rel="shortcut icon" href="/favicon.ico" />
 <link href="index.css" rel="stylesheet"></head>
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">Company name</a>
-      
+      <!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
       <ul class="navbar-nav navbar-expand-md px-3">
           <li class="nav-item text-nowrap mr-3">
               <a class="nav-link js_register" href="#">Регистрация</a>
@@ -17,7 +17,7 @@
           <li class="nav-item text-nowrap mr-3">
               <a class="nav-link js_login" href="#">Логин</a>
           </li>
-          <li class="nav-item text-nowrap mr-3" style="display:none">
+          <li class="nav-item text-nowrap mr-3" style="display: none">
               <a class="nav-link js_logOut" href="#">Выход</a>
           </li>
       </ul>
@@ -28,29 +28,30 @@
           </p>
           <div class="fields">
               <div class="field">
-                  <div style="color:red">
+                  <div style="color: red">
                       <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                   </div>
-                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="email">
+                  <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="email" value="">
               </div>
       
               <div class="field">
-                  <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                  <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">
               </div>
       
           </div>
-          <button class="btn btn-block btn-primary my-button" id="js_login_btn">Логин</button>
+          <button class="btn btn-block btn-primary my-button"
+              id="js_login_btn">Логин</button>
       </form>
       
       </div>
-      <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3 d-none" style="top:0;right:0">
+      <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3 d-none" style="top: 0; right: 0;">
         <form id="js_form">
-            <div class="control-group" style="display:flow-root">
-                <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
+            <div class="control-group" style="display: flow-root;">
+                <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right: 5px" class="">
                     ENG
                 </a>
-                <a style="margin-right:5px">|</a>
-                <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right:5px">
+                <a class="" style="margin-right: 5px">|</a>
+                <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right: 5px" class="">
                     RU
                 </a>
             </div>
@@ -59,15 +60,15 @@
             </p>
             <div class="fields">
                 <div class="field">
-                    <div style="color:red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    <div style="color: red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                     </div>
-                    <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+                    <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="text" value="">
                 </div>
                 <div class="field">
-                    <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                    <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true" type="text" value="">
                 </div>
                 <div class="field">
-                    <input class="padding form-control text" id="loginform-pass-confirm" name="pass-confirm" placeholder="Ваш пароль еще раз" required="true">
+                    <input class="padding form-control text" id="loginform-pass-confirm" name="pass-confirm" placeholder="Ваш пароль еще раз" required="true" type="text" value="">
                 </div>
       
             </div>
@@ -82,7 +83,7 @@
       
   </nav>
 
-<div class="wrapper__content">
+<div class="wrapper__content ">
   <div class="container-fluid pt-5">
     <div class="row">
 
@@ -154,10 +155,10 @@
                   </nav>
 
       <main role="main" class="js_main col-md-9 ml-sm-auto col-lg-10 px-4">
-        
+        <!--todo: del this info block-->
             <p class="js_message_logged--text"></p>
             <p class="js_email-confirm--text"></p>
-        
+        <!--end-->
         
             
               <div class="container-fluid chat-bot-page">
