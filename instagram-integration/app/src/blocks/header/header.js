@@ -5,6 +5,8 @@ import {CONST} from '../../common/js-services/consts';
 
 const selectorLoginState = '.js_message_logged--text';
 const selectorEmailConfirmState = '.js_email-confirm--text';
+const closeClass = 'd-none';
+const openedClass = 'd-block';
 
 function emailNotConfirmed() {
     const $emailnMsg = $(selectorEmailConfirmState);
@@ -13,9 +15,11 @@ function emailNotConfirmed() {
 
 function onLoginSubscribe(msg, data) {
     // console.log(msg, data);
-    $(CONST.uiSelectors.headerNavLoginBtn).addClass('d-none').removeClass('d-block');
-    $(CONST.uiSelectors.headerRegBtn).addClass('d-none').removeClass('d-block');
-    $(CONST.uiSelectors.headerLoginBox).addClass('d-none').removeClass('d-block');
+    $(CONST.uiSelectors.headerNavLoginBtn).addClass(closeClass).removeClass(openedClass);
+    $(CONST.uiSelectors.headerRegBtn).addClass(closeClass).removeClass(openedClass);
+    $(CONST.uiSelectors.headerLoginBox).addClass(closeClass).removeClass(openedClass);
+
+    $('.nav-link.js_logOut').addClass(openedClass).removeClass(closeClass); // show
     const $loginMsg = $(selectorLoginState);
     $loginMsg.text('**onLoginSubscribe** вы залогинились в Luxgram успешно').css('color', 'lightblue');
     const isEmailConfirmed = User.isEmailConfirmed();
