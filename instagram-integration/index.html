@@ -26,6 +26,65 @@
               <button class="burger-menu__toolbar-toggler" id="header_mobile_toggler"><span></span></button>
               <button class="burger-menu__toolbar-toggler burger-menu__toolbar-toggler--dots" id="header_mobile_topbar_toggler"><span></span></button>
           </div>
+          <div class="login-box mw-50 mx-auto d-none">
+          <form id="js_login-form">
+              <p class="class-header">
+                  <strong>Логин</strong>
+              </p>
+              <div class="fields">
+                  <div class="field">
+                      <div style="color:red">
+                          <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                      </div>
+                      <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true" type="email">
+                  </div>
+          
+                  <div class="field">
+                      <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                  </div>
+          
+              </div>
+              <button class="btn btn-block btn-primary my-button" id="js_login_btn">Логин</button>
+          </form>
+          
+          </div>
+          <div class="register-box bg-light border mt-5 mx-auto position-absolute px-3 d-none" style="top:0;right:0">
+            <form id="js_form">
+                <div class="control-group" style="display:flow-root">
+                    <a href="/Language/Change?LanguageAbbrevation=en" style="margin-right:5px">
+                        ENG
+                    </a>
+                    <a style="margin-right:5px">|</a>
+                    <a href="/Language/Change?LanguageAbbrevation=ru" style="margin-right:5px">
+                        RU
+                    </a>
+                </div>
+                <p class="class-header">
+                    <strong>Регистрация</strong>
+                </p>
+                <div class="fields">
+                    <div class="field">
+                        <div style="color:red"> <span class="field-validation-valid validator" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                        <input class="padding form-control text" id="email" name="mail" placeholder="Ваш e-mail*" required="true">
+                    </div>
+                    <div class="field">
+                        <input class="padding form-control text" id="loginform-pass" name="pass" placeholder="Ваш пароль*" required="true">
+                    </div>
+                    <div class="field">
+                        <input class="padding form-control text" id="loginform-pass-confirm" name="pass-confirm" placeholder="Ваш пароль еще раз" required="true">
+                    </div>
+          
+                </div>
+                <button class="btn btn-block btn-primary my-button" id="js_feedback_btn">Регистрация</button>
+            </form>
+            <p align="center" class="block-info">
+                Продолжая, вы соглашаетесь <a href="" target="_blank">Условия использования</a><br>
+          
+                Если он у вас есть  <a href="/Login">Войти</a>
+            </p>
+          </div>
+          
   </nav>
   <div class="sub-header">
       <ul class="navbar-nav navbar-expand-md px-3">
