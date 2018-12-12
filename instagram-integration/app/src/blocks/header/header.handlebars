@@ -12,8 +12,20 @@
             <a class="nav-link js_logOut" href="#">Выход</a>
         </li>
     </ul>
-
-    {{> burger-menu}}
-    {{> login-form}}
-    {{> register-form}}
+    {{#if withMenu}}
+        {{> burger-menu}}
+    {{else}}
+        {{> login-form}}
+        {{> register-form}}
+    {{/if}}
 </nav>
+<div class="sub-header">
+    <ul class="navbar-nav navbar-expand-md px-3">
+        <li class="nav-item text-nowrap mr-3">
+            <a class="nav-link" href="#">Text1</a>
+        </li>
+        <li class="nav-item text-nowrap mr-3">
+            <a class="nav-link" href="#">Text2</a>
+        </li>
+    </ul>
+</div>

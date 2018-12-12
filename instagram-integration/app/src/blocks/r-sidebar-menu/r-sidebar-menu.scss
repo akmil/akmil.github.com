@@ -1,0 +1,22 @@
+$headerHeight: 50px;
+$headerHeightTablet: 70px;
+$headerHeightDesktop: 140px;
+
+.r-side-burger-menu {
+  right: 0;
+  position: fixed;
+  transform: translateX(100%);
+
+  transition: $transition-base;
+  background-color: $dark;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .nav-link {
+    text-decoration: none;
+  }
+
+  &--open {
+    transform: translateX(0);
+  }
+}

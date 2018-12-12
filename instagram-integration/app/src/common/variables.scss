@@ -8,7 +8,7 @@ $bigDesktopBreakpoint: 1444px;
 
 $modalBreakpoint: 1325px;
 
-$primaryTransitionDelay: .4s;
+$transition-base: .4s;
 
 $primaryColor: #000;
 $secondaryColor: #FFF;
@@ -19,6 +19,10 @@ $fontSize: 10px;
 $desktopFontSize: 16px;
 
 $defaultInputWidth: 200px;
+
+$headerHeight: 50px;
+$headerHeightTablet: 70px;
+$headerHeightDesktop: 140px;
 
 /*
 bootstrap vars:

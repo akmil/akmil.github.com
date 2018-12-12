@@ -1,9 +1,13 @@
-$headerHeight: 50px;
-$headerHeightTablet: 70px;
-$headerHeightDesktop: 140px;
 
-.sidebar-sticky {
-  .nav-link {
-    text-decoration: none;
+.aside-burger-menu {
+  transition: $transition-base;
+  background-color: $dark;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .sidebar-sticky {
+    .nav-link {
+      text-decoration: none;
+    }
   }
 }

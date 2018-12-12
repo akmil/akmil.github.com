@@ -6,6 +6,7 @@ import {LoginForm} from './blocks/login-form/login-form';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
 import {Instagram} from './pages/_instagram/instagram';
 import * as header from './blocks/header/header';
+import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import {CONST} from './common/js-services/consts';
 
 const selectorCssLoginForm = {
@@ -31,6 +32,7 @@ const init = () => {
     Instagram().init();
     confirmationWithRedirect().init();
     header.initHeader();
+    burgerMenu.init();
 };
 
 (() => init())();
