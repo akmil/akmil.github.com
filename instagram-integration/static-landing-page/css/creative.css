@@ -318,6 +318,7 @@ header.masthead p {
   box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
 }
 
-footer ul li {
-  display: inline-block;
+/**/
+.list-unstyled li {
+  line-height: 2rem;
 }
