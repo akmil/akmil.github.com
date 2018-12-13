@@ -66,9 +66,11 @@
     background-color: #dadada;
     font-size: 4rem;
 }
+
 .timeline>li .timeline-image .fa {
-    vertical-align: middle;
-    line-height: 136px;
+    font-size: 42px;
+    top: -22px;
+    position: relative;
 }
 
 .timeline>li .timeline-image h4 {
@@ -166,6 +168,11 @@
         margin-left: -75px
     }
 
+    .timeline>li .timeline-image .fa {
+        font-size: 72px;
+        top: 22px;
+    }
+
     .timeline>li .timeline-image h4 {
         font-size: 18px;
         line-height: 26px;
@@ -190,6 +197,10 @@
         width: 170px;
         height: 170px;
         margin-left: -85px
+    }
+
+    .timeline>li .timeline-image .fa {
+        top: 32px;
     }
 
     .timeline>li .timeline-image h4 {
