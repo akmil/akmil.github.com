@@ -322,3 +322,21 @@ header.masthead p {
 .list-unstyled li {
   line-height: 2rem;
 }
+
+.social-buttons a{
+  font-size: 20px;
+  line-height: 50px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  color: #fff;
+  border-radius: 100%;
+  outline: 0;
+  background-color: #212529;
+}
+
+.social-buttons li a:hover {
+  background-color: #fed136;
+}
