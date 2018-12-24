@@ -1,3 +1,21 @@
 
 .profile-user {
+    .heading {
+        .actions {
+            position: absolute;
+            right: 0;
+            top: -6px;
+        }
+    }
+    .accounts-list {
+
+        .title {
+            
+            display: inline-block;
+            font-size: 1.7em;
+            font-weight: bold;
+            padding: 5px 15px;
+        }
+    }
+    
 }
