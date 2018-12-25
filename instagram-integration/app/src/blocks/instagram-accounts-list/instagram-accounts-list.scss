@@ -1,0 +1,56 @@
+
+.profile-user {
+    .heading {
+        .actions {
+            position: absolute;
+            right: 0;
+            top: 10px;
+        }
+    }
+    .accounts-list {
+        .media {
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 15rem!important;
+            }
+            .counts-list {
+                .media-count,
+                .follower-count,
+                .following-count {
+                    // display: inline;
+                    span {
+                        font-size: $font-size-base * .75;
+                        &.figure {
+                            display: block;
+                            font-size: 2.25rem;
+                        }
+                    }
+                }
+                .media-count {
+                    color: $green;
+                }
+                .follower-count{
+                    color: $orange;
+                }
+                .following-count {
+                    color: $gray-700;
+                }
+            }
+        }
+
+        .title {            
+            display: inline-block;
+            font-size: 1.7em;
+            font-weight: bold;
+            padding: 5px 15px;
+        }
+    }
+}
+
+#modal-new-account {
+    .close {
+        // position: absolute;
+        // right: 0;
+    }
+}

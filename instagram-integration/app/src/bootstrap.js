@@ -8,7 +8,7 @@ import {Instagram} from './pages/_instagram/instagram';
 import * as header from './blocks/header/header';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import {CONST} from './common/js-services/consts';
-import * as profileUser from './blocks/profile-user/profile-user';
+import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -34,7 +34,7 @@ const init = () => {
     confirmationWithRedirect().init();
     header.initHeader();
     burgerMenu.init();
-    profileUser.init();
+    instagramAccounts.init();
 };
 
 (() => init())();

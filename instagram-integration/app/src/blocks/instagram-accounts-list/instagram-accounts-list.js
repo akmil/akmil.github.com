@@ -1,13 +1,5 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
-// import viewUtils from '../../common/js-services/view';
-// import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
-// import {CONST} from '../../common/js-services/consts';
-
-// const selectorLoginState = '.js_message_logged--text';
-// const selectorEmailConfirmState = '.js_email-confirm--text';
-// const closeClass = 'd-none';
-// const openedClass = 'd-block';
 
 function addHandler() {
     $('.js_confirm-security-code').on('click', () => {
@@ -28,19 +20,25 @@ function fillList($list, dataArray) {
             const checkpoint = item.checkpoint;
             $(`<li class="media">
                 <img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">
-                <div class="media-body">                
-                    <h3 class="mt-0 mb-3">${info.name}</h3>
-                    <h3 class="mt-0 mb-3">${info.name}</h3>
-                    <button type="button" class="btn btn-primary mr-3">Статус: ${item.status}</button>
-                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#security-code">
-                        <i class="fa fa-plus"></i>Пройти чекпоинт11</button>
-                    ${(checkpoint.status === 'TRIGGERED') ? '<button type="button" class="btn btn-outline-danger">Пройти чекпоинт</button>' : ''}
-
-                    <ul class="list-inline text-center">
-                        <li class="media-count"><span class="figure">231</span><span>Публикации</span></li>
-                        <li class="follower-count"><span class="figure">5</span><span>подписчики</span></li>
-                        <li class="following-count"><span class="figure">0</span><span>подписки</span></li>
-                    </ul>
+                <div class="media-body d-flex">
+                    <div class="col">
+                        <h3 class="mt-0 mb-2">${info.name}</h3>
+                        <p class="mt-0 mb-3">${info.email}</p>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary mr-3">Статус</button>
+                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#security-code">
+                        <i class="fa fa-plus"></i>Пройти чекпоинт</button>
+                        ${(checkpoint.status === 'TRIGGERED') ? '<button type="button" class="btn btn-outline-danger">Пройти чекпоинт</button>' : ''}
+                    </div>
+                    <div class="col">
+                        <ul class="list-inline text-center counts-list">
+                            <li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>
+                            <li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>
+                            <li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </li>`).appendTo(cList);
         }

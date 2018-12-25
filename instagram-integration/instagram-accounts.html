@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>User profile</title>
+  <title>instagram-accounts</title>
   <link rel="shortcut icon" href="/favicon.ico"/>
 <link href="index.css" rel="stylesheet"></head>
 <body>
@@ -174,92 +174,90 @@
         
         
             
-              <div class="container-fluid stories-page">
+            <div class="profile-user">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="heading my-3">
+                                <h2 class="view-title">Instagram аккаунты</h2>
+                                <div class="actions">
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account"><i class="fa fa-plus"></i>Дабавить аккаунт</button>
+                                </div>
+                            </div>
             
-                <h3>Stories page</h3>
-                
-                <div>
-                <p>С помощью этой функции ваш аккаунт будет просматривать stories вашей аудитории и отображаться у них в списке просмотревших. Тем самым вызывая интерес, те в свою очередь будут переходить к вам на страницу</p>
-                <p>[Инструкция по stories] [Видео по Stories]</p>
+                            <ul class="list-unstyled accounts-list mt-5">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             
-                <div class="container">
-            
-                  <div class="row">
-                    <div class="col">
-                      <button>Аккаунт</button>
-                      <button>Цель</button>
-                      <button>Укажите своих конкурентов</button>
-                      <button>Скорость</button>
-                      <button>Критерии</button>
+                <div class="modal fade" id="modal-new-account" tabindex="-1" role="dialog" aria-labelledby="modal-new-account" style="display:none">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modal-new-ticket-label">Дабавить аккаунт</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label class="sr-only">Логин</label>
+                                        <input class="form-control" placeholder="Логин">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only">Пароль</label>
+                                        <input type="password" class="form-control" placeholder="Пароль">
+                                    </div>
+                                    <button type="button" class="btn btn-success margin-top-md center-block" data-dismiss="modal">Add Account</button>                        
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-            
-                  <div class="row">
-                    <div class="col">
-                      <p>Активная аудитория  конкурентов (?)</p>
-                    </div>
-                    <div class="col">
-                      <p>Новые подписчики или</p>
-                      <p>комментаторы конкурентов(?)</p>
-                    </div>
-                    <div class="col">
-                      <p>Активная аудитория  конкурентов (?)</p>
-                    </div>
-                    <div class="col">
-                      <p style="font-size:14px">Просмотр по ГЕО</p>
-                    </div>
-                    <div class="col">
-                      <p style="font-size:14px">Просмотр историй своих подписчиков</p>
-                    </div>
-                    <div class="col">
-                      <p>Свой список</p>
-                    </div>
-                  </div>
-                  
-                  <h3>Скорость</h3>
-                  <div class="row">
-                    <div class="col">
-                      Безопасний
-                    </div>
-                    <div class="col">
-                      Средний
-                    </div>
-                    <div class="col">
-                      Агресивный
-                    </div>
-                  </div>
-            
-                  <div class="row">
-                    <h3>Критерии</h3>
-                    <div class="col">
-                      <p>Макс кол-во просмотров(?)</p>
-                    </div>
-                    <div class="col">
-                     <p>Смотреть highlight, если</p>
-                     <p>нет истории: Да/Нет</p>
-                    </div>
-                  </div>
-            
-                </div> 
-                <div class="container">
-                  <div class="row">
-                    <h3>Статистика</h3>
-                    <div class="col">
-                      <p>Статистика</p>
-                    </div>
-                  </div>
                 </div>
             
-              </div>
+                <div class="modal fade" id="security-code" tabindex="-1" role="dialog" aria-labelledby="security-code11" style="display:none">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label class="sr-only">Код подтверждения</label>
+                                        <input class="form-control" placeholder="Код подтверждения">
+                                    </div>
+                                    <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                    <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                                    <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Запросить код</button>
+                                
+                                <form>                        
+                                    <div class="form-group">
+                                        <label class="sr-only">Код подтверждения</label>
+                                        <input class="form-control" placeholder="Код подтверждения">
+                                    </div>
+                                    <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                    <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                                </form>
+                            </div>
+                        </main></div>
+                    </div>
+                </div> --}}
             
             
         
-      </main>
+      
 
-    </div>
-  </div>
-</div>
+    
+  
+
 
 <script type="text/javascript" src="index.js"></script></body>
 </html>
