@@ -1,10 +1,13 @@
-
-
 nav.navbar {
-  a {
-      text-decoration: none;
-  }
+    height: $headerHeight;
+    .navbar-brand {
+        background-color: $thirdlyColor;
+        color: $secondaryColor;
+        line-height: 1;
+        padding: ($headerHeight/2 - 0.5) 15px;
+    }
+    a {
+        text-decoration: none;
+    }
 }
-.header {
 
-}

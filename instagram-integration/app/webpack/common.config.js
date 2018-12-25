@@ -70,7 +70,12 @@ module.exports = {
     //   name: ['app', 'vendor'],
     //   minChunks: Infinity
     // })
-    new ProvidePlugin({ $: 'jquery', jQuery: 'jquery' })
+    new ProvidePlugin({ $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default']
+    })
+    
   ]
 
 };

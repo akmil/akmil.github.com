@@ -4,16 +4,15 @@ $white-lilac: #F8F9FB;
   background-color: $white-lilac;
 
   &__content {
-    @include contentIndent;
     position: relative;
-    padding: ($headerHeightTablet + 10px) 0 20px;
+    padding: $headerHeight 0 0;
 
-    @media (min-width: $tabletBreakpoint) {
-      padding: ($headerHeightTablet + 20px) 0 60px;
-    }
+    // @media (min-width: $tabletBreakpoint) {
+    //   padding: $headerHeightTablet 0 60px;
+    // }
 
-    @media (min-width: $desktopBreakpoint) {
-      padding: ($headerHeightDesktop + 20px) 0 60px;
-    }
+    // @media (min-width: $desktopBreakpoint) {
+    //   padding: $headerHeightDesktop 0 60px;
+    // }
   }
 }

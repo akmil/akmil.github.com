@@ -1,5 +1,5 @@
 import './base.scss';
-// import $ from 'jquery';
+import 'bootstrap';
 
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
@@ -8,6 +8,7 @@ import {Instagram} from './pages/_instagram/instagram';
 import * as header from './blocks/header/header';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import {CONST} from './common/js-services/consts';
+import * as profileUser from './blocks/profile-user/profile-user';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -33,6 +34,7 @@ const init = () => {
     confirmationWithRedirect().init();
     header.initHeader();
     burgerMenu.init();
+    profileUser.init();
 };
 
 (() => init())();

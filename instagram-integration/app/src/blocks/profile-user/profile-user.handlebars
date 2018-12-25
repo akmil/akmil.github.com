@@ -1,96 +1,58 @@
 <div class="profile-user">
     <div class="row ">
 
-        <div class="col-half w-60 mb-5">
+        <div class="col-half w-60 my-5">
             Profile-user
         </div>
 
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="heading mb-3">
-                        <h2 class="view-title">Members</h2>
+                    <div class="heading my-3">
+                        <h2 class="view-title">Аккаунты</h2>
                         <div class="actions">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-member"><i
-                                    class="fa fa-plus"></i> New Member</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account"><i
+                                    class="fa fa-plus"></i> Новый аккаунт</button>
                         </div>
                     </div>
 
-                    <ul class="list-unstyled accounts-list">
-                        <li class="media">
-                            <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/49.jpg">
-                            <div class="media-body">
-                                <h3 class="mt-0 mb-3">List-based media object</h5>
-                                <button type="button" class="btn btn-primary">Status</button>
-                                <button type="button" class="btn btn-secondary">Checkpoint</button>
+                    <ul class="list-unstyled accounts-list mt-5">
+                        {{!-- <li class="media">
+                            <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/42.jpg">
+                            <div class="media-body mt-3">
+                                <h3 class="mt-0 mb-3">Имя</h3>
+                                <button type="button" class="btn btn-primary mr-3">Статус</button>
+                                <button type="button" class="btn btn-secondary">Чекпоинт</button>
                             </div>
-                        </li>
-                        <li class="media my-4">
-                            <img class="mr-3 rounded" data-src="holder.js/64x64" alt="64x64" src="http://api.randomuser.me/portraits/men/49.jpg"
-                                data-holder-rendered="true" style="width: 64px; height: 64px;">
-                            <div class="media-body">
-                                <h3 class="mt-0 mb-3 name">List-based media object</h5>
-                                <button type="button" class="btn btn-primary">Status</button>
-                                <button type="button" class="btn btn-secondary">Checkpoint</button>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <img class="mr-3 rounded" data-src="holder.js/64x64" alt="64x64" src="http://api.randomuser.me/portraits/men/49.jpg"
-                                data-holder-rendered="true" style="width: 64px; height: 64px;">
-                            <div class="media-body">
-                                <h3 class="mt-0 mb-3">List-based media object</h5>
-                                <button type="button" class="btn btn-primary">Status</button>
-                                <button type="button" class="btn btn-secondary">Checkpoint</button>
-                            </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div id="cant-do-all-the-work-for-you" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="mySmallModalLabel">Ooops!!!</h4>
+    <div class="modal fade" id="modal-new-account" tabindex="-1" role="dialog" aria-labelledby="modal-new-account" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-new-ticket-label">Add New Member</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="sr-only">Email</label>
+                            <input type="email" class="form-control" placeholder="Email Address">
                         </div>
-                        <div class="modal-body">
-                            <p>I am being lazy and do not want to program an "Add User" section into this snippet... So
-                                it looks like you'll have to do that for yourself.</p><br />
-                            <p><strong>Sorry<br />
-                                    ~ Mouse0270</strong></p>
+                        <div class="form-group">
+                            <label class="sr-only">Password</label>
+                            <input type="text" class="form-control" placeholder="Password">
                         </div>
-                    </div>
+                        <button type="button" class="btn btn-success margin-top-md center-block" data-dismiss="modal">Add Account</button>                        
+                    </form>
                 </div>
             </div>
-
-            <div class="modal" id="modal-new-member" tabindex="-1" role="dialog" aria-labelledby="modal-new-member" style="display: none;">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<h4 class="modal-title" id="modal-new-ticket-label">Add New Member</h4>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div class="form-group">
-						<label class="sr-only">Name</label>
-						<input type="text" class="form-control" placeholder="Name">
-					</div>
-					<div class="form-group">
-						<label class="sr-only">Email</label>
-						<input type="email" class="form-control" placeholder="Email Address">
-					</div>
-					<button type="button" class="btn btn-success margin-top-md center-block" data-dismiss="modal">Add Member</button>
-					
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
         </div>
-
     </div>
 
 </div>

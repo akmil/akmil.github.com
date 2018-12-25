@@ -71,6 +71,10 @@ class User {
         };
         return this.network.sendRequest(CONST.getPath('registration'), setting);
     }
+
+    getMetadata(token) {
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}});
+    }
 }
 
 let userInstance = null;
@@ -78,6 +82,5 @@ let userInstance = null;
 if (!userInstance) {
     userInstance = new User();
 }
-// return instance;
 
 export default userInstance;

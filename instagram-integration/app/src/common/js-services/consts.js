@@ -1,11 +1,11 @@
 export const CONST = {
     url: {
-        base: 'https://luxgram.ru/api/v1',
-        registration: '/registration/basic/',
-        login: '/registration/basic/login',
-        confirmation: '/registration/basic/confirmation?token',
-        instagram_addAccount: '/instagram/accounts/',
-        instagram_getAccount: '/instagram/accounts/'
+        base: 'http://api.luxgram.ru/v1/',
+        registration: 'registration/basic/',
+        login: 'registration/basic/login',
+        confirmation: 'registration/basic/confirmation?token',
+        instagram_addAccount: 'instagram/accounts/',
+        instagramAccount_getMetaData: 'instagram-accounts/meta'
     },
     user: {
         email: '',

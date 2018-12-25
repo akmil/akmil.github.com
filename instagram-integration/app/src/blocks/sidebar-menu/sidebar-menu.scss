@@ -6,6 +6,7 @@
   overflow-y: auto;
 
   .sidebar-sticky {
+    height: calc(100vh - #{$headerHeight});
     .nav-link {
       text-decoration: none;
     }
