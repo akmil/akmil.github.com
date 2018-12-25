@@ -75,6 +75,11 @@ class User {
     getMetadata(token) {
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}});
     }
+
+    getSecurityKey(username) {
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_checkpoint')} + ${username}`);
+    }
+
 }
 
 let userInstance = null;

@@ -190,13 +190,44 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="heading my-3">
-                                        <h2 class="view-title">Аккаунты</h2>
+                                        <h2 class="view-title">Instagram аккаунты</h2>
                                         <div class="actions">
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account"><i class="fa fa-plus"></i> Новый аккаунт</button>
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account"><i class="fa fa-plus"></i>Дабавить аккаунт</button>
                                         </div>
                                     </div>
                 
                                     <ul class="list-unstyled accounts-list mt-5">
+                                        <li class="media">
+                                            <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/42.jpg">
+                                            <div class="media-body mt-3">
+                                                <h3 class="mt-0 mb-3">Имя</h3>
+                                                <button type="button" class="btn btn-primary mr-3">Статус</button>
+                                                <button type="button" class="btn btn-secondary">Чекпоинт</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-unstyled accounts-list2 mt-5">
+                                        <li class="media">
+                                            <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/42.jpg">
+                                            <div class="media-body mt-3">
+                                                <div class="col">
+                                                    <h3 class="mt-0 mb-3">Имя</h3>
+                                                    <p class="mt-0 mb-3">email</p>
+                                                </div>
+                                                <div class="col">
+                                                    <button type="button" class="btn btn-primary mr-3">Статус</button>
+                                                    <button type="button" class="btn btn-secondary">Чекпоинт</button>
+                                                </div>
+                                                <div class="col">
+                                                    <ul class="list-inline text-center">
+                                                        <li class="media-count"><span class="figure">231</span><span>Публикации</span></li>
+                                                        <li class="follower-count"><span class="figure">5</span><span>подписчики</span></li>
+                                                        <li class="following-count"><span class="figure">0</span><span>подписки</span></li>
+                                                    </ul>
+                                                </div>
+                                                
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -207,20 +238,73 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="modal-new-ticket-label">Add New Member</h4>
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Дабавить аккаунт</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                 </div>
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group">
-                                            <label class="sr-only">Email</label>
-                                            <input type="email" class="form-control" placeholder="Email Address">
+                                            <label class="sr-only">Логин</label>
+                                            <input class="form-control" placeholder="Логин">
                                         </div>
                                         <div class="form-group">
-                                            <label class="sr-only">Password</label>
-                                            <input class="form-control" placeholder="Password">
+                                            <label class="sr-only">Пароль</label>
+                                            <input type="password" class="form-control" placeholder="Пароль">
                                         </div>
                                         <button type="button" class="btn btn-success margin-top-md center-block" data-dismiss="modal">Add Account</button>                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal fade" id="security-code11" tabindex="-1" role="dialog" aria-labelledby="security-code11" style="display:none">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="btn-group" role="group" aria-label="Default button group">
+                                            <button type="button" class="btn btn-secondary">EMAIL</button>
+                                            <button type="button" class="btn btn-secondary">PHONE</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only">Код подтверждения</label>
+                                            <input class="form-control" placeholder="Код подтверждения">
+                                        </div>
+                                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                        <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal fade" id="security-code" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display:none">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="btn-group" role="group" aria-label="Default button group">
+                                            <button type="button" class="btn btn-secondary">EMAIL</button>
+                                            <button type="button" class="btn btn-secondary">PHONE</button>
+                                        </div>
+                                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Запросить код</button>
+                                    </form>
+                                    <form>                        
+                                        <div class="form-group">
+                                            <label class="sr-only">Код подтверждения</label>
+                                            <input class="form-control" placeholder="Код подтверждения">
+                                        </div>
+                                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                        <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
                                     </form>
                                 </div>
                             </div>

@@ -8,9 +8,20 @@
         }
     }
     .accounts-list {
+        .media {
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 15rem!important;
+            }
+            .media-count,
+            .follower-count,
+            .following-count {
+                display: inline;
+            }
+        }
 
-        .title {
-            
+        .title {            
             display: inline-block;
             font-size: 1.7em;
             font-weight: bold;

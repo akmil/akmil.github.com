@@ -5,7 +5,8 @@ export const CONST = {
         login: 'registration/basic/login',
         confirmation: 'registration/basic/confirmation?token',
         instagram_addAccount: 'instagram/accounts/',
-        instagramAccount_getMetaData: 'instagram-accounts/meta'
+        instagramAccount_getMetaData: 'instagram-accounts/meta',
+        instagramAccount_checkpoint: 'instagram-accounts/checkpoint/'
     },
     user: {
         email: '',

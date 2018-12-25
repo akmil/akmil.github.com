@@ -65,7 +65,7 @@ module.exports = {
       "error",
       "property"
     ],
-    "dot-notation": "error",
+    "dot-notation": "off",
     "eol-last": "off",
     "eqeqeq": "error",
     "func-names": [

@@ -9,22 +9,41 @@ import User from '../../common/js-services/user';
 // const closeClass = 'd-none';
 // const openedClass = 'd-block';
 
+function addHandler() {
+    $('.js_confirm-security-code').on('click', () => {
+        // get http://localhost:8080/v1/instagram-accounts/checkpoint/{username}
+        const username = 'some.name';
+        User.getSecurityKey(username);
+    });
+}
+
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
     cList.empty();
-    for(const key in items) {
-        const item = items[key];
-        const info = item.info;
-        const checkpoint = item.checkpoint;
-        $(`<li class="media">
-            <img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">
-            <div class="media-body mt-3">
-                <h3 class="mt-0 mb-3">${info.name}</h3>
-                <button type="button" class="btn btn-primary mr-3">Статус: ${item.status}</button>
-                <button type="button" class="btn btn-secondary">Чекпоинт: ${checkpoint.status}</button>
-            </div>
-        </li>`).appendTo(cList);
+    for (const key in items) {
+        if (Object.prototype.hasOwnProperty.call(items, key)) {
+            const item = items[key];
+            const info = item.info;
+            const checkpoint = item.checkpoint;
+            $(`<li class="media">
+                <img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">
+                <div class="media-body">                
+                    <h3 class="mt-0 mb-3">${info.name}</h3>
+                    <h3 class="mt-0 mb-3">${info.name}</h3>
+                    <button type="button" class="btn btn-primary mr-3">Статус: ${item.status}</button>
+                    <button class="btn btn-outline-danger" data-toggle="modal" data-target="#security-code">
+                        <i class="fa fa-plus"></i>Пройти чекпоинт11</button>
+                    ${(checkpoint.status === 'TRIGGERED') ? '<button type="button" class="btn btn-outline-danger">Пройти чекпоинт</button>' : ''}
+
+                    <ul class="list-inline text-center">
+                        <li class="media-count"><span class="figure">231</span><span>Публикации</span></li>
+                        <li class="follower-count"><span class="figure">5</span><span>подписчики</span></li>
+                        <li class="following-count"><span class="figure">0</span><span>подписки</span></li>
+                    </ul>
+                </div>
+            </li>`).appendTo(cList);
+        }
     }
 }
 
@@ -45,7 +64,7 @@ export function init() {
         if (!result.status.state === 'ok' || !result.data || !$accountsList.length) {
             $accountsList.empty();
             $(`<li class="media">
-                <div class="media-body mt-3">
+                <div class="media-body">
                     <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
                 </div>
             </li>`).appendTo($accountsList);
@@ -53,4 +72,6 @@ export function init() {
         }
         fillList($accountsList, result.data.accounts);
     });
+
+    addHandler();
 }
