@@ -1,14 +1,25 @@
+$border-color: $gray-300;
 
-.profile-user {
+.profile-user {    
     .heading {
         .actions {
             position: absolute;
-            right: 0;
+            right: 15px;
             top: 10px;
         }
     }
     .accounts-list {
+        border-radius: 4px;
+        border: 1px solid $border-color;
+
         .media {
+            border-bottom: 1px solid $border-color;
+            &:last-child {
+                border-bottom: none;
+            }
+            &:hover{ 
+                background-color: $gray-200;
+            }
             .badge {
                 border-radius: 10rem;
             }

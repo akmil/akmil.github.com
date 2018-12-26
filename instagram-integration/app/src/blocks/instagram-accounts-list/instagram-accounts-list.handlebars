@@ -1,16 +1,16 @@
 <div class="profile-user">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 p-3">
                 <div class="heading my-3">
                     <h2 class="view-title">Instagram аккаунты</h2>
                     <div class="actions">
                         <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account"><i
-                                class="fa fa-plus"></i>Дабавить аккаунт</button>
+                                class="fa fa-plus"></i>Добавить аккаунт</button>
                     </div>
                 </div>
 
-                <ul class="list-unstyled accounts-list mt-5">
+                <ul class="list-unstyled accounts-list mt-5 p-3">
                     {{!-- <li class="media">
                         <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/42.jpg">
                         <div class="media-body mt-3">
@@ -35,13 +35,13 @@
                     <form>
                         <div class="form-group">
                             <label class="sr-only">Логин</label>
-                            <input type="text" class="form-control" placeholder="Логин">
+                            <input type="text" class="form-control" name="username" placeholder="Логин">
                         </div>
                         <div class="form-group">
                             <label class="sr-only">Пароль</label>
-                            <input type="password" class="form-control" placeholder="Пароль">
+                            <input type="password" class="form-control" name="pass" placeholder="Пароль">
                         </div>
-                        <button type="button" class="btn btn-success margin-top-md center-block" data-dismiss="modal">Add Account</button>                        
+                        <button type="button" class="btn btn-success js_add-instagram-account" data-dismiss="modal">Добавить</button>
                     </form>
                 </div>
             </div>

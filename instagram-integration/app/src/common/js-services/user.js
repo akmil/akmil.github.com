@@ -90,7 +90,7 @@ class User {
 
     confirmSecurityKey(key, username) {
         const setting = {
-            method: 'DEL',
+            method: 'DELETE',
             body: JSON.stringify({'security_code': key}),
             headers: {
                 ...this.settingPost.headers,

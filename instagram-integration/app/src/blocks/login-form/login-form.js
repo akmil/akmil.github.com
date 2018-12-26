@@ -15,8 +15,8 @@ export function LoginForm(selectorCss) {
         $form = $(_formId),
         $email = $form.find('input[name="mail"]'),
         $textAreaDescription = $('#description');
-    const openedClass = 'd-block';
-    const closeClass = 'd-none';
+    // const openedClass = 'd-block';
+    // const closeClass = 'd-none';
 
     const userLoginHeader = (_formData) => {
         const cbError = (result) => {
@@ -49,27 +49,27 @@ export function LoginForm(selectorCss) {
                 }
             });
     };
+    // todo: delete me
+    // const addInstagramAccount = (newFormData) => {
+    //     const cbError = (result) => {
+    //         viewUtils.showInfoMessage($textAreaDescription,
+    //             result.status.state,
+    //             result.status.message || 'Login error');
+    //         $(_loginBox).addClass(closeClass).removeClass(openedClass);
+    //     };
 
-    const addInstagramAccount = (newFormData) => {
-        const cbError = (result) => {
-            viewUtils.showInfoMessage($textAreaDescription,
-                result.status.state,
-                result.status.message || 'Login error');
-            $(_loginBox).addClass(closeClass).removeClass(openedClass);
-        };
+    //     user.addInstagramAccount(newFormData, cbError).then((result) => {
+    //         if (result && result.status) {
+    //             console.log(result);
+    //             viewUtils.showInfoMessage($textAreaDescription,
+    //                 result.status.state,
+    //                 result.status.message || 'Login error');
+    //             $(_loginBox).addClass(closeClass).removeClass(openedClass);
+    //         }
+    //     });
 
-        user.addInstagramAccount(newFormData, cbError).then((result) => {
-            if (result && result.status) {
-                console.log(result);
-                viewUtils.showInfoMessage($textAreaDescription,
-                    result.status.state,
-                    result.status.message || 'Login error');
-                $(_loginBox).addClass(closeClass).removeClass(openedClass);
-            }
-        });
-
-        console.log('submit by ', _buttonSubmitId);
-    };
+    //     console.log('submit by ', _buttonSubmitId);
+    // };
 
     const submitForm = function(formDataObj) {
         const email = $email.val(),
@@ -77,7 +77,8 @@ export function LoginForm(selectorCss) {
             _formData = formDataObj || {email, password};
 
         if (selectorCss.isLoginInstagram) {
-            addInstagramAccount({username: $form.find('input[name="username"]').val(), password});
+            // todo: delete me
+            // addInstagramAccount({username: $form.find('input[name="username"]').val(), password});
         } else {
             $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData).then(() => {

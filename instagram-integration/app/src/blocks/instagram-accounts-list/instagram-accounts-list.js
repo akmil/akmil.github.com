@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
+import viewUtils from '../../common/js-services/view';
+
 const staticResp = {
     'status': {
         'state': 'ok'
@@ -10,7 +12,7 @@ const staticResp = {
                 'status': 'OK',
                 'checkpoint': {
                     'status': 'ABSENT',
-                    'type': 'EMAIL_OR_PHONE'
+                    'type': undefined
                 },
                 'tariff': {
                     'status': 'ABSENT'
@@ -51,30 +53,94 @@ const staticResp = {
                     'follower_count': 45,
                     'following_count': 82
                 }
+            },
+            'andrey.jakivchyk3': {
+                'status': 'OK',
+                'checkpoint': {
+                    'status': 'TRIGGERED',
+                    'type': 'PHONE_OR_EMAIL'
+                },
+                'tariff': {
+                    'status': 'ABSENT'
+                }
             }
         },
         'available_proxy_purchase': true
     }
 };
 
-function addHandler(username) {
+// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
+const addInstagramAccount = (newFormData) => {
+    const cbError = (result) => {
+        console.log('ERROR', result);
+        // viewUtils.showInfoMessage($textAreaDescription,
+        //     result.status.state,
+        //     result.status.message || 'Login error');
+        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+    };
+
+    User.addInstagramAccount(newFormData, cbError).then((result) => {
+        if (result && result.status) {
+            console.log(result, result.status);
+            // viewUtils.showInfoMessage($textAreaDescription,
+            //     result.status.state,
+            //     result.status.message || 'Login error');
+            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+        }
+    });
+
+    console.log('submit', newFormData);
+};
+
+function addOnLoadHandlers() {
+    $('.js_add-instagram-account').on('click', (e) => {
+        const btn = $(e.target);
+        const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
+        const username = $modalBody.find('input[name="username"]').val().trim();
+        const password = $modalBody.find('input[name="pass"]').val().trim();
+        const $form = $('form', $modalBody);
+        const form = $form.get(0);
+        const cssValidationClass = 'form-validation';
+
+        e.preventDefault();
+
+        // const validator = new Validator($form);
+        // console.log(validator.validate());
+        if (form.checkValidity()) {
+            addInstagramAccount({username, password});
+        } else {
+            // Highlight errors
+            if (form.reportValidity) {
+                form.reportValidity();
+            }
+            $form.addClass(cssValidationClass);
+        }
+
+        if (!username || !password) {
+            console.log('not valid - Empty fields');
+            return;
+        }
+    });
+}
+
+function addListHandler(username) {
     // $('#security-code').on('show.bs.modal', function (e) {
-    //     const btn = $(this);
-    //     console.log(btn);
-    //     console.log(btn.prop('checkpoint-type'));
     //     console.log(btn.attr('data-checkpoint-type'));
     // });
     let checkpointType = '';
 
     $('.js_pass-checkpoint-btn').on('click', (e) => {
-        // get http://localhost:8080/v1/instagram-accounts/checkpoint/{username}
-        // const username = 'pavlo.oliinyk';
-        // const btn = $(e.target);
         checkpointType = $(e.target).data('checkpointType');
         const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
 
-        if (checkpointType !== 'PHONE' && checkpointType !== 'EMAIL') {
+        if (checkpointType === 'PHONE_OR_EMAIL') {
+            // не отправляем реквест
+            // показать серые переключатели (выбрал тип)
+            // инпуты спрятаны, есть кнопка Запросить код подтверждение
+            // при нажатии "Запросить код подтверждение" - отпарляется реквест "старт чекпоинт" появляеться инпут и кнопка других типах
+            // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
             console.log('select checkpointType now it\'s:', checkpointType);
+            return;
         }
 
         User.getSecurityKey(username, checkpointType).then((result) => {
@@ -122,12 +188,13 @@ function fillList($list, dataArray) {
             const item = items[key];
             const info = item.info;
             const checkpoint = item.checkpoint;
-            $(`<li class="media my-3">
+            $(`<li class="media py-3">
                 <img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">
                 <div class="media-body d-flex">
                     <div class="col">
-                        <h3 class="mt-0 mb-2">${info.name} <span class="badge badge-info badge-pill">${checkpoint.status}</span></h3>
+                        <h3 class="mt-0 mb-2">${info.name}</h3>
                         <p class="mt-0 mb-3">${info.email}</p>
+                        ${(info.phone) ? `<p class="mt-0 mb-3">${info.phone}</p>` : ''}
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
@@ -161,6 +228,15 @@ export function init() {
         return;
     }
 
+    addOnLoadHandlers();
+
+    // Loder
+    // если Тригеред - то показать кнопку пройти Чекпоинт, иначе данніе с инфо (может инфо отсутсвовать - сделать еще раз запрос через 3 сек.)    
+
+    fillList($accountsList, staticResp.data.accounts);
+
+    addListHandler('andrey.jakivchyk');
+
     metadata.then((result) => {
         if (!result.status.state === 'ok' || !result.data || !$accountsList.length) {
             $accountsList.empty();
@@ -174,6 +250,6 @@ export function init() {
 
         fillList($accountsList, staticResp.data.accounts);
 
-        addHandler('andrey.jakivchyk');
+        addListHandler('andrey.jakivchyk');
     });
 }
