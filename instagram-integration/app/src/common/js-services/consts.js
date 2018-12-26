@@ -6,7 +6,8 @@ export const CONST = {
         confirmation: 'registration/basic/confirmation?token',
         instagram_addAccount: 'instagram/accounts/',
         instagramAccount_getMetaData: 'instagram-accounts/meta',
-        instagramAccount_checkpoint: 'instagram-accounts/checkpoint/'
+        instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
+        instagramAccount_confirmKey: 'instagram-accounts/checkpoint/'
     },
     user: {
         email: '',
@@ -34,8 +35,5 @@ export const CONST = {
     },
     getPath(name) {
         return this.url.base + this.url[name];
-    },
-    setUser(obj) {
-        this.user = {...this.user, obj};
     }
 };

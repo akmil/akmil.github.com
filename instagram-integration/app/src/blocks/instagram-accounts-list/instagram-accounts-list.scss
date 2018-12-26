@@ -9,6 +9,9 @@
     }
     .accounts-list {
         .media {
+            .badge {
+                border-radius: 10rem;
+            }
             img {
                 width: 60px;
                 height: 60px;
@@ -18,7 +21,6 @@
                 .media-count,
                 .follower-count,
                 .following-count {
-                    // display: inline;
                     span {
                         font-size: $font-size-base * .75;
                         &.figure {

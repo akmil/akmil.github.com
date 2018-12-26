@@ -47,7 +47,7 @@ class User {
         return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
     }
 
-    getInstagramAccount(formData) {
+    getInstagramAccount() {
         const setting = {
             ...this.settingPost,
             method: 'GET',
@@ -76,8 +76,28 @@ class User {
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}});
     }
 
-    getSecurityKey(username) {
-        return this.network.sendRequest(`${CONST.getPath('instagramAccount_checkpoint')} + ${username}`);
+    getSecurityKey(username, checkpointType) {
+        const setting = {
+            ...this.settingPost,
+            body: JSON.stringify({'type': checkpointType}),
+            headers: {
+                ...this.settingPost.headers,
+                'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
+            }
+        };
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_checkpoint')}${username}`, setting);
+    }
+
+    confirmSecurityKey(key, username) {
+        const setting = {
+            method: 'DEL',
+            body: JSON.stringify({'security_code': key}),
+            headers: {
+                ...this.settingPost.headers,
+                'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
+            }
+        };
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_confirmKey')}${username}`, setting);
     }
 
 }

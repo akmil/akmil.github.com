@@ -57,15 +57,59 @@ const staticResp = {
     }
 };
 
-function addHandler() {
-    $('#security-code').on('show.bs.modal', function (e) {
-        console.log(e.target);
+function addHandler(username) {
+    // $('#security-code').on('show.bs.modal', function (e) {
+    //     const btn = $(this);
+    //     console.log(btn);
+    //     console.log(btn.prop('checkpoint-type'));
+    //     console.log(btn.attr('data-checkpoint-type'));
+    // });
+    let checkpointType = '';
+
+    $('.js_pass-checkpoint-btn').on('click', (e) => {
+        // get http://localhost:8080/v1/instagram-accounts/checkpoint/{username}
+        // const username = 'pavlo.oliinyk';
+        // const btn = $(e.target);
+        checkpointType = $(e.target).data('checkpointType');
+        const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
+
+        if (checkpointType !== 'PHONE' && checkpointType !== 'EMAIL') {
+            console.log('select checkpointType now it\'s:', checkpointType);
+        }
+
+        User.getSecurityKey(username, checkpointType).then((result) => {
+            console.log('SecurityKey received:', result.status.state);
+            if (result.status.state === 'ok') {
+                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+            }
+        });
     });
 
-    $('.js_confirm-security-code').on('click', () => {
-        // get http://localhost:8080/v1/instagram-accounts/checkpoint/{username}
-        const username = 'some.name';
-        User.getSecurityKey(username);
+    // inside modal
+    $('.js_confirm-security-code').on('click', (e) => {
+        const btn = $(e.target);
+        const $keyInput = btn.closest('.modal').find('.modal-dialog form input');
+        const key = $keyInput.val().trim();
+        if (key.length !== 6) {
+            e.stopPropagation();
+            // $keyInput.css('borderColor', 'red');
+            // $keyInput.get(0).setCustomValidity('key.length not correct');
+            // console.log('key.length not correct');
+            return;
+        }
+        User.confirmSecurityKey(key, username);
+    });
+
+    $('form input[minlength]').on('blur', function() {
+        const len = $(this).val().trim().length;
+        const minLen = Number($(this).attr('minlength'));
+        // const message = minLen <= len ? '' : minLen + ' characters minimum';
+        if (minLen !== len) {
+            $(this).css('borderColor', 'red');
+        } else {
+            $(this).css('borderColor', '#ced4da');
+        }
+        // this.setCustomValidity(message)
     });
 }
 
@@ -87,7 +131,7 @@ function fillList($list, dataArray) {
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
-                         ? '<button class="btn btn-outline-danger" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>'
+                         ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
                          : ''}
                     </div>
                     <div class="col">
@@ -108,7 +152,7 @@ function fillList($list, dataArray) {
  * Init header
  */
 export function init() {
-    const token = '3e321e60029711e99264a0481c8e17d4';
+    const token = '3e321e60029711e99264a0481c8e17d4'; // upd to: User.getToken()
     const metadata = User.getMetadata(token);
     const $accountsList = $('.accounts-list');
 
@@ -129,7 +173,7 @@ export function init() {
         }
 
         fillList($accountsList, staticResp.data.accounts);
-    });
 
-    addHandler();
+        addHandler('andrey.jakivchyk');
+    });
 }
