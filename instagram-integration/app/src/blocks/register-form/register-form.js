@@ -66,22 +66,10 @@ export default class RegisterForm {
             });
     }
 
-    // toggleRegForm() {
-    //     const registerBox = '.register-box';
-    //     const registerBoxClose = '.register-box-close';
-    //     $(registerBox).toggleClass(hamburgerButtonCloseClass);
-    //     $(hamburgerMenuCls).toggleClass(hamburgerMenuOpenedClass);
-    // }
-
     bindEvents() {
         const registerBox = CONST.uiSelectors.headerRegBox; // 'nav .register-box';
         const openedClass = 'd-block';
         const closeClass = 'd-none';
-
-        // $('.login').on('click', function (e) {
-        //     this.submitForm(e, CONST.user, 'loginUrl');
-        // });
-
         const $btn = $('#js_feedback_btn'),
             cssValidationClass = 'form-validation';
 
@@ -105,8 +93,6 @@ export default class RegisterForm {
 
         $(document).on('click', (event) => {
             const isRegBtnClick = $(event.target).closest('nav.navbar').find('.register-box').length;
-            // console.log('hasClass', $(registerBox).hasClass(openedClass));
-            // console.log('isRegClick', isRegClick);
 
             if (!isRegBtnClick && $(registerBox).hasClass(openedClass)) {
                 $(registerBox).addClass(closeClass).removeClass(openedClass);
