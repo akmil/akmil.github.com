@@ -1,71 +1,79 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
-import viewUtils from '../../common/js-services/view';
+// import viewUtils from '../../common/js-services/view';
 
 const staticResp = {
-    'status': {
-        'state': 'ok'
+    "status": {
+        "state": "ok"
     },
-    'data': {
-        'accounts': {
-            'andrey.jakivchyk': {
-                'status': 'OK',
-                'checkpoint': {
-                    'status': 'ABSENT',
-                    'type': undefined
-                },
-                'tariff': {
-                    'status': 'ABSENT'
-                },
-                'info': {
-                    'name': 'Андрей Якивчук',
-                    'biography': '',
-                    'url': '',
-                    'email': 'nidzuku@inbox.ru',
-                    'phone': '',
-                    'profile_pic_url': 'https://scontent-ber1-1.cdninstagram.com/vp/7116b5ba2b7967af0c7bdd9452248157/5CB5EE4F/t51.2885-19/s150x150/46841228_385962198812347_2321083919706882048_n.jpg?_nc_ht=scontent-ber1-1.cdninstagram.com',
-                    'is_verified': false,
-                    'is_private': true,
-                    'media_count': 11,
-                    'follower_count': 95,
-                    'following_count': 585
-                }
+    "data": {
+        "accounts": [{
+            "status": "OK",
+            "username": "andrey.jakivchyk",
+            "checkpoint": {
+                "status": "ABSENT",
+                "type": "PHONE"
             },
-            'andrey.jakivchyk2': {
-                'status': 'OK',
-                'checkpoint': {
-                    'status': 'TRIGGERED',
-                    'type': 'PHONE'
-                },
-                'tariff': {
-                    'status': 'ABSENT'
-                },
-                'info': {
-                    'name': 'Андрей Якивчук',
-                    'biography': '',
-                    'url': '',
-                    'email': '2nidzuku@inbox.ru',
-                    'phone': '',
-                    'profile_pic_url': 'https://scontent-ber1-1.cdninstagram.com/vp/7116b5ba2b7967af0c7bdd9452248157/5CB5EE4F/t51.2885-19/s150x150/46841228_385962198812347_2321083919706882048_n.jpg?_nc_ht=scontent-ber1-1.cdninstagram.com',
-                    'is_verified': false,
-                    'is_private': true,
-                    'media_count': 5,
-                    'follower_count': 45,
-                    'following_count': 82
-                }
+            "tariff": {
+                "status": "ABSENT"
             },
-            'andrey.jakivchyk3': {
-                'status': 'OK',
-                'checkpoint': {
-                    'status': 'TRIGGERED',
-                    'type': 'PHONE_OR_EMAIL'
-                },
-                'tariff': {
-                    'status': 'ABSENT'
-                }
+            "info": {
+                "name": "Андрей Якивчук",
+                "biography": "",
+                "url": "",
+                "email": "nidzuku@inbox.ru",
+                "phone": ""
             }
+        }, {
+            "status": "OK",
+            "username": "andrey.jakivchyk",
+            "checkpoint": {
+                "status": "ABSENT",
+                "type": "EMAIL"
+            },
+            "tariff": {
+                "status": "ABSENT"
+            },
+            "info": {
+                "name": "Димон Паралон",
+                "biography": "biography text",
+                "url": "www.lenengrad.ru",
+                "email": "nidzuku@inbox.ru",
+                "phone": "011-111-111-11",
+                "media_count": 515,
+                "follower_count": 32,
+                "following_count": 34
+            }
+        }, {
+            "status": "OK",
+            "username": "alex.smith",
+            "checkpoint": {
+                "status": "TRIGGERED",
+                "type": "PHONE_OR_EMAIL"
+            },
+            "tariff": {
+                "status": "ABSENT"
+            },
         },
-        'available_proxy_purchase': true
+            {
+                "status": "OK",
+                "username": "22andrey.jakivchyk2",
+                "checkpoint": {
+                    "status": "TRIGGERED",
+                    "type": "PHONE"
+                },
+                "tariff": {
+                    "status": "ABSENT"
+                },
+            }
+        ],
+        "available_proxy_purchase": true
+    }
+};
+
+const staticRespWithDelay = {
+    "status": {
+        "state": "ok"
     }
 };
 
@@ -93,6 +101,10 @@ const addInstagramAccount = (newFormData) => {
 };
 
 function addOnLoadHandlers() {
+    $('.js_repeat-security-code').on('click', (e) => {
+
+    });
+
     $('.js_add-instagram-account').on('click', (e) => {
         const btn = $(e.target);
         const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
@@ -130,16 +142,23 @@ function addListHandler(username) {
     let checkpointType = '';
 
     $('.js_pass-checkpoint-btn').on('click', (e) => {
-        checkpointType = $(e.target).data('checkpointType');
+        checkpointType = $(e.target).data('checkpointType') || checkpointType;
+        // $('#security-code').data('checkpointType', checkpointType);
+        //todo add 'checkpointType' to modal
         const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
 
         if (checkpointType === 'PHONE_OR_EMAIL') {
-            // не отправляем реквест
+            e.stopPropagation();
+
+            // инпуты спрятаны,
             // показать серые переключатели (выбрал тип)
-            // инпуты спрятаны, есть кнопка Запросить код подтверждение
-            // при нажатии "Запросить код подтверждение" - отпарляется реквест "старт чекпоинт" появляеться инпут и кнопка других типах
-            // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
+            // есть кнопка Запросить код подтверждение
+            $('#security-code-phoneOremail').modal('show');
+
+
             console.log('select checkpointType now it\'s:', checkpointType);
+
+            // не отправляем реквест
             return;
         }
 
@@ -158,15 +177,12 @@ function addListHandler(username) {
         const key = $keyInput.val().trim();
         if (key.length !== 6) {
             e.stopPropagation();
-            // $keyInput.css('borderColor', 'red');
-            // $keyInput.get(0).setCustomValidity('key.length not correct');
-            // console.log('key.length not correct');
             return;
         }
         User.confirmSecurityKey(key, username);
     });
 
-    $('form input[minlength]').on('blur', function() {
+    $('form input[minlength]').on('blur', function () {
         const len = $(this).val().trim().length;
         const minLen = Number($(this).attr('minlength'));
         // const message = minLen <= len ? '' : minLen + ' characters minimum';
@@ -177,42 +193,72 @@ function addListHandler(username) {
         }
         // this.setCustomValidity(message)
     });
+
+    //"PHONE_OR_EMAIL" modal
+    $('.js_get-security-code-phoneOremail').on('click', (e) => {
+        const typeSelected = $(e.target).closest('#security-code-phoneOremail').find('.js_btn-type-switcher [checked="checked"]')
+        let checkpointTypeActive = typeSelected.val();
+        User.getSecurityKey('username', checkpointTypeActive).then((result) => {
+            // при нажатии "Запросить код подтверждение" - отпарляется реквест "старт чекпоинт" появляеться инпут и кнопка других типах
+            //get selected button
+
+            // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
+            console.log('SecurityKey received:', result.status.state);
+            if (result.status.state === 'ok') {
+                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+            }
+        });
+    });
 }
 
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
     cList.empty();
-    for (const key in items) {
-        if (Object.prototype.hasOwnProperty.call(items, key)) {
-            const item = items[key];
-            const info = item.info;
-            const checkpoint = item.checkpoint;
+    items.forEach((item) => {
+        // const item = items[key];
+        const info = item.info;
+        const checkpoint = item.checkpoint;
+
+        if (!info) {
             $(`<li class="media py-3">
-                <img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">
-                <div class="media-body d-flex">
-                    <div class="col">
-                        <h3 class="mt-0 mb-2">${info.name}</h3>
-                        <p class="mt-0 mb-3">${info.email}</p>
-                        ${(info.phone) ? `<p class="mt-0 mb-3">${info.phone}</p>` : ''}
-                    </div>
+                <div class="media-body d-flex">                
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
-                         ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
-                         : ''}
+                ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
+                            data-toggle="modal" data-target="#security-code">
+                            <i class="fa fa-plus"></i>Пройти чекпоинт</button>`
+                : ''}
                     </div>
-                    <div class="col">
-                        <ul class="list-inline text-center counts-list">
-                            <li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>
-                            <li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>
-                            <li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>
-                        </ul>
-                    </div>
-                    
                 </div>
             </li>`).appendTo(cList);
+        } else {
+            $(`<li class="media py-3">
+            ${(info['profile_pic_url'])
+                ? `<img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">` : ''}
+            <div class="media-body d-flex">
+                <div class="col">
+                    ${(item.username) ? `<h3 class="mt-0 mb-2">${item.username}</h3>` : ''}
+                    ${(info.email) ? `<p class="mt-0 mb-3">${info.email}</p>` : ''}
+                    ${(info.phone) ? `<p class="mt-0 mb-3">${info.phone}</p>` : ''}
+                </div>
+                <div class="col">                        
+                    ${(checkpoint.status === 'TRIGGERED')
+                ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
+                : ''}
+                </div>
+                <div class="col">
+                    <ul class="list-inline text-center counts-list">
+                        ${(info['media_count']) ? `<li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>` : ''}
+                        ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>` : ''}
+                        ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>` : ''}
+                    </ul>
+                </div>
+                
+            </div>
+        </li>`).appendTo(cList);
         }
-    }
+    });
 }
 
 /**
@@ -220,8 +266,11 @@ function fillList($list, dataArray) {
  */
 export function init() {
     const token = '3e321e60029711e99264a0481c8e17d4'; // upd to: User.getToken()
-    const metadata = User.getMetadata(token);
+    let metadata = User.getMetadata(token);
     const $accountsList = $('.accounts-list');
+    const resendRequest = () => {
+        metadata = User.getMetadata(token);
+    };
 
     // check we are in profile page
     if (!$accountsList.length) {
@@ -231,11 +280,8 @@ export function init() {
     addOnLoadHandlers();
 
     // Loder
-    // если Тригеред - то показать кнопку пройти Чекпоинт, иначе данніе с инфо (может инфо отсутсвовать - сделать еще раз запрос через 3 сек.)    
+    // если Тригеред - то показать кнопку пройти Чекпоинт, иначе данные с инфо (может инфо отсутсвовать - сделать еще раз запрос через 3 сек.)
 
-    fillList($accountsList, staticResp.data.accounts);
-
-    addListHandler('andrey.jakivchyk');
 
     metadata.then((result) => {
         if (!result.status.state === 'ok' || !result.data || !$accountsList.length) {
@@ -245,11 +291,14 @@ export function init() {
                     <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
                 </div>
             </li>`).appendTo($accountsList);
+            setTimeout(() => {
+                resendRequest();
+                console.log('Request resend');
+            }, 3500);
             return;
         }
 
         fillList($accountsList, staticResp.data.accounts);
-
         addListHandler('andrey.jakivchyk');
     });
 }

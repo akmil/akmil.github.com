@@ -11,6 +11,12 @@
                 </div>
 
                 <ul class="list-unstyled accounts-list mt-5 p-3">
+                    <li class="media justify-content-center">
+                        <i class="fal fa-quidditch fa-spin"></i>
+                        <div class="spin-animation">
+                            <svg aria-hidden="true" data-prefix="far" data-icon="sync-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sync-alt fa-w-16 fa-fw fa-2x"><path fill="currentColor" d="M483.515 28.485L431.35 80.65C386.475 35.767 324.485 8 256 8 123.228 8 14.824 112.338 8.31 243.493 7.971 250.311 13.475 256 20.301 256h28.045c6.353 0 11.613-4.952 11.973-11.294C66.161 141.649 151.453 60 256 60c54.163 0 103.157 21.923 138.614 57.386l-54.128 54.129c-7.56 7.56-2.206 20.485 8.485 20.485H492c6.627 0 12-5.373 12-12V36.971c0-10.691-12.926-16.045-20.485-8.486zM491.699 256h-28.045c-6.353 0-11.613 4.952-11.973 11.294C445.839 370.351 360.547 452 256 452c-54.163 0-103.157-21.923-138.614-57.386l54.128-54.129c7.56-7.56 2.206-20.485-8.485-20.485H20c-6.627 0-12 5.373-12 12v143.029c0 10.691 12.926 16.045 20.485 8.485L80.65 431.35C125.525 476.233 187.516 504 256 504c132.773 0 241.176-104.338 247.69-235.493.339-6.818-5.165-12.507-11.991-12.507z" class=""></path></svg>
+                        </div>
+                    </li>
                     {{!-- <li class="media">
                         <img class="mr-3 rounded" alt="64x64" src="http://api.randomuser.me/portraits/men/42.jpg">
                         <div class="media-body mt-3">
@@ -65,18 +71,17 @@
                         </div> --}}
                         <div class="form-group">
                             <label class="sr-only">Код подтверждения</label>
-                            <input type="text" class="form-control" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required title="6 characters minimum"
-                                   oninvalid="this.setCustomValidity('Field must contain min. 6 characters')" onchange="try{setCustomValidity('')}catch(e){}">
+                            <input type="text" class="form-control" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required title="6 characters minimum">
                         </div>
                         <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
-                        <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                        <button type="button" class="js_pass-checkpoint-btn js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{!-- 
-    <div class="modal fade" id="security-code11" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display: none;">
+    {{!-- Modal to enter security-code with phoneOremail--}}
+    <div class="modal fade" id="security-code-phoneOremail" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display: none;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,29 +90,21 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="btn-group" role="group" aria-label="Default button group">
-                            <button type="button" class="btn btn-secondary">EMAIL</button>
-                            <button type="button" class="btn btn-secondary">PHONE</button>
+                        <div class="btn-group btn-group-toggle js_btn-type-switcher" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> EMAIL
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> PHONE
+                            </label>
                         </div>
-                        <div class="form-group">
-                            <label class="sr-only">Код подтверждения</label>
-                            <input type="text" class="form-control" placeholder="Код подтверждения">
-                        </div>
-                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Запросить код</button>
-                        <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
-                    </form>
-                    <form>                        
-                        <div class="form-group">
-                            <label class="sr-only">Код подтверждения</label>
-                            <input type="text" class="form-control" placeholder="Код подтверждения">
-                        </div>
-                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
-                        <button type="button" class="js_repeat-security-code btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+
+                        <button type="button" class="js_get-security-code-phoneOremail btn btn-outline-success margin-top-md center-block">Запросить код подтверждения</button>
                     </form>
                 </div>
             </div>
         </div>
     </div> 
-    --}}
+
 
 </div>
