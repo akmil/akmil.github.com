@@ -237,22 +237,23 @@ function fillList($list, dataArray) {
             <ul class="list-inline text-center counts-list">
                 ${(info['media_count']) ? `<li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>`
                     : '<li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>'}
-                ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>`
-                 : '<li class="follower-count list-inline-item"><span class="figure">-</span><span>подписчики</span></li>'}
-                ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>`
-                : '<li class="following-count list-inline-item"><span class="figure">-</span><span>подписки</span></li>'}
+                ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>Подписчики</span></li>`
+                 : '<li class="follower-count list-inline-item"><span class="figure">-</span><span>Подписчики</span></li>'}
+                ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>Подписки</span></li>`
+                : '<li class="following-count list-inline-item"><span class="figure">-</span><span>Подписки</span></li>'}
             </ul>
         </div>`
         : `<div class="col">
             <ul class="list-inline text-center counts-list">
             <li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>
-            <li class="follower-count list-inline-item"><span class="figure">-</span><span>подписчики</span></li>
-            <li class="following-count list-inline-item"><span class="figure">-</span><span>подписки</span></li>
+            <li class="follower-count list-inline-item"><span class="figure">-</span><span>Подписчики</span></li>
+            <li class="following-count list-inline-item"><span class="figure">-</span><span>Подписки</span></li>
             </ul>
         </div>`;
         return tpl;
     };
     cList.empty();
+    cList.addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
         const checkpoint = item.checkpoint;
@@ -266,7 +267,7 @@ function fillList($list, dataArray) {
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
-                        ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
+                        ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
                             data-toggle="modal" data-target="#security-code">
                             <i class="fa fa-plus"></i>Пройти чекпоинт</button>`
                         : ''}
@@ -288,7 +289,7 @@ function fillList($list, dataArray) {
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
+                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
                 : ''}
                 </div>
                 ${stats(info)}
