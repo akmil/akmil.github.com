@@ -22,7 +22,10 @@ const staticResp = {
                 'biography': '',
                 'url': '',
                 'email': 'nidzuku@inbox.ru',
-                'phone': ''
+                'phone': '',
+                'media_count': 2,
+                'follower_count': 4,
+                'following_count': 15
             }
         }, {
             'status': 'OK',
@@ -59,18 +62,19 @@ const staticResp = {
             'status': 'OK',
             'username': '22andrey.jakivchyk2',
             'checkpoint': {
-                    'status': 'TRIGGERED',
-                    'type': 'PHONE'
-                },
+                'status': 'TRIGGERED',
+                'type': 'PHONE'
+            },
             'tariff': {
-                    'status': 'ABSENT'
-                }
+                'status': 'ABSENT'
+            }
         }
         ],
         'available_proxy_purchase': true
     }
 };
 
+/*
 const staticRespWithDelay = {
     'status': {
         'state': 'ok'
@@ -90,6 +94,7 @@ const staticRespWithDelay = {
         'available_proxy_purchase': true
     }
 };
+*/
 
 // После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
 const addInstagramAccount = (newFormData) => {
@@ -115,9 +120,9 @@ const addInstagramAccount = (newFormData) => {
 };
 
 function addOnLoadHandlers() {
-    $('.js_repeat-security-code').on('click', (e) => {
+    // $('.js_repeat-security-code').on('click', (e) => {
 
-    });
+    // });
 
     $('.js_add-instagram-account').on('click', (e) => {
         const btn = $(e.target);
@@ -217,7 +222,7 @@ function addListHandler(username) {
             // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
             console.log('SecurityKey received:', result.status.state);
             if (result.status.state === 'ok') {
-                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на {sendTo} ${result.status.state}`);
             }
         });
     });
