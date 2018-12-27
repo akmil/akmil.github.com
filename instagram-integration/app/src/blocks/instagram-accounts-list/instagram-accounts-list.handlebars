@@ -34,7 +34,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modal-new-ticket-label">Дабавить аккаунт</h4>
+                    <h4 class="modal-title" id="modal-new-ticket-label">Добавить аккаунт</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -65,10 +65,6 @@
                 <div class="modal-body">
                     <p class="js_success-feedback"></p>
                     <form>
-                        {{!-- <div class="btn-group" role="group" aria-label="Default button group">
-                            <button type="button" class="btn btn-secondary">EMAIL</button>
-                            <button type="button" class="btn btn-secondary">PHONE</button>
-                        </div> --}}
                         <div class="form-group">
                             <label class="sr-only">Код подтверждения</label>
                             <input type="text" class="form-control" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required title="6 characters minimum">
@@ -80,6 +76,7 @@
             </div>
         </div>
     </div>
+    
     {{!-- Modal to enter security-code with phoneOremail--}}
     <div class="modal fade" id="security-code-phoneOremail" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display: none;">
         <div class="modal-dialog" role="document">

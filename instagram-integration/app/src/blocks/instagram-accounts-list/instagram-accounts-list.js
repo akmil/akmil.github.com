@@ -3,77 +3,91 @@ import User from '../../common/js-services/user';
 // import viewUtils from '../../common/js-services/view';
 
 const staticResp = {
-    "status": {
-        "state": "ok"
+    'status': {
+        'state': 'ok'
     },
-    "data": {
-        "accounts": [{
-            "status": "OK",
-            "username": "andrey.jakivchyk",
-            "checkpoint": {
-                "status": "ABSENT",
-                "type": "PHONE"
+    'data': {
+        'accounts': [{
+            'status': 'OK',
+            'username': 'andrey.jakivchyk',
+            'checkpoint': {
+                'status': 'ABSENT',
+                'type': 'PHONE'
             },
-            "tariff": {
-                "status": "ABSENT"
+            'tariff': {
+                'status': 'ABSENT'
             },
-            "info": {
-                "name": "Андрей Якивчук",
-                "biography": "",
-                "url": "",
-                "email": "nidzuku@inbox.ru",
-                "phone": ""
+            'info': {
+                'name': 'Андрей Якивчук',
+                'biography': '',
+                'url': '',
+                'email': 'nidzuku@inbox.ru',
+                'phone': ''
             }
         }, {
-            "status": "OK",
-            "username": "andrey.jakivchyk",
-            "checkpoint": {
-                "status": "ABSENT",
-                "type": "EMAIL"
+            'status': 'OK',
+            'username': 'andrey.jakivchyk',
+            'checkpoint': {
+                'status': 'ABSENT',
+                'type': 'EMAIL'
             },
-            "tariff": {
-                "status": "ABSENT"
+            'tariff': {
+                'status': 'ABSENT'
             },
-            "info": {
-                "name": "Димон Паралон",
-                "biography": "biography text",
-                "url": "www.lenengrad.ru",
-                "email": "nidzuku@inbox.ru",
-                "phone": "011-111-111-11",
-                "media_count": 515,
-                "follower_count": 32,
-                "following_count": 34
+            'info': {
+                'profile_pic_url': 'https://randomuser.me/api/portraits/men/52.jpg',
+                'name': 'Димон Паралон',
+                'biography': 'biography text',
+                'url': 'www.lenengrad.ru',
+                'email': 'nidzuku@inbox.ru',
+                'phone': '011-111-111-11',
+                'media_count': 515,
+                'follower_count': 32,
+                'following_count': 34
             }
         }, {
-            "status": "OK",
-            "username": "alex.smith",
-            "checkpoint": {
-                "status": "TRIGGERED",
-                "type": "PHONE_OR_EMAIL"
+            'status': 'OK',
+            'username': 'alex.smith',
+            'checkpoint': {
+                'status': 'TRIGGERED',
+                'type': 'PHONE_OR_EMAIL'
             },
-            "tariff": {
-                "status": "ABSENT"
-            },
-        },
-            {
-                "status": "OK",
-                "username": "22andrey.jakivchyk2",
-                "checkpoint": {
-                    "status": "TRIGGERED",
-                    "type": "PHONE"
-                },
-                "tariff": {
-                    "status": "ABSENT"
-                },
+            'tariff': {
+                'status': 'ABSENT'
             }
+        }, {
+            'status': 'OK',
+            'username': '22andrey.jakivchyk2',
+            'checkpoint': {
+                    'status': 'TRIGGERED',
+                    'type': 'PHONE'
+                },
+            'tariff': {
+                    'status': 'ABSENT'
+                }
+        }
         ],
-        "available_proxy_purchase": true
+        'available_proxy_purchase': true
     }
 };
 
 const staticRespWithDelay = {
-    "status": {
-        "state": "ok"
+    'status': {
+        'state': 'ok'
+    },
+    'data': {
+        'accounts': [{
+            'status': 'OK',
+            'username': 'staticResp.WithDelay',
+            'checkpoint': {
+                'status': 'ABSENT',
+                'type': 'PHONE'
+            },
+            'tariff': {
+                'status': 'ABSENT'
+            }
+        }],
+        'available_proxy_purchase': true
     }
 };
 
@@ -144,7 +158,7 @@ function addListHandler(username) {
     $('.js_pass-checkpoint-btn').on('click', (e) => {
         checkpointType = $(e.target).data('checkpointType') || checkpointType;
         // $('#security-code').data('checkpointType', checkpointType);
-        //todo add 'checkpointType' to modal
+        // todo add 'checkpointType' to modal
         const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
 
         if (checkpointType === 'PHONE_OR_EMAIL') {
@@ -154,8 +168,6 @@ function addListHandler(username) {
             // показать серые переключатели (выбрал тип)
             // есть кнопка Запросить код подтверждение
             $('#security-code-phoneOremail').modal('show');
-
-
             console.log('select checkpointType now it\'s:', checkpointType);
 
             // не отправляем реквест
@@ -194,13 +206,13 @@ function addListHandler(username) {
         // this.setCustomValidity(message)
     });
 
-    //"PHONE_OR_EMAIL" modal
+    // "PHONE_OR_EMAIL" modal
     $('.js_get-security-code-phoneOremail').on('click', (e) => {
-        const typeSelected = $(e.target).closest('#security-code-phoneOremail').find('.js_btn-type-switcher [checked="checked"]')
-        let checkpointTypeActive = typeSelected.val();
+        const typeSelected = $(e.target).closest('#security-code-phoneOremail').find('.js_btn-type-switcher [checked="checked"]');
+        const checkpointTypeActive = typeSelected.val();
         User.getSecurityKey('username', checkpointTypeActive).then((result) => {
             // при нажатии "Запросить код подтверждение" - отпарляется реквест "старт чекпоинт" появляеться инпут и кнопка других типах
-            //get selected button
+            // get selected button
 
             // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
             console.log('SecurityKey received:', result.status.state);
@@ -214,47 +226,67 @@ function addListHandler(username) {
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
+    const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    const stats = (info) => {
+        const tpl = (info) ? `<div class="col">
+            <ul class="list-inline text-center counts-list">
+                ${(info['media_count']) ? `<li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>`
+                    : '<li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>'}
+                ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>`
+                 : '<li class="follower-count list-inline-item"><span class="figure">-</span><span>подписчики</span></li>'}
+                ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>`
+                : '<li class="following-count list-inline-item"><span class="figure">-</span><span>подписки</span></li>'}
+            </ul>
+        </div>`
+        : `<div class="col">
+            <ul class="list-inline text-center counts-list">
+            <li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>
+            <li class="follower-count list-inline-item"><span class="figure">-</span><span>подписчики</span></li>
+            <li class="following-count list-inline-item"><span class="figure">-</span><span>подписки</span></li>
+            </ul>
+        </div>`;
+        return tpl;
+    };
     cList.empty();
     items.forEach((item) => {
-        // const item = items[key];
         const info = item.info;
         const checkpoint = item.checkpoint;
 
         if (!info) {
             $(`<li class="media py-3">
-                <div class="media-body d-flex">                
+                <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
+                <div class="media-body d-flex">
+                    <div class="col">
+                        ${(item.username) ? `<h3 class="mt-0 mb-2">${item.username}</h3>` : ''}
+                    </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
+                        ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
                             data-toggle="modal" data-target="#security-code">
                             <i class="fa fa-plus"></i>Пройти чекпоинт</button>`
-                : ''}
+                        : ''}
                     </div>
+                    ${stats()}
                 </div>
             </li>`).appendTo(cList);
         } else {
             $(`<li class="media py-3">
             ${(info['profile_pic_url'])
-                ? `<img class="mr-3 rounded" alt="64x64" src="${info['profile_pic_url']}">` : ''}
+                ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
+                : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
             <div class="media-body d-flex">
                 <div class="col">
                     ${(item.username) ? `<h3 class="mt-0 mb-2">${item.username}</h3>` : ''}
-                    ${(info.email) ? `<p class="mt-0 mb-3">${info.email}</p>` : ''}
-                    ${(info.phone) ? `<p class="mt-0 mb-3">${info.phone}</p>` : ''}
+                    ${(info.name) ? `<p class="mt-0 mb-2">${info.name}</p>` : ''}
+                    ${(info.email) ? `<p class="mt-0 mb-2">${info.email}</p>` : ''}
+                    ${(info.phone) ? `<p class="mt-0 mb-2">${info.phone}</p>` : ''}
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
                 ? `<button class="btn btn-outline-danger js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
                 : ''}
                 </div>
-                <div class="col">
-                    <ul class="list-inline text-center counts-list">
-                        ${(info['media_count']) ? `<li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>` : ''}
-                        ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>подписчики</span></li>` : ''}
-                        ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>подписки</span></li>` : ''}
-                    </ul>
-                </div>
-                
+                ${stats(info)}
             </div>
         </li>`).appendTo(cList);
         }
@@ -279,9 +311,7 @@ export function init() {
 
     addOnLoadHandlers();
 
-    // Loder
-    // если Тригеред - то показать кнопку пройти Чекпоинт, иначе данные с инфо (может инфо отсутсвовать - сделать еще раз запрос через 3 сек.)
-
+    // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
 
     metadata.then((result) => {
         if (!result.status.state === 'ok' || !result.data || !$accountsList.length) {

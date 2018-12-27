@@ -65,6 +65,11 @@ $border-color: $gray-300;
                     color: $gray-700;
                 }
             }
+            img,
+            .col {
+                margin-top: auto;
+                margin-bottom: auto;
+            }
         }
 
         .title {            
