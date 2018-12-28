@@ -20,12 +20,17 @@ $border-color: $gray-300;
 
 
 
-.profile-user {    
+.profile-user {
     .heading {
         .actions {
             position: absolute;
             right: 15px;
             top: 10px;
+        }
+    }
+    .btn {
+        i {
+            margin-right: 0.5rem;
         }
     }
     .accounts-list {

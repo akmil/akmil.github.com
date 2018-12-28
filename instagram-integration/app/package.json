@@ -12,6 +12,7 @@
     "babel-polyfill": "^6.23.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.6.3",
     "autoprefixer": "^6.7.6",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",

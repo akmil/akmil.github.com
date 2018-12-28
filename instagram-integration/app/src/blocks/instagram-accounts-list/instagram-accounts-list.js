@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
+// import Spinner from '../../common/js-services/spinner';
 // import viewUtils from '../../common/js-services/view';
 
 const staticResp = {
@@ -161,10 +162,12 @@ function addListHandler(username) {
     let checkpointType = '';
 
     $('.js_pass-checkpoint-btn').on('click', (e) => {
-        checkpointType = $(e.target).data('checkpointType') || checkpointType;
+        const $button = $(e.target);
+        checkpointType = $button.data('checkpointType') || checkpointType;
         // $('#security-code').data('checkpointType', checkpointType);
         // todo add 'checkpointType' to modal
         const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
+        // Spinner.start($button, 'fa-key');
 
         if (checkpointType === 'PHONE_OR_EMAIL') {
             e.stopPropagation();
@@ -182,7 +185,9 @@ function addListHandler(username) {
             console.log('SecurityKey received:', result.status.state);
             if (result.status.state === 'ok') {
                 const $modal = $('#security-code');
-                $('#security-code .js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+
+                // Spinner.stop($button, 'fa-key');
+                $('.js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
             }
         });
     });
@@ -192,11 +197,23 @@ function addListHandler(username) {
         const btn = $(e.target);
         const $keyInput = btn.closest('.modal').find('.modal-dialog form input.js_confirm-key');
         const key = $keyInput.val().trim();
+        const $modal = btn.closest('.modal');
+        e.stopPropagation();
+
         if (key.length !== 6) {
-            e.stopPropagation();
             return;
         }
-        User.confirmSecurityKey(key, username);
+        User.confirmSecurityKey(key, username).then((result) => {
+            if (result.status.state !== 'ok') {
+                return;
+            }
+            console.log('js_confirm:', result.status.state, 'close modal');
+            $modal.modal('hide');
+        }).catch((err) => {
+            console.log('err');
+            $('.js_success-feedback', $modal).text('Запрос не отправлен').css('color', 'red');
+            console.log(err);
+        });
     });
 
     $('form input[minlength]').on('blur', function () {
@@ -209,6 +226,13 @@ function addListHandler(username) {
             $(this).css('borderColor', '#ced4da');
         }
         // this.setCustomValidity(message)
+    });
+
+    $('#security-code-phoneOremail').on('hide.bs.modal', (e) => {
+        const $modal = $(e.target);
+        $modal.find('.first-step').removeClass('d-none');
+        $modal.find('.second-step').addClass('d-none');
+        $('.js_success-feedback', $modal).empty();
     });
 
     // "PHONE_OR_EMAIL" modal
@@ -228,7 +252,7 @@ function addListHandler(username) {
             if (result.status.state === 'ok') {
                 $('.first-step', $modal).addClass('d-none');
                 $('.second-step', $modal).removeClass('d-none');
-                $('#security-code .js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+                $('.js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
             }
         });
     });
@@ -275,7 +299,7 @@ function fillList($list, dataArray) {
                         ${(checkpoint.status === 'TRIGGERED')
                         ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
                             data-toggle="modal" data-target="#security-code">
-                            <i class="fa fa-plus"></i>Пройти чекпоинт</button>`
+                            <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                         : ''}
                     </div>
                     ${stats()}
@@ -295,7 +319,8 @@ function fillList($list, dataArray) {
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code"><i class="fa fa-plus"></i>Пройти чекпоинт</button>`
+                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code">
+                    <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                 : ''}
                 </div>
                 ${stats(info)}

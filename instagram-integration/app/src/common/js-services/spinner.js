@@ -1,10 +1,10 @@
 import $ from 'jquery';
-import {CONST} from './consts';
+// import {CONST} from './consts';
 // import Network from './network';
 // import CookieStorage from './cookie';
-import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
+// import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 
-const SPINNER_BASE_TEMPALATE = 'js/ui/tpl/spinner.hbs';
+// const SPINNER_BASE_TEMPALATE = 'js/ui/tpl/spinner.hbs';
 const classes = {
     inline: 'global-inline-spinner',
     overlay: 'global-overlay-spinner',
@@ -23,33 +23,48 @@ const classes = {
 //     return html;
 // };
 // const handlebars = this.getService('core.templating.handlebars');
-Spinner.prototype._mediator = PubSub;
 
 class Spinner {
 
-    constructor(cfg) {
-        cfg = cfg || {};
-        this.$defaultContainer = $('body');
-        $.extend(classes, cfg.classes);
-        this._mediator.subscribe(CONST.events.STOP_FIXED_SPINNER, this.stopFixedSpinner.bind(this));
+    constructor(_cfg) {
+        this.cfg = _cfg || {};
+        // this.$defaultContainer = $('body');
+        $.extend(classes, this.cfg.classes);
+        // this._mediator.subscribe(CONST.events.STOP_FIXED_SPINNER, this.stopFixedSpinner.bind(this));
     }
+    // _mediator = PubSub;
+
+    start($el, prewCls) {
+        // if (addOrRemove) {
+        //     $('#foo').addClass(className);
+        // }
+        // else {
+        //     $('#foo').removeClass(className);
+        // }
+        $el.find('i').toggleClass(prewCls).addClass('fa-spin fa-spinner');
+    }
+
+    stop($el, newCls) {
+        $el.find('i').toggleClass(newCls).removeClass('fa-spin fa-spinner');
+    }
+
     /**
      * Finds spinners
      * @param {string} type
      * @param {string} $container
      * @return {?jQuery} spinners
      */
-    _findSpinner = function (type, $container) {
-        const selector = '.' + type;
-        let $el = this.$defaultContainer;
-        if ($container) {
-            $el = $container;
-        }
-
-        if ($el.find(selector).length > 0) {
-            return $el.find(selector);
-        }
-    };
+    // _findSpinner = function (type, $container) {
+    //     const selector = '.' + type;
+    //     let $el = this.$defaultContainer;
+    //     if ($container) {
+    //         $el = $container;
+    //     }
+    //
+    //     if ($el.find(selector).length > 0) {
+    //         return $el.find(selector);
+    //     }
+    // };
 
     /**
      *
@@ -96,60 +111,58 @@ class Spinner {
      * Adds spinner icon on button before the button text
      * @param {jQuery} $el
      */
-    startButtonSpinner = function ($el) {
-        $el.addClass(classes.button);
-    };
+    // startButtonSpinner = function ($el) {
+    //     $el.addClass(classes.button);
+    // };
 
     /**
      * Stops spinners
      * @param {string} type
      * @param {string} $container
      */
-    _stopSpinner = function (type, $container) {
-        const spinners = this._findSpinner(type, $container);
-        if (spinners) {
-            spinners.remove();
-        }
-    };
+    // _stopSpinner = function (type, $container) {
+    //     const spinners = this._findSpinner(type, $container);
+    //     if (spinners) {
+    //         spinners.remove();
+    //     }
+    // };
 
     /**
      *
      * @param {string} $el
      */
-    stopContentSpinner = function ($el) {
-        $el.find('.' + classes.overlay).remove();
-    };
+    // stopContentSpinner = function ($el) {
+    //     $el.find('.' + classes.overlay).remove();
+    // };
 
     /**
      *
      * @param {string} $el
      */
-    stopInlineContentSpinner = function ($el) {
-        $el.find('.' + classes.inline).remove();
-    };
+    // stopInlineContentSpinner = function ($el) {
+    //     $el.find('.' + classes.inline).remove();
+    // };
 
     /**
      * Stops global full page fixed spinner
      */
-    stopFixedSpinner = function () {
-        this._stopSpinner(classes.fixed);
-    };
+    // stopFixedSpinner = function () {
+    //     this._stopSpinner(classes.fixed);
+    // };
 
     /**
      * Removes spinner icon from button
      * @param {jQuery} $el
      */
-    stopButtonSpinner = function ($el) {
-        $el.removeClass(classes.button);
-    };
-
+    // stopButtonSpinner = function ($el) {
+    //     $el.removeClass(classes.button);
+    // };
 }
-
 
 let spinnerInstance = null;
 
 if (!spinnerInstance) {
-    spinnerInstance = new User();
+    spinnerInstance = new Spinner();
 }
 
 export default spinnerInstance;
