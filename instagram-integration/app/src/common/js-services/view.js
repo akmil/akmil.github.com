@@ -4,8 +4,8 @@ import $ from 'jquery';
 function viewUtils() {
     function showInfoMessage(selector, message1, message2) {
         $(selector).empty()
-            .append(`<p>status: ${message1}</p>`)
-            .append(`<p> message: ${message2} </p>`);
+            .append(`${(message1) ? `<p>status: ${message1}</p>` : ''}`)
+            .append(`<p>${message2} </p>`);
     }
 
     function fillList($list, dataArray) {

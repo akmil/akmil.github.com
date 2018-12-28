@@ -4,7 +4,8 @@ import viewUtils from './view';
 export default class Network {
 
     cbErrorDefault(result) {
-        viewUtils.showInfoMessage($('#description'),
+        const $el = ($('#description').length) ? $('#description') : $('.error-msg');
+        viewUtils.showInfoMessage($el,
             result.status.state,
             result.status.message || 'Login error');
     }
@@ -35,25 +36,5 @@ export default class Network {
                 return json;
             });
     }
-
-    /*
-    parseJSON(response) {
-        return response.json();
-    }
-
-    sendRequest1(url, formData, cbError) {
-        console.log('sending', url, formData);
-        this.cbError = cbError;
-        return fetch(url, formData)
-            .then(function(response) {
-                if (response.status === 400) {
-                    cbError(response.json());
-                    return response.json()
-                }
-            })
-            .then(this.checkStatus.bind(this))
-            .then(this.parseJSON);
-    }
-    */
 }
 

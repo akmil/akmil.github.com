@@ -72,14 +72,14 @@ class User {
         return this.network.sendRequest(CONST.getPath('registration'), setting);
     }
 
-    getMetadata(token) {
-        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}});
+    getMetadata(token, cbError) {
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}}, cbError);
     }
 
     getSecurityKey(username, checkpointType) {
         const setting = {
             ...this.settingPost,
-            body: JSON.stringify({'type': checkpointType}),
+            body: JSON.stringify({'type': checkpointType}), // todo: tmp set, it should be 'type'
             headers: {
                 ...this.settingPost.headers,
                 'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
