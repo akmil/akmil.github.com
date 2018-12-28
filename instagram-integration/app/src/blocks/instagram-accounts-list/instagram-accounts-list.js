@@ -45,7 +45,6 @@ const staticResp = {
                 'email': 'nidzuku@inbox.ru',
                 'phone': '011-111-111-11',
                 'media_count': 515,
-                'follower_count': 32,
                 'following_count': 34
             }
         }, {
@@ -155,8 +154,9 @@ function addOnLoadHandlers() {
 }
 
 function addListHandler(username) {
-    // $('#security-code').on('show.bs.modal', function (e) {
-    //     console.log(btn.attr('data-checkpoint-type'));
+    // $('#yourModalID').on('show.bs.modal', function(e) {
+    //     var yourparameter = e.relatedTarget.dataset.yourparameter;
+    //     // Do some stuff w/ it.
     // });
     let checkpointType = '';
 
@@ -172,8 +172,7 @@ function addListHandler(username) {
             // инпуты спрятаны,
             // показать серые переключатели (выбрал тип)
             // есть кнопка Запросить код подтверждение
-            $('#security-code-phoneOremail').modal('show');
-            console.log('select checkpointType now it\'s:', checkpointType);
+            $('#security-code-phoneOremail').modal({show: true, username});
 
             // не отправляем реквест
             return;
@@ -182,7 +181,8 @@ function addListHandler(username) {
         User.getSecurityKey(username, checkpointType).then((result) => {
             console.log('SecurityKey received:', result.status.state);
             if (result.status.state === 'ok') {
-                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+                const $modal = $('#security-code');
+                $('#security-code .js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
             }
         });
     });
@@ -190,7 +190,7 @@ function addListHandler(username) {
     // inside modal
     $('.js_confirm-security-code').on('click', (e) => {
         const btn = $(e.target);
-        const $keyInput = btn.closest('.modal').find('.modal-dialog form input');
+        const $keyInput = btn.closest('.modal').find('.modal-dialog form input.js_confirm-key');
         const key = $keyInput.val().trim();
         if (key.length !== 6) {
             e.stopPropagation();
@@ -213,16 +213,22 @@ function addListHandler(username) {
 
     // "PHONE_OR_EMAIL" modal
     $('.js_get-security-code-phoneOremail').on('click', (e) => {
-        const typeSelected = $(e.target).closest('#security-code-phoneOremail').find('.js_btn-type-switcher [checked="checked"]');
+        const $modal = $('#security-code-phoneOremail');
+        const typeSelected = $(e.target).closest($modal).find('.js_btn-type-switcher input:checked');
         const checkpointTypeActive = typeSelected.val();
-        User.getSecurityKey('username', checkpointTypeActive).then((result) => {
+        const sendTo = (checkpointTypeActive === 'PHONE') ? 'телефон' : 'email';
+        const modalConfig = $modal.data()['bs.modal']._config;
+        const username = modalConfig.username;
+        User.getSecurityKey(username, checkpointTypeActive).then((result) => {
             // при нажатии "Запросить код подтверждение" - отпарляется реквест "старт чекпоинт" появляеться инпут и кнопка других типах
             // get selected button
 
             // переключатель(серый) и кнопка "Запросить код подтверждение" исчезают
             console.log('SecurityKey received:', result.status.state);
             if (result.status.state === 'ok') {
-                $('#security-code .js_success-feedback').empty().text(`Ключ подтверждения был отправлен Вам на {sendTo} ${result.status.state}`);
+                $('.first-step', $modal).addClass('d-none');
+                $('.second-step', $modal).removeClass('d-none');
+                $('#security-code .js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
             }
         });
     });
@@ -232,28 +238,28 @@ function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
     const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    const insertItem = (data, text, cssCls) => {
+        const liTpl = `${(data)
+            ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
+            : `<li class="list-inline-item ${cssCls}"><span class="figure">-</span><span>${text}</span></li>`}`;
+        return liTpl;
+    };
     const stats = (info) => {
-        const tpl = (info) ? `<div class="col">
+        const tpl = `<div class="col">
             <ul class="list-inline text-center counts-list">
-                ${(info['media_count']) ? `<li class="media-count list-inline-item"><span class="figure">${info['media_count']}</span><span>Публикации</span></li>`
-                    : '<li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>'}
-                ${(info['follower_count']) ? `<li class="follower-count list-inline-item"><span class="figure">${info['follower_count']}</span><span>Подписчики</span></li>`
-                 : '<li class="follower-count list-inline-item"><span class="figure">-</span><span>Подписчики</span></li>'}
-                ${(info['following_count']) ? `<li class="following-count list-inline-item"><span class="figure">${info['following_count']}</span><span>Подписки</span></li>`
-                : '<li class="following-count list-inline-item"><span class="figure">-</span><span>Подписки</span></li>'}
-            </ul>
-        </div>`
-        : `<div class="col">
-            <ul class="list-inline text-center counts-list">
-            <li class="media-count list-inline-item"><span class="figure">-</span><span>Публикации</span></li>
-            <li class="follower-count list-inline-item"><span class="figure">-</span><span>Подписчики</span></li>
-            <li class="following-count list-inline-item"><span class="figure">-</span><span>Подписки</span></li>
+            ${(info)
+              ? `${insertItem(info['media_count'], 'Публикации', 'media-count')}
+                ${insertItem(info['follower_count'], 'Подписчики', 'follower-count')}
+                ${insertItem(info['following_count'], 'Подписки', 'following-count')}`
+              : `${insertItem(false, 'Публикации', 'media-count')}
+                ${insertItem(false, 'Подписчики', 'follower-count')}
+                ${insertItem(false, 'Подписки', 'following-count')}`
+            }
             </ul>
         </div>`;
         return tpl;
     };
-    cList.empty();
-    cList.addClass('border-light-color');
+    cList.empty().addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
         const checkpoint = item.checkpoint;
@@ -262,8 +268,8 @@ function fillList($list, dataArray) {
             $(`<li class="media py-3">
                 <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
                 <div class="media-body d-flex">
-                    <div class="col">
-                        ${(item.username) ? `<h3 class="mt-0 mb-2">${item.username}</h3>` : ''}
+                    <div class="col user-info">
+                        ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
@@ -281,11 +287,11 @@ function fillList($list, dataArray) {
                 ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
                 : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
             <div class="media-body d-flex">
-                <div class="col">
-                    ${(item.username) ? `<h3 class="mt-0 mb-2">${item.username}</h3>` : ''}
-                    ${(info.name) ? `<p class="mt-0 mb-2">${info.name}</p>` : ''}
-                    ${(info.email) ? `<p class="mt-0 mb-2">${info.email}</p>` : ''}
-                    ${(info.phone) ? `<p class="mt-0 mb-2">${info.phone}</p>` : ''}
+                <div class="col user-info">
+                    ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
+                    ${(info.name) ? `<p class="mt-0 mb-1">${info.name}</p>` : ''}
+                    ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
+                    ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''}
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
@@ -333,8 +339,8 @@ export function init() {
             }, 3500);
             return;
         }
-
+        $('.profile-user .spinner-box').addClass('d-none');
         fillList($accountsList, staticResp.data.accounts);
-        addListHandler('andrey.jakivchyk');
+        addListHandler('andrey.jakivchyk'); // todo : get real val
     });
 }

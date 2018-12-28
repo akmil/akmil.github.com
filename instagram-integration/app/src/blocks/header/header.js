@@ -37,20 +37,17 @@ function showLogout() {
     }
     if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
-        $('.profile-user')
-            .append('<span class="js_email-confirm--text" style="color: lightcoral"> вы залогинились успешно ---</span>');
+        $('.js_email-confirm--text').text('вы залогинились успешно');
         const oldURL = document.referrer;
         // console.log(oldURL);
         if (oldURL.includes('confirm-registration')) {
-            $('.profile-user')
-                .append('<p class="js_message_logged--text" style="color: #536caf">вы подтвердили регистрацию</p>');
+            $('.js_message_logged--text').text('вы подтвердили регистрацию');
         }
         onLoginSubscribe();
     } else {
         $(selectorLoginState).text('Привет анонимный пользователь');
         $(selectorEmailConfirmState).empty();
     }
-
 }
 
 /**

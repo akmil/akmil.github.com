@@ -9,11 +9,16 @@ $border-color: $gray-300;
         transform: rotate(1turn);
     }
 }
+.spinner-box {
+    display: flex;
 
-.spin-animation {
-    width: 30px;
-    animation: custom-spin 2s infinite linear;
+    .spin-animation {
+        width: 30px;
+        animation: custom-spin 2s infinite linear;
+    }
 }
+
+
 
 .profile-user {    
     .heading {
@@ -45,6 +50,14 @@ $border-color: $gray-300;
                 width: 60px;
                 height: 60px;
                 border-radius: 15rem!important;
+            }
+            .user-info {
+                color: $text-muted;
+                font-size: $font-size-sm;
+                .name {
+                    font-weight: bolder;
+                    color: $gray-900;
+                }
             }
             .counts-list {
                 .media-count,
