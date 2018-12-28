@@ -228,12 +228,15 @@ function addListHandler(username) {
         // this.setCustomValidity(message)
     });
 
-    $('#security-code-phoneOremail').on('hide.bs.modal', (e) => {
+    function onHideModal(e) {
         const $modal = $(e.target);
         $modal.find('.first-step').removeClass('d-none');
         $modal.find('.second-step').addClass('d-none');
-        $('.js_success-feedback', $modal).empty();
-    });
+        $('.js_confirm-key').val('');
+        $('.js_success-feedback', $modal).removeAttr('style').empty();
+    }
+    $('#security-code-phoneOremail').on('hide.bs.modal', onHideModal);
+    $('#security-code').on('hide.bs.modal', onHideModal);
 
     // "PHONE_OR_EMAIL" modal
     $('.js_get-security-code-phoneOremail').on('click', (e) => {
