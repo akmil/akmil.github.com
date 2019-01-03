@@ -41,6 +41,7 @@ $border-color: $gray-300;
         }
 
         .media {
+            //discuss: make as clickable, click for edit
             border-bottom: 1px solid $border-color;
             &:last-child {
                 border-bottom: none;

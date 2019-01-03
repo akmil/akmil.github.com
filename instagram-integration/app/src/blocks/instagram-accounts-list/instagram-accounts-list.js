@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
-// import viewUtils from '../../common/js-services/view';
+import viewUtils from '../../common/js-services/view';
 
+/*
 const staticResp = {
     'status': {
         'state': 'ok'
@@ -53,7 +54,7 @@ const staticResp = {
             'username': 'alex.smith',
             'checkpoint': {
                 'status': 'TRIGGERED',
-                'type': 'PHONE_OR_EMAIL'
+                'type': 'EMAIL_OR_PHONE'
             },
             'tariff': {
                 'status': 'ABSENT'
@@ -73,7 +74,7 @@ const staticResp = {
         'available_proxy_purchase': true
     }
 };
-
+*/
 /*
 const staticRespWithDelay = {
     'status': {
@@ -100,20 +101,25 @@ const staticRespWithDelay = {
 const addInstagramAccount = (newFormData) => {
     const cbError = (result) => {
         console.log('ERROR', result);
-        // viewUtils.showInfoMessage($textAreaDescription,
-        //     result.status.state,
-        //     result.status.message || 'Login error');
+        viewUtils.showInfoMessage($('.error-msg'),
+            result.status.state,
+            result.status.message || 'Login error');
         // $(_loginBox).addClass(closeClass).removeClass(openedClass);
     };
 
     User.addInstagramAccount(newFormData, cbError).then((result) => {
         if (result && result.status) {
             console.log(result, result.status);
+            // todo : reload list
+
             // viewUtils.showInfoMessage($textAreaDescription,
             //     result.status.state,
             //     result.status.message || 'Login error');
             // $(_loginBox).addClass(closeClass).removeClass(openedClass);
         }
+    }).catch((err) => {
+        // todo: render for user
+        console.log(err);
     });
 
     console.log('submit', newFormData);
@@ -154,7 +160,7 @@ function addOnLoadHandlers() {
     });
 }
 
-function addListHandler(username) {
+function addListHandler(/* username*/) {
     // $('#yourModalID').on('show.bs.modal', function(e) {
     //     var yourparameter = e.relatedTarget.dataset.yourparameter;
     //     // Do some stuff w/ it.
@@ -163,13 +169,14 @@ function addListHandler(username) {
 
     $('.js_pass-checkpoint-btn').on('click', (e) => {
         const $button = $(e.target);
+        const username = $button.data('username');
         checkpointType = $button.data('checkpointType') || checkpointType;
         // $('#security-code').data('checkpointType', checkpointType);
         // todo add 'checkpointType' to modal
         const sendTo = (checkpointType === 'PHONE') ? 'телефон' : 'email';
         // Spinner.start($button, 'fa-key');
 
-        if (checkpointType === 'PHONE_OR_EMAIL') {
+        if (checkpointType === 'EMAIL_OR_PHONE') {
             e.stopPropagation();
 
             // инпуты спрятаны,
@@ -195,6 +202,7 @@ function addListHandler(username) {
     // inside modal
     $('.js_confirm-security-code').on('click', (e) => {
         const btn = $(e.target);
+        const username = btn.data('username');
         const $keyInput = btn.closest('.modal').find('.modal-dialog form input.js_confirm-key');
         const key = $keyInput.val().trim();
         const $modal = btn.closest('.modal');
@@ -228,12 +236,15 @@ function addListHandler(username) {
         // this.setCustomValidity(message)
     });
 
-    $('#security-code-phoneOremail').on('hide.bs.modal', (e) => {
+    function onHideModal(e) {
         const $modal = $(e.target);
         $modal.find('.first-step').removeClass('d-none');
         $modal.find('.second-step').addClass('d-none');
-        $('.js_success-feedback', $modal).empty();
-    });
+        $('.js_confirm-key').val('');
+        $('.js_success-feedback', $modal).removeAttr('style').empty();
+    }
+    $('#security-code-phoneOremail').on('hide.bs.modal', onHideModal);
+    $('#security-code').on('hide.bs.modal', onHideModal);
 
     // "PHONE_OR_EMAIL" modal
     $('.js_get-security-code-phoneOremail').on('click', (e) => {
@@ -297,7 +308,9 @@ function fillList($list, dataArray) {
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
-                        ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" 
+                        ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                            data-checkpoint-type="${checkpoint.type}"
+                            data-username="${item.username || ''}"
                             data-toggle="modal" data-target="#security-code">
                             <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                         : ''}
@@ -365,7 +378,14 @@ export function init() {
             return;
         }
         $('.profile-user .spinner-box').addClass('d-none');
-        fillList($accountsList, staticResp.data.accounts);
-        addListHandler('andrey.jakivchyk'); // todo : get real val
+        fillList($accountsList, result.data.accounts);
+        addListHandler();
+    }).catch((err) => {
+        setTimeout(() => {
+            viewUtils.showInfoMessage($('.error-msg'),
+                err.status || '',
+                'Не получилось загрузить доступные Instagram аккаунты');
+        }, 3000);
+        $('.spinner-box').addClass('d-none');
     });
 }
