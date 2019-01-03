@@ -1,0 +1,153 @@
+strong,
+.bold {
+    font-family: 'SF UI Display Bold';
+}
+section {
+    padding: 120px 0;
+}
+
+
+.padding-x-custom {
+    padding-left: 48px;
+    padding-right: 48px;
+}
+
+/*video*/
+#video .title {
+    max-width: 430px;
+    display: inline-block;
+    margin-right: 20px;
+}
+#video .column-padding {
+    padding-top: 185px;
+    padding-left: 130px;
+}
+.video-btn-box {
+    display: inline-block;
+    position: relative;
+    top: -50px;
+}
+.video-bg {
+    background: url("../img/video/video-bg.jpg") no-repeat center;
+    height: 611px;
+    width: 943px;
+    z-index: 1;
+    position: relative;
+}
+.video-btn {
+    background: url("../img/video/btn-start-video.svg") no-repeat center;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    z-index: 3;
+}
+.video-btn:hover {
+    background: url("../img/video/btn-start-video-active.svg");
+}
+.video-btn-shadow {
+    background: url("../img/video/btn-shadow.png");
+    width: 200px;
+    height: 200px;
+    display: block;
+    position: relative;
+    top: -180px;
+}
+
+/*interesting*/
+
+#interesting img {
+    max-width: 215px;
+}
+#interesting p {
+    padding: 0 40px;
+}
+.extra-space {
+    height: 350px;
+}
+
+/*promo*/
+.promo-bg {
+    background: url("../img/promo/layer-6.png") no-repeat left;
+    height: 670px;
+    position: relative;
+    margin-top: -330px;
+}
+#promo p{
+    font-size: 26px;
+    max-width: 488px;
+}
+
+/*difference*/
+#difference.difference-bg {
+    background: url("../img/difference-bg.jpg") no-repeat center;
+    height: 1127px;
+    position: relative;
+    margin-top: 60px;
+}
+.info {
+
+}
+#difference .info-text {
+    font-size: 18px;
+    color: var(--slate-grey);
+}
+
+/*results*/
+.results-info-box {
+    padding-top: 100px;
+}
+.results-info-box p {
+    line-height: 1.32;
+}
+.results-info-box p.text-style-big {
+    line-height: 0.6;
+}
+.results-info-box .title {
+    font-size: 38px;
+}
+
+.results-bg {
+    background: url("../img/results-bg.jpg") no-repeat right top;
+    height: 762px;
+    position: relative;
+    margin-bottom: -520px;
+}
+
+#reviews {
+    padding-top: 460px;
+}
+#reviews .name {
+    font-size: 38px;
+    color: var(--blue-with-a-hint-of-purple);
+    background-color: #ffffff;
+    display: inline-block;
+    padding: 42px 110px;
+    line-height: 1;
+    margin-left: -90px;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+}
+#reviews .user-box img {
+    z-index: 3;
+    position: relative;
+}
+
+/*tariffs*/
+#tariffs .title {
+    font-size: 38px;
+}
+.tariffs-bg-left,
+.tariffs-bg-right {
+    background: url("../img/tariff-left.jpg") no-repeat top;
+    background-size: cover;
+    height: 297px;
+    padding: 52px 68px;
+}
+.tariffs-bg-left p,
+.tariffs-bg-right p {
+    color: #ffffff;
+    font-size: 38px;
+}
+.tariffs-bg-right {
+    background: url("../img/tariff-right.jpg") no-repeat top;
+}
