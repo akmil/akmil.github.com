@@ -15,10 +15,16 @@
 }
 
 .btn-primary {
-    background-color: transparent;
     border-color: transparent;
-    background: url("../img/buttons/button-bg.jpg") center;
+    background: transparent url("../img/buttons/button-bg.jpg") center;
     position: relative;
+}
+.button-box--run-robot {
+    background: transparent url("../img/buttons/run-robot.svg") center no-repeat;
+    width: 448px;
+    padding: 0;
+    background-position-x: -34px;
+    background-position-y: -30px;
 }
 
 .button-box---primary:before {
