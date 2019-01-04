@@ -21,14 +21,35 @@
     position: relative;
 }
 
+.button-box---primary:before {
+    content: '';
+    display: block;
+    background: url("../img/buttons/finger.png") center no-repeat;
+    height: 128px;
+    width: 0;
+    left: 72px;
+    position: absolute;
+    z-index: 2;
+}
 .button-box---primary:after {
     content: '';
     display: block;
     background: url("../img/buttons/btn-shadow.png") center;
     background-size: cover;
-    height: 40px;
-    max-width: 80%;
-    margin: 30px auto 0;
+    height: 60px;
+    position: absolute;
+    margin: -5px 50% 0;
+    width: 0;
+}
+
+.button-box---primary.revealed:before {
+    width: 60px;
+}
+
+.button-box---primary.revealed:after {
+    margin: -5px 10% 0;
+    width: 80%;
+    transition-duration: 0.2s;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {

@@ -12,6 +12,23 @@ section {
     padding-right: 48px;
 }
 
+.masthead .button-box---primary:before {
+    left: 28px;
+    top: 0;
+}
+.masthead .button-box---primary:after {
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    header.masthead p {
+        font-size: 26px;
+    }
+}
+
 /*video*/
 #video .title {
     max-width: 430px;
@@ -19,7 +36,7 @@ section {
     margin-right: 20px;
 }
 #video .column-padding {
-    padding-top: 185px;
+    padding-top: 155px;
     padding-left: 130px;
 }
 .video-btn-box {
@@ -52,6 +69,10 @@ section {
     position: relative;
     top: -180px;
 }
+section#video {
+    padding-top: 0;
+    margin-top: -80px;
+}
 
 /*interesting*/
 
@@ -75,6 +96,10 @@ section {
 #promo p{
     font-size: 26px;
     max-width: 488px;
+}
+
+#promo .button-box---primary:before {
+    left: 26px;
 }
 
 /*difference*/
@@ -164,7 +189,7 @@ section {
 .footer {
     background: url("../img/footer-bg.jpg") no-repeat top;
     height: 805px;
-    margin-top: -300px;
+    margin-top: -360px;
 }
 
 .footer a {

@@ -66,14 +66,26 @@
     delay: 200,
     distance: '15px',
     origin: 'bottom',
-    scale: 0.8
-  });
+    scale: 0.8,
+    afterReveal: function (el) {
+      el.classList.add('revealed');
+    },
+    afterReset: function (el) {
+      el.classList.remove('revealed');
+    }
+  }, 100);
   sr.reveal('.sr-button-2', {
     delay: 400,
     distance: '15px',
     origin: 'bottom',
-    scale: 0.8
-  });
+    scale: 0.8,
+    afterReveal: function (el) {
+      el.classList.add('revealed');
+    },
+    afterReset: function (el) {
+      el.classList.remove('revealed');
+    }
+  }, 100);
   sr.reveal('.sr-text-1', {
     delay: 200,
     scale: 0
