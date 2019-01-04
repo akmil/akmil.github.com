@@ -42,19 +42,23 @@
   // Scroll reveal calls
   window.sr = ScrollReveal();
 
-  sr.reveal('.sr-icon-1', {
+  sr.reveal('.sr-title', {
     delay: 200,
     scale: 0
   });
-  sr.reveal('.sr-icon-2', {
-    delay: 400,
+  sr.reveal('.sr-col-1', {
+    delay: 350,
     scale: 0
   });
-  sr.reveal('.sr-icon-3', {
-    delay: 600,
+  sr.reveal('.sr-col-2', {
+    delay: 500,
     scale: 0
   });
-  sr.reveal('.sr-icon-4', {
+  sr.reveal('.sr-col-3', {
+    delay: 650,
+    scale: 0
+  });
+  sr.reveal('.sr-col-4', {
     delay: 800,
     scale: 0
   });
@@ -64,11 +68,17 @@
     origin: 'bottom',
     scale: 0.8
   });
-  sr.reveal('.sr-contact-1', {
+  sr.reveal('.sr-button-2', {
+    delay: 400,
+    distance: '15px',
+    origin: 'bottom',
+    scale: 0.8
+  });
+  sr.reveal('.sr-text-1', {
     delay: 200,
     scale: 0
   });
-  sr.reveal('.sr-contact-2', {
+  sr.reveal('.sr-text-2', {
     delay: 400,
     scale: 0
   });
