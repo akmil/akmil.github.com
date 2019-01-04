@@ -8,6 +8,11 @@ const pages = [
         source: 'index'
     },
     {
+        title: 'landing page',
+        name: 'landing',
+        source: '_landing/landing'
+    },
+    {
         title: 'User _autogreeting',
         name: 'autogreeting',
         source: '_autogreeting/autogreeting'
