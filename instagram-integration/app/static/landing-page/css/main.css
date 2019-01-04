@@ -151,3 +151,43 @@ section {
 .tariffs-bg-right {
     background: url("../img/tariff-right.jpg") no-repeat top;
 }
+#tariffs .button-box---primary {
+    margin: -70px auto;
+}
+#tariffs .button-box---primary a{
+    font-size: 28px;
+    font-family: 'SF UI Display Thin';
+    line-height: 62px;
+}
+
+/**/
+.footer {
+    background: url("../img/footer-bg.jpg") no-repeat top;
+    height: 805px;
+    margin-top: -300px;
+}
+
+.footer a {
+    font-size: 16px;
+    line-height: 2.56;
+    font-family: 'SF UI Display Thin';
+}
+
+.footer a.footer-logo {
+    font-size: 36px;
+}
+
+.footer-container-padding {
+    padding-top: 450px;
+}
+
+.footer .small-line-h {
+    line-height: 1.31;
+}
+.custom-max-width {
+    max-width: 140px;
+}
+.copyright p {
+    font-size: 16px;
+}
+

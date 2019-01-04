@@ -10,7 +10,8 @@
 }
 
 .btn-xl {
-    padding: 33px 54px 33px 122px;
+    padding: 33px 54px 33px 108px;
+    min-height: 128px;
 }
 
 .btn-primary {
