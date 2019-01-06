@@ -20,6 +20,7 @@ const staticResp = {
                 'status': 'ABSENT'
             },
             'info': {
+                'profile_pic_url': 'https://randomuser.me/api/portraits/men/50.jpg',
                 'name': 'Андрей Якивчук',
                 'biography': '',
                 'url': '',
@@ -74,8 +75,7 @@ const staticResp = {
         'available_proxy_purchase': true
     }
 };
-*/
-/*
+*//*
 const staticRespWithDelay = {
     'status': {
         'state': 'ok'
@@ -348,10 +348,31 @@ function fillList($list, dataArray) {
  */
 export function init() {
     const token = '3e321e60029711e99264a0481c8e17d4'; // upd to: User.getToken()
-    let metadata = User.getMetadata(token);
+    const metadata = User.getMetadata(token);
     const $accountsList = $('.accounts-list');
-    const resendRequest = () => {
-        metadata = User.getMetadata(token);
+    const resendRequest = () => User.getMetadata(token);
+    let isSendReqOnce = false;
+    const checkResponse = (result, isResendRequest) => {
+        if (!result.status.state === 'ok' || !result.data || !$accountsList.length || isResendRequest) {
+            // проверям один раз наличие result.data.accounts.info
+            $accountsList.empty();
+            $(`<li class="media">
+                <div class="media-body">
+                    <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
+                </div>
+            </li>`).appendTo($accountsList);
+            setTimeout(() => {
+                resendRequest().then((result) => {
+                    checkResponse(result, false);
+                });
+                console.log('Request resend');
+            }, 3500);
+            return;
+        }
+        // вывод результатов (data.accounts.info)
+        $('.profile-user .spinner-box').addClass('d-none');
+        fillList($accountsList, result.data.accounts);
+        addListHandler();
     };
 
     // check we are in profile page
@@ -364,22 +385,18 @@ export function init() {
     // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
 
     metadata.then((result) => {
-        if (!result.status.state === 'ok' || !result.data || !$accountsList.length) {
-            $accountsList.empty();
-            $(`<li class="media">
-                <div class="media-body">
-                    <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
-                </div>
-            </li>`).appendTo($accountsList);
-            setTimeout(() => {
-                resendRequest();
-                console.log('Request resend');
-            }, 3500);
-            return;
+        // проверям один раз наличие result.data.accounts.info
+        let isResendRequest = false;
+        if (result.data && result.data.accounts && !isSendReqOnce) {
+            result.data.accounts.forEach((item) => {
+                if (!item.info) {
+                    isResendRequest = true;
+                    isSendReqOnce = true;
+                    return;
+                }
+            });
         }
-        $('.profile-user .spinner-box').addClass('d-none');
-        fillList($accountsList, result.data.accounts);
-        addListHandler();
+        checkResponse(result, isResendRequest);
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
