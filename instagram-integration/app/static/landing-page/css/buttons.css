@@ -1,0 +1,79 @@
+.btn {
+    font-weight: normal;
+    /*text-transform: uppercase;*/
+    border: none;
+    font-size: 30px;
+    border-radius: 300px;
+    text-align: left;
+    font-family: 'SF UI Display Thin', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.05;
+}
+
+.btn-xl {
+    padding: 33px 54px 33px 108px;
+    min-height: 128px;
+}
+
+.btn-primary {
+    border-color: transparent;
+    background: transparent url("../img/buttons/button-bg.jpg") center;
+    position: relative;
+}
+.button-box--run-robot {
+    background: transparent url("../img/buttons/run-robot.svg") center no-repeat;
+    width: 448px;
+    padding: 0;
+    background-position-x: -34px;
+    background-position-y: -30px;
+}
+
+.button-box---primary:before {
+    content: '';
+    display: block;
+    background: url("../img/buttons/finger.png") center no-repeat;
+    height: 128px;
+    width: 0;
+    left: 72px;
+    position: absolute;
+    z-index: 2;
+}
+.button-box---primary:after {
+    content: '';
+    display: block;
+    background: url("../img/buttons/btn-shadow.png") center;
+    background-size: cover;
+    height: 60px;
+    position: absolute;
+    margin: -5px 50% 0;
+    width: 0;
+}
+
+.button-box---primary.revealed:before {
+    width: 60px;
+}
+
+.button-box---primary.revealed:after {
+    margin: -5px 10% 0;
+    width: 80%;
+    transition-duration: 0.2s;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: #fff;
+    /*background-color: #ee4b28 !important;*/
+}
+
+.btn-primary:active, .btn-primary:focus {
+    /*-webkit-box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;*/
+    /*box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;*/
+}
+
+.button-box a{
+    width: 448px;
+}
+
+/**/
+#promo .button-box{
+    margin-top: 90px;
+}
+
