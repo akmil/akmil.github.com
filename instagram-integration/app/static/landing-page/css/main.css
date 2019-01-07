@@ -137,9 +137,16 @@ section#video {
     position: relative;
     margin-bottom: -520px;
 }
+.results-padding-line {
+    padding-bottom: 360px;
+    height: 100%;
+    background-color: #dddede;
+    margin-top: 110px;
+    margin-bottom: -120px;
+}
 
-#reviews {
-    padding-top: 460px;
+#reviews {    
+    background-color: #dddede;
 }
 #reviews .name {
     font-size: 38px;
@@ -172,6 +179,7 @@ section#video {
 .tariffs-bg-right p {
     color: #ffffff;
     font-size: 38px;
+    line-height: 1.42;
 }
 .tariffs-bg-right {
     background: url("../img/tariff-right.jpg") no-repeat top;

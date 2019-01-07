@@ -40,8 +40,8 @@
 .button-box---primary:after {
     content: '';
     display: block;
-    background: url("../img/buttons/btn-shadow.png") center;
-    background-size: cover;
+    background: url("../img/buttons/shadow1.png") center no-repeat;
+    background-size: 100% 50%;
     height: 60px;
     position: absolute;
     margin: -5px 50% 0;
