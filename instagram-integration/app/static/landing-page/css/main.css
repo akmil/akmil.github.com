@@ -6,10 +6,19 @@ section {
     padding: 120px 0;
 }
 
-
 .padding-x-custom {
     padding-left: 48px;
     padding-right: 48px;
+}
+
+.flip-it {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: "FlipH";
+    filter: FlipH;
 }
 
 .masthead .button-box---primary:before {
@@ -28,8 +37,71 @@ section {
         font-size: 26px;
     }
 }
+#carousel .icon-carousel {
+    background: url("../img/autogreeting.svg") no-repeat center;
+    width: 171px;
+    height: 144px;
+    position: absolute;
+    top: 0;
+}
+.slider-center .slick-slide {
+    padding: 20px;
+    background: url("../img/carousel-bg-light.png") no-repeat center;
+    background-size: cover;
+    min-height: 423px;
+    margin-top: 70px;
+    color: #ffffff;
+}
+
+.slider-center .slick-slide[data-slick-index="0"] {
+    background: url("../img/carousel-bg.jpg") no-repeat center;
+    background-size: cover;
+}
+.slider-center .slick-slide[data-slick-index="0"] h3,
+.slider-center .slick-slide[data-slick-index="0"] p {
+    color: #ffffff;
+}
+.slider-center .slick-slide[data-slick-index="0"] .number {
+    color: rgba(255, 255, 255, 0.4);
+}
+.slider-center .slick-cloned {
+    background: none;
+}
+
+.slider-center .number,
+.slider-center h3,
+.slider-center p {
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.slider-center .number {
+    font-family: 'SF UI Display Ultralight';
+    font-size: 128px;
+    font-size: 126px;
+    font-weight: 200;
+    text-align: right;
+    color: var(--sapphire-20);
+}
+
+.slider-center h3 {
+    font-size: 38px;
+    font-weight: 100;
+    color: var(--blue-with-a-hint-of-purple);
+}
+.slider-center p {
+    font-size: 18px;
+    color: var(--slate-grey);
+}
 
 /*video*/
+#video {
+    padding-bottom: 0;
+}
 #video .title {
     max-width: 430px;
     display: inline-block;
@@ -60,6 +132,8 @@ section {
 }
 .video-btn:hover {
     background: url("../img/video/btn-start-video-active.svg");
+    background-position-y: -1px;
+    background-position-x: -1px;
 }
 .video-btn-shadow {
     background: url("../img/video/btn-shadow.png");
@@ -224,4 +298,3 @@ section#video {
 .copyright p {
     font-size: 16px;
 }
-

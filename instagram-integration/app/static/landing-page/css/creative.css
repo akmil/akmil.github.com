@@ -142,6 +142,9 @@ img::-moz-selection {
   #mainNav .navbar-nav > li.nav-item > a.nav-link {
     padding: 0.5rem 1rem;
   }
+  #mainNav .navbar-nav > li.nav-item.nav-item__sign-in > a.nav-link {
+    padding-left: 2.5rem;
+  }
   #mainNav .navbar-nav > li.nav-item > a.nav-link,
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
     color: rgba(255, 255, 255, 1);

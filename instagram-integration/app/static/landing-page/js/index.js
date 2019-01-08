@@ -95,20 +95,42 @@
     scale: 0
   });
 
-  // Magnific popup calls
-  $('.popup-gallery').magnificPopup({
-    delegate: 'a',
-    type: 'image',
-    tLoading: 'Loading image #%curr%...',
-    mainClass: 'mfp-img-mobile',
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0, 1]
-    },
-    image: {
-      tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-    }
-  });
+    // carousel
+    // slick
+    var slickConf = {
+        centerMode: true,
+        centerPadding: '370px',
+        arrows: true,
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
+        slidesToShow: 2,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              centerPadding: '40px',
+              slidesToShow: 1
+            }
+          }
+        ]
+      };
+
+    $('.slider-center').slick(slickConf);
+    $('.slider-promo').slick({
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
+        appendArrows: '.btn-carousel-box'
+    });
 
 })(jQuery); // End of use strict
