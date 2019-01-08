@@ -272,7 +272,7 @@ section#video {
     background: url("../img/footer-bg.jpg") no-repeat top;
     height: 805px;
     margin-top: -360px;
-    background-size: 100% auto;
+    background-size: 100% 100%;
 }
 
 .footer a {
