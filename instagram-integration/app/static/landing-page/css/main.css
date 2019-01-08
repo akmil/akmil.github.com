@@ -109,9 +109,9 @@ section#video {
     position: relative;
     margin-top: 60px;
 }
-.info {
+/* .info {
 
-}
+} */
 #difference .info-text {
     font-size: 18px;
     color: var(--slate-grey);
