@@ -162,10 +162,11 @@
 }
 #difference .btn-carousel-box {
     right: 20px;
+    margin-top: 32px;
 }
 #difference .btn-carousel-box:after {
-    right: -38px;
-    top: -30px;
+    right: -18px;
+    top: 0;
 }
 .slick-arrow,
 .btn-carousel {
@@ -180,14 +181,4 @@
 }
 .btn-carousel .btn-carousel--right {
     background-position-y: 10px;
-}
-
-.slick-arrow {
-    position: absolute;
-    bottom: -32px;
-    left: 400px;
-    z-index: 1;
-}
-.slick-arrow.btn-carousel--left {
-    margin-left: 66px;
 }

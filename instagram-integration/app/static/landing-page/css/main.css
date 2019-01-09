@@ -37,35 +37,76 @@ section {
         font-size: 26px;
     }
 }
+#carousel {
+    padding-bottom: 1px;
+    position: relative;
+}
 #carousel .icon-carousel {
     background: url("../img/autogreeting.svg") no-repeat center;
     width: 171px;
     height: 144px;
     position: absolute;
-    top: 0;
+    left: 400px; /*first slider position*/
+    top: 121px;
+    z-index: 2;
 }
-.slider-center .slick-slide {
-    padding: 20px;
-    background: url("../img/carousel-bg-light.png") no-repeat center;
-    background-size: cover;
-    min-height: 423px;
-    margin-top: 70px;
-    color: #ffffff;
+#carousel .slick-arrow {
+    position: absolute;
+    bottom: -32px;
+    left: 20%;
+    z-index: 1;
 }
-
-.slider-center .slick-slide[data-slick-index="0"] {
-    background: url("../img/carousel-bg.jpg") no-repeat center;
-    background-size: cover;
+#carousel .slick-arrow.btn-carousel--left {
+    margin-left: 66px;
 }
-.slider-center .slick-slide[data-slick-index="0"] h3,
-.slider-center .slick-slide[data-slick-index="0"] p {
-    color: #ffffff;
-}
-.slider-center .slick-slide[data-slick-index="0"] .number {
-    color: rgba(255, 255, 255, 0.4);
+#carousel .btn-carousel-box:after {
+    left: calc(20% - 20px); /*first slider position*/
+    right: initial;
+    top: -30px;
 }
 .slider-center .slick-cloned {
     background: none;
+}
+.slider-center .slick-slide {
+    padding: 120px 32px 32px;
+    min-height: 470px;
+    margin-top: 70px;
+    color: #ffffff;
+    position: relative;
+    background: none;
+}
+
+.slider-center .slick-slide ~ .slick-active {
+    background: #8579da;
+    background: -moz-linear-gradient(left, #8579da 0%, #85a7e6 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #8579da), color-stop(100%, #85a7e6));
+    background: -webkit-linear-gradient(left, #8579da 0%, #85a7e6 100%);
+    background: -o-linear-gradient(left, #8579da 0%, #85a7e6 100%);
+    background: -ms-linear-gradient(left, #8579da 0%, #85a7e6 100%);
+    background: linear-gradient(to right, #8579da 0%, #85a7e6 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8579da', endColorstr='#85a7e6', GradientType=1 );
+}
+
+.slider-center .slick-current.slick-active {
+    background: #3e23ca;
+    background: -moz-linear-gradient(left, #3e23ca 0%, #1cb6ea 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #3e23ca), color-stop(100%, #1cb6ea));
+    background: -webkit-linear-gradient(left, #3e23ca 0%, #1cb6ea 100%);
+    background: -o-linear-gradient(left, #3e23ca 0%, #1cb6ea 100%);
+    background: -ms-linear-gradient(left, #3e23ca 0%, #1cb6ea 100%);
+    background: linear-gradient(to right, #3e23ca 0%, #1cb6ea 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e23ca', endColorstr='#1cb6ea', GradientType=1 );
+
+}
+.slider-center .slick-current.slick-active h3,
+.slider-center .slick-current.slick-active p,
+.slider-center .slick-slide ~ .slick-active h3,
+.slider-center .slick-slide ~ .slick-active p {
+    color: #ffffff;
+}
+.slider-center .slick-slide ~ .slick-active .number,
+.slider-center .slick-current.slick-active .number {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .slider-center .number,
@@ -81,11 +122,13 @@ section {
 
 .slider-center .number {
     font-family: 'SF UI Display Ultralight';
-    font-size: 128px;
     font-size: 126px;
     font-weight: 200;
     text-align: right;
     color: var(--sapphire-20);
+    position: absolute;
+    right: 32px;
+    top: 32px;
 }
 
 .slider-center h3 {
@@ -221,6 +264,7 @@ section#video {
 
 #reviews {    
     background-color: #dddede;
+    padding-bottom: 104px;
 }
 #reviews .name {
     font-size: 38px;
@@ -230,12 +274,20 @@ section#video {
     padding: 42px 110px;
     line-height: 1;
     margin-left: -90px;
+    margin-top: 32px;
     border-top-right-radius: 60px;
     border-bottom-right-radius: 60px;
+}
+#reviews .user-box {
+    height: 204px;
 }
 #reviews .user-box img {
     z-index: 3;
     position: relative;
+    float: left;
+}
+#reviews .btn-carousel-box {
+    left: 20%;
 }
 
 /*tariffs*/

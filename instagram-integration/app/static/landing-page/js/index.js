@@ -99,10 +99,11 @@
     // slick
     var slickConf = {
         centerMode: true,
-        centerPadding: '370px',
+        centerPadding: '20%',
         arrows: true,
         prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
+        appendArrows: '#carousel .btn-carousel-box',
         slidesToShow: 2,
         responsive: [
           {
@@ -111,7 +112,7 @@
               arrows: false,
               centerMode: true,
               centerPadding: '40px',
-              slidesToShow: 3
+              slidesToShow: 2
             }
           },
           {
@@ -130,7 +131,12 @@
     $('.slider-promo').slick({
         prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
-        appendArrows: '.btn-carousel-box'
+        appendArrows: '#difference .btn-carousel-box'
+    });
+    $('.slider-reviews').slick({
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
+        appendArrows: '#reviews .btn-carousel-box'
     });
 
 })(jQuery); // End of use strict
