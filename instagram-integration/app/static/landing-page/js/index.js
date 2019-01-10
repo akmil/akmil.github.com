@@ -107,32 +107,44 @@
         slidesToShow: 2,
         responsive: [
           {
-            breakpoint: 768,
+            breakpoint: 992,
             settings: {
-              arrows: false,
-              centerMode: true,
               centerPadding: '40px',
               slidesToShow: 2
             }
           },
           {
-            breakpoint: 480,
+            breakpoint: 720,
             settings: {
-              arrows: false,
-              centerMode: true,
-              centerPadding: '40px',
+                centerMode: false,
+              centerPadding: '20px',
               slidesToShow: 1
             }
           }
         ]
       };
 
-    $('.slider-center').slick(slickConf);
+    var prevCls = 'slick-slide-prev';
+    $('.slider-center')
+        .on('init reInit', function(){
+            $(".slick-current", $(this)).prev().addClass('slick-slide-prev');
+      }).on('beforeChange', function(){
+            $(".slick-slide").removeClass(prevCls);
+      }).on('afterChange swipe', function(){
+          $(".slick-current", $(this)).prev().removeClass(prevCls).addClass(prevCls);
+      }).slick(slickConf);
+      if ($(window).width() < 720) {
+          $('.slider-center').slick('slickGoTo', -1).addClass('slider-center--mobile');
+      } else {
+          $('.slider-center').removeClass('slider-center--mobile');
+      }
+
     $('.slider-promo').slick({
         prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
         appendArrows: '#difference .btn-carousel-box'
     });
+
     $('.slider-reviews').slick({
         prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',

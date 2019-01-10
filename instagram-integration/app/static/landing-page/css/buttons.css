@@ -1,6 +1,5 @@
 .btn {
     font-weight: normal;
-    /*text-transform: uppercase;*/
     border: none;
     font-size: 30px;
     border-radius: 300px;
@@ -68,7 +67,7 @@
     width: 80px;
     height: 80px;
     display: block;
-    background: transparent url(../img/buttons/finger-white.svg) no-repeat -10px -24px;
+    background: transparent url("../img/buttons/finger-white.svg") no-repeat -10px -24px;
 }
 
 .button-box---primary:before {
@@ -81,10 +80,11 @@
     position: absolute;
     z-index: 2;
 }
+.video-bg:after,
 .button-box---primary:after {
     content: '';
     display: block;
-    background: url("../img/buttons/shadow1.png") center no-repeat;
+    background: url("../img/buttons/shadow.png") center no-repeat;
     background-size: 100% 50%;
     height: 60px;
     position: absolute;
