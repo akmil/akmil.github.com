@@ -111,11 +111,11 @@ const addInstagramAccount = (newFormData) => {
         if (result && result.status) {
             console.log(result, result.status);
             // todo : reload list
-            debugger;
+            // debugger;
             const $accountsList = $('.accounts-list');
             $accountsList.empty();
-            fillList($accountsList, result.data.accounts);
-            addListHandler();
+            // fillList($accountsList, result.data.accounts);
+            // addListHandler();
 
             // viewUtils.showInfoMessage($textAreaDescription,
             //     result.status.state,
