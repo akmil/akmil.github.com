@@ -1,7 +1,7 @@
 .btn {
     font-weight: normal;
     border: none;
-    font-size: 30px;
+    font-size: 20px;
     border-radius: 300px;
     text-align: left;
     font-family: 'SF UI Display Thin', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -9,8 +9,8 @@
 }
 
 .btn-xl {
-    padding: 33px 54px 33px 108px;
-    min-height: 128px;
+    padding: 23px 54px 23px 108px;
+    min-height: 88px;
 }
 
 .btn-primary {
@@ -74,11 +74,13 @@
     content: '';
     display: block;
     background: url("../img/buttons/finger.svg") -25px 0;
-    height: 128px;
+    height: 118px;
     width: 0;
     left: 72px;
     position: absolute;
     z-index: 2;
+    transform: scale(0.75);
+    top: -15px;
 }
 .video-bg:after,
 .button-box---primary:after {
@@ -128,6 +130,7 @@
 
 .button-box a{
     width: 448px;
+    max-width: 100%;
 }
 
 #promo .button-box{
@@ -181,4 +184,22 @@
 }
 .btn-carousel .btn-carousel--right {
     background-position-y: 10px;
+}
+
+@media (min-width: 768px) {
+    /*.button-box a{
+        width: 448px;
+    }*/
+    .btn {
+        font-size: 30px;
+    }
+    .btn-xl {
+        padding: 33px 54px 33px 108px;
+        min-height: 128px;
+    }
+    .button-box---primary:before {
+        height: 128px;
+        transform: scale(1);
+        top: initial;
+    }
 }

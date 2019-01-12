@@ -31,12 +31,28 @@ section {
     width: 100%;
     margin: 0 auto;
 }
+.masthead h1 {
+    padding-top: 200px;
+}
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 56px);
+    background: url("../img/header.jpg") left center;
+    background-size: cover;
+}
 
 @media (min-width: 768px) {
+    header.masthead  {
+        background: url("../img/header.jpg") center center;
+    }
+    .masthead h1 {
+        padding-top: 0;
+    }
     header.masthead p {
         font-size: 26px;
     }
 }
+
 #carousel {
     padding-bottom: 1px;
     position: relative;
@@ -46,7 +62,7 @@ section {
     width: 171px;
     height: 144px;
     position: absolute;
-    left: 20%; /*first slider position*/
+    left: 22%; /*first slider position*/
     top: 121px;
     z-index: 2;
 }
@@ -67,12 +83,10 @@ section {
     right: initial;
     top: -30px;
 }
-/*.slider-center .slick-cloned {*/
-    /*background: none;*/
-/*}*/
+
 .slider-center .slick-slide {
     padding: 120px 32px 32px;
-    min-height: 470px;
+    min-height: 575px;
     margin-top: 70px;
     color: #ffffff;
     position: relative;
@@ -151,24 +165,29 @@ section {
 .slider-center .slick-slide.slick-slide-prev p {
     color: var(--slate-grey);
 }
-
-    /*video*/
+@media (min-width: 992px) {
+    .slider-center .slick-slide {
+        min-height: 470px;
+    }
+}
+/*video*/
 #video {
     padding: 0;
 }
 #video .title {
-    max-width: 430px;
-    display: inline-block;
+    display: block;
     margin-right: 20px;
 }
+#video h2 {
+    margin-bottom: 0;
+}
 #video .column-padding {
-    padding-top: 155px;
-    padding-left: 130px;
+    padding-top: 75px;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 .video-btn-box {
-    display: inline-block;
-    position: relative;
-    top: -50px;
+    margin: 0 auto;
 }
 .video-bg {
     background: url("../img/video/video-bg.jpg") no-repeat center;
@@ -177,12 +196,13 @@ section {
     z-index: 1;
     position: relative;
     top: -80px;
+    max-width: 100%;
 }
 .video-bg:after {
-    position: relative;
-    bottom: 130px;
+    bottom: -100px;
     margin: 0;
     width: 100%;
+    height: 100px;
 }
 .video-btn {
     background: url("../img/video/btn-start-video.svg") no-repeat center;
@@ -204,7 +224,36 @@ section {
     position: relative;
     top: -180px;
 }
-
+/*tablet up*/
+@media (min-width: 768px) {
+    #video .column-padding {
+        padding-top: 155px;
+        padding-left: 130px;
+    }
+    #video .title {
+        max-width: 430px;
+        display: inline-block;
+    }
+    #video h2 {
+        margin-bottom: 60px;
+    }
+    .video-btn-box {
+        display: inline-block;
+        position: relative;
+        top: -50px;
+    }
+    /*.video-bg:after {
+        position: relative;
+        bottom: 130px;
+    }*/
+}
+/*mobile only*/
+@media (max-width: 769px) {
+    #video .display-1 {
+        font-size: 4.5rem;
+        margin-bottom: 3rem;
+    }
+}
 /*interesting*/
 
 #interesting img {
@@ -235,17 +284,19 @@ section {
 
 /*difference*/
 #difference.difference-bg {
-    background: url("../img/difference-bg.jpg") no-repeat center;
+    background: url("../img/difference-bg.jpg") no-repeat left;
     height: 1127px;
     position: relative;
     margin-top: 60px;
 }
-/* .info {
-
-} */
 #difference .info-text {
     font-size: 18px;
     color: var(--slate-grey);
+}
+@media (min-width: 768px) {
+    #difference.difference-bg {
+        background: url("../img/difference-bg.jpg") no-repeat center;
+    }
 }
 
 /*results*/
@@ -312,7 +363,7 @@ section {
 .tariffs-bg-right {
     background: url("../img/tariff-left.jpg") no-repeat top;
     background-size: cover;
-    height: 297px;
+    min-height: 297px;
     padding: 52px 68px;
 }
 .tariffs-bg-left p,
@@ -320,6 +371,7 @@ section {
     color: #ffffff;
     font-size: 38px;
     line-height: 1.42;
+    margin-bottom: 50px;
 }
 .tariffs-bg-right {
     background: url("../img/tariff-right.jpg") no-repeat top;
@@ -331,6 +383,19 @@ section {
     font-size: 28px;
     font-family: 'SF UI Display Thin';
     line-height: 62px;
+}
+#tariffs .column-bottom-padding {
+    padding-bottom: 150px;
+}
+
+@media (min-width: 768px) {
+    #tariffs .column-bottom-padding {
+        padding-bottom: 0;
+    }
+    .tariffs-bg-left p,
+    .tariffs-bg-right p {
+        margin-bottom: 0;
+    }
 }
 
 /**/

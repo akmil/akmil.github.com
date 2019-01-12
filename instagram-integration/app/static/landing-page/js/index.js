@@ -114,7 +114,7 @@
             }
           },
           {
-            breakpoint: 720,
+            breakpoint: 768,
             settings: {
                 centerMode: false,
               centerPadding: '20px',
@@ -133,7 +133,7 @@
       }).on('afterChange swipe', function(){
           $(".slick-current", $(this)).prev().removeClass(prevCls).addClass(prevCls);
       }).slick(slickConf);
-      if ($(window).width() < 720) {
+      if ($(window).width() < 768) {
           $('.slider-center').slick('slickGoTo', -1).addClass('slider-center--mobile');
       } else {
           $('.slider-center').removeClass('slider-center--mobile');
