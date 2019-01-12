@@ -195,8 +195,14 @@ header.masthead {
     width: 943px;
     z-index: 1;
     position: relative;
-    top: -80px;
+    top: 0px;
+    opacity: 0.2;
     max-width: 100%;
+}
+.video-bg--fadeInUp {
+    top: -80px;
+    transition-duration: 1s;
+    opacity: 1;
 }
 .video-bg:after {
     bottom: -100px;

@@ -9,7 +9,7 @@
 }
 
 .btn-xl {
-    padding: 23px 54px 23px 108px;
+    padding: 23px 54px 23px 128px;
     min-height: 88px;
 }
 
@@ -35,6 +35,7 @@
     background: linear-gradient(to bottom, #1cb6ea 0%, #2e15b0 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1cb6ea', endColorstr='#2e15b0', GradientType=0 );
 }
+/*
 .button-box--run-robot {
     width: 449px;
     height: 129px;
@@ -69,7 +70,7 @@
     display: block;
     background: transparent url("../img/buttons/finger-white.svg") no-repeat -10px -24px;
 }
-
+*/
 .button-box---primary:before {
     content: '';
     display: block;
@@ -102,6 +103,10 @@
     margin: -5px 10% 0;
     width: 80%;
     transition-duration: 0.2s;
+}
+.button-box--promo.button-box---primary.revealed:after {
+    margin: -5px 0 0;
+    max-width: 448px;
 }
 
 .button-box---primary .btn-primary--free {
@@ -185,6 +190,68 @@
 .btn-carousel .btn-carousel--right {
     background-position-y: 10px;
 }
+/**/
+
+#button-background {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 448px;
+    min-height: 128px;
+    border: white;
+    border-radius: 70px;
+    border-bottom: 2px solid rgba(180, 180, 180, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #slider {
+    transition: width 0.3s, border-radius 0.3s, height 0.3s;
+    position: absolute;
+    background-color: #3e23ca;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    width: 106px;
+    height: 126px;
+    background: transparent url(../img/buttons/btn-run-robot.svg) -44px -31px no-repeat;
+    left: 10px;
+  }
+  #slider::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 75px;
+    background: transparent url(../img/buttons/finger-white.svg) no-repeat -20px -28px;
+    z-index: 1;
+  }
+  #slider:hover::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    width: 170px;
+    height: 170px;
+    display: block;
+    background: transparent url(../img/buttons/C274CBF3.png) center no-repeat;
+  }
+  
+  .slide-text {
+    color: #fff;
+    font-size: 30px;
+    font-family: 'SF UI Display Thin', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    padding: 0 0 0 80px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+  }
+  
+  /**/
 
 @media (min-width: 768px) {
     /*.button-box a{
