@@ -61,3 +61,13 @@ font-style: normal;
 font-weight: normal;
 src: local('SF UI Display Black'), url('sf-ui-display-black.woff') format('woff');
 }
+
+@font-face {
+    font-family: 'SF UI Display Regular';
+    src: url('SFUIText-Regular.eot');
+    src: url('SFUIText-Regular.eot?#iefix') format('embedded-opentype'),
+    url('SFUIText-Regular.woff') format('woff'),
+    url('SFUIText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -33,9 +33,13 @@ h2 {
   margin-bottom: 60px;
 }
 
-#video .title .display-1 strong,
 .font-medium {
   font-family: 'SF UI Display Medium', Sans-serif, Arial;
+}
+
+#video .title .display-1 strong,
+.font-regular {
+    font-family: 'SF UI Display Regular', Sans-serif, Arial;
 }
 
 .font-thin {
@@ -50,7 +54,7 @@ h2 {
 
 p {
   color: var(--purple-brown);
-  font-family: 'SF UI Display Thin';
+  font-family: 'SF UI Display Regular';
   font-size: 22px;
 }
 .text-white{
