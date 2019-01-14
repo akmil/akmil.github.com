@@ -71,13 +71,16 @@
     background: transparent url("../img/buttons/finger-white.svg") no-repeat -10px -24px;
 }
 */
+.button-box---primary{
+    max-width: 448px;
+}
 .button-box---primary:before {
     content: '';
     display: block;
     background: url("../img/buttons/finger.svg") -25px 0;
     height: 118px;
     width: 0;
-    left: 72px;
+    left: 32px;
     position: absolute;
     z-index: 2;
     transform: scale(0.75);
@@ -143,11 +146,11 @@
 }
 
 .nav-item__sign-in {
-    background: url(../img/buttons/btn-enter.svg) no-repeat -6px -6px;
+    background: url("../img/buttons/btn-enter.svg") no-repeat -6px -6px;
     width: 112px;
 }
 .nav-item__sign-in:hover {
-    background: url(../img/buttons/btn-enter.svg) no-repeat -6px -60px;
+    background: url("../img/buttons/btn-enter.svg") no-repeat -6px -60px;
 }
 .btn-carousel-box {
     margin-top: 72px;
@@ -162,7 +165,7 @@
     width: 165px;
     height: 121px;
     opacity: 0.7;
-    background: url(../img/buttons/shadow-carousel.png) no-repeat center -20px;
+    background: url("../img/buttons/shadow-carousel.png") no-repeat center -20px;
     position: absolute;
     right: -18px;
     top: 0;
@@ -182,10 +185,10 @@
     width: 64px;
     height: 64px;
     border-radius: initial;
-    background: url(../img/buttons/arrow-right.svg) no-repeat -34px -22px;
+    background: url("../img/buttons/arrow-right.svg") no-repeat -33px -22px;
 }
 .btn-carousel:hover {
-    background: url(../img/buttons/arrow-right.svg) no-repeat -99px -22px;
+    background: url("../img/buttons/arrow-right.svg") no-repeat -99px -22px;
 }
 .btn-carousel .btn-carousel--right {
     background-position-y: 10px;

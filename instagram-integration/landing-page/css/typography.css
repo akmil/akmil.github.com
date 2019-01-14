@@ -12,7 +12,7 @@ h1 {
 #difference .info,
 h2 {
   font-family: 'SF UI Display Thin', Sans-serif, Arial;
-  font-size: 55px;
+  font-size: 2.4375rem;
   font-weight: 100;
   font-style: normal;
   font-stretch: normal;
@@ -21,14 +21,25 @@ h2 {
   text-align: left;
   color: var(--blue-with-a-hint-of-purple);
 }
+@media(min-width: 768px){
+  #video .title,
+  #difference .info,
+  h2 {
+    font-size: 3.4375rem;
+  }
+}
 
 h2 {
   margin-bottom: 60px;
 }
 
-#video .title .display-1 strong,
 .font-medium {
   font-family: 'SF UI Display Medium', Sans-serif, Arial;
+}
+
+#video .title .display-1 strong,
+.font-regular {
+    font-family: 'SF UI Display Regular', Sans-serif, Arial;
 }
 
 .font-thin {
@@ -43,7 +54,7 @@ h2 {
 
 p {
   color: var(--purple-brown);
-  font-family: 'SF UI Display Thin';
+  font-family: 'SF UI Display Regular';
   font-size: 22px;
 }
 .text-white{

@@ -132,7 +132,7 @@
         centerMode: true,
         centerPadding: '20%',
         arrows: true,
-        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right mr-1"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
         appendArrows: '#carousel .btn-carousel-box',
         slidesToShow: 2,
@@ -171,13 +171,13 @@
       }
 
     $('.slider-promo').slick({
-        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right mr-1"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
         appendArrows: '#difference .btn-carousel-box'
     });
 
     $('.slider-reviews').slick({
-        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right"></div>',
+        prevArrow: '<div class="btn btn-primary btn-carousel btn-carousel--right mr-1"></div>',
         nextArrow: '<div class="btn btn-primary btn-carousel btn-carousel--left flip-it"></div>',
         appendArrows: '#reviews .btn-carousel-box'
     });
