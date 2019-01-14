@@ -13,6 +13,11 @@ const pages = [
         source: '_landing/landing'
     },
     {
+        title: 'Auth page',
+        name: 'login',
+        source: '_auth/login'
+    },
+    {
         title: 'User _autogreeting',
         name: 'autogreeting',
         source: '_autogreeting/autogreeting'

@@ -53,18 +53,15 @@ h6 {
   background: #212529;
   text-shadow: none;
 }
-
 ::selection {
   color: #fff;
   background: #212529;
   text-shadow: none;
 }
-
 img::-moz-selection {
   color: #fff;
   background: transparent;
 }
-
 img::selection {
   color: #fff;
   background: transparent;
@@ -74,24 +71,20 @@ img::-moz-selection {
   color: #fff;
   background: transparent;
 }
-
 #mainNav {
   background-color: #fff;
   font-family: 'SF UI Display Regular', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-
 #mainNav .navbar-brand {
   color: var(--blue-with-a-hint-of-purple);
   font-family: 'SF UI Display Light', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: normal;
 }
-
 #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
   color: var(--blue-with-a-hint-of-purple);
 }
-
 #mainNav .navbar-nav > li.nav-item > a.nav-link,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
   font-family: 'SF UI Display Light', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -99,21 +92,22 @@ img::-moz-selection {
   font-size: 1rem;
   color: #212529;
 }
-
 #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
   color: var(--blue-with-a-hint-of-purple);
 }
-
 #mainNav .navbar-nav > li.nav-item > a.nav-link.active,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active {
-  color: var(--blue-with-a-hint-of-purple) !important;
+  /*color: var(--blue-with-a-hint-of-purple) !important;*/
   background-color: transparent;
 }
-
 #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active:hover {
   background-color: transparent;
+}
+
+#mainNav .navbar-nav > li.nav-item.nav-item__sign-in > a.nav-link {
+  padding-left: 2.5rem;
 }
 
 @media (min-width: 992px) {
@@ -130,9 +124,6 @@ img::-moz-selection {
   #mainNav .navbar-nav > li.nav-item > a.nav-link {
     padding: 0.5rem 1rem;
   }
-  #mainNav .navbar-nav > li.nav-item.nav-item__sign-in > a.nav-link {
-    padding-left: 2.5rem;
-  }
   #mainNav .navbar-nav > li.nav-item > a.nav-link,
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
     color: rgba(255, 255, 255, 1);
@@ -143,21 +134,22 @@ img::-moz-selection {
   }
   #mainNav.navbar-shrink {
     border-bottom: 1px solid rgba(33, 37, 41, 0.1);
-    background-color: #fff;
+    background: url("../img/header.jpg") center top;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    color: var(--blue-with-a-hint-of-purple);
+    /*color: var(--blue-with-a-hint-of-purple);*/
   }
   #mainNav.navbar-shrink .navbar-brand:focus, #mainNav.navbar-shrink .navbar-brand:hover {
-    color: var(--blue-with-a-hint-of-purple);
+    color: var(--bright-cyan);
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: #212529;
+    /*color: #212529;*/
+    color: #ffffff;
   }
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
   #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {
-    color: var(--blue-with-a-hint-of-purple);
+    color: var(--bright-cyan);
   }
 }
 

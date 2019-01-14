@@ -71,13 +71,16 @@
     background: transparent url("../img/buttons/finger-white.svg") no-repeat -10px -24px;
 }
 */
+.button-box---primary{
+    max-width: 448px;
+}
 .button-box---primary:before {
     content: '';
     display: block;
     background: url("../img/buttons/finger.svg") -25px 0;
     height: 118px;
     width: 0;
-    left: 72px;
+    left: 32px;
     position: absolute;
     z-index: 2;
     transform: scale(0.75);

@@ -21,13 +21,6 @@ h2 {
   text-align: left;
   color: var(--blue-with-a-hint-of-purple);
 }
-@media(min-width: 768px){
-  #video .title,
-  #difference .info,
-  h2 {
-    font-size: 3.4375rem;
-  }
-}
 
 h2 {
   margin-bottom: 60px;
@@ -76,7 +69,17 @@ p {
 .text-style-big small {
   font-size: 22px;
   vertical-align: middle;
-  margin: 0 15px;
+  margin: 0 -5px;
+}
+@media(min-width: 768px){
+  #video .title,
+  #difference .info,
+  h2 {
+    font-size: 3.4375rem;
+  }
+  .text-style-big small {
+    margin: 0 15px;
+  }
 }
 
 

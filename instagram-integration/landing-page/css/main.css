@@ -307,7 +307,7 @@ header.masthead {
 
 /*results*/
 .results-info-box {
-    padding-top: 100px;
+    padding-top: 50px;
 }
 .results-info-box p {
     line-height: 1.32;
@@ -322,9 +322,10 @@ header.masthead {
 
 .results-bg {
     background: url("../img/results-bg.jpg") no-repeat right top;
-    height: 762px;
+    min-height: 762px;
     position: relative;
     margin-bottom: -520px;
+    background-size: auto calc(100% - 40px);
 }
 .results-padding-line {
     padding-bottom: 360px;
@@ -361,7 +362,15 @@ header.masthead {
 #reviews .btn-carousel-box {
     left: 20%;
 }
-
+@media (min-width: 768px) {
+    .results-bg {
+        height: 762px;
+        background-size: auto auto;
+    }
+    .results-info-box {
+        padding-top: 100px;
+    }
+}
 /*tariffs*/
 #tariffs .title {
     font-size: 38px;
