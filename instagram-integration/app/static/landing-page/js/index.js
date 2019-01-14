@@ -43,25 +43,45 @@
   // Scroll reveal calls
   window.sr = ScrollReveal();
 
+  sr.reveal('.sr-container', {
+    origin: 'bottom',
+    distance: '100px',
+    duration: 1000,
+    delay: 0,
+  });
+  sr.reveal('.sr-container-1', {
+    origin: 'bottom',
+    distance: '100px',
+    duration: 1000,
+    delay: 750,
+  });
   sr.reveal('.sr-title', {
+    origin: 'bottom',
+    distance: '60px',
     delay: 200,
-    scale: 0
+    scale: 1
   });
   sr.reveal('.sr-col-1', {
-    delay: 350,
-    scale: 0
+    delay: 500,
+    origin: 'bottom',
+    distance: '60px',
+    scale: 1
   });
   sr.reveal('.sr-col-2', {
-    delay: 500,
-    scale: 0
+    delay: 650,
+    origin: 'bottom',
+    distance: '60px',
+    scale: 0.5
   });
   sr.reveal('.sr-col-3', {
-    delay: 650,
-    scale: 0
+    delay: 800,
+    origin: 'bottom',
+    distance: '60px',
+    scale: 0.5
   });
   sr.reveal('.sr-col-4', {
-    delay: 800,
-    scale: 0
+    delay: 950,
+    scale: 0.5
   });
   sr.reveal('.sr-button', {
     delay: 200,
@@ -87,6 +107,11 @@
       el.classList.remove('revealed');
     }
   }, 100);
+    sr.reveal('.sr-text-0', {
+        delay: 50,
+        origin: 'bottom',
+        scale: 0.5
+    });
   sr.reveal('.sr-text-1', {
     delay: 200,
     scale: 0
@@ -95,6 +120,11 @@
     delay: 400,
     scale: 0
   });
+    sr.reveal('.sr-text-3', {
+        delay: 900,
+        origin: 'bottom',
+        scale: 0.5
+    });
 
     // carousel
     // slick

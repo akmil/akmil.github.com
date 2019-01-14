@@ -311,6 +311,7 @@ header.masthead {
 }
 .results-info-box p {
     line-height: 1.32;
+    font-family: 'SF UI Display Thin', Sans-serif, Arial;
 }
 .results-info-box p.text-style-big {
     line-height: 0.6;
