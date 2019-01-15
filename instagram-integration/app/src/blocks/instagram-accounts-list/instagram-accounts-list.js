@@ -352,9 +352,13 @@ function fillList($list, dataArray) {
  * Init header
  */
 export function init() {
+    const $accountsList = $('.accounts-list');
+    // check we are in profile page
+    if (!$accountsList.length) {
+        return;
+    }
     const token = '3e321e60029711e99264a0481c8e17d4'; // upd to: User.getToken()
     const metadata = User.getMetadata(token);
-    const $accountsList = $('.accounts-list');
     const resendRequest = () => User.getMetadata(token);
     let isSendReqOnce = false;
     const checkResponse = (result, isResendRequest) => {

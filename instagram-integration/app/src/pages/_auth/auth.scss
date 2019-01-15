@@ -10,6 +10,17 @@
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /**/
+    background: #22c6e3;/* Old Browsers */
+    background: -moz-linear-gradient(45deg, #22c6e3 0%, #207ce5 49%, #22dde3 100%); /* FF3.6+ */
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #22c6e3), color-stop(49%, #207ce5), color-stop(100%, #22dde3));/* Chrome, Safari4+ */
+    background: -webkit-linear-gradient(45deg, #22c6e3 0%, #207ce5 49%, #22dde3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg, #22c6e3 0%, #207ce5 49%, #22dde3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg, #22c6e3 0%, #207ce5 49%, #22dde3 100%); /* IE 10+ */
+    background: linear-gradient(45deg, #22c6e3 0%, #207ce5 49%, #22dde3 100%);/* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#22c6e3', endColorstr='#22dde3', GradientType=1 );/* IE6-9 fallback on horizontal gradient */
+    min-height: 100vh;
   }
   
   .card-signin {
