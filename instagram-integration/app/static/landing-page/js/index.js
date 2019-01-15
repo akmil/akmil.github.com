@@ -187,14 +187,22 @@
     var slideMovementTotal = 0;
     var mouseIsDown = false;
     var slider = $('#slider');
+    var sliderSignIn = $('#signIn');
+    var mouseIsDownSignIn = false;
 
-    slider.on('mousedown touchstart', function(event) {
+    function sliderHandlerMouseDown(event, isSignIn) {
+        if (isSignIn) {
+            mouseIsDown = mouseIsDownSignIn;
+        }
         mouseIsDown = true;
         slideMovementTotal = $('#button-background').width() - $(this).width();
         initialMouse = event.clientX || event.originalEvent.touches[0].pageX;
-    });
-
-    $(document.body, '#slider').on('mouseup touchend', function (event) {
+        // console.log(initialMouse);
+    }
+    function sliderHandlerMouseUp(event, isSignIn) {
+        // if (isSignIn) {
+        //     mouseIsDown = mouseIsDownSignIn;
+        // }
         if (!mouseIsDown) {
             return;
         }
@@ -203,38 +211,55 @@
         var relativeMouse = currentMouse - initialMouse;
         var url = slider.data('href');
 
-
+        // console.log(relativeMouse, slideMovementTotal);
         if (relativeMouse < slideMovementTotal - 20) {
             $('.slide-text').fadeTo(300, 1);
             slider.animate({
                 left: '10px'
-            }, 300);
+            }, 300).css({'cursor': 'pointer'});
             return;
         }
         window.location.href = url;
-    });
+        // console.log(url);
+    }
+    function sliderHandlerMouseMove(event, isSignIn) {
+        // if (isSignIn) {
+        //     mouseIsDown = mouseIsDownSignIn;
+        // }
 
-    $(document.body).on('mousemove touchmove', function(event) {
+
         if (!mouseIsDown) {
+            console.log('return');
             return;
         }
+        // console.log(!mouseIsDown);
 
         var currentMouse = event.clientX || event.originalEvent.touches[0].pageX;
         var relativeMouse = currentMouse - initialMouse;
         var slidePercent = 1 - (relativeMouse / slideMovementTotal);
-        
+
         $('.slide-text').fadeTo(0, slidePercent);
 
         if (relativeMouse <= 0) {
-            slider.css({'left': '10px'});
+            slider.css({'left': '10px', 'cursor': 'grabbing'});
             return;
         }
         if (relativeMouse >= slideMovementTotal - 0) {
             slider.css({'left': slideMovementTotal + 'px'});
             return;
         }
-        slider.css({'left': relativeMouse - 0});
-    });
+        slider.css({'left': relativeMouse - 0,  'cursor': 'grabbing'});
+        console.log(relativeMouse);
+    }
+
+    sliderSignIn.on('mousedown touchstart', sliderHandlerMouseDown.bind(this, 1));
+    slider.on('mousedown touchstart', sliderHandlerMouseDown);
+
+    $(document.body, '#slider').on('mouseup touchend', sliderHandlerMouseUp);
+    $(document.body, '#sliderSignIn').on('mouseup touchend', sliderHandlerMouseUp.bind(this, 1));
+
+    $(document.body).on('mousemove touchmove', sliderHandlerMouseMove);
+    // $(document.body).on('mousemove touchmove', sliderHandlerMouseMove.bind(this, 1));
 
     /* */
 

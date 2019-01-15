@@ -30,14 +30,21 @@
   
   .form-signin {
     width: 100%;
+    a {
+      color: #666;
+      text-decoration: none;
+      &:hover {
+        color: #0052D4;
+      }
+    }
   }
   
   .form-signin .btn {
-    font-size: 80%;
+    font-size: 90%;
     border-radius: 5rem;
     letter-spacing: .1rem;
     font-weight: bold;
-    padding: 1rem;
+    padding: 1.5rem;
     transition: all 0.2s;
   }
   
