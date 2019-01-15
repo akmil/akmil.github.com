@@ -197,7 +197,7 @@
         mouseIsDown = true;
         slideMovementTotal = $('#button-background').width() - $(this).width();
         initialMouse = event.clientX || event.originalEvent.touches[0].pageX;
-        console.log(initialMouse);
+        // console.log(initialMouse);
     }
     function sliderHandlerMouseUp(event, isSignIn) {
         // if (isSignIn) {
@@ -211,16 +211,16 @@
         var relativeMouse = currentMouse - initialMouse;
         var url = slider.data('href');
 
-        console.log(relativeMouse, slideMovementTotal);
+        // console.log(relativeMouse, slideMovementTotal);
         if (relativeMouse < slideMovementTotal - 20) {
             $('.slide-text').fadeTo(300, 1);
             slider.animate({
                 left: '10px'
-            }, 300);
+            }, 300).css({'cursor': 'pointer'});
             return;
         }
         window.location.href = url;
-        console.log(url);
+        // console.log(url);
     }
     function sliderHandlerMouseMove(event, isSignIn) {
         // if (isSignIn) {
@@ -232,7 +232,7 @@
             console.log('return');
             return;
         }
-        console.log(!mouseIsDown);
+        // console.log(!mouseIsDown);
 
         var currentMouse = event.clientX || event.originalEvent.touches[0].pageX;
         var relativeMouse = currentMouse - initialMouse;
@@ -241,14 +241,14 @@
         $('.slide-text').fadeTo(0, slidePercent);
 
         if (relativeMouse <= 0) {
-            slider.css({'left': '10px'});
+            slider.css({'left': '10px', 'cursor': 'grabbing'});
             return;
         }
         if (relativeMouse >= slideMovementTotal - 0) {
             slider.css({'left': slideMovementTotal + 'px'});
             return;
         }
-        slider.css({'left': relativeMouse - 0});
+        slider.css({'left': relativeMouse - 0,  'cursor': 'grabbing'});
         console.log(relativeMouse);
     }
 
