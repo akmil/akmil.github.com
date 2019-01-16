@@ -110,10 +110,10 @@ const addInstagramAccount = (newFormData) => {
     User.addInstagramAccount(newFormData, cbError).then((result) => {
         if (result && result.status) {
             console.log(result, result.status);
-            // todo : reload list
             // debugger;
             const $accountsList = $('.accounts-list');
             $accountsList.empty();
+            // todo : reload list
             // fillList($accountsList, result.data.accounts);
             // addListHandler();
 
@@ -357,7 +357,7 @@ export function init() {
     if (!$accountsList.length) {
         return;
     }
-    const token = '3e321e60029711e99264a0481c8e17d4'; // upd to: User.getToken()
+    const token = User.getToken(); // upd to: User.getToken()
     const metadata = User.getMetadata(token);
     const resendRequest = () => User.getMetadata(token);
     let isSendReqOnce = false;
