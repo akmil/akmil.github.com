@@ -17,7 +17,7 @@ module.exports = {
 
     extensions: ['.js', '.scss'],
 
-    modules: ['node_modules']
+    modules: ['node_modules', 'static']
 
   },
 

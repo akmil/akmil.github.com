@@ -61,7 +61,8 @@ export function LoginPage(selectorCss) {
         } else {
             $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData).then(() => {
-                PubSub.publish(CONST.events.USER_LOGGED, 'login');
+                // PubSub.publish(CONST.events.USER_LOGGED, 'login');
+                window.location.href = '/instagram-accounts.html';
             });
         }
     };
