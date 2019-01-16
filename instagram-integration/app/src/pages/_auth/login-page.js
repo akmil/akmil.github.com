@@ -7,10 +7,10 @@ import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 
-window.$ = $;
+// window.$ = $;
 
-export function LoginForm(selectorCss) {
-    const {_formId, _buttonSubmitId, _showLoginBoxBtnId, _loginBox} = selectorCss;
+export function LoginPage(selectorCss) {
+    const {_formId, _buttonSubmitId, _loginBox} = selectorCss;
     const user = User, // service
         $form = $(_formId),
         $email = $form.find('input[name="mail"]'),
@@ -72,18 +72,18 @@ export function LoginForm(selectorCss) {
     };
 
     const bindEvents = function() {
-        const $showLoginBoxBtnId = $(_showLoginBoxBtnId);
+        // const $showLoginBoxBtnId = $(_showLoginBoxBtnId);
         const $loginBox = $(_loginBox);
         const openedClass = 'd-block';
         const closeClass = 'd-none';
 
-        $showLoginBoxBtnId.on('click', () => {
-            if (!selectorCss.isLoginInstagram) {
-                $loginBox.css({'top': 0, 'right': 0})
-                    .addClass('bg-light border mt-5 mx-auto position-absolute');
-            }
-            $loginBox.addClass(openedClass).removeClass(closeClass);
-        });
+        // $showLoginBoxBtnId.on('click', () => {
+        //     if (!selectorCss.isLoginInstagram) {
+        //         $loginBox.css({'top': 0, 'right': 0})
+        //             .addClass('bg-light border mt-5 mx-auto position-absolute');
+        //     }
+        //     $loginBox.addClass(openedClass).removeClass(closeClass);
+        // });
 
         const $buttonSubmit = $(_buttonSubmitId),
             cssValidationClass = 'form-validation';
@@ -92,7 +92,8 @@ export function LoginForm(selectorCss) {
             e.preventDefault();
             const form = $form.get(0);
             // const validator = new Validator($form);
-            // console.log(validator.validate());
+            console.log(viewUtils, viewUtils.isEmail($email.val()));
+
             if (form.checkValidity() && viewUtils.isEmail($email.val())) {
                 submitForm();
             } else {
@@ -130,7 +131,9 @@ export function LoginForm(selectorCss) {
     };
 
     function init() {
-        bindEvents();
+        if ($('.auth .login').length) {
+            bindEvents();
+        }
     }
 
     return {

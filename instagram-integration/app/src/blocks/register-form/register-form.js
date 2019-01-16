@@ -5,17 +5,23 @@ import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
 
+const selectorCls = {
+    form: '#js_form',
+    submitBtn: '#js_feedback_btn'
+};
 export default class RegisterForm {
     constructor() {
         this.user = User;
-        this.$form = $('#js_form');
+        this.$form = $(selectorCls.form);
         this.$email = this.$form.find('input[name="mail"]');
         this.$textAreaDescription = $('#description');
         this.formData = {'email': 'test1_email@m.ru', 'password': 'password'};
     }
 
     init() {
-        this.bindEvents();
+        if ($('.auth .register').length) {
+            this.bindEvents();
+        }
     }
 
     submitForm(formDataObj) {
@@ -70,7 +76,7 @@ export default class RegisterForm {
         const registerBox = CONST.uiSelectors.headerRegBox; // 'nav .register-box';
         const openedClass = 'd-block';
         const closeClass = 'd-none';
-        const $btn = $('#js_feedback_btn'),
+        const $btn = $(selectorCls.submitBtn),
             cssValidationClass = 'form-validation';
 
         $btn.on('click', (e) => {

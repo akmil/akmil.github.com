@@ -3,6 +3,7 @@ import 'bootstrap';
 
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
+import {LoginPage} from './pages/_auth/login-page';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
 import {Instagram} from './pages/_instagram/instagram';
 import * as header from './blocks/header/header';
@@ -30,6 +31,11 @@ const init = () => {
     (new RegisterForm()).init();
     LoginForm(selectorCssLoginForm).init();
     LoginForm(selectorCssLoginFormInstagram).init(); // init instagram login form*/
+    LoginPage({
+        _loginBox: '.auth.login .card-signin',
+        _formId: '.form-signin',
+        _buttonSubmitId: '.form-signin [type="submit"]'
+    }).init();
     Instagram().init();
     confirmationWithRedirect().init();
     header.initHeader();
