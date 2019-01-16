@@ -6,8 +6,8 @@ import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
 
 const selectorCls = {
-    form: '#js_form',
-    submitBtn: '#js_feedback_btn'
+    form: '.auth .register .form-signin',
+    submitBtn: '[type="submit"]'
 };
 export default class RegisterForm {
     constructor() {
@@ -19,7 +19,7 @@ export default class RegisterForm {
     }
 
     init() {
-        if ($('.auth .register').length) {
+        if ($('.auth.register').length) {
             this.bindEvents();
         }
     }

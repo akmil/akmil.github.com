@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="/instagram-integration/favicon.ico"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link href="index.css" rel="stylesheet"></head>
-<body class="auth login">
+<body class="auth register">
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -16,16 +16,16 @@
                     <h5 class="card-title text-center">Регистрация</h5>
                     <form class="form-signin">
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email адресс" required autofocus>
+                            <input type="email" id="inputEmail" class="form-control" name="mail" placeholder="Email адресс" required autofocus>
                             <label for="inputEmail">Email адресс</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+                            <input type="password" id="inputPassword" class="form-control" name="pass" placeholder="Пароль" required>
                             <label for="inputPassword">Пароль</label>
                         </div>
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword-repeat" class="form-control" placeholder="Пароль еще раз" required>
+                            <input type="password" id="inputPassword-repeat" class="form-control" name="pass-confirm" placeholder="Пароль еще раз" required>
                             <label for="inputPassword-repeat">Пароль еще раз</label>
                         </div>
 
@@ -34,6 +34,7 @@
                         
                         
                         <button class="border-0 btn btn-lg btn-primary btn-block text-uppercase mt-5" type="submit">Войти</button>
+                        <p class="small text-muted">Регистрируясь на сервисе, вы принимаете правила и условия пользовательского соглашения.</p>
                         <hr class="my-4">
                         <div class="text-center">
                             <a href="/instagram-integration/login.html">Логин</a>

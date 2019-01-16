@@ -131,7 +131,7 @@ export function LoginPage(selectorCss) {
     };
 
     function init() {
-        if ($('.auth .login').length) {
+        if ($('.auth.login').length) {
             bindEvents();
         }
     }
