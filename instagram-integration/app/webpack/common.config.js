@@ -17,7 +17,7 @@ module.exports = {
 
     extensions: ['.js', '.scss'],
 
-    modules: ['node_modules', 'static']
+    modules: ['node_modules']
 
   },
 
@@ -34,7 +34,7 @@ module.exports = {
 
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|static/,
         use: ['babel-loader', 'eslint-loader']
       },
 
@@ -55,6 +55,7 @@ module.exports = {
 
       {
         test: /\.svg$/,
+        exclude: /static/,
         use: {
           loader: 'svg-url-loader'
         }
