@@ -63,17 +63,18 @@ module.exports = webpackMerge(webpackCommon, {
     new ExtractTextPlugin('[name].css'), // -[chunkhash].min
     /* todo: turnOn UglifyJsPlugin for production */
     new UglifyJsPlugin({
-    //   compressor: {
-    //     screw_ie8: true,
-    //     warnings: false
-    //   },
-    //   mangle: {
-    //     screw_ie8: true
-    //   },
-    //   output: {
-    //     comments: false,
-    //     screw_ie8: true
-    //   },
+      compressor: {
+        screw_ie8: true,
+        warnings: false
+      },
+      mangle: {
+        screw_ie8: true
+      },
+      minimize: false,
+      output: {
+        comments: false,
+        screw_ie8: true
+      },
       sourceMap: true /* todo: set to FALSE for production */
     }),
     new LoaderOptionsPlugin({
