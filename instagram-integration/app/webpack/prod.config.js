@@ -16,7 +16,7 @@ module.exports = webpackMerge(webpackCommon, {
 
   bail: true,
 
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   output: {
 
@@ -40,7 +40,7 @@ module.exports = webpackMerge(webpackCommon, {
           use: [
             'css-loader?modules=false&localIdentName=[local]&minimize&importLoaders=2&url=true', // &sourceMap
             'postcss-loader',
-            'sass-loader?outputStyle=expanded' //&sourceMap' //&sourceMapContents'
+            'sass-loader?outputStyle=expanded' //&sourceMap&sourceMapContents'
           ]
         })
       }
@@ -62,21 +62,21 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new ExtractTextPlugin('[name].css'), // -[chunkhash].min
     /* todo: turnOn UglifyJsPlugin for production */
-    new UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      },
+    /*new UglifyJsPlugin({
+      // compressor: {
+      //   screw_ie8: true,
+      //   warnings: false
+      // },
       mangle: {
         screw_ie8: true
       },
       minimize: false,
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
-      sourceMap: true /* todo: set to FALSE for production */
-    }),
+      // output: {
+      //   comments: false,
+      //   screw_ie8: true
+      // },
+      sourceMap: true /!* todo: set to FALSE for production *!/
+    }),*/
     new LoaderOptionsPlugin({
       options: {
         context: '/',
