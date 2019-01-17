@@ -302,7 +302,7 @@ function fillList($list, dataArray) {
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
-        const checkpoint = item.checkpoint;
+        const checkpoint = item.checkpoint || item;
 
         if (!info) {
             $(`<li class="media py-3">
@@ -318,7 +318,7 @@ function fillList($list, dataArray) {
                             data-username="${item.username || ''}"
                             data-toggle="modal" data-target="#security-code">
                             <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                        : ''}
+                        : `(todo)checkpoint status - ${checkpoint}`}
                     </div>
                     ${stats()}
                 </div>
