@@ -1,108 +1,133 @@
 {{#> base modificator='messagesModificatorTest'}}
 
-  <div class="container-fluid messages-page">
+    <div class="container-fluid messages-page">
 
-    <h3>Newsletter page</h3>
+        <h3>Newsletter page</h3>
 
-    <div>
-      <p>Рассылка по direct - процесс отправки личных сообщений в директ в инстаграм по нужной вам аудитории.<u>Прочитать
-          инструкцию</u>или<u>посмотреть видео</u></p>
-    </div>
-
-    <div class="container">
-
-      <div class="row">
-        <div class="col">
-          <p>Переписка</p>
-          <p>Форма ответа</p>
+        <div>
+            <p>Рассылка по direct - процесс отправки личных сообщений в директ в инстаграм по нужной вам аудитории. <u>Прочитать
+                инструкцию</u> или <u>посмотреть видео</u></p>
         </div>
-        <div class="col">
-          <p>список пользователей</p>
-          <div class="p-3" id="messages">
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="https://i.imgur.com/jNNT4LE.png" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="https://i.imgur.com/jNNT4LE.png" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="https://i.imgur.com/jNNT4LE.png" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="https://i.imgur.com/jNNT4LE.png" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img class="img-avatar" src="https://i.imgur.com/jNNT4LE.png" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                incididunt...</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  </div>
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <p>Переписка</p>
+                    <div id="mainChatPart" class="panel panel-default mypanel"
+                         style="border-color: #ffffff;     height: 90vh; width: 100%; display: block">
+
+                        <ul id="listReports" class="messages-list list-unstyled">
+                            <li class="chat-item justify-content-end" value="Дратути ^_^">
+                                <div class="d-flex">
+                                    <div class="chat-text mytext">Дратути ^_^</div>
+                                    <small class="chat-time-text">15:32</small>
+                                </div>
+                            </li>
+                            <li class="chat-item justify-content-end" value="28544787417907994322672800489275392">
+                                <div class="d-flex">
+                                    <div class="chat-text" style="float: right;text-align: right;">
+                                        <img
+                                                src="https://instagram.fhel2-1.fna.fbcdn.net/vp/0a0d0f2658d8a4f399bd2291a8db2901/5CD4BE19/t51.2885-15/fr/e15/s1080x1080/49546102_314019615987210_6059389213328998521_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ3ODc0MTc5MDc5OTQzMjI2NzI4MDA0ODkyNzUzOTI%3D.2"
+                                                alt="Content Image" class="content-image">
+                                    </div>
+                                    <small class="chat-time-text">23:47</small>
+                                </div>
+                            </li>
+                            <li class="chat-date-text" value="14012019">
+                                <div>14.01.2019</div>
+                            </li>
+                            <li class="chat-item justify-content-end" value="28544809368657203246793946117963776">
+                                <div class="d-flex">
+                                    <div class="chat-text" style="float: right;text-align: right;">
+                                        <img
+                                                src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
+                                                alt="Content Image" class="content-image">
+                                    </div>
+                                    <small class="chat-time-text">00:06</small>
+                                </div>
+                            </li>
+                            <li class="chat-item chat-item-right" value="Some msg">
+                                <div class="d-flex">
+                                    <div class="chat-img"><a target="_blank"
+                                                             href="https://www.instagram.com/your_dieta/"><img
+                                            src="https://instagram.fhel2-1.fna.fbcdn.net/vp/c9d3add4b34748e12a4229350fb611e4/5CC667B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net"
+                                            style="width: 48px" alt="User Avatar" class="img-circle"></a></div>
+                                    <div class="chat-text">Some msg</div>
+                                    <small class="chat-time-text">00:09</small>
+                                </div>
+                            </li>
+                            <li class="chat-item chat-item-right" value="28547568910799589058260519404699648">
+                                <div class="d-flex">
+                                    <div class="chat-img">
+                                        <a target="_blank"
+                                                             href="https://www.instagram.com/your_dieta/"><img
+                                            src="https://instagram.fhel2-1.fna.fbcdn.net/vp/c9d3add4b34748e12a4229350fb611e4/5CC667B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net"
+                                            style="width: 48px" alt="User Avatar" class="img-circle"></a>
+                                    </div>
+                                    <div class="chat-text oponent"><a href="http://google.com" target="_blank">Заходи
+                                        сюда: google.com</a></div>
+                                    <small class="pull-right chat-time-text">17:40</small></div>
+                            </li>
+                        </ul>
+
+                        <div>
+                            <table class="w-100">
+                                <tbody>
+                                <tr>
+                                    <td class="chat-col-img">
+                                        <a target="_blank" href="https://www.instagram.com/the_rostyslav/"
+                                           id="text-area-link">
+                                            <img src="https://instagram.fupg2-1.fna.fbcdn.net/vp/0999bd4c94e301faf62c705d261183de/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=instagram.fupg2-1.fna.fbcdn.net&amp;_nc_cat=1"
+                                                 class="img-circle chat-reciver-img " id="text-area-img">
+                                        </a>
+                                    </td>
+                                    <td style="">
+                                        <textarea id="sendMessageTextArea" class="chat-text-area"
+                                                  placeholder="Напишите сообщение"></textarea>
+                                    </td>
+                                    <td class="chat-col-btn">
+                                        <div class="">
+                                            <form enctype="multipart/form-data">
+                                                <input type="file" id="imgupload" style="display: none"
+                                                       accept="image/*">
+                                            </form>
+                                            <button id="sendMessageButton"
+                                                    class="btn btn-success chat-button"><i
+                                                    class="fas fa-feather-alt"></i>sendMessageButton
+                                            </button>
+                                            <button id="Imoji" class="btn btn-success chat-button"><i
+                                                    class="fas fa-smile"></i>Imoji
+                                            </button>
+                                            <button id="sndFile" class="btn btn-success chat-button"><i
+                                                    class="fa fa-upload"></i></button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td colspan="3">
+                                        <img id="ImgToSend" style="width: 128px; height: 128px; display: none">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <p>список пользователей</p>
+                    <ul class="list-group list-unstyled messages-user-list">
+                        {{> user-item }}
+                        {{> user-item }}
+                        {{> user-item }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 {{/ base }}
