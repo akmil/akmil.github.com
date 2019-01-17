@@ -16,15 +16,15 @@ module.exports = webpackMerge(webpackCommon, {
 
   bail: true,
 
-  devtool: '#source-map',
+  devtool: 'source-map',
 
   output: {
 
     path: path.resolve(__dirname, '../../'),
 
-    filename: '[name].js', // -[hash].min
+    filename: '[name]-app.js', // -[hash].min
 
-    sourceMapFilename: '[name].map', // -[hash]
+    sourceMapFilename: '[name]-app.map', // -[hash]
 
     // chunkFilename: '[id]-[chunkhash].js'
 
@@ -38,9 +38,9 @@ module.exports = webpackMerge(webpackCommon, {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            'css-loader?modules=false&localIdentName=[local]&minimize&sourceMap&importLoaders=2&url=true', // &sourceMap
+            'css-loader?modules=false&localIdentName=[local]&minimize&importLoaders=2&url=true', // &sourceMap
             'postcss-loader',
-            'sass-loader?outputStyle=expanded' // &sourceMap&sourceMapContents
+            'sass-loader?outputStyle=expanded' //&sourceMap' //&sourceMapContents'
           ]
         })
       }
@@ -62,7 +62,7 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new ExtractTextPlugin('[name].css'), // -[chunkhash].min
     /* todo: turnOn UglifyJsPlugin for production */
-    // new UglifyJsPlugin({
+    new UglifyJsPlugin({
     //   compressor: {
     //     screw_ie8: true,
     //     warnings: false
@@ -74,8 +74,8 @@ module.exports = webpackMerge(webpackCommon, {
     //     comments: false,
     //     screw_ie8: true
     //   },
-    //   sourceMap: false
-    // }),
+      sourceMap: true /* todo: set to FALSE for production */
+    }),
     new LoaderOptionsPlugin({
       options: {
         context: '/',
