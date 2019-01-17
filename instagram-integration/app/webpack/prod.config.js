@@ -61,20 +61,21 @@ module.exports = webpackMerge(webpackCommon, {
       }
     }),
     new ExtractTextPlugin('[name].css'), // -[chunkhash].min
-    new UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
-      sourceMap: false
-    }),
+    /* todo: turnOn UglifyJsPlugin for production */
+    // new UglifyJsPlugin({
+    //   compressor: {
+    //     screw_ie8: true,
+    //     warnings: false
+    //   },
+    //   mangle: {
+    //     screw_ie8: true
+    //   },
+    //   output: {
+    //     comments: false,
+    //     screw_ie8: true
+    //   },
+    //   sourceMap: false
+    // }),
     new LoaderOptionsPlugin({
       options: {
         context: '/',

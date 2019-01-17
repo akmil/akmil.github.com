@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
 // const hamburgerButtonCls = '#aside_mobile__button';
 // const hamburgerMenuCls = '.aside-burger-menu';

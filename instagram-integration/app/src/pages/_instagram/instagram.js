@@ -1,5 +1,5 @@
 ﻿/* eslint-disable sort-vars */
-import $ from 'jquery';
+// import $ from 'jquery';
 import User from '../../common/js-services/user';
 // import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';

@@ -1,5 +1,5 @@
 import './base.scss';
-import 'bootstrap';
+// import 'bootstrap';
 
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
@@ -30,7 +30,7 @@ const init = () => {
     // console.log('init js here', CONST.user);
     (new RegisterForm()).init();
     LoginForm(selectorCssLoginForm).init();
-    LoginForm(selectorCssLoginFormInstagram).init(); // init instagram login form*/
+    LoginForm(selectorCssLoginFormInstagram).init(); // init instagram login form*!/
     LoginPage({
         _loginBox: '.auth.login .card-signin',
         _formId: '.form-signin',

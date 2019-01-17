@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 // import {CONST} from './consts';
 // import Network from './network';
 // import CookieStorage from './cookie';

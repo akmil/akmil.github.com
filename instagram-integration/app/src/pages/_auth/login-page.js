@@ -1,5 +1,5 @@
 /* eslint-disable sort-vars */
-import $ from 'jquery';
+// import $ from 'jquery';
 import User from '../../common/js-services/user';
 import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 import cookieStorage from '../../common/js-services/cookie';

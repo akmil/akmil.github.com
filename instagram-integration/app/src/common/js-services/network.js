@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import viewUtils from './view';
 
 export default class Network {

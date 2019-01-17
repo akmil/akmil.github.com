@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
 import viewUtils from '../../common/js-services/view';
