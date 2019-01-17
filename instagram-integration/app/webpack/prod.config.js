@@ -75,7 +75,7 @@ module.exports = webpackMerge(webpackCommon, {
         comments: false,
         screw_ie8: true
       },
-      sourceMap: true /* todo: set to FALSE for production */
+      sourceMap: false /* todo: set to FALSE for production */
     }),
     new LoaderOptionsPlugin({
       options: {
