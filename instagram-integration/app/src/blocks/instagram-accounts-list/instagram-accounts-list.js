@@ -318,7 +318,7 @@ function fillList($list, dataArray) {
                             data-username="${item.username || ''}"
                             data-toggle="modal" data-target="#security-code">
                             <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                        : `(todo)checkpoint status - ${checkpoint}`}
+                        : `(todo)checkpoint status - ${checkpoint.status}`}
                     </div>
                     ${stats()}
                 </div>
