@@ -110,13 +110,6 @@
     margin-top: 90px;
 }
 
-.nav-item__sign-in {
-    background: url("../img/buttons/btn-enter.svg") no-repeat -6px -6px;
-    width: 112px;
-}
-.nav-item__sign-in:hover {
-    background: url("../img/buttons/btn-enter.svg") no-repeat -6px -60px;
-}
 .btn-carousel-box {
     margin-top: 72px;
     text-align: right;
@@ -223,7 +216,7 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
+    cursor: pointer;
     height: 34px;
 }
 
@@ -243,6 +236,8 @@
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
+    padding-left: 40px;
+    z-index: -1;
 }
 
 .slider:before {
@@ -256,9 +251,14 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-
+input:checked ~ .text {
+    color: #2196F3;
+    opacity: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 input:checked + .slider {
-    background-color: #2196F3;
+    /*background-color: #2196F3;*/
 }
 
 input:focus + .slider {
@@ -266,20 +266,32 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(68px);
+    -ms-transform: translateX(68px);
+    transform: translateX(68px);
 }
 
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
+.switch .text {
+    text-align: right;
+    z-index: 5;
+    color: #fff;
+    padding-left: 32px;
+    margin-right: 12px;
+    line-height: 34px;
 }
-
-.slider.round:before {
-    border-radius: 50%;
+.nav-item__sign-in .switch {
+    top: 3px;
 }
-  /**/
+.nav-item__sign-in .slider {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+}
+.nav-item__sign-in .slider:before{
+    background: url("../img/buttons/btn-enter.svg") no-repeat -10px -12px;
+    width: 30px;
+    height: 30px;
+    bottom: 2px;
+}
 
 @media (min-width: 768px) {
     /*.button-box a{

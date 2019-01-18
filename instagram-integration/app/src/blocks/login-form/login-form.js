@@ -7,7 +7,7 @@ import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 
-window.$ = $;
+// window.$ = $;
 
 export function LoginForm(selectorCss) {
     const {_formId, _buttonSubmitId, _showLoginBoxBtnId, _loginBox} = selectorCss;

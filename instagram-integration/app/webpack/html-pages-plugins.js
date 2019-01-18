@@ -13,12 +13,12 @@ const pages = [
         source: '_landing/landing'
     },
     {
-        title: 'Login page',
+        title: 'Авторизация',
         name: 'login',
         source: '_auth/login'
     },
     {
-        title: 'Register page',
+        title: 'Регистрация',
         name: 'register',
         source: '_auth/register'
     },
@@ -53,12 +53,12 @@ const pages = [
         source: '_confirm-registration/confirm-registration'
     },
     {
-        title: 'instagram-accounts',
+        title: 'Instagram аккаунты',
         name: 'instagram-accounts',
         source: '_instagram-accounts/instagram-accounts'
     },
     {
-        title: 'User messages',
+        title: 'Диалоги',
         name: 'messages',
         source: '_messages/messages'
     },

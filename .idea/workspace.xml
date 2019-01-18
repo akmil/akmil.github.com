@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="664b4c5e-d5ff-444d-a3a5-8632eebf76fe" name="Default" comment="add: handlebars">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="664b4c5e-d5ff-444d-a3a5-8632eebf76fe" name="Default" comment="upd: styles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/src/blocks/login-form/login-form.js" afterPath="$PROJECT_DIR$/instagram-integration/app/src/blocks/login-form/login-form.js" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/index.html" afterPath="$PROJECT_DIR$/instagram-integration/app/static/index.html" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-enter.svg" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-enter.svg" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/webpack/html-pages-plugins.js" afterPath="$PROJECT_DIR$/instagram-integration/app/webpack/html-pages-plugins.js" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/index-app.js" afterPath="$PROJECT_DIR$/instagram-integration/index-app.js" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/instagram-accounts.html" afterPath="$PROJECT_DIR$/instagram-integration/instagram-accounts.html" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/landing-page/css/buttons.css" afterPath="$PROJECT_DIR$/instagram-integration/landing-page/css/buttons.css" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/landing-page/img/buttons/btn-enter.svg" afterPath="$PROJECT_DIR$/instagram-integration/landing-page/img/buttons/btn-enter.svg" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/login.html" afterPath="$PROJECT_DIR$/instagram-integration/login.html" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/messages.html" afterPath="$PROJECT_DIR$/instagram-integration/messages.html" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/register.html" afterPath="$PROJECT_DIR$/instagram-integration/register.html" />
     </list>
     <ignored path="$PROJECT_DIR$/scripts/colorNamer/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -18,31 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.gspec" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/galen-test/home.gspec">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+            <state relative-caret-position="170">
+              <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -60,6 +52,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>img/portfolio</find>
+      <find>slider</find>
+      <find>slick-cloned</find>
     </findStrings>
     <replaceStrings>
       <replace>static-landing-page/img/portfolio</replace>
@@ -90,13 +84,13 @@
         <option value="$PROJECT_DIR$/instagram-integration/app/src/base.scss" />
         <option value="$PROJECT_DIR$/instagram-integration/app/src/base.handlebars" />
         <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/creative.js" />
-        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" />
         <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/typography.css" />
-        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/main.css" />
         <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/creative.css" />
-        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing.html" />
-        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" />
+        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" />
+        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/main.css" />
+        <option value="$PROJECT_DIR$/instagram-integration/app/static/landing.html" />
       </list>
     </option>
   </component>
@@ -185,6 +179,34 @@
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
             </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
+              <item name="color-namer" type="cbb8eebc:String" user="color-namer" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
+              <item name="instagram-integration" type="cbb8eebc:String" user="instagram-integration" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
+              <item name="scripts" type="cbb8eebc:String" user="scripts" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
+              <item name="scripts" type="cbb8eebc:String" user="scripts" />
+              <item name="colorNamer" type="cbb8eebc:String" user="colorNamer" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="akmil.github" type="cbb8eebc:String" user="akmil.github" />
+              <item name="scripts" type="cbb8eebc:String" user="scripts" />
+              <item name="colorNamer" type="cbb8eebc:String" user="colorNamer" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -208,158 +230,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\projects\akmil\akmil.github\instagram-integration\app\static\landing-page\img\video" />
       <recent name="D:\projects\akmil\akmil.github\instagram-integration\app\static\landing-page\img\buttons" />
       <recent name="D:\projects\akmil\akmil.github\instagram-integration\app\static\landing-page\js" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/src/blocks/instagram-accounts-list/instagram-accounts-list.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/creative.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/main.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/run-robot.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/interest/image.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/interest/image_2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/interest/image_3.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/results-bg.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing.html</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path-carousel.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path-carousel1.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path@2x.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path@2x.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path@3x.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/__images_jpg/path@3x.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/autogreeting.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/2E1E51D4.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/C274CBF3.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/E1C96C27.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/arrow-right.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-blue.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-enter.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-get-result.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-run-robot.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/finger-white.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/finger.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/get-result.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/run-robot--.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/run-robot-active--.svg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/shadow-carousel.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/shadow.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/shadow1.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/carousel-bg-light.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/carousel-bg.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/results-bg--.jpg</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-shadow.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-shadow2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/run-robot-active.svg</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -408,48 +282,11 @@
       <workItem from="1546009767119" duration="50000" />
       <workItem from="1546601273046" duration="9007000" />
       <workItem from="1547021792344" duration="158000" />
-    </task>
-    <task id="LOCAL-00012" summary="mod: host">
-      <created>1543240188712</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1543240188712</updated>
-    </task>
-    <task id="LOCAL-00013" summary="mod: inRegister message">
-      <created>1543240446919</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1543240446919</updated>
-    </task>
-    <task id="LOCAL-00014" summary="add: login on Confirm">
-      <created>1543240735808</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1543240735808</updated>
-    </task>
-    <task id="LOCAL-00015" summary="add: show logOut btn">
-      <created>1543240870817</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1543240870817</updated>
-    </task>
-    <task id="LOCAL-00016" summary="mod: logo path">
-      <created>1543240988916</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1543240988916</updated>
-    </task>
-    <task id="LOCAL-00017" summary="add: redirect to profile">
-      <created>1543326705181</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1543326705181</updated>
+      <workItem from="1547477135821" duration="277000" />
+      <workItem from="1547550442051" duration="57000" />
+      <workItem from="1547550891910" duration="650000" />
+      <workItem from="1547716664616" duration="177000" />
+      <workItem from="1547728466477" duration="2066000" />
     </task>
     <task id="LOCAL-00018" summary="add: pass confirm checking">
       <created>1543335396336</created>
@@ -752,28 +589,70 @@
       <option name="project" value="LOCAL" />
       <updated>1546613181615</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="mod: acc list">
+      <created>1547022144231</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1547022144231</updated>
+    </task>
+    <task id="LOCAL-00062" summary="add: sliders">
+      <created>1547037681062</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1547037681062</updated>
+    </task>
+    <task id="LOCAL-00063" summary="upd: styles">
+      <created>1547477166854</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1547477166855</updated>
+    </task>
+    <task id="LOCAL-00064" summary="upd: styles">
+      <created>1547728480732</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1547728480732</updated>
+    </task>
+    <task id="LOCAL-00065" summary="upd: styles">
+      <created>1547729472682</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1547729472682</updated>
+    </task>
+    <task id="LOCAL-00066" summary="upd: styles">
+      <created>1547730457264</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1547730457264</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54272000" />
+    <option name="totallyTimeSpent" value="68745000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.50842994" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.4915701" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2365648" sideWeight="0.081037275" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19565217" sideWeight="0.4915701" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2365648" sideWeight="0.30810812" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2365648" sideWeight="0.9189627" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2365648" sideWeight="0.6918919" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="SonarQube" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -818,8 +697,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="mod js" />
-    <MESSAGE value="add: welcome page" />
     <MESSAGE value="add: error handler" />
     <MESSAGE value="add: viewUtils" />
     <MESSAGE value="mod: host" />
@@ -843,7 +720,9 @@
     <MESSAGE value="add: static accounts-list modal" />
     <MESSAGE value="upd: build" />
     <MESSAGE value="add: handlebars" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: handlebars" />
+    <MESSAGE value="add: sliders" />
+    <MESSAGE value="upd: styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd: styles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -852,49 +731,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/instagram-integration/vendor-landing-page/scrollreveal/scrollreveal.js" />
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/src/common/variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="80" column="22" lean-forward="false" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14527">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/webpack/prod.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="23" lean-forward="false" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/src/common/js-services/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="28" column="53" lean-forward="false" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/instagram-integration/static-landing-page1/css/creative.min.css" />
     <entry file="file://$PROJECT_DIR$/instagram-integration/static-landing-page1/css/creative.css" />
     <entry file="file://$PROJECT_DIR$/instagram-integration/static-landing-page1/css/timeline.css" />
@@ -977,36 +813,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/creative.min.js" />
     <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/creative.js" />
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/vendor-landing/scrollreveal/scrollreveal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/vendor-landing/scrollreveal/scrollreveal.js" />
     <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/finger.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="75" column="10" lean-forward="false" selection-start-line="75" selection-start-column="10" selection-end-line="75" selection-end-column="10" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/typography.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-240">
           <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1022,25 +838,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="60" column="114" lean-forward="false" selection-start-line="60" selection-start-column="114" selection-end-line="60" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/galen-test/home.gspec">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,7 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,6 +856,84 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="168" column="10" lean-forward="true" selection-start-line="168" selection-start-column="10" selection-end-line="168" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing.html" />
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/src/blocks/instagram-accounts-list/instagram-accounts-list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-891">
+          <caret line="113" column="21" lean-forward="false" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="138" column="31" lean-forward="false" selection-start-line="138" selection-start-column="31" selection-end-line="138" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="289" column="14" lean-forward="false" selection-start-line="289" selection-start-column="14" selection-end-line="289" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/landing-page/css/buttons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-714">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instagram-integration/app/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/colorNamer/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-821">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding />
         </state>
       </provider>

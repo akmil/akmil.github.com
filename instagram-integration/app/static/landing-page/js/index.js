@@ -187,19 +187,19 @@
     var slideMovementTotal = 0;
     var mouseIsDown = false;
     var slider = $('#slider');
-    var sliderSignIn = $('#signIn');
-    var mouseIsDownSignIn = false;
+    // var sliderSignIn = $('#signIn');
+    // var mouseIsDownSignIn = false;
 
-    function sliderHandlerMouseDown(event, isSignIn) {
-        if (isSignIn) {
-            mouseIsDown = mouseIsDownSignIn;
-        }
+    function sliderHandlerMouseDown(event, /*isSignIn*/) {
+        // if (isSignIn) {
+        //     mouseIsDown = mouseIsDownSignIn;
+        // }
         mouseIsDown = true;
         slideMovementTotal = $('#button-background').width() - $(this).width();
         initialMouse = event.clientX || event.originalEvent.touches[0].pageX;
         // console.log(initialMouse);
     }
-    function sliderHandlerMouseUp(event, isSignIn) {
+    function sliderHandlerMouseUp(event, /*isSignIn*/) {
         // if (isSignIn) {
         //     mouseIsDown = mouseIsDownSignIn;
         // }
@@ -222,7 +222,7 @@
         window.location.href = url;
         // console.log(url);
     }
-    function sliderHandlerMouseMove(event, isSignIn) {
+    function sliderHandlerMouseMove(event, /*isSignIn*/) {
         // if (isSignIn) {
         //     mouseIsDown = mouseIsDownSignIn;
         // }
@@ -252,15 +252,19 @@
         console.log(relativeMouse);
     }
 
-    sliderSignIn.on('mousedown touchstart', sliderHandlerMouseDown.bind(this, 1));
+    // sliderSignIn.on('mousedown touchstart', sliderHandlerMouseDown.bind(this, 1));
     slider.on('mousedown touchstart', sliderHandlerMouseDown);
 
     $(document.body, '#slider').on('mouseup touchend', sliderHandlerMouseUp);
-    $(document.body, '#sliderSignIn').on('mouseup touchend', sliderHandlerMouseUp.bind(this, 1));
+    // $(document.body, '#sliderSignIn').on('mouseup touchend', sliderHandlerMouseUp.bind(this, 1));
 
     $(document.body).on('mousemove touchmove', sliderHandlerMouseMove);
     // $(document.body).on('mousemove touchmove', sliderHandlerMouseMove.bind(this, 1));
 
     /* */
+    function signInHandler() {
+        console.log('nav-item__sign-in');
+    }
+    $('.nav-item__sign-in').on('click', signInHandler)
 
 })(jQuery); // End of use strict
