@@ -12,7 +12,8 @@ const conversation = {
                     'side': 'left',
                     'type': 'text', // photo, video, gif, like, link
                     'value': '',
-                    'timestamp': '14:33'
+                    'timestamp': '14:33',
+
                 },
                 {
                     'side': 'right',
@@ -83,4 +84,4 @@ const userList = {
     }
 };
 
-export default {userList, conversation};
+export {userList, conversation};

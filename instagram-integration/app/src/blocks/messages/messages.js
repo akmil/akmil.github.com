@@ -1,6 +1,7 @@
 import * as data from './dataServer';
-import User from '../../common/js-services/user';
+// import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
+/*
 import viewUtils from '../../common/js-services/view';
 
 function addOnLoadHandlers() {
@@ -38,7 +39,7 @@ function addOnLoadHandlers() {
     });
 }
 
-function addListHandler(/* username*/) {
+function addListHandler(/!* username*!/) {
     // $('#yourModalID').on('show.bs.modal', function(e) {
     //     var yourparameter = e.relatedTarget.dataset.yourparameter;
     //     // Do some stuff w/ it.
@@ -147,83 +148,12 @@ function addListHandler(/* username*/) {
     });
 }
 
-function fillList($list, dataArray) {
-    const items = dataArray;
-    const cList = $list;
-    const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
-    const insertItem = (data, text, cssCls) => {
-        const liTpl = `${(data)
-            ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
-            : `<li class="list-inline-item ${cssCls}"><span class="figure">-</span><span>${text}</span></li>`}`;
-        return liTpl;
-    };
-    const stats = (info) => {
-        const tpl = `<div class="col">
-            <ul class="list-inline text-center counts-list">
-            ${(info)
-              ? `${insertItem(info['media_count'], 'Публикации', 'media-count')}
-                ${insertItem(info['follower_count'], 'Подписчики', 'follower-count')}
-                ${insertItem(info['following_count'], 'Подписки', 'following-count')}`
-              : `${insertItem(false, 'Публикации', 'media-count')}
-                ${insertItem(false, 'Подписчики', 'follower-count')}
-                ${insertItem(false, 'Подписки', 'following-count')}`
-            }
-            </ul>
-        </div>`;
-        return tpl;
-    };
-    cList.empty().addClass('border-light-color');
-    items.forEach((item) => {
-        const info = item.info;
-        const checkpoint = item.checkpoint || item;
-
-        if (!info) {
-            $(`<li class="media py-3">
-                <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
-                <div class="media-body d-flex">
-                    <div class="col user-info">
-                        ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
-                    </div>
-                    <div class="col">                        
-                        ${(checkpoint.status === 'TRIGGERED')
-                        ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                            data-checkpoint-type="${checkpoint.type}"
-                            data-username="${item.username || ''}"
-                            data-toggle="modal" data-target="#security-code">
-                            <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                        : `(todo)checkpoint status - ${checkpoint.status}`}
-                    </div>
-                    ${stats()}
-                </div>
-            </li>`).appendTo(cList);
-        } else {
-            $(`<li class="media py-3">
-            ${(info['profile_pic_url'])
-                ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
-                : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
-            <div class="media-body d-flex">
-                <div class="col user-info">
-                    ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
-                    ${(info.name) ? `<p class="mt-0 mb-1">${info.name}</p>` : ''}
-                    ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
-                    ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''}
-                </div>
-                <div class="col">                        
-                    ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code">
-                    <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                : ''}
-                </div>
-                ${stats(info)}
-            </div>
-        </li>`).appendTo(cList);
-        }
-    });
-}
+*/
 
 /**
  * Init header
  */
+/*
 export function initOld() {
     const $msgList = $('.messages-list');
     // check we are in profile page
@@ -282,13 +212,85 @@ export function initOld() {
         $('.spinner-box').addClass('d-none');
     });
 }
+*/
+
+function fillList($list, dataArray) {
+    const items = dataArray;
+    const cList = $list;
+    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    // const insertItem = (data, text, cssCls) => {
+    //     const liTpl = `${(data)
+    //         ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
+    //         : `<li class="list-inline-item ${cssCls}"><span class="figure">-</span><span>${text}</span></li>`}`;
+    //     return liTpl;
+    // };
+    /*
+    const stats = (info) => {
+        const tpl = `<div class="col">
+            <ul class="list-inline text-center counts-list">
+            ${(info)
+            ? `${insertItem(info['media_count'], 'Публикации', 'media-count')}
+                ${insertItem(info['follower_count'], 'Подписчики', 'follower-count')}
+                ${insertItem(info['following_count'], 'Подписки', 'following-count')}`
+            : `${insertItem(false, 'Публикации', 'media-count')}
+                ${insertItem(false, 'Подписчики', 'follower-count')}
+                ${insertItem(false, 'Подписки', 'following-count')}`
+            }
+            </ul>
+        </div>`;
+        return tpl;
+    };
+    */
+    cList.empty().addClass('border-light-color');
+    items.forEach((item) => {
+        const message = item;
+        // const checkpoint = item.checkpoint || item;
+
+        if (message.side === 'left') {
+            $(`<li class="chat-item justify-content-end" value="${message.value}">
+                <div class="d-flex">
+                ${(message['profile_pic_url'])
+                     ? `<div class="chat-text" style="text-align: right;">
+                        <img src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
+                            alt="Content Image" class="content-image">                        
+                    </div>`
+                     : `<div class="chat-text" >${message.value}</div>`
+                }
+                    <small class="chat-time-text">${message.timestamp}</small>
+                </div>
+            </li>`).appendTo(cList);
+        } else {
+            $(`<li class="chat-item chat-item-right" value="${message.value}">
+                <div class="d-flex">
+                    <div class="chat-img">
+                        <a target="_blank"
+                            href="https://www.instagram.com/your_dieta/">
+                        ${(message['profile_pic_url'])
+                        ? `<div class="chat-text" style="text-align: right;">
+                                <img src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
+                                    alt="Content Image" class="content-image">                        
+                            </div>`
+                        : `<div class="chat-text" >${message.value}</div>`
+                        }
+                            </a>                    
+                    </div>
+                    <div class="chat-text oponent">
+                        <a href="http://google.com" target="_blank">Заходи сюда: google.com</a>
+                    </div>
+                        <small class="pull-right chat-time-text">17:40</small>
+                    </div>
+            </li>`).appendTo(cList);
+        }
+    });
+}
 
 export function init() {
     const {conversation, userList} = data;
-    console.log('test', conversation, userList);
+    console.log('test', userList, conversation);
     const $msgList = $('.messages-list');
     // check we are in profile page
     if (!$msgList.length) {
         return;
     }
+    fillList($msgList, conversation.data.meta.messages);
 }
