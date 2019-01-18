@@ -229,7 +229,7 @@
 
 
         if (!mouseIsDown) {
-            console.log('return');
+            // console.log('return');
             return;
         }
         // console.log(!mouseIsDown);
@@ -249,7 +249,7 @@
             return;
         }
         slider.css({'left': relativeMouse - 0,  'cursor': 'grabbing'});
-        console.log(relativeMouse);
+        // console.log(relativeMouse);
     }
 
     // sliderSignIn.on('mousedown touchstart', sliderHandlerMouseDown.bind(this, 1));
@@ -263,12 +263,12 @@
 
     /* */
     function signInHandler(e) {
-        console.log('nav-item__sign-in');
         setTimeout(function () {
             var url = $(e.target).closest('.nav-item__sign-in').find('.switch').data('href');
             window.location.href = url;
         }, 500);
     }
+    $('.switch input[type="checkbox"]').prop('checked', false);
     $('.nav-item__sign-in').on('click', signInHandler)
 
 })(jQuery); // End of use strict
