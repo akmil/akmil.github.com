@@ -6,7 +6,7 @@ import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
 
 const selectorCls = {
-    form: '.auth .register .form-signin',
+    form: '.auth.register .form-signin',
     submitBtn: '[type="submit"]'
 };
 export default class RegisterForm {
