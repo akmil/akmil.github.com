@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="664b4c5e-d5ff-444d-a3a5-8632eebf76fe" name="Default" comment="upd: styles">
+    <list default="true" id="664b4c5e-d5ff-444d-a3a5-8632eebf76fe" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/instagram-integration/app/src/blocks/vendor-scripts/vendor-scripts.handlebars" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/src/blocks/login-form/login-form.js" afterPath="$PROJECT_DIR$/instagram-integration/app/src/blocks/login-form/login-form.js" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/index.html" afterPath="$PROJECT_DIR$/instagram-integration/app/static/index.html" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/css/buttons.css" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-enter.svg" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/img/buttons/btn-enter.svg" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" afterPath="$PROJECT_DIR$/instagram-integration/app/static/landing-page/js/index.js" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/app/webpack/html-pages-plugins.js" afterPath="$PROJECT_DIR$/instagram-integration/app/webpack/html-pages-plugins.js" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/src/base.handlebars" afterPath="$PROJECT_DIR$/instagram-integration/app/src/base.handlebars" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/src/pages/_auth/login.handlebars" afterPath="$PROJECT_DIR$/instagram-integration/app/src/pages/_auth/login.handlebars" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/app/src/pages/_auth/register.handlebars" afterPath="$PROJECT_DIR$/instagram-integration/app/src/pages/_auth/register.handlebars" />
       <change beforePath="$PROJECT_DIR$/instagram-integration/index-app.js" afterPath="$PROJECT_DIR$/instagram-integration/index-app.js" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/instagram-accounts.html" afterPath="$PROJECT_DIR$/instagram-integration/instagram-accounts.html" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/landing-page/css/buttons.css" afterPath="$PROJECT_DIR$/instagram-integration/landing-page/css/buttons.css" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/landing-page/img/buttons/btn-enter.svg" afterPath="$PROJECT_DIR$/instagram-integration/landing-page/img/buttons/btn-enter.svg" />
+      <change beforePath="$PROJECT_DIR$/instagram-integration/landing-page/js/index.js" afterPath="$PROJECT_DIR$/instagram-integration/landing-page/js/index.js" />
       <change beforePath="$PROJECT_DIR$/instagram-integration/login.html" afterPath="$PROJECT_DIR$/instagram-integration/login.html" />
-      <change beforePath="$PROJECT_DIR$/instagram-integration/messages.html" afterPath="$PROJECT_DIR$/instagram-integration/messages.html" />
       <change beforePath="$PROJECT_DIR$/instagram-integration/register.html" afterPath="$PROJECT_DIR$/instagram-integration/register.html" />
     </list>
     <ignored path="$PROJECT_DIR$/scripts/colorNamer/dist/" />
@@ -286,14 +281,7 @@
       <workItem from="1547550442051" duration="57000" />
       <workItem from="1547550891910" duration="650000" />
       <workItem from="1547716664616" duration="177000" />
-      <workItem from="1547728466477" duration="2066000" />
-    </task>
-    <task id="LOCAL-00018" summary="add: pass confirm checking">
-      <created>1543335396336</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1543335396336</updated>
+      <workItem from="1547728466477" duration="2517000" />
     </task>
     <task id="LOCAL-00019" summary="add: pubsub">
       <created>1543826960547</created>
@@ -631,11 +619,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547730457264</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="upd: styles">
+      <created>1547804922154</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1547804922154</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68745000" />
+    <option name="totallyTimeSpent" value="69196000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
