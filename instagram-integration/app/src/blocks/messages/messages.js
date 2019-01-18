@@ -3,132 +3,7 @@ import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
 import viewUtils from '../../common/js-services/view';
 
-/*
-const staticResp = {
-    'status': {
-        'state': 'ok'
-    },
-    'data': {
-        'accounts': [{
-            'status': 'OK',
-            'username': 'andrey.jakivchyk',
-            'checkpoint': {
-                'status': 'ABSENT',
-                'type': 'PHONE'
-            },
-            'tariff': {
-                'status': 'ABSENT'
-            },
-            'info': {
-                'profile_pic_url': 'https://randomuser.me/api/portraits/men/50.jpg',
-                'name': 'Андрей Якивчук',
-                'biography': '',
-                'url': '',
-                'email': 'nidzuku@inbox.ru',
-                'phone': '',
-                'media_count': 2,
-                'follower_count': 4,
-                'following_count': 15
-            }
-        }, {
-            'status': 'OK',
-            'username': 'andrey.jakivchyk',
-            'checkpoint': {
-                'status': 'ABSENT',
-                'type': 'EMAIL'
-            },
-            'tariff': {
-                'status': 'ABSENT'
-            },
-            'info': {
-                'profile_pic_url': 'https://randomuser.me/api/portraits/men/52.jpg',
-                'name': 'Димон Паралон',
-                'biography': 'biography text',
-                'url': 'www.lenengrad.ru',
-                'email': 'nidzuku@inbox.ru',
-                'phone': '011-111-111-11',
-                'media_count': 515,
-                'following_count': 34
-            }
-        }, {
-            'status': 'OK',
-            'username': 'alex.smith',
-            'checkpoint': {
-                'status': 'TRIGGERED',
-                'type': 'EMAIL_OR_PHONE'
-            },
-            'tariff': {
-                'status': 'ABSENT'
-            }
-        }, {
-            'status': 'OK',
-            'username': '22andrey.jakivchyk2',
-            'checkpoint': {
-                'status': 'TRIGGERED',
-                'type': 'PHONE'
-            },
-            'tariff': {
-                'status': 'ABSENT'
-            }
-        }
-        ],
-        'available_proxy_purchase': true
-    }
-};
-*//*
-const staticRespWithDelay = {
-    'status': {
-        'state': 'ok'
-    },
-    'data': {
-        'accounts': [{
-            'status': 'OK',
-            'username': 'staticResp.WithDelay',
-            'checkpoint': {
-                'status': 'ABSENT',
-                'type': 'PHONE'
-            },
-            'tariff': {
-                'status': 'ABSENT'
-            }
-        }],
-        'available_proxy_purchase': true
-    }
-};
-*/
 
-// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
-const addInstagramAccount = (newFormData) => {
-    const cbError = (result) => {
-        console.log('ERROR', result);
-        viewUtils.showInfoMessage($('.error-msg'),
-            result.status.state,
-            result.status.message || 'Login error');
-        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-    };
-
-    User.addInstagramAccount(newFormData, cbError).then((result) => {
-        if (result && result.status) {
-            console.log(result, result.status);
-            // debugger;
-            const $msgList = $('.accounts-list');
-            $msgList.empty();
-            // todo : reload list
-            // fillList($msgList, result.data.accounts);
-            // addListHandler();
-
-            // viewUtils.showInfoMessage($textAreaDescription,
-            //     result.status.state,
-            //     result.status.message || 'Login error');
-            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-        }
-    }).catch((err) => {
-        // todo: render for user
-        console.log(err);
-    });
-
-    console.log('submit', newFormData);
-};
 
 function addOnLoadHandlers() {
     // $('.js_repeat-security-code').on('click', (e) => {
@@ -309,7 +184,7 @@ function fillList($list, dataArray) {
                 <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
                 <div class="media-body d-flex">
                     <div class="col user-info">
-                        ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
+                        ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
                     </div>
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
@@ -331,10 +206,9 @@ function fillList($list, dataArray) {
             <div class="media-body d-flex">
                 <div class="col user-info">
                     ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
-                    ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
-                    ${(false)  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
-                     ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
-                    
+                    ${(info.name) ? `<p class="mt-0 mb-1">${info.name}</p>` : ''}
+                    ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
+                    ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''}
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
@@ -353,7 +227,7 @@ function fillList($list, dataArray) {
  * Init header
  */
 export function init() {
-    const $msgList = $('.accounts-list');
+    const $msgList = $('.messages-list');
     // check we are in profile page
     if (!$msgList.length) {
         return;
@@ -385,14 +259,7 @@ export function init() {
         addListHandler();
     };
 
-    // check we are in profile page
-    if (!$msgList.length) {
-        return;
-    }
-
     addOnLoadHandlers();
-
-    // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
 
     metadata.then((result) => {
         // проверям один раз наличие result.data.accounts.info
@@ -408,6 +275,7 @@ export function init() {
         }
         checkResponse(result, isResendRequest);
     }).catch((err) => {
+        // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
                 err.status || '',
