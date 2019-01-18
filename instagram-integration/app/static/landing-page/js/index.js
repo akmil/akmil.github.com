@@ -262,8 +262,12 @@
     // $(document.body).on('mousemove touchmove', sliderHandlerMouseMove.bind(this, 1));
 
     /* */
-    function signInHandler() {
+    function signInHandler(e) {
         console.log('nav-item__sign-in');
+        setTimeout(function () {
+            var url = $(e.target).closest('.nav-item__sign-in').find('.switch').data('href');
+            window.location.href = url;
+        }, 500);
     }
     $('.nav-item__sign-in').on('click', signInHandler)
 

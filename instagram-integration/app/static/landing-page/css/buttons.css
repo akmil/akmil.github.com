@@ -249,7 +249,7 @@
     bottom: 4px;
     background-color: white;
     -webkit-transition: .4s;
-    transition: .4s;
+    transition: .4s; /*if modify, check js redirect timeout*/
 }
 input:checked ~ .text {
     color: #2196F3;
