@@ -10,6 +10,7 @@ import * as header from './blocks/header/header';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import {CONST} from './common/js-services/consts';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
+import * as messages from './blocks/messages/messages';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -41,6 +42,7 @@ const init = () => {
     header.initHeader();
     burgerMenu.init();
     instagramAccounts.init();
+    messages.init();
 };
 
 (() => init())();

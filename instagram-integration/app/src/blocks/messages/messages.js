@@ -1,9 +1,7 @@
-// import $ from 'jquery';
+import * as data from './dataServer';
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
 import viewUtils from '../../common/js-services/view';
-
-
 
 function addOnLoadHandlers() {
     // $('.js_repeat-security-code').on('click', (e) => {
@@ -24,7 +22,7 @@ function addOnLoadHandlers() {
         // const validator = new Validator($form);
         // console.log(validator.validate());
         if (form.checkValidity()) {
-            addInstagramAccount({username, password});
+            // addInstagramAccount({username, password});
         } else {
             // Highlight errors
             if (form.reportValidity) {
@@ -226,7 +224,7 @@ function fillList($list, dataArray) {
 /**
  * Init header
  */
-export function init() {
+export function initOld() {
     const $msgList = $('.messages-list');
     // check we are in profile page
     if (!$msgList.length) {
@@ -283,4 +281,14 @@ export function init() {
         }, 3000);
         $('.spinner-box').addClass('d-none');
     });
+}
+
+export function init() {
+    const {conversation, userList} = data;
+    console.log('test', conversation, userList);
+    const $msgList = $('.messages-list');
+    // check we are in profile page
+    if (!$msgList.length) {
+        return;
+    }
 }

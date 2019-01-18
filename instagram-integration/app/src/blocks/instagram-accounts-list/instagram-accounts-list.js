@@ -332,7 +332,7 @@ function fillList($list, dataArray) {
                 <div class="col user-info">
                     ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
                     ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
-                    ${(false)  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
+                    ${(info.name) ? '' : 'commented'  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
                      ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
                     
                 </div>
