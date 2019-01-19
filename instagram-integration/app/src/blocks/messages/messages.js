@@ -218,12 +218,23 @@ function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
-    // const insertItem = (data, text, cssCls) => {
-    //     const liTpl = `${(data)
-    //         ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
-    //         : `<li class="list-inline-item ${cssCls}"><span class="figure">-</span><span>${text}</span></li>`}`;
-    //     return liTpl;
-    // };
+    const insertMsg = (value, type, cssCls) => {
+        let str = '';
+        switch (type) {
+            case 'photo':
+                str = `<div class="chat-img">
+                    <img src="${value}" alt="Content Image" class="content-image">
+                </div>`;
+                break;
+            case 'link':
+                str = `<div class="chat-img">
+                <a target="_blank" href="${value}">${value}</a>`;
+                break;
+            default: str = `<div class="chat-text" >${value}</div>`;
+        }
+        return str;
+    };
+
     /*
     const stats = (info) => {
         const tpl = `<div class="col">
@@ -247,40 +258,68 @@ function fillList($list, dataArray) {
         // const checkpoint = item.checkpoint || item;
 
         if (message.side === 'left') {
-            $(`<li class="chat-item justify-content-end" value="${message.value}">
+            $(`<li class="chat-item chat-item-left" value="${message.value}">
                 <div class="d-flex">
                 ${(message['profile_pic_url'])
-                     ? `<div class="chat-text" style="text-align: right;">
-                        <img src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
-                            alt="Content Image" class="content-image">                        
-                    </div>`
-                     : `<div class="chat-text" >${message.value}</div>`
+                    ? `<div class="chat-img-box"> 
+                         <img src="${message['profile_pic_url']}" alt="User Avatar" class="">
+                        </div>`
+                    : ''
                 }
+                <div>
+                    <p class="chat-username text-muted">${message.username}</p>
+                    ${insertMsg(message.value, message.type)}
+                </div>
                     <small class="chat-time-text">${message.timestamp}</small>
                 </div>
             </li>`).appendTo(cList);
         } else {
-            $(`<li class="chat-item chat-item-right" value="${message.value}">
+            $(`<li class="chat-item justify-content-end chat-item-right" value="${message.value}">
                 <div class="d-flex">
-                    <div class="chat-img">
-                        <a target="_blank"
-                            href="https://www.instagram.com/your_dieta/">
-                        ${(message['profile_pic_url'])
-                        ? `<div class="chat-text" style="text-align: right;">
-                                <img src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
-                                    alt="Content Image" class="content-image">                        
-                            </div>`
-                        : `<div class="chat-text" >${message.value}</div>`
-                        }
-                            </a>                    
-                    </div>
-                    <div class="chat-text oponent">
-                        <a href="http://google.com" target="_blank">Заходи сюда: google.com</a>
-                    </div>
-                        <small class="pull-right chat-time-text">17:40</small>
+                    ${insertMsg(message.value, message.type)}
+                    <small class="pull-right chat-time-text">${message.timestamp}</small>
                     </div>
             </li>`).appendTo(cList);
         }
+    });
+}
+function fillUserList($list, dataArray) {
+    const items = dataArray;
+    const cList = $list;
+    cList.empty().addClass('border-light-color');
+    // <div class="media">
+    //     <a href="#" class="mr-3">
+    //         <img src="https://i.imgur.com/jNNT4LE.png"
+    //              class="media-photo">
+    //     </a>
+    //     <span class="badge badge-secondary position-absolute p-2">3</span>
+    //     <div class="media-body">
+    //         <h4 class="title">
+    //             John Doe John Doe
+    //             <small class="text-muted time">11.02.2018</small>
+
+    //         </h4>
+    //         <p class="summary">last msg</p>
+    //     </div>
+    // </div>
+    items.forEach((item) => {
+        console.log(item);
+        $(`<li class="list-group-item">
+            <div class="media">
+                <a href="#" class="mr-3">
+                    <img src="https://i.imgur.com/jNNT4LE.png"
+                    class="media-photo">
+                </a>
+            <span class="badge badge-secondary position-absolute p-2">3</span>
+            <div class="media-body">
+                <h4 class="title">
+                    ${item.name}
+                    <small class="text-muted time">11.02.2018</small>
+
+                </h4>
+                <p class="summary">${item['last_message']}</p>
+            </div>
+            </li>`).appendTo(cList);
     });
 }
 
@@ -288,9 +327,11 @@ export function init() {
     const {conversation, userList} = data;
     console.log('test', userList, conversation);
     const $msgList = $('.messages-list');
-    // check we are in profile page
+    const $userList = $('.messages-user-list');
+    // check we are in correct page (messages)
     if (!$msgList.length) {
         return;
     }
     fillList($msgList, conversation.data.meta.messages);
+    fillUserList($userList, userList.data.meta[0].conversations);
 }

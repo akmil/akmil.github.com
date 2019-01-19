@@ -8,15 +8,16 @@ $time-color: #999999;
   }
   .content-image {
     width: 30%;
+    min-width: 150px;
     height: auto;
   }
 }
 .messages-user-list {
   .time {
     float: right;
-    margin-top: -32px;
   }
 }
+
 .messages-list {
   overflow-y: auto;
   max-height: 80vh;
@@ -35,13 +36,22 @@ $time-color: #999999;
     width: 100%;
     margin-bottom: 0.5rem;
   }
-  .chat-item-right {
+  .chat-item-left {
     >div.d-flex {
       width: 100%
     }
-    .chat-img {
+    .chat-img-box {
       margin-right: $time-margin;
+      position: relative;
+      img {
+        width: 64px;
+        height: 64px;
+      }
     }
+    .chat-username {
+        margin: 0;
+    }
+    
     .chat-text {
       background-color: #bae3fa;
       display: inline-table;
@@ -52,14 +62,13 @@ $time-color: #999999;
       right: 15px;
     }
   }
+  .chat-item-right {
+      .chat-img {
+          text-align: right;
+      }
+  }
   .chat-time-text {
     margin-left: $time-margin;
     color: $time-color;
-  }
-}
-.message {
-  .img-avatar {
-    width: 64px;
-    height: auto;
   }
 }
