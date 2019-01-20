@@ -98,6 +98,7 @@ function fillUserList($list, dataArray) {
         let tpl = '';
         items.forEach((item) => {
             tpl += `<img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
+                <div class="media-body">
                 <h5 class="title">
                     ${item.username}
                 </h5>`;
@@ -109,7 +110,6 @@ function fillUserList($list, dataArray) {
         conversations.forEach((item) => {
             tpl += `<div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
                 <div class="media">
-                    <div>
                         ${conversationDetail(item.to)}
                         <p class="summary">${item['last_message']}</p>
                     </div>
