@@ -92,34 +92,33 @@ function fillList($list, dataArray) {
     });
 }
 function fillUserList($list, dataArray) {
-    const items = dataArray.meta[0].conversations;
+    const items = dataArray.meta;
     const cList = $list;
-    const to = function(items) {
+    const conversationDetail = function(items) {
         let tpl = '';
         items.forEach((item) => {
-            tpl += `<div>
-                <img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
-                ${item.username}
+            tpl += `<img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
+                <h5 class="title">
+                    ${item.username}
+                </h5>`;
+        });
+        return tpl;
+    };
+    const addConversations = function(conversations, idx) {
+        let tpl = '';
+        conversations.forEach((item) => {
+            tpl += `<div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
+                <div class="media">
+                    <div>
+                        ${conversationDetail(item.to)}
+                        <p class="summary">${item['last_message']}</p>
+                    </div>
+                </div>
             </div>`;
         });
         return tpl;
     };
     cList.empty().addClass('border-light-color');
-    $list.append(`<li class="list-group-item list-group-item--head">
-            <div class="media">
-                <a href="#" class="mr-3">
-                    <img src="https://i.imgur.com/jNNT4LE.png"
-                    class="media-photo">
-                </a>
-                <span class="badge badge-secondary position-absolute p-2">${dataArray.meta[0]['unread_conversations']}</span>
-        </div>
-        <div class="media-body">
-            <h4 class="title">
-                ${dataArray.meta[0].username}
-                <small class="text-muted time">11.02.2018</small>
-            </h4>
-            </div>
-    </li>`);
     items.forEach((item, idx) => {
         $(`<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="media" id="heading-${idx}">
@@ -127,19 +126,14 @@ function fillUserList($list, dataArray) {
                     <img src="https://i.imgur.com/jNNT4LE.png"
                     class="media-photo">
                 </a>
+                <span class="badge badge-secondary position-absolute p-2">${item['unread_conversations']}</span>
                 <div class="media-body">
                     <h4 class="title">
-                        ${item.name}
-                        <small class="text-muted time">11.02.2018</small>
+                        ${item.username}
                     </h4>
-                    <p class="summary">${item['last_message']}</p>
                 </div>
             </div>
-            <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
-                <div class="card-body">
-                ${to(item.to)}
-                </div>
-            </div>
+            ${addConversations(item.conversations, idx)}
             </li>`).appendTo(cList);
     });
 }

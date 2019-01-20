@@ -16,18 +16,12 @@ $time-intent: 10px;
 .messages-user-list {
     .list-group-item {
         cursor: pointer;
-        &--head {
-            cursor: initial;
-            background-color: $gray-100; //$dark;
-        }
     }
     .time {
         float: right;
     }
 }
-// .messages-list-box {
-    
-// }
+
 .messages-list {
   overflow-y: auto;
   max-height: 80vh;
@@ -71,6 +65,7 @@ $time-intent: 10px;
     .chat-time-text {
       position: absolute;
       right: $time-intent;
+      padding-right: 0;
     }
   }
   .chat-item-right {
