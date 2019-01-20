@@ -1,5 +1,6 @@
 $time-margin: 0.25rem;
 $time-color: #999999;
+$time-intent: 10px;
 
 .messages-page {
   img {
@@ -13,22 +14,32 @@ $time-color: #999999;
   }
 }
 .messages-user-list {
-  .time {
-    float: right;
-  }
+    .list-group-item {
+        cursor: pointer;
+        &--head {
+            cursor: initial;
+            background-color: $gray-100; //$dark;
+        }
+    }
+    .time {
+        float: right;
+    }
 }
-
+// .messages-list-box {
+    
+// }
 .messages-list {
   overflow-y: auto;
   max-height: 80vh;
   height: 80vh;
-  width: 100%;
+  width: 100%;  
   .chat-date-text {
     text-align: center;
     font-size: small;
     color: $time-color;
   }
   .chat-item {
+    position: relative;
     list-style-type: none;
     margin-left: 0;
     padding-left: 0;
@@ -59,7 +70,7 @@ $time-color: #999999;
     }
     .chat-time-text {
       position: absolute;
-      right: 15px;
+      right: $time-intent;
     }
   }
   .chat-item-right {
@@ -70,6 +81,7 @@ $time-color: #999999;
   .chat-time-text {
     margin-left: $time-margin;
     color: $time-color;
+    padding-right: $time-intent;
   }
 }
 .send-message-box {

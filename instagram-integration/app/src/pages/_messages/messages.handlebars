@@ -16,61 +16,9 @@
                     <p>Переписка</p>
                     <div id="mainChatPart" class="panel panel-default mypanel"
                          style="border-color: #ffffff;     height: 90vh; width: 100%; display: block">
-
-                        <ul class="messages-list list-unstyled"></ul>
-                        {{!-- <ul id="listReports" class="messages-list list-unstyled">
-                            <li class="chat-item justify-content-end" value="Дратути ^_^">
-                                <div class="d-flex">
-                                    <div class="chat-text mytext">Дратути ^_^</div>
-                                    <small class="chat-time-text">15:32</small>
-                                </div>
-                            </li>
-                            <li class="chat-item justify-content-end" value="28544787417907994322672800489275392">
-                                <div class="d-flex">
-                                    <div class="chat-text" style="text-align: right;">
-                                        <img
-                                                src="https://instagram.fhel2-1.fna.fbcdn.net/vp/0a0d0f2658d8a4f399bd2291a8db2901/5CD4BE19/t51.2885-15/fr/e15/s1080x1080/49546102_314019615987210_6059389213328998521_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ3ODc0MTc5MDc5OTQzMjI2NzI4MDA0ODkyNzUzOTI%3D.2"
-                                                alt="Content Image" class="content-image">
-                                    </div>
-                                    <small class="chat-time-text">23:47</small>
-                                </div>
-                            </li>
-                            <li class="chat-date-text" value="14012019">
-                                <div>14.01.2019</div>
-                            </li>
-                            <li class="chat-item justify-content-end" value="28544809368657203246793946117963776">
-                                <div class="d-flex">
-                                    <div class="chat-text" style="text-align: right;">
-                                        <img
-                                                src="https://instagram.fhel2-1.fna.fbcdn.net/vp/6daa223fedcadbcf0dee1ef2ddb827f9/5CC90090/t51.2885-15/fr/e15/s1080x1080/47693476_789469761430631_4313731441826823090_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net&amp;ig_cache_key=Mjg1NDQ4MDkzNjg2NTcyMDMyNDY3OTM5NDYxMTc5NjM3NzY%3D.2"
-                                                alt="Content Image" class="content-image">
-                                    </div>
-                                    <small class="chat-time-text">00:06</small>
-                                </div>
-                            </li>
-                            <li class="chat-item chat-item-left" value="Some msg">
-                                <div class="d-flex">
-                                    <div class="chat-img-box"><a target="_blank"
-                                                             href="https://www.instagram.com/your_dieta/"><img
-                                            src="https://instagram.fhel2-1.fna.fbcdn.net/vp/c9d3add4b34748e12a4229350fb611e4/5CC667B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net"
-                                            style="width: 48px" alt="User Avatar" class="img-circle"></a></div>
-                                    <div class="chat-text">Some msg</div>
-                                    <small class="chat-time-text">00:09</small>
-                                </div>
-                            </li>
-                            <li class="chat-item chat-item-left" value="28547568910799589058260519404699648">
-                                <div class="d-flex">
-                                    <div class="chat-img-box">
-                                        <a target="_blank"
-                                                             href="https://www.instagram.com/your_dieta/"><img
-                                            src="https://instagram.fhel2-1.fna.fbcdn.net/vp/c9d3add4b34748e12a4229350fb611e4/5CC667B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=instagram.fhel2-1.fna.fbcdn.net"
-                                            style="width: 48px" alt="User Avatar" class="img-circle"></a>
-                                    </div>
-                                    <div class="chat-text oponent"><a href="http://google.com" target="_blank">Заходи
-                                        сюда: google.com</a></div>
-                                    <small class="pull-right chat-time-text">17:40</small></div>
-                            </li>
-                        </ul> --}}
+                        <div class="messages-list-box">
+                            <ul class="messages-list list-unstyled"></ul>
+                        </div>
 
                         <div class="send-message-box">
                             <table class="w-100">
@@ -190,10 +138,8 @@
                 </div>
                 <div class="col-4">
                     <p>список пользователей</p>
-                    <ul class="list-group list-unstyled messages-user-list">
-                        {{> user-item }}
-                        {{> user-item }}
-                        {{> user-item }}
+                    <ul class="list-group list-unstyled messages-user-list" id="accordion">
+                        <li>loading...</li>
                     </ul>
                 </div>
             </div>
