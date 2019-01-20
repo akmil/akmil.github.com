@@ -1,5 +1,5 @@
 {{#> base modificator='messagesModificatorTest'}}
-
+    <link href="https://fineuploader.com/source/fine-uploader-new.min.css" rel="stylesheet">
     <div class="container-fluid messages-page">
 
         <h3>Newsletter page</h3>
@@ -72,7 +72,7 @@
                             </li>
                         </ul> --}}
 
-                        <div>
+                        <div class="send-message-box">
                             <table class="w-100">
                                 <tbody>
                                 <tr>
@@ -84,36 +84,106 @@
                                         </a>
                                     </td>
                                     <td style="">
-                                        <textarea id="sendMessageTextArea" class="chat-text-area"
+                                        <textarea data-meteor-emoji="true" style="width: 100%;" id="sendMessageTextArea" class="chat-text-area"
                                                   placeholder="Напишите сообщение"></textarea>
                                     </td>
                                     <td class="chat-col-btn">
                                         <div class="">
                                             <form enctype="multipart/form-data">
                                                 <input type="file" id="imgupload" style="display: none"
-                                                       accept="image/*">
+                                                       accept="image/*">                                                
                                             </form>
                                             <button id="sendMessageButton"
                                                     class="btn btn-success chat-button"><i
                                                     class="fas fa-feather-alt"></i>sendMessageButton
                                             </button>
-                                            <button id="Imoji" class="btn btn-success chat-button"><i
+                                            {{!-- <button id="Imoji" class="btn btn-success chat-button"><i
                                                     class="fas fa-smile"></i>Imoji
-                                            </button>
-                                            <button id="sndFile" class="btn btn-success chat-button"><i
-                                                    class="fa fa-upload"></i></button>
-
+                                            </button> --}}
+                                            <span id="sndFile" class="btn btn-success chat-button hiddenFileInput">
+                                                {{!-- <i class="fa fa-upload"></i> --}}
+                                                    <input type="file" name="theFile"/>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td colspan="3">
-                                        <img id="ImgToSend" style="width: 128px; height: 128px; display: none">
+                                        <style>
+                                        .thumb {
+                                            height: 75px;
+                                            border: 1px solid #000;
+                                            margin: 10px 5px 0 0;
+                                        }
+                                        </style>
+                                        <output id="list"></output>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                             <style>
+                                .qq-uploader {
+                                    min-height: 100px;
+                                }
+                            </style>
+                            <script type="text/template" id="qq-template-validation">
+                                <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
+                                    <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+                                    </div>
+                                    <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                                        <span class="qq-upload-drop-area-text-selector"></span>
+                                    </div>
+                                    <div class="qq-upload-button-selector qq-upload-button">
+                                        <div>Select files</div>
+                                    </div>
+                                    <span class="qq-drop-processing-selector qq-drop-processing">
+                                        <span>Processing dropped files...</span>
+                                        <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+                                    </span>
+                                    <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
+                                        <li>
+                                            <div class="qq-progress-bar-container-selector">
+                                                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                                            </div>
+                                            <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                                            <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
+                                            <span class="qq-upload-file-selector qq-upload-file"></span>
+                                            <span class="qq-upload-size-selector qq-upload-size"></span>
+                                            <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
+                                            <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
+                                            <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                                            <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                                        </li>
+                                    </ul>
+
+                                    <dialog class="qq-alert-dialog-selector">
+                                        <div class="qq-dialog-message-selector"></div>
+                                        <div class="qq-dialog-buttons">
+                                            <button type="button" class="qq-cancel-button-selector">Close</button>
+                                        </div>
+                                    </dialog>
+
+                                    <dialog class="qq-confirm-dialog-selector">
+                                        <div class="qq-dialog-message-selector"></div>
+                                        <div class="qq-dialog-buttons">
+                                            <button type="button" class="qq-cancel-button-selector">No</button>
+                                            <button type="button" class="qq-ok-button-selector">Yes</button>
+                                        </div>
+                                    </dialog>
+
+                                    <dialog class="qq-prompt-dialog-selector">
+                                        <div class="qq-dialog-message-selector"></div>
+                                        <input type="text">
+                                        <div class="qq-dialog-buttons">
+                                            <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                                            <button type="button" class="qq-ok-button-selector">Ok</button>
+                                        </div>
+                                    </dialog>
+                                </div>
+                            </script>
+                            <div id="fine-uploader-validation"></div>
 
                         </div>
                     </div>
@@ -130,5 +200,40 @@
         </div>
 
     </div>
+    
+</div>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('sndFile').addEventListener('change', handleFileSelect, false);
+</script>
 
 {{/ base }}
