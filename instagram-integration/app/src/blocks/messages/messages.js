@@ -125,6 +125,8 @@ function addHandlers() {
         // const $button = $(e.target);
         const userMsg = $('#sendMessageTextArea').val();
         console.log(userMsg);
+        // eslint-disable-next-line no-alert
+        alert(userMsg);
         // console.log($button);
     });
 }
