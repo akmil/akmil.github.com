@@ -1,17 +1,24 @@
 import * as data from './dataServer';
 import MeteorEmoji from 'meteor-emoji';
 import qq from 'fine-uploader';
+import User from '../../common/js-services/user';
 
+function isInMessagePage() {
+    const $msgList = $('.messages-list');
+    const $userList = $('.messages-user-list');
+    return !!$msgList.length && !!$userList.length;
+}
 $(document).ready(() => {
+    if (!isInMessagePage()) {
+        return;
+    }
     // eslint-disable-next-line no-unused-vars
     const m = new MeteorEmoji();
     const $picker = $('textarea[data-meteor-emoji="true"] ~ div');
     const style = $picker.attr('style');
     const styleNew = style.replace('top: 30px;', 'top: -210px;');
     $picker.attr('style', styleNew);
-});
 
-$(document).ready(() => {
     // eslint-disable-next-line no-unused-vars
     const restrictedUploader = new qq.FineUploader({
         element: document.getElementById('fine-uploader-validation'),
@@ -136,9 +143,14 @@ export function init() {
     const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
-    if (!$msgList.length) {
+    if (!isInMessagePage()) {
         return;
     }
+    const token = User.getToken(); // upd to: User.getToken()
+    const metadata = User.getMetadata(token);
+    metadata.then((result) => {
+        console.log(result);
+    });
     fillList($msgList, conversation.data.meta.messages);
     fillUserList($userList, userList.data.meta[0].conversations);
     addHandlers();
