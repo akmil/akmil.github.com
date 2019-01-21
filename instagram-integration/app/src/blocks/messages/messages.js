@@ -98,11 +98,15 @@ function fillUserList($list, dataArray) {
     const conversationDetail = function(items) {
         let tpl = '';
         items.forEach((item) => {
-            tpl += `<img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
-                <div class="media-body">
+            if (items.length > 1) {
+                tpl += `<img src="${item['profile_pic_url']}" class="media-photo media-photo--group" style="width: 24px;">`;
+            } else {
+                tpl += `<img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
+                <div class="media-body">                
                 <h5 class="title">
                     ${item.username}
                 </h5>`;
+            }
         });
         return tpl;
     };

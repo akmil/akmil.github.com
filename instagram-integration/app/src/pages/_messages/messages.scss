@@ -20,6 +20,10 @@ $time-intent: 10px;
     .time {
         float: right;
     }
+    .media-photo--group:not(:first-child) {
+      margin-left: -5px;
+      border-radius: 30px;
+    }
 }
 
 .messages-list {
