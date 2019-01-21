@@ -106,15 +106,13 @@ function fillUserList($list, dataArray) {
         });
         return tpl;
     };
-    const addConversations = function(conversations, idx) {
+    const addConversations = function(conversations) {
         let tpl = '';
         conversations.forEach((item) => {
-            tpl += `<div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
-                <div class="media">
-                        ${conversationDetail(item.to)}
-                        <p class="summary">${item['last_message']}</p>
-                    </div>
-                </div>
+            tpl += `<div class="media">
+                    ${conversationDetail(item.to)}
+                    <p class="summary">${item['last_message']}</p>
+                </div>                
             </div>`;
         });
         return tpl;
@@ -134,7 +132,9 @@ function fillUserList($list, dataArray) {
                     </h4>
                 </div>
             </div>
-            ${addConversations(item.conversations, idx)}
+            <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
+                ${addConversations(item.conversations, idx)}
+            </div>
             </li>`).appendTo(cList);
     });
 }
@@ -161,12 +161,17 @@ function addHandlers() {
 }
 
 export function init() {
-    const {/* conversation,*/userList} = data;
-    // const $msgList = $('.messages-list');
+    const {conversation, userList} = data;
+    const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
     if (!isInMessagePage()) {
         return;
+    }
+    if (window.location.href.includes('localhost')) {
+        fillUserList($userList, userList.data);
+        fillList($msgList, conversation.data.meta.messages);
+        addHandlers();
     }
     const token = User.getToken(); // upd to: User.getToken()
     const metadata = UserConversation.getMetadata(token);
