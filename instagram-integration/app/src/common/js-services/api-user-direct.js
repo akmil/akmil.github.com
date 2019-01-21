@@ -31,7 +31,7 @@ class User {
     }
 
     getMetadata(token, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}}, cbError);
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}`, {headers: {token}}, cbError);
     }
 
     getSecurityKey(username, checkpointType) {

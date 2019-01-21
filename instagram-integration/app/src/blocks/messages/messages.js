@@ -149,10 +149,9 @@ function addHandlers() {
         alert(userMsg);
         // console.log($button);
     });
-
     $(document).on('click', '.list-group-item', function(e) {
         // e.preventDefault();
-        console.log();
+        console.log('click');
     });
 }
 
@@ -168,8 +167,9 @@ export function init() {
     const metadata = User.getMetadata(token);
     metadata.then((result) => {
         console.log(result);
+        fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
     });
-    fillList($msgList, conversation.data.meta.messages);
+
     fillUserList($userList, userList.data);
     addHandlers();
 }
