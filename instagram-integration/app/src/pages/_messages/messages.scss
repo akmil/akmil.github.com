@@ -28,14 +28,14 @@ $time-intent: 10px;
     .media-photo--group {
       border-radius: 30px;
       &:not(:first-child) {
-        margin-left: -5px;
+        margin-left: -10px;
       }
     }
 }
 
 .messages-list {
   overflow-y: auto;
-  max-height: 80vh;
+  max-height: calc(80vh - 40px);
   height: 80vh;
   width: 100%;  
   .chat-date-text {

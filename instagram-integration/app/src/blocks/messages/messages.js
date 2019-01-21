@@ -49,7 +49,8 @@ function fillList($list, dataArray) {
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     const insertMsg = (value, type, cssCls) => {
         let str = '';
-        switch (type) {
+        // type = type.toLowerCase();
+        switch (type.toLowerCase()) {
             case 'photo':
                 str = `<div class="chat-img">
                     <img src="${value}" alt="Content Image" class="content-image">
@@ -68,7 +69,7 @@ function fillList($list, dataArray) {
         const message = item;
         // const checkpoint = item.checkpoint || item;
 
-        if (message.side === 'left') {
+        if (message.side.toLowerCase() === 'left') {
             $(`<li class="chat-item chat-item-left" value="${message.value}">
                 <div class="d-flex">
                 ${(message['profile_pic_url'])
@@ -81,14 +82,14 @@ function fillList($list, dataArray) {
                     <p class="chat-username text-muted">${message.username}</p>
                     ${insertMsg(message.value, message.type)}
                 </div>
-                    <small class="chat-time-text">${message.timestamp}</small>
+                    <small class="chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
             </li>`).appendTo(cList);
         } else {
             $(`<li class="chat-item justify-content-end chat-item-right" value="${message.value}">
                 <div class="d-flex">
                     ${insertMsg(message.value, message.type)}
-                    <small class="pull-right chat-time-text">${message.timestamp}</small>
+                    <small class="pull-right chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`).appendTo(cList);
         }
@@ -101,23 +102,27 @@ function fillUserList($list, dataArray) {
         let tpl = '';
         items.forEach((item) => {
             if (items.length > 1) {
-                tpl += `<img src="${item['profile_pic_url']}" class="media-photo media-photo--group" style="width: 24px;">`;
+                tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
             } else {
-                tpl += `<img src="${item['profile_pic_url']}" class="media-photo" style="width: 24px;">
+                tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1" style="width: 24px;">
                 <div class="media-body">                
                 <h5 class="title">
                     ${item.username}
                 </h5>`;
             }
         });
+        if (items.length > 1) {
+            tpl += '<h5 class="title">Груповой чат</h5>';
+        }
         return tpl;
     };
     const addConversations = function(conversations) {
         let tpl = '';
         conversations.forEach((item) => {
-            tpl += `<div class="media" data-conversation-id="${item.id}">
+            tpl += `<div class="media p-1" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
-                    ${(item['last_message']) ? `<p class="summary">${item['last_message']}</p>` : ''}                                
+                    ${(parseInt(item['last_message'], 10) > 0) ? `<p class="summary text-muted">${item['last_message']}</p>` : ''}
+                    </div>                                
             </div>`;
         });
         return tpl;
@@ -131,7 +136,7 @@ function fillUserList($list, dataArray) {
                     <img src="https://i.imgur.com/jNNT4LE.png"
                     class="media-photo">
                 </a>
-                <span class="badge badge-secondary position-absolute p-2">${item['unread_conversations']}</span>
+                ${(item['unread_conversations'] > 0) ? `<span class="badge badge-secondary position-absolute p-2">${item['unread_conversations']}</span>` : ''}
                 <div class="media-body">
                     <h4 class="title">
                         ${item.username}
@@ -161,16 +166,13 @@ function addHandlers() {
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
         const $msgList = $('.messages-list');
-        const {conversation} = data;
+        // const {conversation} = data;
 
         console.log(username, conversationId);
-        UserConversation.getMetadataDetailConversation(token, {username, conversation});
-        fillList($msgList, conversation.data.meta.messages);
+        UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+            fillList($msgList, result.data.meta.messages);
+        });
     });
-    // $(document).on('click', '.list-group-item .collapse', function(e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    // });
 }
 
 export function init() {
@@ -181,21 +183,21 @@ export function init() {
     if (!isInMessagePage()) {
         return;
     }
-    if (window.location.href.includes('localhost')) {
+    if (!window.location.href.includes('localhost')) {
         fillUserList($userList, userList.data);
         fillList($msgList, conversation.data.meta.messages);
         addHandlers();
+    } else {
+        const metadata = UserConversation.getMetadata(token);
+        metadata.then((result) => {
+            fillUserList($userList, result.data || userList.data);
+        }).then((result) => {
+            console.log('add onClick');
+            UserConversation.getMetadata(token);
+            // fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
+            // addHandlers();
+        });
     }
-
-    const metadata = UserConversation.getMetadata(token);
-    metadata.then((result) => {
-        fillUserList($userList, result.data || userList.data);
-    }).then((result) => {
-        console.log('add onClick');
-        UserConversation.getMetadata(token);
-        // fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
-        // addHandlers();
-    });
     addHandlers();
 
 }
