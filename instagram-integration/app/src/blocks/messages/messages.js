@@ -113,10 +113,9 @@ function fillUserList($list, dataArray) {
     const addConversations = function(conversations) {
         let tpl = '';
         conversations.forEach((item) => {
-            tpl += `<div class="media">
+            tpl += `<div class="media" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
-                    ${(item['last_message']) ? `<p class="summary">${item['last_message']}</p>` : ''}
-                </div>                
+                    ${(item['last_message']) ? `<p class="summary">${item['last_message']}</p>` : ''}                                
             </div>`;
         });
         return tpl;
