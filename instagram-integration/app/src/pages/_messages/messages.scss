@@ -20,9 +20,11 @@ $time-intent: 10px;
     .time {
         float: right;
     }
-    .media-photo--group:not(:first-child) {
-      margin-left: -5px;
+    .media-photo--group {
       border-radius: 30px;
+      &:not(:first-child) {
+        margin-left: -5px;
+      }
     }
 }
 

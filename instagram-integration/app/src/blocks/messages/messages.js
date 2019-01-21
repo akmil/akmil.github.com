@@ -115,7 +115,7 @@ function fillUserList($list, dataArray) {
         conversations.forEach((item) => {
             tpl += `<div class="media">
                     ${conversationDetail(item.to)}
-                    <p class="summary">${item['last_message']}</p>
+                    ${(item['last_message']) ? `<p class="summary">${item['last_message']}</p>` : ''}
                 </div>                
             </div>`;
         });
