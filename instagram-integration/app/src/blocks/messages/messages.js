@@ -152,12 +152,16 @@ function addHandlers() {
     $(document).on('click', '.list-group-item', function(e) {
         // e.preventDefault();
         console.log('click');
+        const $msgList = $('.messages-list');
+        const {conversation} = data;
+        // User.getMetadata(token);
+        fillList($msgList, conversation.data.meta.messages);
     });
 }
 
 export function init() {
-    const {conversation, userList} = data;
-    const $msgList = $('.messages-list');
+    const {/* conversation,*/userList} = data;
+    // const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
     if (!isInMessagePage()) {
@@ -166,10 +170,13 @@ export function init() {
     const token = User.getToken(); // upd to: User.getToken()
     const metadata = User.getMetadata(token);
     metadata.then((result) => {
-        console.log(result);
-        fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
+        fillUserList($userList, result.data || userList.data);
+    }).then((result) => {
+        console.log('add onClick');
+        User.getMetadata(token);
+        // fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
+        // addHandlers();
     });
-
-    fillUserList($userList, userList.data);
     addHandlers();
+
 }
