@@ -6,6 +6,7 @@ import Spinner from '../../common/js-services/spinner';
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
+let updateInterval = '';
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -124,7 +125,10 @@ function fillUserList($list, dataArray) {
         conversations.forEach((item) => {
             tpl += `<div class="media p-1" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
-                    ${(parseInt(item['last_message'].length, 10) > 0) ? `<p class="summary text-muted">${item['last_message']}</p>` : ''}
+                    ${(item['last_message'] && (parseInt(item['last_message'].length, 10)) > 0)
+                        ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
+                        ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
+                        : ''}
                     </div>
             </div>`;
         });
@@ -155,12 +159,18 @@ function fillUserList($list, dataArray) {
 }
 
 function addHandlers() {
-    function getAndFillConversation(username, conversationId) {
+    function getAndFillConversation(username, conversationId, isScrollDown) {
         UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
             fillList($msgList, result.data.meta.messages);
             Spinner.remove();
             $('.js_send-message-box').removeClass('d-none');
             $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
+
+            if (isScrollDown) {
+                $msgList.animate({
+                    scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
+                }, 1000);
+            }
         });
     }
 
@@ -183,13 +193,14 @@ function addHandlers() {
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
-        getAndFillConversation(username, conversationId);
+        getAndFillConversation(username, conversationId, true);
+        setInterval(() => {
+            getAndFillConversation(username, conversationId);
+        }, updateInterval);
     });
 }
 
 export function init() {
-    // const {conversation, userList} = data;
-    // const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
     if (!isInMessagePage()) {
@@ -199,6 +210,9 @@ export function init() {
     const metadata = UserConversation.getMetadata(token);
     metadata.then((result) => {
         fillUserList($userList, result.data);
+        if (result.data.settings && result.data.settings.invoke_in_millis) {
+            updateInterval = result.data.settings.invoke_in_millis;
+        }
     });
 
     addHandlers();
