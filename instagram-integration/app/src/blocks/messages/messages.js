@@ -3,8 +3,10 @@ import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
+import Spinner from '../../common/js-services/spinner';
 
 const token = User.getToken();
+const $msgList = $('.messages-list');
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -153,30 +155,35 @@ function fillUserList($list, dataArray) {
 }
 
 function addHandlers() {
-    // let checkpointType = '';
+    function getAndFillConversation(username, conversationId) {
+        UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+            fillList($msgList, result.data.meta.messages);
+            Spinner.remove();
+            $('.js_send-message-box').removeClass('d-none');
+            $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
+        });
+    }
 
     $('#sendMessageButton').on('click', (e) => {
-        // const $button = $(e.target);
-        const value = $('#sendMessageTextArea').val();
+        const $textArea = $('#sendMessageTextArea');
+        const value = $textArea.val();
         const userData = $('.messages-list').data('conversation');
         const {username, conversationId} = userData;
-        // userData = JSON.stringify(userData);
-        console.log(username, conversationId);
+        Spinner.add($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
-            console.log(result);
+            if (result.status.state === 'ok') {
+                getAndFillConversation(username, conversationId);
+                $textArea.val('');
+                Spinner.remove();
+            }
         });
-
     });
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
-        const $msgList = $('.messages-list');
-        UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
-            fillList($msgList, result.data.meta.messages);
-            $('.js_send-message-box').removeClass('d-none');
-            $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
-        });
+        Spinner.add($('#mainChatPart'), 'my-5 py-5');
+        getAndFillConversation(username, conversationId);
     });
 }
 

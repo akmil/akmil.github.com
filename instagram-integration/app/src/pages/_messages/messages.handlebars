@@ -20,55 +20,84 @@
                         </div>
 
                         <div class="send-message-box js_send-message-box d-none">
-                            <table class="w-100">
-                                <tbody>
-                                <tr>
-                                    <td class="chat-col-img">
-                                        <a target="_blank" href="https://www.instagram.com/the_rostyslav/"
-                                           id="text-area-link">
-                                            <img src="https://instagram.fupg2-1.fna.fbcdn.net/vp/0999bd4c94e301faf62c705d261183de/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=instagram.fupg2-1.fna.fbcdn.net&amp;_nc_cat=1"
-                                                 class="img-circle chat-reciver-img " id="text-area-img">
-                                        </a>
-                                    </td>
-                                    <td style="">
-                                        <textarea data-meteor-emoji="true" style="width: 100%;" id="sendMessageTextArea" class="chat-text-area"
-                                                  placeholder="Напишите сообщение"></textarea>
-                                    </td>
+                            <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-7 mr-1">
+                                    <textarea data-meteor-emoji="true" style="padding: 0.25rem; width: 100%;min-height: 42px;" id="sendMessageTextArea" class="chat-text-area "
+                                    placeholder="Напишите сообщение"></textarea>
+                                </div>
+                                <div class="col">
                                     <td class="chat-col-btn">
                                         <div class="">
                                             <form enctype="multipart/form-data">
                                                 <input type="file" id="imgupload" style="display: none"
-                                                       accept="image/*">                                                
+                                                       accept="image/*">
                                             </form>
                                             <button id="sendMessageButton"
                                                     class="btn btn-success chat-button"><i
-                                                    class="fas fa-feather-alt mr-1"></i>Отправить сообщение
+                                                    class="fas fa-feather-alt mr-1"></i>Отправить
                                             </button>
                                             {{!-- <button id="Imoji" class="btn btn-success chat-button"><i
                                                     class="fas fa-smile"></i>Imoji
                                             </button> --}}
                                             <span id="sndFile" class="btn btn-success chat-button hiddenFileInput">
-                                                {{!-- <i class="fa fa-upload"></i> --}}
-                                                    <input type="file" name="theFile"/>
-                                            </span>
+                                                    {{!-- <i class="fa fa-upload"></i> --}}
+                                                <input type="file" name="theFile"/>
+                                                </span>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td colspan="3">
-                                        <style>
-                                        .thumb {
-                                            height: 75px;
-                                            border: 1px solid #000;
-                                            margin: 10px 5px 0 0;
-                                        }
-                                        </style>
-                                        <output id="list"></output>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                </div>
+                            </div>
+                            </div>
+                            <!--<table class="w-100">-->
+                                <!--<tbody>-->
+                                <!--<tr>-->
+                                    <!--&lt;!&ndash;<td class="chat-col-img">-->
+                                        <!--<a target="_blank" href="https://www.instagram.com/the_rostyslav/"-->
+                                           <!--id="text-area-link">-->
+                                            <!--<img src="https://instagram.fupg2-1.fna.fbcdn.net/vp/0999bd4c94e301faf62c705d261183de/5CDDD9F1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=instagram.fupg2-1.fna.fbcdn.net&amp;_nc_cat=1"-->
+                                                 <!--class="img-circle chat-reciver-img " id="text-area-img">-->
+                                        <!--</a>-->
+                                    <!--</td>&ndash;&gt;-->
+                                    <!--<td style="">-->
+                                        <!--<textarea data-meteor-emoji="true" style="width: 100%;" id="sendMessageTextArea" class="chat-text-area"-->
+                                                  <!--placeholder="Напишите сообщение"></textarea>-->
+                                    <!--</td>-->
+                                    <!--<td class="chat-col-btn">-->
+                                        <!--<div class="">-->
+                                            <!--<form enctype="multipart/form-data">-->
+                                                <!--<input type="file" id="imgupload" style="display: none"-->
+                                                       <!--accept="image/*">                                                -->
+                                            <!--</form>-->
+                                            <!--<button id="sendMessageButton"-->
+                                                    <!--class="btn btn-success chat-button"><i-->
+                                                    <!--class="fas fa-feather-alt mr-1"></i>Отправить-->
+                                            <!--</button>-->
+                                            <!--{{!-- <button id="Imoji" class="btn btn-success chat-button"><i-->
+                                                    <!--class="fas fa-smile"></i>Imoji-->
+                                            <!--</button> --}}-->
+                                            <!--<span id="sndFile" class="btn btn-success chat-button hiddenFileInput">-->
+                                                <!--{{!-- <i class="fa fa-upload"></i> --}}-->
+                                                    <!--<input type="file" name="theFile"/>-->
+                                            <!--</span>-->
+                                        <!--</div>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>&nbsp;</td>-->
+                                    <!--<td colspan="3">-->
+                                        <!--<style>-->
+                                        <!--.thumb {-->
+                                            <!--height: 75px;-->
+                                            <!--border: 1px solid #000;-->
+                                            <!--margin: 10px 5px 0 0;-->
+                                        <!--}-->
+                                        <!--</style>-->
+                                        <!--<output id="list"></output>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
                             <!--//todo: fine-uploade-->
                              <!--<style>
                                 .qq-uploader {

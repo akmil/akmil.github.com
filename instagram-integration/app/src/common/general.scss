@@ -58,3 +58,17 @@ a {
   background: linear-gradient(to bottom, #1cb6ea 0%, #2e15b0 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1cb6ea', endColorstr='#2e15b0', GradientType=0 );
 }
+
+//spinner
+.spinner-box {
+  z-index: 99;
+  background-color: rgba(255,255,255, 0.75);
+  width: 100%;
+  top: 30%;
+  position: absolute;
+  &--sendMsg {
+    top: -50px;
+    left: -160px;
+    color: #000;
+  }
+}
