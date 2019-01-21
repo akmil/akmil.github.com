@@ -8,7 +8,8 @@ export const CONST = {
         instagramAccount_getMetaData: 'instagram-accounts/meta',
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',
-        instagramDirect_getMetaData: 'instagram-direct/meta'
+        instagramDirect_getMetaData: 'instagram-direct/meta',
+        instagramDirect_postMessage: 'instagram-direct/'
     },
     user: {
         email: '',

@@ -157,12 +157,12 @@ function addHandlers() {
 
     $('#sendMessageButton').on('click', (e) => {
         // const $button = $(e.target);
-        // const userMsg = $('#sendMessageTextArea').val();
+        const value = $('#sendMessageTextArea').val();
         const userData = $('.messages-list').data('conversation');
         const {username, conversationId} = userData;
         // userData = JSON.stringify(userData);
         console.log(username, conversationId);
-        UserConversation.postMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+        UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
             console.log(result);
         });
 

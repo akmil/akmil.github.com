@@ -47,7 +47,7 @@ class UserConversation {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}/text`,
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.username}/${details.conversationId}/text`,
             setting, cbError);
     }
 
