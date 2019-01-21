@@ -16,6 +16,11 @@ $time-intent: 10px;
 .messages-user-list {
     .list-group-item {
         cursor: pointer;
+        .collapse {
+          .media:hover {
+            background-color: $gray-200;
+          }
+        }
     }
     .time {
         float: right;

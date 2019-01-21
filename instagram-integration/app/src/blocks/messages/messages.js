@@ -4,6 +4,8 @@ import qq from 'fine-uploader';
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
 
+const token = User.getToken();
+
 function isInMessagePage() {
     const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
@@ -154,17 +156,21 @@ function addHandlers() {
         alert(userMsg);
         // console.log($button);
     });
-    $(document).on('click', '.list-group-item', function(e) {
-        // e.preventDefault();
+    $(document).on('click', '.list-group-item .collapse', function(e) {
+        e.stopPropagation();
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
-        console.log(username, conversationId);
-        console.log($(e.target));
         const $msgList = $('.messages-list');
         const {conversation} = data;
-        // User.getMetadata(token);
+
+        console.log(username, conversationId);
+        UserConversation.getMetadataDetailConversation(token, {username, conversation});
         fillList($msgList, conversation.data.meta.messages);
     });
+    // $(document).on('click', '.list-group-item .collapse', function(e) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    // });
 }
 
 export function init() {
@@ -180,7 +186,7 @@ export function init() {
         fillList($msgList, conversation.data.meta.messages);
         addHandlers();
     }
-    const token = User.getToken(); // upd to: User.getToken()
+
     const metadata = UserConversation.getMetadata(token);
     metadata.then((result) => {
         fillUserList($userList, result.data || userList.data);

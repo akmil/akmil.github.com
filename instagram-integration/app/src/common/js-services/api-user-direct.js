@@ -34,6 +34,11 @@ class UserConversation {
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}`, {headers: {token}}, cbError);
     }
 
+    getMetadataDetailConversation(token, details, cbError) {
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.userName}/${details.conversationId}`,
+            {headers: {token}}, cbError);
+    }
+
     getSecurityKey(username, checkpointType) {
         const setting = {
             ...this.settingPost,
