@@ -281,7 +281,7 @@ function fillList($list, dataArray) {
     const insertItem = (data, text, cssCls) => {
         const liTpl = `${(data)
             ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
-            : `<li class="list-inline-item ${cssCls}"><span class="figure">-</span><span>${text}</span></li>`}`;
+            : `<li class="list-inline-item ${cssCls}"><span class="figure">0</span><span>${text}</span></li>`}`;
         return liTpl;
     };
     const stats = (info) => {
@@ -330,9 +330,9 @@ function fillList($list, dataArray) {
                 : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
             <div class="media-body d-flex">
                 <div class="col user-info">
-                    ${(item.username) ? `<p class="mt-0 mb-1 name">${item.username}</p>` : ''}
+                    ${(item.username) ? `<p class="mt-0 mb-1 name lead">${item.username}</p>` : ''}
                     ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
-                    ${(info.name) ? '' : 'commented'  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
+                    ${(info.name) ? '' : ''  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
                      ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
                     
                 </div>

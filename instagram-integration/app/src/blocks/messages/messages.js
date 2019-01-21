@@ -1,4 +1,4 @@
-import * as data from './dataServer';
+// import * as data from './dataServer';
 import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
@@ -157,8 +157,14 @@ function addHandlers() {
 
     $('#sendMessageButton').on('click', (e) => {
         // const $button = $(e.target);
-        const userMsg = $('#sendMessageTextArea').val();
-        console.log(userMsg);
+        // const userMsg = $('#sendMessageTextArea').val();
+        const userData = $('.messages-list').data('conversation');
+        const {username, conversationId} = userData;
+        // userData = JSON.stringify(userData);
+        console.log(username, conversationId);
+        UserConversation.postMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+            console.log(result);
+        });
 
     });
     $(document).on('click', '.list-group-item .collapse', function(e) {
@@ -175,28 +181,19 @@ function addHandlers() {
 }
 
 export function init() {
-    const {conversation, userList} = data;
-    const $msgList = $('.messages-list');
+    // const {conversation, userList} = data;
+    // const $msgList = $('.messages-list');
     const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
     if (!isInMessagePage()) {
         return;
     }
-    if (!window.location.href.includes('localhost')) {
-        fillUserList($userList, userList.data);
-        fillList($msgList, conversation.data.meta.messages);
-        addHandlers();
-    } else {
-        const metadata = UserConversation.getMetadata(token);
-        metadata.then((result) => {
-            fillUserList($userList, result.data || userList.data);
-        }).then((result) => {
-            console.log('add onClick');
-            UserConversation.getMetadata(token);
-            // fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
-            // addHandlers();
-        });
-    }
+
+    const metadata = UserConversation.getMetadata(token);
+    metadata.then((result) => {
+        fillUserList($userList, result.data);
+    });
+
     addHandlers();
 
 }

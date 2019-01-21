@@ -82,7 +82,7 @@ class User {
             body: JSON.stringify({'type': checkpointType}), // todo: tmp set, it should be 'type'
             headers: {
                 ...this.settingPost.headers,
-                'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
+                'token': this.getToken()
             }
         };
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_checkpoint')}${username}`, setting);
