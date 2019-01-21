@@ -35,8 +35,7 @@ $time-intent: 10px;
 
 .messages-list {
   overflow-y: auto;
-  max-height: calc(80vh - 40px);
-  height: 80vh;
+  height: calc(70vh - 40px);
   width: 100%;  
   .chat-date-text {
     text-align: center;

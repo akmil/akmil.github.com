@@ -38,6 +38,18 @@ class UserConversation {
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}`,
             {headers: {token}}, cbError);
     }
+    // postMetadataDetailConversation(token, details, cbError) {
+    //     const setting = {
+    //         method: 'DELETE',
+    //         body: JSON.stringify({'security_code': key}),
+    //         headers: {
+    //             ...this.settingPost.headers,
+    //             'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
+    //         }
+    //     };
+    //     return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}`,
+    //         setting, cbError);
+    // }
 
     getFormattedDateUtil(tStamp, showFullTime) {
         const date = new Date(tStamp);

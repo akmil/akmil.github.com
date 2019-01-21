@@ -1,6 +1,6 @@
 import * as data from './dataServer';
 import MeteorEmoji from 'meteor-emoji';
-import qq from 'fine-uploader';
+// import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
 
@@ -22,6 +22,8 @@ $(document).ready(() => {
     const styleNew = style.replace('top: 30px;', 'top: -210px;');
     $picker.attr('style', styleNew);
 
+    /*
+    //todo: fine-uploade
     // eslint-disable-next-line no-unused-vars
     const restrictedUploader = new qq.FineUploader({
         element: document.getElementById('fine-uploader-validation'),
@@ -40,7 +42,7 @@ $(document).ready(() => {
             itemLimit: 3,
             sizeLimit: 500 * 1024
         }
-    });
+    });*/
 });
 
 function fillList($list, dataArray) {
@@ -49,7 +51,6 @@ function fillList($list, dataArray) {
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     const insertMsg = (value, type, cssCls) => {
         let str = '';
-        // type = type.toLowerCase();
         switch (type.toLowerCase()) {
             case 'photo':
                 str = `<div class="chat-img">
@@ -95,6 +96,7 @@ function fillList($list, dataArray) {
         }
     });
 }
+
 function fillUserList($list, dataArray) {
     const items = dataArray.meta;
     const cList = $list;
@@ -157,20 +159,17 @@ function addHandlers() {
         // const $button = $(e.target);
         const userMsg = $('#sendMessageTextArea').val();
         console.log(userMsg);
-        // eslint-disable-next-line no-alert
-        alert(userMsg);
-        // console.log($button);
+
     });
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
         const $msgList = $('.messages-list');
-        // const {conversation} = data;
-
-        console.log(username, conversationId);
         UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
             fillList($msgList, result.data.meta.messages);
+            $('.js_send-message-box').removeClass('d-none');
+            $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
         });
     });
 }
