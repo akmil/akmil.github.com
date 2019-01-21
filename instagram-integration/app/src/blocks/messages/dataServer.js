@@ -66,7 +66,7 @@ const userList = {
             'do_notification': true,
             'invoke_in_millis': 3000
         },
-        'meta': [
+        'accounts': [
             {
                 'username': 'the_rostyslav',
                 'unread_conversations': 0,

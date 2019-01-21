@@ -3,7 +3,7 @@ import {CONST} from './consts';
 import Network from './network';
 import CookieStorage from './cookie';
 
-class User {
+class UserConversation {
 
     constructor() {
         this.network = new Network();
@@ -63,7 +63,7 @@ class User {
 let userInstance = null;
 
 if (!userInstance) {
-    userInstance = new User();
+    userInstance = new UserConversation();
 }
 
 export default userInstance;

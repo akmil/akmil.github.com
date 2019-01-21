@@ -2,6 +2,7 @@ import * as data from './dataServer';
 import MeteorEmoji from 'meteor-emoji';
 import qq from 'fine-uploader';
 import User from '../../common/js-services/user';
+import UserConversation from '../../common/js-services/api-user-direct';
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -168,12 +169,12 @@ export function init() {
         return;
     }
     const token = User.getToken(); // upd to: User.getToken()
-    const metadata = User.getMetadata(token);
+    const metadata = UserConversation.getMetadata(token);
     metadata.then((result) => {
         fillUserList($userList, result.data || userList.data);
     }).then((result) => {
         console.log('add onClick');
-        User.getMetadata(token);
+        UserConversation.getMetadata(token);
         // fillList($msgList, result.data.meta.messages || conversation.data.meta.messages);
         // addHandlers();
     });
