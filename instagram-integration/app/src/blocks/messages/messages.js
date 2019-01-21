@@ -1,4 +1,3 @@
-// import * as data from './dataServer';
 import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
@@ -109,7 +108,7 @@ function fillUserList($list, dataArray) {
                 tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
             } else {
                 tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1" style="width: 24px;">
-                <div class="media-body">                
+                <div class="media-body">
                 <h5 class="title">
                     ${item.username}
                 </h5>`;
@@ -125,13 +124,14 @@ function fillUserList($list, dataArray) {
         conversations.forEach((item) => {
             tpl += `<div class="media p-1" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
-                    ${(parseInt(item['last_message'], 10) > 0) ? `<p class="summary text-muted">${item['last_message']}</p>` : ''}
-                    </div>                                
+                    ${(parseInt(item['last_message'].length, 10) > 0) ? `<p class="summary text-muted">${item['last_message']}</p>` : ''}
+                    </div>
             </div>`;
         });
         return tpl;
     };
     cList.empty().addClass('border-light-color');
+    // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
     items.forEach((item, idx) => {
         $(`<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
                 aria-expanded="true" aria-controls="collapse-${idx}">
