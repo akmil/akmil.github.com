@@ -122,7 +122,8 @@ function fillUserList($list, dataArray) {
     };
     cList.empty().addClass('border-light-color');
     items.forEach((item, idx) => {
-        $(`<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" aria-expanded="true" aria-controls="collapse-${idx}">
+        $(`<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
+                aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="media" id="heading-${idx}">
                 <a href="#" class="mr-3">
                     <img src="https://i.imgur.com/jNNT4LE.png"
@@ -155,7 +156,10 @@ function addHandlers() {
     });
     $(document).on('click', '.list-group-item', function(e) {
         // e.preventDefault();
-        console.log('click');
+        const username = $(e.target).closest('.list-group-item').data('username');
+        const conversationId = $(e.target).closest('.media').data('conversation-id');
+        console.log(username, conversationId);
+        console.log($(e.target));
         const $msgList = $('.messages-list');
         const {conversation} = data;
         // User.getMetadata(token);
