@@ -1,9 +1,8 @@
-﻿/* eslint-disable sort-vars */
-// import $ from 'jquery';
+﻿// toDO: check is redundant
+
+/* eslint-disable sort-vars */
 import User from '../../common/js-services/user';
-// import cookieStorage from '../../common/js-services/cookie';
 import viewUtils from '../../common/js-services/view';
-// import {CONST} from '../../common/js-services/consts';
 
 export function Instagram(selectorCSS = {}) {
     const $buttonSubmit = $('#js_instagram-get-accounts--btn');

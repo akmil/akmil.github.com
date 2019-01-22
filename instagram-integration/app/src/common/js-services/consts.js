@@ -4,7 +4,7 @@ export const CONST = {
         registration: 'registration/basic/',
         login: 'registration/basic/login',
         confirmation: 'registration/basic/confirmation?token',
-        instagram_addAccount: 'instagram-accounts/',
+        instagram_addAccount: 'instagram-accounts/', // toDO: check is redundant
         instagramAccount_getMetaData: 'instagram-accounts/meta',
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',

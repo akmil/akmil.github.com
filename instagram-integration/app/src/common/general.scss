@@ -7,10 +7,6 @@ body {
   font-size: $fontSize;
   line-height: $lineHeight;
   color: $primaryColor;
-
-  // @media (min-width: $desktopBreakpoint) {
-  //   font-size: $desktopFontSize;
-  // }
 }
 
 p {
@@ -22,6 +18,18 @@ a {
 
   &:hover {
 
+  }
+}
+
+/*
+ * Content
+ */
+
+[role="main"] {
+  padding-top: 24px;
+  /* Space for fixed navbar */
+  @media (min-width: $tabletBreakpoint) {
+    padding-top: 48px;
   }
 }
 

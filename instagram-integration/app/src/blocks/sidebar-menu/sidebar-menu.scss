@@ -6,9 +6,15 @@
   overflow-y: auto;
 
   .sidebar-sticky {
-    height: calc(100vh - #{$headerHeight});
+    height: initial;
     .nav-link {
       text-decoration: none;
     }
+  }
+}
+
+@media (min-width: $tabletBreakpoint) {
+  .sidebar-sticky {
+    height: calc(100vh - #{$headerHeight});
   }
 }

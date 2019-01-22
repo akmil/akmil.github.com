@@ -9,6 +9,7 @@ import {CONST} from '../../common/js-services/consts'; // https://www.npmjs.com/
 const token = User.getToken();
 const $msgList = $('.messages-list');
 let updateInterval = '';
+let intervalId = '';
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -162,7 +163,29 @@ function fillUserList($list, dataArray) {
     });
 }
 
+function getAndFillUserList(isActiveFirst) {
+    const $userList = $('.messages-user-list');
+    const metadata = UserConversation.getMetadata(token);
+    let prevActiveDialogId = '';
+    if (!isActiveFirst) {
+        prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
+    }
+    metadata.then((result) => {
+        fillUserList($userList, result.data);
+        if (result.data.settings && result.data.settings.invoke_in_millis) {
+            updateInterval = result.data.settings.invoke_in_millis;
+        }
+        if (isActiveFirst) {
+            $userList.find('li:first-child .collapse').addClass('show');
+        } else {
+            // console.log('ttt', prevActiveDialogId);
+            $(`#${prevActiveDialogId}`).addClass('show');
+        }
+    });
+}
+
 function addHandlers() {
+    let conversationId = '';
     function getAndFillConversation(username, conversationId, isScrollDown) {
         UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
             fillList($msgList, result.data.meta.messages);
@@ -185,29 +208,36 @@ function addHandlers() {
         const {username, conversationId} = userData;
         Spinner.add($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
-            if (result.status.state === 'ok') {
+            if (result && result.status && result.status.state === 'ok') {
                 getAndFillConversation(username, conversationId);
                 $textArea.val('');
                 Spinner.remove();
-                PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value});
+                PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value, result});
             }
         });
     });
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
         const username = $(e.target).closest('.list-group-item').data('username');
-        const conversationId = $(e.target).closest('.media').data('conversation-id');
+        conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
         // resend request
-        setInterval(() => {
+        if (intervalId.length) {
+            clearInterval(intervalId);
+        }
+        intervalId = setInterval(() => {
+            console.log(conversationId);
             getAndFillConversation(username, conversationId);
+            getAndFillUserList();
         }, updateInterval);
     });
 
     PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
-        const {username, conversationId, value} = data;
+        const {username, conversationId, value, resultFromServer} = data;
         const $dialog = $(`.messages-user-list .list-group-item[data-username="${username}"] div[data-conversation-id="${conversationId}"]`);
+        console.log('set val from text-area', value);
+        console.log('resultFromServer: ', resultFromServer);
         $dialog.find('.summary').text(value);
         // metadata.then((result) => {
         //     fillUserList($userList, result.data);
@@ -219,24 +249,11 @@ function addHandlers() {
 }
 
 export function init() {
-    const $userList = $('.messages-user-list');
     // check we are in correct page (messages)
     if (!isInMessagePage()) {
         return;
     }
 
-    const metadata = UserConversation.getMetadata(token);
-    metadata.then((result) => {
-        fillUserList($userList, result.data);
-        if (result.data.settings && result.data.settings.invoke_in_millis) {
-            updateInterval = result.data.settings.invoke_in_millis;
-        }
-        // resend request
-        setInterval(() => {
-            fillUserList($userList, result.data);
-        }, updateInterval);
-    });
-
+    getAndFillUserList('setActiveFirst');
     addHandlers();
-
 }

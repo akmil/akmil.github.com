@@ -14,6 +14,14 @@ $avatar-conversation-size: 38px;
     height: auto;
   }
 }
+
+.user-list-box {
+  order: -1;
+  @media (min-width: $tabletBreakpoint) {
+    order: initial;
+  }
+}
+
 .messages-user-list {
     .list-group-item {
         cursor: pointer;
@@ -109,7 +117,7 @@ $avatar-conversation-size: 38px;
 }
 .hiddenFileInput > input{
     height: 100%;
-    width: 100;
+    width: 100%;
     opacity: 0;
     margin-left: -180px;
     cursor: pointer;
