@@ -34,7 +34,10 @@ export const CONST = {
         USER_LOGGED: 'user_logged',
         USER_LOGOUT: 'user_logout',
         USER_EMAIL_CONFIRMED: 'user_email_confirmed',
-        STOP_FIXED_SPINNER: 'stop_fixed_spinner'
+        STOP_FIXED_SPINNER: 'stop_fixed_spinner',
+        messages: {
+            RECIEVE_NEW_MESSAGE: 'receive_new_message'
+        }
     },
     getPath(name) {
         return this.url.base + this.url[name];

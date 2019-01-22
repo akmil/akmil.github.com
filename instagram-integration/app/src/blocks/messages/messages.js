@@ -3,6 +3,8 @@ import MeteorEmoji from 'meteor-emoji';
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
 import Spinner from '../../common/js-services/spinner';
+import PubSub from 'pubsub-js';
+import {CONST} from '../../common/js-services/consts'; // https://www.npmjs.com/package/pubsub-js
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
@@ -47,6 +49,7 @@ $(document).ready(() => {
     });*/
 });
 
+// messages-list
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
@@ -99,6 +102,7 @@ function fillList($list, dataArray) {
     });
 }
 
+// messages-user-list
 function fillUserList($list, dataArray) {
     const items = dataArray.meta;
     const cList = $list;
@@ -185,6 +189,7 @@ function addHandlers() {
                 getAndFillConversation(username, conversationId);
                 $textArea.val('');
                 Spinner.remove();
+                PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value});
             }
         });
     });
@@ -193,10 +198,23 @@ function addHandlers() {
         const username = $(e.target).closest('.list-group-item').data('username');
         const conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
-        getAndFillConversation(username, conversationId, true);
+        getAndFillConversation(username, conversationId, 'isScrollDown');
+        // resend request
         setInterval(() => {
             getAndFillConversation(username, conversationId);
         }, updateInterval);
+    });
+
+    PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
+        const {username, conversationId, value} = data;
+        const $dialog = $(`.messages-user-list .list-group-item[data-username="${username}"] div[data-conversation-id="${conversationId}"]`);
+        $dialog.find('.summary').text(value);
+        // metadata.then((result) => {
+        //     fillUserList($userList, result.data);
+        //     if (result.data.settings && result.data.settings.invoke_in_millis) {
+        //         updateInterval = result.data.settings.invoke_in_millis;
+        //     }
+        // });
     });
 }
 
@@ -213,6 +231,10 @@ export function init() {
         if (result.data.settings && result.data.settings.invoke_in_millis) {
             updateInterval = result.data.settings.invoke_in_millis;
         }
+        // resend request
+        setInterval(() => {
+            fillUserList($userList, result.data);
+        }, updateInterval);
     });
 
     addHandlers();
