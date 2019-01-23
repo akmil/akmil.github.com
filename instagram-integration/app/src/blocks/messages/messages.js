@@ -9,7 +9,7 @@ import {CONST} from '../../common/js-services/consts'; // https://www.npmjs.com/
 const token = User.getToken();
 const $msgList = $('.messages-list');
 let updateInterval = '';
-let intervalId = '';
+let intervalId = false;
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -51,7 +51,7 @@ $(document).ready(() => {
 });
 
 // messages-list
-function fillList($list, dataArray) {
+function fillList($list, dataArray, isAppentPrevMsg) {
     const items = dataArray;
     const cList = $list;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
@@ -71,20 +71,23 @@ function fillList($list, dataArray) {
         }
         return str;
     };
-    cList.empty().addClass('border-light-color');
-    items.forEach((item) => {
-        const message = item;
-        // const checkpoint = item.checkpoint || item;
+    if (isAppentPrevMsg) {
+        console.log('isAppentPrevMsg to', cList);
+    } else {
+        cList.empty().addClass('border-light-color');
+        items.forEach((item) => {
+            const message = item;
+            // const checkpoint = item.checkpoint || item;
 
-        if (message.side.toLowerCase() === 'left') {
-            $(`<li class="chat-item chat-item-left" value="${message.value}">
+            if (message.side.toLowerCase() === 'left') {
+                $(`<li class="chat-item chat-item-left col flex-column-reverse" value="${message.value}">
                 <div class="d-flex">
                 ${(message['profile_pic_url'])
                     ? `<div class="chat-img-box"> 
                          <img src="${message['profile_pic_url']}" alt="User Avatar" class="">
                         </div>`
                     : ''
-                }
+                    }
                 <div>
                     <p class="chat-username text-muted">${message.username}</p>
                     ${insertMsg(message.value, message.type)}
@@ -92,17 +95,33 @@ function fillList($list, dataArray) {
                     <small class="chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
             </li>`).appendTo(cList);
-        } else {
-            $(`<li class="chat-item justify-content-end chat-item-right" value="${message.value}">
-                <div class="d-flex">
+            } else {
+                $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
+                <div class="d-flex justify-content-end">
                     ${insertMsg(message.value, message.type)}
                     <small class="pull-right chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`).appendTo(cList);
-        }
-    });
+            }
+        });
+    }
 }
+function addPagination($wrapper, pagination) {
+    const conversationId = pagination.prev_cursor;
+    const $button = $(`<button class="btn load-more" data-cursor="${conversationId}">еще давай!</button>`);
 
+    if (!$wrapper.closest('.messages-list-box').find('.load-more').length) {
+        $button.insertBefore($wrapper).on('click', (e) => {
+            console.log(e);
+            const userData = $('.messages-list').data('conversation');
+            const {username} = userData;
+            UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+                console.log('receive old msg', result);
+                fillList($msgList, result.data.meta.messages, 'appentPrevMsg');
+            });
+        });
+    }
+}
 // messages-user-list
 function fillUserList($list, dataArray) {
     const items = dataArray.meta;
@@ -171,6 +190,10 @@ function getAndFillUserList(isActiveFirst) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
     }
     metadata.then((result) => {
+        if (!result.data) {
+            return;
+        }
+        result.data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
         fillUserList($userList, result.data);
         if (result.data.settings && result.data.settings.invoke_in_millis) {
             updateInterval = result.data.settings.invoke_in_millis;
@@ -184,22 +207,26 @@ function getAndFillUserList(isActiveFirst) {
     });
 }
 
+function getAndFillConversation(username, conversationId, isScrollDown) {
+    UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+        fillList($msgList, result.data.meta.messages);
+        if (result.data.meta.pagination) {
+            addPagination($msgList, result.data.meta.pagination);
+        }
+        Spinner.remove();
+        $('.js_send-message-box').removeClass('d-none');
+        $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
+
+        if (isScrollDown) {
+            $msgList.animate({
+                scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
+            }, 1000);
+        }
+    });
+}
+
 function addHandlers() {
     let conversationId = '';
-    function getAndFillConversation(username, conversationId, isScrollDown) {
-        UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
-            fillList($msgList, result.data.meta.messages);
-            Spinner.remove();
-            $('.js_send-message-box').removeClass('d-none');
-            $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
-
-            if (isScrollDown) {
-                $msgList.animate({
-                    scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
-                }, 1000);
-            }
-        });
-    }
 
     $('#sendMessageButton').on('click', (e) => {
         const $textArea = $('#sendMessageTextArea');
@@ -222,12 +249,13 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
+        updateInterval = (updateInterval > 6000) ? updateInterval : 9999996000;
         // resend request
-        if (intervalId.length) {
+        if (intervalId) {
             clearInterval(intervalId);
         }
         intervalId = setInterval(() => {
-            console.log(conversationId);
+            console.log(intervalId, conversationId);
             getAndFillConversation(username, conversationId);
             getAndFillUserList();
         }, updateInterval);
