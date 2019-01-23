@@ -212,11 +212,6 @@ function getAndFillUserList(isActiveFirst) {
 function getAndFillConversation(username, conversationId, isScrollDown) {
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         fillList($msgList, result.data.meta.messages);
-        if (result.data.meta.pagination) {
-            addPagination($msgList, result.data.meta.pagination);
-        } else {
-            $('.messages-list-box').find('.load-more').remove();
-        }
         Spinner.remove();
         $('.js_send-message-box').removeClass('d-none');
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
@@ -225,6 +220,11 @@ function getAndFillConversation(username, conversationId, isScrollDown) {
             $msgList.animate({
                 scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
             }, 1000);
+            if (result.data.meta.pagination) {
+                addPagination($msgList, result.data.meta.pagination);
+            } else {
+                $('.messages-list-box').find('.load-more').remove();
+            }
         }
     });
 }
@@ -253,7 +253,7 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
-        updateInterval = (updateInterval > 6000) ? updateInterval : 9999996000;
+        updateInterval = (updateInterval > 6000) ? updateInterval : 6000;
         // resend request
         if (intervalId) {
             clearInterval(intervalId);

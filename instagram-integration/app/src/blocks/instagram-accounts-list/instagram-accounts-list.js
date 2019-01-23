@@ -106,6 +106,8 @@ function addListHandler(/* username*/) {
 
                 // Spinner.stop($button, 'fa-key');
                 $('.js_success-feedback', $modal).empty().text(`Ключ подтверждения был отправлен Вам на ${sendTo}`);
+
+                $('#security-code').attr('data-username', username);
             }
         });
     });
@@ -113,7 +115,7 @@ function addListHandler(/* username*/) {
     // inside modal
     $('.js_confirm-security-code').on('click', (e) => {
         const btn = $(e.target);
-        const username = btn.data('username');
+        const username = btn.closest('#security-code').data('username');
         const $keyInput = btn.closest('.modal').find('.modal-dialog form input.js_confirm-key');
         const key = $keyInput.val().trim();
         const $modal = btn.closest('.modal');
@@ -220,7 +222,7 @@ function fillList($list, dataArray) {
                     <div class="col">                        
                         ${(checkpoint.status === 'TRIGGERED')
                         ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                            data-checkpoint-type="${checkpoint.type}"
+                            data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
                             data-username="${item.username || ''}"
                             data-toggle="modal" data-target="#security-code">
                             <i class="fas fa-key"></i>Пройти чекпоинт</button>`
@@ -244,7 +246,10 @@ function fillList($list, dataArray) {
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" data-checkpoint-type="${checkpoint.type}" data-toggle="modal" data-target="#security-code">
+                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                        data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
+                        data-username="${item.username || ''}" 
+                        data-toggle="modal" data-target="#security-code">
                     <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                 : ''}
                 </div>
