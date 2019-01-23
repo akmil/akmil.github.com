@@ -1,14 +1,12 @@
 import './base.scss';
 // import 'bootstrap';
-
+import {CONST} from './common/js-services/consts';
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
 import {LoginPage} from './pages/_auth/login-page';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
-import {Instagram} from './pages/_instagram/instagram';
 import * as header from './blocks/header/header';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
-import {CONST} from './common/js-services/consts';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
 
@@ -37,7 +35,7 @@ const init = () => {
         _formId: '.form-signin',
         _buttonSubmitId: '.form-signin [type="submit"]'
     }).init();
-    Instagram().init();
+
     confirmationWithRedirect().init();
     header.initHeader();
     burgerMenu.init();

@@ -91,11 +91,6 @@ const pages = [
         title: 'User profile -- unsibscribe',
         name: 'unsibscribe',
         source: '_unsibscribe/unsibscribe'
-    },
-    {
-        title: 'User profile -- instagram',
-        name: 'instagram',
-        source: '_instagram/instagram'
     }
 ];
 

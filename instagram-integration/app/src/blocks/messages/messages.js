@@ -108,15 +108,17 @@ function fillList($list, dataArray, isAppentPrevMsg) {
 }
 function addPagination($wrapper, pagination) {
     const conversationId = pagination.prev_cursor;
-    const $button = $(`<button class="btn load-more" data-cursor="${conversationId}">еще давай!</button>`);
+    const $button = $(`<button class="btn load-more d-flex position-absolute" style="top: -42px;" 
+        data-cursor="${conversationId}">еще давай!</button>`);
 
     if (!$wrapper.closest('.messages-list-box').find('.load-more').length) {
         $button.insertBefore($wrapper).on('click', (e) => {
-            console.log(e);
             const userData = $('.messages-list').data('conversation');
             const {username} = userData;
+            Spinner.startButtonSpinner($button);
             UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
                 console.log('receive old msg', result);
+                Spinner.stopButtonSpinner($button);
                 fillList($msgList, result.data.meta.messages, 'appentPrevMsg');
             });
         });
@@ -212,6 +214,8 @@ function getAndFillConversation(username, conversationId, isScrollDown) {
         fillList($msgList, result.data.meta.messages);
         if (result.data.meta.pagination) {
             addPagination($msgList, result.data.meta.pagination);
+        } else {
+            $('.messages-list-box').find('.load-more').remove();
         }
         Spinner.remove();
         $('.js_send-message-box').removeClass('d-none');
@@ -267,6 +271,7 @@ function addHandlers() {
         console.log('set val from text-area', value);
         console.log('resultFromServer: ', resultFromServer);
         $dialog.find('.summary').text(value);
+
         // metadata.then((result) => {
         //     fillUserList($userList, result.data);
         //     if (result.data.settings && result.data.settings.invoke_in_millis) {
