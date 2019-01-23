@@ -35,7 +35,8 @@ class UserConversation {
     }
 
     getMetadataDetailConversation(token, details, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}`,
+        const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}${cursor}`,
             {headers: {token}}, cbError);
     }
     postMetadataDetailConversation(token, details, cbError) {
