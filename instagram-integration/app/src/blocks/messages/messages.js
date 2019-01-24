@@ -71,20 +71,28 @@ function fillList($list, dataArray, isAppentPrevMsg) {
         }
         return str;
     };
+    const addToList = (isAppentPrevMsg, $li, $list) => {
+        if (isAppentPrevMsg) {
+            $li.insertBefore($list.find('li:first-child'));
+        } else {
+            $li.appendTo($list);
+        }
+    };
     if (isAppentPrevMsg) {
         console.log('isAppentPrevMsg to', cList);
     } else {
         cList.empty().addClass('border-light-color');
-        items.forEach((item) => {
-            const message = item;
-            // const checkpoint = item.checkpoint || item;
+    }
+    items.forEach((item) => {
+        const message = item;
+        // const checkpoint = item.checkpoint || item;
 
-            if (message.side.toLowerCase() === 'left') {
-                $(`<li class="chat-item chat-item-left col flex-column-reverse" value="${message.value}">
+        if (message.side.toLowerCase() === 'left') {
+            const $li = $(`<li class="chat-item chat-item-left col flex-column-reverse" value="${message.value}">
                 <div class="d-flex">
                 ${(message['profile_pic_url'])
                     ? `<div class="chat-img-box"> 
-                         <img src="${message['profile_pic_url']}" alt="User Avatar" class="">
+                            <img src="${message['profile_pic_url']}" alt="User Avatar" class="">
                         </div>`
                     : ''
                     }
@@ -94,30 +102,31 @@ function fillList($list, dataArray, isAppentPrevMsg) {
                 </div>
                     <small class="chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
-            </li>`).appendTo(cList);
-            } else {
-                $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
+            </li>`);
+            addToList(isAppentPrevMsg, $li, cList);
+        } else {
+            const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
                 <div class="d-flex justify-content-end">
                     ${insertMsg(message.value, message.type)}
                     <small class="pull-right chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
-            </li>`).appendTo(cList);
-            }
-        });
-    }
+            </li>`);
+            addToList(isAppentPrevMsg, $li, cList);
+        }
+    });
 }
 function addPagination($wrapper, pagination) {
-    const conversationId = pagination.prev_cursor;
-    const $button = $(`<button class="btn load-more d-flex position-absolute" style="top: -42px;" 
-        data-cursor="${conversationId}">еще давай!</button>`);
+    const cursor = pagination.prev_cursor;
+    const $button = $(`<button class="btn btn-secondary load-more d-flex position-absolute" style="top: -42px;"
+        data-cursor="${cursor}">еще давай!</button>`);
 
     if (!$wrapper.closest('.messages-list-box').find('.load-more').length) {
         $button.insertBefore($wrapper).on('click', (e) => {
             const userData = $('.messages-list').data('conversation');
-            const {username} = userData;
+            const {username, conversationId} = userData;
             Spinner.startButtonSpinner($button);
-            UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
-                console.log('receive old msg', result);
+            UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor}).then((result) => {
+                console.log('receive msg', result);
                 Spinner.stopButtonSpinner($button);
                 fillList($msgList, result.data.meta.messages, 'appentPrevMsg');
             });
@@ -253,7 +262,7 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
-        updateInterval = (updateInterval > 6000) ? updateInterval : 6000;
+        updateInterval = (updateInterval > 6000) ? updateInterval : 15000;
         // resend request
         if (intervalId) {
             clearInterval(intervalId);
