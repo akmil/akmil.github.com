@@ -78,9 +78,9 @@ const pages = [
         source: '_profile/profile-page'
     },
     {
-        title: 'User profile',
-        name: 'sibscribe',
-        source: '_sibscribe/sibscribe'
+        title: 'Подписки',
+        name: 'subscribe',
+        source: '_subscribe/subscribe'
     },
     {
         title: 'User profile',
@@ -89,8 +89,8 @@ const pages = [
     },
     {
         title: 'User profile -- unsibscribe',
-        name: 'unsibscribe',
-        source: '_unsibscribe/unsibscribe'
+        name: 'unsubscribe',
+        source: '_unsubscribe/unsubscribe'
     }
 ];
 

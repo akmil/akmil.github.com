@@ -246,12 +246,12 @@ function fillList($list, dataArray) {
                 </div>
                 <div class="col">                        
                     ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                        data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
-                        data-username="${item.username || ''}" 
-                        data-toggle="modal" data-target="#security-code">
-                    <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                : ''}
+                    ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                            data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
+                            data-username="${item.username || ''}" 
+                            data-toggle="modal" data-target="#security-code">
+                        <i class="fas fa-key"></i>Пройти чекпоинт</button>`
+                    : ''}
                 </div>
                 ${stats(info)}
             </div>

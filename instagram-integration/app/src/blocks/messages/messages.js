@@ -259,6 +259,7 @@ function addHandlers() {
             clearInterval(intervalId);
         }
         intervalId = setInterval(() => {
+            conversationId = $(e.target).closest('.media').data('conversation-id');
             console.log(intervalId, conversationId);
             getAndFillConversation(username, conversationId);
             getAndFillUserList();
