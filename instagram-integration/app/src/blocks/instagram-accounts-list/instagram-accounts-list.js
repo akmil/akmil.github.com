@@ -2,6 +2,8 @@
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
 import viewUtils from '../../common/js-services/view';
+// import PubSub from 'pubsub-js';
+import {CONST} from '../../common/js-services/consts';
 
 // После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
 const addInstagramAccount = (newFormData) => {
@@ -213,13 +215,13 @@ function fillList($list, dataArray) {
         const checkpoint = item.checkpoint || item;
 
         if (!info) {
-            $(`<li class="media py-3">
+            $(`<li class="media py-3" data-username="${item.username}">
                 <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
                 <div class="media-body d-flex">
                     <div class="col user-info">
                         ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
                     </div>
-                    <div class="col">                        
+                    <div class="col user-checkpoint">                        
                         ${(checkpoint.status === 'TRIGGERED')
                         ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
                             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
@@ -232,7 +234,7 @@ function fillList($list, dataArray) {
                 </div>
             </li>`).appendTo(cList);
         } else {
-            $(`<li class="media py-3">
+            $(`<li class="media py-3" data-username="${item.username}">
             ${(info['profile_pic_url'])
                 ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
                 : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
@@ -244,7 +246,7 @@ function fillList($list, dataArray) {
                      ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
                     
                 </div>
-                <div class="col">                        
+                <div class="col user-checkpoint">                        
                     ${(checkpoint.status === 'TRIGGERED')
                     ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
                             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
@@ -258,6 +260,8 @@ function fillList($list, dataArray) {
         </li>`).appendTo(cList);
         }
     });
+    console.log('publish PubSub', CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED);
+    window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED);
 }
 
 /**

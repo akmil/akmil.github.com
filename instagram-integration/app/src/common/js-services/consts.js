@@ -9,7 +9,12 @@ export const CONST = {
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',
         instagramDirect_getMetaData: 'instagram-direct/meta',
-        instagramDirect_postMessage: 'instagram-direct/'
+        instagramDirect_postMessage: 'instagram-direct/',
+        instagramTaskManager: 'instagram-task-manager/',
+        instagramTaskManager_getMetaData: 'instagram-task-manager/meta',
+        instagramTaskManager_getTaskTypes: 'instagram-task-manager/task/types',
+        instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {STRATEGY_TYPE}/subtype/{STRATEGY_SUBTYPE}
+        instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task'
     },
     user: {
         email: '',
@@ -37,6 +42,9 @@ export const CONST = {
         STOP_FIXED_SPINNER: 'stop_fixed_spinner',
         messages: {
             RECIEVE_NEW_MESSAGE: 'receive_new_message'
+        },
+        instagramAccouns: {
+            INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered'
         }
     },
     getPath(name) {

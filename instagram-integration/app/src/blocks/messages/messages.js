@@ -3,8 +3,8 @@ import MeteorEmoji from 'meteor-emoji';
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
 import Spinner from '../../common/js-services/spinner';
-import PubSub from 'pubsub-js';
-import {CONST} from '../../common/js-services/consts'; // https://www.npmjs.com/package/pubsub-js
+// import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
+import {CONST} from '../../common/js-services/consts';
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
@@ -252,7 +252,7 @@ function addHandlers() {
                 getAndFillConversation(username, conversationId);
                 $textArea.val('');
                 Spinner.remove();
-                PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value, result});
+                window.PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value, result});
             }
         });
     });
@@ -275,7 +275,7 @@ function addHandlers() {
         }, updateInterval);
     });
 
-    PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
+    window.PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
         const {username, conversationId, value, resultFromServer} = data;
         const $dialog = $(`.messages-user-list .list-group-item[data-username="${username}"] div[data-conversation-id="${conversationId}"]`);
         console.log('set val from text-area', value);

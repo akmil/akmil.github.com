@@ -1,5 +1,12 @@
 {{#> base }}
 
-{{> instagram-accounts-list }}
+    <div class="profile-user">
+        {{> instagram-accounts-list
+                showHeader='true'
+                withIntent='true'
+                listPadding='true'
+        }}
+        {{> instagram-accounts-list-modals}}
+    </div>
 
 {{/ base }}

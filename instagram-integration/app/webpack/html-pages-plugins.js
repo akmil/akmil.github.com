@@ -79,8 +79,8 @@ const pages = [
     },
     {
         title: 'Подписки',
-        name: 'subscribe',
-        source: '_subscribe/subscribe'
+        name: 'follow',
+        source: '_follow-page/follow-page'
     },
     {
         title: 'User profile',

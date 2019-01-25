@@ -1,0 +1,87 @@
+
+<div class="modal fade" id="modal-new-account" tabindex="-1" role="dialog" aria-labelledby="modal-new-account" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-new-ticket-label">Добавить аккаунт</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="sr-only">Логин</label>
+                        <input type="text" class="form-control" name="username" placeholder="Логин">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Пароль</label>
+                        <input type="password" class="form-control" name="pass" placeholder="Пароль">
+                    </div>
+                    <button type="button" class="btn btn-success js_add-instagram-account" data-dismiss="modal">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal to enter security-code --}}
+<div class="modal fade" id="security-code" tabindex="-1" role="dialog" aria-labelledby="security-code11" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="js_success-feedback mt-0"></p>
+                <form>
+                    <div class="form-group">
+                        <label class="sr-only">Код подтверждения</label>
+                        <input type="text" class="form-control js_confirm-key" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required title="6 characters minimum">
+                    </div>
+                    <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                    <button type="button" class="js_pass-checkpoint-btn btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal to enter security-code with phoneOremail--}}
+<div class="modal fade" id="security-code-phoneOremail" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="js_success-feedback m-0"></p>
+                <form>
+                    <div class="first-step">
+                        <p class="text-center mt-0">Выберите способ подтверждения кода</p>
+                        <div class="js_btn-type-switcher btn-group btn-group-toggle justify-content-center mb-3 w-100" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" value="EMAIL" checked>EMAIL
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2" value="PHONE">Телефон
+                            </label>
+                        </div>
+
+                        <button type="button" class="js_get-security-code-phoneOremail btn btn-outline-success btn-block">
+                            Запросить код подтверждения</button>
+                    </div>
+
+                    <div class="second-step d-none">
+                        <div class="form-group mt-3">
+                            <label class="sr-only">Код подтверждения</label>
+                            <input type="text" class="form-control js_confirm-key" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required="" title="6 characters minimum" style="border-color: red;">
+                        </div>
+                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                        <!--<button type="button" class="js_pass-checkpoint-btn btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

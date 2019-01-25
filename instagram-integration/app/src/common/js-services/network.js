@@ -1,4 +1,3 @@
-// import $ from 'jquery';
 import viewUtils from './view';
 
 export default class Network {
@@ -7,7 +6,7 @@ export default class Network {
         const $el = ($('#description').length) ? $('#description') : $('.error-msg');
         viewUtils.showInfoMessage($el,
             result.status.state,
-            result.status.message || 'Login error');
+            result.status.message || 'error');
     }
 
     checkStatus(response) {

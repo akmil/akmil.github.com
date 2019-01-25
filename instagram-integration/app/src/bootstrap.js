@@ -1,6 +1,7 @@
 import './base.scss';
 // import 'bootstrap';
 import {CONST} from './common/js-services/consts';
+import PubSub from 'pubsub-js';
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
 import {LoginPage} from './pages/_auth/login-page';
@@ -9,6 +10,8 @@ import * as header from './blocks/header/header';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
+import * as follow from './blocks/follow/follow';
+// import * as followSteps from './blocks/follow/follow-using-steps';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -25,7 +28,12 @@ const selectorCssLoginFormInstagram = {
     isLoginInstagram: true
 };
 
+function setPubSub(PubSub) {
+    window.PubSub = PubSub;
+}
+
 const init = () => {
+    setPubSub(PubSub);
     // console.log('init js here', CONST.user);
     (new RegisterForm()).init();
     LoginForm(selectorCssLoginForm).init();
@@ -39,8 +47,11 @@ const init = () => {
     confirmationWithRedirect().init();
     header.initHeader();
     burgerMenu.init();
+    follow.init();
     instagramAccounts.init();
     messages.init();
+
+    // followSteps.init();
 };
 
 (() => init())();
