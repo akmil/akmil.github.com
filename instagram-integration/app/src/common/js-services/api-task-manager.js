@@ -58,7 +58,7 @@ class UserTaskManager {
             }
         };
         setting.body = JSON.stringify({
-            'username': 'leshhowanton',
+            'username': 'brandylenhart',
             'type': 'FOLLOWING',
             'subtype': 'FOLLOWING_LIST',
 

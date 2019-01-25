@@ -198,31 +198,32 @@ function modifyAccList() {
         </div>`;
     const $accountsList = $('.accounts-list');
     const $li = $accountsList.find('.media-body');
-    const $parentFieldset = $accountsList.parents('fieldset');
-
-    function updateStatus() {
-        if ($('div.custom-checkbox input:checked').length > 0) {
-            $('.btn-next', $parentFieldset).prop('disabled', false);
-        } else {
-            $('.btn-next', $parentFieldset).prop('disabled', true);
-        }
-    }
-
     for (let i = 0; i < $li.length; i++) {
         $($li[i]).append(checkboxCell(i));
     }
 
+    // const $parentFieldset = $accountsList.parents('fieldset');
+    // function updateStatus() {
+    //     if ($('div.custom-checkbox input:checked').length > 0) {
+    //         $('.btn-next', $parentFieldset).prop('disabled', false);
+    //     } else {
+    //         $('.btn-next', $parentFieldset).prop('disabled', true);
+    //     }
+    // }
+
     $('.checkbox-cell').on('change', (e) => {
         console.log('validate');
-        updateStatus();
+        // updateStatus();
     });
 }
+// function initHandlers(){}
 
 export function init() {
     initSteps();
-    console.log('init PubSub', CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED);
-    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
-        console.log('subscribe');
-        modifyAccList();
-    });
+    if ($('.follow').length) {
+        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
+            console.log('subscribe');
+            modifyAccList();
+        });
+    }
 }
