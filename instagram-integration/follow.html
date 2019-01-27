@@ -119,7 +119,7 @@
                   <div class="assessment-container container follow">
                       <div class="row">
                           <div class="col-md-12 form-box">
-                              <form role="form" class="registration-form" action="javascript:void(0);">
+                              <form role="form" name="follow-form" class="registration-form was-validated---" action="javascript:void(0);">
                   
                                   <fieldset>
                                       <div class="form-top">
@@ -157,21 +157,17 @@
                                   <fieldset>
                                       <div class="form-top">
                                           <div class="form-top-left">
-                                              <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>выбирает на кого подписываться</h3>
-                                              <p>Шаг 2/4 или описание</p>
+                                              <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает на кого подписываться</h3>
+                                              <p>Шаг 2/4</p>
                                           </div>
                                       </div>
                                       <div class="form-bottom">
                                           <ul class="js_task-meta-list list-unstyled"></ul>
-                                          <ul>
-                                              <li>akk 01</li>
-                                              <li>akk 02</li>
-                                              <li>akk 03</li>
-                                              <li>akk 04</li>
-                                          </ul>
-                                          <ul class="js_task-types list-unstyled"></ul>
-                                          <ul class="js_task-start-following list-unstyled"></ul>
-                                         
+                                          <div class="row">
+                                              <div class="form-group col-md-6 col-sm-6">
+                                                  <input class="form-control" placeholder="Введите ИД-пользователей через запятую" id="followers">
+                                              </div>
+                                          </div>
                                           <button type="button" class="btn btn-previous">Назад</button>
                                           <button type="button" class="btn btn-next">Дальше</button>
                                       </div>
@@ -179,17 +175,27 @@
                                   <fieldset>
                                       <div class="form-top">
                                           <div class="form-top-left">
-                                              <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>скорость</h3>
+                                              <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Скорость</h3>
                                               <p>Шаг 3/4</p>
                                           </div>
                                       </div>
                                       <div class="form-bottom">
-                                          <div class="form-group">
-                                              <ul>
-                                                  <li>скорость 01</li>
-                                                  <li>скорость 02</li>
-                                                  <li>скорость 03</li>
-                                              </ul>
+                                          <div class="form-group row col-lg-12">
+                                              <label class="col-3 col-form-label">Скорость</label>
+                                              <div class="col-9 js_follow-speed">
+                                                  <div class="custom-control custom-radio">
+                                                      <input type="radio" id="safe" name="customRadio" value="safe" class="custom-control-input" checked="checked">
+                                                      <label class="custom-control-label" for="safe"><strong>Безопасный:</strong> 9 подписок в час</label>
+                                                  </div>
+                                                  <div class="custom-control custom-radio">
+                                                      <input type="radio" id="normal" name="customRadio" value="normal" class="custom-control-input">
+                                                      <label class="custom-control-label" for="normal"><strong>Средний:</strong> 18 подписок в час</label>
+                                                  </div>
+                                                  <div class="custom-control custom-radio">
+                                                      <input type="radio" id="agressive" name="customRadio" value="agressive" class="custom-control-input">
+                                                      <label class="custom-control-label" for="agressive"><strong>Агрессивный:</strong> 30 подписок в час</label>
+                                                  </div>
+                                              </div>
                                           </div>
                                           <button type="button" class="btn btn-previous">Назад</button>
                                           <button type="button" class="btn btn-next">Дальше</button>
@@ -203,13 +209,70 @@
                                           </div>
                                       </div>
                                       <div class="form-bottom">
-                                          
-                  
-                                          <ul>
-                                              <li>критерий 01</li>
-                                              <li>критерий 02</li>
-                                              <li>критерий 03</li>
-                                          </ul>
+                                          <div class="row">
+                                              <div class="form-group col-md-6 col-sm-6">
+                                                  <label for="limit">limit</label>
+                                                  <input type="number" class="form-control" placeholder="limit" name="limit" id="limit" min="0" value="7500">
+                                              </div>
+                                              <div class="form-group col-md-6 col-sm-6">
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <div class="custom-control custom-checkbox">
+                                                          <input type="checkbox" class="custom-control-input" id="unfollow_then">
+                                                          <label class="custom-control-label" for="unfollow_then">unfollow_then</label>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <div class="custom-control custom-checkbox">
+                                                          <input type="checkbox" class="custom-control-input" id="follow_on_closed_profiles">
+                                                          <label class="custom-control-label" for="follow_on_closed_profiles">follow_on_closed_profiles</label>
+                                                      </div>
+                                                  </div>
+                                                  
+                                              </div>
+                                          </div>
+                                          <div class="form-group" style="margin-bottom:3px">
+                                              <div class="row">
+                                                  <div class="form-group col-md-12">
+                                                      have_posts
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_posts_from" placeholder="have_posts from" id="have_posts-from" min="0" value="3">
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_posts_to" placeholder="have_posts to" id="have_posts-to" min="0" value="999999">
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="form-group col-md-12">
+                                                      have_followers
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_followers_from" placeholder="have_followers from" id="have_followers-from" min="0" value="30">
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to" id="have_followers-to" min="0" value="999999">
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="form-group col-md-12">
+                                                      have_followings
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_followings_from" placeholder="have_followings from" id="have_followings-from" min="0" value="0">
+                                                  </div>
+                                                  <div class="form-group col-md-3 col-sm-3">
+                                                      <input type="number" class="form-control" name="have_followings_to" placeholder="have_followings to" id="have_followings-to" min="0" value="999">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-3 col-form-label">Пол</label>
+                                              <select class="form-control select-gender">
+                                                  <option value="any">Любой</option>
+                                                  <option value="men">Мужской</option>
+                                                  <option value="women">Женский</option>
+                                              </select>
+                                          </div>
                   
                                           <button type="button" class="btn btn-previous">Назад</button>
                                           <button type="submit" class="btn">Старт</button>
@@ -222,36 +285,9 @@
                   
                   
                 
-                <p>Система будет подписываться от нужных аккаунтов по заданным критериям. </p>
-                <ul>
-                  <li>Формат добавления задания:</li>
-                    <li>Сначала пользователь выбирает аккаунт, с которого будет производиться подписка</li>
-                    <li>После выбора раскрывается следующий пункт - выбирает на кого подписываться. На примере выбрана активная аудитория.
-                  Далее Раскрывается еще пункт и там нужно указать список своих конкурентов
-                  Потом раскрывается еще - скорость</li>
-                    <li>Потом критерии</li>
-                    <li>И кнопка старта</li>
-            
-                    <li>Здесь все аккаунты в одном окне отображаются.</li>
-            
-                  </ul>
-            
-                <div class="container">
-                  <div class="row">
-                    <div class="col">
-                      <button>Выберите аккаунт</button>
-                      <button>На кого подписываться?</button>
-                      <button>Укажите своих конкурентов</button>
-                      <button>Скорость</button>
-                      <button>Критерии</button>
-                    </div>
-                  </div>
-                </div>
-            
-            
+                <p>Система будет подписываеться на нужных аккаунтов по заданным критериям. </p>
             
               </div>
-            
             
         
       </main>

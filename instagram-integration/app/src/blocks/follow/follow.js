@@ -2,7 +2,10 @@ import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 
 const state = {
-    username: []
+    username: [],
+    user_default_config: {
+        task_mode: 'SAFE'
+    }
 };
 
 function fillList($list, dataArray) {
@@ -28,7 +31,7 @@ function fillList($list, dataArray) {
                         ${(item.progress)
                             ? `<p class="mt-0 mb-1 name">Количество - ${item.progress.count}</p>
                                 <p class="mt-0 mb-1 name">Процент - ${item.progress.percent}</p>` : ''}
-                    </div>                                    
+                    </div>
                 </div>
             </li>`).appendTo($list);
     });
@@ -44,10 +47,10 @@ function fillListTypes($list, data) {
         if (Object.prototype.hasOwnProperty.call(structureObj, item)) {
             console.log(`obj.${item} = ${structureObj[item]}`);
             $(`<li class="list-group-item py-2">
-                <div class="media-body d-flex">                    
+                <div class="media-body d-flex">
                     <div class="col task-progress">
                         ${(structureObj[item]) ? `<p class="mt-0 mb-1 name">${item} -- ${structureObj[item]}</p>` : ''}
-                    </div>                                    
+                    </div>
                 </div>
             </li>`).appendTo($list);
         }
@@ -93,16 +96,28 @@ function getDataStep2(usersArr) {
     UserTaskManager.getMetadata(usersArr);
     getTasksData();
 }
+function getDataStep3(usersArr) {
+    const users = $('#followers').val()
+        .trim()
+        .replace(/ /g, '')
+        .split(',')
+        .filter(i => i.length > 0);
+
+    state['user_custom_config'] = {
+        users
+    };
+}
 
 function stepReducer(stepNumbre) {
     console.log('reduce', stepNumbre);
     switch (stepNumbre) {
         case 0:
-            console.log(stepNumbre);
             getDataStep2([...new Set(state.username)]);
+            console.log(state);
             break;
         case 1:
-            console.log(stepNumbre);
+            getDataStep3();
+            console.log(state);
             break;
         case 2:
             console.log(stepNumbre);
@@ -129,12 +144,14 @@ function initSteps() {
         const parent_fieldset = $(this).parents('fieldset');
         let next_step = true;
 
-        const checkBoxes = parent_fieldset.find('div.custom-checkbox input:checked');
+        const radioBtnActive = parent_fieldset.find('input[name="userAccountRadio"]:checked');
+        // const value = $(this).attr('value');
         state.username.length = 0;
-        if (checkBoxes.length > 0) {
-            checkBoxes.each(function () {
-                state.username.push($(this).parents('li').data('username'));
-            });
+        if (radioBtnActive.length > 0) {
+            state.username.push(radioBtnActive.parents('li').data('username'));
+            // radioBtnActive.each(function () {
+            //     state.username.push($(this).parents('li').data('username'));
+            // });
         }
         stepReducer(parent_fieldset.index(), state);
 
@@ -163,15 +180,69 @@ function initSteps() {
         });
     });
 
+    // speed radio-btn group
+    $('.js_follow-speed input[type=radio]').on('click', function () {
+        const value = $(this).attr('value');
+        state.user_default_config = {
+            task_mode: value.toUpperCase()
+        };
+        // if ($(this).is(':checked')) {
+        //     console.log('its checked');
+        // }
+    });
+
     // submit
     $('.registration-form').on('submit', function (e) {
 
-        $(this).find('input[type="text"],input[type="email"]').each(function () {
+        const genderVal = $(this).find('.select-gender option:selected').val();
+        state.user_default_config = {
+            following_criteria: {
+                gender: genderVal.toUpperCase()
+            }
+        };
+        const limit = document.forms['follow-form']['limit'];
+        const have_posts = {
+            from: document.forms['follow-form']['have_posts_from'].value,
+            to: document.forms['follow-form']['have_posts_to'].value
+        };
+        const have_followers = {
+            from: document.forms['follow-form']['have_followers_from'].value,
+            to: document.forms['follow-form']['have_followers_to'].value
+        };
+        const have_followings = {
+            from: document.forms['follow-form']['have_followings_from'].value,
+            to: document.forms['follow-form']['have_followings_to'].value
+        };
+
+        if (limit.value === '') {
+            limit.focus();
+            return false;
+        }
+        state['user_default_config'].following_criteria = {
+            limit: limit.value,
+            'unfollow_then': true,
+            'follow_on_closed_profiles': true,
+            have_posts,
+            have_followers,
+            have_followings
+        };
+
+        $(this).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
             if ($(this).val() === '') {
                 e.preventDefault();
                 $(this).addClass('input-error');
             } else {
                 $(this).removeClass('input-error');
+            }
+        });
+
+        state.type = 'FOLLOWING';
+        state.subtype = 'FOLLOWING_LIST';
+        console.log('make request**  post: StartFollowingList', state);
+
+        UserTaskManager.postStartFollowingList(state).then((result) => {
+            if (result.status.state === 'ok') {
+                console.log(JSON.stringify(result));
             }
         });
 
@@ -190,16 +261,14 @@ function fixStepIndicator(n) {
 }*/
 
 function modifyAccList() {
-    const checkboxCell = (idx) => `<div class="col checkbox-cell">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="check-${idx}">
-              <label class="custom-control-label" for="check-${idx}">Подписаться</label>
-            </div>
+    const radioBtn = (idx) => `<div class="col custom-control custom-radio">
+            <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
+            <label class="custom-control-label" for="customRadio-${idx}">Подписаться</label>
         </div>`;
     const $accountsList = $('.accounts-list');
     const $li = $accountsList.find('.media-body');
     for (let i = 0; i < $li.length; i++) {
-        $($li[i]).append(checkboxCell(i));
+        $($li[i]).append(radioBtn(i));
     }
 
     // const $parentFieldset = $accountsList.parents('fieldset');

@@ -221,7 +221,7 @@ function fillList($list, dataArray) {
                     <div class="col user-info">
                         ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
                     </div>
-                    <div class="col user-checkpoint">                        
+                    <div class="col user-checkpoint">
                         ${(checkpoint.status === 'TRIGGERED')
                         ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
                             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
