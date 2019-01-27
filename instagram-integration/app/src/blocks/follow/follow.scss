@@ -392,9 +392,6 @@ $border-radius-follow: 4px;
             }
         }
     }
-    .form-row {
-
-    }
     .form-control {
         height: 30px;
         border: none;
@@ -402,8 +399,7 @@ $border-radius-follow: 4px;
         width: 100%;
         background: none;
         font-weight: 600;
-        &:focus {
-        }
+        
         &::-webkit-input-placeholder {
             color: #333;
         }

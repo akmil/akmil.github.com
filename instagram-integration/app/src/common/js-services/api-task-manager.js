@@ -29,7 +29,7 @@ class UserTaskManager {
         return (asHeader) ? {headers: {token: cookieToken}} : cookieToken;
     }
 
-    getMetadata(cbError) {
+    getMetadata(usersName, cbError) {
         return this.network.sendRequest(`${CONST.getPath('instagramTaskManager_getMetaData')}`,
             this.getToken('asHeader'), cbError);
     }
@@ -57,7 +57,7 @@ class UserTaskManager {
                 'token': this.getToken()
             }
         };
-        setting.body = body;
+        setting.body = JSON.stringify(body);
         // JSON.stringify({
         //     'username': 'brandylenhart',
         //     'type': 'FOLLOWING',

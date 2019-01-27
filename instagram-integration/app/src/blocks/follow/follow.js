@@ -2,7 +2,7 @@ import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 
 const state = {
-    username: [],
+    username: '',
     user_default_config: {
         task_mode: 'SAFE'
     }
@@ -16,7 +16,7 @@ function fillList($list, dataArray) {
     items.forEach((item) => {
         // const info = item.info;
         // const checkpoint = item.checkpoint || item;
-        $(`<li class="list-group-item py-2" data-username="${item.type}">                
+        $(`<li class="list-group-item py-2" data-username="${item.type}">
                 <div class="media-body d-flex">
                     <div class="col task-type">
                         ${(item.type) ? `<h4 class="mt-0 mb-1 name">${item.type}</h4>` : ''}
@@ -91,11 +91,12 @@ function getTasksData() {
     });
 }
 
-function getDataStep2(usersArr) {
-    console.log(usersArr);
-    UserTaskManager.getMetadata(usersArr);
+function getDataStep2(usersName) {
+    console.log(usersName);
+    UserTaskManager.getMetadata();
     getTasksData();
 }
+
 function getDataStep3(usersArr) {
     const users = $('#followers').val()
         .trim()
@@ -112,7 +113,7 @@ function stepReducer(stepNumbre) {
     console.log('reduce', stepNumbre);
     switch (stepNumbre) {
         case 0:
-            getDataStep2([...new Set(state.username)]);
+            getDataStep2(state.username); // [...new Set(state.username)]
             console.log(state);
             break;
         case 1:
@@ -121,6 +122,7 @@ function stepReducer(stepNumbre) {
             break;
         case 2:
             console.log(stepNumbre);
+            console.log(state);
             break;
         default:
             console.log('default', stepNumbre);
@@ -146,9 +148,9 @@ function initSteps() {
 
         const radioBtnActive = parent_fieldset.find('input[name="userAccountRadio"]:checked');
         // const value = $(this).attr('value');
-        state.username.length = 0;
+        // state.username.length = 0;
         if (radioBtnActive.length > 0) {
-            state.username.push(radioBtnActive.parents('li').data('username'));
+            state.username = radioBtnActive.parents('li').data('username');
             // radioBtnActive.each(function () {
             //     state.username.push($(this).parents('li').data('username'));
             // });
@@ -174,7 +176,7 @@ function initSteps() {
 
     // previous step
     $('.registration-form .btn-previous').on('click', function () {
-        state.username = [...new Set(state.username)];
+        // state.username = [...new Set(state.username)];
         $(this).parents('fieldset').fadeOut(400, function () {
             $(this).prev().fadeIn();
         });
@@ -193,9 +195,9 @@ function initSteps() {
 
     // submit
     $('.registration-form').on('submit', function (e) {
-
         const genderVal = $(this).find('.select-gender option:selected').val();
         state.user_default_config = {
+            ...state.user_default_config,
             following_criteria: {
                 gender: genderVal.toUpperCase()
             }
@@ -236,6 +238,10 @@ function initSteps() {
             }
         });
 
+        // state.id = {
+        //     type: 'FOLLOWING',
+        //     subtype: 'FOLLOWING_LIST'
+        // };
         state.type = 'FOLLOWING';
         state.subtype = 'FOLLOWING_LIST';
         console.log('make request**  post: StartFollowingList', state);
@@ -261,7 +267,7 @@ function fixStepIndicator(n) {
 }*/
 
 function modifyAccList() {
-    const radioBtn = (idx) => `<div class="col custom-control custom-radio">
+    const radioBtn = (idx) => `<div class="col custom-control custom-radio js_user-radio">
             <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
             <label class="custom-control-label" for="customRadio-${idx}">Подписаться</label>
         </div>`;
@@ -271,14 +277,16 @@ function modifyAccList() {
         $($li[i]).append(radioBtn(i));
     }
 
-    // const $parentFieldset = $accountsList.parents('fieldset');
-    // function updateStatus() {
-    //     if ($('div.custom-checkbox input:checked').length > 0) {
-    //         $('.btn-next', $parentFieldset).prop('disabled', false);
-    //     } else {
-    //         $('.btn-next', $parentFieldset).prop('disabled', true);
-    //     }
-    // }
+    $('.js_user-radio input[type=radio]').on('click', function () {
+        const $parentFieldset = $(this).parents('fieldset');
+        // const $parentFieldset = $accountsList.parents('fieldset');
+        $('.btn-next', $parentFieldset).prop('disabled', false);
+        // if ($('div.custom-checkbox input:checked').length > 0) {
+        //     $('.btn-next', $parentFieldset).prop('disabled', false);
+        // } else {
+        //     $('.btn-next', $parentFieldset).prop('disabled', true);
+        // }
+    });
 
     $('.checkbox-cell').on('change', (e) => {
         console.log('validate');
