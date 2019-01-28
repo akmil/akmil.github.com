@@ -122,8 +122,14 @@
                               <button type="button" class="btn btn-success js_btn-show-task-runs">Запущеные</button>
                               <button class="btn btn-warning js_btn-show-task-stopped">Остановленные</button>
                               <hr>
-                              <ul class="follow-tasks-runs list-unstyled"></ul>
-                              <ul class="follow-tasks-stopped list-unstyled"></ul>
+                              <div class="follow-tasks-runs--box">
+                                  <h3>Запущеные</h3>
+                                  <ul class="follow-tasks-runs list-unstyled"></ul>
+                              </div>
+                              <div class="follow-tasks-stopped--box d-none">
+                                  <h3>Остановленные</h3>
+                                  <ul class="follow-tasks-stopped list-unstyled"></ul>
+                              </div>
                           </div>        <div class="col-md-9 col-sm-12 js_add-new-task">
                               <div class="row">
                                   <div class="col-md-6 col-sm-6 js_task-types">

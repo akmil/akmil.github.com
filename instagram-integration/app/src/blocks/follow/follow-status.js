@@ -3,8 +3,8 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 
 const $btnShowRuns = $('.js_btn-show-task-runs');
 const $btnShowStopped = $('.js_btn-show-task-stopped');
-const $taskListRuns = $('.follow-tasks-runs');
-const $taskListStopped = $('.follow-tasks-stopped');
+const $taskListRuns = $('.follow-tasks-runs--box');
+const $taskListStopped = $('.follow-tasks-stopped--box');
 const hideCls = 'd-none';
 const showCls = 'd-block';
 
@@ -26,7 +26,7 @@ function fillListMeta($list, dataArray, isRuns) {
                         ${(item.subtype) ? `<p class="mt-0 mb-1">${item.subtype}</p>` : ''}
                     </div>-->
                     <div class="col task-progress">
-                        <p class="small mb-2">reason</p>
+                        <p class="small mb-1">reason</p>
                         <p class="mb-1">${item.status.reason}</p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ function fillListMeta($list, dataArray, isRuns) {
                 </div>
             </li>`).appendTo($list);
         }
-        if (!$list.length) {
+        if (!$('li', $list).length) {
             $(`<li class="list-group-item py-2">
                 В этом разделе нет ни одной задачи.
             </li>`).appendTo($list);
@@ -73,8 +73,6 @@ function initHandlers() {
  * Init
  */
 export function init() {
-    $taskListStopped.addClass(hideCls);
-    $taskListRuns.addClass(hideCls);
     getTasksData();
     initHandlers();
 }
