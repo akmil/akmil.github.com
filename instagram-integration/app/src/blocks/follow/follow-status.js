@@ -11,8 +11,7 @@ const showCls = 'd-block';
 function fillListMeta($list, dataArray, isRuns) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
-    $list.empty().addClass('border-light-color');
-    $(`<li class="list-group-item py-2"><h3>${(isRuns) ? 'Запущеные' : 'Остановленные'}</h3></li>`).appendTo($list);
+    $list.empty();
     items.forEach((item) => {
         if (item.type !== 'FOLLOWING') {
             return;
@@ -37,6 +36,11 @@ function fillListMeta($list, dataArray, isRuns) {
                 <div class="col task-progress">
                     <p class="mt-0 mb-1 name">Runs - ${item.status.reason}</p>
                 </div>
+            </li>`).appendTo($list);
+        }
+        if (!$list.length) {
+            $(`<li class="list-group-item py-2">
+                В этом разделе нет ни одной задачи.
             </li>`).appendTo($list);
         }
     });
