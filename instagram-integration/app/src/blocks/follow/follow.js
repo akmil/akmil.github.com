@@ -1,5 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
+import 'brutusin-json-forms';
 
 const state = {
     username: '',
@@ -8,7 +9,8 @@ const state = {
     }
 };
 
-function fillList($list, dataArray) {
+/*
+function fillListMeta($list, dataArray) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty().addClass('border-light-color');
@@ -26,7 +28,7 @@ function fillList($list, dataArray) {
                     </div>
                     <div class="col task-progress">
                         ${(item.status) ? `<p class="mt-0 mb-1 name">Статус - ${item.status.state}</p>` : ''}
-                    </div>  
+                    </div>
                     <div class="col task-progress">
                         ${(item.progress)
                             ? `<p class="mt-0 mb-1 name">Количество - ${item.progress.count}</p>
@@ -35,69 +37,47 @@ function fillList($list, dataArray) {
                 </div>
             </li>`).appendTo($list);
     });
-}
+}*/
 
-function fillListTypes($list, data) {
-    $list.empty().addClass('border-light-color');
-    $('<li class="list-group-item py-2"><h3>UserTaskManager -> getTaskTypes</h3></li>').appendTo($list);
-
+function fillListTypes($wrapper, data) {
     const structureObj = data['structure'];
-    for (const item in structureObj) {
+
+    $wrapper.empty().addClass('border-light-color');
+    $('<div class="">Тип задания</div><select name="task-type" id="task-types"></select>').appendTo($wrapper);
+    for (const type in structureObj) {
         // console.log('structure: ' + item);
-        if (Object.prototype.hasOwnProperty.call(structureObj, item)) {
-            console.log(`obj.${item} = ${structureObj[item]}`);
-            $(`<li class="list-group-item py-2">
-                <div class="media-body d-flex">
-                    <div class="col task-progress">
-                        ${(structureObj[item]) ? `<p class="mt-0 mb-1 name">${item} -- ${structureObj[item]}</p>` : ''}
-                    </div>
-                </div>
-            </li>`).appendTo($list);
+        if (Object.prototype.hasOwnProperty.call(structureObj, type)) {
+            $(`<option class="list-group-item py-2" ${(type !== 'FOLLOWING') ? 'disabled="disabled"' : ''}
+                value = "${JSON.stringify({type, subtype: structureObj[type]})}">
+                ${type}
+            </option>`).appendTo($('#task-types'));
         }
     }
-
 }
 
 function getTasksData() {
-    UserTaskManager.getMetadata().then((result) => {
-        console.log(result);
-        if (result.status.state === 'ok') {
-            fillList($('.js_task-meta-list'), result.data.meta);
-        }
-    });
+    // UserTaskManager.getMetadata().then((result) => {
+    //     console.log(result);
+    //     if (result.status.state === 'ok') {
+    //         fillListMeta($('.js_task-meta-list'), result.data.meta);
+    //     }
+    // });
 
-    UserTaskManager.getTaskTypes().then((result) => {
-        console.log('getTaskTypes');
-        if (result.status.state === 'ok') {
-            console.log(result);
-            fillListTypes($('.js_task-types'), result.data);
-        }
-    });
-
-    // todo: find out URL
-    UserTaskManager.getDefaultConfigs().then((result) => {
-        console.log('getDefaultConfigs');
-        if (result.status.state === 'ok') {
-            console.log(result);
-        }
-    });
-
-    UserTaskManager.postStartFollowingList().then((result) => {
-        console.log('postStartFollowingList', result);
-        if (result.status.state === 'ok') {
-            console.log(JSON.stringify(result));
-            fillListTypes($('.js_task-start-following'), result.data);
-        }
-    });
+    // UserTaskManager.postStartFollowingList().then((result) => {
+    //     console.log('postStartFollowingList', result);
+    //     if (result.status.state === 'ok') {
+    //         console.log(JSON.stringify(result));
+    //         fillListTypes($('.js_task-start-following'), result.data);
+    //     }
+    // });
 }
 
 function getDataStep2(usersName) {
     console.log(usersName);
-    UserTaskManager.getMetadata();
     getTasksData();
 }
 
-function getDataStep3(usersArr) {
+function getDataStep3() {
     const users = $('#followers').val()
         .trim()
         .replace(/ /g, '')
@@ -107,25 +87,63 @@ function getDataStep3(usersArr) {
     state['user_custom_config'] = {
         users
     };
+    const fillSpeedList = function ($wrapper, data) {
+        const taskModes = data.cfg && data.cfg.task_modes;
+        const radioBtnReducer = function (item) {
+            switch (item) {
+                case 'AGGRESSIVE':
+                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
+                // break;
+                case 'MIDDLE':
+                    return (`<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);
+                // break;
+                case 'SAFE':
+                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> 9 подписок в час</label>`;
+                // break;
+                default:
+                    console.log('default', item);
+            }
+        };
+        console.log('draw speed radioBtn');
+        $wrapper.empty();
+        for (const item in taskModes) {
+            // console.log('structure: ' + item);
+            if (Object.prototype.hasOwnProperty.call(taskModes, item)) {
+                $(`<div class="custom-control custom-radio">
+                ${radioBtnReducer(item)}
+            </div>`).appendTo($wrapper);
+            }
+        }
+    };
+
+    // draw criteria
+    UserTaskManager.getDefaultConfigs().then((result) => {
+        console.log('getDefaultConfigs');
+        if (result.status.state === 'ok') {
+            // console.log(result);
+            fillSpeedList($('.js_follow-speed'), result.data.found);
+        }
+    });
 }
 
-function stepReducer(stepNumbre) {
-    console.log('reduce', stepNumbre);
-    switch (stepNumbre) {
+function stepReducer(stepNumber) {
+    switch (stepNumber) {
         case 0:
             getDataStep2(state.username); // [...new Set(state.username)]
-            console.log(state);
+            // console.log(state);
             break;
         case 1:
             getDataStep3();
-            console.log(state);
             break;
         case 2:
-            console.log(stepNumbre);
-            console.log(state);
+            // console.log(stepNumber);
+            // console.log(state);
             break;
         default:
-            console.log('default', stepNumbre);
+            console.log('default', stepNumber);
     }
 }
 
@@ -133,27 +151,23 @@ function stepReducer(stepNumbre) {
  * Init header
  */
 function initSteps() {
+    const $form = $('.follow-form');
     $('.js_profile-user-follow>.container').removeClass('container');
 
-    $('.registration-form fieldset:first-child').fadeIn('slow');
+    $form.find('fieldset:first-child').fadeIn('slow');
 
-    $('.registration-form input[type="text"]').on('focus', function () {
+    $form.find('input[type="text"]').on('focus', function () {
         $(this).removeClass('input-error');
     });
 
     // next step
-    $('.registration-form .btn-next').on('click', function () {
+    $form.find('.btn-next').on('click', function () {
         const parent_fieldset = $(this).parents('fieldset');
         let next_step = true;
-
         const radioBtnActive = parent_fieldset.find('input[name="userAccountRadio"]:checked');
-        // const value = $(this).attr('value');
-        // state.username.length = 0;
+
         if (radioBtnActive.length > 0) {
             state.username = radioBtnActive.parents('li').data('username');
-            // radioBtnActive.each(function () {
-            //     state.username.push($(this).parents('li').data('username'));
-            // });
         }
         stepReducer(parent_fieldset.index(), state);
 
@@ -175,7 +189,7 @@ function initSteps() {
     });
 
     // previous step
-    $('.registration-form .btn-previous').on('click', function () {
+    $form.find('.btn-previous').on('click', function () {
         // state.username = [...new Set(state.username)];
         $(this).parents('fieldset').fadeOut(400, function () {
             $(this).prev().fadeIn();
@@ -188,17 +202,14 @@ function initSteps() {
         state.user_default_config = {
             task_mode: value.toUpperCase()
         };
-        // if ($(this).is(':checked')) {
-        //     console.log('its checked');
-        // }
     });
 
     // submit
-    $('.registration-form').on('submit', function (e) {
+    $form.on('submit', function (e) {
         const genderVal = $(this).find('.select-gender option:selected').val();
         state.user_default_config = {
             ...state.user_default_config,
-            following_criteria: {
+            criteria: {
                 gender: genderVal.toUpperCase()
             }
         };
@@ -220,10 +231,10 @@ function initSteps() {
             limit.focus();
             return false;
         }
-        state['user_default_config'].following_criteria = {
+        state['user_default_config'].criteria = {
             limit: limit.value,
-            'unfollow_then': true,
-            'follow_on_closed_profiles': true,
+            'unfollow_then': !!$('#unfollow_then:checked').length,
+            'follow_on_closed_profiles': !!$('#follow_on_closed_profiles:checked').length,
             have_posts,
             have_followers,
             have_followings
@@ -238,10 +249,6 @@ function initSteps() {
             }
         });
 
-        // state.id = {
-        //     type: 'FOLLOWING',
-        //     subtype: 'FOLLOWING_LIST'
-        // };
         state.type = 'FOLLOWING';
         state.subtype = 'FOLLOWING_LIST';
         console.log('make request**  post: StartFollowingList', state);
@@ -249,6 +256,8 @@ function initSteps() {
         UserTaskManager.postStartFollowingList(state).then((result) => {
             if (result.status.state === 'ok') {
                 console.log(JSON.stringify(result));
+                $('.form-submit-finish').addClass('d-block')
+                    .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
             }
         });
 
@@ -273,19 +282,20 @@ function modifyAccList() {
         </div>`;
     const $accountsList = $('.accounts-list');
     const $li = $accountsList.find('.media-body');
+
     for (let i = 0; i < $li.length; i++) {
         $($li[i]).append(radioBtn(i));
     }
+    UserTaskManager.getTaskTypes().then((result) => {
+        if (result.status.state === 'ok') {
+            // console.log(result);
+            fillListTypes($('.js_task-types'), result.data);
+        }
+    });
 
     $('.js_user-radio input[type=radio]').on('click', function () {
         const $parentFieldset = $(this).parents('fieldset');
-        // const $parentFieldset = $accountsList.parents('fieldset');
         $('.btn-next', $parentFieldset).prop('disabled', false);
-        // if ($('div.custom-checkbox input:checked').length > 0) {
-        //     $('.btn-next', $parentFieldset).prop('disabled', false);
-        // } else {
-        //     $('.btn-next', $parentFieldset).prop('disabled', true);
-        // }
     });
 
     $('.checkbox-cell').on('change', (e) => {
@@ -293,13 +303,75 @@ function modifyAccList() {
         // updateStatus();
     });
 }
-// function initHandlers(){}
+
+/* working demo : http://brutusin.org/json-forms/#13
+function formFromJson() {
+    const schema = {
+        "type": "object",
+        "properties": {
+            "prop1": {
+                "type": "integer"
+            },
+            "prop2": {
+                "type": "integer",
+                "required": true
+            },
+            "prop3": {
+                "type": "integer",
+                "required": true
+            },
+            "composite1": {
+                "type": "object",
+                "properties": {
+                    "nested1": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "nested2": {
+                        "type": "number",
+                        "required": true
+                    }
+                },
+                "required": [
+                    "nested1",
+                    "nested2"
+                ]
+            },
+            "composite2": {
+                "type": "object",
+                "properties": {
+                    "nested1": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "nested2": {
+                        "type": "number",
+                        "required": true
+                    }
+                },
+                "required": [
+                    "nested1",
+                    "nested2"
+                ]
+            }
+        },
+        "required": [
+            "prop1",
+            "prop2",
+            "composite1"
+        ]
+    };
+    const BrutusinForms = window.brutusin['json-forms'];
+    const bf = BrutusinForms.create(schema);
+    const container = document.getElementById('form1');
+    console.log(window.brutusin);
+    bf.render(container, data);
+}*/
 
 export function init() {
     initSteps();
     if ($('.follow').length) {
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
-            console.log('subscribe');
             modifyAccList();
         });
     }

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -118,8 +118,12 @@
             
                   <div class="assessment-container container follow">
                       <div class="row">
+                          <div class="col-md-6 col-sm-6 js_task-types">
+                          </div>
+                      </div>
+                      <div class="row">
                           <div class="col-md-12 form-box">
-                              <form role="form" name="follow-form" class="registration-form was-validated---" action="javascript:void(0);">
+                              <form role="form" name="follow-form" class="follow-form was-validated---" action="javascript:void(0);">
                   
                                   <fieldset>
                                       <div class="form-top">
@@ -183,18 +187,6 @@
                                           <div class="form-group row col-lg-12">
                                               <label class="col-3 col-form-label">Скорость</label>
                                               <div class="col-9 js_follow-speed">
-                                                  <div class="custom-control custom-radio">
-                                                      <input type="radio" id="safe" name="customRadio" value="safe" class="custom-control-input" checked="checked">
-                                                      <label class="custom-control-label" for="safe"><strong>Безопасный:</strong> 9 подписок в час</label>
-                                                  </div>
-                                                  <div class="custom-control custom-radio">
-                                                      <input type="radio" id="middle" name="customRadio" value="middle" class="custom-control-input">
-                                                      <label class="custom-control-label" for="middle"><strong>Средний:</strong> 18 подписок в час</label>
-                                                  </div>
-                                                  <div class="custom-control custom-radio">
-                                                      <input type="radio" id="agressive" name="customRadio" value="agressive" class="custom-control-input">
-                                                      <label class="custom-control-label" for="agressive"><strong>Агрессивный:</strong> 30 подписок в час</label>
-                                                  </div>
                                               </div>
                                           </div>
                                           <button type="button" class="btn btn-previous">Назад</button>
@@ -250,7 +242,7 @@
                                                       <input type="number" class="form-control" name="have_followers_from" placeholder="have_followers from" id="have_followers-from" min="0" value="30">
                                                   </div>
                                                   <div class="form-group col-md-3 col-sm-3">
-                                                      <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to" id="have_followers-to" min="0" value="999999">
+                                                      <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to" id="have_followers-to" min="0" value="99999">
                                                   </div>
                                               </div>
                                               <div class="row">
@@ -278,10 +270,24 @@
                                           <button type="submit" class="btn">Старт</button>
                                       </div>
                                   </fieldset>
+                                  <div class="form-submit-finish position-absolute d-none">
+                                      <div class="alert alert-success fade show">
+                                          <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                          <h2>Задание создано успешно!</h2>
+                                      </div>
+                                  </div>
                               </form>
                           </div>
                       </div>
                   </div>
+                  
+                  <div id="form1"></div>
+                  
+                  
+                  
+                  
+                  
+                  
                   
                   
                 

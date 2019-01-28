@@ -12,6 +12,7 @@ module.exports = {
     ],
     // 'vendor': './src/vendor.js'
   },
+  node: { fs: 'empty' },
 
   resolve: {
 

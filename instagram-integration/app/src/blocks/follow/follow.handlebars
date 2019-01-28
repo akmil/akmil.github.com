@@ -1,7 +1,12 @@
 <div class="assessment-container container follow">
     <div class="row">
+        <div class="col-md-6 col-sm-6 js_task-types">
+            {{!-- task-types from Ajax--}}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12 form-box">
-            <form role="form" name="follow-form" class="registration-form was-validated---" action="javascript:void(0);">
+            <form role="form" name="follow-form" class="follow-form was-validated---" action="javascript:void(0);">
 
                 <fieldset>
                     <div class="form-top">
@@ -34,13 +39,6 @@
                                     id="followers">
                             </div>
                         </div>
-                        {{!-- task-types --}}
-                        {{!-- 
-                        <ul class="js_task-meta-list list-unstyled"></ul>
-                        <ul class="js_task-types list-unstyled"></ul>
-                        <ul class="js_task-start-following list-unstyled"></ul> 
-                        --}}
-                       {{!-- task-types end! --}}
                         <button type="button" class="btn btn-previous">Назад</button>
                         <button type="button" class="btn btn-next">Дальше</button>
                     </div>
@@ -56,18 +54,7 @@
                         <div class="form-group row col-lg-12">
                             <label class="col-3 col-form-label">Скорость</label>
                             <div class="col-9 js_follow-speed">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="safe" name="customRadio" value="safe" class="custom-control-input" checked>
-                                    <label class="custom-control-label" for="safe"><strong>Безопасный:</strong> 9 подписок в час</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="middle" name="customRadio" value="middle" class="custom-control-input">
-                                    <label class="custom-control-label" for="middle"><strong>Средний:</strong> 18 подписок в час</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="agressive" name="customRadio" value="agressive" class="custom-control-input">
-                                    <label class="custom-control-label" for="agressive"><strong>Агрессивный:</strong> 30 подписок в час</label>
-                                </div>
+                                {{!-- follow-speed from Ajax --}}
                             </div>
                         </div>
                         <button type="button" class="btn btn-previous">Назад</button>
@@ -127,7 +114,7 @@
                                 </div>
                                 <div class="form-group col-md-3 col-sm-3">
                                     <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to"
-                                        id="have_followers-to" min="0" value="999999">
+                                        id="have_followers-to" min="0" value="99999">
                                 </div>
                             </div>
                             <div class="row">
@@ -157,10 +144,44 @@
                         <button type="submit" class="btn">Старт</button>
                     </div>
                 </fieldset>
+                <div class="form-submit-finish position-absolute d-none">
+                    <div class="alert alert-success fade show">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        <h2>Задание создано успешно!</h2>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
+<div id="form1"></div>
+
+<!-- alpaca -->
+<!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>-->
+<!--<link type="text/css" href="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.css" rel="stylesheet"/>-->
+<!--<script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.js"></script>-->
+<!--
+<div id="form1"></div>
+<script type="text/javascript">
+    $("#form1").alpaca({
+        "schema": {
+            "title": "What do you think of Alpaca?",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                },
+                "ranking": {
+                    "type": "string",
+                    "title": "Ranking",
+                    "enum": ['excellent', 'not too shabby', 'alpaca built my hotrod']
+                }
+            }
+        }
+    });
+</script>-->
 
 {{!--<div class="follow-steps">
     <div class="wrapper">
