@@ -100,7 +100,7 @@ $border-radius-follow: 4px;
         color: #888;
     }
 
-    button.btn {
+    button.btn-blue {
         height: 50px;
         margin: 0;
         padding: 0 20px;
@@ -126,12 +126,12 @@ $border-radius-follow: 4px;
         transition: $transition-follow;
     }
 
-    button.btn:hover {
+    button.btn-blue:hover {
         opacity: 0.6;
         color: #fff;
     }
 
-    button.btn:active {
+    button.btn-blue:active {
         outline: 0;
         opacity: 0.6;
         color: #fff;
@@ -140,7 +140,7 @@ $border-radius-follow: 4px;
         box-shadow: none;
     }
 
-    button.btn:focus {
+    button.btn-blue:focus {
         outline: 0;
         opacity: 0.6;
         background: $blue;
@@ -148,61 +148,12 @@ $border-radius-follow: 4px;
         color: #fff;
     }
 
-    button.btn:active:focus,
-    button.btn.active:focus {
+    button.btn-blue:active:focus,
+    button.btn-blue.active:focus {
         outline: 0;
         opacity: 0.6;
         background: $blue;
     ;
-        color: #fff;
-    }
-
-    .btn-link-1 {
-        display: inline-block;
-        height: 50px;
-        margin: 0 5px;
-        padding: 16px 20px 0 20px;
-        background: $blue;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 16px;
-        color: #fff;
-        -moz-border-radius: $border-radius-follow;
-        -webkit-border-radius: $border-radius-follow;
-        border-radius: $border-radius-follow;
-    }
-
-    .btn-link-1:hover,
-    .btn-link-1:focus,
-    .btn-link-1:active {
-        outline: 0;
-        opacity: 0.6;
-        color: #fff;
-    }
-
-    .btn-link-2 {
-        display: inline-block;
-        height: 50px;
-        margin: 0 5px;
-        padding: 15px 20px 0 20px;
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid #fff;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 16px;
-        color: #fff;
-        -moz-border-radius: $border-radius-follow;
-        -webkit-border-radius: $border-radius-follow;
-        border-radius: $border-radius-follow;
-    }
-
-    .btn-link-2:hover,
-    .btn-link-2:focus,
-    .btn-link-2:active,
-    .btn-link-2:active:focus {
-        outline: 0;
-        opacity: 0.6;
-        background: rgba(0, 0, 0, 0.3);
         color: #fff;
     }
 

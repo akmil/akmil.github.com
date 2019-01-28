@@ -1,3 +1,4 @@
+import * as followStatus from './follow-status';
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import 'brutusin-json-forms';
@@ -9,7 +10,6 @@ const state = {
     }
 };
 
-/*
 function fillListMeta($list, dataArray) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
@@ -21,23 +21,23 @@ function fillListMeta($list, dataArray) {
         $(`<li class="list-group-item py-2" data-username="${item.type}">
                 <div class="media-body d-flex">
                     <div class="col task-type">
-                        ${(item.type) ? `<h4 class="mt-0 mb-1 name">${item.type}</h4>` : ''}
+                        ${(item.task_id) ? `<p class="mt-0 mb-1 name">${item.task_id}</p>` : ''}
                     </div>
                     <div class="col task-subtype">
                         ${(item.subtype) ? `<p class="mt-0 mb-1 name">${item.subtype}</p>` : ''}
                     </div>
                     <div class="col task-progress">
-                        ${(item.status) ? `<p class="mt-0 mb-1 name">Статус - ${item.status.state}</p>` : ''}
+                        ${(item.status.state === 'STOPPED') ? `<p class="mt-0 mb-1 name">Остановлено - ${item.status.reason}</p>` : ''}
                     </div>
-                    <div class="col task-progress">
+                    <!--<div class="col task-progress">
                         ${(item.progress)
                             ? `<p class="mt-0 mb-1 name">Количество - ${item.progress.count}</p>
                                 <p class="mt-0 mb-1 name">Процент - ${item.progress.percent}</p>` : ''}
-                    </div>
+                    </div>-->
                 </div>
             </li>`).appendTo($list);
     });
-}*/
+}
 
 function fillListTypes($wrapper, data) {
     const structureObj = data['structure'];
@@ -56,12 +56,12 @@ function fillListTypes($wrapper, data) {
 }
 
 function getTasksData() {
-    // UserTaskManager.getMetadata().then((result) => {
-    //     console.log(result);
-    //     if (result.status.state === 'ok') {
-    //         fillListMeta($('.js_task-meta-list'), result.data.meta);
-    //     }
-    // });
+    UserTaskManager.getMetadata().then((result) => {
+        console.log(result);
+        if (result.status.state === 'ok') {
+            fillListMeta($('.follow-tasks-list'), result.data.meta);
+        }
+    });
 
     // UserTaskManager.postStartFollowingList().then((result) => {
     //     console.log('postStartFollowingList', result);
@@ -369,6 +369,7 @@ function formFromJson() {
 }*/
 
 export function init() {
+    followStatus.init();
     initSteps();
     if ($('.follow').length) {
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
