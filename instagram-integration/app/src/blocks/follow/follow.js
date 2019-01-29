@@ -62,14 +62,6 @@ function getTasksData() {
             fillListMeta($('.follow-tasks-list'), result.data.meta);
         }
     });
-
-    // UserTaskManager.postStartFollowingList().then((result) => {
-    //     console.log('postStartFollowingList', result);
-    //     if (result.status.state === 'ok') {
-    //         console.log(JSON.stringify(result));
-    //         fillListTypes($('.js_task-start-following'), result.data);
-    //     }
-    // });
 }
 
 function getDataStep2(usersName) {
@@ -261,6 +253,12 @@ function initSteps() {
             }
         });
 
+    });
+
+    // alert close
+    $('.form-submit-finish .close').on('click', function () {
+        $('#v-pills-runned-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
 

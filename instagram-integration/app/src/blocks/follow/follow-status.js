@@ -1,5 +1,6 @@
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
+import {CONST} from '../../common/js-services/consts';
 
 function fillListMeta($list, dataArray, isRuns) {
     const items = dataArray;
@@ -94,4 +95,7 @@ function getTasksData() {
  */
 export function init() {
     getTasksData();
+    window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
+        getTasksData();
+    });
 }

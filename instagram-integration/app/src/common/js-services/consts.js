@@ -45,6 +45,9 @@ export const CONST = {
         },
         instagramAccouns: {
             INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered'
+        },
+        tasks: {
+            NEW_TASK_CREATED: 'new_task_created'
         }
     },
     getPath(name) {
