@@ -39,6 +39,34 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
+    stopFollowingList(taskId, cbError) {
+        const setting = {
+            ...this.settingPost,
+            method: 'PUT',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        const url = CONST.getPath('instagramTaskManager_putStopFollowingList', taskId);
+        return this.network.sendRequest(url,
+            setting, cbError);
+    }
+
+    deleteFollowingList(taskId, cbError) {
+        const setting = {
+            ...this.settingPost,
+            method: 'DELETE',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        const url = CONST.getPath('instagramTaskManager_delRemoveFollowingList', taskId);
+        return this.network.sendRequest(url,
+            setting, cbError);
+    }
+
     getDefaultConfigs(cbError) {
         const details = {
             STRATEGY_TYPE: 'FOLLOWING',
@@ -54,39 +82,11 @@ class UserTaskManager {
             ...this.settingPost,
             headers: {
                 ...this.settingPost.headers,
-                'token': this.getToken()
+                'token': this.getToken(),
+                'X-Auth-Token': 'e2f4336abea440489c51c5c10294ea12'
             }
         };
         setting.body = JSON.stringify(body);
-        // JSON.stringify({
-        //     'username': 'brandylenhart',
-        //     'type': 'FOLLOWING',
-        //     'subtype': 'FOLLOWING_LIST',
-        //     'user_default_config': {
-        //         'task_mode': 'SAFE',
-        //         'following_criteria': {
-        //             'limit': 7500,
-        //             'unfollow_then': true,
-        //             'follow_on_closed_profiles': true,
-        //             'have_posts': {
-        //                 'from': 3,
-        //                 'to': 999999
-        //             },
-        //             'have_followers': {
-        //                 'from': 30,
-        //                 'to': 99999
-        //             },
-        //             'have_followings': {
-        //                 'from': 0,
-        //                 'to': 999
-        //             },
-        //             'gender': 'ANY'
-        //         }
-        //     },
-        //     'user_custom_config': {
-        //         'users': [12496926, 251400884]
-        //     }
-        // });
 
         return this.network.sendRequest(`${CONST.getPath('instagramTaskManager_postStartFollowingList')}`,
             setting, cbError);

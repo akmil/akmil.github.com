@@ -17,7 +17,7 @@ function fillListMeta($list, dataArray, isRuns) {
             return;
         }
         if (item.status.state === 'STOPPED' && !isRuns) {
-            $(`<li class="list-group-item p-0" data-username="${item.type}">
+            $(`<li class="list-group-item p-0" data-username="${item.type}" data-task-id="${item.task_id}">
                 <div class="media-body d-flex">
                     <div class="col task-type">
                         ${(item.task_id) ? `<p class="badge badge-secondary my-1">${item.task_id}</p>` : ''}
@@ -25,7 +25,8 @@ function fillListMeta($list, dataArray, isRuns) {
                         <p class="small my-1">reason</p>
                         <p class="my-1">${item.status.reason}</p>
                     </div>
-                    </div>
+                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
+                </div>
                     <!--<div class="col task-subtype">
                         ${(item.subtype) ? `<p class="mt-0 mb-1">${item.subtype}</p>` : ''}
                     </div>-->                    
@@ -60,6 +61,7 @@ function fillListMeta($list, dataArray, isRuns) {
     });
 }
 
+/* eslint-disable no-use-before-define */
 function initHandlers() {
     const $btnStopTask = $('.js_btn-stop-task');
     const $btnDelTask = $('.js_btn-delete-task');
@@ -71,17 +73,25 @@ function initHandlers() {
     $btnStopTask.on('click', (e) => {
         const taskId = getTaskID(e);
         console.log('STOP Task id', taskId);
+        UserTaskManager.stopFollowingList(taskId).then((result) => {
+            console.log(result);
+            getTasksData();
+        });
     });
 
     $btnDelTask.on('click', (e) => {
         const taskId = getTaskID(e);
         console.log('DELETE id', taskId);
+        UserTaskManager.deleteFollowingList(taskId).then((result) => {
+            console.log(result);
+            getTasksData();
+        });
     });
 }
 
 function getTasksData() {
     UserTaskManager.getMetadata().then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.status.state === 'ok') {
             fillListMeta($('.follow-tasks-runs'), result.data.meta, 'isRuns');
             fillListMeta($('.follow-tasks-stopped'), result.data.meta);
