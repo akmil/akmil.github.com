@@ -2,6 +2,7 @@ import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
+import viewUtils from '../../common/js-services/view';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
@@ -100,7 +101,7 @@ function fillList($list, dataArray, isAppentPrevMsg) {
                     <p class="chat-username text-muted">${message.username}</p>
                     ${insertMsg(message.value, message.type)}
                 </div>
-                    <small class="chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
+                    <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
             </li>`);
             addToList(isAppentPrevMsg, $li, cList);
@@ -108,7 +109,7 @@ function fillList($list, dataArray, isAppentPrevMsg) {
             const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
                 <div class="d-flex justify-content-end">
                     ${insertMsg(message.value, message.type)}
-                    <small class="pull-right chat-time-text">${UserConversation.getFormattedDateUtil(message.timestamp)}</small>
+                    <small class="pull-right chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`);
             addToList(isAppentPrevMsg, $li, cList);

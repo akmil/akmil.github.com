@@ -369,9 +369,9 @@ function formFromJson() {
 }*/
 
 export function init() {
-    followStatus.init();
-    initSteps();
     if ($('.follow').length) {
+        followStatus.init();
+        initSteps();
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
         });
