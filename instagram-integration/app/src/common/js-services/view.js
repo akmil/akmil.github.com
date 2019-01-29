@@ -28,10 +28,36 @@ function viewUtils() {
         /* eslint-enable */
     }
 
+    function getFormattedDateUtil(tStamp, showFullTime) {
+        const date = new Date(tStamp);
+
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let min = date.getMinutes();
+        let sec = date.getSeconds();
+
+        month = (month < 10 ? '0' : '') + month;
+        day = (day < 10 ? '0' : '') + day;
+        hour = (hour < 10 ? '0' : '') + hour;
+        min = (min < 10 ? '0' : '') + min;
+        sec = (sec < 10 ? '0' : '') + sec;
+
+        let str = '';
+        if (!showFullTime) {
+            str = `${hour}:${min}`;
+        } else {
+            str = `${date.getFullYear()}-${month}-${day}_${hour}:${min}:${sec}`;
+        }
+
+        return str;
+    }
+
     return {
         showInfoMessage,
         fillList,
-        isEmail
+        isEmail,
+        getFormattedDateUtil
     };
 }
 

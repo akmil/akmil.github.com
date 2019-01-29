@@ -1,191 +1,47 @@
 <div class="container-fluid follow">
     <div class="row">
-        {{>follow-status}}
-        <div class="col-md-9 col-sm-12 js_add-new-task">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 js_task-types">
-                    {{!-- task-types from Ajax--}}
-                </div>
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-create-task-tab" data-toggle="pill" href="#create-task" role="tab" aria-controls="create-task" aria-selected="false">Создать задание</a>
+                <a class="nav-link" id="v-pills-runned-tab" data-toggle="pill" href="#runned" role="tab" aria-controls="runned" aria-selected="true">Запущенные задание</a>
+                <a class="nav-link" id="v-pills-stopped-tab" data-toggle="pill" href="#stopped-tasks" role="tab" aria-controls="stopped-tasks" aria-selected="true">Остановленые задание</a>
             </div>
-            <div class="row">
-                <div class="col-md-12 form-box">
-                    <form role="form" name="follow-form" class="follow-form was-validated---" action="javascript:void(0);">
-
-                        <fieldset>
-                            <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает аккаунт, с которого будет производиться подписка</h3>
-                                    <p>Шаг 1/4</p>
-                                </div>
-                            </div>
-
-                            <div class="form-bottom">
-                                <div class="profile-user js_profile-user-follow">
-                                    {{> instagram-accounts-list}}
-                                </div>
-                                <button type="button" class="btn btn-blue btn-next" disabled="disabled">Дальше</button>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает на кого подписываться</h3>
-                                    <p>Шаг 2/4</p>
-                                </div>
-                            </div>
-                            <div class="form-bottom">
-                                
-                                <div class="row">
-                                    <div class="form-group col-md-6 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Введите ИД-пользователей через запятую"
-                                            id="followers">
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-blue btn-previous">Назад</button>
-                                <button type="button" class="btn btn-blue btn-next">Дальше</button>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Скорость</h3>
-                                    <p>Шаг 3/4</p>
-                                </div>
-                            </div>
-                            <div class="form-bottom">
-                                <div class="form-group row col-lg-12">
-                                    <label class="col-3 col-form-label">Скорость</label>
-                                    <div class="col-9 js_follow-speed">
-                                        {{!-- follow-speed from Ajax --}}
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-blue btn-previous">Назад</button>
-                                <button type="button" class="btn btn-blue btn-next">Дальше</button>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Критерии</h3>
-                                    <p>Шаг 4/4</p>
-                                </div>
-                            </div>
-                            <div class="form-bottom">
-                                <div class="row">
-                                    <div class="form-group col-md-6 col-sm-6">
-                                        <label class="" for="limit">limit</label>
-                                        <input type="number" class="form-control" placeholder="limit" name="limit" id="limit" min="0" value="7500">
-                                    </div>
-                                    <div class="form-group col-md-6 col-sm-6">
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="unfollow_then">
-                                                <label class="custom-control-label" for="unfollow_then">unfollow_then</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="follow_on_closed_profiles">
-                                                <label class="custom-control-label" for="follow_on_closed_profiles">follow_on_closed_profiles</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:3px;">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            have_posts
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_posts_from" placeholder="have_posts from"
-                                                id="have_posts-from" min="0" value="3">
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_posts_to" placeholder="have_posts to"
-                                                id="have_posts-to" min="0" value="999999">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            have_followers
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_followers_from" placeholder="have_followers from"
-                                                id="have_followers-from" min="0" value="30">
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to"
-                                                id="have_followers-to" min="0" value="99999">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            have_followings
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_followings_from" placeholder="have_followings from"
-                                                id="have_followings-from" min="0" value="0">
-                                        </div>
-                                        <div class="form-group col-md-3 col-sm-3">
-                                            <input type="number" class="form-control" name="have_followings_to" placeholder="have_followings to"
-                                                id="have_followings-to" min="0" value="999">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-3 col-form-label">Пол</label>
-                                    <select class="form-control select-gender">
-                                        <option value="any">Любой</option>
-                                        <option value="men">Мужской</option>
-                                        <option value="women">Женский</option>
-                                    </select>
-                                </div>
-
-                                <button type="button" class="btn btn-blue btn-previous">Назад</button>
-                                <button type="submit" class="btn btn-blue ">Старт</button>
-                            </div>
-                        </fieldset>
-                        <div class="form-submit-finish position-absolute d-none">
-                            <div class="alert alert-success fade show">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-                                <h2>Задание создано успешно!</h2>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show" id="runned" role="tabpanel" aria-labelledby="v-pills-runned-tab">
+                    <div class="follow-tasks-runs--box">
+                        <h3>Запущеные</h3>
+                        <ul class="follow-tasks-runs list-unstyled"></ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
+                    <div class="follow-tasks-stopped--box">
+                        <h3>Остановленные</h3>
+                        <ul class="follow-tasks-stopped list-unstyled"></ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
+                    <div class="col-md-9 col-sm-12 js_add-new-task">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 js_task-types">
+                                {{!-- task-types from Ajax--}}
                             </div>
                         </div>
-                    </form>
+                        <div class="row">
+                            <div class="col-md-12 form-box">
+                                {{>follow-create-task}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="form1"></div>
+<!--<div id="form1"></div>-->
 
-<!-- alpaca -->
-<!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>-->
-<!--<link type="text/css" href="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.css" rel="stylesheet"/>-->
-<!--<script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.js"></script>-->
-<!--
-<div id="form1"></div>
-<script type="text/javascript">
-    $("#form1").alpaca({
-        "schema": {
-            "title": "What do you think of Alpaca?",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "title": "Name"
-                },
-                "ranking": {
-                    "type": "string",
-                    "title": "Ranking",
-                    "enum": ['excellent', 'not too shabby', 'alpaca built my hotrod']
-                }
-            }
-        }
-    });
-</script>-->
 
 {{!--<div class="follow-steps">
     <div class="wrapper">
