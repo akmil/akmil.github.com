@@ -22,40 +22,40 @@ function fillListMeta($list, dataArray, isRuns) {
                     <div class="col task-type">
                         ${(item.task_id) ? `<p class="badge badge-secondary my-1">${item.task_id}</p>` : ''}
                         <div class="task-progress">
-                        <p class="small my-1">reason</p>
-                        <p class="my-1">${item.status.reason}</p>
-                    </div>
+                            <p class="small my-1">Остановлено</p>
+                            <p class="my-1">${item.status.reason}</p>
+                        </div>
                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-                </div>
+                    </div>
                     <!--<div class="col task-subtype">
                         ${(item.subtype) ? `<p class="mt-0 mb-1">${item.subtype}</p>` : ''}
                     </div>-->                    
                 </div>
             </li>`).appendTo($list);
-        } else if (item.status.state !== 'STOPPED' && isRuns) {
-            $(`<li class="list-group-item py-2" data-task-type="${item.type}">
+        } else if (item.status.state === 'IN_PROGRESS') {
+            $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
                 <div class="col task-progress">
-                    <p class="mt-0 mb-1 name">Runs - ${item.status.reason}</p>
+                    <p class="mt-0 mb-1 name">В прогрессе : ${item.status.reason}</p>
+                </div>
+            </li>`).appendTo($list);
+        } else if (item.status.state === 'FINISHED' && !isRuns) {
+            $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
+                 <div class="card-block">
+                    <h4 class="card-title">Выполненно</h4>
+                    <div class="text-right">                        
+                        <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
+                    </div>
+                    <span class="text-success">100%</span>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>                    
+                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
                 </div>
             </li>`).appendTo($list);
         }
         if (!$('li', $list).length) {
             $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
-                <p>В этом разделе нет ни одной задачи.</p>
-                <br/>
-                <div class="card-block">
-                    <h4 class="card-title">FOLLOWING (пример прогресса)</h4>
-                    <div class="text-right">
-                        <h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i>${progress.count}</h2>
-                        <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
-                    </div>
-                    <span class="text-success">${progress.percent}%</span>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress.percent}%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <button type="button" class="btn btn-success js_btn-stop-task">Остановить</button>
-                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-                </div>
+                <p>В этом разделе нет ни одной задачи.</p>                
             </li>`).appendTo($list);
         }
     });

@@ -223,11 +223,22 @@ $border-radius-follow: 4px;
         background-color: transparent;
     }
     .accounts-list {
+        li.active {
+            box-shadow: inset 0 0 0 3px $primary;
+        }
+        .media:hover {
+            background-color: transparent;
+        }
         .user-checkpoint {
             display: none;
         }
         .custom-control-label {
             font-size: 1.25rem;
+        }
+        &--label-wrapper {
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
     .custom-control-label {

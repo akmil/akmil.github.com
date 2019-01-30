@@ -57,7 +57,6 @@ function fillListTypes($wrapper, data) {
 
 function getTasksData() {
     UserTaskManager.getMetadata().then((result) => {
-        console.log(result);
         if (result.status.state === 'ok') {
             fillListMeta($('.follow-tasks-list'), result.data.meta);
         }
@@ -99,7 +98,7 @@ function getDataStep3() {
                     console.log('default', item);
             }
         };
-        console.log('draw speed radioBtn');
+        // console.log('draw speed radioBtn');
         $wrapper.empty();
         for (const item in taskModes) {
             // console.log('structure: ' + item);
@@ -113,7 +112,7 @@ function getDataStep3() {
 
     // draw criteria
     UserTaskManager.getDefaultConfigs().then((result) => {
-        console.log('getDefaultConfigs');
+        // console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
             // console.log(result);
             fillSpeedList($('.js_follow-speed'), result.data.found);
@@ -274,15 +273,21 @@ function fixStepIndicator(n) {
 }*/
 
 function modifyAccList() {
-    const radioBtn = (idx) => `<div class="col custom-control custom-radio js_user-radio">
-            <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
-            <label class="custom-control-label" for="customRadio-${idx}">Подписаться</label>
+    // const radioBtn = (idx) => `<div class="col custom-control custom-radio js_user-radio">
+    //         <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
+    //         <label class="custom-control-label" for="customRadio-${idx}">Подписаться</label>
+    //     </div>`;
+    const radioBtnAppend = (idx) => `<div class="">
+            <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input d-none" value="">
         </div>`;
+    const radioBtnWrap = (idx) => `<label class="accounts-list--label-wrapper col mb-0 media py-3" for="customRadio-${idx}"></label>`;
     const $accountsList = $('.accounts-list');
-    const $li = $accountsList.find('.media-body');
+    const $li = $accountsList.find('li.media');
+    $li.addClass('js_user-radio').removeClass('py-3 media');
 
     for (let i = 0; i < $li.length; i++) {
-        $($li[i]).append(radioBtn(i));
+        // $($li[i]).append(radioBtn(i));
+        $($li[i]).wrapInner(radioBtnWrap(i)).append(radioBtnAppend(i));
     }
     UserTaskManager.getTaskTypes().then((result) => {
         if (result.status.state === 'ok') {
@@ -291,8 +296,10 @@ function modifyAccList() {
         }
     });
 
-    $('.js_user-radio input[type=radio]').on('click', function () {
+    $('.js_user-radio').on('click', 'input[type=radio]', function (e) {
         const $parentFieldset = $(this).parents('fieldset');
+        $('li.active', $parentFieldset).removeClass('active');
+        $(this).closest('li').addClass('active');
         $('.btn-next', $parentFieldset).prop('disabled', false);
     });
 
