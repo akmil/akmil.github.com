@@ -256,6 +256,7 @@ function initSteps() {
 
     // alert close
     $('.form-submit-finish .close').on('click', function () {
+        // $(this).closest('form-submit-finish').removeClass('d-block');
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
