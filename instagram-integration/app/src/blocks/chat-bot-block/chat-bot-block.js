@@ -62,7 +62,10 @@ function initSteps() {
             'username': 'the_rostyslav',
             'type': 'CHAT_BOT',
             'subtype': 'DEFAULT_CHAT_BOT',
-            'text_forms': reqBody
+            'user_default_config': {},
+            'user_custom_config': {
+                'text_forms': reqBody
+            }
         };
 
         console.log('make request here**', nReqBody);
