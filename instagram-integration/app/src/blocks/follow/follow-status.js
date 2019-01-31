@@ -7,12 +7,7 @@ function fillListMeta($list, dataArray, isRuns) {
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
     items.forEach((item) => {
-        const progress = {
-            count: 1,
-            index: 0,
-            percent: 55,
-            timestamp: 1548669507658
-        };
+        const progress = item.progress;
         if (item.type !== 'FOLLOWING') {
             return;
         }

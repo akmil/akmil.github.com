@@ -77,7 +77,7 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
-    postStartFollowingList(body, cbError) {
+    postStartFollowingList(body, cbError, path) {
         const setting = {
             ...this.settingPost,
             headers: {
@@ -87,9 +87,15 @@ class UserTaskManager {
             }
         };
         setting.body = JSON.stringify(body);
+        const url = path ? `${CONST.getPath(path)}` : `${CONST.getPath('instagramTaskManager_postStartFollowingList')}`;
 
-        return this.network.sendRequest(`${CONST.getPath('instagramTaskManager_postStartFollowingList')}`,
+        return this.network.sendRequest(url,
             setting, cbError);
+    }
+
+    postStartChatBot(body, cbError) {
+        const path = 'instagramTaskManager_postStartChatBot';
+        this.postStartFollowingList(body, cbError, path);
     }
 }
 

@@ -16,7 +16,9 @@ export const CONST = {
         instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {STRATEGY_TYPE}/subtype/{STRATEGY_SUBTYPE}
         instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task',
         instagramTaskManager_putStopFollowingList: id => `instagram-task-manager/task/${id}`,
-        instagramTaskManager_delRemoveFollowingList: id => `instagram-task-manager/task/${id}`
+        instagramTaskManager_delRemoveFollowingList: id => `instagram-task-manager/task/${id}`,
+        instagramTaskManager_postStartChatBot: 'instagram-task-manager/task'
+
     },
     user: {
         email: '',
