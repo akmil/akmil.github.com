@@ -11,7 +11,7 @@ import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
 import * as follow from './blocks/follow/follow';
-// import * as followSteps from './blocks/follow/follow-using-steps';
+import * as chatBot from './blocks/chat-bot-block/chat-bot-block';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -50,8 +50,7 @@ const init = () => {
     follow.init();
     instagramAccounts.init();
     messages.init();
-
-    // followSteps.init();
+    chatBot.init();
 };
 
 (() => init())();

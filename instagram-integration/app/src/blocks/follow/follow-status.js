@@ -38,7 +38,7 @@ function fillListMeta($list, dataArray, isRuns) {
                     <p class="mt-0 mb-1 name">В прогрессе : ${item.status.reason}</p>
                 </div>
             </li>`).appendTo($list);
-        } else if (item.status.state === 'FINISHED' && !isRuns) {
+        } else if ((item.status.state === 'FINISHED' || item.status.state === 'IN_PROGRESS') && !isRuns) {
             $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
                  <div class="card-block">
                     <h4 class="card-title">Выполненно</h4>
