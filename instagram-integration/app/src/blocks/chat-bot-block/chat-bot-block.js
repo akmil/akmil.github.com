@@ -35,45 +35,51 @@ function fillListTypes($wrapper, data) {
  * Init header
  */
 function initSteps() {
-  const $form = $('.chat-bot-form');
-  const textRow = $('.chat-bot-text-fields');
+    const $form = $('.chat-bot-form');
+    const textRow = $('.chat-bot-text-fields');
 
-  $('.js_add-chat-bot').on('click', (e) => {
-    console.log('click');
-    // $(textRow).insertAfter($('.chat-bot-text-fields'));
-    $('.chat-bot-text-fields:first-child').clone().insertBefore(textRow);
-  });
-  // submit
-  $form.on('submit', function (e){
-  const keyWords = $('.chat-bot-text-fields textarea.chat-words').val()
-    .trim()
-    .replace(/ /g, '')
-    .split(',')
-    .filter(i => i.length > 0);
-  const answer = $('.chat-bot-text-fields textarea.chat-messages').val();
+    $('.js_add-chat-bot').on('click', (e) => {
+        console.log('click');
+        const texRowClone = $('.chat-bot-text-fields:first-child').clone();
+        texRowClone.insertBefore(textRow);
+    });
+    // submit
+    $form.on('submit', function (e) {
+        const fields = $('.chat-bot-text-fields');
+        const keyWords = $el => $el.val()
+            .trim()
+            .replace(/ /g, '')
+            .split(',')
+            .filter(i => i.length > 0);
+        const reqBody = [];
+        fields.each((idx, item) => {
+            const keyWord = keyWords($(item).find('textarea.chat-words'));
+            const answer = $(item).find('textarea.chat-messages').val();
+            reqBody.push({'key_word': keyWord, answer});
+        });
 
-    console.log('make request here**', {keyWords, answer});
+        console.log('make request here**', reqBody);
 
-    // UserTaskManager.postStartFollowingList(state).then((result) => {
-    //     if (result.status.state === 'ok') {
-    //         console.log(JSON.stringify(result));
-    //         $('.form-submit-finish').addClass('d-block')
-    //             .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
-    //     }
-    // });
+        // UserTaskManager.postStartFollowingList(state).then((result) => {
+        //     if (result.status.state === 'ok') {
+        //         console.log(JSON.stringify(result));
+        //         $('.form-submit-finish').addClass('d-block')
+        //             .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
+        //     }
+        // });
 
-  });
+    });
 
-  // alert close
-  $('.form-submit-finish .close').on('click', function () {
-    // $(this).closest('form-submit-finish').removeClass('d-block');
-    $('#v-pills-runned-tab').trigger('click');
-    window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
-  });
+    // alert close
+    $('.form-submit-finish .close').on('click', function () {
+        // $(this).closest('form-submit-finish').removeClass('d-block');
+        $('#v-pills-runned-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+    });
 }
 
 export function init() {
-  if ($('.chat-bot-form').length) {
-    initSteps();
-  }
+    if ($('.chat-bot-form').length) {
+        initSteps();
+    }
 }
