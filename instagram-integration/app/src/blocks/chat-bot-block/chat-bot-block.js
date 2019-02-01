@@ -35,24 +35,24 @@ function fillListTypes($wrapper, data) {
  * Init header
  */
 function initSteps() {
-  const $form = $('.chat-bot-form');
-  const textRow = $('.chat-bot-text-fields');
+    const $form = $('.chat-bot-form');
+    const textRow = $('.chat-bot-text-fields');
 
-  $('.js_add-chat-bot').on('click', (e) => {
-    console.log('click');
+    $('.js_add-chat-bot').on('click', (e) => {
+        console.log('click');
     // $(textRow).insertAfter($('.chat-bot-text-fields'));
-    $('.chat-bot-text-fields:first-child').clone().insertBefore(textRow);
-  });
-  // submit
-  $form.on('submit', function (e){
-  const keyWords = $('.chat-bot-text-fields textarea.chat-words').val()
-    .trim()
-    .replace(/ /g, '')
-    .split(',')
-    .filter(i => i.length > 0);
-  const answer = $('.chat-bot-text-fields textarea.chat-messages').val();
+        $('.chat-bot-text-fields:first-child').clone().insertBefore(textRow);
+    });
+    // submit
+    $form.on('submit', function (e) {
+        const keyWords = $('.chat-bot-text-fields textarea.chat-words').val()
+        .trim()
+        .replace(/ /g, '')
+        .split(',')
+        .filter(i => i.length > 0);
+        const answer = $('.chat-bot-text-fields textarea.chat-messages').val();
 
-    console.log('make request here**', {keyWords, answer});
+        console.log('make request here**', {keyWords, answer});
 
     // UserTaskManager.postStartFollowingList(state).then((result) => {
     //     if (result.status.state === 'ok') {
@@ -62,18 +62,18 @@ function initSteps() {
     //     }
     // });
 
-  });
+    });
 
-  // alert close
-  $('.form-submit-finish .close').on('click', function () {
-    // $(this).closest('form-submit-finish').removeClass('d-block');
-    $('#v-pills-runned-tab').trigger('click');
-    window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
-  });
+    // alert close
+    $('.form-submit-finish .close').on('click', function () {
+        // $(this).closest('form-submit-finish').removeClass('d-block');
+        $('#v-pills-runned-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+    });
 }
 
 export function init() {
-  if ($('.chat-bot-form').length) {
-    initSteps();
-  }
+    if ($('.chat-bot-form').length) {
+        initSteps();
+    }
 }

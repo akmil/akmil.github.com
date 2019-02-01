@@ -29,8 +29,9 @@ class UserTaskManager {
         return (asHeader) ? {headers: {token: cookieToken}} : cookieToken;
     }
 
-    getMetadata(usersName, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramTaskManager_getMetaData')}`,
+    getMetadata(path, cbError) {
+        const {type, subType} = path;
+        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getTaskByTypes', type, subType)}`,
             this.getToken('asHeader'), cbError);
     }
 

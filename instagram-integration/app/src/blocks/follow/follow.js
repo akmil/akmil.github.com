@@ -14,7 +14,7 @@ function fillListMeta($list, dataArray) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty().addClass('border-light-color');
-    $('<li class="list-group-item py-2"><h3>UserTaskManager -> getMetadata</h3></li>').appendTo($list);
+    $('<li class="list-group-item py-2"><h3>UserTaskManager</h3></li>').appendTo($list);
     items.forEach((item) => {
         // const info = item.info;
         // const checkpoint = item.checkpoint || item;
@@ -55,8 +55,8 @@ function fillListTypes($wrapper, data) {
     }
 }
 
-function getTasksData() {
-    UserTaskManager.getMetadata().then((result) => {
+function getTasksData(path) {
+    UserTaskManager.getMetadata(path).then((result) => {
         if (result.status.state === 'ok') {
             fillListMeta($('.follow-tasks-list'), result.data.meta);
         }
@@ -65,7 +65,11 @@ function getTasksData() {
 
 function getDataStep2(usersName) {
     console.log(usersName);
-    getTasksData();
+    const path = {
+        type: CONST.url.tmTypes.followingT,
+        subType: CONST.url.tmTypes.followingSubT[0]
+    };
+    getTasksData(path);
 }
 
 function getDataStep3() {

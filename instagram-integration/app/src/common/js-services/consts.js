@@ -1,5 +1,11 @@
 export const CONST = {
     url: {
+        tmTypes: {
+            followingT: 'FOLLOWING',
+            followingSubT: ['FOLLOWING_LIST'],
+            chatBotT: 'CHAT_BOT',
+            chatBotSubT: ['DEFAULT_CHAT_BOT']
+        },
         base: 'http://api.luxgram.ru/v1/',
         registration: 'registration/basic/',
         login: 'registration/basic/login',
@@ -13,6 +19,7 @@ export const CONST = {
         instagramTaskManager: 'instagram-task-manager/',
         instagramTaskManager_getMetaData: 'instagram-task-manager/meta',
         instagramTaskManager_getTaskTypes: 'instagram-task-manager/task/types',
+        instagramTaskManager_getTaskByTypes: (type, subtype) => `instagram-task-manager/task/type/${type}/subtype/${subtype}`,
         instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {STRATEGY_TYPE}/subtype/{STRATEGY_SUBTYPE}
         instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task',
         instagramTaskManager_putStopFollowingList: id => `instagram-task-manager/task/${id}`,
@@ -55,6 +62,12 @@ export const CONST = {
     getPath(name, id) {
         if (typeof this.url[name] === 'function' && id) {
             return this.url.base + this.url[name](id);
+        }
+        return this.url.base + this.url[name];
+    },
+    getPathTypeSubtype(name, type, subtype) {
+        if (typeof this.url[name] === 'function' && type && subtype) {
+            return this.url.base + this.url[name](type, subtype);
         }
         return this.url.base + this.url[name];
     }
