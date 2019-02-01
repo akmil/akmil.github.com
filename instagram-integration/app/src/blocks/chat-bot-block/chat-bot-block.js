@@ -1,5 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
-// import UserTaskManager from '../../common/js-services/api-task-manager';
+import UserTaskManager from '../../common/js-services/api-task-manager';
+
 /*
 const state = {
     'text_forms': [
@@ -40,27 +41,42 @@ function initSteps() {
 
     $('.js_add-chat-bot').on('click', (e) => {
         console.log('click');
-    // $(textRow).insertAfter($('.chat-bot-text-fields'));
-        $('.chat-bot-text-fields:first-child').clone().insertBefore(textRow);
+        const texRowClone = $('.chat-bot-text-fields:first-child').clone();
+        texRowClone.insertBefore(textRow);
     });
     // submit
     $form.on('submit', function (e) {
-        const keyWords = $('.chat-bot-text-fields textarea.chat-words').val()
-        .trim()
-        .replace(/ /g, '')
-        .split(',')
-        .filter(i => i.length > 0);
-        const answer = $('.chat-bot-text-fields textarea.chat-messages').val();
+        const fields = $('.chat-bot-text-fields');
+        const keyWords = $el => $el.val()
+            .trim()
+            .replace(/ /g, '')
+            .split(',')
+            .filter(i => i.length > 0);
+        const reqBody = [];
+        fields.each((idx, item) => {
+            const keyWord = keyWords($(item).find('textarea.chat-words'));
+            const answer = $(item).find('textarea.chat-messages').val();
+            reqBody.push({'key_words': keyWord, answer});
+        });
+        const nReqBody = {
+            'username': 'the_rostyslav',
+            'type': 'CHAT_BOT',
+            'subtype': 'DEFAULT_CHAT_BOT',
+            'user_default_config': {},
+            'user_custom_config': {
+                'text_forms': reqBody
+            }
+        };
 
-        console.log('make request here**', {keyWords, answer});
+        console.log('make request here**', nReqBody);
 
-    // UserTaskManager.postStartFollowingList(state).then((result) => {
-    //     if (result.status.state === 'ok') {
-    //         console.log(JSON.stringify(result));
-    //         $('.form-submit-finish').addClass('d-block')
-    //             .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
-    //     }
-    // });
+        UserTaskManager.postStartChatBot(nReqBody).then((result) => {
+            if (result.status.state === 'ok') {
+                console.log(JSON.stringify(result));
+                $('.form-submit-finish').addClass('d-block')
+                    .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
+            }
+        });
 
     });
 
@@ -72,8 +88,19 @@ function initSteps() {
     });
 }
 
+function getTasksData() {
+    UserTaskManager.getMetadata().then((result) => {
+        // console.log(result);
+        if (result.status.state === 'ok') {
+            console.log(result.data.meta);
+            // initHandlers();
+        }
+    });
+}
+
 export function init() {
     if ($('.chat-bot-form').length) {
+        getTasksData();
         initSteps();
     }
 }

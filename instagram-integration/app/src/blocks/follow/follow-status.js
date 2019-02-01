@@ -7,12 +7,7 @@ function fillListMeta($list, dataArray, isRuns) {
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
     items.forEach((item) => {
-        const progress = {
-            count: 1,
-            index: 0,
-            percent: 55,
-            timestamp: 1548669507658
-        };
+        const progress = item.progress;
         if (item.type !== 'FOLLOWING') {
             return;
         }
@@ -23,39 +18,41 @@ function fillListMeta($list, dataArray, isRuns) {
                         ${(item.task_id) ? `<p class="badge badge-secondary my-1">${item.task_id}</p>` : ''}
                         <div class="task-progress">
                             <p class="small my-1">Остановлено</p>
-                            <p class="my-1">${item.status.reason}</p>
+                            ${(item.status.reason) ? `<p class="my-1">${item.status.reason}</p>` : ''}
                         </div>
                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
                     </div>
                     <!--<div class="col task-subtype">
                         ${(item.subtype) ? `<p class="mt-0 mb-1">${item.subtype}</p>` : ''}
-                    </div>-->                    
+                    </div>-->
                 </div>
             </li>`).appendTo($list);
-        } else if (item.status.state === 'IN_PROGRESS') {
+        } else if (item.status.state === 'IN_PROGRESS' && isRuns) {
             $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
                 <div class="col task-progress">
-                    <p class="mt-0 mb-1 name">В прогрессе : ${item.status.reason}</p>
+                    <p class="mt-0 mb-1 name">В прогрессе : ${item.task_id}</p>
                 </div>
+                <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
+                <button class="btn btn-warning js_btn-delete-task">Удалить</button>
             </li>`).appendTo($list);
-        } else if ((item.status.state === 'FINISHED' || item.status.state === 'IN_PROGRESS') && !isRuns) {
+        } else if (item.status.state === 'FINISHED' && !isRuns) {
             $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
                  <div class="card-block">
                     <h4 class="card-title">Выполненно</h4>
-                    <div class="text-right">                        
+                    <div class="text-right">
                         <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
                     </div>
                     <span class="text-success">100%</span>
                     <div class="progress mb-3">
                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>                    
+                    </div>
                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
                 </div>
             </li>`).appendTo($list);
         }
         if (!$('li', $list).length) {
             $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
-                <p>В этом разделе нет ни одной задачи.</p>                
+                <p>В этом разделе нет ни одной задачи.</p>
             </li>`).appendTo($list);
         }
     });

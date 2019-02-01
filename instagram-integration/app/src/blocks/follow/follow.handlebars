@@ -5,6 +5,7 @@
                 <a class="nav-link active" id="v-pills-create-task-tab" data-toggle="pill" href="#create-task" role="tab" aria-controls="create-task" aria-selected="false">Создать задание</a>
                 <a class="nav-link" id="v-pills-runned-tab" data-toggle="pill" href="#runned" role="tab" aria-controls="runned" aria-selected="true">Запущенные задание</a>
                 <a class="nav-link" id="v-pills-stopped-tab" data-toggle="pill" href="#stopped-tasks" role="tab" aria-controls="stopped-tasks" aria-selected="true">Остановленные/Выполненные задание</a>
+                <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#logs" role="tab" aria-controls="logs" aria-selected="true">Логи</a>
             </div>
         </div>
         <div class="col-9">
@@ -19,6 +20,29 @@
                     <div class="follow-tasks-stopped--box">
                         <h3>Остановленные</h3>
                         <ul class="follow-tasks-stopped list-unstyled"></ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
+                    <div class="log-tasks--box">
+                        <h3>Логи</h3>
+                        <ul class="log-tasks list-unstyled">
+                            <li class="ipsField tag_field">
+							<label for="ipbTags" class="ipsField_title">Теги темы</label>
+							<p class="ipsField_content">
+                                <ul id="ipsTags_wrapper" class="ipsTagBox_wrapper">
+                                    <li tvalue="instagram" class="ipsTagBox_tag">instagram<span class="ipsTagBox_closetag">×</span></li>
+                                    <li id="ipsTags_inputItem" class=""><input type="text" autocomplete="off" class="ipsTagBox_hiddeninput" maxlength="29"></li>
+                                </ul>
+                                <input type="text" class="input_text" size="50" value="" name="ipsTags" id="ipsTags" style="display: none;">
+                                <br>
+                                <span class="desc lighter">Укажите не более 10 тег(ов)</span>
+
+                                <script type="text/javascript">
+                                    window.$( "ipsTags" ).tagify( {"isOpenSystem":true,"isEnabled":true,"minLen":2,"maxLen":30,"minTags":0,"maxTags":10,"predefinedTags":null,"fieldId":"ipsTags","prefixesEnabled":false,"meta_app":"forums","meta_area":"topics","meta_parent_id":75,"lang":{"tag_add_link":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0442\u0435\u0433","tip_text":"\u0412\u0432\u043e\u0434\u0438\u0442\u0435 \u0442\u0435\u0433\u0438 \u0440\u0430\u0437\u0434\u0435\u043b\u044f\u044f \u0438\u0445 \u0437\u0430\u043f\u044f\u0442\u044b\u043c\u0438"},"forceLowercase":"0","existingTags":false} );
+                                </script>
+                            </p>
+						    </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
