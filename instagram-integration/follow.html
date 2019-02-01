@@ -102,8 +102,7 @@
                                   <i class="far fa-newspaper mr-1"></i>Подписки</a>
                               </li>
                               <li class="nav-item"><a class="nav-link text-light" href="./chat-bot.html">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                                  chat-bot</a></li>
+                                  <i class="fas fa-robot mr-1"></i>Чат бот</a></li>
                           </ul>
       
                       </div>
@@ -127,6 +126,7 @@
                                   <a class="nav-link active" id="v-pills-create-task-tab" data-toggle="pill" href="#create-task" role="tab" aria-controls="create-task" aria-selected="false">Создать задание</a>
                                   <a class="nav-link" id="v-pills-runned-tab" data-toggle="pill" href="#runned" role="tab" aria-controls="runned" aria-selected="true">Запущенные задание</a>
                                   <a class="nav-link" id="v-pills-stopped-tab" data-toggle="pill" href="#stopped-tasks" role="tab" aria-controls="stopped-tasks" aria-selected="true">Остановленные/Выполненные задание</a>
+                                  <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#logs" role="tab" aria-controls="logs" aria-selected="true">Логи</a>
                               </div>
                           </div>
                           <div class="col-9">
@@ -141,6 +141,27 @@
                                       <div class="follow-tasks-stopped--box">
                                           <h3>Остановленные</h3>
                                           <ul class="follow-tasks-stopped list-unstyled"></ul>
+                                      </div>
+                                  </div>
+                                  <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
+                                      <div class="log-tasks--box">
+                                          <h3>Логи</h3>
+                                          <ul class="log-tasks list-unstyled">
+                                              <li class="ipsField tag_field">
+                  							<label for="ipbTags" class="ipsField_title">Теги темы</label>
+                  							<p class="ipsField_content">
+                                                  <ul id="ipsTags_wrapper" class="ipsTagBox_wrapper">
+                                                      <li tvalue="instagram" class="ipsTagBox_tag">instagram<span class="ipsTagBox_closetag">×</span></li>
+                                                      <li id="ipsTags_inputItem"><input autocomplete="off" class="ipsTagBox_hiddeninput" maxlength="29"></li>
+                                                  </ul>
+                                                  <input class="input_text" size="50" name="ipsTags" id="ipsTags" style="display:none">
+                                                  <br>
+                                                  <span class="desc lighter">Укажите не более 10 тег(ов)</span>
+                  
+                                                  <script type="text/javascript">window.$("ipsTags").tagify({isOpenSystem:!0,isEnabled:!0,minLen:2,maxLen:30,minTags:0,maxTags:10,predefinedTags:null,fieldId:"ipsTags",prefixesEnabled:!1,meta_app:"forums",meta_area:"topics",meta_parent_id:75,lang:{tag_add_link:"Добавить тег",tip_text:"Вводите теги разделяя их запятыми"},forceLowercase:"0",existingTags:!1})</script>
+                                              </p>
+                  						    </li>
+                                          </ul>
                                       </div>
                                   </div>
                                   <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">

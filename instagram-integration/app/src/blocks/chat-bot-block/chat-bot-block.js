@@ -89,7 +89,11 @@ function initSteps() {
 }
 
 function getTasksData() {
-    UserTaskManager.getMetadata().then((result) => {
+    const path = {
+        type: CONST.url.tmTypes.followingT,
+        subType: CONST.url.tmTypes.followingSubT[0]
+    };
+    UserTaskManager.getMetadata(path).then((result) => {
         // console.log(result);
         if (result.status.state === 'ok') {
             console.log(result.data.meta);
