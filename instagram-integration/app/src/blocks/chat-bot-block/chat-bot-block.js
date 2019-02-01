@@ -90,8 +90,8 @@ function initSteps() {
 
 function getTasksData() {
     const path = {
-        type: CONST.url.tmTypes.followingT,
-        subType: CONST.url.tmTypes.followingSubT[0]
+        type: CONST.url.tmTypes.chatBotSubT,
+        subType: CONST.url.tmTypes.chatBotSubT[0]
     };
     UserTaskManager.getMetadata(path).then((result) => {
         // console.log(result);
@@ -108,3 +108,8 @@ export function init() {
         initSteps();
     }
 }
+
+/*
+GET http://api.luxgram.ru/v1/instagram-task-manager/logs/type/{type}/subtype/{subtype}/account/{username}
+Необязательный параметр “page”
+ */
