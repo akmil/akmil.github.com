@@ -1,6 +1,7 @@
 $transition-follow: all .3s;
 $border-radius-follow: 4px;
 
+.chat-bot-page,
 .follow {
     input[type="number"],
     input[type="text"],
@@ -206,7 +207,7 @@ $border-radius-follow: 4px;
         color: #d03e3e;
     }
 
-    form.follow-form fieldset {
+    form fieldset {
         display: none;
     }
 }

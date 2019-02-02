@@ -15,6 +15,8 @@ class UserTaskManager {
                 'Accept': 'application/json'
             }
         };
+        this.postStartFollowingList = this.postStartFollowingList;
+        this.postStartChatBot = this.postStartChatBot;
     }
 
     // isLoggedIn() {
@@ -96,7 +98,7 @@ class UserTaskManager {
 
     postStartChatBot(body, cbError) {
         const path = 'instagramTaskManager_postStartChatBot';
-        this.postStartFollowingList(body, cbError, path);
+        return this.postStartFollowingList(body, cbError, path);
     }
 }
 

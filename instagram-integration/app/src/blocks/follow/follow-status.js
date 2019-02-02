@@ -6,9 +6,16 @@ function fillListMeta($list, dataArray, isRuns) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
+    if (!items.length) {
+        $(`<li class="list-group-item py-2">
+                <p>В этом разделе нет ни одной задачи.</p>
+            </li>`).appendTo($list);
+        return;
+    }
     items.forEach((item) => {
         const progress = item.progress;
-        if (item.type !== 'FOLLOWING') {
+        console.log(item.type);
+        if (item.type && item.type !== 'FOLLOWING') {
             return;
         }
         if (item.status.state === 'STOPPED' && !isRuns) {
@@ -92,7 +99,7 @@ function getTasksData() {
         subType: CONST.url.tmTypes.followingSubT[0]
     };
     UserTaskManager.getMetadata(path).then((result) => {
-        // console.log(result);
+        // console.log('getMetadata & fillListMeta', result);
         if (result.status.state === 'ok') {
             fillListMeta($('.follow-tasks-runs'), result.data.meta, 'isRuns');
             fillListMeta($('.follow-tasks-stopped'), result.data.meta);

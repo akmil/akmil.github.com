@@ -1,0 +1,17 @@
+<form role="form" name="wizard-form" class="wizard-form col-md-12 was-validated---" action="javascript:void(0);">
+    
+    {{> @partial-block }}
+    
+    <div class="form-submit-finish position-absolute d-none">
+        <div class="alert alert-success fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <h2>Задание создано успешно!</h2>
+        </div>
+    </div>
+    <div class="form-submit-finish--error position-absolute d-none">
+        <div class="alert alert-danger fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <h2>Задание уже существует :(</h2>
+        </div>
+    </div>
+</form>

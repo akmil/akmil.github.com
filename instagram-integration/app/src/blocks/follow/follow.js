@@ -133,10 +133,6 @@ function stepReducer(stepNumber) {
         case 1:
             getDataStep3();
             break;
-        case 2:
-            // console.log(stepNumber);
-            // console.log(state);
-            break;
         default:
             console.log('default', stepNumber);
     }
@@ -145,8 +141,8 @@ function stepReducer(stepNumber) {
 /**
  * Init header
  */
-function initSteps() {
-    const $form = $('.follow-form');
+function initSteps(formSelector) {
+    const $form = $(formSelector);
     $('.js_profile-user-follow>.container').removeClass('container');
 
     $form.find('fieldset:first-child').fadeIn('slow');
@@ -244,8 +240,8 @@ function initSteps() {
             }
         });
 
-        state.type = 'FOLLOWING';
-        state.subtype = 'FOLLOWING_LIST';
+        state.type = CONST.url.tmTypes.followingT; // 'FOLLOWING';
+        state.subtype = CONST.url.tmTypes.followingSubT[0]; // 'FOLLOWING_LIST';
         console.log('make request**  post: StartFollowingList', state);
 
         UserTaskManager.postStartFollowingList(state).then((result) => {
@@ -277,7 +273,7 @@ function fixStepIndicator(n) {
     x[n].className += " active";
 }*/
 
-function modifyAccList() {
+export function modifyAccList() {
     // const radioBtn = (idx) => `<div class="col custom-control custom-radio js_user-radio">
     //         <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
     //         <label class="custom-control-label" for="customRadio-${idx}">Подписаться</label>
@@ -381,7 +377,7 @@ function formFromJson() {
 export function init() {
     if ($('.follow').length) {
         followStatus.init();
-        initSteps();
+        initSteps('.follow-form');
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
         });
