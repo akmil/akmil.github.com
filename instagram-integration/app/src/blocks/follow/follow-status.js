@@ -62,7 +62,11 @@ function fillListMeta($list, dataArray, isRuns) {
 }
 
 /* eslint-disable no-use-before-define */
-function initHandlers() {
+function initHandlers(holders, path) {
+    const _path = path || {
+        type: CONST.url.tmTypes.followingT,
+        subType: CONST.url.tmTypes.followingSubT[0]
+    };
     const $btnStopTask = $('.js_btn-stop-task');
     const $btnDelTask = $('.js_btn-delete-task');
     const getTaskID = (e) => {
@@ -75,7 +79,7 @@ function initHandlers() {
         console.log('STOP Task id', taskId);
         UserTaskManager.stopTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData();
+            getTasksData(holders, _path);
         });
     });
 
@@ -84,12 +88,12 @@ function initHandlers() {
         console.log('DELETE id', taskId);
         UserTaskManager.deleteTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData();
+            getTasksData(holders, _path);
         });
     });
 }
 
-export function getTasksData(holders, path, fillListMetaOverride) {
+export function getTasksData(holders, path) {
     const {$runs, $stopped} = holders;
     const _path = path || {
         type: CONST.url.tmTypes.followingT,
@@ -100,7 +104,7 @@ export function getTasksData(holders, path, fillListMetaOverride) {
         if (result.status.state === 'ok') {
             fillListMeta($runs, result.data.meta, 'isRuns');
             fillListMeta($stopped, result.data.meta);
-            initHandlers();
+            initHandlers(holders, path);
         }
     });
 }
