@@ -42,7 +42,7 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
-    stopFollowingList(taskId, cbError) {
+    stopTaskByID(taskId, cbError) {
         const setting = {
             ...this.settingPost,
             method: 'PUT',
@@ -51,12 +51,12 @@ class UserTaskManager {
                 'token': this.getToken()
             }
         };
-        const url = CONST.getPath('instagramTaskManager_putStopFollowingList', taskId);
+        const url = CONST.getPath('instagramTaskManager_putStopTaskByID', taskId);
         return this.network.sendRequest(url,
             setting, cbError);
     }
 
-    deleteFollowingList(taskId, cbError) {
+    deleteTaskByID(taskId, cbError) {
         const setting = {
             ...this.settingPost,
             method: 'DELETE',
@@ -65,7 +65,7 @@ class UserTaskManager {
                 'token': this.getToken()
             }
         };
-        const url = CONST.getPath('instagramTaskManager_delRemoveFollowingList', taskId);
+        const url = CONST.getPath('instagramTaskManager_delRemoveTaskByID', taskId);
         return this.network.sendRequest(url,
             setting, cbError);
     }

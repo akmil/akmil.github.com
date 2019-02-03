@@ -39,6 +39,7 @@ function fillListMeta($list, dataArray) {
     });
 }
 
+/*
 function fillListTypes($wrapper, data) {
     const structureObj = data['structure'];
 
@@ -54,6 +55,7 @@ function fillListTypes($wrapper, data) {
         }
     }
 }
+*/
 
 function getTasksData(path) {
     UserTaskManager.getMetadata(path).then((result) => {
@@ -290,12 +292,12 @@ export function modifyAccList() {
         // $($li[i]).append(radioBtn(i));
         $($li[i]).wrapInner(radioBtnWrap(i)).append(radioBtnAppend(i));
     }
-    UserTaskManager.getTaskTypes().then((result) => {
-        if (result.status.state === 'ok') {
-            // console.log(result);
-            fillListTypes($('.js_task-types'), result.data);
-        }
-    });
+    // UserTaskManager.getTaskTypes().then((result) => {
+    //     if (result.status.state === 'ok') {
+    //         // console.log(result);
+    //         fillListTypes($('.js_task-types'), result.data);
+    //     }
+    // });
 
     $('.js_user-radio').on('click', 'input[type=radio]', function (e) {
         const $parentFieldset = $(this).parents('fieldset');

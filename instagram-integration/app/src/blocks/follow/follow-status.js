@@ -13,16 +13,16 @@ function fillListMeta($list, dataArray, isRuns) {
         return;
     }
     items.forEach((item) => {
-        const progress = item.progress;
-        console.log(item.type);
-        if (item.type && item.type !== 'FOLLOWING') {
-            return;
-        }
+        const {progress, task_id, type, subtype} = item;
+        // console.log(type);
+        // if (item.type && item.type !== 'FOLLOWING') {
+        //     return;
+        // }
         if (item.status.state === 'STOPPED' && !isRuns) {
-            $(`<li class="list-group-item p-0" data-username="${item.type}" data-task-id="${item.task_id}">
+            $(`<li class="list-group-item p-0 py-2" data-username="${type}" data-task-id="${task_id}">
                 <div class="media-body d-flex">
                     <div class="col task-type">
-                        ${(item.task_id) ? `<p class="badge badge-secondary my-1">${item.task_id}</p>` : ''}
+                        ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
                         <div class="task-progress">
                             <p class="small my-1">Остановлено</p>
                             ${(item.status.reason) ? `<p class="my-1">${item.status.reason}</p>` : ''}
@@ -30,20 +30,20 @@ function fillListMeta($list, dataArray, isRuns) {
                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
                     </div>
                     <!--<div class="col task-subtype">
-                        ${(item.subtype) ? `<p class="mt-0 mb-1">${item.subtype}</p>` : ''}
+                        ${(subtype) ? `<p class="mt-0 mb-1">${subtype}</p>` : ''}
                     </div>-->
                 </div>
             </li>`).appendTo($list);
         } else if (item.status.state === 'IN_PROGRESS' && isRuns) {
-            $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
+            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
                 <div class="col task-progress">
-                    <p class="mt-0 mb-1 name">В прогрессе : ${item.task_id}</p>
+                    <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
                 </div>
                 <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
                 <button class="btn btn-warning js_btn-delete-task">Удалить</button>
             </li>`).appendTo($list);
         } else if (item.status.state === 'FINISHED' && !isRuns) {
-            $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
+            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
                  <div class="card-block">
                     <h4 class="card-title">Выполненно</h4>
                     <div class="text-right">
@@ -58,7 +58,7 @@ function fillListMeta($list, dataArray, isRuns) {
             </li>`).appendTo($list);
         }
         if (!$('li', $list).length) {
-            $(`<li class="list-group-item py-2" data-task-id="${item.task_id}">
+            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
                 <p>В этом разделе нет ни одной задачи.</p>
             </li>`).appendTo($list);
         }
@@ -77,7 +77,7 @@ function initHandlers() {
     $btnStopTask.on('click', (e) => {
         const taskId = getTaskID(e);
         console.log('STOP Task id', taskId);
-        UserTaskManager.stopFollowingList(taskId).then((result) => {
+        UserTaskManager.stopTaskByID(taskId).then((result) => {
             console.log(result);
             getTasksData();
         });
@@ -86,23 +86,24 @@ function initHandlers() {
     $btnDelTask.on('click', (e) => {
         const taskId = getTaskID(e);
         console.log('DELETE id', taskId);
-        UserTaskManager.deleteFollowingList(taskId).then((result) => {
+        UserTaskManager.deleteTaskByID(taskId).then((result) => {
             console.log(result);
             getTasksData();
         });
     });
 }
 
-function getTasksData() {
-    const path = {
+export function getTasksData(holders, path, fillListMetaOverride) {
+    const {$runs, $stopped} = holders;
+    const _path = path || {
         type: CONST.url.tmTypes.followingT,
         subType: CONST.url.tmTypes.followingSubT[0]
     };
-    UserTaskManager.getMetadata(path).then((result) => {
+    UserTaskManager.getMetadata(_path).then((result) => {
         // console.log('getMetadata & fillListMeta', result);
         if (result.status.state === 'ok') {
-            fillListMeta($('.follow-tasks-runs'), result.data.meta, 'isRuns');
-            fillListMeta($('.follow-tasks-stopped'), result.data.meta);
+            fillListMeta($runs, result.data.meta, 'isRuns');
+            fillListMeta($stopped, result.data.meta);
             initHandlers();
         }
     });
@@ -112,8 +113,12 @@ function getTasksData() {
  * Init
  */
 export function init() {
-    getTasksData();
+    const holders = {
+        $runs: $('.follow-tasks-runs'),
+        $stopped: $('.follow-tasks-stopped')
+    };
+    getTasksData(holders);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
-        getTasksData();
+        getTasksData(holders);
     });
 }
