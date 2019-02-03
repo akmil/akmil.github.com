@@ -1,22 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import {getTasksData} from '../follow/follow-status';
 
-/*
-function fillListMeta($wrapper, data) {
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">${JSON.stringify(data)}</div>`).appendTo($wrapper);
-    // for (const type in data['structure']) {
-    // console.log('structure: ' + item);
-    //     if (Object.prototype.hasOwnProperty.call(structureObj, type)) {
-    //         $(`<option class="list-group-item py-2" ${(type !== 'FOLLOWING') ? 'disabled="disabled"' : ''}
-    //             value = "${JSON.stringify({type, subtype: structureObj[type]})}">
-    //             ${type}
-    //         </option>`).appendTo($('#task-types'));
-    //     }
-    // }
-}
-*/
-
 export function init() {
     if ($('.chat-bot-page').length) {
         const path = {
@@ -28,12 +12,9 @@ export function init() {
             $stopped: $('.bot-tasks-stopped')
         };
         getTasksData(wrappers, path);
-        // UserTaskManager.getMetadata(path).then((result) => {
-        //     if (result.status.state === 'ok') {
-        //         console.log(result.data.meta);
-        //         fillListLogs($('.bot-log-tasks'), result.data.meta);
-        //     }
-        // });
+        window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
+            getTasksData(wrappers, path);
+        });
     }
 }
 

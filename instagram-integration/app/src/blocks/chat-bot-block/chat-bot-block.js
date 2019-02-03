@@ -67,15 +67,15 @@ function initChatMsg() {
     // alert close
     $('.form-submit-finish .close').on('click', function () {
         console.log('alert close');
-        // $('#v-pills-runned-tab').trigger('click');
-        // window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        $('#v-pills-runned-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
     // alert close
     $('.form-submit-finish--error .close').on('click', function () {
         console.log('alert close');
-        // $('#v-pills-runned-tab').trigger('click');
-        // window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        $('#v-pills-runned-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
 

@@ -14,10 +14,6 @@ function fillListMeta($list, dataArray, isRuns) {
     }
     items.forEach((item) => {
         const {progress, task_id, type, subtype} = item;
-        // console.log(type);
-        // if (item.type && item.type !== 'FOLLOWING') {
-        //     return;
-        // }
         if (item.status.state === 'STOPPED' && !isRuns) {
             $(`<li class="list-group-item p-0 py-2" data-username="${type}" data-task-id="${task_id}">
                 <div class="media-body d-flex">
