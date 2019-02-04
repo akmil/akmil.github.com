@@ -65,7 +65,7 @@ function fillListMeta($list, dataArray, isRuns) {
 function initHandlers(holders, path) {
     const _path = path || {
         type: CONST.url.tmTypes.followingT,
-        subType: CONST.url.tmTypes.followingSubT[0]
+        subtype: CONST.url.tmTypes.followingSubT[0]
     };
     const $btnStopTask = $('.js_btn-stop-task');
     const $btnDelTask = $('.js_btn-delete-task');
@@ -97,7 +97,7 @@ export function getTasksData(holders, path) {
     const {$runs, $stopped} = holders;
     const _path = path || {
         type: CONST.url.tmTypes.followingT,
-        subType: CONST.url.tmTypes.followingSubT[0]
+        subtype: CONST.url.tmTypes.followingSubT[0]
     };
     UserTaskManager.getMetadata(_path).then((result) => {
         // console.log('getMetadata & fillListMeta', result);

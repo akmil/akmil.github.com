@@ -69,7 +69,7 @@ function getDataStep2(usersName) {
     console.log(usersName);
     const path = {
         type: CONST.url.tmTypes.followingT,
-        subType: CONST.url.tmTypes.followingSubT[0]
+        subtype: CONST.url.tmTypes.followingSubT[0]
     };
     getTasksData(path);
 }

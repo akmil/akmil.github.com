@@ -32,8 +32,8 @@ class UserTaskManager {
     }
 
     getMetadata(path, cbError) {
-        const {type, subType} = path;
-        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getTaskByTypes', type, subType)}`,
+        // const {type, subType} = path;
+        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getTaskByTypes', path)}`,
             this.getToken('asHeader'), cbError);
     }
 
@@ -100,6 +100,13 @@ class UserTaskManager {
         const path = 'instagramTaskManager_postStartChatBot';
         return this.postStartFollowingList(body, cbError, path);
     }
+
+    getLogsChatBot(path, cbError) {
+        // const {type, subType, username} = path;
+        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getLogsChatBot', path)}`,
+            this.getToken('asHeader'), cbError);
+    }
+
 }
 
 let userInstance = null;

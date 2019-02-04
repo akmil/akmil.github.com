@@ -1,6 +1,5 @@
-// import * as wizardForm from "../wizard-form/wizard-form";
-// import * as chatBotStatus from "./chat-bot-status";
-// import viewUtils from "../../common/js-services/view";
+import UserTaskManager from '../../common/js-services/api-task-manager';
+import {CONST} from '../../common/js-services/consts';
 
 const json = {
     'status': {
@@ -179,6 +178,17 @@ function fillListMeta($list, dataArray, isRuns) {
 export function init() {
     if ($('.chat-bot-page').length) {
         const $list = $('.bot-log-tasks');
-        fillListMeta($list, json.data.logs);
+        const path = {
+            type: CONST.url.tmTypes.chatBotT,
+            subtype: CONST.url.tmTypes.chatBotSubT[0],
+            username: 'the_rostyslav'
+        };
+        UserTaskManager.getLogsChatBot(path).then((result) => {
+            console.log('getLogsChatBot');
+            if (result.status.state === 'ok') {
+                console.log(JSON.stringify(result));
+                fillListMeta($list, result.data.logs);
+            }
+        });
     }
 }

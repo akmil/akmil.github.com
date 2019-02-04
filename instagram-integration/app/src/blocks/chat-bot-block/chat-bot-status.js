@@ -6,7 +6,7 @@ export function init() {
     if ($('.chat-bot-page').length) {
         const path = {
             type: CONST.url.tmTypes.chatBotT,
-            subType: CONST.url.tmTypes.chatBotSubT[0]
+            subtype: CONST.url.tmTypes.chatBotSubT[0]
         };
         const wrappers = {
             $runs: $('.bot-tasks-runs'),
@@ -20,7 +20,3 @@ export function init() {
     }
 }
 
-/*
-GET http://api.luxgram.ru/v1/instagram-task-manager/logs/type/{type}/subtype/{subtype}/account/{username}
-Необязательный параметр “page”
- */
