@@ -1,6 +1,4 @@
-// import * as followStatus from './follow-status';
 import {CONST} from '../../common/js-services/consts';
-// import UserTaskManager from '../../common/js-services/api-task-manager';
 // import 'brutusin-json-forms';
 const state = {
     username: ''

@@ -101,9 +101,8 @@ class UserTaskManager {
         return this.postStartFollowingList(body, cbError, path);
     }
 
-    getLogsChatBot(path, cbError) {
-        // const {type, subType, username} = path;
-        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getLogsChatBot', path)}`,
+    getLogsChatBot(path, page, cbError) {
+        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getLogsChatBot', path, page)}`,
             this.getToken('asHeader'), cbError);
     }
 

@@ -25,7 +25,10 @@ export const CONST = {
         instagramTaskManager_putStopTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_postStartChatBot: 'instagram-task-manager/task',
-        instagramTaskManager_getLogsChatBot: (type, subtype, username) => `instagram-task-manager/logs/type/${type}/subtype/${subtype}/account/${username}`
+        instagramTaskManager_getLogsChatBot: (path, page) => {
+            const {type, subtype, username} = path;
+            return `instagram-task-manager/logs/type/${type}/subtype/${subtype}/account/${username}${page ? `?page=${page}` : ''}`;
+        }
     },
     user: {
         email: '',
@@ -67,11 +70,14 @@ export const CONST = {
         }
         return this.url.base + this.url[name];
     },
-    getPathTypeSubtype(name, path) {
+    getPathTypeSubtype(name, path, page) {
         const {type, subtype, username} = path;
         if (typeof this.url[name] === 'function' && type && subtype) {
+            if (username && page) {
+                return this.url.base + this.url[name](path, page);
+            }
             if (username) {
-                return this.url.base + this.url[name](type, subtype, username);
+                return this.url.base + this.url[name](path);
             }
             return this.url.base + this.url[name](type, subtype);
         }

@@ -1,127 +1,43 @@
+/* eslint-disable no-use-before-define */
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import {CONST} from '../../common/js-services/consts';
 
-const json = {
-    'status': {
-        'state': 'ok'
-    },
-    'data': {
-        'settings': {
-            'pagination': {
-                'pages': [
-                    1,
-                    2,
-                    3
-                ],
-                'current': 1,
-                'next': 2
-            },
-            'invoke_in_millis': 1000
-        },
-        'logs': [
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:42:16]: Пауза 108 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:40:28]: Пауза 107 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:38:55]: Пауза 92 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:36:55]: Пауза 119 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:35:20]: Пауза 94 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:33:55]: Пауза 84 сек.'
-            },
-            {
-                'level': 'ERROR',
-                'value': '[01.02.2019 09:32:01]: Пауза 112 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:30:16]: Пауза 104 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:29:14]: Пауза 60 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:28:06]: Пауза 67 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:26:34]: Пауза 91 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:24:52]: Пауза 101 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:23:27]: Пауза 83 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:22:15]: Пауза 71 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:21:02]: Пауза 72 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:19:41]: Пауза 80 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:18:14]: Пауза 85 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:17:07]: Пауза 66 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:15:28]: Пауза 98 сек.'
-            },
-            {
-                'level': 'INFO',
-                'value': '[01.02.2019 09:14:11]: Пауза 76 сек.'
-            }
-        ]
-    }
+const $list = $('.bot-log-tasks');
+const path = {
+    type: CONST.url.tmTypes.chatBotT,
+    subtype: CONST.url.tmTypes.chatBotSubT[0],
+    username: 'the_rostyslav'
 };
+let currentPage = null;
 
-function initHandlerPagination($previous, $next) {
+function initHandlerPagination($previous, $next, dataArray) {
     const $wrapper = $('.logs-pagination');
-    const {pagination} = json.data.settings; /* , invoke_in_millis */
+    const {pagination} = dataArray.settings; /* , invoke_in_millis */
     const lastPage = pagination.pages[pagination.pages.length - 1];
     const updateButtons = function (e, currentActiveIdx) {
         $wrapper.find('li.page-number.active').removeClass('active');
-        $($wrapper.find('li.page-number')[currentActiveIdx]).addClass('active');
+        $($wrapper.find('li.page-number')[pagination.current]).addClass('active');
     };
     $previous.on('click', (e) => {
         const currentActiveIdx = $wrapper.find('li.page-number.active').index();
-        updateButtons(e, currentActiveIdx - 1);
-        if (currentActiveIdx === 0 && $next.hasClass('disabled')) {
-            $previous.removeClass('disabled');
+        const page = pagination.previous;
+        if (!pagination.previous) {
+            $previous.addClass('disabled').prop('disabled', 'disabled');
+            return;
         }
-        console.log(currentActiveIdx, lastPage);
+        currentPage = pagination.previous;
+        updateButtons(e, currentActiveIdx - 1);
+        getLogsData($list, path, page);
     });
 
     $next.on('click', (e) => {
         const currentActiveIdx = $wrapper.find('li.page-number.active').index();
+        const page = pagination.next;
+        if (!pagination.next) {
+            // $previous.addClass('disabled').prop('disabled', 'disabled');
+            return;
+        }
+        currentPage = pagination.next;
         updateButtons(e, currentActiveIdx);
         if (lastPage <= currentActiveIdx + 1) {
             $(e.target).parent().addClass('disabled');
@@ -129,25 +45,28 @@ function initHandlerPagination($previous, $next) {
         if (currentActiveIdx && $previous.hasClass('disabled')) {
             $previous.removeClass('disabled');
         }
+
+        console.log(pagination.next);
+        getLogsData($list, path, page);
     });
 }
-function addPagination() {
+function addPagination(dataArray) {
     const $wrapper = $('.logs-pagination');
-    const {pagination} = json.data.settings;
-    const lastPage = pagination.pages[pagination.pages.length - 1];
-    const tplPrevious = $(`<li class="page-item ${(pagination.current === 1) ? 'disabled' : ''}"><a class="page-link" href="#">Назад</a></li>`);
-    const tplNext = $(`<li class="page-item ${(pagination.current === lastPage) ? 'disabled' : ''}"><a class="page-link" href="#">Вперед</a></li>`);
+    const {pagination} = dataArray.settings;
+    const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'd-none' : ''}"><a class="page-link" href="#">Назад</a></li>`);
+    const tplNext = $(`<li class="page-item ml-auto ${(!pagination.next) ? 'd-none' : ''}"><a class="page-link" href="#">Вперед</a></li>`);
+    $wrapper.empty();
 
     $wrapper.append(tplPrevious);
-    pagination['pages'].forEach((item) => {
-        $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
-    });
+    // pagination['pages'].forEach((item) => {
+    //     $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
+    // });
     $wrapper.append(tplNext);
-    initHandlerPagination(tplPrevious, tplNext);
+    initHandlerPagination(tplPrevious, tplNext, dataArray);
 }
 
 function fillListMeta($list, dataArray, isRuns) {
-    const items = dataArray;
+    const items = dataArray.logs;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
     if (!items.length) {
@@ -156,7 +75,7 @@ function fillListMeta($list, dataArray, isRuns) {
     </li>`).appendTo($list);
         return;
     }
-    addPagination();
+    addPagination(dataArray);
     items.forEach((item) => {
         const {level, value} = item;
         $(`<li class="list-group-item p-0 py-2">
@@ -174,21 +93,29 @@ function fillListMeta($list, dataArray, isRuns) {
         }
     });
 }
+let intervalId = '';
+function getLogsData($list, path, page) {
+    UserTaskManager.getLogsChatBot(path, page).then((result) => {
+        console.log('getLogsChatBot');
+        if (result.status.state === 'ok') {
+            fillListMeta($list, result.data);
+            const updateInterval = result.data.settings.invoke_in_millis;
+            // reset Timer request
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            intervalId = setInterval(() => {
+              // eslint-disable-next-line indent
+                getLogsData($list, path, currentPage);
+                console.log(intervalId);
+            }, updateInterval);
+        }
+    });
+}
 
 export function init() {
     if ($('.chat-bot-page').length) {
-        const $list = $('.bot-log-tasks');
-        const path = {
-            type: CONST.url.tmTypes.chatBotT,
-            subtype: CONST.url.tmTypes.chatBotSubT[0],
-            username: 'the_rostyslav'
-        };
-        UserTaskManager.getLogsChatBot(path).then((result) => {
-            console.log('getLogsChatBot');
-            if (result.status.state === 'ok') {
-                console.log(JSON.stringify(result));
-                fillListMeta($list, result.data.logs);
-            }
-        });
+        getLogsData($list, path);
+
     }
 }
