@@ -114,6 +114,10 @@ function getLogsData($list, path, page) {
                 getLogsData($list, path, currentPage);
                 console.log(intervalId);
             }, updateInterval);
+        } else {
+            $(`<li class="list-group-item py-2">
+                <p>Нет доступа</p>
+            </li>`).appendTo($list);
         }
     });
 }
