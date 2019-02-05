@@ -49,6 +49,11 @@ function initHandlerPagination($previous, $next, dataArray) {
         console.log(pagination.next);
         getLogsData($list, path, page);
     });
+
+    $('#v-pills-logs-tab').on('click', (e) => {
+        const page = 1;
+        getLogsData($list, path, page);
+    });
 }
 function addPagination(dataArray) {
     const $wrapper = $('.logs-pagination');
@@ -58,9 +63,9 @@ function addPagination(dataArray) {
     $wrapper.empty();
 
     $wrapper.append(tplPrevious);
-    // pagination['pages'].forEach((item) => {
-    //     $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
-    // });
+    pagination['pages'].forEach((item) => {
+        $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
+    });
     $wrapper.append(tplNext);
     initHandlerPagination(tplPrevious, tplNext, dataArray);
 }
@@ -71,8 +76,8 @@ function fillListMeta($list, dataArray, isRuns) {
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">
-        <p>В этом разделе нет ни одной задачи.</p>
-    </li>`).appendTo($list);
+            <p>В этом разделе нет ни одной задачи.</p>
+        </li>`).appendTo($list);
         return;
     }
     addPagination(dataArray);
@@ -80,7 +85,7 @@ function fillListMeta($list, dataArray, isRuns) {
         const {level, value} = item;
         $(`<li class="list-group-item p-0 py-2">
               <div class="media-body d-flex">
-                  <div class="col task-type ${(level === 'ERROR') ? 'text-danger text-right' : ''}">
+                  <div class="col task-type ${(level === 'ERROR') ? 'text-danger' : ''}">
                       ${(value) ? `${value}` : ''}
                   </div>
               </div>
