@@ -45,21 +45,24 @@ function initHandlerPagination($previous, $next, dataArray) {
         if (currentActiveIdx && $previous.hasClass('disabled')) {
             $previous.removeClass('disabled');
         }
-
-        console.log(pagination.next);
         getLogsData($list, path, page);
     });
 
     $('#v-pills-logs-tab').on('click', (e) => {
-        const page = 1;
-        getLogsData($list, path, page);
+        // at this point of time setInterval is working
+        currentPage = 1;
+    });
+    $('.page-number').on('click', (e) => {
+        const val = $(e.target).text();
+        currentPage = parseInt(val, 10);
+        console.log(currentPage);
     });
 }
 function addPagination(dataArray) {
     const $wrapper = $('.logs-pagination');
     const {pagination} = dataArray.settings;
     const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'd-none' : ''}"><a class="page-link" href="#">Назад</a></li>`);
-    const tplNext = $(`<li class="page-item ml-auto ${(!pagination.next) ? 'd-none' : ''}"><a class="page-link" href="#">Вперед</a></li>`);
+    const tplNext = $(`<li class="page-item ${(!pagination.next) ? 'd-none' : ''}"><a class="page-link" href="#">Вперед</a></li>`);
     $wrapper.empty();
 
     $wrapper.append(tplPrevious);
@@ -101,7 +104,7 @@ function fillListMeta($list, dataArray, isRuns) {
 let intervalId = '';
 function getLogsData($list, path, page) {
     UserTaskManager.getLogsChatBot(path, page).then((result) => {
-        console.log('getLogsChatBot');
+        // console.log('getLogsChatBot');
         if (result.status.state === 'ok') {
             fillListMeta($list, result.data);
             const updateInterval = result.data.settings.invoke_in_millis;
@@ -112,7 +115,6 @@ function getLogsData($list, path, page) {
             intervalId = setInterval(() => {
               // eslint-disable-next-line indent
                 getLogsData($list, path, currentPage);
-                console.log(intervalId);
             }, updateInterval);
         } else {
             $(`<li class="list-group-item py-2">
@@ -125,6 +127,5 @@ function getLogsData($list, path, page) {
 export function init() {
     if ($('.chat-bot-page').length) {
         getLogsData($list, path);
-
     }
 }
