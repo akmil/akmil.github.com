@@ -61,8 +61,8 @@ function initHandlerPagination($previous, $next, dataArray) {
 function addPagination(dataArray) {
     const $wrapper = $('.logs-pagination');
     const {pagination} = dataArray.settings;
-    const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'd-none' : ''}"><a class="page-link" href="#">Назад</a></li>`);
-    const tplNext = $(`<li class="page-item ${(!pagination.next) ? 'd-none' : ''}"><a class="page-link" href="#">Вперед</a></li>`);
+    const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.previous) ? 'tabindex="-1"' : ''}>Назад</a></li>`);
+    const tplNext = $(`<li class="page-item ${(!pagination.next) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.next) ? 'tabindex="-1"' : ''}>Вперед</a></li>`);
     $wrapper.empty();
 
     $wrapper.append(tplPrevious);
