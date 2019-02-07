@@ -6,13 +6,14 @@ const $list = $('.bot-log-tasks');
 const path = {
     type: CONST.url.tmTypes.chatBotT,
     subtype: CONST.url.tmTypes.chatBotSubT[0],
-    username: 'the_rostyslav'
+    username: () => $('li.active').data('username')
 };
 let currentPage = null;
+let intervalId = '';
 
 function initHandlerPagination($previous, $next, dataArray) {
     const $wrapper = $('.logs-pagination');
-    const {pagination} = dataArray.settings; /* , invoke_in_millis */
+    const {pagination} = dataArray.settings;
     const lastPage = pagination.pages[pagination.pages.length - 1];
     const updateButtons = function (e, currentActiveIdx) {
         $wrapper.find('li.page-number.active').removeClass('active');
@@ -58,6 +59,7 @@ function initHandlerPagination($previous, $next, dataArray) {
         console.log(currentPage);
     });
 }
+
 function addPagination(dataArray) {
     const $wrapper = $('.logs-pagination');
     const {pagination} = dataArray.settings;
@@ -101,7 +103,7 @@ function fillListMeta($list, dataArray, isRuns) {
         }
     });
 }
-let intervalId = '';
+
 function getLogsData($list, path, page) {
     UserTaskManager.getLogsChatBot(path, page).then((result) => {
         // console.log('getLogsChatBot');
@@ -126,6 +128,11 @@ function getLogsData($list, path, page) {
 
 export function init() {
     if ($('.chat-bot-page').length) {
-        getLogsData($list, path);
+        if (path.username()) {
+            console.log(path.username());
+            getLogsData($list, path);
+        } else {
+            console.log('select user');
+        }
     }
 }

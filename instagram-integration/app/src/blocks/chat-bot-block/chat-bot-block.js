@@ -77,6 +77,10 @@ function initChatMsg() {
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
+    $('#v-pills-logs-tab').on('click', (e) => {
+        // at this point of time setInterval is working
+        chatBotStatus.init();
+    });
 }
 
 function setUserName(state) {
@@ -95,6 +99,22 @@ function stepReducer(stepNumber, state) {
     }
 }
 
+function fillListUsers($wrapper, data) {
+    const structureObj = data['structure'];
+
+    $wrapper.empty().addClass('border-light-color');
+    $('<div class="">Тип задания</div><select name="task-type" id="task-types"></select>').appendTo($wrapper);
+    for (const type in structureObj) {
+        // console.log('structure: ' + item);
+        if (Object.prototype.hasOwnProperty.call(structureObj, type)) {
+            $(`<option class="list-group-item py-2" ${(type !== 'FOLLOWING') ? 'disabled="disabled"' : ''}
+                value = "${JSON.stringify({type, subtype: structureObj[type]})}">
+                ${type}
+            </option>`).appendTo($('#task-types'));
+        }
+    }
+}
+
 export function init() {
     if ($('.chat-bot-page').length) {
         const wizardCfg = {
@@ -103,6 +123,10 @@ export function init() {
         };
         wizardForm.init(wizardCfg);
         initChatMsg();
-        chatBotStatus.init();
+        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
+            console.log('INSTAGRAM_ACCOUNS_RENDERED', eventName, data);
+            const $wrapper = $('.log-users-list');
+            fillListUsers($wrapper, data);
+        });
     }
 }
