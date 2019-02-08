@@ -4,7 +4,9 @@ export const CONST = {
             followingT: 'FOLLOWING',
             followingSubT: ['FOLLOWING_LIST'],
             chatBotT: 'CHAT_BOT',
-            chatBotSubT: ['DEFAULT_CHAT_BOT']
+            chatBotSubT: ['DEFAULT_CHAT_BOT'],
+            autogreetT: 'AUTO_GREETING',
+            autogreetSubT: ['DEFAULT_AUTO_GREETING']
         },
         base: 'http://api.luxgram.ru/v1/',
         registration: 'registration/basic/',
