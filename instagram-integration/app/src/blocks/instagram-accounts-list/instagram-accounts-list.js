@@ -260,7 +260,7 @@ function fillList($list, dataArray) {
         </li>`).appendTo(cList);
         }
     });
-    window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, name, dataArray);
+    window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
 

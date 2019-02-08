@@ -1,6 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import {getTasksData} from '../follow/follow-status';
-import * as chatBotLogs from './bot-logs';
+// import * as chatBotLogs from './bot-logs';
 
 export function init() {
     if ($('.chat-bot-page').length) {
@@ -21,7 +21,6 @@ export function init() {
         window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
             getTasksData(wrappers, path);
         });
-        chatBotLogs.init();
     }
 }
 

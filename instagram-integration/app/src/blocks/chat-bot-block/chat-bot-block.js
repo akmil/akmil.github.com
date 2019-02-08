@@ -2,8 +2,11 @@ import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as chatBotStatus from './chat-bot-status';
+import * as chatBotLogs from './bot-logs';
 
 let usernameSelected = '';
+let userListInstagram = [];
+const selectCls = 'js_logs-accounts';
 
 function onSubmitHandler(e) {
     const fields = $('.chat-bot-text-fields');
@@ -44,6 +47,21 @@ function onSubmitHandler(e) {
     });
 }
 
+function fillListUsers($wrapper, data) {
+    $wrapper.empty().addClass('border-light-color');
+    $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+    data.forEach((item) => {
+        $(`<option class="list-group-item py-2" value="${item.username}">
+            ${item.username}
+        </option>`).appendTo($(`.${selectCls}`));
+    });
+    $(`.${selectCls}`).on('change', function () {
+        usernameSelected = $(`.${selectCls} option:selected`).val();
+        console.log(usernameSelected);
+        chatBotLogs.init(selectCls);
+    });
+}
+
 /**
  * Init header
  */
@@ -79,7 +97,9 @@ function initChatMsg() {
     });
     $('#v-pills-logs-tab').on('click', (e) => {
         // at this point of time setInterval is working
-        chatBotStatus.init();
+        const $wrapper = $('.log-users-list');
+        fillListUsers($wrapper, userListInstagram);
+        chatBotLogs.init(selectCls);
     });
 }
 
@@ -99,22 +119,6 @@ function stepReducer(stepNumber, state) {
     }
 }
 
-function fillListUsers($wrapper, data) {
-    const structureObj = data['structure'];
-
-    $wrapper.empty().addClass('border-light-color');
-    $('<div class="">Тип задания</div><select name="task-type" id="task-types"></select>').appendTo($wrapper);
-    for (const type in structureObj) {
-        // console.log('structure: ' + item);
-        if (Object.prototype.hasOwnProperty.call(structureObj, type)) {
-            $(`<option class="list-group-item py-2" ${(type !== 'FOLLOWING') ? 'disabled="disabled"' : ''}
-                value = "${JSON.stringify({type, subtype: structureObj[type]})}">
-                ${type}
-            </option>`).appendTo($('#task-types'));
-        }
-    }
-}
-
 export function init() {
     if ($('.chat-bot-page').length) {
         const wizardCfg = {
@@ -123,10 +127,10 @@ export function init() {
         };
         wizardForm.init(wizardCfg);
         initChatMsg();
-        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
-            console.log('INSTAGRAM_ACCOUNS_RENDERED', eventName, data);
-            const $wrapper = $('.log-users-list');
-            fillListUsers($wrapper, data);
+        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
+            console.log('INSTAGRAM_ACCOUNS_RENDERED', dataObj);
+            userListInstagram = dataObj.dataArray;
+            chatBotStatus.init();
         });
     }
 }

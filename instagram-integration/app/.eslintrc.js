@@ -98,10 +98,7 @@ module.exports = {
         "before": true
       }
     ],
-    "linebreak-style": [
-      "error",
-      "windows"
-    ],
+    "linebreak-style": "off",
     "lines-around-comment": "error",
     "max-depth": "error",
     "max-len": "off",

@@ -3,10 +3,12 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import {CONST} from '../../common/js-services/consts';
 
 const $list = $('.bot-log-tasks');
+let selectCls = 'someClass';
+const getUsername = () => $(`.${selectCls} option:selected`).val();
 const path = {
     type: CONST.url.tmTypes.chatBotT,
     subtype: CONST.url.tmTypes.chatBotSubT[0],
-    username: () => $('li.active').data('username')
+    username: getUsername()
 };
 let currentPage = null;
 let intervalId = '';
@@ -15,9 +17,9 @@ function initHandlerPagination($previous, $next, dataArray) {
     const $wrapper = $('.logs-pagination');
     const {pagination} = dataArray.settings;
     const lastPage = pagination.pages[pagination.pages.length - 1];
-    const updateButtons = function (e, currentActiveIdx) {
+    const updateButtons = function () {
         $wrapper.find('li.page-number.active').removeClass('active');
-        $($wrapper.find('li.page-number')[pagination.current]).addClass('active');
+        // $($wrapper.find('li.page-number')[pagination.current]).addClass('active');
     };
     $previous.on('click', (e) => {
         const currentActiveIdx = $wrapper.find('li.page-number.active').index();
@@ -56,16 +58,16 @@ function initHandlerPagination($previous, $next, dataArray) {
     $('.page-number').on('click', (e) => {
         const val = $(e.target).text();
         currentPage = parseInt(val, 10);
+        getLogsData($list, path, currentPage);
         console.log(currentPage);
     });
 }
 
-function addPagination(dataArray) {
-    const $wrapper = $('.logs-pagination');
+function addPagination(dataArray, $wrapper) {
     const {pagination} = dataArray.settings;
     const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.previous) ? 'tabindex="-1"' : ''}>Назад</a></li>`);
     const tplNext = $(`<li class="page-item ${(!pagination.next) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.next) ? 'tabindex="-1"' : ''}>Вперед</a></li>`);
-    $wrapper.empty();
+    clearPagination($wrapper);
 
     $wrapper.append(tplPrevious);
     pagination['pages'].forEach((item) => {
@@ -75,7 +77,12 @@ function addPagination(dataArray) {
     initHandlerPagination(tplPrevious, tplNext, dataArray);
 }
 
+function clearPagination($wrapper) {
+    $wrapper.empty();
+}
+
 function fillListMeta($list, dataArray, isRuns) {
+    const $wrapperPagination = $('.logs-pagination');
     const items = dataArray.logs;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
@@ -83,9 +90,10 @@ function fillListMeta($list, dataArray, isRuns) {
         $(`<li class="list-group-item py-2">
             <p>В этом разделе нет ни одной задачи.</p>
         </li>`).appendTo($list);
+        clearPagination($wrapperPagination);
         return;
     }
-    addPagination(dataArray);
+    addPagination(dataArray, $wrapperPagination);
     items.forEach((item) => {
         const {level, value} = item;
         $(`<li class="list-group-item p-0 py-2">
@@ -105,8 +113,8 @@ function fillListMeta($list, dataArray, isRuns) {
 }
 
 function getLogsData($list, path, page) {
+    path.username = getUsername(selectCls);
     UserTaskManager.getLogsChatBot(path, page).then((result) => {
-        // console.log('getLogsChatBot');
         if (result.status.state === 'ok') {
             fillListMeta($list, result.data);
             const updateInterval = result.data.settings.invoke_in_millis;
@@ -114,10 +122,12 @@ function getLogsData($list, path, page) {
             if (intervalId) {
                 clearInterval(intervalId);
             }
-            intervalId = setInterval(() => {
-              // eslint-disable-next-line indent
-                getLogsData($list, path, currentPage);
-            }, updateInterval);
+            if (!currentPage >= 1) {
+                intervalId = setInterval(() => {
+                    // eslint-disable-next-line indent
+                    getLogsData($list, path, currentPage);
+                }, updateInterval);
+            }
         } else {
             $(`<li class="list-group-item py-2">
                 <p>Нет доступа</p>
@@ -126,10 +136,11 @@ function getLogsData($list, path, page) {
     });
 }
 
-export function init() {
+export function init(_selectCls) {
     if ($('.chat-bot-page').length) {
-        if (path.username()) {
-            console.log(path.username());
+        selectCls = _selectCls;
+        if (getUsername()) {
+            console.log(getUsername());
             getLogsData($list, path);
         } else {
             console.log('select user');
