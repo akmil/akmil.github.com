@@ -1,6 +1,6 @@
 {{#> base }}
 
-    <div class="container-fluid chat-bot-page">
+    <div class="container-fluid autogreeting-page">
         <h3>Автоприветствие</h3>
 
         <div class="container-fluid">
@@ -16,15 +16,15 @@
                 <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show" id="runned" role="tabpanel" aria-labelledby="v-pills-runned-tab">
-                            <div class="bot-tasks-runs--box">
+                            <div class="tasks-runs--box">
                                 <h3>Запущеные</h3>
-                                <ul class="bot-tasks-runs list-unstyled"></ul>
+                                <ul class="tasks-runs list-unstyled"></ul>
                             </div>
                         </div>
                         <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
-                            <div class="bot-tasks-stopped--box">
+                            <div class="tasks-stopped--box">
                                 <h3>Остановленные</h3>
-                                <ul class="bot-tasks-stopped list-unstyled"></ul>
+                                <ul class="tasks-stopped list-unstyled"></ul>
                             </div>
                         </div>
                         <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
@@ -51,7 +51,7 @@
                                 <div class="row">
                                     <div class="col-md-12 form-box">
                                         {{#> wizard-form }}
-                                            {{> chat-bot-wizard}}
+                                            {{> autogreet-wizard}}
                                         {{/ wizard-form }}
                                     </div>
                                 </div>

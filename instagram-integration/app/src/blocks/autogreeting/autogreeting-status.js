@@ -1,0 +1,21 @@
+import {CONST} from '../../common/js-services/consts';
+import {getTasksData} from '../follow/follow-status';
+
+export function init(cfg) {
+    if ($(cfg.currentPageCls).length) {
+        const {pathType, pathSubType} = cfg;
+        const path = {
+            type: pathType,
+            subtype: pathSubType};
+        const wrappers = {
+            $runs: $('.tasks-runs'),
+            $stopped: $('.tasks-stopped')
+        };
+        getTasksData(wrappers, path);
+        window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
+            console.log('getTasksData **NEW_TASK_CREATED**');
+            getTasksData(wrappers, path);
+        });
+    }
+}
+

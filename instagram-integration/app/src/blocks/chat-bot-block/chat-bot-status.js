@@ -1,6 +1,5 @@
 import {CONST} from '../../common/js-services/consts';
 import {getTasksData} from '../follow/follow-status';
-// import * as chatBotLogs from './bot-logs';
 
 export function init() {
     if ($('.chat-bot-page').length) {
@@ -9,8 +8,8 @@ export function init() {
             subtype: CONST.url.tmTypes.chatBotSubT[0]
         };
         const wrappers = {
-            $runs: $('.bot-tasks-runs'),
-            $stopped: $('.bot-tasks-stopped')
+            $runs: $('.tasks-runs'),
+            $stopped: $('.tasks-stopped')
         };
         getTasksData(wrappers, path);
         console.log(path);

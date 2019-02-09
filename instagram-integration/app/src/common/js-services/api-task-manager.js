@@ -70,12 +70,9 @@ class UserTaskManager {
             setting, cbError);
     }
 
-    getDefaultConfigs(cbError) {
-        const details = {
-            STRATEGY_TYPE: 'FOLLOWING',
-            STRATEGY_SUBTYPE: 'FOLLOWING_LIST'
-        };
-        const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${details.STRATEGY_TYPE}/subtype/${details.STRATEGY_SUBTYPE}`;
+    // todo
+    getDefaultConfigs(path, cbError) {
+        const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
         return this.network.sendRequest(url,
             this.getToken('asHeader'), cbError);
     }

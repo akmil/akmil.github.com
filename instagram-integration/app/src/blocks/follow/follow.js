@@ -66,7 +66,7 @@ function getTasksData(path) {
 }
 
 function getDataStep2(usersName) {
-    console.log(usersName);
+    // console.log(usersName);
     const path = {
         type: CONST.url.tmTypes.followingT,
         subtype: CONST.url.tmTypes.followingSubT[0]
@@ -74,7 +74,7 @@ function getDataStep2(usersName) {
     getTasksData(path);
 }
 
-function getDataStep3() {
+function getDataStepSpeed() {
     const users = $('#followers').val()
         .trim()
         .replace(/ /g, '')
@@ -115,9 +115,13 @@ function getDataStep3() {
             }
         }
     };
+    const path = {
+        type: 'FOLLOWING',
+        subtype: 'FOLLOWING_LIST'
+    };
 
     // draw criteria
-    UserTaskManager.getDefaultConfigs().then((result) => {
+    UserTaskManager.getDefaultConfigs(path).then((result) => {
         // console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
             // console.log(result);
@@ -133,7 +137,7 @@ function stepReducer(stepNumber) {
             // console.log(state);
             break;
         case 1:
-            getDataStep3();
+            getDataStepSpeed();
             break;
         default:
             console.log('default', stepNumber);

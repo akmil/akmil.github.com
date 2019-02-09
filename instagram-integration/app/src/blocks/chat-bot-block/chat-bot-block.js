@@ -2,11 +2,20 @@ import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as chatBotStatus from './chat-bot-status';
-import * as chatBotLogs from './bot-logs';
+import * as chatBotLogs from '../logs/logs';
 
 let usernameSelected = '';
 let userListInstagram = [];
 const selectCls = 'js_logs-accounts';
+const clsConst = {
+    currentPageCls: '.chat-bot-page',
+    tasksList: '.bot-log-tasks',
+    logsTabBtn: '#v-pills-logs-tab',
+    pagination: '.logs-pagination',
+    paginationPgNumber: '.page-number',
+    pathType: CONST.url.tmTypes.autogreetT,
+    pathSubType: CONST.url.tmTypes.autogreetSubT[0]
+};
 
 function onSubmitHandler(e) {
     const fields = $('.chat-bot-text-fields');
@@ -58,7 +67,7 @@ function fillListUsers($wrapper, data) {
     $(`.${selectCls}`).on('change', function () {
         usernameSelected = $(`.${selectCls} option:selected`).val();
         console.log(usernameSelected);
-        chatBotLogs.init(selectCls);
+        chatBotLogs.init(selectCls, clsConst);
     });
 }
 
@@ -99,7 +108,7 @@ function initChatMsg() {
         // at this point of time setInterval is working
         const $wrapper = $('.log-users-list');
         fillListUsers($wrapper, userListInstagram);
-        chatBotLogs.init(selectCls);
+        chatBotLogs.init(selectCls, clsConst);
     });
 }
 
