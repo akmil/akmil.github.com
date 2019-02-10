@@ -274,7 +274,7 @@ export function init() {
         return;
     }
     const token = User.getToken(); // upd to: User.getToken()
-    const metadata = User.getMetadata(token);
+    const metadata = User.getMetadata();
     const resendRequest = () => User.getMetadata(token);
     let isSendReqOnce = false;
     const checkResponse = (result, isResendRequest) => {

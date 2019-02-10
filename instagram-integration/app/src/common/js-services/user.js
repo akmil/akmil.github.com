@@ -25,9 +25,9 @@ class User {
         return (this.cookieStorage.get(CONST.cookieStorage.emailConfirmed) === 'confirmed');
     }
 
-    getToken() {
+    getToken(asHeader) {
         const cookieToken = this.cookieStorage.get(CONST.cookieStorage.token);
-        return cookieToken;
+        return (asHeader) ? {headers: {token: cookieToken}} : cookieToken;
     }
 
     login(formData, cbError) {
@@ -72,8 +72,14 @@ class User {
         return this.network.sendRequest(CONST.getPath('registration'), setting);
     }
 
+    // todo: move to account-list
     getMetadata(token, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`, {headers: {token}}, cbError);
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`,
+            this.getToken('asHeader'), cbError);
+    }
+    getMetadataLazy(cbError) {
+        return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}?lazy=true`,
+            this.getToken('asHeader'), cbError);
     }
 
     getSecurityKey(username, checkpointType) {

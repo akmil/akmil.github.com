@@ -1,5 +1,5 @@
 import {CONST} from '../../common/js-services/consts';
-import {getTasksData} from '../follow/follow-status';
+import {getTasksData} from '../_shared/task-status/task-status';
 
 export function init() {
     if ($('.chat-bot-page').length) {
@@ -12,11 +12,10 @@ export function init() {
             $stopped: $('.tasks-stopped')
         };
         getTasksData(wrappers, path);
-        console.log(path);
-        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
-            getTasksData(wrappers, path);
-            console.log('**chat-bot-status', eventName, data);
-        });
+        // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
+        //     getTasksData(wrappers, path);
+        //     console.log('**chat-bot-status', eventName, data);
+        // });
         window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
             getTasksData(wrappers, path);
         });

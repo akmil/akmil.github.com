@@ -3,6 +3,13 @@ import {CONST} from './consts';
 import Network from './network';
 import CookieStorage from './cookie';
 
+const objToArr = (obj) => {
+    if (obj && obj.subtype) {
+        obj.subtype = `subtype/${obj.subtype}`;
+    }
+    return Object.values(obj);
+};
+
 class UserTaskManager {
 
     constructor() {
@@ -32,8 +39,14 @@ class UserTaskManager {
     }
 
     getMetadata(path, cbError) {
-        // const {type, subType} = path;
-        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getTaskByTypes', path)}`,
+        const pathArr = objToArr(path);
+        return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getTaskByTypes', pathArr)}`,
+            this.getToken('asHeader'), cbError);
+    }
+    getMetadataLazy(path, cbError) {
+        const pathArr = objToArr(path);
+        pathArr.push('?lazy=true');
+        return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getTaskByTypes', pathArr)}`,
             this.getToken('asHeader'), cbError);
     }
 
@@ -70,7 +83,6 @@ class UserTaskManager {
             setting, cbError);
     }
 
-    // todo
     getDefaultConfigs(path, cbError) {
         const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
         return this.network.sendRequest(url,
@@ -98,8 +110,10 @@ class UserTaskManager {
         return this.postStartFollowingList(body, cbError, path);
     }
 
-    getLogsChatBot(path, page, cbError) {
-        return this.network.sendRequest(`${CONST.getPathTypeSubtype('instagramTaskManager_getLogsChatBot', path, page)}`,
+    getLogsChatBot(pathArray, page, cbError) {
+        // const pathArr = objToArr(path);
+        // console.log('convert path as ARR', pathArray, page);
+        return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getLogsChatBot', pathArray, page)}`,
             this.getToken('asHeader'), cbError);
     }
 

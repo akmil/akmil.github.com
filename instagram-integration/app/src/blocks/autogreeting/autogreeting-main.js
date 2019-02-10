@@ -2,7 +2,7 @@ import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as chatBotStatus from './autogreeting-status';
-import * as chatBotLogs from '../logs/logs';
+import * as chatBotLogs from '../_shared/logs/logs';
 
 let usernameSelected = '';
 let userListInstagram = [];

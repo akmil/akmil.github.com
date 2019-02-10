@@ -23,7 +23,7 @@ const pages = [
         source: '_auth/register'
     },
     {
-        title: 'User _autogreeting',
+        title: 'Автоприветствие',
         name: 'autogreeting',
         source: '_autogreeting/autogreeting'
     },
@@ -33,22 +33,22 @@ const pages = [
         source: '_autoposting/autoposting'
     },
     {
-        title: 'User bot-cleaner',
+        title: 'Чат бот очистка',
         name: 'bot-cleaner',
         source: '_bot-cleaner/bot-cleaner'
     },
     {
-        title: 'User chat-bot',
+        title: 'Чат бот',
         name: 'chat-bot',
         source: '_chat-bot/chat-bot'
     },
     {
-        title: 'User comments',
+        title: 'Коментарии',
         name: 'comments',
         source: '_comments/comments'
     },
     {
-        title: 'Confirm registration',
+        title: 'Подтверждение регистрации',
         name: 'confirm-registration',
         source: '_confirm-registration/confirm-registration'
     },
@@ -88,7 +88,7 @@ const pages = [
         source: '_stories/stories'
     },
     {
-        title: 'User profile -- unsibscribe',
+        title: 'Отписки',
         name: 'unsubscribe',
         source: '_unsubscribe/unsubscribe'
     }

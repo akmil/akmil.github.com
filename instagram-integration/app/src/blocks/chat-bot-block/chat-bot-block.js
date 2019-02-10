@@ -1,11 +1,12 @@
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
+import User from '../../common/js-services/user';
 import * as chatBotStatus from './chat-bot-status';
-import * as chatBotLogs from '../logs/logs';
+import * as chatBotLogs from '../_shared/logs/logs';
 
 let usernameSelected = '';
-let userListInstagram = [];
+// let userListInstagram = [];
 const selectCls = 'js_logs-accounts';
 const clsConst = {
     currentPageCls: '.chat-bot-page',
@@ -40,41 +41,50 @@ function onSubmitHandler(e) {
         }
     };
 
-    console.log('make request here**', nReqBody);
+    // console.log('make request here**', nReqBody);
     function cbError(res) {
         const msg = res.status.message;
         $('.form-submit-finish--error').addClass('d-block')
         .find('.alert').append(`<p>${msg}</p>`);
     }
     UserTaskManager.postStartChatBot(nReqBody, cbError).then((result) => {
-        console.log('postBot');
+        // console.log('postBot');
         if (result.status.state === 'ok') {
-            console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result));
             $('.form-submit-finish').addClass('d-block')
                 .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
         }
     });
 }
 
-function fillListUsers($wrapper, data) {
+function fillListUsers($wrapper, accounts) {
     $wrapper.empty().addClass('border-light-color');
     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    data.forEach((item) => {
-        $(`<option class="list-group-item py-2" value="${item.username}">
-            ${item.username}
+    accounts.forEach((name) => {
+        $(`<option class="list-group-item py-2" value="${name}">
+            ${name}
         </option>`).appendTo($(`.${selectCls}`));
     });
     $(`.${selectCls}`).on('change', function () {
         usernameSelected = $(`.${selectCls} option:selected`).val();
-        console.log(usernameSelected);
+        // console.log(usernameSelected);
         chatBotLogs.init(selectCls, clsConst);
+    });
+}
+
+function getMetaLazy($wrapper) {
+    User.getMetadataLazy().then((res) => {
+        if (res.status.state === 'ok' && res.data && res.data.accounts) {
+            fillListUsers($wrapper, res.data.accounts);
+            chatBotLogs.init(selectCls, clsConst);
+        }
     });
 }
 
 /**
  * Init header
  */
-function initChatMsg() {
+function initHandlers() {
     const tplTextField = () => $(`<div class="chat-bot-text-fields mt-2">
         <div class="row">
             <div class="col">
@@ -93,22 +103,22 @@ function initChatMsg() {
 
     // alert close
     $('.form-submit-finish .close').on('click', function () {
-        console.log('alert close');
+        // console.log('alert close');
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
     // alert close
     $('.form-submit-finish--error .close').on('click', function () {
-        console.log('alert close');
+        // console.log('alert close');
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
     $('#v-pills-logs-tab').on('click', (e) => {
         // at this point of time setInterval is working
         const $wrapper = $('.log-users-list');
-        fillListUsers($wrapper, userListInstagram);
-        chatBotLogs.init(selectCls, clsConst);
+        getMetaLazy($wrapper);
+        // chatBotLogs.init(selectCls, clsConst);
     });
 }
 
@@ -135,11 +145,11 @@ export function init() {
             onSubmitHandler
         };
         wizardForm.init(wizardCfg);
-        initChatMsg();
+        initHandlers();
+        chatBotStatus.init();
+        // getMetaLazy();
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
-            console.log('INSTAGRAM_ACCOUNS_RENDERED', dataObj);
-            userListInstagram = dataObj.dataArray;
-            chatBotStatus.init();
+            // userListInstagram = dataObj.dataArray;
         });
     }
 }

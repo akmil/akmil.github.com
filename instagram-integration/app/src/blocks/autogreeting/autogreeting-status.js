@@ -1,5 +1,5 @@
 import {CONST} from '../../common/js-services/consts';
-import {getTasksData} from '../follow/follow-status';
+import {getTasksData} from '../_shared/task-status/task-status';
 
 export function init(cfg) {
     if ($(cfg.currentPageCls).length) {

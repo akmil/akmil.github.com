@@ -16,30 +16,13 @@
                 <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show" id="runned" role="tabpanel" aria-labelledby="v-pills-runned-tab">
-                            <div class="tasks-runs--box">
-                                <h3>Запущеные</h3>
-                                <ul class="tasks-runs list-unstyled"></ul>
-                            </div>
+                            {{>task-status wrapperCls='tasks-runs--box' listCls = 'tasks-runs' title='Запущеные'}}
                         </div>
                         <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
-                            <div class="tasks-stopped--box">
-                                <h3>Остановленные</h3>
-                                <ul class="tasks-stopped list-unstyled"></ul>
-                            </div>
+                            {{>task-status wrapperCls='tasks-stopped--box' listCls='tasks-stopped' title='Остановленные'}}
                         </div>
                         <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
-                            <div class="log-tasks--box">
-                                <h3>Логи</h3>
-                                <div class="log-users-list"></div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="logs-pagination pagination justify-content-center"></ul>
-                                </nav>
-                                <ul class="bot-log-tasks list-unstyled">
-                                    <li class="ipsField tag_field">
-                                        loading...
-                                    </li>
-                                </ul>
-                            </div>
+                            {{>logs}}
                         </div>
                         <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
                             <div class="js_add-new-task">

@@ -21,16 +21,13 @@ export const CONST = {
         instagramTaskManager: 'instagram-task-manager/',
         instagramTaskManager_getMetaData: 'instagram-task-manager/meta',
         instagramTaskManager_getTaskTypes: 'instagram-task-manager/task/types',
-        instagramTaskManager_getTaskByTypes: (type, subtype) => `instagram-task-manager/meta/type/${type}/subtype/${subtype}`,
-        instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {STRATEGY_TYPE}/subtype/{STRATEGY_SUBTYPE}
+        instagramTaskManager_getTaskByTypes: 'instagram-task-manager/meta/type/',
+        instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {TYPE}/subtype/{SUBTYPE}
         instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task',
         instagramTaskManager_putStopTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_postStartChatBot: 'instagram-task-manager/task',
-        instagramTaskManager_getLogsChatBot: (path, page) => {
-            const {type, subtype, username} = path;
-            return `instagram-task-manager/logs/type/${type}/subtype/${subtype}/account/${username}${page ? `?page=${page}` : ''}`;
-        }
+        instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
     },
     user: {
         email: '',
@@ -64,6 +61,9 @@ export const CONST = {
         },
         tasks: {
             NEW_TASK_CREATED: 'new_task_created'
+        },
+        logs: {
+            STOP_LOGS: 'stop_logs'
         }
     },
     getPath(name, id) {
@@ -84,5 +84,15 @@ export const CONST = {
             return this.url.base + this.url[name](type, subtype);
         }
         return this.url.base + this.url[name];
+    },
+    getPathByArr(name, array, page) {
+        const base = this.url.base + this.url[name];
+        const reducer = (accumulator, currentValue) => `${accumulator}/${currentValue}`;
+        const url = base + array.reduce(reducer); // ${type}/subtype/${subtype}
+        // console.log(url);
+        if (page) {
+            return `${url}?page=${page}`;
+        }
+        return url;
     }
 };

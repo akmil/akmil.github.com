@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import UserTaskManager from '../../common/js-services/api-task-manager';
+import UserTaskManager from '../../../common/js-services/api-task-manager';
 
 let clsConst = {
     currentPageCls: '',
@@ -20,7 +20,7 @@ let intervalId = '';
 function initHandlerPagination($previous, $next, dataArray) {
     const $wrapper = $(clsConst.pagination);
     const {pagination} = dataArray.settings;
-    const lastPage = pagination.pages[pagination.pages.length - 1];
+    // const lastPage = pagination.pages[pagination.pages.length - 1];
 
     $previous.on('click', (e) => {
         const $liActive = $wrapper.find('li.page-number.active');
@@ -43,9 +43,9 @@ function initHandlerPagination($previous, $next, dataArray) {
         }
         currentPage = pagination.next;
         $liActive.removeClass('active');
-        if (lastPage <= currentActiveIdx + 1) {
-            $(e.target).parent().addClass('disabled');
-        }
+        // if (lastPage <= currentActiveIdx + 1) {
+        //     $(e.target).parent().addClass('disabled');
+        // }
         if (currentActiveIdx && $previous.hasClass('disabled')) {
             $previous.removeClass('disabled');
         }
@@ -57,6 +57,7 @@ function initHandlerPagination($previous, $next, dataArray) {
         currentPage = 1;
     });
     $(`${clsConst.pagination} ${clsConst.paginationPgNumber}`).on('click', (e) => {
+        e.preventDefault();
         const val = $(e.target).text();
         currentPage = parseInt(val, 10);
         getLogsData($list, path, currentPage);
@@ -71,9 +72,11 @@ function addPagination(dataArray, $wrapper) {
     clearPagination($wrapper);
 
     $wrapper.append(tplPrevious);
-    pagination['pages'].forEach((item) => {
-        $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
-    });
+    if (pagination && pagination['pages']) {
+        pagination['pages'].forEach((item) => {
+            $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
+        });
+    }
     $wrapper.append(tplNext);
     initHandlerPagination(tplPrevious, tplNext, dataArray);
 }
@@ -113,11 +116,27 @@ function fillListMeta($list, dataArray, isRuns) {
     });
 }
 
+function tabHandler() {
+    $('#v-pills-tab').on('click', 'a', (e) => {
+        e.preventDefault();
+        const tab = $(e.target);
+        // const hasId = 'v-pills-logs-tab';
+        if (tab.attr('id') !== 'v-pills-logs-tab') {
+            console.log('stop req');
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+        }
+    });
+}
+
 function getLogsData($list, path, page) {
     path.username = getUsername(selectCls);
-    UserTaskManager.getLogsChatBot(path, page).then((result) => {
+    const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}`];
+    UserTaskManager.getLogsChatBot(pathArr, page).then((result) => {
         if (result.status.state === 'ok') {
             fillListMeta($list, result.data);
+            tabHandler();
             const updateInterval = result.data.settings.invoke_in_millis;
             // reset Timer request
             if (intervalId) {
