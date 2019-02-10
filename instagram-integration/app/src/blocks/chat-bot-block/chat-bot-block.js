@@ -1,12 +1,12 @@
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
-import User from '../../common/js-services/user';
+// import User from '../../common/js-services/user';
+import * as tabs from '../_shared/tebs-pils/tabs';
 import * as chatBotStatus from './chat-bot-status';
 import * as chatBotLogs from '../_shared/logs/logs';
 
 let usernameSelected = '';
-// let userListInstagram = [];
 const selectCls = 'js_logs-accounts';
 const clsConst = {
     currentPageCls: '.chat-bot-page',
@@ -14,8 +14,8 @@ const clsConst = {
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.autogreetT,
-    pathSubType: CONST.url.tmTypes.autogreetSubT[0]
+    pathType: CONST.url.tmTypes.chatBotT,
+    pathSubType: CONST.url.tmTypes.chatBotSubT[0]
 };
 
 function onSubmitHandler(e) {
@@ -72,14 +72,14 @@ function fillListUsers($wrapper, accounts) {
     });
 }
 
-function getMetaLazy($wrapper) {
-    User.getMetadataLazy().then((res) => {
-        if (res.status.state === 'ok' && res.data && res.data.accounts) {
-            fillListUsers($wrapper, res.data.accounts);
-            chatBotLogs.init(selectCls, clsConst);
-        }
-    });
-}
+// function getMetaLazy($wrapper, cbFillListUsers) {
+//     User.getMetadataLazy().then((res) => {
+//         if (res.status.state === 'ok' && res.data && res.data.accounts) {
+//             cbFillListUsers($wrapper, res.data.accounts);
+//             chatBotLogs.init(selectCls, clsConst);
+//         }
+//     });
+// }
 
 /**
  * Init header
@@ -114,12 +114,16 @@ function initHandlers() {
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
+
+    /*
     $('#v-pills-logs-tab').on('click', (e) => {
         // at this point of time setInterval is working
         const $wrapper = $('.log-users-list');
-        getMetaLazy($wrapper);
+        getMetaLazy($wrapper, fillListUsers);
         // chatBotLogs.init(selectCls, clsConst);
     });
+    */
+    tabs.init(fillListUsers);
 }
 
 function setUserName(state) {
@@ -147,9 +151,9 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         chatBotStatus.init();
-        // getMetaLazy();
-        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
-            // userListInstagram = dataObj.dataArray;
+        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+            // console.log(accounts);
+            chatBotLogs.init(selectCls, clsConst);
         });
     }
 }

@@ -1,11 +1,12 @@
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
+import * as tabs from '../_shared/tebs-pils/tabs';
 import * as chatBotStatus from './autogreeting-status';
 import * as chatBotLogs from '../_shared/logs/logs';
 
 let usernameSelected = '';
-let userListInstagram = [];
+// let userListInstagram = [];
 const selectCls = 'js_logs-accounts';
 const speedType = '.js_autogreeting-speed';
 const clsConst = {
@@ -62,9 +63,9 @@ function onSubmitHandler(e) {
 function fillListUsers($wrapper, data) {
     $wrapper.empty().addClass('border-light-color');
     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    data.forEach((item) => {
-        $(`<option class="list-group-item py-2" value="${item.username}">
-            ${item.username}
+    data.forEach((name) => {
+        $(`<option class="list-group-item py-2" value="${name}">
+            ${name}
         </option>`).appendTo($(`.${selectCls}`));
     });
     $(`.${selectCls}`).on('change', function () {
@@ -77,7 +78,7 @@ function fillListUsers($wrapper, data) {
 /**
  * Init header
  */
-function initChatMsg() {
+function initHandlers() {
     const tplTextField = (msg) => $(`<div class="chat-bot-text-fields mt-2">
         <div class="row">
             <div class="col">
@@ -105,12 +106,12 @@ function initChatMsg() {
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
-    $('#v-pills-logs-tab').on('click', (e) => {
+    // $('#v-pills-logs-tab').on('click', (e) => {
         // at this point of time setInterval is working
-        const $wrapper = $('.log-users-list');
-        fillListUsers($wrapper, userListInstagram);
-        chatBotLogs.init(selectCls, clsConst);
-    });
+        // const $wrapper = $('.log-users-list');
+        // fillListUsers($wrapper, userListInstagram);
+    // });
+    tabs.init(fillListUsers);
 }
 
 function setUserName(state) {
@@ -205,11 +206,16 @@ export function init() {
             onSubmitHandler
         };
         wizardForm.init(wizardCfg);
-        initChatMsg();
-        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
-            console.log('INSTAGRAM_ACCOUNS_RENDERED', dataObj);
-            userListInstagram = dataObj.dataArray;
-            chatBotStatus.init(clsConst);
+        initHandlers();
+        chatBotStatus.init(clsConst);
+        // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
+        //     console.log('INSTAGRAM_ACCOUNS_RENDERED', dataObj);
+        //     userListInstagram = dataObj.dataArray;
+        //     chatBotStatus.init(clsConst);
+        // });
+        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+            // console.log(accounts);
+            chatBotLogs.init(selectCls, clsConst);
         });
     }
 }

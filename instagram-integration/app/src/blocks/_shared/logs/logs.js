@@ -116,11 +116,10 @@ function fillListMeta($list, dataArray, isRuns) {
     });
 }
 
-function tabHandler() {
+function tabStopReqHandler() {
     $('#v-pills-tab').on('click', 'a', (e) => {
         e.preventDefault();
         const tab = $(e.target);
-        // const hasId = 'v-pills-logs-tab';
         if (tab.attr('id') !== 'v-pills-logs-tab') {
             console.log('stop req');
             if (intervalId) {
@@ -136,7 +135,7 @@ function getLogsData($list, path, page) {
     UserTaskManager.getLogsChatBot(pathArr, page).then((result) => {
         if (result.status.state === 'ok') {
             fillListMeta($list, result.data);
-            tabHandler();
+            tabStopReqHandler();
             const updateInterval = result.data.settings.invoke_in_millis;
             // reset Timer request
             if (intervalId) {

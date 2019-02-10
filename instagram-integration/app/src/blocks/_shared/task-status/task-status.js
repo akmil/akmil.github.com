@@ -2,34 +2,62 @@ import UserTaskManager from '../../../common/js-services/api-task-manager';
 import viewUtils from '../../../common/js-services/view';
 import {CONST} from '../../../common/js-services/consts';
 
-// function reduceState(taskState, isRuns, $list, item) {
-//     const {progress, task_id, type, subtype, status} = item;
-//     switch (taskState) {
-//         case 'STOPPED':
-//             $(`<li class="list-group-item p-0 py-2" data-username="${type}" data-task-id="${task_id}">
-//                 <div class="media-body d-flex">
-//                     <div class="col task-type">
-//                         ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
-//                         <div class="task-progress">
-//                             <p class="small my-1">Остановлено</p>
-//                             ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
-//                         </div>
-//                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-//                     </div>
-//                     <!--<div class="col task-subtype">
-//                         ${(subtype) ? `<p class="mt-0 mb-1">${subtype}</p>` : ''}
-//                     </div>-->
-//                 </div>
-//             </li>`).appendTo($list);
-//             break;
+function fillListByState(taskState, $list, item) {
+    const {progress, task_id, type, status} = item;
+    const addItem = (tplStop) => {
+        $(`<li class="list-group-item p-0 py-2" data-type="${type}" data-task-id="${task_id}">
+                ${tplStop}
+            </li>`).appendTo($list);
+    };
+    const tplPaused = `<div class="card-block">
+        <h4 class="card-title">На паузе</h4>
+        <div class="text-right">
+            <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
+        </div>
+        <span class="text-success">10%</span>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    const tplPregress = `<div class="col task-progress">
+            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
+        </div>
+        <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
+        <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    const tplStop = `<div class="media-body d-flex">
+            <div class="col task-type">
+                ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
+                <div class="task-progress">
+                    <p class="small my-1">Остановлено</p>
+                    ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
+                </div>
+            <button class="btn btn-warning js_btn-delete-task">Удалить</button>
+            </div>
+        </div>`;
+    const tplFinished = `<div class="col task-progress">
+                <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
+            </div>
+            <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
+            <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    switch (taskState) {
+        case 'STOPPED':
+            addItem(tplStop);
+            break;
+        case 'IN_PROGRESS':
+            addItem(tplPregress);
+            break;
+        case 'FINISHED':
+            addItem(tplFinished);
+            break;
+        case 'PAUSED':
+            addItem(tplPaused);
+            break;
+        default:
+            break;
+    }
+}
 
-//         default:
-//             break;
-//     }
-// }
-
-function fillListMeta($list, dataArray, isRuns) {
-    const items = dataArray;
+function fillListMeta($list, items, isRuns) {
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
     $list.empty();
     if (!items.length) {
@@ -39,66 +67,17 @@ function fillListMeta($list, dataArray, isRuns) {
         return;
     }
     items.forEach((item) => {
-        const {progress, task_id, type, subtype} = item;
-        if (item.status.state === 'STOPPED' && !isRuns) {
-            $(`<li class="list-group-item p-0 py-2" data-username="${type}" data-task-id="${task_id}">
-                <div class="media-body d-flex">
-                    <div class="col task-type">
-                        ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
-                        <div class="task-progress">
-                            <p class="small my-1">Остановлено</p>
-                            ${(item.status.reason) ? `<p class="my-1">${item.status.reason}</p>` : ''}
-                        </div>
-                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-                    </div>
-                    <!--<div class="col task-subtype">
-                        ${(subtype) ? `<p class="mt-0 mb-1">${subtype}</p>` : ''}
-                    </div>-->
-                </div>
-            </li>`).appendTo($list);
-        } else if (item.status.state === 'IN_PROGRESS' && isRuns) {
-            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
-                <div class="col task-progress">
-                    <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
-                </div>
-                <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
-                <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-            </li>`).appendTo($list);
-        } else if (item.status.state === 'FINISHED' && !isRuns) {
-            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
-                 <div class="card-block">
-                    <h4 class="card-title">Выполненно</h4>
-                    <div class="text-right">
-                        <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
-                    </div>
-                    <span class="text-success">100%</span>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-                </div>
-            </li>`).appendTo($list);
-        } else if (item.status.state === 'PAUSED' && isRuns) {
-            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
-                <div class="card-block">
-                    <h4 class="card-title">На паузе</h4>
-                    <div class="text-right">
-                        <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
-                    </div>
-                    <span class="text-success">10%</span>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-                </div>
-            </li>`).appendTo($list);
-        }
-        if (!$('li', $list).length) {
-            $(`<li class="list-group-item py-2" data-task-id="${task_id}">
-                <p>В этом разделе нет ни одной задачи.</p>
-            </li>`).appendTo($list);
+        if ((item.status.state === 'STOPPED' || item.status.state === 'FINISHED') && !isRuns) {
+            fillListByState(item.status.state, $list, item);
+        } else if ((item.status.state === 'IN_PROGRESS' || item.status.state === 'PAUSED') && isRuns) {
+            fillListByState(item.status.state, $list, item);
         }
     });
+    if (!$('li', $list).length) {
+        $(`<li class="list-group-item py-2">
+            <p>В этом разделе нет ни одной задачи.</p>
+        </li>`).appendTo($list);
+    }
 }
 
 /* eslint-disable no-use-before-define */
