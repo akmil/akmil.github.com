@@ -18,6 +18,11 @@ const clsConst = {
     pathType: CONST.url.tmTypes.autogreetT,
     pathSubType: CONST.url.tmTypes.autogreetSubT[0]
 };
+const state = {
+    user_default_config: {
+        task_mode: 'SAFE'
+    }
+};
 
 function onSubmitHandler(e) {
     const fields = $('.chat-bot-text-fields');
@@ -38,7 +43,7 @@ function onSubmitHandler(e) {
         'type': CONST.url.tmTypes.autogreetT,
         'subtype': CONST.url.tmTypes.autogreetSubT[0],
         'user_default_config': {
-            'task_mode': 'AGGRESSIVE' // todo
+            'task_mode': state.user_default_config.task_mode // todo
         },
         'user_custom_config': {
             'messages': reqBody
@@ -118,11 +123,7 @@ function setUserName(state) {
     // console.log('getTasksData', state.username);
     usernameSelected = state.username;
 }
-const state = {
-    user_default_config: {
-        task_mode: 'SAFE'
-    }
-};
+
 function getDataStepSpeed() {
     // const users = $('#followers').val()
     //     .trim()
@@ -135,19 +136,19 @@ function getDataStepSpeed() {
     // };
     const fillSpeedList = function ($wrapper, data) {
         const taskModes = data.cfg && data.cfg.task_modes;
-        const radioBtnReducer = function (item) {
+        const radioBtnReducer = function (item, val) {
             switch (item) {
                 case 'AGGRESSIVE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> ${val} в час</label>`;
                 // break;
                 case 'MIDDLE':
-                    return (`<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);
+                    return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> ${val} в час</label>`);
                 // break;
                 case 'SAFE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> 9 подписок в час</label>`;
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> ${val} в час</label>`;
                 // break;
                 default:
                     console.log('default', item);
@@ -159,7 +160,7 @@ function getDataStepSpeed() {
             // console.log('structure: ' + item);
             if (Object.prototype.hasOwnProperty.call(taskModes, item)) {
                 $(`<div class="custom-control custom-radio">
-                ${radioBtnReducer(item)}
+                ${radioBtnReducer(item, taskModes[item])}
             </div>`).appendTo($wrapper);
             }
         }
@@ -174,11 +175,10 @@ function getDataStepSpeed() {
         if (result.status.state === 'ok') {
             fillSpeedList($(speedType), result.data.found);
             // speed radio-btn group
-            $(`${speedType} input[type=radio]`).on('click', function () {
-                const value = $(this).attr('value');
-                state.user_default_config = {
-                    task_mode: value.toUpperCase()
-                };
+            $(`${speedType} input[type=radio]`).on('click', (e) => {
+                const value = $(e.target).attr('value');
+                state.user_default_config.task_mode = value.toUpperCase();
+                console.log(state);
             });
         }
     });

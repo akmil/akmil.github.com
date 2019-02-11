@@ -89,15 +89,15 @@ function getDataStepSpeed() {
         const radioBtnReducer = function (item) {
             switch (item) {
                 case 'AGGRESSIVE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
                     <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
                 // break;
                 case 'MIDDLE':
-                    return (`<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input">
+                    return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
                     <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);
                 // break;
                 case 'SAFE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="safe" class="custom-control-input" checked>
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
                     <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> 9 подписок в час</label>`;
                 // break;
                 default:
