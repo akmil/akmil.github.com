@@ -98,7 +98,7 @@ function initHandlers(holders, path) {
         console.log('STOP Task id', taskId);
         UserTaskManager.stopTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData(holders, _path);
+            getTasksData(holders, _path, 'excludeAddingSubtype');
         });
     });
 
@@ -107,17 +107,19 @@ function initHandlers(holders, path) {
         console.log('DELETE id', taskId);
         UserTaskManager.deleteTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData(holders, _path);
+            getTasksData(holders, _path, 'excludeAddingSubtype');
         });
     });
 }
 
-export function getTasksData(holders, path) {
+export function getTasksData(holders, path, excludeAddingSubtype) {
     const {$runs, $stopped} = holders;
-    const _path = path || {
-        type: CONST.url.tmTypes.followingT,
-        subtype: CONST.url.tmTypes.followingSubT[0]
+    const _path = {
+        ...path
     };
+    if (excludeAddingSubtype) {
+        _path.excludeAddingSubtype = excludeAddingSubtype;
+    }
     UserTaskManager.getMetadata(_path).then((result) => {
         // console.log('getMetadata & fillListMeta', result);
         if (result.status.state === 'ok') {
@@ -138,6 +140,10 @@ export function init() {
     };
     getTasksData(holders);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
-        getTasksData(holders);
+        const _path = {
+            type: CONST.url.tmTypes.followingT,
+            subtype: CONST.url.tmTypes.followingSubT[0]
+        };
+        getTasksData(holders, _path, 'excludeAddingSubtype');
     });
 }

@@ -14,7 +14,7 @@ export function init(cfg) {
         getTasksData(wrappers, path);
         window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
             console.log('getTasksData **NEW_TASK_CREATED**');
-            getTasksData(wrappers, path);
+            getTasksData(wrappers, path, 'excludeAddingSubtype');
         });
     }
 }
