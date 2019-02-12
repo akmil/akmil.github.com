@@ -5,7 +5,10 @@ import CookieStorage from './cookie';
 
 const objToArr = (obj) => {
     if (obj && obj.subtype) {
-        obj.subtype = `subtype/${obj.subtype}`;
+        if (!obj.subtype.includes('subtype/')) {
+            obj.subtype = `subtype/${obj.subtype}`;
+            console.log('includes');
+        }
     }
     return Object.values(obj);
 };
@@ -39,10 +42,11 @@ class UserTaskManager {
     }
 
     getMetadata(path, cbError) {
-        const pathArr = (!path.excludeAddingSubtype) ? objToArr(path) : path;
-        if (path.excludeAddingSubtype) {
-            delete path.excludeAddingSubtype;
-        }
+        // const pathArr = (!path.excludeAddingSubtype) ? objToArr(path) : path;
+        const pathArr = objToArr(path);
+        // if (path.excludeAddingSubtype) {
+        //     delete path.excludeAddingSubtype;
+        // }
         return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getTaskByTypes', pathArr)}`,
             this.getToken('asHeader'), cbError);
     }

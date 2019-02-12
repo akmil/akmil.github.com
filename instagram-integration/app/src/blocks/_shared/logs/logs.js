@@ -69,15 +69,18 @@ function addPagination(dataArray, $wrapper) {
     const {pagination} = dataArray.settings;
     const tplPrevious = $(`<li class="page-item ${(!pagination.previous) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.previous) ? 'tabindex="-1"' : ''}>Назад</a></li>`);
     const tplNext = $(`<li class="page-item ${(!pagination.next) ? 'disabled' : ''}"><a class="page-link" href="#" ${(!pagination.next) ? 'tabindex="-1"' : ''}>Вперед</a></li>`);
+
     clearPagination($wrapper);
 
-    $wrapper.append(tplPrevious);
-    if (pagination && pagination['pages']) {
-        pagination['pages'].forEach((item) => {
-            $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
-        });
+    if (pagination.next) {
+        $wrapper.append(tplPrevious);
+        if (pagination && pagination['pages']) {
+            pagination['pages'].forEach((item) => {
+                $(`<li class="page-item page-number ${(pagination.current === item) ? 'active' : ''}"><a class="page-link" href="#">${item}</a></li>`).appendTo($wrapper);
+            });
+        }
+        $wrapper.append(tplNext);
     }
-    $wrapper.append(tplNext);
     initHandlerPagination(tplPrevious, tplNext, dataArray);
 }
 

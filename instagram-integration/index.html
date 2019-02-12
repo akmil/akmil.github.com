@@ -92,11 +92,6 @@
                           <ul class="nav flex-column">
       
                               
-                              <li class="nav-item">
-                                  <a class="nav-link text-light" href="./instagram-accounts.html">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                  Instagram аккаунты</a>
-                              </li>
                               <li class="nav-item"><a class="nav-link text-light" href="./messages.html">
                                   <i class="fas fa-comments mr-1"></i>Direct</a></li>
                               <li class="nav-item"><a class="nav-link text-light" href="./follow.html">
@@ -117,16 +112,120 @@
         
         
         
-              <h1>Добро пожаловать на Luxgram</h1>
-                <p>Шаг1. Чтобы начать работу - добавьте свой аккаунт (или несколько аккаунтов) Instagram, с которых хотите осуществлять продвижение
-                Кнопка “Добавить аккаунт”.
-                </p>
-                <p>
-                    Шаг 2. Прочтите видеоинструкцию или посмотрите видео, чтобы понимать, как работать с роботом Service.
-                </p>
-                <p>
-                    Шаг 3. Слева в меню есть функции. Выберите интересующую вас функцию и начните продвижение.
-                </p>
+            
+                <div class="profile-user">
+                    <div class="container">
+                            <div class="row">
+                                <div class="col-12 p-3">
+                                    <div class="heading my-3">
+                                        <h2 class="view-title">Instagram аккаунты</h2>
+                                        <div class="actions">
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-new-account">
+                                                <i class="fas fa-plus"></i>Добавить аккаунт</button>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="spinner-box justify-content-center my-5 py-5">
+                                        <div class="spin-animation">
+                                            <svg aria-hidden="true" data-prefix="far" data-icon="sync-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sync-alt fa-w-16 fa-fw fa-2x"><path fill="currentColor" d="M483.515 28.485L431.35 80.65C386.475 35.767 324.485 8 256 8 123.228 8 14.824 112.338 8.31 243.493 7.971 250.311 13.475 256 20.301 256h28.045c6.353 0 11.613-4.952 11.973-11.294C66.161 141.649 151.453 60 256 60c54.163 0 103.157 21.923 138.614 57.386l-54.128 54.129c-7.56 7.56-2.206 20.485 8.485 20.485H492c6.627 0 12-5.373 12-12V36.971c0-10.691-12.926-16.045-20.485-8.486zM491.699 256h-28.045c-6.353 0-11.613 4.952-11.973 11.294C445.839 370.351 360.547 452 256 452c-54.163 0-103.157-21.923-138.614-57.386l54.128-54.129c7.56-7.56 2.206-20.485-8.485-20.485H20c-6.627 0-12 5.373-12 12v143.029c0 10.691 12.926 16.045 20.485 8.485L80.65 431.35C125.525 476.233 187.516 504 256 504c132.773 0 241.176-104.338 247.69-235.493.339-6.818-5.165-12.507-11.991-12.507z"></path></svg>
+                                        </div>
+                                    </div>
+                    
+                                    <ul class="list-unstyled accounts-list mt-5 p-3">
+                                    </ul>
+                    
+                                    <div class="error-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                    <div class="modal fade" id="modal-new-account" tabindex="-1" role="dialog" aria-labelledby="modal-new-account" style="display:none">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Добавить аккаунт</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="sr-only">Логин</label>
+                                            <input class="form-control" name="username" placeholder="Логин">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only">Пароль</label>
+                                            <input type="password" class="form-control" name="pass" placeholder="Пароль">
+                                        </div>
+                                        <button type="button" class="btn btn-success js_add-instagram-account" data-dismiss="modal">Добавить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal fade" id="security-code" tabindex="-1" role="dialog" aria-labelledby="security-code11" style="display:none">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="js_success-feedback mt-0"></p>
+                                    <form>
+                                        <div class="form-group">
+                                            <label class="sr-only">Код подтверждения</label>
+                                            <input class="form-control js_confirm-key" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required title="6 characters minimum">
+                                        </div>
+                                        <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                        <button type="button" class="js_pass-checkpoint-btn btn btn-outline-secondary margin-top-md center-block" data-dismiss="modal">Запросить повторно</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal fade" id="security-code-phoneOremail" tabindex="-1" role="dialog" aria-labelledby="security-code" style="display:none">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-new-ticket-label">Прохождение чекпоинта</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="js_success-feedback m-0"></p>
+                                    <form>
+                                        <div class="first-step">
+                                            <p class="text-center mt-0">Выберите способ подтверждения кода</p>
+                                            <div class="js_btn-type-switcher btn-group btn-group-toggle justify-content-center mb-3 w-100" data-toggle="buttons">
+                                                <label class="btn btn-secondary active">
+                                                    <input type="radio" name="options" id="option1" value="EMAIL" checked="checked">EMAIL
+                                                </label>
+                                                <label class="btn btn-secondary">
+                                                    <input type="radio" name="options" id="option2" value="PHONE">Телефон
+                                                </label>
+                                            </div>
+                    
+                                            <button type="button" class="js_get-security-code-phoneOremail btn btn-outline-success btn-block">
+                                                Запросить код подтверждения</button>
+                                        </div>
+                    
+                                        <div class="second-step d-none">
+                                            <div class="form-group mt-3">
+                                                <label class="sr-only">Код подтверждения</label>
+                                                <input class="form-control js_confirm-key" placeholder="Код подтверждения" minlength="6" pattern=".{6,}" required="" title="6 characters minimum" style="border-color:red">
+                                            </div>
+                                            <button type="button" class="js_confirm-security-code btn btn-success margin-top-md center-block" data-dismiss="modal">Подтвердить</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
         
       </main>
 

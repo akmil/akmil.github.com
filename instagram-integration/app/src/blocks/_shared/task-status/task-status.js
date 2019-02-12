@@ -19,11 +19,11 @@ function fillListByState(taskState, $list, item) {
             <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
-    const tplPregress = `<div class="col task-progress">
-            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
-        </div>
-        <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
-        <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    const tplProgress = `<div class="col task-progress">
+            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>        
+            <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
+            <button class="btn btn-warning js_btn-delete-task">Удалить</button>
+        </div>`;
     const tplStop = `<div class="media-body d-flex">
             <div class="col task-type">
                 ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
@@ -35,22 +35,21 @@ function fillListByState(taskState, $list, item) {
             </div>
         </div>`;
     const tplFinished = `<div class="col task-progress">
-                <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
+                <p class="mt-0 mb-1 name">Завершено : ${task_id}</p>
             </div>
-            <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
             <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     switch (taskState) {
+        case 'PAUSED':
+            addItem(tplPaused);
+            break;
+        case 'IN_PROGRESS':
+            addItem(tplProgress);
+            break;
         case 'STOPPED':
             addItem(tplStop);
             break;
-        case 'IN_PROGRESS':
-            addItem(tplPregress);
-            break;
         case 'FINISHED':
             addItem(tplFinished);
-            break;
-        case 'PAUSED':
-            addItem(tplPaused);
             break;
         default:
             break;
@@ -98,7 +97,7 @@ function initHandlers(holders, path) {
         console.log('STOP Task id', taskId);
         UserTaskManager.stopTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData(holders, _path, 'excludeAddingSubtype');
+            getTasksData(holders, _path);
         });
     });
 
@@ -107,19 +106,17 @@ function initHandlers(holders, path) {
         console.log('DELETE id', taskId);
         UserTaskManager.deleteTaskByID(taskId).then((result) => {
             console.log(result);
-            getTasksData(holders, _path, 'excludeAddingSubtype');
+            getTasksData(holders, _path);
         });
     });
 }
 
-export function getTasksData(holders, path, excludeAddingSubtype) {
+export function getTasksData(holders, path) {
     const {$runs, $stopped} = holders;
-    const _path = {
-        ...path
+    const _path = path || {
+        type: CONST.url.tmTypes.followingT,
+        subtype: CONST.url.tmTypes.followingSubT[0]
     };
-    if (excludeAddingSubtype) {
-        _path.excludeAddingSubtype = excludeAddingSubtype;
-    }
     UserTaskManager.getMetadata(_path).then((result) => {
         // console.log('getMetadata & fillListMeta', result);
         if (result.status.state === 'ok') {
@@ -144,6 +141,6 @@ export function init() {
             type: CONST.url.tmTypes.followingT,
             subtype: CONST.url.tmTypes.followingSubT[0]
         };
-        getTasksData(holders, _path, 'excludeAddingSubtype');
+        getTasksData(holders, _path);
     });
 }
