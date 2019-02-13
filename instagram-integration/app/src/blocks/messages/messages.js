@@ -68,7 +68,7 @@ function fillList($list, dataArray, isAppentPrevMsg) {
                 str = `<div class="chat-img">
                 <a target="_blank" href="${value}">${value}</a>`;
                 break;
-            default: str = `<div class="chat-text" >${value}</div>`;
+            default: str = `<div class="chat-text ${cssCls}" >${value}</div>`;
         }
         return str;
     };
@@ -83,9 +83,12 @@ function fillList($list, dataArray, isAppentPrevMsg) {
         console.log('isAppentPrevMsg to', cList);
     } else {
         cList.empty().addClass('border-light-color');
+        // add margin-auto to make masseges on bottom
+        $('<li class="mt-auto"></li>').appendTo(cList);
     }
     items.forEach((item) => {
         const message = item;
+        const value = message.value.replace(/(?:\r\n|\r|\n)/g, '<br />');
         // const checkpoint = item.checkpoint || item;
 
         if (message.side.toLowerCase() === 'left') {
@@ -99,7 +102,7 @@ function fillList($list, dataArray, isAppentPrevMsg) {
                     }
                 <div>
                     <p class="chat-username text-muted">${message.username}</p>
-                    ${insertMsg(message.value, message.type)}
+                    ${insertMsg(message.value, message.type, 'text-left')}
                 </div>
                     <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
@@ -108,7 +111,7 @@ function fillList($list, dataArray, isAppentPrevMsg) {
         } else {
             const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
                 <div class="d-flex justify-content-end">
-                    ${insertMsg(message.value, message.type)}
+                    ${insertMsg(value, message.type, 'text-right')}
                     <small class="pull-right chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`);
@@ -241,9 +244,9 @@ function getAndFillConversation(username, conversationId, isScrollDown) {
 
 function addHandlers() {
     let conversationId = '';
+    const $textArea = $('#sendMessageTextArea');
 
     $('#sendMessageButton').on('click', (e) => {
-        const $textArea = $('#sendMessageTextArea');
         const value = $textArea.val();
         const userData = $('.messages-list').data('conversation');
         const {username, conversationId} = userData;
@@ -257,6 +260,20 @@ function addHandlers() {
             }
         });
     });
+
+    $textArea.on('keydown', (e) => {
+        if (e.keyCode === 13) {
+            if (e.ctrlKey) {
+                console.log('ctrl+enter');
+                e.preventDefault();
+                e.target.value = `${e.target.value}\n`;
+            } else {
+                console.log('enter');
+                $('#sendMessageButton').trigger('click');
+            }
+        }
+    });
+
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
         const username = $(e.target).closest('.list-group-item').data('username');

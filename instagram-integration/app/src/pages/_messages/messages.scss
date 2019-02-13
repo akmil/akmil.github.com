@@ -59,7 +59,7 @@ $avatar-conversation-size: 38px;
 .messages-list {
   overflow-y: auto;
   height: calc(100vh - 62px - 20px - 80px);
-  width: 100%;  
+  width: 100%;
   .chat-date-text {
     text-align: center;
     font-size: small;
@@ -69,12 +69,13 @@ $avatar-conversation-size: 38px;
     position: relative;
     list-style-type: none;
     margin-left: 0;
-    padding-left: 0;
     padding-right: 0;
     display: flex;
     width: 100%;
     margin-bottom: 1rem;
+    font-size: 1rem;
     flex: 1 0 auto;
+    flex-grow: 0;
   }
   .chat-item-left {
     >div.d-flex {
@@ -91,7 +92,7 @@ $avatar-conversation-size: 38px;
     .chat-username {
         margin: 0;
     }
-    
+
     .chat-text {
       background-color: #bae3fa;
       display: inline-table;
@@ -112,7 +113,7 @@ $avatar-conversation-size: 38px;
     margin-left: $time-margin;
     color: $time-color;
     padding-right: $time-intent;
-  }  
+  }
 }
 .send-message-box {
     margin-top: -40px;
@@ -131,7 +132,7 @@ $avatar-conversation-size: 38px;
     display: inline-block;
     overflow: hidden;
     padding: 0;
-    
+
     /*for the background, optional*/
     background: $primary center center no-repeat;
     background-size: 75% 75%;
