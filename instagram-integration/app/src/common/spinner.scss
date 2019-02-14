@@ -1,0 +1,27 @@
+//spinner
+.spinner-box {
+  z-index: 99;
+  background-color: rgba(255,255,255, 0.75);
+  width: 100%;
+  top: 30%;
+  position: absolute;
+  &--sendMsg {
+    top: -50px;
+    left: -160px;
+    color: #000;
+  }
+  &--button {
+    font-size: 1rem;
+  }
+}
+
+button {
+  &.button--load {
+    .spinner-box {
+      display: block;
+    }
+  }
+  .spinner-box {
+    display: none;
+  }
+}

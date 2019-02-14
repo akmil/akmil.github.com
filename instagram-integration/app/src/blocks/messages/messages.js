@@ -2,15 +2,62 @@ import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import viewUtils from '../../common/js-services/view';
+import {fillMassagesList, fillUserList} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
+const stateCfg = {
+    pageIncrement: 0,
+    loadingFlag: false,
+    setSingleVal: false
+};
 let updateInterval = '';
 let intervalId = false;
+
+const renderResults = function (cfg) {
+    // let items;
+    const {dataArray: data, $list: ulElement, stateCfg} = cfg;
+
+    function showMessage(element, message, /* optional */clearList) {
+        // $btnGET.attr('disabled', false);
+
+        if (clearList) {
+            $('li', element).remove();
+        }
+        element.css({'overflow': 'auto'});
+        $('<li/>')
+            .addClass('list-group-item text-center')
+            .text(message)
+            .appendTo(ulElement);
+    }
+
+    if (stateCfg.loadingFlag === 'FINAL_PAGE') {
+        return false; // exit if has reached last page
+    }
+
+    // show fail msg
+    if (data === 'FAIL') {
+        showMessage(ulElement, 'Failure, possible key not correct.', true);
+        return false;
+    }
+
+    if (stateCfg.loadingFlag === 'STOP_LOAD' && data.length !== 0) {
+        stateCfg.loadingFlag = 'FINAL_PAGE';
+        showMessage(ulElement, 'No more results.', false);
+        // $liFooter.hide();
+        return false;
+    }
+
+    if (data === null || !data.length) {
+        showMessage(ulElement, 'No results found.', true);
+        return false;
+    }
+
+    fillMassagesList(cfg);
+};
 
 function isInMessagePage() {
     const $msgList = $('.messages-list');
@@ -51,76 +98,8 @@ $(document).ready(() => {
     });*/
 });
 
-// messages-list
-function fillList($list, dataArray, isAppentPrevMsg) {
-    const items = dataArray;
-    const cList = $list;
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
-    const insertMsg = (value, type, cssCls) => {
-        let str = '';
-        switch (type.toLowerCase()) {
-            case 'photo':
-                str = `<div class="chat-img">
-                    <img src="${value}" alt="Content Image" class="content-image">
-                </div>`;
-                break;
-            case 'link':
-                str = `<div class="chat-img">
-                <a target="_blank" href="${value}">${value}</a>`;
-                break;
-            default: str = `<div class="chat-text ${cssCls}" >${value}</div>`;
-        }
-        return str;
-    };
-    const addToList = (isAppentPrevMsg, $li, $list) => {
-        if (isAppentPrevMsg) {
-            $li.insertBefore($list.find('li:first-child'));
-        } else {
-            $li.appendTo($list);
-        }
-    };
-    if (isAppentPrevMsg) {
-        console.log('isAppentPrevMsg to', cList);
-    } else {
-        cList.empty().addClass('border-light-color');
-        // add margin-auto to make masseges on bottom
-        $('<li class="mt-auto"></li>').appendTo(cList);
-    }
-    items.forEach((item) => {
-        const message = item;
-        const value = message.value.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        // const checkpoint = item.checkpoint || item;
-
-        if (message.side.toLowerCase() === 'left') {
-            const $li = $(`<li class="chat-item chat-item-left col flex-column-reverse" value="${message.value}">
-                <div class="d-flex">
-                ${(message['profile_pic_url'])
-                    ? `<div class="chat-img-box"> 
-                            <img src="${message['profile_pic_url']}" alt="User Avatar" class="">
-                        </div>`
-                    : ''
-                    }
-                <div>
-                    <p class="chat-username text-muted">${message.username}</p>
-                    ${insertMsg(message.value, message.type, 'text-left')}
-                </div>
-                    <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
-                </div>
-            </li>`);
-            addToList(isAppentPrevMsg, $li, cList);
-        } else {
-            const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
-                <div class="d-flex justify-content-end">
-                    ${insertMsg(value, message.type, 'text-right')}
-                    <small class="pull-right chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
-                    </div>
-            </li>`);
-            addToList(isAppentPrevMsg, $li, cList);
-        }
-    });
-}
 function addPagination($wrapper, pagination) {
-    const cursor = pagination.prev_cursor;
+    let cursor = pagination.prev_cursor;
     const $button = $(`<button class="btn btn-secondary load-more d-flex position-absolute" style="top: -42px;"
         data-cursor="${cursor}">еще давай!</button>`);
 
@@ -130,71 +109,28 @@ function addPagination($wrapper, pagination) {
             const {username, conversationId} = userData;
             Spinner.startButtonSpinner($button);
             UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor}).then((result) => {
-                console.log('receive msg', result);
+                // console.log('receive msg', result);
                 Spinner.stopButtonSpinner($button);
-                fillList($msgList, result.data.meta.messages, 'appentPrevMsg');
+                renderResults({
+                    $list: $msgList,
+                    dataArray: result.data.meta.messages,
+                    isAppendPrevMsg: 'appentPrevMsg',
+                    stateCfg
+                });
+                // set new cursor
+                if (result.data.meta.pagination && result.data.meta.pagination.prev_cursor) {
+                    cursor = result.data.meta.pagination.prev_cursor;
+                } else {
+                    $button.remove();
+                }
+
+                // stop update interval
+                if (intervalId) {
+                    clearInterval(intervalId);
+                }
             });
         });
     }
-}
-// messages-user-list
-function fillUserList($list, dataArray) {
-    const items = dataArray.meta;
-    const cList = $list;
-    const conversationDetail = function(items) {
-        let tpl = '';
-        items.forEach((item) => {
-            if (items.length > 1) {
-                tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
-            } else {
-                tpl += `<img src="${item['profile_pic_url']}" class="media-photo mr-1" style="width: 24px;">
-                <div class="media-body">
-                <h5 class="title">
-                    ${item.username}
-                </h5>`;
-            }
-        });
-        if (items.length > 1) {
-            tpl += '<h5 class="title">Груповой чат</h5>';
-        }
-        return tpl;
-    };
-    const addConversations = function(conversations) {
-        let tpl = '';
-        conversations.forEach((item) => {
-            tpl += `<div class="media p-1" data-conversation-id="${item.id}">
-                    ${conversationDetail(item.to)}
-                    ${(item['last_message'] && (parseInt(item['last_message'].length, 10)) > 0)
-                        ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
-                        ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
-                        : ''}
-                    </div>
-            </div>`;
-        });
-        return tpl;
-    };
-    cList.empty().addClass('border-light-color');
-    // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
-    items.forEach((item, idx) => {
-        $(`<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
-                aria-expanded="true" aria-controls="collapse-${idx}">
-            <div class="media" id="heading-${idx}">
-                <a href="#" class="mr-3">
-                    <img src="https://i.imgur.com/jNNT4LE.png"
-                    class="media-photo">
-                </a>
-                ${(item['unread_conversations'] > 0) ? `<span class="badge badge-secondary position-absolute p-2">${item['unread_conversations']}</span>` : ''}
-                <div class="media-body">
-                    <h4 class="title">
-                        ${item.username}
-                    </h4>
-                </div>
-            </div>
-            <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
-                ${addConversations(item.conversations, idx)}
-            </div>
-            </li>`).appendTo(cList);
-    });
 }
 
 function getAndFillUserList(isActiveFirst) {
@@ -209,6 +145,7 @@ function getAndFillUserList(isActiveFirst) {
             return;
         }
         result.data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
+        // messages-user-list from utils.js
         fillUserList($userList, result.data);
         if (result.data.settings && result.data.settings.invoke_in_millis) {
             updateInterval = result.data.settings.invoke_in_millis;
@@ -224,7 +161,8 @@ function getAndFillUserList(isActiveFirst) {
 
 function getAndFillConversation(username, conversationId, isScrollDown) {
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
-        fillList($msgList, result.data.meta.messages);
+        // messages-list from utils
+        fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg});
         Spinner.remove();
         $('.js_send-message-box').removeClass('d-none');
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
@@ -268,8 +206,10 @@ function addHandlers() {
                 e.preventDefault();
                 e.target.value = `${e.target.value}\n`;
             } else {
-                console.log('enter');
-                $('#sendMessageButton').trigger('click');
+                if (e.target.value.trim().length) {
+                    $('#sendMessageButton').trigger('click');
+                }
+                e.preventDefault();
             }
         }
     });
@@ -280,14 +220,14 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
-        updateInterval = (updateInterval > 6000) ? updateInterval : 15000;
+        updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
         // resend request
         if (intervalId) {
             clearInterval(intervalId);
         }
         intervalId = setInterval(() => {
             conversationId = $(e.target).closest('.media').data('conversation-id');
-            console.log(intervalId, conversationId);
+            // console.log(intervalId, conversationId);
             getAndFillConversation(username, conversationId);
             getAndFillUserList();
         }, updateInterval);

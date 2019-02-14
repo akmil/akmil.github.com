@@ -67,6 +67,9 @@ class Spinner {
      */
     startButtonSpinner = function ($el, newCls) {
         $el.addClass(classes.button);
+        if ($el.find('.spinner-box--button').length) {
+            return;
+        }
         $el.prepend(`<div class="spinner-box spinner-box--button justify-content-center position-relative p-0 m-0 bg-transparent ${newCls}">
             <div class="spin-animation">
                 <svg aria-hidden="true" data-prefix="far" data-icon="sync-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" 
