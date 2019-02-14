@@ -211,7 +211,7 @@
                     </div>
             
                 </div>
-                
+            
             </main></div>
             
             <script>function handleFileSelect(e){for(var t,n=e.target.files,a=0;t=n[a];a++)if(t.type.match("image.*")){var l=new FileReader;l.onload=function(e){return function(t){var n=document.createElement("span");n.innerHTML=['<img class="thumb" src="',t.target.result,'" title="',escape(e.name),'"/>'].join(""),document.getElementById("list").insertBefore(n,null)}}(t),l.readAsDataURL(t)}}document.getElementById("sndFile").addEventListener("change",handleFileSelect,!1)</script>
