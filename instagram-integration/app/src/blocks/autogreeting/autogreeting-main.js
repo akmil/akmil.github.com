@@ -140,18 +140,15 @@ function getDataStepSpeed() {
             switch (item) {
                 case 'AGGRESSIVE':
                     return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> ${val} в час</label>`;
-                // break;
+                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> ${val} сообщений в час</label>`;
                 case 'MIDDLE':
                     return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> ${val} в час</label>`);
-                // break;
+                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> ${val} сообщений в час</label>`);
                 case 'SAFE':
                     return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> ${val} в час</label>`;
-                // break;
+                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> ${val} сообщений в час</label>`;
                 default:
-                    console.log('default', item);
+                    break;
             }
         };
         // console.log('draw speed radioBtn');
