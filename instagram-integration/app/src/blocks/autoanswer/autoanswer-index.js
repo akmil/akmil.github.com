@@ -14,8 +14,8 @@ const clsConst = {
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.chatBotT,
-    pathSubType: CONST.url.tmTypes.chatBotSubT[0]
+    pathType: CONST.url.tmTypes.autogreetT,
+    pathSubType: CONST.url.tmTypes.autogreetSubT[0]
 };
 
 function onSubmitHandler(e) {
@@ -33,11 +33,11 @@ function onSubmitHandler(e) {
     });
     const nReqBody = {
         'username': usernameSelected,
-        'type': CONST.url.tmTypes.chatBotT, // 'CHAT_BOT',
-        'subtype': CONST.url.tmTypes.chatBotSubT[0], // 'DEFAULT_CHAT_BOT',
+        'type': clsConst.pathType,
+        'subtype': clsConst.pathSubType,
         'user_default_config': {},
         'user_custom_config': {
-            'text_forms': reqBody
+            'forms': reqBody
         }
     };
 
