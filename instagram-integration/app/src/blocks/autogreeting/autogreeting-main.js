@@ -11,7 +11,7 @@ const selectCls = 'js_logs-accounts';
 const speedType = '.js_autogreeting-speed';
 const clsConst = {
     currentPageCls: '.autogreeting-page',
-    tasksList: '.bot-log-tasks',
+    tasksList: '.log-tasks',
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
@@ -25,7 +25,7 @@ const state = {
 };
 
 function onSubmitHandler(e) {
-    const fields = $('.chat-bot-text-fields');
+    const fields = $('.autoanswer-text-fields');
     // const keyWords = $el => $el.val()
     //     .trim()
     //     .replace(/ /g, '')
@@ -33,7 +33,7 @@ function onSubmitHandler(e) {
     //     .filter(i => i.length > 0);
     const reqBody = [];
     fields.each((idx, item) => {
-        const message = $(item).find('textarea.chat-words').val();
+        const message = $(item).find('textarea.answer-words').val();
         // const answer = $(item).find('textarea.chat-messages').val();
         // reqBody.push({'key_words': keyWord, answer});
         reqBody.push(message);
@@ -84,16 +84,16 @@ function fillListUsers($wrapper, data) {
  * Init header
  */
 function initHandlers() {
-    const tplTextField = (msg) => $(`<div class="chat-bot-text-fields mt-2">
+    const tplTextField = (msg) => $(`<div class="autoanswer-text-fields mt-2">
         <div class="row">
             <div class="col">
-                <textarea class="form-control chat-words" rows="4" placeholder="${msg}"></textarea>
+                <textarea class="form-control answer-words" rows="4" placeholder="${msg}"></textarea>
             </div>
         </div>
     </div>`);
 
-    $('.js_add-chat-bot').on('click', (e) => {
-        const lastTextField = $('.chat-bot-text-fields').last();
+    $('.js_add-autoanswer').on('click', (e) => {
+        const lastTextField = $('.autoanswer-text-fields').last();
         const msg = 'Введите приветствие';
         tplTextField(msg).insertAfter(lastTextField);
     });
