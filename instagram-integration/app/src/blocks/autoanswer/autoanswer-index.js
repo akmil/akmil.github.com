@@ -3,14 +3,14 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 // import User from '../../common/js-services/user';
 import * as tabs from '../_shared/tebs-pils/tabs';
-import * as chatBotStatus from './chat-bot-status';
+import * as chatBotStatus from './autoanswer-status';
 import * as chatBotLogs from '../_shared/logs/logs';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
-    currentPageCls: '.chat-bot-page',
-    tasksList: '.bot-log-tasks',
+    currentPageCls: '.autoanswer-page',
+    tasksList: '.log-tasks',
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
@@ -19,7 +19,7 @@ const clsConst = {
 };
 
 function onSubmitHandler(e) {
-    const fields = $('.chat-bot-text-fields');
+    const fields = $('.autoanswer-text-fields');
     const keyWords = $el => $el.val()
         .trim()
         .replace(/ /g, '')
@@ -27,8 +27,8 @@ function onSubmitHandler(e) {
         .filter(i => i.length > 0);
     const reqBody = [];
     fields.each((idx, item) => {
-        const keyWord = keyWords($(item).find('textarea.chat-words'));
-        const answer = $(item).find('textarea.chat-messages').val();
+        const keyWord = keyWords($(item).find('textarea.answer-words'));
+        const answer = $(item).find('textarea.answer-messages').val();
         reqBody.push({'key_words': keyWord, answer});
     });
     const nReqBody = {
@@ -85,19 +85,19 @@ function fillListUsers($wrapper, accounts) {
  * Init header
  */
 function initHandlers() {
-    const tplTextField = () => $(`<div class="chat-bot-text-fields mt-2">
+    const tplTextField = () => $(`<div class="autoanswer-text-fields mt-2">
         <div class="row">
             <div class="col">
-                <textarea class="form-control chat-words" rows="4" placeholder="Введите ключевые слова или фразы через запятую, при которых будет срабатывать чат-бот"></textarea>
+                <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова или фразы через запятую, при которых будет срабатывать чат-бот"></textarea>
             </div>
             <div class="col">
-                <textarea class="form-control chat-messages" rows="4" placeholder="Введите сообщение, которое будет отправляться, если присутствовали ключ.слова или фразы из столбца слева"></textarea>
+                <textarea class="form-control answer-messages" rows="4" placeholder="Введите сообщение, которое будет отправляться, если присутствовали ключ.слова или фразы из столбца слева"></textarea>
             </div>
         </div>
     </div>`);
 
-    $('.js_add-chat-bot').on('click', (e) => {
-        const lastTextField = $('.chat-bot-text-fields').last();
+    $('.js_add-autoanswer').on('click', (e) => {
+        const lastTextField = $('.autoanswer-text-fields').last();
         tplTextField().insertAfter(lastTextField);
     });
 
@@ -143,7 +143,7 @@ function stepReducer(stepNumber, state) {
 }
 
 export function init() {
-    if ($('.chat-bot-page').length) {
+    if ($('.autoanswer-page').length) {
         const wizardCfg = {
             stepReducer,
             onSubmitHandler

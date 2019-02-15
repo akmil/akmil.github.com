@@ -38,9 +38,9 @@ const pages = [
         source: '_bot-cleaner/bot-cleaner'
     },
     {
-        title: 'Чат бот',
-        name: 'chat-bot',
-        source: '_chat-bot/chat-bot'
+        title: 'Автоответ',
+        name: 'autoanswer',
+        source: '_autoanswer/autoanswer'
     },
     {
         title: 'Коментарии',

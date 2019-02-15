@@ -11,7 +11,7 @@ import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
 import * as follow from './blocks/follow/follow';
-import * as chatBot from './blocks/chat-bot-block/chat-bot-block';
+import * as autoanswer from './blocks/autoanswer/autoanswer-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
 // import * as tabsPils from './blocks/_shared/tebs-pils/tabs';
 
@@ -52,7 +52,7 @@ const init = () => {
     follow.init();
     instagramAccounts.init();
     messages.init();
-    chatBot.init();
+    autoanswer.init();
     autogreeting.init();
     // tabsPils.init();
 };
