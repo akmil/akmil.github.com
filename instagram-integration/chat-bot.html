@@ -97,11 +97,12 @@
                               <li class="nav-item"><a class="nav-link text-light" href="./follow.html">
                                   <i class="far fa-newspaper mr-1"></i>Подписки</a>
                               </li>
-                              <li class="nav-item"><a class="nav-link text-light" href="./chat-bot.html">
-                                  <i class="fas fa-robot mr-1"></i>Автоответ</a></li>
-                              <li class="nav-item"><a class="nav-link text-light" href="./autogreeting.html">
+                              <li class="nav-item"><a class="nav-link text-light" href="./autoanswer.html">
                                   <i class="fas fa-handshake mr-1"></i>
-                                  Автоприветствие</a></li>
+                                  Автоответ</a></li>
+                              <li class="nav-item"><a class="nav-link text-light" href="./chat-bot.html">
+                                  <i class="fas fa-robot mr-1"></i>Чат бот (2)</a></li>
+                              
                           </ul>
       
                       </div>
@@ -113,7 +114,7 @@
         
         
             
-            <div class="container-fluid chat-bot-page">
+            <div class="container-fluid bot-page">
                 <h3>Чат бот</h3>
             
                 <div class="container-fluid">
@@ -149,9 +150,9 @@
                                     <nav aria-label="Page navigation">
                                         <ul class="logs-pagination pagination justify-content-center"></ul>
                                     </nav>
-                                    <ul class="bot-log-tasks list-unstyled">
+                                    <ul class="log-tasks list-unstyled">
                                         <li class="ipsField tag_field">
-                                            Выберете пользователя
+                                            Выберите пользователя
                                         </li>
                                     </ul>
                                 </div>                </div>
@@ -168,7 +169,7 @@
                                                     <fieldset>
                                                         <div class="form-top">
                                                             <div class="form-top-left">
-                                                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает аккаунт, с которого будет отвечать бот</h3>
+                                                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает аккаунт, с которого будет отвечать происходить автоответ</h3>
                                                                 <p>Шаг 1/2</p>
                                                             </div>
                                                         </div>
@@ -200,24 +201,24 @@
                                                     <fieldset>
                                                         <div class="form-top">
                                                             <div class="form-top-left">
-                                                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Настройка чат-бота</h3>
+                                                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Настройка автоответчика</h3>
                                                                 <p>Шаг 2/2</p>
                                                             </div>
                                                         </div>
                                                         <div class="form-bottom">
-                                                            <div class="chat-bot-text-fields">
+                                                            <div class="bot-text-fields">
                                                                 <div class="row">
                                                                     <div class="col">
-                                                                        <textarea class="form-control chat-words" rows="4" placeholder="Введите ключевые слова, на которые будет срабатывать чат-бот"></textarea>
+                                                                        <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова, на которые будет срабатывать автоответ"></textarea>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <textarea class="form-control chat-messages" rows="4" placeholder="Введите сообщение, которое будет отправлено"></textarea>
+                                                                        <textarea class="form-control answer-messages" rows="4" placeholder="Введите сообщение, которое будет отправлено"></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row py-3">
                                                                 <div class="col">
-                                                                    <button type="button" class="btn btn-outline-success js_add-chat-bot">+Добавить еще Чат бота</button>
+                                                                    <button type="button" class="btn btn-outline-success js_add-bot">+Добавить еще</button>
                                                                 </div>
                                                             </div>
                                                             <button type="button" class="btn btn-blue btn-previous mr-2">Назад</button>
