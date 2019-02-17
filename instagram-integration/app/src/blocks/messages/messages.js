@@ -104,6 +104,13 @@ function addPagination($wrapper, pagination) {
         data-cursor="${cursor}">еще давай!</button>`);
 
     if (!$wrapper.closest('.messages-list-box').find('.load-more').length) {
+        // if (processing) {
+        //     return false;
+        // }
+        // if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
+        //     processing = true; //sets a processing AJAX request flag
+        // }
+
         $button.insertBefore($wrapper).on('click', (e) => {
             const userData = $('.messages-list').data('conversation');
             const {username, conversationId} = userData;
