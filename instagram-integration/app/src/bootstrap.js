@@ -12,6 +12,7 @@ import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-a
 import * as messages from './blocks/messages/messages';
 import * as follow from './blocks/follow/follow';
 import * as autoanswer from './blocks/autoanswer/autoanswer-index';
+import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
 // import * as tabsPils from './blocks/_shared/tebs-pils/tabs';
 
@@ -54,6 +55,7 @@ const init = () => {
     messages.init();
     autoanswer.init();
     autogreeting.init();
+    chatBot.init();
     // tabsPils.init();
 };
 
