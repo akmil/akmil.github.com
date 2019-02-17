@@ -20,7 +20,7 @@ function fillListByState(taskState, $list, item) {
         </div>
         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     const tplProgress = `<div class="col task-progress">
-            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>        
+            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
             <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
             <button class="btn btn-warning js_btn-delete-task">Удалить</button>
         </div>`;

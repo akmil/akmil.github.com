@@ -98,48 +98,6 @@ $(document).ready(() => {
     });*/
 });
 
-function addPagination($wrapper, pagination) {
-    let cursor = pagination.prev_cursor;
-    const $button = $(`<button class="btn btn-secondary load-more d-flex position-absolute" style="top: -42px;"
-        data-cursor="${cursor}">еще давай!</button>`);
-
-    if (!$wrapper.closest('.messages-list-box').find('.load-more').length) {
-        // if (processing) {
-        //     return false;
-        // }
-        // if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
-        //     processing = true; //sets a processing AJAX request flag
-        // }
-
-        $button.insertBefore($wrapper).on('click', (e) => {
-            const userData = $('.messages-list').data('conversation');
-            const {username, conversationId} = userData;
-            Spinner.startButtonSpinner($button);
-            UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor}).then((result) => {
-                // console.log('receive msg', result);
-                Spinner.stopButtonSpinner($button);
-                renderResults({
-                    $list: $msgList,
-                    dataArray: result.data.meta.messages,
-                    isAppendPrevMsg: 'appentPrevMsg',
-                    stateCfg
-                });
-                // set new cursor
-                if (result.data.meta.pagination && result.data.meta.pagination.prev_cursor) {
-                    cursor = result.data.meta.pagination.prev_cursor;
-                } else {
-                    $button.remove();
-                }
-
-                // stop update interval
-                if (intervalId) {
-                    clearInterval(intervalId);
-                }
-            });
-        });
-    }
-}
-
 function getAndFillUserList(isActiveFirst) {
     const $userList = $('.messages-user-list');
     const metadata = UserConversation.getMetadata(token);
@@ -165,8 +123,92 @@ function getAndFillUserList(isActiveFirst) {
         }
     });
 }
+const scrollLoaderState = {
+    cursor: 'pagination.prev_cursor',
+    firstLoad: true,
+    allMsgLoaded: false
+};
+function addPagination(pagination) {
+    if (scrollLoaderState.allMsgLoaded) {
+        return;
+    }
+    if (scrollLoaderState.firstLoad) {
+        scrollLoaderState.cursor = pagination.prev_cursor;
+        scrollLoaderState.firstLoad = false;
+    }
 
+    // if (processing) {
+    //     return false;
+    // }
+    // console.log($msgList[0].scrollHeight);
+    // if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+    //     // processing = true; //sets a processing AJAX request flag
+    //     console.log($(window).scrollTop(), $(document).height(), $(window).height());
+    // }
+
+        // $button.insertBefore($wrapper).on('click', (e) => {
+    const userData = $msgList.data('conversation');
+    const {username, conversationId} = userData;
+    // console.log('cursor: ', scrollLoaderState.cursor);
+    Spinner.add($('#mainChatPart'), 'my-5 py-5');
+    UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor: scrollLoaderState.cursor}).then((result) => {
+        // console.log('receive msg', result.data.meta);
+        Spinner.remove();
+        renderResults({
+            $list: $msgList,
+            dataArray: result.data.meta.messages,
+            isAppendPrevMsg: 'appentPrevMsg',
+            stateCfg
+        });
+        // set new cursor
+        if (result.data.meta.pagination && result.data.meta.pagination.prev_cursor) {
+            scrollLoaderState.cursor = result.data.meta.pagination.prev_cursor;
+            $msgList.scrollTop(70);
+        } else {
+            // all msg loaded
+            scrollLoaderState.allMsgLoaded = true;
+        }
+
+        // stop update interval
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+    });
+        // });
+    // }
+}
+
+function scrollHandler(scrollDelay, pagination) {
+    const $messages = $('.messages-info');
+    let recentScroll = false;
+    setTimeout(() => {
+        $msgList.on('scroll', function() {
+            const scrollTop = $(this).scrollTop();
+            if (!recentScroll) {
+                if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
+                    $messages.text('end reached');
+                } else if (scrollTop <= 50) {
+                    $messages.text('Top reached');
+                    console.log('pagination');
+                    if (pagination) {
+                        addPagination(pagination);
+                        console.log('go');
+                    } else {
+                        $('.messages-list-box').find('.load-more').remove();
+                    }
+                } else {
+                    $messages.text('');
+                }
+                recentScroll = true;
+                window.setTimeout(() => {
+                    recentScroll = false;
+                }, 50);
+            }
+        });
+    }, (scrollDelay + 200));
+}
 function getAndFillConversation(username, conversationId, isScrollDown) {
+    const TIME_SCROLL = 1000;
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg});
@@ -177,13 +219,10 @@ function getAndFillConversation(username, conversationId, isScrollDown) {
         if (isScrollDown) {
             $msgList.animate({
                 scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
-            }, 1000);
-            if (result.data.meta.pagination) {
-                addPagination($msgList, result.data.meta.pagination);
-            } else {
-                $('.messages-list-box').find('.load-more').remove();
-            }
+            }, TIME_SCROLL);
         }
+
+        scrollHandler(TIME_SCROLL, result.data.meta.pagination);
     });
 }
 
@@ -193,7 +232,7 @@ function addHandlers() {
 
     $('#sendMessageButton').on('click', (e) => {
         const value = $textArea.val();
-        const userData = $('.messages-list').data('conversation');
+        const userData = $msgList.data('conversation');
         const {username, conversationId} = userData;
         Spinner.add($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
