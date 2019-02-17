@@ -5,6 +5,8 @@ export const CONST = {
             followingSubT: ['FOLLOWING_LIST'],
             chatBotT: 'CHAT_BOT',
             chatBotSubT: ['DEFAULT_CHAT_BOT'],
+            autoanswerT: 'AUTO_ANSWER',
+            autoanswerSubT: ['DEFAULT_AUTO_ANSWER'],
             autogreetT: 'AUTO_GREETING',
             autogreetSubT: ['DEFAULT_AUTO_GREETING']
         },

@@ -4,8 +4,8 @@ import {getTasksData} from '../_shared/task-status/task-status';
 export function init() {
     if ($('.autoanswer-page').length) {
         const path = {
-            type: CONST.url.tmTypes.autogreetT,
-            subtype: CONST.url.tmTypes.autogreetSubT[0]
+            type: CONST.url.tmTypes.autoanswerT,
+            subtype: CONST.url.tmTypes.autoanswerSubT[0]
         };
         const wrappers = {
             $runs: $('.tasks-runs'),

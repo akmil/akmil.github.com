@@ -3,8 +3,8 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 // import User from '../../common/js-services/user';
 import * as tabs from '../_shared/tebs-pils/tabs';
-import * as chatBotStatus from './autoanswer-status';
-import * as chatBotLogs from '../_shared/logs/logs';
+import * as autoanswerStatus from './autoanswer-status';
+import * as logs from '../_shared/logs/logs';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
@@ -14,8 +14,8 @@ const clsConst = {
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.autogreetT,
-    pathSubType: CONST.url.tmTypes.autogreetSubT[0]
+    pathType: CONST.url.tmTypes.autoanswerT,
+    pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
 };
 
 function onSubmitHandler(e) {
@@ -68,7 +68,7 @@ function fillListUsers($wrapper, accounts) {
     $(`.${selectCls}`).on('change', function () {
         usernameSelected = $(`.${selectCls} option:selected`).val();
         // console.log(usernameSelected);
-        chatBotLogs.init(selectCls, clsConst);
+        logs.init(selectCls, clsConst);
     });
 }
 
@@ -76,7 +76,7 @@ function fillListUsers($wrapper, accounts) {
 //     User.getMetadataLazy().then((res) => {
 //         if (res.status.state === 'ok' && res.data && res.data.accounts) {
 //             cbFillListUsers($wrapper, res.data.accounts);
-//             chatBotLogs.init(selectCls, clsConst);
+//             logs.init(selectCls, clsConst);
 //         }
 //     });
 // }
@@ -120,7 +120,7 @@ function initHandlers() {
         // at this point of time setInterval is working
         const $wrapper = $('.log-users-list');
         getMetaLazy($wrapper, fillListUsers);
-        // chatBotLogs.init(selectCls, clsConst);
+        // logs.init(selectCls, clsConst);
     });
     */
     tabs.init(fillListUsers);
@@ -150,10 +150,10 @@ export function init() {
         };
         wizardForm.init(wizardCfg);
         initHandlers();
-        chatBotStatus.init();
+        autoanswerStatus.init();
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             // console.log(accounts);
-            chatBotLogs.init(selectCls, clsConst);
+            logs.init(selectCls, clsConst);
         });
     }
 }
