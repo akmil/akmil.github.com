@@ -1,7 +1,7 @@
 {{!-- {{>follow-create-task}} --}}
 <div class="form-top">
     <div class="form-top-left">
-        <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Настройка автоответчика</h3>
+        <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Настройка автоответа</h3>
         <p>Шаг 2/2</p>
     </div>
 </div>
@@ -15,8 +15,14 @@
             </div>
             <div class="col">
                 <textarea class="form-control answer-messages" rows="4"
-                            placeholder="Введите сообщение, которое будет отправлено"
+                    data-meteor-emoji="true" style="padding: 0.25rem; width: 100%;min-height: 42px;"
+                    placeholder="Введите сообщение, которое будет отправлено"
                 ></textarea>
+                <div class="mt-2">
+                    <button class="btn btn-success js_autoanswer-add-photo">photo</button>
+                    <button class="btn btn-success js_autoanswer-add-post">post</button>
+                    <button class="btn btn-success js_autoanswer-add-smile">smile</button>
+                </div>
             </div>
         </div>
     </div>

@@ -163,7 +163,7 @@ function addPagination(pagination) {
         // set new cursor
         if (result.data.meta.pagination && result.data.meta.pagination.prev_cursor) {
             scrollLoaderState.cursor = result.data.meta.pagination.prev_cursor;
-            $msgList.scrollTop(70);
+            $msgList.scrollTop($msgList.scrollTop() + 30);
         } else {
             // all msg loaded
             scrollLoaderState.allMsgLoaded = true;
@@ -179,16 +179,17 @@ function addPagination(pagination) {
 }
 
 function scrollHandler(scrollDelay, pagination) {
-    const $messages = $('.messages-info');
+    // const $messages = $('.messages-info');
     let recentScroll = false;
     setTimeout(() => {
         $msgList.on('scroll', function() {
             const scrollTop = $(this).scrollTop();
             if (!recentScroll) {
                 if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
-                    $messages.text('end reached');
-                } else if (scrollTop <= 50) {
-                    $messages.text('Top reached');
+                    // $messages.text('end reached');
+                } else if (scrollTop <= 30) {
+                    // $messages.text('Top reached');
+                    // $(this).scrollTop(70);
                     console.log('pagination');
                     if (pagination) {
                         addPagination(pagination);
@@ -197,7 +198,7 @@ function scrollHandler(scrollDelay, pagination) {
                         $('.messages-list-box').find('.load-more').remove();
                     }
                 } else {
-                    $messages.text('');
+                    // $messages.text('');
                 }
                 recentScroll = true;
                 window.setTimeout(() => {
@@ -275,6 +276,9 @@ function addHandlers() {
             conversationId = $(e.target).closest('.media').data('conversation-id');
             // console.log(intervalId, conversationId);
             getAndFillConversation(username, conversationId);
+        }, updateInterval);
+
+        setInterval(() => {
             getAndFillUserList();
         }, updateInterval);
     });

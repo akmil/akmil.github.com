@@ -1,3 +1,4 @@
+import MeteorEmoji from 'meteor-emoji';
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
@@ -23,6 +24,18 @@ const state = {
         task_mode: 'SAFE'
     }
 };
+
+$(document).ready(() => {
+    if ($(clsConst.currentPageCls).length) {
+        return;
+    }
+    // eslint-disable-next-line no-unused-vars
+    const m = new MeteorEmoji();
+    const $picker = $('textarea[data-meteor-emoji="true"] ~ div');
+    const style = $picker.attr('style');
+    const styleNew = style.replace('top: 30px;', 'top: -210px;');
+    $picker.attr('style', styleNew);
+});
 
 function onSubmitHandler(e) {
     const fields = $('.autoanswer-text-fields');

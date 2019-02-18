@@ -112,10 +112,10 @@ export function fillUserList($list, dataArray) {
         tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
                 aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="border-bottom mb-1 media pb-2" id="heading-${idx}">
-                <a href="#" class="mr-3">
+                <span class="mr-3">
                     <img src="${item.profile_pic_url}" alt="avatar"
-                    class="media-photo">
-                </a>
+                    class="media-photo rounded-circle">
+                </span>
                 ${(item['unread_conversations'] > 0) ? `<span class="badge badge-secondary position-absolute p-2">${item['unread_conversations']}</span>` : ''}
                 <div class="media-body">
                     <h4 class="title">
