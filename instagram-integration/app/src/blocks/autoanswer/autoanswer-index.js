@@ -14,8 +14,8 @@ const clsConst = {
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.chatBotT,
-    pathSubType: CONST.url.tmTypes.chatBotSubT[0]
+    pathType: CONST.url.tmTypes.autoanswerT,
+    pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
 };
 
 function onSubmitHandler(e) {
@@ -33,11 +33,11 @@ function onSubmitHandler(e) {
     });
     const nReqBody = {
         'username': usernameSelected,
-        'type': CONST.url.tmTypes.chatBotT, // 'CHAT_BOT',
-        'subtype': CONST.url.tmTypes.chatBotSubT[0], // 'DEFAULT_CHAT_BOT',
+        'type': clsConst.pathType,
+        'subtype': clsConst.pathSubType,
         'user_default_config': {},
         'user_custom_config': {
-            'text_forms': reqBody
+            'forms': reqBody
         }
     };
 
@@ -88,10 +88,10 @@ function initHandlers() {
     const tplTextField = () => $(`<div class="autoanswer-text-fields mt-2">
         <div class="row">
             <div class="col">
-                <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова или фразы через запятую, при которых будет срабатывать чат-бот"></textarea>
+                <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова на которые будет срабатывать автоответ"></textarea>
             </div>
             <div class="col">
-                <textarea class="form-control answer-messages" rows="4" placeholder="Введите сообщение, которое будет отправляться, если присутствовали ключ.слова или фразы из столбца слева"></textarea>
+                <textarea class="form-control answer-messages" rows="4" placeholder="Введите сообщение, которое будет отправлено"></textarea>
             </div>
         </div>
     </div>`);
