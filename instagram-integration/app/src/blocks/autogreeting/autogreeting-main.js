@@ -189,7 +189,7 @@ function stepReducer(stepNumber, state) {
             console.log(state, stepNumber);
             break;
         case 1:
-            console.log(state, stepNumber);
+            // console.log(state, stepNumber);
             break;
         default:
             console.log('default', stepNumber);

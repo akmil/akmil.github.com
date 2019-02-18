@@ -3,6 +3,7 @@ import {CONST} from '../../common/js-services/consts';
 const state = {
     username: ''
 };
+const wizardFormSelector = '.wizard-form';
 
 /**
  * Init header
@@ -91,6 +92,19 @@ function initSteps(formSelector, wizardCfg) {
         // $('#v-pills-runned-tab').trigger('click');
         // window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
+
+    $('#v-pills-create-task-tab').on('click', (e) => {
+        console.log('reset form');
+        if ($('fieldset:first-child').css('display') === 'none') {
+            $form.find('fieldset').hide('fast', function () {
+                $form.find('fieldset:first-child').show('slow');
+            });
+        }
+        // $form.find('fieldset:first-child').fadeIn(function () {
+        //     $form.find('fieldset:not(:first-child)').fadeOut();
+        // });
+        $('fieldset', wizardFormSelector).find('input,textarea').val('');
+    });
 }
 
 /*
@@ -138,7 +152,7 @@ function modifyAccList() {
 
 export function init(wizardCfg) {
     if ($('.wizard-form').length) {
-        initSteps('.wizard-form', wizardCfg);
+        initSteps(wizardFormSelector, wizardCfg);
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
         });
