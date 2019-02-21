@@ -214,9 +214,44 @@
                                                                     <div class="col">
                                                                         <textarea class="form-control answer-messages" rows="4" data-meteor-emoji="true" style="padding:.25rem;width:100%;min-height:42px" placeholder="Введите сообщение, которое будет отправлено"></textarea>
                                                                         <div class="mt-2">
-                                                                            <button class="btn btn-success js_autoanswer-add-photo">photo</button>
-                                                                            <button class="btn btn-success js_autoanswer-add-post">post</button>
-                                                                            <button class="btn btn-success js_autoanswer-add-smile">smile</button>
+                                                                            <div class="imageupload panel panel-default d-inline-block">
+                                                                                <div class="file-tab panel-body">
+                                                                                <label class="btn btn-success js_autoanswer-add-photo btn-file mb-0">
+                                                                                        <b>Выбрать фото
+                                                                                        
+                                                                                        <input type="file" name="image-file">
+                                                                                    </b></label>
+                                                                                    <button type="button" class="btn btn-default">Удалить</button>
+                                                                                </div>
+                                                                            </div>
+                                                                                    
+                                                        
+                                                                            
+                                                                            <button type="button" class="btn btn-success js_autoanswer-add-post" data-toggle="modal" data-post-info="todo: get req to user: " data-target="#postsGridModal">
+                                                                                post
+                                                                            </button>
+                                                        
+                                                                            
+                                                                            <div class="modal fade" id="postsGridModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                <div class="modal-dialog" role="document">
+                                                                                    <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        ...
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                        <button type="button" class="btn btn-success">Save changes</button>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                        
                                                                         </div>
                                                                     </div>
                                                                 </div>
