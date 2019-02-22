@@ -72,7 +72,7 @@ function addPagination(dataArray, $wrapper) {
 
     clearPagination($wrapper);
 
-    if (pagination.next || pagination.current === pagination.pages[pagination.pages.length - 1]) {
+    if (pagination.next || pagination.pages && (pagination.current === pagination.pages[pagination.pages.length - 1])) {
         $wrapper.append(tplPrevious);
         if (pagination && pagination['pages']) {
             pagination['pages'].forEach((item) => {

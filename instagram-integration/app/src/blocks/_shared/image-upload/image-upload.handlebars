@@ -1,4 +1,23 @@
-<div class="imageupload panel panel-default d-inline-block">
+<div class="file-upload">
+  <button class="file-upload-btn" type="button">Добавить картинку</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' accept="image/*" />
+    {{!-- <div class="drag-text">
+      <h3>Выбрать фото</h3>
+    </div> --}}
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="button" class="remove-image">Удалить <span class="image-title">Загрузить</span></button>
+    </div>
+  </div>
+</div>
+
+
+
+{{!-- <div class="imageupload panel panel-default d-inline-block">
     <div class="file-tab panel-body">
     <label class="btn btn-success js_autoanswer-add-photo btn-file mb-0">
             <b>Выбрать фото</span>
@@ -7,7 +26,9 @@
         </label>
         <button type="button" class="btn btn-default">Удалить</button>
     </div>
-</div>
+</div> --}}
+
+
     {{!-- <div class="panel-heading clearfix"> --}}
         
         {{!-- <div class="btn-group pull-right">

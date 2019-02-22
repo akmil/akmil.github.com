@@ -214,16 +214,24 @@
                                                                     <div class="col">
                                                                         <textarea class="form-control answer-messages" rows="4" data-meteor-emoji="true" style="padding:.25rem;width:100%;min-height:42px" placeholder="Введите сообщение, которое будет отправлено"></textarea>
                                                                         <div class="mt-2">
-                                                                            <div class="imageupload panel panel-default d-inline-block">
-                                                                                <div class="file-tab panel-body">
-                                                                                <label class="btn btn-success js_autoanswer-add-photo btn-file mb-0">
-                                                                                        <b>Выбрать фото
-                                                                                        
-                                                                                        <input type="file" name="image-file">
-                                                                                    </b></label>
-                                                                                    <button type="button" class="btn btn-default">Удалить</button>
+                                                                            <div class="file-upload">
+                                                                              <button class="file-upload-btn" type="button">Добавить картинку</button>
+                                                                            
+                                                                              <div class="image-upload-wrap">
+                                                                                <input class="file-upload-input" type="file" accept="image/*"/>
+                                                                              </div>
+                                                                              <div class="file-upload-content">
+                                                                                <img class="file-upload-image" src="#" alt="your image"/>
+                                                                                <div class="image-title-wrap">
+                                                                                  <button type="button" class="remove-image">Удалить <span class="image-title">Загрузить</span></button>
                                                                                 </div>
+                                                                              </div>
                                                                             </div>
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
                                                                                     
                                                         
                                                                             

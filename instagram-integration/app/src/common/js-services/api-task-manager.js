@@ -7,7 +7,6 @@ const objToArr = (obj) => {
     if (obj && obj.subtype) {
         if (!obj.subtype.includes('subtype/')) {
             obj.subtype = `subtype/${obj.subtype}`;
-            console.log('includes');
         }
     }
     return Object.values(obj);
@@ -115,6 +114,21 @@ class UserTaskManager {
     postStartChatBot(body, cbError) {
         const path = 'instagramTaskManager_postStartChatBot';
         return this.postStartFollowingList(body, cbError, path);
+    }
+    postImageAutoanswer(body, cbError) {
+        const setting = {
+            ...this.settingPost,
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken(),
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+        setting.body = JSON.stringify(body);
+        const url = `${CONST.getPath('instagramTaskManager_postImageAttachment')}`;
+
+        return this.network.sendRequest(url,
+            setting, cbError);
     }
 
     getLogsChatBot(pathArray, page, cbError) {
