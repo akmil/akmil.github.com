@@ -117,11 +117,11 @@ class UserTaskManager {
     }
     postImageAutoanswer(body, cbError) {
         const setting = {
-            ...this.settingPost,
+            method: 'POST',
             headers: {
-                ...this.settingPost.headers,
                 'token': this.getToken(),
-                'Content-Type': 'multipart/form-data'
+                'Accept': 'application/json',
+                'Content-type': 'multipart/form-data'
             }
         };
         setting.body = JSON.stringify(body);

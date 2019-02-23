@@ -1,4 +1,4 @@
-// import {CONST} from '../../../common/js-services/consts';
+import {CONST} from '../../../common/js-services/consts';
 import UserTaskManager from '../../../common/js-services/api-task-manager';
 
 function removeUpload() {
@@ -46,23 +46,19 @@ function updateProgress(evt, progress) {
 }
 
 function handleSubmit(acceptedFile) {
-    const data = new FormData();
-    data.append('image', acceptedFile);
+    const url = CONST.getPath('instagramTaskManager_postImageAttachment');
+    const token = UserTaskManager.getToken();
+    const formData = new FormData();
+    formData.append('image', acceptedFile, acceptedFile.name);
 
-    // for (const file of acceptedFiles) {
-    //     data.append('image', file, file.name);
-    // }
-
-    // return fetch('https://example.com/api/upload', {
-    //   method: 'POST',
-    //   body: data
-    // });
-    // const body = {
-    //     'image': data
-    // };
-    UserTaskManager.postImageAutoanswer(data).then(res => {
-        console.log(res);
-    });
+    const request = new XMLHttpRequest();
+    request.open('POST', url);
+    // request.withCredentials = true;
+    request.setRequestHeader('token', token);
+    request.setRequestHeader('Accept', 'application/json');
+    request.setRequestHeader('cache-control', 'no-cache');
+    request.send(formData);
+    console.log(acceptedFile);
 }
 
 function readURL(input) {
@@ -75,13 +71,12 @@ function readURL(input) {
             $('.file-upload-image').attr('src', e.target.result);
             $('.file-upload-content').show();
             $('.image-title').html(input.files[0].name);
-
-            handleSubmit(input.files[0]);
         };
         reader.onerror = errorHandler;
         reader.onprogress = updateProgress;
 
         reader.readAsDataURL(input.files[0]);
+        setTimeout(() => handleSubmit(input.files[0]), 2000);
         // Read in the image file as a binary string.
         // reader.readAsBinaryString(input.files[0]);
 
@@ -91,13 +86,11 @@ function readURL(input) {
 }
 
 $('.file-upload-btn').on('click', () => {
-    console.log('boo');
     $('.file-upload-input').trigger('click');
     // readURL($('.file-upload-input'));
 });
 
 $('.file-upload-input').on('change', (e) => {
-    console.log('change');
     readURL(e.target);
 });
 

@@ -5,33 +5,8 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
-// import 'blueimp-file-upload/js/jquery.fileupload';
-// import 'bootstrap-imageupload';
 import '../_shared/image-upload/image-upload';
-
-// console.log($.fn.imageupload);
-// $('#my-imageupload').imageupload({
-//     allowedFormats: ['jpg'],
-//     maxFileSizeKb: 512
-// });
-
-// const $imageupload = $('.imageupload');
-// $imageupload.imageupload();
-
-// $('#imageupload-disable').on('click', function() {
-//     $imageupload.imageupload('disable');
-//     $(this).blur();
-// });
-
-// $('#imageupload-enable').on('click', function() {
-//     $imageupload.imageupload('enable');
-//     $(this).blur();
-// });
-
-// $('#imageupload-reset').on('click', function() {
-//     $imageupload.imageupload('reset');
-//     $(this).blur();
-// });
+import {emoji} from '../../common/js-services/emoji';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
@@ -44,6 +19,8 @@ const clsConst = {
     pathType: CONST.url.tmTypes.autoanswerT,
     pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
 };
+
+emoji({page: clsConst.currentPageCls, styles: {old: 'bottom: 30px;', new: 'top: -210px;'}});
 
 function onSubmitHandler(e) {
     const fields = $('.autoanswer-text-fields');
@@ -98,15 +75,6 @@ function fillListUsers($wrapper, accounts) {
         logs.init(selectCls, clsConst);
     });
 }
-
-// function getMetaLazy($wrapper, cbFillListUsers) {
-//     User.getMetadataLazy().then((res) => {
-//         if (res.status.state === 'ok' && res.data && res.data.accounts) {
-//             cbFillListUsers($wrapper, res.data.accounts);
-//             logs.init(selectCls, clsConst);
-//         }
-//     });
-// }
 
 /**
  * Init header
@@ -181,6 +149,7 @@ function initModalHandler() {
         modal.find('.modal-body input').val(recipient);
     });
 }
+
 export function init() {
     if ($('.autoanswer-page').length) {
         const wizardCfg = {
@@ -197,3 +166,15 @@ export function init() {
         initModalHandler();
     }
 }
+
+// $(document).ready(() => {
+//     if (!$(clsConst.currentPageCls).length) {
+//         return;
+//     }
+//     // eslint-disable-next-line no-unused-vars
+//     const m = new MeteorEmoji();
+//     const $picker = $('textarea[data-meteor-emoji="true"] ~ div');
+//     const style = $picker.attr('style');
+//     const styleNew = style.replace('bottom: 30px;', 'top: -210px;');
+//     $picker.attr('style', styleNew);
+// });
