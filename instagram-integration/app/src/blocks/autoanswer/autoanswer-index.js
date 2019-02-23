@@ -41,8 +41,8 @@ function onSubmitHandler(e) {
             'key_words': keyWord,
             answer,
             'attachment': imageId ? {
-                'image_id': imageId,
-                'post': {id: '', type: ''}
+                'image_id': imageId
+                // 'post': {id: '', type: ''}
             } : undefined
         });
     });
@@ -184,15 +184,3 @@ export function init() {
         initModalHandler();
     }
 }
-
-// $(document).ready(() => {
-//     if (!$(clsConst.currentPageCls).length) {
-//         return;
-//     }
-//     // eslint-disable-next-line no-unused-vars
-//     const m = new MeteorEmoji();
-//     const $picker = $('textarea[data-meteor-emoji="true"] ~ div');
-//     const style = $picker.attr('style');
-//     const styleNew = style.replace('bottom: 30px;', 'top: -210px;');
-//     $picker.attr('style', styleNew);
-// });
