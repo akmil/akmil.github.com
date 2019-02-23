@@ -20,7 +20,10 @@ const clsConst = {
     pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
 };
 
-emoji({page: clsConst.currentPageCls, styles: {old: 'bottom: 30px;', new: 'top: -210px;'}});
+emoji({
+    page: clsConst.currentPageCls,
+    styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
+});
 
 function onSubmitHandler(e) {
     const fields = $('.autoanswer-text-fields');
@@ -162,6 +165,10 @@ export function init() {
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             // console.log(accounts);
             logs.init(selectCls, clsConst);
+        });
+        window.PubSub.subscribe('image_loaded', (e, data) => {
+            console.log('image_loaded', data);
+            // logs.init(selectCls, clsConst);
         });
         initModalHandler();
     }

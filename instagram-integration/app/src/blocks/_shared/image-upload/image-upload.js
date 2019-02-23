@@ -59,6 +59,12 @@ function handleSubmit(acceptedFile) {
     request.setRequestHeader('cache-control', 'no-cache');
     request.send(formData);
     console.log(acceptedFile);
+    request.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+            console.log(this.responseText);
+            window.PubSub.publish('image_loaded', this.responseText);
+        }
+    });
 }
 
 function readURL(input) {

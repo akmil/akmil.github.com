@@ -64,6 +64,8 @@ function isInMessagePage() {
     const $userList = $('.messages-user-list');
     return !!$msgList.length && !!$userList.length;
 }
+
+// todo: get from emojii.js
 $(document).ready(() => {
     if (!isInMessagePage()) {
         return;
@@ -128,7 +130,7 @@ const scrollLoaderState = {
     firstLoad: true,
     allMsgLoaded: false
 };
-function addPagination(pagination) {
+function addPagination(pagination, cbFn) {
     if (scrollLoaderState.allMsgLoaded) {
         return;
     }
@@ -136,23 +138,12 @@ function addPagination(pagination) {
         scrollLoaderState.cursor = pagination.prev_cursor;
         scrollLoaderState.firstLoad = false;
     }
-
-    // if (processing) {
-    //     return false;
-    // }
-    // console.log($msgList[0].scrollHeight);
-    // if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
-    //     // processing = true; //sets a processing AJAX request flag
-    //     console.log($(window).scrollTop(), $(document).height(), $(window).height());
-    // }
-
-        // $button.insertBefore($wrapper).on('click', (e) => {
     const userData = $msgList.data('conversation');
     const {username, conversationId} = userData;
     // console.log('cursor: ', scrollLoaderState.cursor);
     Spinner.add($('#mainChatPart'), 'my-5 py-5');
     UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor: scrollLoaderState.cursor}).then((result) => {
-        // console.log('receive msg', result.data.meta);
+        console.log('firstLoad:', scrollLoaderState.firstLoad, result.data.meta);
         Spinner.remove();
         renderResults({
             $list: $msgList,
@@ -173,6 +164,7 @@ function addPagination(pagination) {
         if (intervalId) {
             clearInterval(intervalId);
         }
+        cbFn();
     });
         // });
     // }
@@ -181,6 +173,10 @@ function addPagination(pagination) {
 function scrollHandler(scrollDelay, pagination) {
     // const $messages = $('.messages-info');
     let recentScroll = false;
+    let makeReqOnce = true;
+    function checkIsOnce() {
+        makeReqOnce = true;
+    }
     setTimeout(() => {
         $msgList.on('scroll', function() {
             const scrollTop = $(this).scrollTop();
@@ -191,8 +187,9 @@ function scrollHandler(scrollDelay, pagination) {
                     // $messages.text('Top reached');
                     // $(this).scrollTop(70);
                     console.log('pagination');
-                    if (pagination) {
-                        addPagination(pagination);
+                    if (pagination && makeReqOnce) {
+                        makeReqOnce = false;
+                        addPagination(pagination, checkIsOnce);
                         console.log('go');
                     } else {
                         $('.messages-list-box').find('.load-more').remove();
@@ -208,8 +205,9 @@ function scrollHandler(scrollDelay, pagination) {
         });
     }, (scrollDelay + 200));
 }
+
 function getAndFillConversation(username, conversationId, isScrollDown) {
-    const TIME_SCROLL = 1000;
+    const TIME_SCROLL = 10;
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg});
