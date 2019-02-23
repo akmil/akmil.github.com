@@ -45,9 +45,10 @@ function updateProgress(evt, progress) {
     }
 }
 
-function handleSubmit(acceptedFile) {
+function handleSubmit(input) {
     const url = CONST.getPath('instagramTaskManager_postImageAttachment');
     const token = UserTaskManager.getToken();
+    const acceptedFile = input.files[0];
     const formData = new FormData();
     formData.append('image', acceptedFile, acceptedFile.name);
 
@@ -62,7 +63,7 @@ function handleSubmit(acceptedFile) {
     request.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
             console.log(this.responseText);
-            window.PubSub.publish('image_loaded', this.responseText);
+            window.PubSub.publish('image_loaded', {'response': this.responseText, 'el': input});
         }
     });
 }
@@ -82,7 +83,7 @@ function readURL(input) {
         reader.onprogress = updateProgress;
 
         reader.readAsDataURL(input.files[0]);
-        setTimeout(() => handleSubmit(input.files[0]), 2000);
+        setTimeout(() => handleSubmit(input), 2000);
         // Read in the image file as a binary string.
         // reader.readAsBinaryString(input.files[0]);
 

@@ -1,7 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
-// import User from '../../common/js-services/user';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
@@ -36,7 +35,16 @@ function onSubmitHandler(e) {
     fields.each((idx, item) => {
         const keyWord = keyWords($(item).find('textarea.answer-words'));
         const answer = $(item).find('textarea.answer-messages').val();
-        reqBody.push({'key_words': keyWord, answer});
+        const imageId = $(item).find('.file-upload').attr('attached-img-id');
+        // console.log(imageId);
+        reqBody.push({
+            'key_words': keyWord,
+            answer,
+            'attachment': imageId ? {
+                'image_id': imageId,
+                'post': {id: '', type: ''}
+            } : undefined
+        });
     });
     const nReqBody = {
         'username': usernameSelected,
@@ -166,8 +174,11 @@ export function init() {
             // console.log(accounts);
             logs.init(selectCls, clsConst);
         });
-        window.PubSub.subscribe('image_loaded', (e, data) => {
-            console.log('image_loaded', data);
+        window.PubSub.subscribe('image_loaded', (e, res) => {
+            const result = JSON.parse(res.response);
+            const imageId = result && result.data && result.data.image_id;
+            $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
+            console.log('image_loaded', res);
             // logs.init(selectCls, clsConst);
         });
         initModalHandler();
