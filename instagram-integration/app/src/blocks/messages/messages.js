@@ -166,8 +166,6 @@ function addPagination(pagination, cbFn) {
         }
         cbFn();
     });
-        // });
-    // }
 }
 
 function scrollHandler(scrollDelay, pagination) {
@@ -205,6 +203,8 @@ function scrollHandler(scrollDelay, pagination) {
         });
     }, (scrollDelay + 200));
 }
+let initialVal = '';
+let flagInitialVal = true;
 
 function getAndFillConversation(username, conversationId, isScrollDown) {
     const TIME_SCROLL = 10;
@@ -219,6 +219,12 @@ function getAndFillConversation(username, conversationId, isScrollDown) {
             $msgList.animate({
                 scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
             }, TIME_SCROLL);
+            // save first value
+            if (flagInitialVal) {
+                initialVal = result.data.meta.messages[result.data.meta.messages.length - 1];
+                console.log(initialVal);
+                flagInitialVal = false;
+            }
         }
 
         scrollHandler(TIME_SCROLL, result.data.meta.pagination);
@@ -265,6 +271,7 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
+        flagInitialVal = true; // reset first value flag
         updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
         // resend request
         if (intervalId) {
@@ -272,7 +279,7 @@ function addHandlers() {
         }
         intervalId = setInterval(() => {
             conversationId = $(e.target).closest('.media').data('conversation-id');
-            // console.log(intervalId, conversationId);
+            console.log(intervalId, conversationId);
             getAndFillConversation(username, conversationId);
         }, updateInterval);
 

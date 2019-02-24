@@ -4,7 +4,7 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
-import '../_shared/image-upload/image-upload';
+import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
 
 let usernameSelected = '';
@@ -19,10 +19,12 @@ const clsConst = {
     pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
 };
 
-emoji({
-    page: clsConst.currentPageCls,
-    styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
-});
+function initEmojii() {
+    emoji({
+        page: clsConst.currentPageCls,
+        styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
+    });
+}
 
 function onSubmitHandler(e) {
     const fields = $('.autoanswer-text-fields');
@@ -97,7 +99,33 @@ function initHandlers() {
                 <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова на которые будет срабатывать автоответ"></textarea>
             </div>
             <div class="col">
-                <textarea class="form-control answer-messages" rows="4" placeholder="Введите сообщение, которое будет отправлено"></textarea>
+                <textarea class="form-control answer-messages" rows="4"
+                    data-meteor-emoji="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
+                    placeholder="Введите сообщение, которое будет отправлено"
+                ></textarea>
+
+                <div class="mt-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success js_autoanswer-add-post" 
+                        data-toggle="modal" 
+                        data-post-info="todo: get req to user: "
+                        data-target="#postsGridModal">
+                        post
+                    </button>
+                    <div class="file-upload">
+                        <button class="file-upload-btn btn btn-success" type="button">Добавить картинку</button>
+
+                        <div class="image-upload-wrap">
+                            <input class="file-upload-input" type='file' accept="image/*" />
+                        </div>
+                        <div class="file-upload-content">
+                            <img class="file-upload-image" src="#" alt="your image" />
+                            <div class="image-title-wrap">
+                            <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>`);
@@ -105,6 +133,8 @@ function initHandlers() {
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $('.autoanswer-text-fields').last();
         tplTextField().insertAfter(lastTextField);
+        initEmojii();
+        imageUpload.init();
     });
 
     // alert close
@@ -182,5 +212,7 @@ export function init() {
             // logs.init(selectCls, clsConst);
         });
         initModalHandler();
+        initEmojii();
+        imageUpload.init();
     }
 }

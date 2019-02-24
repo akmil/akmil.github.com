@@ -70,14 +70,14 @@ function handleSubmit(input) {
 
 function readURL(input) {
     if (input.files && input.files[0]) {
-
+        const $container = $(input).closest('.file-upload');
         const reader = new FileReader();
 
         reader.onload = function(e) {
-            $('.image-upload-wrap').hide();
-            $('.file-upload-image').attr('src', e.target.result);
-            $('.file-upload-content').show();
-            $('.image-title').html(input.files[0].name);
+            $container.find('.image-upload-wrap').hide();
+            $container.find('.file-upload-image').attr('src', e.target.result);
+            $container.find('.file-upload-content').show();
+            $container.find('.image-title').html(input.files[0].name);
         };
         reader.onerror = errorHandler;
         reader.onprogress = updateProgress;
@@ -92,15 +92,17 @@ function readURL(input) {
     }
 }
 
-$('.file-upload-btn').on('click', () => {
-    $('.file-upload-input').trigger('click');
-    // readURL($('.file-upload-input'));
-});
+export function init() {
+    $('.file-upload-btn').on('click', () => {
+        $('.file-upload-input').trigger('click');
+        // readURL($('.file-upload-input'));
+    });
 
-$('.file-upload-input').on('change', (e) => {
-    readURL(e.target);
-});
+    $('.file-upload-input').on('change', (e) => {
+        readURL(e.target);
+    });
 
-$('.remove-image').on('click', () => {
-    removeUpload();
-});
+    $('.remove-image').on('click', () => {
+        removeUpload();
+    });
+}
