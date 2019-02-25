@@ -2,7 +2,7 @@ import MeteorEmoji from 'meteor-emoji';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import {fillMassagesList, fillUserList} from './utils';
+import {fillMassagesList, fillUserList, messageAreaHendler} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
@@ -18,7 +18,6 @@ let updateInterval = '';
 let intervalId = false;
 
 const renderResults = function (cfg) {
-    // let items;
     const {dataArray: data, $list: ulElement, stateCfg} = cfg;
 
     function showMessage(element, message, /* optional */clearList) {
@@ -120,7 +119,6 @@ function getAndFillUserList(isActiveFirst) {
         if (isActiveFirst) {
             $userList.find('li:first-child .collapse').addClass('show');
         } else {
-            // console.log('ttt', prevActiveDialogId);
             $(`#${prevActiveDialogId}`).addClass('show');
         }
     });
@@ -144,6 +142,7 @@ function addPagination(pagination, cbFn) {
     Spinner.add($('#mainChatPart'), 'my-5 py-5');
     UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor: scrollLoaderState.cursor}).then((result) => {
         console.log('firstLoad:', scrollLoaderState.firstLoad, result.data.meta);
+        const newCursor = result.data.meta.pagination && result.data.meta.pagination.prev_cursor;
         Spinner.remove();
         renderResults({
             $list: $msgList,
@@ -152,8 +151,9 @@ function addPagination(pagination, cbFn) {
             stateCfg
         });
         // set new cursor
-        if (result.data.meta.pagination && result.data.meta.pagination.prev_cursor) {
-            scrollLoaderState.cursor = result.data.meta.pagination.prev_cursor;
+        if (newCursor) {
+            console.log('**', scrollLoaderState.cursor);
+            scrollLoaderState.cursor = newCursor;
             $msgList.scrollTop($msgList.scrollTop() + 30);
         } else {
             // all msg loaded
@@ -162,9 +162,9 @@ function addPagination(pagination, cbFn) {
 
         // stop update interval
         if (intervalId) {
-            clearInterval(intervalId);
+            clearInterval(newCursor);
         }
-        cbFn();
+        cbFn(result.data.meta.pagination.prev_cursor);
     });
 }
 
@@ -172,8 +172,13 @@ function scrollHandler(scrollDelay, pagination) {
     // const $messages = $('.messages-info');
     let recentScroll = false;
     let makeReqOnce = true;
-    function checkIsOnce() {
-        makeReqOnce = true;
+    let cursor = pagination.prev_cursor;
+    function checkIsOnce(newCursor) {
+        if (newCursor !== cursor) {
+            cursor = newCursor;
+            makeReqOnce = true;
+            console.log('prevCursor', newCursor);
+        }
     }
     setTimeout(() => {
         $msgList.on('scroll', function() {
@@ -181,7 +186,7 @@ function scrollHandler(scrollDelay, pagination) {
             if (!recentScroll) {
                 if (scrollTop + $(this).innerHeight() >= this.scrollHeight) {
                     // $messages.text('end reached');
-                } else if (scrollTop <= 30) {
+                } else if (scrollTop <= 45) {
                     // $messages.text('Top reached');
                     // $(this).scrollTop(70);
                     console.log('pagination');
@@ -250,20 +255,7 @@ function addHandlers() {
         });
     });
 
-    $textArea.on('keydown', (e) => {
-        if (e.keyCode === 13) {
-            if (e.ctrlKey) {
-                console.log('ctrl+enter');
-                e.preventDefault();
-                e.target.value = `${e.target.value}\n`;
-            } else {
-                if (e.target.value.trim().length) {
-                    $('#sendMessageButton').trigger('click');
-                }
-                e.preventDefault();
-            }
-        }
-    });
+    messageAreaHendler($textArea, $('#sendMessageButton'));
 
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
@@ -294,13 +286,6 @@ function addHandlers() {
         console.log('set val from text-area', value);
         console.log('resultFromServer: ', resultFromServer);
         $dialog.find('.summary').text(value);
-
-        // metadata.then((result) => {
-        //     fillUserList($userList, result.data);
-        //     if (result.data.settings && result.data.settings.invoke_in_millis) {
-        //         updateInterval = result.data.settings.invoke_in_millis;
-        //     }
-        // });
     });
 }
 
