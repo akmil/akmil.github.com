@@ -6,6 +6,7 @@ import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
+import {fillPosts} from './utils';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
@@ -151,14 +152,6 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    /*
-    $('#v-pills-logs-tab').on('click', (e) => {
-        // at this point of time setInterval is working
-        const $wrapper = $('.log-users-list');
-        getMetaLazy($wrapper, fillListUsers);
-        // logs.init(selectCls, clsConst);
-    });
-    */
     tabs.init(fillListUsers);
 }
 
@@ -178,6 +171,46 @@ function stepReducer(stepNumber, state) {
     }
 }
 
+function addPagination(modalFooter, cursor) {
+    $('#load-more').attr('cursor', cursor);
+    modalFooter.removeClass('d-none');
+}
+function loadMoreHandler(getPosts) {
+    $('#load-more').on('click', (e) => {
+        const $btn = $(e.target);
+        const cursor = $btn.attr('cursor');
+        console.log('load more click');
+        getPosts(null, {userName: usernameSelected, cursor});
+    });
+}
+function getPosts(modal, details) {
+    // eslint-disable-next-line consistent-this
+    // const self = this;
+    UserTaskManager.getPostsAutoanswer(details).then((result) => {
+        console.log(result);
+        if (result.status.state === 'ok') {
+            const {data} = result;
+            const modalFooter = $('.modal-footer', modal);
+            const $list = $('.modal-body .posts-list', modal);
+            if (modal) {
+                fillPosts($list, data.posts);
+                modal.modal('handleUpdate');
+                if (data.pagination && data.pagination.cursor) {
+                    // console.log('add more btn');
+                    addPagination(modalFooter, data.pagination.cursor);
+                }
+            } else if (data.post) {
+                // append new data
+                fillPosts($list, data.posts, 'appendToList');
+                addPagination(null, data.pagination.cursor);
+            }
+            if (data.pagination && data.pagination.cursor) {
+                loadMoreHandler(getPosts);
+            }
+        }
+    });
+}
+
 function initModalHandler() {
     const $modalBtn = $('#postsGridModal');
     $modalBtn.on('show.bs.modal', function (event) {
@@ -186,6 +219,7 @@ function initModalHandler() {
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         const modal = $(this);
+        getPosts(modal, {userName: usernameSelected});
         modal.find('.modal-title').text(`New message to ${recipient} ${usernameSelected}`);
         modal.find('.modal-body input').val(recipient);
     });

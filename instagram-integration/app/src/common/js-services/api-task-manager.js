@@ -138,6 +138,14 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
+    getPostsAutoanswer(details, cbError) {
+        const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
+        // eslint-disable-next-line no-param-reassign
+        const urlByUserName = `${CONST.getPath('instagramTaskManager_getPosts', details.userName || 'user_not_selected')}${cursor}`;
+        return this.network.sendRequest(urlByUserName,
+            this.getToken('asHeader'), cbError);
+    }
+
 }
 
 let userInstance = null;
