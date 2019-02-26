@@ -130,3 +130,20 @@ export function fillUserList($list, dataArray) {
     });
     $(tpl).appendTo(cList);
 }
+
+export const messageAreaHendler = ($textArea, $sendMessageButton) => {
+    $textArea.on('keydown', (e) => {
+        if (e.keyCode === 13) {
+            if (e.ctrlKey) {
+                // console.log('ctrl+enter');
+                e.preventDefault();
+                e.target.value = `${e.target.value}\n`;
+            } else {
+                if (e.target.value.trim().length) {
+                    $sendMessageButton.trigger('click');
+                }
+                e.preventDefault();
+            }
+        }
+    });
+};
