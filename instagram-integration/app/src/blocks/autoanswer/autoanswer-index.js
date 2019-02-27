@@ -6,7 +6,7 @@ import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
-import {fillPosts} from './utils';
+import {getPosts} from './utils-modal';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
@@ -39,15 +39,23 @@ function onSubmitHandler(e) {
         const keyWord = keyWords($(item).find('textarea.answer-words'));
         const answer = $(item).find('textarea.answer-messages').val();
         const imageId = $(item).find('.file-upload').attr('attached-img-id');
+        const postImgId = $(item).find('.js_autoanswer-add-post').attr('data-post-img-id');
         // console.log(imageId);
-        reqBody.push({
+        const submitBodyItem = {
             'key_words': keyWord,
             answer,
             'attachment': imageId ? {
                 'image_id': imageId
                 // 'post': {id: '', type: ''}
             } : undefined
-        });
+        };
+        if (postImgId) {
+            submitBodyItem.attachment.post = {
+                id: postImgId,
+                type: 'photo'
+            };
+        }
+        reqBody.push(submitBodyItem);
     });
     const nReqBody = {
         'username': usernameSelected,
@@ -170,58 +178,27 @@ function stepReducer(stepNumber, state) {
             console.log('default', stepNumber);
     }
 }
+let targetButton = {};
 
-function addPagination(modalFooter, cursor) {
-    $('#load-more').attr('cursor', cursor);
-    modalFooter.removeClass('d-none');
-}
 function loadMoreHandler(getPosts) {
     $('#load-more').on('click', (e) => {
         const $btn = $(e.target);
         const cursor = $btn.attr('cursor');
         console.log('load more click');
-        getPosts(null, {userName: usernameSelected, cursor});
-    });
-}
-function getPosts(modal, details) {
-    // eslint-disable-next-line consistent-this
-    // const self = this;
-    UserTaskManager.getPostsAutoanswer(details).then((result) => {
-        console.log(result);
-        if (result.status.state === 'ok') {
-            const {data} = result;
-            const modalFooter = $('.modal-footer', modal);
-            const $list = $('.modal-body .posts-list', modal);
-            if (modal) {
-                fillPosts($list, data.posts);
-                modal.modal('handleUpdate');
-                if (data.pagination && data.pagination.cursor) {
-                    // console.log('add more btn');
-                    addPagination(modalFooter, data.pagination.cursor);
-                }
-            } else if (data.post) {
-                // append new data
-                fillPosts($list, data.posts, 'appendToList');
-                addPagination(null, data.pagination.cursor);
-            }
-            if (data.pagination && data.pagination.cursor) {
-                loadMoreHandler(getPosts);
-            }
-        }
+        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
     });
 }
 
 function initModalHandler() {
-    const $modalBtn = $('#postsGridModal');
-    $modalBtn.on('show.bs.modal', function (event) {
-        const button = $(event.relatedTarget); // Button that triggered the modal
-        const recipient = button.data('post-info'); // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    const modal = $('#postsGridModal');
+    modal.on('show.bs.modal', function (event) {
+        targetButton = $(event.relatedTarget); // Button that triggered the modal
+        // const recipient = button.data('post-info'); // Extract info from data-* attributes
+        // console.log(recipient);
+        // Update the modal's content.
         const modal = $(this);
-        getPosts(modal, {userName: usernameSelected});
-        modal.find('.modal-title').text(`New message to ${recipient} ${usernameSelected}`);
-        modal.find('.modal-body input').val(recipient);
+        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text(`${usernameSelected} выберите картинку`);
     });
 }
 
@@ -235,16 +212,17 @@ export function init() {
         initHandlers();
         autoanswerStatus.init();
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
-            // console.log(accounts);
             logs.init(selectCls, clsConst);
         });
-        window.PubSub.subscribe('image_loaded', (e, res) => {
+        window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
             const result = JSON.parse(res.response);
             const imageId = result && result.data && result.data.image_id;
             $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
             console.log('image_loaded', res);
-            // logs.init(selectCls, clsConst);
         });
+        // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_POST_SELECTED, (e, id) => {
+        //     console.log('IMAGE_POST_SELECTED', id);
+        // });
         initModalHandler();
         initEmojii();
         imageUpload.init();

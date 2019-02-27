@@ -64,6 +64,10 @@ export const CONST = {
             INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered',
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
+        autoarnswer: {
+            IMAGE_UPLOADED: 'image_loaded'
+            // IMAGE_POST_SELECTED: 'image_post_selected'
+        },
         tasks: {
             NEW_TASK_CREATED: 'new_task_created'
         },
