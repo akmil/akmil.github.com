@@ -142,7 +142,7 @@ function addPagination(pagination, cbFn) {
     // console.log('cursor: ', scrollLoaderState.cursor);
     Spinner.add($('#mainChatPart'), 'my-5 py-5');
     UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor: scrollLoaderState.cursor}).then((result) => {
-        console.log('firstLoad:', scrollLoaderState.firstLoad, result.data.meta);
+        // console.log('firstLoad:', scrollLoaderState.firstLoad, result.data.meta);
         const newCursor = result.data.meta.pagination && result.data.meta.pagination.prev_cursor;
         Spinner.remove();
         renderResults({
@@ -153,7 +153,7 @@ function addPagination(pagination, cbFn) {
         });
         // set new cursor
         if (newCursor) {
-            console.log('**', scrollLoaderState.cursor);
+            // console.log('**', scrollLoaderState.cursor);
             scrollLoaderState.cursor = newCursor;
             $msgList.scrollTop($msgList.scrollTop() + 30);
         } else {

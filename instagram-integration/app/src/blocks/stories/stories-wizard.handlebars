@@ -2,7 +2,7 @@
     <div class="form-top">
         <div class="form-top-left">
             <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выбирает аккаунт, с которого будет отвечать происходить автоответ</h3>
-            <p>Шаг 1/2</p>
+            <p>Шаг 1/3</p>
         </div>
     </div>
 
@@ -14,5 +14,26 @@
     </div>
 </fieldset>
 <fieldset>
-    {{> stories-block }}
+    {{> stories-step-2 
+        titleHeader='Типы stories'
+        subTitle='Шаг 2/3'
+    }}
 </fieldset>
+<fieldset>
+    {{> stories-step-3 
+        titleHeader='Критерии'
+        subTitle='Шаг 3/3'
+    }}
+</fieldset>
+{{!-- <fieldset>
+    {{> stories-step-4 
+        titleHeader='Критерии'
+        subTitle='Шаг 4/4'
+    }}
+</fieldset> --}}
+<div class="form-submit-finish position-absolute d-none">
+    <div class="alert alert-success fade show">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        <h2>Задание создано успешно!</h2>
+    </div>
+</div>

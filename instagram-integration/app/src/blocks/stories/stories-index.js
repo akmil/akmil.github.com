@@ -27,59 +27,66 @@ const elSelector = {
     fileUploadBox: '.file-upload',
     addPostBtns: '.js_autoanswer-add-post'
 };
+const state = {
+    subtype: clsConst.pathSubTypes[0]
+};
 
 function onSubmitHandler(e) {
-    const fields = $(elSelector.fields);
-    const keyWords = $el => $el.val()
-        .trim()
-        .replace(/ /g, '')
-        .split(',')
-        .filter(i => i.length > 0);
-    const reqBody = [];
-    fields.each((idx, item) => {
-        const keyWord = keyWords($(item).find(elSelector.keyWord));
-        const answer = $(item).find(elSelector.answer).val();
-        const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
-        const postImgId = $(item).find(elSelector.addPostBtns).attr('data-post-img-id');
-        // console.log(imageId);
-        const submitBodyItem = {
-            'key_words': keyWord,
-            answer,
-            'attachment': imageId ? {
-                'image_id': imageId
-            } : undefined
-        };
-        if (postImgId) {
-            submitBodyItem.attachment = {
-                ...submitBodyItem.attachment,
-                post: {
-                    id: postImgId,
-                    type: 'photo'
-                }
-            };
-        }
-        reqBody.push(submitBodyItem);
-    });
-    const nReqBody = {
-        'username': usernameSelected,
-        'type': clsConst.pathType,
-        'subtype': clsConst.pathSubType,
-        'user_default_config': {},
-        'user_custom_config': {
-            'forms': reqBody
-        }
+    // const fields = $(elSelector.fields);
+    const form = $(e.target);
+    const formName = 'wizard-form';
+
+    const taskMode = $(form).find('.select-task_mode option:selected').val();
+    state.user_default_config = {
+        ...state.user_default_config,
+        task_mode: taskMode.toUpperCase(),
+        criteria: {}
+    };
+    const limit = document.forms[formName]['limit'];
+    // const have_posts = {
+    //     from: document.forms[formName]['have_posts_from'].value,
+    //     to: document.forms[formName]['have_posts_to'].value
+    // };
+    const cycle_pause = {
+        from: document.forms[formName]['have_cycle_pause_from'].value,
+        to: document.forms[formName]['have_cycle_pause_to'].value
+    };
+    const followings = {
+        from: document.forms[formName]['have_followings_from'].value,
+        to: document.forms[formName]['have_followings_to'].value
     };
 
-    // console.log('make request here**', nReqBody);
-    function cbError(res) {
-        const msg = res.status.message;
-        $('.form-submit-finish--error').addClass('d-block')
-        .find('.alert').append(`<p>${msg}</p>`);
+    if (limit.value === '') {
+        limit.focus();
+        return false;
     }
-    UserTaskManager.postStartChatBot(nReqBody, cbError).then((result) => {
+    state['user_default_config'].criteria = {
+        max_views: limit.value,
+        // 'unfollow_then': !!$('#unfollow_then:checked').length,
+        // 'follow_on_closed_profiles': !!$('#follow_on_closed_profiles:checked').length,
+        // have_posts,
+        // have_followers,
+        followings
+    };
+
+    $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
+        if ($(this).val() === '') {
+            e.preventDefault();
+            $(this).addClass('input-error');
+        } else {
+            $(this).removeClass('input-error');
+        }
+    });
+
+    // state.type = CONST.url.tmTypes.followingT;
+    // state.subtype = CONST.url.tmTypes.followingSubT[0];
+    console.log('onSubmitHandler **request**  post: StartFollowingList', state);
+
+    UserTaskManager.postStartFollowingList(state).then((result) => {
         if (result.status.state === 'ok') {
+            console.log(JSON.stringify(result));
             $('.form-submit-finish').addClass('d-block')
-                .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
+                    .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
         }
     });
 }
@@ -131,16 +138,6 @@ function setUserName(state) {
     usernameSelected = state.username;
 }
 
-function stepReducer(stepNumber, state) {
-    switch (stepNumber) {
-        case 0:
-            setUserName(state);
-            // console.log(state, stepNumber);
-            break;
-        default:
-            console.log('default', stepNumber);
-    }
-}
 let targetButton = {};
 
 function loadMoreHandler(getPosts) {
@@ -164,10 +161,10 @@ function initModalHandler() {
         modal.find('.modal-title').text(`${usernameSelected} выберите картинку`);
     });
 }
-function getConfig(idx) {
+function getConfig() {
     const path = {
         type: clsConst.pathType,
-        subtype: clsConst.pathSubTypes[idx]
+        subtype: state.subtype
     };
     const cbError = function(res) {
         const msg = res.status.message;
@@ -192,13 +189,41 @@ function getConfig(idx) {
     });
 }
 
+function setSubtype(state) {
+    // console.log('getTasksData', state.username);
+    usernameSelected = state.username;
+    getConfig();
+}
+
+function stepReducer(stepNumber, state) {
+    switch (stepNumber) {
+        case 0:
+            setUserName(state);
+            // console.log(state, stepNumber);
+            break;
+        case 1:
+            setSubtype(state);
+            // console.log(state, stepNumber);
+            break;
+        default:
+            console.log('default', stepNumber);
+    }
+}
 export function init() {
     if (!$(clsConst.currentPageCls).length) {
         return;
     }
     console.log(clsConst.currentPageCls);
-    getConfig(0);
-    getConfig(1);
+    // getConfig(0);
+    // getConfig(1);
+    const addHandlers = () => {
+        $('.js_get-stories-type input[type=radio]').on('click', (e) => {
+            const value = $(e.target).attr('value');
+            state.subtype = value.toUpperCase();
+            console.log(state);
+        });
+    };
+    addHandlers();
     const wizardCfg = {
         stepReducer,
         onSubmitHandler
