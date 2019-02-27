@@ -14,7 +14,7 @@ import * as follow from './blocks/follow/follow';
 import * as autoanswer from './blocks/autoanswer/autoanswer-index';
 import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
-// import * as tabsPils from './blocks/_shared/tebs-pils/tabs';
+import * as stories from './blocks/stories/stories-index';
 
 const selectorCssLoginForm = {
     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -56,7 +56,7 @@ const init = () => {
     autoanswer.init();
     autogreeting.init();
     chatBot.init();
-    // tabsPils.init();
+    stories.init();
 };
 
 (() => init())();

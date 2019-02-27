@@ -18,9 +18,5 @@ function tabHandler($wrapper, cbFillListUsers) {
 
 export function init(cbFillListUsers) {
     const $wrapper = $('.log-users-list');
-    // getMetaLazy($wrapper, cbFillListUsers);
     tabHandler($wrapper, cbFillListUsers);
-    // window.PubSub.subscribe(CONST.events.logs.STOP_LOGS, (eventName, data) => {
-    //     tabHandler();
-    // });
 }

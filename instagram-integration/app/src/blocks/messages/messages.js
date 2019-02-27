@@ -16,6 +16,7 @@ const stateCfg = {
 };
 let updateInterval = '';
 let intervalId = false;
+let cursor = '';
 
 const renderResults = function (cfg) {
     const {dataArray: data, $list: ulElement, stateCfg} = cfg;
@@ -162,9 +163,10 @@ function addPagination(pagination, cbFn) {
 
         // stop update interval
         if (intervalId) {
-            clearInterval(newCursor);
+            clearInterval(intervalId);
+            cbFn(result.data.meta.pagination.prev_cursor);
         }
-        cbFn(result.data.meta.pagination.prev_cursor);
+
     });
 }
 
@@ -172,7 +174,7 @@ function scrollHandler(scrollDelay, pagination) {
     // const $messages = $('.messages-info');
     let recentScroll = false;
     let makeReqOnce = true;
-    let cursor = pagination.prev_cursor;
+    cursor = pagination.prev_cursor;
     function checkIsOnce(newCursor) {
         if (newCursor !== cursor) {
             cursor = newCursor;
@@ -188,12 +190,11 @@ function scrollHandler(scrollDelay, pagination) {
                     // $messages.text('end reached');
                 } else if (scrollTop <= 45) {
                     // $messages.text('Top reached');
-                    // $(this).scrollTop(70);
-                    console.log('pagination');
+                    // console.log('pagination');
                     if (pagination && makeReqOnce) {
                         makeReqOnce = false;
                         addPagination(pagination, checkIsOnce);
-                        console.log('go');
+                        // console.log('go');
                     } else {
                         $('.messages-list-box').find('.load-more').remove();
                     }

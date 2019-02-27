@@ -146,6 +146,12 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
+    getStoriesConfig(path, cbError) {
+        const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
+        return this.network.sendRequest(url,
+          this.getToken('asHeader'), cbError);
+    }
+
 }
 
 let userInstance = null;

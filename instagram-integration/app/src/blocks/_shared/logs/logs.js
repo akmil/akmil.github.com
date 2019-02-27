@@ -170,7 +170,7 @@ export function init(_selectCls, cfg) {
         selectCls = _selectCls;
         preConfig(cfg);
         if (getUsername()) {
-            console.log(getUsername());
+            // console.log(getUsername());
             getLogsData($list, path);
         } else {
             console.log('select user');

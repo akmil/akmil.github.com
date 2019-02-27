@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
@@ -5,20 +6,19 @@ import * as tabs from '../_shared/tebs-pils/tabs';
 import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
 import * as imageUpload from '../_shared/image-upload/image-upload';
-import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from './utils-modal';
 import {tplTextField} from './addAnswerTemplate';
 
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
-    currentPageCls: '.autoanswer-page',
+    currentPageCls: '.stories-page',
     tasksList: '.log-tasks',
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.autoanswerT,
-    pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
+    pathType: CONST.url.tmTypes.storiesT,
+    pathSubTypes: CONST.url.tmTypes.storiesSubT
 };
 const elSelector = {
     fields: '.autoanswer-text-fields',
@@ -27,13 +27,6 @@ const elSelector = {
     fileUploadBox: '.file-upload',
     addPostBtns: '.js_autoanswer-add-post'
 };
-
-function initEmojii() {
-    emoji({
-        page: clsConst.currentPageCls,
-        styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
-    });
-}
 
 function onSubmitHandler(e) {
     const fields = $(elSelector.fields);
@@ -113,7 +106,6 @@ function initHandlers() {
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $('.autoanswer-text-fields').last();
         tplTextField().insertAfter(lastTextField);
-        initEmojii();
         imageUpload.init();
     });
 
@@ -172,30 +164,58 @@ function initModalHandler() {
         modal.find('.modal-title').text(`${usernameSelected} выберите картинку`);
     });
 }
+function getConfig(idx) {
+    const path = {
+        type: clsConst.pathType,
+        subtype: clsConst.pathSubTypes[idx]
+    };
+    const cbError = function(res) {
+        const msg = res.status.message;
+        $('.form-submit-finish--error').addClass('d-block')
+      .find('.alert').append(`<p>${msg}</p>`);
+    };
+
+    UserTaskManager.getStoriesConfig(path, cbError).then((result) => {
+        if (result.status.state !== 'ok') {
+            return;
+        }
+        const {
+            data: {
+              found: {
+                cfg,
+                id
+              }
+            }
+        } = result;
+
+        console.log(id, cfg);
+    });
+}
 
 export function init() {
-    if ($(clsConst.currentPageCls).length) {
-        const wizardCfg = {
-            stepReducer,
-            onSubmitHandler
-        };
-        wizardForm.init(wizardCfg);
-        initHandlers();
-        autoanswerStatus.init();
-        window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
-            logs.init(selectCls, clsConst);
-        });
-        window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
-            const result = JSON.parse(res.response);
-            const imageId = result && result.data && result.data.image_id;
-            $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
-            console.log('image_loaded', res);
-        });
-        // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_POST_SELECTED, (e, id) => {
-        //     console.log('IMAGE_POST_SELECTED', id);
-        // });
-        initModalHandler();
-        initEmojii();
-        imageUpload.init();
+    if (!$(clsConst.currentPageCls).length) {
+        return;
     }
+    console.log(clsConst.currentPageCls);
+    getConfig(0);
+    getConfig(1);
+    const wizardCfg = {
+        stepReducer,
+        onSubmitHandler
+    };
+    wizardForm.init(wizardCfg);
+    // initHandlers();
+    // autoanswerStatus.init();
+    // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+    //     logs.init(selectCls, clsConst);
+    // });
+    // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
+    //     const result = JSON.parse(res.response);
+    //     const imageId = result && result.data && result.data.image_id;
+    //     $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
+    //     console.log('image_loaded', res);
+    // });
+    // initModalHandler();
+    // imageUpload.init();
+
 }

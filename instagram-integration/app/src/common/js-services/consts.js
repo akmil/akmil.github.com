@@ -8,7 +8,9 @@ export const CONST = {
             autoanswerT: 'AUTO_ANSWER',
             autoanswerSubT: ['DEFAULT_AUTO_ANSWER'],
             autogreetT: 'AUTO_GREETING',
-            autogreetSubT: ['DEFAULT_AUTO_GREETING']
+            autogreetSubT: ['DEFAULT_AUTO_GREETING'],
+            storiesT: 'STORIES',
+            storiesSubT: ['STORIES_BY_FOLLOWERS', 'STORIES_BY_ACTIVE_AUDIENCE']
         },
         base: 'http://api.luxgram.ru/v1/',
         registration: 'registration/basic/',
