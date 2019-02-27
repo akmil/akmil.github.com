@@ -50,9 +50,12 @@ function onSubmitHandler(e) {
             } : undefined
         };
         if (postImgId) {
-            submitBodyItem.attachment.post = {
-                id: postImgId,
-                type: 'photo'
+            submitBodyItem.attachment = {
+                ...submitBodyItem.attachment,
+                post: {
+                    id: postImgId,
+                    type: 'photo'
+                }
             };
         }
         reqBody.push(submitBodyItem);
