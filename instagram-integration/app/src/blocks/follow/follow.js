@@ -1,6 +1,7 @@
 import * as followStatus from './follow-status';
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
+import viewUtils from '../../common/js-services/view';
 import 'brutusin-json-forms';
 
 const state = {
@@ -65,8 +66,7 @@ function getTasksData(path) {
     });
 }
 
-function getDataStep2(usersName) {
-    // console.log(usersName);
+function getDataStep2() {
     const path = {
         type: CONST.url.tmTypes.followingT,
         subtype: CONST.url.tmTypes.followingSubT[0]
@@ -84,37 +84,7 @@ function getDataStepSpeed() {
     state['user_custom_config'] = {
         users
     };
-    const fillSpeedList = function ($wrapper, data) {
-        const taskModes = data.cfg && data.cfg.task_modes;
-        const radioBtnReducer = function (item) {
-            switch (item) {
-                case 'AGGRESSIVE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
-                // break;
-                case 'MIDDLE':
-                    return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);
-                // break;
-                case 'SAFE':
-                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> 9 подписок в час</label>`;
-                // break;
-                default:
-                    console.log('default', item);
-            }
-        };
-        // console.log('draw speed radioBtn');
-        $wrapper.empty();
-        for (const item in taskModes) {
-            // console.log('structure: ' + item);
-            if (Object.prototype.hasOwnProperty.call(taskModes, item)) {
-                $(`<div class="custom-control custom-radio">
-                ${radioBtnReducer(item)}
-            </div>`).appendTo($wrapper);
-            }
-        }
-    };
+    const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
         type: 'FOLLOWING',
         subtype: 'FOLLOWING_LIST'
@@ -124,8 +94,17 @@ function getDataStepSpeed() {
     UserTaskManager.getDefaultConfigs(path).then((result) => {
         // console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
-            // console.log(result);
-            fillSpeedList($('.js_follow-speed'), result.data.found);
+            const {
+              data: {
+                found: {
+                  cfg: {
+                    task_modes
+                  }
+                }
+              }
+            } = result;
+
+            fillSpeedList($('.js_follow-speed'), task_modes);
         }
     });
 }

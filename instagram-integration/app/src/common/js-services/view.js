@@ -53,9 +53,45 @@ function viewUtils() {
         return str;
     }
 
+    function isEmpty(obj) {
+        return !obj || Object.keys(obj).length === 0;
+    }
+
+    function fillRadioGroupList($wrapper, taskModes) {
+        if (isEmpty(taskModes)) {
+            console.info('taskModes is empty');
+        }
+        const radioBtnReducer = function (item) {
+            switch (item) {
+                case 'AGGRESSIVE':
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
+                case 'MIDDLE':
+                    return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);
+                case 'SAFE':
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> 9 подписок в час</label>`;
+                default:
+                    console.log('default', item);
+            }
+        };
+    // console.log('draw speed radioBtn');
+        $wrapper.empty();
+        for (const item in taskModes) {
+      // console.log('structure: ' + item);
+            if (Object.prototype.hasOwnProperty.call(taskModes, item)) {
+                $(`<div class="custom-control custom-radio">
+                ${radioBtnReducer(item)}
+            </div>`).appendTo($wrapper);
+            }
+        }
+    }
+
     return {
         showInfoMessage,
         fillList,
+        fillRadioGroupList,
         isEmail,
         getFormattedDateUtil
     };

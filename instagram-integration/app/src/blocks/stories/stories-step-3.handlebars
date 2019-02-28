@@ -1,75 +1,11 @@
 {{>step-header title=titleHeader subTitle=subTitle}}
 <div class="form-bottom">
-    <div class="row">
-        <div class="form-group col-md-6 col-sm-6">
-            <label class="" for="limit">Лимит подписок</label>
-            <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="10000">
-        </div>
-        {{!-- <div class="form-group col-md-6 col-sm-6">
-            <div class="form-group col-md-3 col-sm-3">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="unfollow_then">
-                    <label class="custom-control-label" for="unfollow_then">Отписаться по окончанию</label>
-                </div>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="follow_on_closed_profiles">
-                    <label class="custom-control-label" for="follow_on_closed_profiles">Подписываться на закрытые профили</label>
-                </div>
-            </div>
-        </div> --}}
-    </div>
-    <div class="form-group" style="margin-bottom:3px;">
-        {{!-- <div class="row">
-            <div class="form-group col-md-12">
-                Количество постов
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_posts_from" placeholder="have_posts from"
-                        id="have_posts-from" min="0" value="3">
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_posts_to" placeholder="have_posts to"
-                        id="have_posts-to" min="0" value="999999">
-            </div>
-        </div> --}}
-        <div class="row">
-            <div class="form-group col-md-12">
-                every_cycle_pause_in_seconds
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_cycle_pause_from" placeholder="have_cycle_pause from"
-                        id="have_cycle_pause-from" min="0" value="5">
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_cycle_pause_to" placeholder="have_cycle_pause to"
-                        id="have_cycle_pause-to" min="0" value="30">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                Количество подписок
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_followings_from" placeholder="have_followings from"
-                        id="have_followings-from" min="0" value="2000">
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <input type="number" class="form-control" name="have_followings_to" placeholder="have_followings to"
-                        id="have_followings-to" min="0" value="8000">
-            </div>
+    <div class="form-group row col-lg-12">
+        <label class="col-3 col-form-label">Скорость</label>
+        <div class="col-9 js_task-mode">
+            {{!-- follow-speed from Ajax --}}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-3 col-form-label">task_modes</label>
-        <select class="form-control select-task_mode">
-            <option value="AGGRESSIVE">AGGRESSIVE</option>
-            <option value="MIDDLE">MIDDLE</option>
-            <option value="SAFE">SAFE</option>
-        </select>
-    </div>
-
     <button type="button" class="btn btn-blue btn-previous">Назад</button>
-    <button type="submit" class="btn btn-blue ">Старт</button>
+    <button type="button" class="btn btn-blue btn-next">Дальше</button>
 </div>
