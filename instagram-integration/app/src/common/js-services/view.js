@@ -61,7 +61,7 @@ function viewUtils() {
         if (isEmpty(taskModes)) {
             console.info('taskModes is empty');
         }
-        const actionText = _actionText || 'подписок'; // todo
+        const actionText = _actionText || 'подписок(todo)'; // todo
         const radioBtnReducer = function (item) {
             switch (item) {
                 case 'AGGRESSIVE':
