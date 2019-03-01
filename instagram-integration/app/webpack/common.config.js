@@ -6,77 +6,74 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 module.exports = {
 
-  entry: {
-    'index': [
-      './src/bootstrap.js'
-    ],
+    entry: {
+        'index': [
+            './src/bootstrap.js'
+        ]
     // 'vendor': './src/vendor.js'
-  },
-  node: { fs: 'empty' },
+    },
+    node: {fs: 'empty'},
 
-  resolve: {
+    resolve: {
+        extensions: ['.js', '.scss'],
+        modules: ['node_modules']
+    },
 
-    extensions: ['.js', '.scss'],
+    module: {
 
-    modules: ['node_modules']
+        rules: [
+            {
+                test: /\.handlebars$/,
+                loader: 'handlebars-loader',
+                query: {
+                    partialDirs: [path.resolve(__dirname, '../src')].concat(glob.sync('**/', {cwd: path.resolve(__dirname, '../src'), realpath: true}))
+                }
+            },
 
-  },
+            {
+                test: /\.js$/,
+                exclude: /node_modules|static/,
+                use: ['babel-loader', 'eslint-loader']
+            },
 
-  module: {
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
 
-    rules: [
-      {
-        test: /\.handlebars$/,
-        loader: 'handlebars-loader',
-        query: {
-          partialDirs: [path.resolve(__dirname, '../src')].concat(glob.sync('**/', { cwd: path.resolve(__dirname, '../src'), realpath: true }))
-        }
-      },
+            {
+                test: /\.(jpg|png|gif|eot|ttf|woff|woff2)$/,
+                loader: 'file-loader'
+            },
 
-      {
-        test: /\.js$/,
-        exclude: /node_modules|static/,
-        use: ['babel-loader', 'eslint-loader']
-      },
+            {
+                test: /\.(mp4|webm)$/,
+                loader: 'url-loader?limit=10000'
+            },
 
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
+            {
+                test: /\.svg$/,
+                exclude: /static/,
+                use: {
+                    loader: 'svg-url-loader'
+                }
+            }
 
-      {
-        test: /\.(jpg|png|gif|eot|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-      },
+        ]
 
-      {
-        test: /\.(mp4|webm)$/,
-        loader: 'url-loader?limit=10000'
-      },
+    },
 
-      {
-        test: /\.svg$/,
-        exclude: /static/,
-        use: {
-          loader: 'svg-url-loader'
-        }
-      }
-
-    ]
-
-  },
-
-  plugins: [
-    new CopyWebpackPlugin([{ from: './static' }, { from: './src/assets', to: './assets' }]),
+    plugins: [
+        new CopyWebpackPlugin([{from: './static'}, {from: './src/assets', to: './assets'}]),
     // new CommonsChunkPlugin({
     //   name: ['app', 'vendor'],
     //   minChunks: Infinity
     // })
-    new ProvidePlugin({ /*$: 'jquery',
+        new ProvidePlugin({ /* $: 'jquery',
         jQuery: 'jquery',*/
         // Popper: ['popper.js', 'default']
-    })
-    
-  ]
+        })
+
+    ]
 
 };

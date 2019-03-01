@@ -8,7 +8,7 @@ let clsConst = {
     pagination: '',
     paginationPgNumber: ''
 };
-let $list = '$(clsConst.tasksList)';
+let $list = '$(clsConst.tasksList)'; // set in preConfig()
 let selectCls = 'someClass';
 const getUsername = () => $(`.${selectCls} option:selected`).val();
 const path = {

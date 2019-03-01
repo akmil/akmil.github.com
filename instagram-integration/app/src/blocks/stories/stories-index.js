@@ -5,9 +5,9 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as storiesStatus from './stories-status';
 import * as logs from '../_shared/logs/logs';
-import * as imageUpload from '../_shared/image-upload/image-upload';
-import {getPosts} from './utils-modal';
-import {tplTextField} from './addAnswerTemplate';
+// import * as imageUpload from '../_shared/image-upload/image-upload';
+// import {getPosts} from './utils-modal';
+// import {tplTextField} from './addAnswerTemplate';
 import viewUtils from '../../common/js-services/view';
 
 let usernameSelected = '';
@@ -22,49 +22,53 @@ const clsConst = {
     pathSubTypes: CONST.url.tmTypes.storiesSubT
 };
 const elSelector = {
+    wizardForm: '.wizard-form',
+    wizardFormName: 'wizard-form',
     fields: '.autoanswer-text-fields',
-    keyWord: 'textarea.answer-words',
-    answer: 'textarea.answer-messages',
-    fileUploadBox: '.file-upload',
-    addPostBtns: '.js_autoanswer-add-post'
+    taskMode: '.js_task-mode',
+    competitors: 'textarea.stories-competitors'
 };
 const state = {
-    subtype: clsConst.pathSubTypes[0]
+    subtype: clsConst.pathSubTypes[0],
+    task_mode: 'SAFE'
 };
+const getCompetitors = $el => $el.val()
+    .trim()
+    .replace(/ /g, '')
+    .split(',')
+    .filter(i => i.length > 0);
 
 function onSubmitHandler(e) {
-    // const fields = $(elSelector.fields);
-    const form = $(e.target);
-    const formName = 'wizard-form';
-
-    const taskMode = $(form).find('.select-task_mode option:selected').val();
-    console.log(state);
-    state.user_default_config = {
-        ...state.user_default_config,
-        task_mode: taskMode.toUpperCase(),
-        criteria: {}
-    };
-    const limit = document.forms[formName]['limit'];
-    const cycle_pause = {
-        from: document.forms[formName]['have_cycle_pause_from'].value,
-        to: document.forms[formName]['have_cycle_pause_to'].value
-    };
+    const {wizardFormName} = elSelector;
+    const form = document.forms[wizardFormName];
+    // const taskMode = $(e.target).find('.select-task_mode option:selected').val();
+    const limit = form['limit'];
     const followings = {
-        from: document.forms[formName]['have_followings_from'].value,
-        to: document.forms[formName]['have_followings_to'].value
+        from: form['have_followings_from'].value,
+        to: form['have_followings_to'].value
     };
 
     if (limit.value === '') {
         limit.focus();
         return false;
     }
-    state['user_default_config'].criteria = {
-        max_views: limit.value,
-        followings
+
+    const competitors = getCompetitors($(form).find(elSelector.competitors));
+
+    const body = {
+        ...state,
+        user_default_config: {
+            criteria: {
+                max_views: limit.value,
+                followings
+            }
+        },
+        type: clsConst.pathType,
+        username: usernameSelected,
+        user_custom_config: {
+            competitors
+        }
     };
-    state['type'] = clsConst.pathType;
-    state['username'] = usernameSelected;
-    state['user_custom_config'] = {};
 
     $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
         if ($(this).val() === '') {
@@ -75,15 +79,13 @@ function onSubmitHandler(e) {
         }
     });
 
-    // state.type = CONST.url.tmTypes.followingT;
-    // state.subtype = CONST.url.tmTypes.followingSubT[0];
-    console.log('onSubmitHandler **request**  post: StartFollowingList', state);
+    console.log('onSubmitHandler **request**  post: StartFollowingList', body);
 
-    UserTaskManager.postStartFollowingList(state).then((result) => {
+    UserTaskManager.postStartFollowingList(body).then((result) => {
         if (result.status.state === 'ok') {
             console.log(JSON.stringify(result));
             $('.form-submit-finish').addClass('d-block')
-                    .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
+                .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
         }
     });
 }
@@ -130,10 +132,6 @@ function initHandlers() {
     tabs.init(fillListUsers);
 }
 
-function setUserName(state) {
-    usernameSelected = state.username;
-}
-
 // let defaultCfg = {
 //     cfg: {},
 //     id: {}
@@ -141,7 +139,13 @@ function setUserName(state) {
 
 function renderTaskMode(defaultCfg) {
     const {cfg: {task_modes}} = defaultCfg;
-    viewUtils.fillRadioGroupList($('.js_task-mode'), task_modes);
+    const {taskMode: taskModeSelector} = elSelector;
+    viewUtils.fillRadioGroupList($(taskModeSelector), task_modes);
+    $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
+        const value = $(e.target).attr('value');
+        state.task_mode = value.toUpperCase();
+        console.log(state.task_mode);
+    });
 }
 
 function getConfig() {
@@ -170,24 +174,36 @@ function getConfig() {
     });
 }
 
-function setSubtype(state) {
+function setUserName(state) {
     usernameSelected = state.username;
+}
+
+function addTextArea(stepNumber) {
+    const {wizardForm} = elSelector;
+    if (state.subtype === CONST.url.tmTypes.storiesSubT[0]) {
+        const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
+        const tpl = `<div class="row"><textarea class="form-control stories-competitors" rows="4"
+                            placeholder="Введите имена конкурентов, через запятую"
+                ></textarea></div>`;
+        $(fieldLast).find('.form-bottom>.row').after(tpl);
+        console.log('end');
+    }
 }
 
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
-            console.log(state, stepNumber);
+            // console.log(state, stepNumber);
             setUserName(state);
             break;
         case 1:
-            console.log(state, stepNumber);
-            setSubtype(state);
+            // console.log(state, stepNumber);
+            // setSubtype(state);
             getConfig();
             break;
         case 2:
             console.log(state, stepNumber);
-
+            addTextArea(stepNumber);
             break;
         default:
             console.log('default', stepNumber);

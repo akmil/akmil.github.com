@@ -100,10 +100,8 @@ function initSteps(formSelector, wizardCfg) {
                 $form.find('fieldset:first-child').show('slow');
             });
         }
-        // $form.find('fieldset:first-child').fadeIn(function () {
-        //     $form.find('fieldset:not(:first-child)').fadeOut();
-        // });
-        $('fieldset', wizardFormSelector).find('input,textarea').val('');
+        // clear all val in textarea and input (except radio)
+        $('fieldset', wizardFormSelector).find('input:not([type="radio"]), textarea').val('');
     });
 }
 

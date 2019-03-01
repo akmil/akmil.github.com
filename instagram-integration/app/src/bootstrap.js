@@ -1,7 +1,11 @@
 import './base.scss';
-// import 'bootstrap';
-import {CONST} from './common/js-services/consts';
+
+// vendor
+import 'whatwg-fetch';
 import PubSub from 'pubsub-js';
+
+// components
+import {CONST} from './common/js-services/consts';
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginForm} from './blocks/login-form/login-form';
 import {LoginPage} from './pages/_auth/login-page';

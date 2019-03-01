@@ -9,73 +9,73 @@ const htmlPagesPlugins = require('./html-pages-plugins');
 
 module.exports = webpackMerge(webpackCommon, {
 
-  devtool: 'inline-source-map',
+    devtool: 'inline-source-map',
 
-  output: {
+    output: {
 
-    path: path.resolve(__dirname, '../static/dist'),
+        path: path.resolve(__dirname, '../static/dist'),
 
-    filename: '[name].js',
+        filename: '[name].js',
 
-    sourceMapFilename: '[name].map',
+        sourceMapFilename: '[name].map',
 
-    chunkFilename: '[id]-chunk.js',
+        chunkFilename: '[id]-chunk.js',
 
-    publicPath: '/'
+        publicPath: '/'
 
-  },
+    },
 
-  module: {
+    module: {
 
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: false,
-              localIdentName: '[local]',
-              url: true
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
+                            modules: false,
+                            localIdentName: '[local]',
+                            url: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            outputStyle: 'expanded',
+                            sourceMap: true,
+                            sourceMapContents: true
+                        }
+                    }
+                ]
             }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-              sourceMapContents: true
-            }
-          }
+
         ]
-      }
 
-    ]
+    },
 
-  },
+    plugins: [
+        new DefinePlugin({
+            'process.env': {
+                NODE_ENV: '\'development\''
+            }
+        }),
+        ...htmlPagesPlugins.dev
+    ],
 
-  plugins: [
-    new DefinePlugin({
-      'process.env': {
-        NODE_ENV: "'development'"
-      }
-    }),
-    ...htmlPagesPlugins.dev,
-  ],
-
-  devServer: {
-    host: 'localhost',
-    port: 3003,
-    open: true,
-    historyApiFallback: true,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
+    devServer: {
+        host: 'localhost',
+        port: 3003,
+        open: true,
+        historyApiFallback: true,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     }
-  }
 
 });

@@ -3,7 +3,7 @@ import viewUtils from '../../../common/js-services/view';
 import {CONST} from '../../../common/js-services/consts';
 
 function fillListByState(taskState, $list, item) {
-    const {progress, task_id, type, status} = item;
+    const {progress, created_at, task_id, type, status} = item;
     const addItem = (tplStop) => {
         $(`<li class="list-group-item p-0 py-2" data-type="${type}" data-task-id="${task_id}">
                 ${tplStop}
@@ -12,7 +12,8 @@ function fillListByState(taskState, $list, item) {
     const tplPaused = `<div class="card-block">
         <h4 class="card-title">На паузе</h4>
         <div class="text-right">
-            <span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>
+            ${(progress && progress.timestamp) ? `<span class="text-muted">${viewUtils.getFormattedDateUtil(progress.timestamp)}</span>` : ''}
+            ${created_at ? `<span class="text-muted">${viewUtils.getFormattedDateUtil(created_at)}</span>` : ''}
         </div>
         <span class="text-success">10%</span>
         <div class="progress mb-3">

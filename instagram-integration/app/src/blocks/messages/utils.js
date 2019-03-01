@@ -42,7 +42,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) 
     items.forEach((item) => {
         const message = item;
         const value = message.value.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        // const checkpoint = item.checkpoint || item;
+        // const value = message.value;
 
         if (message.side.toLowerCase() === 'left') {
             const $li = $(`<li class="chat-item chat-item-left col flex-column-reverse" value="${message.value}">
