@@ -2,32 +2,6 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 
-// function reduceState(taskState, isRuns, $list, item) {
-//     const {progress, task_id, type, subtype, status} = item;
-//     switch (taskState) {
-//         case 'STOPPED':
-//             $(`<li class="list-group-item p-0 py-2" data-username="${type}" data-task-id="${task_id}">
-//                 <div class="media-body d-flex">
-//                     <div class="col task-type">
-//                         ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
-//                         <div class="task-progress">
-//                             <p class="small my-1">Остановлено</p>
-//                             ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
-//                         </div>
-//                     <button class="btn btn-warning js_btn-delete-task">Удалить</button>
-//                     </div>
-//                     <!--<div class="col task-subtype">
-//                         ${(subtype) ? `<p class="mt-0 mb-1">${subtype}</p>` : ''}
-//                     </div>-->
-//                 </div>
-//             </li>`).appendTo($list);
-//             break;
-
-//         default:
-//             break;
-//     }
-// }
-
 function fillListMeta($list, dataArray, isRuns) {
     const items = dataArray;
     // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';

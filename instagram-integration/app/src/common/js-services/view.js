@@ -57,15 +57,16 @@ function viewUtils() {
         return !obj || Object.keys(obj).length === 0;
     }
 
-    function fillRadioGroupList($wrapper, taskModes) {
+    function fillRadioGroupList($wrapper, taskModes, _actionText) {
         if (isEmpty(taskModes)) {
             console.info('taskModes is empty');
         }
+        const actionText = _actionText || 'подписок'; // todo
         const radioBtnReducer = function (item) {
             switch (item) {
                 case 'AGGRESSIVE':
                     return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 подписок в час</label>`;
+                    <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> 30 ${actionText} в час</label>`;
                 case 'MIDDLE':
                     return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
                     <label class="custom-control-label" for="${item}"><strong>Средний:</strong> 18 подписок в час</label>`);

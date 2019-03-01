@@ -1,17 +1,21 @@
-/* eslint-disable no-unused-vars */
 import {CONST} from '../../common/js-services/consts';
-import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
-import * as tabs from '../_shared/tebs-pils/tabs';
-import * as storiesStatus from './stories-status';
-import * as logs from '../_shared/logs/logs';
-// import * as imageUpload from '../_shared/image-upload/image-upload';
-// import {getPosts} from './utils-modal';
-// import {tplTextField} from './addAnswerTemplate';
 import viewUtils from '../../common/js-services/view';
 
+import * as wizardForm from '../../blocks/wizard-form/wizard-form';
+import * as storiesStatus from './stories-status';
+import * as tabs from '../_shared/tebs-pils/tabs';
+import * as logs from '../_shared/logs/logs';
+
 let usernameSelected = '';
-const selectCls = 'js_logs-accounts';
+const logsState = {
+    selectCls: 'js_logs-accounts',
+    selectClsLogsTaskType: 'js_logs-subtypes',
+    wrapperSubtype: '.log-subype',
+    activeSubtype: ''
+};
+// const selectCls = 'js_logs-accounts';
+// const selectClsLogsTaskType = 'js_logs-subtypes';
 const clsConst = {
     currentPageCls: '.stories-page',
     tasksList: '.log-tasks',
@@ -19,7 +23,7 @@ const clsConst = {
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
     pathType: CONST.url.tmTypes.storiesT,
-    pathSubTypes: CONST.url.tmTypes.storiesSubT
+    pathSubType: CONST.url.tmTypes.storiesSubT
 };
 const elSelector = {
     wizardForm: '.wizard-form',
@@ -29,8 +33,10 @@ const elSelector = {
     competitors: 'textarea.stories-competitors'
 };
 const state = {
-    subtype: clsConst.pathSubTypes[0],
-    task_mode: 'SAFE'
+    subtype: CONST.url.tmTypes.storiesSubT[0],
+    user_default_config: {
+        task_mode: 'SAFE'
+    }
 };
 const getCompetitors = $el => $el.val()
     .trim()
@@ -41,34 +47,32 @@ const getCompetitors = $el => $el.val()
 function onSubmitHandler(e) {
     const {wizardFormName} = elSelector;
     const form = document.forms[wizardFormName];
-    // const taskMode = $(e.target).find('.select-task_mode option:selected').val();
     const limit = form['limit'];
-    const followings = {
-        from: form['have_followings_from'].value,
-        to: form['have_followings_to'].value
-    };
 
     if (limit.value === '') {
         limit.focus();
         return false;
     }
 
-    const competitors = getCompetitors($(form).find(elSelector.competitors));
-
     const body = {
         ...state,
         user_default_config: {
+            ...state.user_default_config,
             criteria: {
-                max_views: limit.value,
-                followings
+                max_views: limit.value
             }
         },
+        user_custom_config: {},
         type: clsConst.pathType,
-        username: usernameSelected,
-        user_custom_config: {
-            competitors
-        }
+        username: usernameSelected
     };
+
+    if (body.subtype === CONST.url.tmTypes.storiesSubT[1]) {
+        const competitors = getCompetitors($(form).find(elSelector.competitors));
+        body.user_custom_config = {
+            competitors
+        };
+    }
 
     $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
         if ($(this).val() === '') {
@@ -90,9 +94,34 @@ function onSubmitHandler(e) {
     });
 }
 
-function fillListUsers($wrapper, accounts) {
+// todo refactor merge with fillDropdownUsers
+function fillDropdownTaskSubT($wrapper, subtypes) {
+    const {selectClsLogsTaskType} = logsState;
+    const label = 'Доступные задания';
     $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+    $(`<div class="">${label}</div><select name="task-subtype" class="${selectClsLogsTaskType}"></select>`).appendTo($wrapper);
+    if (!subtypes.length) {
+        return;
+    }
+    $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
+    subtypes.forEach((name, idx) => {
+        $(`<option class="list-group-item py-2" value="${name}">
+            ${idx === 0 ? 'По подписчикам' : 'По активной аудитории конкурентов'}
+        </option>`).appendTo($(`.${selectClsLogsTaskType}`));
+    });
+    $(`.${selectClsLogsTaskType}`).on('change', function () {
+        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+        $('.js_logs-container').addClass('d-block');
+        $('option.js_empty-subtype').remove();
+        // logs.init(selectClsLogsTaskType, clsConst);
+    });
+}
+
+function fillDropdownUsers($wrapper, accounts) {
+    const {selectCls} = logsState;
+    const label = 'Доступные аккаунты';
+    $wrapper.empty().addClass('border-light-color');
+    $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
     accounts.forEach((name) => {
         $(`<option class="list-group-item py-2" value="${name}">
             ${name}
@@ -129,22 +158,20 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    tabs.init(fillListUsers);
+    fillDropdownTaskSubT($(logsState.wrapperSubtype), clsConst.pathSubType);
+    tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
 }
-
-// let defaultCfg = {
-//     cfg: {},
-//     id: {}
-// };
 
 function renderTaskMode(defaultCfg) {
     const {cfg: {task_modes}} = defaultCfg;
     const {taskMode: taskModeSelector} = elSelector;
+
     viewUtils.fillRadioGroupList($(taskModeSelector), task_modes);
+
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
-        state.task_mode = value.toUpperCase();
-        console.log(state.task_mode);
+        state.user_default_config.task_mode = value.toUpperCase();
+        // console.log(state.user_default_config.task_mode);
     });
 }
 
@@ -165,12 +192,12 @@ function getConfig() {
         }
         const {
             data: {
-              found
+                found
             }
         } = result;
-
-        // defaultCfg = found;
+        const limitVal = found.cfg.criteria.max_views;
         renderTaskMode(found);
+        $('#limit').val(limitVal);
     });
 }
 
@@ -180,11 +207,11 @@ function setUserName(state) {
 
 function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
-    if (state.subtype === CONST.url.tmTypes.storiesSubT[0]) {
+    if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
         const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
-        const tpl = `<div class="row"><textarea class="form-control stories-competitors" rows="4"
-                            placeholder="Введите имена конкурентов, через запятую"
-                ></textarea></div>`;
+        const tpl = `<div class="row">
+            <label class="">Конкуренты</label>
+            <textarea class="form-control stories-competitors mb-2" rows="1"></textarea></div>`;
         $(fieldLast).find('.form-bottom>.row').after(tpl);
         console.log('end');
     }
@@ -233,7 +260,5 @@ export function init() {
     //     $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
     //     console.log('image_loaded', res);
     // });
-    // initModalHandler();
-    // imageUpload.init();
 
 }

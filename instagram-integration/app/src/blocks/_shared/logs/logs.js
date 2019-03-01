@@ -20,7 +20,6 @@ let intervalId = '';
 function initHandlerPagination($previous, $next, dataArray) {
     const $wrapper = $(clsConst.pagination);
     const {pagination} = dataArray.settings;
-    // const lastPage = pagination.pages[pagination.pages.length - 1];
 
     $previous.on('click', (e) => {
         const $liActive = $wrapper.find('li.page-number.active');

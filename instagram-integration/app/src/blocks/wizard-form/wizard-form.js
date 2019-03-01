@@ -100,6 +100,7 @@ function initSteps(formSelector, wizardCfg) {
                 $form.find('fieldset:first-child').show('slow');
             });
         }
+        $('.form-submit-finish').removeClass('d-block');
         // clear all val in textarea and input (except radio)
         $('fieldset', wizardFormSelector).find('input:not([type="radio"]), textarea').val('');
     });
