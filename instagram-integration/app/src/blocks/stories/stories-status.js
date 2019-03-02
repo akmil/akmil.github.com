@@ -22,7 +22,6 @@ function dropdownOnSelectCb(e) {
     const pathUpdated = {...path, subtype};
     $('.js_logs-container').addClass('d-block');
     $('option.js_empty-subtype').remove();
-    console.log('dropdownOnSelectCb', wrappers, pathUpdated);
     getTasksData(wrappers, pathUpdated);
 }
 
@@ -33,7 +32,7 @@ export function init({isInStoriesPage}) {
 
     dropDown.addDropdown(logsState.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
 
-    getTasksData(wrappers, path);
+    // getTasksData(wrappers, path);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
         getTasksData(wrappers, path);
     });

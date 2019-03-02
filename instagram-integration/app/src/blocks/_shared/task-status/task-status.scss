@@ -1,0 +1,13 @@
+/*file-upload new*/
+  
+.tasks {
+    .col-6--with-borders {
+        border-left: 1px solid $gray-500;
+        padding-left: 0.75rem;
+        p {
+            margin-top: 0;
+            margin-bottom: 0.25rem;
+            border-bottom: 1px solid $gray-500;
+        }
+    }
+}

@@ -12,6 +12,7 @@ const logsState = {
     selectCls: 'js_logs-accounts',
     selectClsLogsTaskType: 'js_logs-subtypes',
     wrapperSubtype: '.log-subype'
+    // activeSubType: CONST.url.tmTypes.storiesSubT[0]
 };
 const clsConst = {
     currentPageCls: '.stories-page',
@@ -20,7 +21,7 @@ const clsConst = {
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
     pathType: CONST.url.tmTypes.storiesT,
-    pathSubType: CONST.url.tmTypes.storiesSubT
+    pathSubType: CONST.url.tmTypes.storiesSubT[0]
 };
 const elSelector = {
     wizardForm: '.wizard-form',
@@ -95,6 +96,7 @@ function onSubmitHandler(e) {
 function dropdownOnSelectCb(e) {
     const {selectClsLogsTaskType} = logsState;
     clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+    // logsState.activeSubType = clsConst.pathSubType;
     $('.js_logs-container').addClass('d-block');
     $('option.js_empty-subtype').remove();
 }
@@ -111,6 +113,7 @@ function fillDropdownUsers($wrapper, accounts) {
     });
     $(`.${selectCls}`).on('change', function () {
         usernameSelected = $(`.${selectCls} option:selected`).val();
+        // clsConst.pathSubType = logsState.activeSubType;
         logs.init(selectCls, clsConst);
     });
 }
@@ -140,7 +143,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    viewUtils.addDropdown($(logsState.wrapperSubtype), clsConst.pathSubType, {logsState, dropdownOnSelectCb});
+    viewUtils.addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
     tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
 }
 

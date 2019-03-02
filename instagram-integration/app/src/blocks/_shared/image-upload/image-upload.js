@@ -94,7 +94,7 @@ function readURL(input) {
 
 export function init() {
     $('.file-upload-btn').on('click', (e) => {
-        const input = $(e.target).closest('.file-upload').find('input');
+        const input = $(e.target).closest('.col.file-upload').find('input');
         input.trigger('click');
     });
 

@@ -330,4 +330,11 @@ export function init() {
         }, 3000);
         $('.spinner-box').addClass('d-none');
     });
+
+    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
+        const {dataArray} = data;
+        dataArray.forEach(item => {
+            sessionStorage.setItem(item.username, item.info.profile_pic_url);
+        });
+    });
 }

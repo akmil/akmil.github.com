@@ -22,25 +22,34 @@ function fillListByState(taskState, $list, item) {
         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     const tplProgress = `<div class="no-gutters px-2 row task-progress">
             <div class="col-6 align-items-center d-flex">
-                <h3 class="mt-0 mb-1 ">${username}</h3>
+                <img src="${sessionStorage.getItem(username)}" class="rounded-circle avatar" alt="аватар"/>
+                <h2 class="mt-0 mb-1 ml-2">${username}</h2>
             </div>
-            <div class="col-6">
-                <p class="mt-0 mb-1 name">В прогрессе: ${task_id}</p>
-                 ${created_at ? `<p class="mt-0 mb-1">Запущено: ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}            
-                <p class="mt-0 mb-1 ">Режим: ${mode}</p>
-                <button class="btn btn-outline-primary js_btn-stop-task"><i class="far fa-pause-circle"></i></button>
-                <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt"></i></button>
+            <div class="col-6 col-6--with-borders">
+                <p class="pb-1 name"><b>В прогрессе:</b> ${task_id}</p>
+                ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
+                ${mode ? `<p class="pb-1"><b>Режим:</b> ${mode}</p>` : ''}
+                <div class="text-center">
+                    <button class="btn btn-outline-primary js_btn-stop-task mr-3"><i class="far fa-pause-circle fa-lg"></i></button>
+                    <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt fa-lg"></i></button>
+                </div>
             </div>
         </div>`;
-    const tplStop = `<div class="media-body d-flex">
-            <div class="col task-type">
-                ${(task_id) ? `<p class="badge badge-secondary my-1">${task_id}</p>` : ''}
-                <div class="task-progress">
-                    <p class="small my-1">Остановлено</p>
-                    ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
-                </div>
-            <button class="btn btn-warning js_btn-delete-task">Удалить</button>
+    const tplStop = `<div class="no-gutters px-2 row task-stopped">
+            <div class="col-6 align-items-center d-flex">
+                <img src="${sessionStorage.getItem(username)}" class="rounded-circle avatar" alt="аватар"/>
+                <h2 class="mt-0 mb-1 ml-2">${username}</h2>
             </div>
+            <div class="col-6 col-6--with-borders">
+                <p class="pb-1 name"><b>Остановлено:</b> ${task_id}</p>
+                ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
+                ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
+                ${mode ? `<p class="pb-1"><b>Режим:</b> ${mode}</p>` : ''}
+                <div class="text-center">
+                    <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt fa-lg"></i></button>
+                </div>
+            </div>
+
         </div>`;
     const tplFinished = `<div class="col task-progress">
                 <p class="mt-0 mb-1 name">Завершено : ${task_id}</p>

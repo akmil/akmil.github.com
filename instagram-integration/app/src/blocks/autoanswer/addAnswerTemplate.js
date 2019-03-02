@@ -19,7 +19,7 @@ $(`<div class="autoanswer-text-fields mt-2">
                     post
                 </button>
                 <div class="file-upload">
-                    <button class="file-upload-btn btn btn-success" type="button">Добавить картинку</button>
+                    <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image"></i></button>
 
                     <div class="image-upload-wrap">
                         <input class="file-upload-input" type='file' accept="image/*" />
