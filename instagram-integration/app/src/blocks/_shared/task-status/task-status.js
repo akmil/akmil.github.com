@@ -3,7 +3,7 @@ import viewUtils from '../../../common/js-services/view';
 import {CONST} from '../../../common/js-services/consts';
 
 function fillListByState(taskState, $list, item) {
-    const {progress, created_at, task_id, type, status} = item;
+    const {progress, created_at, task_id, type, status, username, mode} = item;
     const addItem = (tplStop) => {
         $(`<li class="list-group-item p-0 py-2" data-type="${type}" data-task-id="${task_id}">
                 ${tplStop}
@@ -22,6 +22,8 @@ function fillListByState(taskState, $list, item) {
         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     const tplProgress = `<div class="col task-progress">
             <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
+            <p class="mt-0 mb-1 ">username : ${username}</p>
+            <p class="mt-0 mb-1 ">mode : ${mode}</p>
             <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
             <button class="btn btn-warning js_btn-delete-task">Удалить</button>
         </div>`;

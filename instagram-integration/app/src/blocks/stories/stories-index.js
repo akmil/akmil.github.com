@@ -11,11 +11,8 @@ let usernameSelected = '';
 const logsState = {
     selectCls: 'js_logs-accounts',
     selectClsLogsTaskType: 'js_logs-subtypes',
-    wrapperSubtype: '.log-subype',
-    activeSubtype: ''
+    wrapperSubtype: '.log-subype'
 };
-// const selectCls = 'js_logs-accounts';
-// const selectClsLogsTaskType = 'js_logs-subtypes';
 const clsConst = {
     currentPageCls: '.stories-page',
     tasksList: '.log-tasks',
@@ -95,26 +92,11 @@ function onSubmitHandler(e) {
 }
 
 // todo refactor merge with fillDropdownUsers
-function fillDropdownTaskSubT($wrapper, subtypes) {
+function dropdownOnSelectCb(e) {
     const {selectClsLogsTaskType} = logsState;
-    const label = 'Доступные задания';
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">${label}</div><select name="task-subtype" class="${selectClsLogsTaskType}"></select>`).appendTo($wrapper);
-    if (!subtypes.length) {
-        return;
-    }
-    $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
-    subtypes.forEach((name, idx) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${idx === 0 ? 'По подписчикам' : 'По активной аудитории конкурентов'}
-        </option>`).appendTo($(`.${selectClsLogsTaskType}`));
-    });
-    $(`.${selectClsLogsTaskType}`).on('change', function () {
-        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-        $('.js_logs-container').addClass('d-block');
-        $('option.js_empty-subtype').remove();
-        // logs.init(selectClsLogsTaskType, clsConst);
-    });
+    clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+    $('.js_logs-container').addClass('d-block');
+    $('option.js_empty-subtype').remove();
 }
 
 function fillDropdownUsers($wrapper, accounts) {
@@ -158,7 +140,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    fillDropdownTaskSubT($(logsState.wrapperSubtype), clsConst.pathSubType);
+    viewUtils.addDropdown($(logsState.wrapperSubtype), clsConst.pathSubType, {logsState, dropdownOnSelectCb});
     tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
 }
 
@@ -171,7 +153,6 @@ function renderTaskMode(defaultCfg) {
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
         state.user_default_config.task_mode = value.toUpperCase();
-        // console.log(state.user_default_config.task_mode);
     });
 }
 

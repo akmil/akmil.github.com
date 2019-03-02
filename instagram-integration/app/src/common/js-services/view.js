@@ -89,12 +89,37 @@ function viewUtils() {
         }
     }
 
+    /**
+     * cfg ={ logsState, cbFN() }
+     */
+    function addDropdown($wrapper, items, cfg) {
+        const {selectClsLogsTaskType} = cfg.logsState;
+        const label = 'Доступные задания';
+        $wrapper.empty().addClass('border-light-color');
+        $(`<div class="">${label}</div><select name="task-subtype" class="${selectClsLogsTaskType}"></select>`).appendTo($wrapper);
+        if (!items.length) {
+            return;
+        }
+        $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
+        items.forEach((name, idx) => {
+            $(`<option class="list-group-item py-2" value="${name}">
+            ${idx === 0 ? 'По подписчикам' : 'По активной аудитории конкурентов'}
+        </option>`).appendTo($(`.${selectClsLogsTaskType}`));
+        });
+        $(`.${selectClsLogsTaskType}`).on('change', function () {
+            cfg.dropdownOnSelectCb();
+
+            /* logs.init(selectClsLogsTaskType, clsConst); */
+        });
+    }
+
     return {
         showInfoMessage,
         fillList,
         fillRadioGroupList,
         isEmail,
-        getFormattedDateUtil
+        getFormattedDateUtil,
+        addDropdown
     };
 }
 

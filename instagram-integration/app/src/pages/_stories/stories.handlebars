@@ -17,9 +17,11 @@
           <div class="col-9">
               <div class="tab-content" id="v-pills-tabContent">
                   <div class="tab-pane fade show" id="runned" role="tabpanel" aria-labelledby="v-pills-runned-tab">
+                      {{> dropdown wrapperCls='subtype' selectBoxCls='subtype-select-wrapper' title='Тип' }}
                       {{>task-status wrapperCls='tasks-runs--box' listCls = 'tasks-runs' title='Запущеные'}}
                   </div>
                   <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
+                      {{> dropdown wrapperCls='subtype' selectBoxCls='subtype-select-wrapper' title='Тип' }}
                       {{>task-status wrapperCls='tasks-stopped--box' listCls='tasks-stopped' title='Остановленные'}}
                   </div>
                   <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
