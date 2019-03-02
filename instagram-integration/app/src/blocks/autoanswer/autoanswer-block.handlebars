@@ -18,17 +18,18 @@
                     data-meteor-emoji="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
                     placeholder="Введите сообщение, которое будет отправлено"
                 ></textarea>
-                <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image"></i></button>
+                <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image fa-lg"></i></button>
+                <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
+                        data-toggle="modal" 
+                        data-post-info="todo: get req to user: "
+                        data-target="#postsGridModal">
+                    <i class="fas fa-paste fa-lg"></i>
+                </button>
                 <div class="mt-2">
                     {{> image-upload }}
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-success js_autoanswer-add-post" 
-                        data-toggle="modal" 
-                        data-post-info="todo: get req to user: "
-                        data-target="#postsGridModal">
-                        post
-                    </button>
+                    
                 </div>
             </div>
         </div>

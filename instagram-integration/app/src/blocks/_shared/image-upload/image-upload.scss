@@ -1,5 +1,5 @@
 /*file-upload new*/
-  
+
 .file-upload {
     background-color: #ffffff;
     margin: 0 auto;
@@ -30,6 +30,13 @@
     //     transition: all .2s ease;
     //     }
     //   }
+    &-btn {
+        top: -35px;
+        position: relative;
+        padding: 4px 8px;
+        width: auto !important;
+        min-width: initial !important;
+    }
   }
   
   .file-upload-content {

@@ -78,7 +78,6 @@ function initSteps(formSelector, wizardCfg) {
         });
 
         if (onSubmitHandler) {
-            console.log('**outer onSubmitHandler**');
             onSubmitHandler(e);
         }
 

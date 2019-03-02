@@ -43,6 +43,16 @@ function onSubmitHandler(e) {
         .split(',')
         .filter(i => i.length > 0);
     const reqBody = [];
+    fields.find(elSelector.keyWord).each(function () {
+        if ($(this).val() === '') {
+            e.preventDefault();
+            $(this).addClass('input-error');
+            return;
+        } else {
+            $(this).removeClass('input-error');
+        }
+        console.log('**alarm **', elSelector.keyWord);
+    });
     fields.each((idx, item) => {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
@@ -56,6 +66,7 @@ function onSubmitHandler(e) {
                 'image_id': imageId
             } : undefined
         };
+
         if (postImgId) {
             submitBodyItem.attachment = {
                 ...submitBodyItem.attachment,
@@ -104,6 +115,9 @@ function fillListUsers($wrapper, accounts) {
         logs.init(selectCls, clsConst);
     });
 }
+function removeExtraTextFields() {
+    $(`${elSelector.fields}:not(:first-child)`).remove();
+}
 
 /**
  * Init Handlers
@@ -111,7 +125,7 @@ function fillListUsers($wrapper, accounts) {
 function initHandlers() {
 
     $('.js_add-autoanswer').on('click', (e) => {
-        const lastTextField = $('.autoanswer-text-fields').last();
+        const lastTextField = $(elSelector.fields).last();
         tplTextField().insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
@@ -122,6 +136,7 @@ function initHandlers() {
         // console.log('alert close');
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        removeExtraTextFields();
     });
 
     // alert close
@@ -129,6 +144,7 @@ function initHandlers() {
         // console.log('alert close');
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        removeExtraTextFields();
     });
 
     tabs.init(fillListUsers);

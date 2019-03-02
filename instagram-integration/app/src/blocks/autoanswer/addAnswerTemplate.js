@@ -9,18 +9,17 @@ $(`<div class="autoanswer-text-fields mt-2">
                 data-meteor-emoji="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
                 placeholder="Введите сообщение, которое будет отправлено"
             ></textarea>
-
-            <div class="mt-2">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success js_autoanswer-add-post" 
+            <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image fa-lg"></i></button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
                     data-toggle="modal" 
                     data-post-info="todo: get req to user: "
                     data-target="#postsGridModal">
-                    post
-                </button>
-                <div class="file-upload">
-                    <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image"></i></button>
+                <i class="fas fa-paste fa-lg"></i>
+            </button>
 
+            <div class="mt-2">
+                <div class="file-upload">
                     <div class="image-upload-wrap">
                         <input class="file-upload-input" type='file' accept="image/*" />
                     </div>
