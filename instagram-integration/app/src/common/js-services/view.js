@@ -47,7 +47,7 @@ function viewUtils() {
         if (!showFullTime) {
             str = `${hour}:${min}`;
         } else {
-            str = `${date.getFullYear()}-${month}-${day}_${hour}:${min}:${sec}`;
+            str = `${date.getFullYear()}-${month}-${day} ${hour}:${min}:${sec}`;
         }
 
         return str;

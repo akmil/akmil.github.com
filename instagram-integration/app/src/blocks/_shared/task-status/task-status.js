@@ -20,12 +20,17 @@ function fillListByState(taskState, $list, item) {
             <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
-    const tplProgress = `<div class="col task-progress">
-            <p class="mt-0 mb-1 name">В прогрессе : ${task_id}</p>
-            <p class="mt-0 mb-1 ">username : ${username}</p>
-            <p class="mt-0 mb-1 ">mode : ${mode}</p>
-            <button class="btn btn-outline-primary js_btn-stop-task">Остановить</button>
-            <button class="btn btn-warning js_btn-delete-task">Удалить</button>
+    const tplProgress = `<div class="no-gutters px-2 row task-progress">
+            <div class="col-6 align-items-center d-flex">
+                <h3 class="mt-0 mb-1 ">${username}</h3>
+            </div>
+            <div class="col-6">
+                <p class="mt-0 mb-1 name">В прогрессе: ${task_id}</p>
+                 ${created_at ? `<p class="mt-0 mb-1">Запущено: ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}            
+                <p class="mt-0 mb-1 ">Режим: ${mode}</p>
+                <button class="btn btn-outline-primary js_btn-stop-task"><i class="far fa-pause-circle"></i></button>
+                <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt"></i></button>
+            </div>
         </div>`;
     const tplStop = `<div class="media-body d-flex">
             <div class="col task-type">
