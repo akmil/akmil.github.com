@@ -43,16 +43,21 @@ function onSubmitHandler(e) {
         .split(',')
         .filter(i => i.length > 0);
     const reqBody = [];
+    let validation = true;
     fields.find(elSelector.keyWord).each(function () {
         if ($(this).val() === '') {
             e.preventDefault();
             $(this).addClass('input-error');
+            validation = false;
             return;
         } else {
             $(this).removeClass('input-error');
         }
         console.log('**alarm **', elSelector.keyWord);
     });
+    if (!validation) {
+        return;
+    }
     fields.each((idx, item) => {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
