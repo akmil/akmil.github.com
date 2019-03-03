@@ -36,13 +36,13 @@ class User {
     }
 
     addInstagramAccount(formData, cbError) {
-        const {username, password} = formData;
+        const {username, password, ip, port} = formData;
 
         // TODO: del proxyTMP after beta-testing
         const proxyTMP = {
             'proxy': {
-                'host': '192.168.0.1',
-                'port': 8080,
+                'host': ip,
+                port,
                 username,
                 password
             }

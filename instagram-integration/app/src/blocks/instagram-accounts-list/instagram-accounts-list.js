@@ -47,16 +47,23 @@ function addOnLoadHandlers() {
         const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
         const username = $modalBody.find('input[name="username"]').val().trim();
         const password = $modalBody.find('input[name="pass"]').val().trim();
+        const ip = $modalBody.find('input[name="ip"]').val().trim(); // TMP solution
+        const port = $modalBody.find('input[name="port"]').val().trim(); // TMP solution
         const $form = $('form', $modalBody);
         const form = $form.get(0);
         const cssValidationClass = 'form-validation';
 
         e.preventDefault();
-
+        function isValidIpv4Addr(ip) {
+            return (/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/).test(ip);
+        }
+        function isValidPort(port) {
+            return (/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/).test(port);
+        }
         // const validator = new Validator($form);
         // console.log(validator.validate());
         if (form.checkValidity()) {
-            addInstagramAccount({username, password});
+            addInstagramAccount({username, password, ip, port});
         } else {
             // Highlight errors
             if (form.reportValidity) {
@@ -65,8 +72,9 @@ function addOnLoadHandlers() {
             $form.addClass(cssValidationClass);
         }
 
-        if (!username || !password) {
-            console.log('not valid - Empty fields');
+        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port)) {
+            e.stopPropagation();
+            console.log('not valid fields');
             return;
         }
     });
@@ -208,6 +216,17 @@ function fillList($list, dataArray) {
         </div>`;
         return tpl;
     };
+    const checkPointText = (checkpoint, item) => {
+        if (checkpoint.status === 'TRIGGERED') {
+            return `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
+                data-username="${item.username || ''}"
+                data-toggle="modal" data-target="#security-code">
+                <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
+        } else if (item.status === 'FAIL') {
+            return '<span class="text-danger">Ошибка при добавлении</span>';
+        }
+    };
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
@@ -221,13 +240,7 @@ function fillList($list, dataArray) {
                         ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
                     </div>
                     <div class="col user-checkpoint">
-                        ${(checkpoint.status === 'TRIGGERED')
-                        ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                            data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
-                            data-username="${item.username || ''}"
-                            data-toggle="modal" data-target="#security-code">
-                            <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                        : `(todo)checkpoint status - ${checkpoint.status}`}
+                        ${checkPointText(checkpoint, item)}
                     </div>
                     ${stats()}
                 </div>
@@ -272,11 +285,13 @@ export function init() {
     if (!$msgList.length) {
         return;
     }
-    const token = User.getToken(); // upd to: User.getToken()
+    // const token = User.getToken();
     const metadata = User.getMetadata();
-    const resendRequest = () => User.getMetadata(token);
-    let isSendReqOnce = false;
+    // const resendRequest = () => User.getMetadata(token);
+    // let isSendReqOnce = false;
     const checkResponse = (result, isResendRequest) => {
+
+        /*
         if (!result.status.state === 'ok' || !result.data || !$msgList.length || isResendRequest) {
             // проверям один раз наличие result.data.accounts.info
             $msgList.empty();
@@ -293,6 +308,7 @@ export function init() {
             }, 3500);
             return;
         }
+        */
         // вывод результатов (data.accounts.info)
         $('.profile-user .spinner-box').addClass('d-none');
         fillList($msgList, result.data.accounts);
@@ -310,6 +326,7 @@ export function init() {
 
     metadata.then((result) => {
         // проверям один раз наличие result.data.accounts.info
+        /*
         let isResendRequest = false;
         if (result.data && result.data.accounts && !isSendReqOnce) {
             result.data.accounts.forEach((item) => {
@@ -320,7 +337,9 @@ export function init() {
                 }
             });
         }
-        checkResponse(result, isResendRequest);
+        */
+    //    checkResponse(result, isResendRequest);
+        checkResponse(result);
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
