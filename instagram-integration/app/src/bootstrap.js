@@ -11,6 +11,7 @@ import {LoginForm} from './blocks/login-form/login-form';
 import {LoginPage} from './pages/_auth/login-page';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
 import * as header from './blocks/header/header';
+import * as sidebarMenu from './blocks/sidebar-menu/sidebar-menu';
 import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
@@ -53,6 +54,7 @@ const init = () => {
 
     confirmationWithRedirect().init();
     header.initHeader();
+    sidebarMenu.initMenu();
     burgerMenu.init();
     follow.init();
     instagramAccounts.init();

@@ -13,7 +13,7 @@ const state = {
 
 function fillListMeta($list, dataArray) {
     const items = dataArray;
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty().addClass('border-light-color');
     $('<li class="list-group-item py-2"><h3>UserTaskManager</h3></li>').appendTo($list);
     items.forEach((item) => {

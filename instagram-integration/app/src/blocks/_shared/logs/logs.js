@@ -90,7 +90,7 @@ function clearPagination($wrapper) {
 function fillListMeta($list, dataArray, isRuns) {
     const $wrapperPagination = $('.logs-pagination');
     const items = dataArray.logs;
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">

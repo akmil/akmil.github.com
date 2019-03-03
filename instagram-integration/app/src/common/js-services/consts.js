@@ -36,6 +36,7 @@ export const CONST = {
         instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
     },
     user: {
+        defaulAvatar: 'https://i.imgur.com/jNNT4LE.png', // todo: get from designer
         email: '',
         password: '',
         token: ''

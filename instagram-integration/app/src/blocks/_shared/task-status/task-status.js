@@ -2,6 +2,19 @@ import UserTaskManager from '../../../common/js-services/api-task-manager';
 import viewUtils from '../../../common/js-services/view';
 import {CONST} from '../../../common/js-services/consts';
 
+const modeRus = (mode) => {
+    switch (mode) {
+        case 'AGGRESSIVE':
+            return 'Агрессивный';
+        case 'MIDDLE':
+            return 'Средний';
+        case 'SAFE':
+            return ' Безопасный';
+        default:
+            break;
+    }
+};
+
 function fillListByState(taskState, $list, item) {
     const {progress, created_at, task_id, type, status, username, mode} = item;
     const addItem = (tplStop) => {
@@ -26,9 +39,9 @@ function fillListByState(taskState, $list, item) {
                 <h2 class="mt-0 mb-1 ml-2">${username}</h2>
             </div>
             <div class="col-6 col-6--with-borders">
-                <p class="pb-1 name"><b>В прогрессе:</b> ${task_id}</p>
+                <p class="pb-1 name"><b>ID:</b> ${task_id}</p>
                 ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
-                ${mode ? `<p class="pb-1"><b>Режим:</b> ${mode}</p>` : ''}
+                ${mode ? `<p class="pb-1"><b>Режим:</b> ${modeRus(mode)}</p>` : ''}
                 <div class="text-center">
                     <button class="btn btn-outline-primary js_btn-stop-task mr-3"><i class="far fa-pause-circle fa-lg"></i></button>
                     <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt fa-lg"></i></button>
@@ -41,10 +54,10 @@ function fillListByState(taskState, $list, item) {
                 <h2 class="mt-0 mb-1 ml-2">${username}</h2>
             </div>
             <div class="col-6 col-6--with-borders">
-                <p class="pb-1 name"><b>Остановлено:</b> ${task_id}</p>
+                <p class="pb-1 name"><b>ID:</b> ${task_id}</p>
                 ${(item.status.reason) ? `<p class="my-1">${status.reason}</p>` : ''}
                 ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
-                ${mode ? `<p class="pb-1"><b>Режим:</b> ${mode}</p>` : ''}
+                ${mode ? `<p class="pb-1"><b>Режим:</b> ${modeRus(mode)}</p>` : ''}
                 <div class="text-center">
                     <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt fa-lg"></i></button>
                 </div>
@@ -52,7 +65,7 @@ function fillListByState(taskState, $list, item) {
 
         </div>`;
     const tplFinished = `<div class="col task-progress">
-                <p class="mt-0 mb-1 name">Завершено : ${task_id}</p>
+                <p class="mt-0 mb-1 name"><b>ID:</b> ${task_id}</p>
             </div>
             <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     switch (taskState) {
@@ -74,7 +87,7 @@ function fillListByState(taskState, $list, item) {
 }
 
 function fillListMeta($list, items, isRuns) {
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">

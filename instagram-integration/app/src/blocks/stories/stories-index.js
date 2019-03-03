@@ -151,7 +151,7 @@ function renderTaskMode(defaultCfg) {
     const {cfg: {task_modes}} = defaultCfg;
     const {taskMode: taskModeSelector} = elSelector;
 
-    viewUtils.fillRadioGroupList($(taskModeSelector), task_modes);
+    viewUtils.fillRadioGroupList($(taskModeSelector), task_modes, ' ');
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');

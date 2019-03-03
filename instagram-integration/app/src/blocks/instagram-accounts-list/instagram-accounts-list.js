@@ -14,7 +14,6 @@ const addInstagramAccount = (newFormData) => {
             result.status.message || 'Login error');
         // $(_loginBox).addClass(closeClass).removeClass(openedClass);
     };
-
     User.addInstagramAccount(newFormData, cbError).then((result) => {
         if (result && result.status) {
             console.log(result, result.status);
@@ -187,7 +186,7 @@ function addListHandler(/* username*/) {
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
-    const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    const defaultAvatarSrc = CONST.user.defaulAvatar;
     const insertItem = (data, text, cssCls) => {
         const liTpl = `${(data)
             ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
@@ -246,7 +245,7 @@ function fillList($list, dataArray) {
                      ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
                     
                 </div>
-                <div class="col user-checkpoint">                        
+                <div class="col user-checkpoint">
                     ${(checkpoint.status === 'TRIGGERED')
                     ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
                             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
@@ -334,7 +333,8 @@ export function init() {
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
         const {dataArray} = data;
         dataArray.forEach(item => {
-            sessionStorage.setItem(item.username, item.info.profile_pic_url);
+            const avatar = item.info && item.info.profile_pic_url || CONST.user.defaulAvatar;
+            sessionStorage.setItem(item.username, avatar);
         });
     });
 }

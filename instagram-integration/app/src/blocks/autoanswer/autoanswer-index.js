@@ -53,9 +53,9 @@ function onSubmitHandler(e) {
         } else {
             $(this).removeClass('input-error');
         }
-        console.log('**alarm **', elSelector.keyWord);
     });
     if (!validation) {
+        console.log('**alarm **', elSelector.keyWord);
         return;
     }
     fields.each((idx, item) => {

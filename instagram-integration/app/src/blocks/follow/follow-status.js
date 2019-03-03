@@ -4,7 +4,7 @@ import {CONST} from '../../common/js-services/consts';
 
 function fillListMeta($list, dataArray, isRuns) {
     const items = dataArray;
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
+    // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">

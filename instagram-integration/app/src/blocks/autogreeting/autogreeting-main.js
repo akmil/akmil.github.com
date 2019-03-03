@@ -125,15 +125,8 @@ function setUserName(state) {
 }
 
 function getDataStepSpeed() {
-    // const users = $('#followers').val()
-    //     .trim()
-    //     .replace(/ /g, '')
-    //     .split(',')
-    //     .filter(i => i.length > 0);
 
-    // state['user_custom_config'] = {
-    //     users
-    // };
+    // TODO: refactor get from - view.fillRadioGroupList
     const fillSpeedList = function ($wrapper, data) {
         const taskModes = data.cfg && data.cfg.task_modes;
         const radioBtnReducer = function (item, val) {

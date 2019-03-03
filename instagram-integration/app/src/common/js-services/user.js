@@ -36,14 +36,30 @@ class User {
     }
 
     addInstagramAccount(formData, cbError) {
+        const {username, password} = formData;
+
+        // TODO: del proxyTMP after beta-testing
+        const proxyTMP = {
+            'proxy': {
+                'host': '192.168.0.1',
+                'port': 8080,
+                username,
+                password
+            }
+        };
+        const body = JSON.stringify({username,
+            password,
+            ...proxyTMP // TODO: del proxyTMP after beta-testing
+        });
         const setting = {
             ...this.settingPost,
-            body: JSON.stringify(formData),
+            body,
             headers: {
                 ...this.settingPost.headers,
                 token: this.getToken()
             }
         };
+
         return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
     }
 
@@ -100,7 +116,7 @@ class User {
             body: JSON.stringify({'security_code': key}),
             headers: {
                 ...this.settingPost.headers,
-                'token': '3e321e60029711e99264a0481c8e17d4' // todo: this.getToken()
+                'token': this.getToken()
             }
         };
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_confirmKey')}${username}`, setting);
