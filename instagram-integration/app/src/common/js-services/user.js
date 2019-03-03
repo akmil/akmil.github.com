@@ -36,15 +36,15 @@ class User {
     }
 
     addInstagramAccount(formData, cbError) {
-        const {username, password, ip, port} = formData;
+        const {username, password, ip, port, usernameProxy, passwordProxy} = formData;
 
         // TODO: del proxyTMP after beta-testing
         const proxyTMP = {
             'proxy': {
                 'host': ip,
                 port,
-                username,
-                password
+                username: usernameProxy,
+                password: passwordProxy
             }
         };
         const body = JSON.stringify({username,
@@ -61,6 +61,16 @@ class User {
         };
 
         return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
+    }
+    delInstagramAccount(username) {
+        const setting = {
+            method: 'DELETE',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount')}`, username, setting);
     }
 
     getInstagramAccount() {

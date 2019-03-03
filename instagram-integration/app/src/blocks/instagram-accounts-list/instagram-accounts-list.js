@@ -1,86 +1,11 @@
-// import $ from 'jquery';
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
-import viewUtils from '../../common/js-services/view';
 // import PubSub from 'pubsub-js';
+import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
+import {settingButtonsHandler} from './accounts-list-btn-settings';
 
-// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
-const addInstagramAccount = (newFormData) => {
-    const cbError = (result) => {
-        console.log('ERROR', result);
-        viewUtils.showInfoMessage($('.error-msg'),
-            result.status.state,
-            result.status.message || 'Login error');
-        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-    };
-    User.addInstagramAccount(newFormData, cbError).then((result) => {
-        if (result && result.status) {
-            console.log(result, result.status);
-            // debugger;
-            const $msgList = $('.accounts-list');
-            $msgList.empty();
-            // todo : reload list
-            // fillList($msgList, result.data.accounts);
-            // addListHandler();
-
-            // viewUtils.showInfoMessage($textAreaDescription,
-            //     result.status.state,
-            //     result.status.message || 'Login error');
-            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-        }
-    }).catch((err) => {
-        // todo: render for user
-        console.log(err);
-    });
-
-    console.log('submit', newFormData);
-};
-
-function addOnLoadHandlers() {
-    // $('.js_repeat-security-code').on('click', (e) => {
-
-    // });
-
-    $('.js_add-instagram-account').on('click', (e) => {
-        const btn = $(e.target);
-        const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
-        const username = $modalBody.find('input[name="username"]').val().trim();
-        const password = $modalBody.find('input[name="pass"]').val().trim();
-        const ip = $modalBody.find('input[name="ip"]').val().trim(); // TMP solution
-        const port = $modalBody.find('input[name="port"]').val().trim(); // TMP solution
-        const usernameProxy = $modalBody.find('input[name="usernameProxy"]').val().trim(); // TMP solution
-        const passwordProxy = $modalBody.find('input[name="passProxy"]').val().trim(); // TMP solution
-        const $form = $('form', $modalBody);
-        const form = $form.get(0);
-        const cssValidationClass = 'form-validation';
-
-        e.preventDefault();
-        function isValidIpv4Addr(ip) {
-            return (/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/).test(ip);
-        }
-        function isValidPort(port) {
-            return (/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/).test(port);
-        }
-        // const validator = new Validator($form);
-        // console.log(validator.validate());
-        if (form.checkValidity()) {
-            addInstagramAccount({username, password, usernameProxy, passwordProxy, ip, port});
-        } else {
-            // Highlight errors
-            if (form.reportValidity) {
-                form.reportValidity();
-            }
-            $form.addClass(cssValidationClass);
-        }
-
-        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port) || !usernameProxy || !passwordProxy) {
-            e.stopPropagation();
-            console.log('not valid fields');
-            return;
-        }
-    });
-}
+const $msgList = $('.accounts-list');
 
 function addListHandler(/* username*/) {
     // $('#yourModalID').on('show.bs.modal', function(e) {
@@ -229,6 +154,11 @@ function fillList($list, dataArray) {
             return '<span class="text-danger">Ошибка при добавлении</span>';
         }
     };
+    const addSettingBtn = () => `<div class="account-setting col-1 d-flex flex-column">
+            <button class="btn btn-outline-success p-1 mb-1 js_acc-edit"><i class="fas fa-pen m-0"></i></button>
+            <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh"><i class="fas fa-retweet m-0"></i></button>
+            <button class="btn btn-outline-danger p-1 js_acc-delete"><i class="fas fa-trash m-0"></i></button>
+        </div>`;
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
@@ -245,6 +175,7 @@ function fillList($list, dataArray) {
                         ${checkPointText(checkpoint, item)}
                     </div>
                     ${stats()}
+                    ${addSettingBtn()}
                 </div>
             </li>`).appendTo(cList);
         } else {
@@ -270,6 +201,7 @@ function fillList($list, dataArray) {
                     : ''}
                 </div>
                 ${stats(info)}
+                ${addSettingBtn()}
             </div>
         </li>`).appendTo(cList);
         }
@@ -278,11 +210,120 @@ function fillList($list, dataArray) {
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
 
+function checkResponse (result, isResendRequest) {
+
+    /*
+    if (!result.status.state === 'ok' || !result.data || !$msgList.length || isResendRequest) {
+        // проверям один раз наличие result.data.accounts.info
+        $msgList.empty();
+        $(`<li class="media">
+            <div class="media-body">
+                <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
+            </div>
+        </li>`).appendTo($msgList);
+        setTimeout(() => {
+            resendRequest().then((result) => {
+                checkResponse(result, false);
+            });
+            console.log('Request resend');
+        }, 3500);
+        return;
+    }
+    */
+    // вывод результатов (data.accounts.info)
+    $('.profile-user .spinner-box').addClass('d-none');
+    fillList($msgList, result.data.accounts);
+    addListHandler();
+}
+
+// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
+const addInstagramAccount = (newFormData) => {
+    const cbError = (result) => {
+        console.log('ERROR', result);
+        viewUtils.showInfoMessage($('.error-msg'),
+            result.status.state,
+            result.status.message || 'Login error');
+        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+    };
+    User.addInstagramAccount(newFormData, cbError).then((result) => {
+        if (result && result.status) {
+            console.log(result, result.status);
+            const $msgList = $('.accounts-list');
+            User.getMetadata().then((result) => {
+                $msgList.empty();
+                // todo : reload list
+                console.log(result.data, result.data.accounts);
+                checkResponse(result);
+            }).catch((err) => {
+                setTimeout(() => {
+                    viewUtils.showInfoMessage($('.error-msg'),
+                        err.status || '',
+                        'Не получилось загрузить доступные Instagram аккаунты');
+                }, 3000);
+                $('.spinner-box').addClass('d-none');
+            });
+            // viewUtils.showInfoMessage($textAreaDescription,
+            //     result.status.state,
+            //     result.status.message || 'Login error');
+            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+        }
+    }).catch((err) => {
+        // todo: render for user
+        console.log(err);
+    });
+
+    console.log('submit', newFormData);
+};
+
+function addOnLoadHandlers() {
+    // $('.js_repeat-security-code').on('click', (e) => {
+
+    // });
+
+    $('.js_add-instagram-account').on('click', (e) => {
+        const btn = $(e.target);
+        const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
+        const username = $modalBody.find('input[name="username"]').val().trim();
+        const password = $modalBody.find('input[name="pass"]').val().trim();
+        const ip = $modalBody.find('input[name="ip"]').val().trim(); // TMP solution
+        const port = $modalBody.find('input[name="port"]').val().trim(); // TMP solution
+        const usernameProxy = $modalBody.find('input[name="usernameProxy"]').val().trim(); // TMP solution
+        const passwordProxy = $modalBody.find('input[name="passProxy"]').val().trim(); // TMP solution
+        const $form = $('form', $modalBody);
+        const form = $form.get(0);
+        const cssValidationClass = 'form-validation';
+
+        e.preventDefault();
+        function isValidIpv4Addr(ip) {
+            return (/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/).test(ip);
+        }
+        function isValidPort(port) {
+            return (/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/).test(port);
+        }
+        // const validator = new Validator($form);
+        // console.log(validator.validate());
+        if (form.checkValidity()) {
+            addInstagramAccount({username, password, usernameProxy, passwordProxy, ip, port});
+        } else {
+            // Highlight errors
+            if (form.reportValidity) {
+                form.reportValidity();
+            }
+            $form.addClass(cssValidationClass);
+        }
+
+        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port) || !usernameProxy || !passwordProxy) {
+            e.stopPropagation();
+            console.log('not valid fields');
+            return;
+        }
+    });
+}
+
 /**
  * Init header
  */
 export function init() {
-    const $msgList = $('.accounts-list');
     // check we are in profile page
     if (!$msgList.length) {
         return;
@@ -291,32 +332,6 @@ export function init() {
     const metadata = User.getMetadata();
     // const resendRequest = () => User.getMetadata(token);
     // let isSendReqOnce = false;
-    const checkResponse = (result, isResendRequest) => {
-
-        /*
-        if (!result.status.state === 'ok' || !result.data || !$msgList.length || isResendRequest) {
-            // проверям один раз наличие result.data.accounts.info
-            $msgList.empty();
-            $(`<li class="media">
-                <div class="media-body">
-                    <h3 class="mt-0 mb-3">Ни одного Аккаунта не добавлено</h3>
-                </div>
-            </li>`).appendTo($msgList);
-            setTimeout(() => {
-                resendRequest().then((result) => {
-                    checkResponse(result, false);
-                });
-                console.log('Request resend');
-            }, 3500);
-            return;
-        }
-        */
-        // вывод результатов (data.accounts.info)
-        $('.profile-user .spinner-box').addClass('d-none');
-        fillList($msgList, result.data.accounts);
-        addListHandler();
-    };
-
     // check we are in profile page
     if (!$msgList.length) {
         return;
@@ -342,6 +357,7 @@ export function init() {
         */
     //    checkResponse(result, isResendRequest);
         checkResponse(result);
+        settingButtonsHandler(classCfg);
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
