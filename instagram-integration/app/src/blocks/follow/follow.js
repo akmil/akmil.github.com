@@ -365,6 +365,7 @@ export function init() {
         initSteps('.follow-form');
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
+            console.log('modifyAccList');
         });
     }
 }

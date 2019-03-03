@@ -116,6 +116,7 @@ function fixStepIndicator(n) {
     x[n].className += " active";
 }*/
 
+// wrap list as radiogroup
 function modifyAccList() {
     const radioBtnAppend = (idx) => `<div class="">
             <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input d-none" value="">
@@ -126,14 +127,12 @@ function modifyAccList() {
     $li.addClass('js_user-radio').removeClass('py-3 media');
 
     for (let i = 0; i < $li.length; i++) {
-        $($li[i]).wrapInner(radioBtnWrap(i)).append(radioBtnAppend(i));
+        const currLi = $($li[i]);
+        currLi.wrapInner(radioBtnWrap(i)).append(radioBtnAppend(i));
+        if (currLi.find('.user-checkpoint .text-danger').length) {
+            currLi.remove();
+        }
     }
-    // UserTaskManager.getTaskTypes().then((result) => {
-    //     if (result.status.state === 'ok') {
-    //         // console.log(result);
-    //         fillListTypes($('.js_task-types'), result.data);
-    //     }
-    // });
 
     $('.js_user-radio').on('click', 'input[type=radio]', function (e) {
         const $parentFieldset = $(this).parents('fieldset');
