@@ -16,6 +16,15 @@
                         <label class="sr-only">Пароль</label>
                         <input type="password" class="form-control" name="pass" placeholder="Пароль" required>
                     </div>
+                    {{!-- TMP fields --}}
+                    <div class="form-group">
+                        <label class="sr-only">Логин(Proxy)</label>
+                        <input type="text" class="form-control" name="usernameProxy" placeholder="Логин(Proxy)" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Пароль(Proxy)</label>
+                        <input type="password" class="form-control" name="passProxy" placeholder="Пароль(Proxy)" required>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-8">
                             <label class="sr-only">IP (добавить валидацию)</label>
@@ -23,9 +32,10 @@
                         </div>
                         <div class="form-group col-4">
                             <label class="sr-only">Порт</label>
-                            <input type="number" class="form-control" name="port" min="0" max="9999" placeholder="Порт" value="8000" required>
+                            <input type="number" class="form-control" name="port" min="0" max="9999" placeholder="Порт" required>
                         </div>
                     </div>
+                    {{!-- TMP fields END--}}
                     <button type="button" class="btn btn-success js_add-instagram-account" data-dismiss="modal">Добавить</button>
                 </form>
             </div>

@@ -49,6 +49,8 @@ function addOnLoadHandlers() {
         const password = $modalBody.find('input[name="pass"]').val().trim();
         const ip = $modalBody.find('input[name="ip"]').val().trim(); // TMP solution
         const port = $modalBody.find('input[name="port"]').val().trim(); // TMP solution
+        const usernameProxy = $modalBody.find('input[name="usernameProxy"]').val().trim(); // TMP solution
+        const passwordProxy = $modalBody.find('input[name="passProxy"]').val().trim(); // TMP solution
         const $form = $('form', $modalBody);
         const form = $form.get(0);
         const cssValidationClass = 'form-validation';
@@ -63,7 +65,7 @@ function addOnLoadHandlers() {
         // const validator = new Validator($form);
         // console.log(validator.validate());
         if (form.checkValidity()) {
-            addInstagramAccount({username, password, ip, port});
+            addInstagramAccount({username, password, usernameProxy, passwordProxy, ip, port});
         } else {
             // Highlight errors
             if (form.reportValidity) {
@@ -72,7 +74,7 @@ function addOnLoadHandlers() {
             $form.addClass(cssValidationClass);
         }
 
-        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port)) {
+        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port) || !usernameProxy || !passwordProxy) {
             e.stopPropagation();
             console.log('not valid fields');
             return;
