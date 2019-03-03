@@ -70,7 +70,7 @@ class User {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount')}`, username, setting);
+        return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount', username)}`, setting);
     }
 
     getInstagramAccount() {

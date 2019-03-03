@@ -357,7 +357,7 @@ export function init() {
         */
     //    checkResponse(result, isResendRequest);
         checkResponse(result);
-        settingButtonsHandler(classCfg);
+        settingButtonsHandler('classCfg');
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
