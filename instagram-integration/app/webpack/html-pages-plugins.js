@@ -24,7 +24,7 @@ const pages = [
     },
     {
         title: 'Автоприветствие',
-        name: 'autogreeting',
+        name: 'autogreeting-old',
         source: '_autogreeting/autogreeting'
     },
     {
@@ -38,8 +38,8 @@ const pages = [
         source: '_bot-cleaner/bot-cleaner'
     },
     {
-        title: 'Чат бот',
-        name: 'chat-bot',
+        title: 'Автоприветствие',
+        name: 'autogreeting',
         source: '_chat-bot/chat-bot'
     },
     {

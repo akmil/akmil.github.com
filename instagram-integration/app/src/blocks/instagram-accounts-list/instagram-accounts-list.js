@@ -5,13 +5,12 @@ import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 import {settingButtonsHandler} from './accounts-list-btn-settings';
 
+const InstagramAccPageCls = '.instagram-accounts-page';
+const isInstagramAccPage = $(InstagramAccPageCls).length;
 const $msgList = $('.accounts-list');
+const INSTAGRAM_ACCOUNTS_HREF = 'instagram-accounts';
 
-function addListHandler(/* username*/) {
-    // $('#yourModalID').on('show.bs.modal', function(e) {
-    //     var yourparameter = e.relatedTarget.dataset.yourparameter;
-    //     // Do some stuff w/ it.
-    // });
+function addListHandler() {
     let checkpointType = '';
 
     $('.js_pass-checkpoint-btn').on('click', (e) => {
@@ -64,7 +63,7 @@ function addListHandler(/* username*/) {
             if (result.status.state !== 'ok') {
                 return;
             }
-            console.log('js_confirm:', result.status.state, 'close modal');
+            // console.log('js_confirm:', result.status.state, 'close modal');
             $modal.modal('hide');
         }).catch((err) => {
             console.log('err');
@@ -154,11 +153,15 @@ function fillList($list, dataArray) {
             return '<span class="text-danger">Ошибка при добавлении</span>';
         }
     };
-    const addSettingBtn = () => `<div class="account-setting col-1 d-flex flex-column">
-            <button class="btn btn-outline-success p-1 mb-1 js_acc-edit"><i class="fas fa-pen m-0"></i></button>
-            <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh"><i class="fas fa-retweet m-0"></i></button>
-            <button class="btn btn-outline-danger p-1 js_acc-delete"><i class="fas fa-trash m-0"></i></button>
-        </div>`;
+    const addSettingBtn = (username) => {
+        if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
+            return `<div class="account-setting col-1 d-flex flex-column">
+                <button class="btn btn-outline-success p-1 mb-1 js_acc-edit"><i class="fas fa-pen m-0"></i></button>
+                <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh"><i class="fas fa-retweet m-0"></i></button>
+                <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
+            </div>`;
+        }
+    };
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
         const info = item.info;
@@ -175,7 +178,7 @@ function fillList($list, dataArray) {
                         ${checkPointText(checkpoint, item)}
                     </div>
                     ${stats()}
-                    ${addSettingBtn()}
+                    ${addSettingBtn(item.username)}
                 </div>
             </li>`).appendTo(cList);
         } else {
@@ -201,7 +204,7 @@ function fillList($list, dataArray) {
                     : ''}
                 </div>
                 ${stats(info)}
-                ${addSettingBtn()}
+                ${(addSettingBtn()) ? addSettingBtn() : ''}
             </div>
         </li>`).appendTo(cList);
         }
@@ -210,7 +213,7 @@ function fillList($list, dataArray) {
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
 
-function checkResponse (result, isResendRequest) {
+function checkResponse (result /* , isResendRequest*/) {
 
     /*
     if (!result.status.state === 'ok' || !result.data || !$msgList.length || isResendRequest) {
@@ -236,6 +239,29 @@ function checkResponse (result, isResendRequest) {
     addListHandler();
 }
 
+function reloadList() {
+    const $msgList = $('.accounts-list');
+    // TODO: add spinner
+    $('.profile-user .spinner-box').removeClass('d-none');
+    User.getMetadata().then((result) => {
+        $msgList.empty();
+        // todo : reload list
+        console.log(result.data, result.data.accounts);
+        checkResponse(result);
+    }).catch((err) => {
+        setTimeout(() => {
+            viewUtils.showInfoMessage($('.error-msg'),
+                err.status || '',
+                'Не получилось загрузить доступные Instagram аккаунты');
+        }, 3000);
+        $('.spinner-box').addClass('d-none');
+    });
+    const cfg = {
+        deleteBtnCls: '.js_acc-delete'
+    };
+    settingButtonsHandler(cfg);
+}
+
 // После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
 const addInstagramAccount = (newFormData) => {
     const cbError = (result) => {
@@ -248,6 +274,9 @@ const addInstagramAccount = (newFormData) => {
     User.addInstagramAccount(newFormData, cbError).then((result) => {
         if (result && result.status) {
             console.log(result, result.status);
+            reloadList();
+
+            /*
             const $msgList = $('.accounts-list');
             User.getMetadata().then((result) => {
                 $msgList.empty();
@@ -262,6 +291,8 @@ const addInstagramAccount = (newFormData) => {
                 }, 3000);
                 $('.spinner-box').addClass('d-none');
             });
+            */
+
             // viewUtils.showInfoMessage($textAreaDescription,
             //     result.status.state,
             //     result.status.message || 'Login error');
@@ -340,7 +371,6 @@ export function init() {
     addOnLoadHandlers();
 
     // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
-
     metadata.then((result) => {
         // проверям один раз наличие result.data.accounts.info
         /*
@@ -357,7 +387,10 @@ export function init() {
         */
     //    checkResponse(result, isResendRequest);
         checkResponse(result);
-        settingButtonsHandler('classCfg');
+        const cfg = {
+            deleteBtnCls: '.js_acc-delete'
+        };
+        settingButtonsHandler(cfg);
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
@@ -367,6 +400,9 @@ export function init() {
         $('.spinner-box').addClass('d-none');
     });
 
+    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, (eventName, data) => {
+        reloadList();
+    });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
         const {dataArray} = data;
         dataArray.forEach(item => {

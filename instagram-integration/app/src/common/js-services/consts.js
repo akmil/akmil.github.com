@@ -65,6 +65,7 @@ export const CONST = {
             RECIEVE_NEW_MESSAGE: 'receive_new_message'
         },
         instagramAccouns: {
+            INSTAGRAM_ACCOUNS_NEED_REFRESH: 'instagram_accouns_need_refresh',
             INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered',
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
