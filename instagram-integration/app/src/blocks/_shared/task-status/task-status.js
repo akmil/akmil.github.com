@@ -75,6 +75,9 @@ function fillListByState(taskState, $list, item) {
         case 'IN_PROGRESS':
             addItem(tplProgress);
             break;
+        case 'GLOBAL_PAUSE':
+            addItem(tplProgress);
+            break;
         case 'STOPPED':
             addItem(tplStop);
             break;
