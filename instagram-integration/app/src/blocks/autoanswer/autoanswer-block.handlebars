@@ -14,16 +14,21 @@
                 ></textarea>
             </div>
             <div class="col">
+                {{!-- TODO: Если сообщение пустое-но на сервер не посылаем это поле (answer) --}}
                 <textarea class="form-control answer-messages" rows="4"
                     data-meteor-emoji="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
                     placeholder="Введите сообщение, которое будет отправлено"
                 ></textarea>
+                {{!-- TODO: add tooltip : Добавить изображение --}}
+                {{!--  добавить валидацию на JPEG, JPG --}}
                 <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image fa-lg"></i></button>
+
+                {{!-- TODO: add tooltip : Добавить публикацию --}}
                 <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
                         data-toggle="modal" 
                         data-post-info="todo: get req to user: "
                         data-target="#postsGridModal">
-                    <i class="fas fa-paste fa-lg"></i>
+                    <i class="far fa-images fa-lg"></i>
                 </button>
                 <div class="mt-2">
                     {{> image-upload }}
@@ -48,7 +53,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h2 class="modal-title" id="exampleModalLabel">Modal title</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

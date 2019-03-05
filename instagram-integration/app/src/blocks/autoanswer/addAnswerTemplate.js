@@ -15,7 +15,7 @@ $(`<div class="autoanswer-text-fields mt-2">
                     data-toggle="modal" 
                     data-post-info="todo: get req to user: "
                     data-target="#postsGridModal">
-                <i class="fas fa-paste fa-lg"></i>
+                <i class="far fa-images fa-lg"></i>
             </button>
 
             <div class="mt-2">

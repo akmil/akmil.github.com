@@ -13,10 +13,10 @@
       
       <ul class="navbar-nav navbar-expand-md px-3">
           <li class="nav-item text-nowrap mr-3">
-              <a class="nav-link js_register" href="#">Регистрация</a>
+              <a class="nav-link" href="./register.html">Регистрация</a>
           </li>
           <li class="nav-item text-nowrap mr-3">
-              <a class="nav-link js_login" href="#">Логин</a>
+              <a class="nav-link" href="./login.htm">Логин</a>
           </li>
           <li class="nav-item text-nowrap mr-3" style="display:none">
               <a class="nav-link js_logOut" href="#">Выход</a>
@@ -107,7 +107,7 @@
                       <i class="fas fa-handshake mr-1"></i>
                       Автоответ</a></li>
                   <li class="nav-item"><a class="nav-link text-light" href="./autogreeting.html">
-                      <i class="fas fa-robot mr-1"></i>Автоприветствие</a></li>
+                      <i class="fas fa-hand-peace mr-1"></i>Автоприветствие</a></li>
                   <li class="nav-item"><a class="nav-link text-light" href="./stories.html">
                       <i class="fas fa-history mr-1"></i>Просмотр Stories</a></li>
       
@@ -122,7 +122,7 @@
         
         
             
-                <div class="profile-user">
+                <div class="profile-user instagram-accounts-page">
                     <div class="container">
                             <div class="row">
                                 <div class="col-12 p-3">
@@ -253,22 +253,20 @@
                         </div>
                     </div>
                     
-                    
-                    <div id="delete-user-promt" class="modal fade" role="dialog">
+                    <div class="modal fade" id="delete-user-promt" tabindex="-1" role="dialog" aria-labelledby="delete-user" style="display:none">
                         <div class="modal-dialog">
-                    
                             
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h4 class="modal-title">Удалить аккаунт</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Удаление аккаунта</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Удалить аккаунт?</p>
+                                    <p>Вы действительно хотите удалить аккаунт?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default js_acc-delete-confirm">Да</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                                    <button type="button" class="btn btn-success js_acc-delete-confirm">Да</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
                                 </div>
                             </div>
                         </div>

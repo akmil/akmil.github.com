@@ -107,22 +107,21 @@
     </div>
 </div>
 
-
-<div id="delete-user-promt" class="modal fade" role="dialog">
+{{!-- Modal to enter security-code with phoneOremail--}}
+<div class="modal fade" id="delete-user-promt" tabindex="-1" role="dialog" aria-labelledby="delete-user" style="display: none;">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">Удалить аккаунт</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Удаление аккаунта</h4>
             </div>
             <div class="modal-body">
-                <p>Удалить аккаунт?</p>
+                <p>Вы действительно хотите удалить аккаунт?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default js_acc-delete-confirm" >Да</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-success js_acc-delete-confirm" >Да</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
             </div>
         </div>
     </div>

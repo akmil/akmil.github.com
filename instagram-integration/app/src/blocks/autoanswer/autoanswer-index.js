@@ -190,7 +190,7 @@ function initModalHandler() {
         // Update the modal's content.
         const modal = $(this);
         getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
-        modal.find('.modal-title').text(`${usernameSelected} выберите картинку`);
+        modal.find('.modal-title').text('Публикации');
     });
 }
 
