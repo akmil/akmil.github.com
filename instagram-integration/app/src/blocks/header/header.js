@@ -1,6 +1,6 @@
 // import $ from 'jquery';
 import User from '../../common/js-services/user';
-import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
+// import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
 
 const selectorLoginState = '.js_message_logged--text';
@@ -14,7 +14,7 @@ function emailNotConfirmed() {
 }
 
 function onLoginSubscribe(msg, data) {
-    // console.log(msg, data);
+    // console.log('onLoginSubscribe', msg, data);
     $(CONST.uiSelectors.headerNavLoginBtn).addClass(closeClass).removeClass(openedClass);
     $(CONST.uiSelectors.headerRegBtn).addClass(closeClass).removeClass(openedClass);
     $(CONST.uiSelectors.headerLoginBox).addClass(closeClass).removeClass(openedClass);
@@ -35,6 +35,7 @@ function showLogout() {
     if (!isEmailConfirmed) {
         emailNotConfirmed();
     }
+    // console.log('isLogged', isLogged);
     if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
         $('.js_email-confirm--text').text('вы залогинились успешно');
@@ -55,22 +56,22 @@ function showLogout() {
  */
 export function initHeader() {
    // check other handler in login-form.js
-    const $loginBox = $(CONST.uiSelectors.headerLoginBox);
-    const $registerBox = $(CONST.uiSelectors.headerRegBox);
+    // const $loginBox = $(CONST.uiSelectors.headerLoginBox);
+    // const $registerBox = $(CONST.uiSelectors.headerRegBox);
 
-    PubSub.subscribe(CONST.events.USER_LOGGED, onLoginSubscribe);
+    // PubSub.subscribe(CONST.events.USER_LOGGED, onLoginSubscribe);
 
     showLogout();
 
-    $(CONST.uiSelectors.headerRegBtn).on('click', () => {
-        $loginBox.hide();
-        $registerBox.css({'top': 0, 'right': 0})
-            .addClass('bg-light border mt-5 mx-auto position-absolute px-3 d-block')
-            .removeClass('d-none');
-    });
+    // $(CONST.uiSelectors.headerRegBtn).on('click', () => {
+    //     $loginBox.hide();
+    //     $registerBox.css({'top': 0, 'right': 0})
+    //         .addClass('bg-light border mt-5 mx-auto position-absolute px-3 d-block')
+    //         .removeClass('d-none');
+    // });
 
-    $(CONST.uiSelectors.headerNavLoginBtn).on('click', () => {
-        $loginBox.addClass('d-block').removeClass('d-none');
-        $registerBox.addClass('d-none').removeClass('d-block');
-    });
+    // $(CONST.uiSelectors.headerNavLoginBtn).on('click', () => {
+    //     $loginBox.addClass('d-block').removeClass('d-none');
+    //     $registerBox.addClass('d-none').removeClass('d-block');
+    // });
 }
