@@ -54,16 +54,23 @@ function onSubmitHandler(e) {
             $(this).removeClass('input-error');
         }
     });
-    if (!validation) {
-        console.log('**alarm **', elSelector.keyWord);
-        return;
-    }
+
     fields.each((idx, item) => {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
         const postImgId = $(item).find(elSelector.addPostBtns).attr('data-post-img-id');
-        // console.log(imageId);
+        if (!keyWord.length) {
+            console.log('keyWord is empty, not push me to request');
+            $(item).append(`
+                <p class="msg-empty-field text-danger">Пустое поле не валидно</p>
+            `);
+            setTimeout(() => {
+                $('.msg-empty-field').addClass('d-none');
+            }, 5000);
+            validation = false;
+            return;
+        }
         const submitBodyItem = {
             'key_words': keyWord,
             answer,
@@ -83,6 +90,11 @@ function onSubmitHandler(e) {
         }
         reqBody.push(submitBodyItem);
     });
+    if (!validation) {
+        console.log('**alarm **', elSelector.keyWord);
+        return;
+    }
+
     const nReqBody = {
         'username': usernameSelected,
         'type': clsConst.pathType,
@@ -207,7 +219,8 @@ export function init() {
             logs.init(selectCls, clsConst);
         });
         window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
-            const result = JSON.parse(res.response);
+            const {response} = res;
+            const result = (response.length) ? JSON.parse(response) : '';
             const imageId = result && result.data && result.data.image_id;
             $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
             console.log('image_loaded', res);

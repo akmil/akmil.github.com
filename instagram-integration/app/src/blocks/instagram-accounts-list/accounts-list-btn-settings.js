@@ -5,7 +5,7 @@ export function settingButtonsHandler(classCfg) {
     const {deleteBtnCls} = classCfg;
     const modalConfirm = $('#delete-user-promt');
     let username = '';
-    // DELETE blablabla/instagram-accounts/{username}
+    // DELETE .../instagram-accounts/{username}
     $(deleteBtnCls).on('click', (e) => {
         username = $(e.target).closest(deleteBtnCls).data('username');
         console.log();

@@ -1,15 +1,21 @@
 import {CONST} from '../../../common/js-services/consts';
 import UserTaskManager from '../../../common/js-services/api-task-manager';
 
+const MAX_IMG_FILE_SIZE_MB = 2;
+const fileUploadBox = '.file-upload';
+const fileUploadContent = '.file-upload-content';
+
 function removeUpload() {
     $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-    $('.file-upload-content').hide();
+    $(fileUploadContent).hide();
     $('.image-upload-wrap').show();
 }
-$('.image-upload-wrap').bind('dragover', function () {
+
+const $imgUploadWrap = $('.image-upload-wrap');
+$imgUploadWrap.bind('dragover', function () {
     $('.image-upload-wrap').addClass('image-dropping');
 });
-$('.image-upload-wrap').bind('dragleave', function () {
+$imgUploadWrap.bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
 
@@ -44,11 +50,26 @@ function updateProgress(evt, progress) {
         }
     }
 }
+function isImgSizeOk(acceptedFile) {
+    const imgSize = Math.round((acceptedFile.size / 1024) / 1024);
+    return MAX_IMG_FILE_SIZE_MB > imgSize;
+}
 
 function handleSubmit(input) {
     const url = CONST.getPath('instagramTaskManager_postImageAttachment');
     const token = UserTaskManager.getToken();
     const acceptedFile = input.files[0];
+    if (!isImgSizeOk(acceptedFile)) {
+        console.log('show error message, imgSize to big ');
+        $(fileUploadBox)
+            .append(`
+                <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_MB}MB</p>
+            `);
+        setTimeout(() => {
+            $('.msg-max-size-img').addClass('d-none');
+        }, 5000);
+        return;
+    }
     const formData = new FormData();
     formData.append('image', acceptedFile, acceptedFile.name);
 
@@ -59,24 +80,26 @@ function handleSubmit(input) {
     request.setRequestHeader('Accept', 'application/json');
     request.setRequestHeader('cache-control', 'no-cache');
     request.send(formData);
-    console.log(acceptedFile);
     request.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
-            console.log(this.responseText);
-            window.PubSub.publish('image_loaded', {'response': this.responseText, 'el': input});
+            console.log('this', this.responseText, this);
+            window.PubSub.publish(CONST.events.autoarnswer.IMAGE_UPLOADED, {'response': this.responseText, 'el': input});
         }
     });
 }
 
 function readURL(input) {
     if (input.files && input.files[0]) {
-        const $container = $(input).closest('.file-upload');
+        const $container = $(input).closest(fileUploadBox);
         const reader = new FileReader();
 
         reader.onload = function(e) {
+            if (!isImgSizeOk(input.files[0])) {
+                return;
+            }
             $container.find('.image-upload-wrap').hide();
             $container.find('.file-upload-image').attr('src', e.target.result);
-            $container.find('.file-upload-content').show();
+            $container.find(fileUploadContent).show();
             $container.find('.image-title').html(input.files[0].name);
         };
         reader.onerror = errorHandler;
@@ -94,7 +117,7 @@ function readURL(input) {
 
 export function init() {
     $('.file-upload-btn').on('click', (e) => {
-        const input = $(e.target).closest('.col').find('.file-upload').find('input');
+        const input = $(e.target).closest('.col').find(fileUploadBox).find('input');
         input.trigger('click');
     });
 
