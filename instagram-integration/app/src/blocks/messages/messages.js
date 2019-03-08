@@ -1,4 +1,5 @@
-import MeteorEmoji from 'meteor-emoji';
+// import MeteorEmoji from 'meteor-emoji';
+import EmojiPicker from 'vanilla-emoji-picker';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
@@ -71,10 +72,11 @@ $(document).ready(() => {
         return;
     }
     // eslint-disable-next-line no-unused-vars
-    const m = new MeteorEmoji();
-    const $picker = $('textarea[data-meteor-emoji="true"] ~ div');
+    const ep = new EmojiPicker();
+    // const m = new MeteorEmoji();
+    const $picker = $('textarea[data-emoji-picker="true"] ~ div');
     const style = $picker.attr('style');
-    const styleNew = style.replace('top: 30px;', 'top: -210px;');
+    const styleNew = style.replace('top: 20px;', 'top: -210px;');
     $picker.attr('style', styleNew);
 
     /*

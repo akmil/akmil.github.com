@@ -28,12 +28,20 @@ import * as stories from './blocks/stories/stories-index';
 //     _showLoginBoxBtnId: CONST.uiSelectors.headerNavLoginBtn
 // };
 
+/*
+* global functions
+*/
 function setPubSub(PubSub) {
     window.PubSub = PubSub;
 }
 
+function initTooltip() {
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
 const init = () => {
     setPubSub(PubSub);
+    initTooltip();
     // console.log('init js here', CONST.user);
     (new RegisterForm()).init();
     // LoginForm(selectorCssLoginForm).init();

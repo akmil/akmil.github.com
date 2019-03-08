@@ -6,12 +6,16 @@ $(`<div class="autoanswer-text-fields mt-2">
         </div>
         <div class="col">
             <textarea class="form-control answer-messages" rows="4"
-                data-meteor-emoji="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
+                data-emoji-picker="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
                 placeholder="Введите сообщение, которое будет отправлено"
             ></textarea>
-            <button class="file-upload-btn btn btn-success" type="button"><i class="far fa-image fa-lg"></i></button>
+            <button class="file-upload-btn btn btn-success" type="button"
+                    data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                <i class="far fa-image fa-lg"></i>
+            </button>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
+                data-toggle="tooltip" data-placement="top" title="Добавить изображение"
                     data-toggle="modal" 
                     data-post-info="todo: get req to user: "
                     data-target="#postsGridModal">
