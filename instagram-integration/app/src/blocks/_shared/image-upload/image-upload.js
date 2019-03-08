@@ -1,7 +1,7 @@
 import {CONST} from '../../../common/js-services/consts';
 import UserTaskManager from '../../../common/js-services/api-task-manager';
 
-const MAX_IMG_FILE_SIZE_MB = 2;
+const MAX_IMG_FILE_SIZE_BYTE = 1048576;
 const fileUploadBox = '.file-upload';
 const fileUploadContent = '.file-upload-content';
 
@@ -51,8 +51,8 @@ function updateProgress(evt, progress) {
     }
 }
 function isImgSizeOk(acceptedFile) {
-    const imgSize = Math.round((acceptedFile.size / 1024) / 1024);
-    return MAX_IMG_FILE_SIZE_MB > imgSize;
+    const imgSize = Math.round(acceptedFile.size);
+    return MAX_IMG_FILE_SIZE_BYTE > imgSize;
 }
 
 function handleSubmit(input) {
@@ -63,7 +63,7 @@ function handleSubmit(input) {
         console.log('show error message, imgSize to big ');
         $(fileUploadBox)
             .append(`
-                <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_MB}MB</p>
+                <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
             `);
         setTimeout(() => {
             $('.msg-max-size-img').addClass('d-none');
