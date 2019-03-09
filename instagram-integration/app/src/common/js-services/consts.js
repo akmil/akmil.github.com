@@ -31,7 +31,7 @@ export const CONST = {
         instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task',
         instagramTaskManager_putStopTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
-        instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment',
+        instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
         instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
         instagramTaskManager_postStartChatBot: 'instagram-task-manager/task',
         instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}

@@ -5,10 +5,11 @@ const MAX_IMG_FILE_SIZE_BYTE = 1048576;
 const fileUploadBox = '.file-upload';
 const fileUploadContent = '.file-upload-content';
 
-function removeUpload() {
-    $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-    $(fileUploadContent).hide();
-    $('.image-upload-wrap').show();
+function removeUpload($uploadContainer) {
+    const input = $uploadContainer.find('input');
+    input.replaceWith(input.clone());
+    $uploadContainer.find(fileUploadContent).hide();
+    $uploadContainer.find('.image-upload-wrap').show();
 }
 
 const $imgUploadWrap = $('.image-upload-wrap');
@@ -59,17 +60,18 @@ function handleSubmit(input) {
     const url = CONST.getPath('instagramTaskManager_postImageAttachment');
     const token = UserTaskManager.getToken();
     const acceptedFile = input.files[0];
-    if (!isImgSizeOk(acceptedFile)) {
-        console.log('show error message, imgSize to big ');
-        $(fileUploadBox)
-            .append(`
-                <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
-            `);
-        setTimeout(() => {
-            $('.msg-max-size-img').addClass('d-none');
-        }, 5000);
-        return;
-    }
+    console.log('handleSubmit');
+    // if (!isImgSizeOk(acceptedFile)) {
+    //     console.log('show error message, imgSize to big ');
+    //     $(fileUploadBox)
+    //         .append(`
+    //             <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
+    //         `);
+    //     setTimeout(() => {
+    //         $('.msg-max-size-img').addClass('d-none');
+    //     }, 5000);
+    //     return;
+    // }
     const formData = new FormData();
     formData.append('image', acceptedFile, acceptedFile.name);
 
@@ -89,14 +91,22 @@ function handleSubmit(input) {
 }
 
 function readURL(input) {
+    const $container = $(input).closest(fileUploadBox);
     if (input.files && input.files[0]) {
-        const $container = $(input).closest(fileUploadBox);
         const reader = new FileReader();
+        console.log('readURL');
+        if (!isImgSizeOk(input.files[0])) {
+            console.log('show error message, imgSize to big ');
+            $(fileUploadBox).append(`
+                    <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
+                `);
+            setTimeout(() => {
+                $('.msg-max-size-img').addClass('d-none');
+            }, 5000);
+            return;
+        }
 
         reader.onload = function(e) {
-            if (!isImgSizeOk(input.files[0])) {
-                return;
-            }
             $container.find('.image-upload-wrap').hide();
             $container.find('.file-upload-image').attr('src', e.target.result);
             $container.find(fileUploadContent).show();
@@ -111,21 +121,30 @@ function readURL(input) {
         // reader.readAsBinaryString(input.files[0]);
 
     } else {
-        removeUpload();
+        removeUpload($container);
     }
 }
 
 export function init() {
-    $('.file-upload-btn').on('click', (e) => {
+    const $uploadBtn = $('.file-upload-btn');
+    const $uploadInput = $('.file-upload-input');
+    const $removeImgBtn = $('.remove-image');
+
+    $uploadBtn.off();
+    $uploadInput.off();
+    $removeImgBtn.off();
+
+    $uploadBtn.on('click', (e) => {
         const input = $(e.target).closest('.col').find(fileUploadBox).find('input');
         input.trigger('click');
     });
 
-    $('.file-upload-input').on('change', (e) => {
+    $uploadInput.on('change', (e) => {
         readURL(e.target);
     });
 
-    $('.remove-image').on('click', () => {
-        removeUpload();
+    $removeImgBtn.on('click', (e) => {
+        const $container = $(e.target).closest('.col').find(fileUploadBox);
+        removeUpload($container);
     });
 }

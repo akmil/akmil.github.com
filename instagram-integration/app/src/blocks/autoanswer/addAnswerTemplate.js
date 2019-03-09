@@ -25,7 +25,7 @@ $(`<div class="autoanswer-text-fields mt-2">
             <div class="mt-2">
                 <div class="file-upload">
                     <div class="image-upload-wrap">
-                        <input class="file-upload-input" type='file' accept="image/*" />
+                        <input class="file-upload-input" type='file' accept=".jpg, .jpeg" />
                     </div>
                     <div class="file-upload-content">
                         <img class="file-upload-image" src="#" alt="your image" />

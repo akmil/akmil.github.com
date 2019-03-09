@@ -41,11 +41,7 @@ class UserTaskManager {
     }
 
     getMetadata(path, cbError) {
-        // const pathArr = (!path.excludeAddingSubtype) ? objToArr(path) : path;
         const pathArr = objToArr(path);
-        // if (path.excludeAddingSubtype) {
-        //     delete path.excludeAddingSubtype;
-        // }
         return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getTaskByTypes', pathArr)}`,
             this.getToken('asHeader'), cbError);
     }
