@@ -43,8 +43,8 @@ function fillListByState(taskState, $list, item) {
                 ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
                 ${mode ? `<p class="pb-1"><b>Режим:</b> ${modeRus(mode)}</p>` : ''}
                 <div class="text-center">
-                    <button class="btn btn-outline-primary js_btn-stop-task mr-3"><i class="far fa-pause-circle fa-lg"></i></button>
-                    <button class="btn btn-warning js_btn-delete-task"><i class="far fa-trash-alt fa-lg"></i></button>
+                    <button class="btn btn-outline-primary js_btn-stop-task"><i class="far fa-pause-circle fa-lg"></i></button>
+                    <!--button class="btn btn-warning js_btn-delete-task ml-3"><i class="far fa-trash-alt fa-lg"></i></button-->
                 </div>
             </div>
         </div>`;
@@ -89,7 +89,7 @@ function fillListByState(taskState, $list, item) {
     }
 }
 
-function fillListMeta($list, items, isRuns) {
+function fillListMeta($list, items/* , isRuns*/) {
     // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty();
     if (!items.length) {
@@ -99,11 +99,12 @@ function fillListMeta($list, items, isRuns) {
         return;
     }
     items.forEach((item) => {
-        if ((item.status.state === 'STOPPED' || item.status.state === 'FINISHED') && !isRuns) {
-            fillListByState(item.status.state, $list, item);
-        } else if ((item.status.state === 'IN_PROGRESS' || item.status.state === 'PAUSED') && isRuns) {
-            fillListByState(item.status.state, $list, item);
-        }
+        // if ((item.status.state === 'STOPPED' || item.status.state === 'FINISHED') && !isRuns) {
+        //     fillListByState(item.status.state, $list, item);
+        // } else if ((item.status.state === 'IN_PROGRESS' || item.status.state === 'PAUSED') && isRuns) {
+        //     fillListByState(item.status.state, $list, item);
+        // }
+        fillListByState(item.status.state, $list, item);
     });
     if (!$('li', $list).length) {
         $(`<li class="list-group-item py-2">
@@ -145,7 +146,7 @@ function initHandlers(holders, path) {
 }
 
 export function getTasksData(holders, path) {
-    const {$runs, $stopped} = holders;
+    const {/* $runs,*/$all} = holders;
     const _path = path || {
         type: CONST.url.tmTypes.followingT,
         subtype: CONST.url.tmTypes.followingSubT[0]
@@ -153,8 +154,8 @@ export function getTasksData(holders, path) {
     UserTaskManager.getMetadata(_path).then((result) => {
         // console.log('getMetadata & fillListMeta', result);
         if (result.status.state === 'ok') {
-            fillListMeta($runs, result.data.meta, 'isRuns');
-            fillListMeta($stopped, result.data.meta);
+            // fillListMeta($runs, result.data.meta, 'isRuns');
+            fillListMeta($all, result.data.meta, 'isAll');
             initHandlers(holders, path);
         }
     });
@@ -166,7 +167,8 @@ export function getTasksData(holders, path) {
 export function init() {
     const holders = {
         $runs: $('.follow-tasks-runs'),
-        $stopped: $('.follow-tasks-stopped')
+        $stopped: $('.follow-tasks-stopped'),
+        $all: $('.follow-tasks-all')
     };
     getTasksData(holders);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {

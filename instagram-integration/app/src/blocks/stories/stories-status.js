@@ -8,7 +8,7 @@ const path = {
     subtype: CONST.url.tmTypes.storiesSubT[0]
 };
 const wrappers = {
-    $runs: $('.tasks-runs'),
+    $all: $('.tasks-all'),
     $stopped: $('.tasks-stopped')
 };
 const logsState = {

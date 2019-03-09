@@ -9,7 +9,7 @@ export function init(cfg) {
             subtype: pathSubType};
         const wrappers = {
             $runs: $('.tasks-runs'),
-            $stopped: $('.tasks-stopped')
+            $all: $('.tasks-all')
         };
         getTasksData(wrappers, path);
         window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {

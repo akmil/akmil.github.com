@@ -9,7 +9,8 @@ export function init() {
         };
         const wrappers = {
             $runs: $('.tasks-runs'),
-            $stopped: $('.tasks-stopped')
+            $stopped: $('.tasks-stopped'),
+            $all: $('.tasks-all')
         };
         getTasksData(wrappers, path);
         // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
