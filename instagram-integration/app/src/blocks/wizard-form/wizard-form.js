@@ -140,11 +140,6 @@ function modifyAccList() {
         $(this).closest('li').addClass('active');
         $('.btn-next', $parentFieldset).prop('disabled', false);
     });
-
-    // $('.checkbox-cell').on('change', (e) => {
-    //     console.log('validate');
-    //     // updateStatus();
-    // });
 }
 
 export function init(wizardCfg) {

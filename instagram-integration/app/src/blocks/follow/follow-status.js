@@ -1,3 +1,4 @@
+/*
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
@@ -75,7 +76,6 @@ function fillListMeta($list, dataArray, isRuns) {
     });
 }
 
-/* eslint-disable no-use-before-define */
 function initHandlers(holders, path) {
     const _path = path || {
         type: CONST.url.tmTypes.followingT,
@@ -123,9 +123,6 @@ export function getTasksData(holders, path) {
     });
 }
 
-/**
- * Init
- */
 export function init() {
     const holders = {
         $runs: $('.follow-tasks-runs'),
@@ -134,5 +131,26 @@ export function init() {
     getTasksData(holders);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
         getTasksData(holders);
+    });
+}
+*/
+
+/**/
+import {CONST} from '../../common/js-services/consts';
+import {getTasksData} from '../_shared/task-status/task-status';
+
+export function init() {
+    const path = {
+        type: CONST.url.tmTypes.followingT,
+        subtype: CONST.url.tmTypes.followingSubT[0]
+    };
+    const wrappers = {
+        // $runs: $('.follow-tasks-runs'),
+        // $stopped: $('.follow-tasks-stopped'),
+        $all: $('.follow-tasks-all')
+    };
+    getTasksData(wrappers, path);
+    window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
+        getTasksData(wrappers, path);
     });
 }
