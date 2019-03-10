@@ -64,10 +64,10 @@ function fillListByState(taskState, $list, item) {
             </div>
 
         </div>`;
-    const tplFinished = `<div class="col task-progress">
-                <p class="mt-0 mb-1 name"><b>ID:</b> ${task_id}</p>
-            </div>
-            <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    // const tplFinished = `<div class="col task-progress">
+    //             <p class="mt-0 mb-1 name"><b>ID:</b> ${task_id}</p>
+    //         </div>
+    //         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
     switch (taskState) {
         case 'PAUSED':
             addItem(tplPaused);
@@ -82,7 +82,7 @@ function fillListByState(taskState, $list, item) {
             addItem(tplStop);
             break;
         case 'FINISHED':
-            addItem(tplFinished);
+            addItem(tplProgress);
             break;
         default:
             break;
