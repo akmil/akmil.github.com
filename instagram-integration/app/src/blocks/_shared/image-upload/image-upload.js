@@ -51,6 +51,10 @@ function updateProgress(evt, progress) {
         }
     }
 }
+function isFileTypeOk(acceptedFile) {
+    return acceptedFile.type === 'image/jpeg';
+}
+
 function isImgSizeOk(acceptedFile) {
     const imgSize = Math.round(acceptedFile.size);
     return MAX_IMG_FILE_SIZE_BYTE > imgSize;
@@ -95,13 +99,16 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
         console.log('readURL');
-        if (!isImgSizeOk(input.files[0])) {
+        if (!isImgSizeOk(input.files[0]) || !isFileTypeOk(input.files[0])) {
             console.log('show error message, imgSize to big ');
             $(fileUploadBox).append(`
+                <div class="warning-image text-danger">
+                    <p>Доступный формат изображения jpeg или jpg</p>
                     <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
-                `);
+                </div>
+            `);
             setTimeout(() => {
-                $('.msg-max-size-img').addClass('d-none');
+                $('.warning-image').addClass('d-none');
             }, 5000);
             return;
         }

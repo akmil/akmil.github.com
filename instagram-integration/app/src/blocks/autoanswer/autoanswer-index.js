@@ -34,7 +34,18 @@ function initEmojii() {
         styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
     });
 }
-
+function validateIsEmpty($elements, e) {
+    $elements.each(function () {
+        if ($(this).val() === '') {
+            e.preventDefault();
+            $(this).addClass('input-error');
+            // validation = false;
+            return;
+        } else {
+            $(this).removeClass('input-error');
+        }
+    });
+}
 function onSubmitHandler(e) {
     const fields = $(elSelector.fields);
     const keyWords = $el => $el.val()
@@ -44,23 +55,18 @@ function onSubmitHandler(e) {
         .filter(i => i.length > 0);
     const reqBody = [];
     let validation = true;
-    fields.find(elSelector.keyWord).each(function () {
-        if ($(this).val() === '') {
-            e.preventDefault();
-            $(this).addClass('input-error');
-            validation = false;
-            return;
-        } else {
-            $(this).removeClass('input-error');
-        }
-    });
+    const $elementsKeyWord = fields.find(elSelector.keyWord);
+    const $elementsAnswer = fields.find(elSelector.answer);
+
+    validateIsEmpty($elementsKeyWord, e);
+    validateIsEmpty($elementsAnswer, e);
 
     fields.each((idx, item) => {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
         const postImgId = $(item).find(elSelector.addPostBtns).attr('data-post-img-id');
-        if (!keyWord.length) {
+        if (!keyWord.length || !answer.length) {
             console.log('keyWord is empty, not push me to request');
             $(item).append(`
                 <p class="msg-empty-field text-danger">Пустое поле не валидно</p>
