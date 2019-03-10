@@ -90,6 +90,14 @@ function viewUtils() {
         }
     }
 
+    function getValByCommaSeparator($el) {
+        return $el.val()
+            .trim()
+            .replace(/ /g, '')
+            .split(',')
+            .filter(i => i.length > 0);
+    }
+
     /**
      * cfg ={ logsState, cbFN() }
      */
@@ -120,6 +128,7 @@ function viewUtils() {
         fillRadioGroupList,
         isEmail,
         getFormattedDateUtil,
+        getValByCommaSeparator,
         addDropdown
     };
 }

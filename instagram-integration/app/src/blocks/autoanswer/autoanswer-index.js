@@ -67,7 +67,7 @@ function onSubmitHandler(e) {
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
         const postImgId = $(item).find(elSelector.addPostBtns).attr('data-post-img-id');
         if (!keyWord.length || !answer.length) {
-            console.log('keyWord is empty, not push me to request');
+            // console.log('keyWord is empty, not push me to request');
             $(item).append(`
                 <p class="msg-empty-field text-danger">Пустое поле не валидно</p>
             `);
@@ -97,7 +97,7 @@ function onSubmitHandler(e) {
         reqBody.push(submitBodyItem);
     });
     if (!validation) {
-        console.log('**alarm **', elSelector.keyWord);
+        // console.log('**alarm **', elSelector.keyWord);
         return;
     }
 

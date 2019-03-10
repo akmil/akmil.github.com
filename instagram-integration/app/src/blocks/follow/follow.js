@@ -1,11 +1,14 @@
-import * as followStatus from './follow-status';
+// import * as followStatus from './follow-status';
+import * as followStatusBySubtype from '../../blocks/_shared/task-status/task-status-by-subtype';
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
+import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
 
 const state = {
     username: '',
+    subtype: CONST.url.tmTypes.followingSubT[0], // default value
     user_default_config: {
         task_mode: 'SAFE'
     }
@@ -69,30 +72,41 @@ function getTasksData(path) {
 function getDataStep2() {
     const path = {
         type: CONST.url.tmTypes.followingT,
-        subtype: CONST.url.tmTypes.followingSubT[0]
+        subtype: state.subtype || CONST.url.tmTypes.followingSubT[0]
     };
     getTasksData(path);
 }
 
 function getDataStepSpeed() {
-    const users = $('#followers').val()
-        .trim()
-        .replace(/ /g, '')
-        .split(',')
-        .filter(i => i.length > 0);
+    // const users = $('#followers').val()
+    //     .trim()
+    //     .replace(/ /g, '')
+    //     .split(',')
+    //     .filter(i => i.length > 0);
 
-    state['user_custom_config'] = {
-        users
-    };
+    // state['user_custom_config'] = {
+    //     users
+    // };
     const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
-        type: 'FOLLOWING',
-        subtype: 'FOLLOWING_LIST'
+        type: CONST.url.tmTypes.followingT,
+        subtype: state.subtype || CONST.url.tmTypes.followingSubT[0]
     };
+    console.log('path.subtype', path.subtype);
+
+    if (path.subtype === 'FOLLOWING_BY_LIST') {
+        // show txt fileUpload
+        $('.add-file').addClass('d-block');
+        $('.add-competitors').addClass('d-none').removeClass('d-block');
+    } else {
+        // show competitors
+        $('.add-competitors').addClass('d-block');
+        $('.add-file').addClass('d-none').removeClass('d-block');
+    }
 
     // draw criteria
     UserTaskManager.getDefaultConfigs(path).then((result) => {
-        // console.log('getDefaultConfigs');
+        console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
             const {
               data: {
@@ -108,15 +122,29 @@ function getDataStepSpeed() {
         }
     });
 }
+function setCompetitors() {
+    const competitors = $('#followers').val()
+        .trim()
+        .replace(/ /g, '')
+        .split(',')
+        .filter(i => i.length > 0);
+
+    state['user_custom_config'] = {
+        competitors
+    };
+}
 
 function stepReducer(stepNumber) {
     switch (stepNumber) {
         case 0:
-            getDataStep2(state.username); // [...new Set(state.username)]
+            getDataStep2(state.username);
             // console.log(state);
             break;
         case 1:
             getDataStepSpeed();
+            break;
+        case 2:
+            setCompetitors();
             break;
         default:
             console.log('default', stepNumber);
@@ -129,6 +157,8 @@ function stepReducer(stepNumber) {
 function initSteps(formSelector) {
     const $form = $(formSelector);
     $('.js_profile-user-follow>.container').removeClass('container');
+
+    attachTxtFileHandler('.file-upload-container');
 
     $form.find('fieldset:first-child').fadeIn('slow');
 
@@ -180,13 +210,22 @@ function initSteps(formSelector) {
         };
     });
 
+    $('.js_get-follow-type input[type=radio]').on('click', (e) => {
+        const value = $(e.target).attr('value');
+        state.subtype = value.toUpperCase();
+        // console.log(state);
+    });
+
     // submit
     $form.on('submit', function (e) {
-        const genderVal = $(this).find('.select-gender option:selected').val();
+        // todo:  get data from attachment
+
+        // const genderVal = $(this).find('.select-gender option:selected').val();
+
         state.user_default_config = {
             ...state.user_default_config,
             criteria: {
-                gender: genderVal.toUpperCase()
+                // gender: genderVal.toUpperCase()
             }
         };
         const limit = document.forms['follow-form']['limit'];
@@ -226,7 +265,19 @@ function initSteps(formSelector) {
         });
 
         state.type = CONST.url.tmTypes.followingT; // 'FOLLOWING';
-        state.subtype = CONST.url.tmTypes.followingSubT[0]; // 'FOLLOWING_LIST';
+        console.log('----+ state.subtype +----', state.subtype);
+        if (state.subtype === 'FOLLOWING_BY_LIST') {
+            // text file should be added
+            state['user_custom_config'].attachment = {
+                'list_id': $('.add-file .file-upload-container').attr('attached-txt-id')
+            };
+        }
+        if (state.subtype === CONST.url.tmTypes.followingSubT[1]) {
+            // const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
+            state.user_custom_config = {
+                competitors: 'competitors'
+            };
+        }
         console.log('make request**  post: StartFollowingList', state);
 
         UserTaskManager.postStartFollowingList(state).then((result) => {
@@ -242,7 +293,7 @@ function initSteps(formSelector) {
     // alert close
     $('.form-submit-finish .close').on('click', function () {
         // $(this).closest('form-submit-finish').removeClass('d-block');
-        $('#v-pills-runned-tab').trigger('click');
+        $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
@@ -349,12 +400,18 @@ function formFromJson() {
 }*/
 
 export function init() {
-    if ($('.follow').length) {
-        followStatus.init();
+    const isInCorrectPage = $('.follow').length;
+    if (isInCorrectPage) {
+        const initialPath = {
+            type: CONST.url.tmTypes.followingT,
+            subtype: CONST.url.tmTypes.followingSubT[0],
+            subtypes: CONST.url.tmTypes.followingSubT
+        };
+        followStatusBySubtype.init({isInCorrectPage, initialPath});
         initSteps('.follow-form');
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
-            console.log('modifyAccList');
+            // console.log('modifyAccList');
         });
     }
 }

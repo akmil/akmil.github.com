@@ -54,6 +54,18 @@ $border-radius-follow: 4px;
     .progress {
         height: initial;
     }
+    .add-file {
+        // .label-chous {
+        // }
+        .input-txt-file {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+    }
 }
 
 .follow-steps {
@@ -326,6 +338,7 @@ $border-radius-follow: 4px;
             }
         }
     }
+    
     @media (max-width: 1500px) {
         .steps {
             bottom: -40px;

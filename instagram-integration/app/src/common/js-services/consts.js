@@ -2,7 +2,7 @@ export const CONST = {
     url: {
         tmTypes: {
             followingT: 'FOLLOWING',
-            followingSubT: ['FOLLOWING_LIST'],
+            followingSubT: ['FOLLOWING_BY_LIST', 'FOLLOWING_BY_ACTIVE_AUDIENCE'],
             chatBotT: 'CHAT_BOT',
             chatBotSubT: ['DEFAULT_CHAT_BOT'],
             autoanswerT: 'AUTO_ANSWER',
@@ -32,6 +32,7 @@ export const CONST = {
         instagramTaskManager_putStopTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
+        instagramTaskManager_postTextAttachment: 'instagram-task-manager/task/attachment/users_list',
         instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
         instagramTaskManager_postStartChatBot: 'instagram-task-manager/task',
         instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
@@ -70,8 +71,8 @@ export const CONST = {
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
         autoarnswer: {
-            IMAGE_UPLOADED: 'image_loaded'
-            // IMAGE_POST_SELECTED: 'image_post_selected'
+            IMAGE_UPLOADED: 'image_loaded',
+            TEXT_FILE_UPLOADED: 'text_file_uploaded'
         },
         tasks: {
             NEW_TASK_CREATED: 'new_task_created'

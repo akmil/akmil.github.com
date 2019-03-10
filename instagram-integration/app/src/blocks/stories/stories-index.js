@@ -1,6 +1,8 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
+// import {addDropdown, getValByCommaSeparator, fillRadioGroupList} from '../../common/js-services/view';
+const {addDropdown, getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
@@ -36,11 +38,6 @@ const state = {
         task_mode: 'SAFE'
     }
 };
-const getCompetitors = $el => $el.val()
-    .trim()
-    .replace(/ /g, '')
-    .split(',')
-    .filter(i => i.length > 0);
 
 function onSubmitHandler(e) {
     const {wizardFormName} = elSelector;
@@ -66,7 +63,7 @@ function onSubmitHandler(e) {
     };
 
     if (body.subtype === CONST.url.tmTypes.storiesSubT[1]) {
-        const competitors = getCompetitors($(form).find(elSelector.competitors));
+        const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
         body.user_custom_config = {
             competitors
         };
@@ -143,7 +140,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    viewUtils.addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
+    addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
     tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
 }
 
@@ -151,7 +148,7 @@ function renderTaskMode(defaultCfg) {
     const {cfg: {task_modes}} = defaultCfg;
     const {taskMode: taskModeSelector} = elSelector;
 
-    viewUtils.fillRadioGroupList($(taskModeSelector), task_modes, ' ');
+    fillRadioGroupList($(taskModeSelector), task_modes, ' ');
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
