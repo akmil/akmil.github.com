@@ -31,22 +31,9 @@
                     </div>
                 </div> --}}
                 <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
-                    <div class="log-tasks--box">
-                        <h3>Логи</h3>
-                        <ul class="log-tasks list-unstyled">
-                            <li class="ipsField tag_field">
-                                <label for="ipbTags" class="ipsField_title">Теги темы</label>
-                                <p class="ipsField_content">
-                                    <ul id="ipsTags_wrapper" class="ipsTagBox_wrapper">
-                                        <li tvalue="instagram" class="ipsTagBox_tag">instagram<span class="ipsTagBox_closetag">×</span></li>
-                                        <li id="ipsTags_inputItem" class=""><input type="text" autocomplete="off" class="ipsTagBox_hiddeninput" maxlength="29"></li>
-                                    </ul>
-                                    <input type="text" class="input_text" size="50" value="" name="ipsTags" id="ipsTags" style="display: none;">
-                                    <br>
-                                    <span class="desc lighter">Укажите не более 10 тег(ов)</span>
-                                </p>
-						    </li>
-                        </ul>
+                    {{>logs-subtype}}
+                    <div class="js_logs-container d-none">
+                        {{>logs}}
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">

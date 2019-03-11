@@ -303,14 +303,20 @@ function initSteps(formSelector) {
 // eslint-disable-next-line no-unused-vars
 let usernameSelected = '';
 const clsConst = {
+    currentPageCls: '.follow',
+    tasksList: '.log-tasks',
+    logsTabBtn: '#v-pills-logs-tab',
+    pagination: '.logs-pagination',
+    paginationPgNumber: '.page-number',
+    pathType: CONST.url.tmTypes.followingT,
     pathSubType: CONST.url.tmTypes.followingSubT[0]
 };
+const logsSubtypes = CONST.url.tmTypes.followingSubT;
 const {addDropdown} = viewUtils;
 const logsState = {
     selectCls: 'js_logs-accounts',
     selectClsLogsTaskType: 'js_logs-subtypes',
     wrapperSubtype: '.log-subype'
-    // activeSubType: CONST.url.tmTypes.storiesSubT[0]
 };
 // todo refactor merge with fillDropdownUsers
 function dropdownOnSelectCb(e) {
@@ -339,7 +345,7 @@ function fillDropdownUsers($wrapper, accounts) {
 }
 
 function initLogsTab() {
-    addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
+    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
     tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
 }
 
