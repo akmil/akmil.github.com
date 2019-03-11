@@ -238,21 +238,26 @@ function checkResponse (result /* , isResendRequest*/) {
     fillList($msgList, result.data.accounts);
     addListHandler();
 }
+const errMessageFront = 'Не получилось загрузить доступные Instagram аккаунты';
+function cbError() {
+    viewUtils.showInfoMessage($('.error-msg'),
+        '',
+        errMessageFront);
+}
 
 function reloadList() {
     const $msgList = $('.accounts-list');
     // TODO: add spinner
     $('.profile-user .spinner-box').removeClass('d-none');
-    User.getMetadata().then((result) => {
+    User.getMetadata(cbError).then((result) => {
         $msgList.empty();
         // todo : reload list
-        console.log(result.data, result.data.accounts);
         checkResponse(result);
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),
                 err.status || '',
-                'Не получилось загрузить доступные Instagram аккаунты');
+                errMessageFront);
         }, 3000);
         $('.spinner-box').addClass('d-none');
     });
@@ -360,7 +365,7 @@ export function init() {
         return;
     }
     // const token = User.getToken();
-    const metadata = User.getMetadata();
+    const metadata = User.getMetadata(cbError);
     // const resendRequest = () => User.getMetadata(token);
     // let isSendReqOnce = false;
     // check we are in profile page
