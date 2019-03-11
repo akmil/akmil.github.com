@@ -1,0 +1,13 @@
+
+.unfollow-page {
+    // todo: create tabs compponent
+    a {
+        color: $primary;
+        text-decoration: none;
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+    }
+}
+
+
+
