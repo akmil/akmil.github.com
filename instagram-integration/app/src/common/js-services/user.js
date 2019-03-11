@@ -73,17 +73,17 @@ class User {
         return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount', username)}`, setting);
     }
 
-    getInstagramAccount() {
-        const setting = {
-            ...this.settingPost,
-            method: 'GET',
-            headers: {
-                ...this.settingPost.headers,
-                token: this.getToken()
-            }
-        };
-        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting);
-    }
+    // getInstagramAccount() {
+    //     const setting = {
+    //         ...this.settingPost,
+    //         method: 'GET',
+    //         headers: {
+    //             ...this.settingPost.headers,
+    //             token: this.getToken()
+    //         }
+    //     };
+    //     return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting);
+    // }
 
     confirm(token) {
         // const confirmUrl = CONST.getPath('confirmation');
@@ -99,7 +99,7 @@ class User {
     }
 
     // todo: move to account-list
-    getMetadata(token, cbError) {
+    getMetadata(cbError) {
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_getMetaData')}`,
             this.getToken('asHeader'), cbError);
     }
