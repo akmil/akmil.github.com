@@ -5,6 +5,8 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
+import * as tabs from '../_shared/tebs-pils/tabs';
+import * as logs from '../_shared/logs/logs';
 
 const state = {
     username: '',
@@ -298,6 +300,49 @@ function initSteps(formSelector) {
     });
 }
 
+// eslint-disable-next-line no-unused-vars
+let usernameSelected = '';
+const clsConst = {
+    pathSubType: CONST.url.tmTypes.followingSubT[0]
+};
+const {addDropdown} = viewUtils;
+const logsState = {
+    selectCls: 'js_logs-accounts',
+    selectClsLogsTaskType: 'js_logs-subtypes',
+    wrapperSubtype: '.log-subype'
+    // activeSubType: CONST.url.tmTypes.storiesSubT[0]
+};
+// todo refactor merge with fillDropdownUsers
+function dropdownOnSelectCb(e) {
+    const {selectClsLogsTaskType} = logsState;
+    clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+    // logsState.activeSubType = clsConst.pathSubType;
+    $('.js_logs-container').addClass('d-block');
+    $('option.js_empty-subtype').remove();
+}
+
+function fillDropdownUsers($wrapper, accounts) {
+    const {selectCls} = logsState;
+    const label = 'Доступные аккаунты';
+    $wrapper.empty().addClass('border-light-color');
+    $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+    accounts.forEach((name) => {
+        $(`<option class="list-group-item py-2" value="${name}">
+            ${name}
+        </option>`).appendTo($(`.${selectCls}`));
+    });
+    $(`.${selectCls}`).on('change', function () {
+        usernameSelected = $(`.${selectCls} option:selected`).val();
+        // clsConst.pathSubType = logsState.activeSubType;
+        logs.init(selectCls, clsConst);
+    });
+}
+
+function initLogsTab() {
+    addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
+    tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
+}
+
 /*
 function fixStepIndicator(n) {
     // This function removes the "active" class of all steps...
@@ -409,6 +454,7 @@ export function init() {
         };
         followStatusBySubtype.init({isInCorrectPage, initialPath});
         initSteps('.follow-form');
+        initLogsTab();
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
             // console.log('modifyAccList');
