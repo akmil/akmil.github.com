@@ -3,14 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const pages = [
     {
-        title: 'List of pages',
+        title: 'Instagram аккаунты',
         name: 'index',
         source: 'index'
-    },
-    {
-        title: 'landing page',
-        name: 'landing',
-        source: '_landing/landing'
     },
     {
         title: 'Авторизация',
@@ -28,29 +23,9 @@ const pages = [
         source: '_autogreeting/autogreeting'
     },
     {
-        title: 'User _autoposting',
-        name: 'autoposting',
-        source: '_autoposting/autoposting'
-    },
-    {
-        title: 'Чат бот очистка',
-        name: 'bot-cleaner',
-        source: '_bot-cleaner/bot-cleaner'
-    },
-    {
-        title: 'Автоприветствие',
-        name: 'chat-bot--old',
-        source: '_chat-bot/chat-bot'
-    },
-    {
         title: 'Автоответ',
         name: 'autoanswer',
         source: '_autoanswer/autoanswer'
-    },
-    {
-        title: 'Коментарии',
-        name: 'comments',
-        source: '_comments/comments'
     },
     {
         title: 'Подтверждение регистрации',
@@ -68,6 +43,43 @@ const pages = [
         source: '_messages/messages'
     },
     {
+        title: 'Подписки',
+        name: 'follow',
+        source: '_follow-page/follow-page'
+    },
+    {
+        title: 'Отписки',
+        name: 'unfollow',
+        source: '_unfollow/unfollow'
+    },
+    {
+        title: 'Просмотр Stories',
+        name: 'stories',
+        source: '_stories/stories'
+    }
+// unused
+/*
+    {
+        title: 'Автоприветствие(bot-old)',
+        name: 'chat-bot--old',
+        source: '_chat-bot/chat-bot'
+    },
+    {
+        title: 'Чат бот очистка',
+        name: 'bot-cleaner',
+        source: '_bot-cleaner/bot-cleaner'
+    },
+    {
+        title: 'User _autoposting',
+        name: 'autoposting',
+        source: '_autoposting/autoposting'
+    },
+    {
+        title: 'Коментарии',
+        name: 'comments',
+        source: '_comments/comments'
+    },
+    {
         title: 'User _newsletter',
         name: 'newsletter',
         source: '_newsletter/newsletter'
@@ -81,22 +93,8 @@ const pages = [
         title: 'User profile',
         name: 'profile',
         source: '_profile/profile-page'
-    },
-    {
-        title: 'Подписки',
-        name: 'follow',
-        source: '_follow-page/follow-page'
-    },
-    {
-        title: 'User profile',
-        name: 'stories',
-        source: '_stories/stories'
-    },
-    {
-        title: 'Отписки',
-        name: 'unsubscribe',
-        source: '_unsubscribe/unsubscribe'
     }
+*/
 ];
 
 const getHtmlPagesPlugins = (isMinify = false) => {
