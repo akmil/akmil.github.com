@@ -12,6 +12,12 @@
                 <input type="radio" id="{{subtype-2}}" name="customRadio" value="{{subtype-2}}" class="custom-control-input">
                 <label class="custom-control-label" for="{{subtype-2}}">{{subtype-2-text}}</label>
             </div>
+            {{#if subtype-3}}
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="{{subtype-3}}" name="customRadio" value="{{subtype-3}}" class="custom-control-input">
+                    <label class="custom-control-label" for="{{subtype-3}}">{{subtype-3-text}}</label>
+                </div>
+            {{/if}}
         </div>
     </div>
     {{>step-buttons}}

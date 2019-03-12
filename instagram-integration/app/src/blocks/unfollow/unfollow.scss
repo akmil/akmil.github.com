@@ -1,12 +1,17 @@
 
 .unfollow-page {
-    // todo: create tabs compponent
-    a {
-        color: $primary;
-        text-decoration: none;
-        background-color: transparent;
-        -webkit-text-decoration-skip: objects;
+  .add-file {
+    // .label-chous {
+    // }
+    .input-txt-file {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
     }
+  }
 }
 
 

@@ -12,9 +12,8 @@ const wrappers = {
     $all: $('.tasks-all'),
     $stopped: $('.tasks-stopped')
 };
-const logsState = {
+const logsStateStatus = {
     wrapperSubtype: $('.subtype--box')
-    // selectClsLogsTaskType: 'subtype-select-wrapper'
 };
 
 function dropdownOnSelectCb(e) {
@@ -30,8 +29,9 @@ export function init({isInStoriesPage}) {
     if (!isInStoriesPage) {
         return;
     }
-
-    dropDown.addDropdown(logsState.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
+    // toDO : refactor
+    // render status dropdown
+    dropDown.addDropdown(logsStateStatus.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState: logsStateStatus, dropdownOnSelectCb});
 
     // getTasksData(wrappers, path);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {

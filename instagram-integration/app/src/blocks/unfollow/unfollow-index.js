@@ -1,39 +1,34 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
-// import {addDropdown, getValByCommaSeparator, fillRadioGroupList} from '../../common/js-services/view';
-const {addDropdown, getValByCommaSeparator, fillRadioGroupList} = viewUtils;
+const {addDropdown, fillRadioGroupList} = viewUtils;
 
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
-import * as storiesStatus from './unfollow-status';
+import * as tabStatus from './unfollow-status';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as logs from '../_shared/logs/logs';
 
 let usernameSelected = '';
-const logsState = {
-    selectCls: 'js_logs-accounts',
-    selectClsLogsTaskType: 'js_logs-subtypes',
-    wrapperSubtype: '.log-subype'
-    // activeSubType: CONST.url.tmTypes.storiesSubT[0]
-};
+const logsState = CONST.logsState;
 const clsConst = {
     currentPageCls: '.unfollow-page',
     tasksList: '.log-tasks',
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.storiesT,
-    pathSubType: CONST.url.tmTypes.storiesSubT[0]
+    pathType: CONST.url.tmTypes.unfollowingT,
+    pathSubType: CONST.url.tmTypes.unfollowingSubT[0]
 };
 const elSelector = {
     wizardForm: '.wizard-form',
     wizardFormName: 'wizard-form',
     fields: '.autoanswer-text-fields',
     taskMode: '.js_task-mode',
+    typeRadioGroup: '.js_get-unfollow-type',
     competitors: 'textarea.stories-competitors'
 };
 const state = {
-    subtype: CONST.url.tmTypes.storiesSubT[0],
+    subtype: CONST.url.tmTypes.unfollowingSubT[0],
     user_default_config: {
         task_mode: 'SAFE'
     }
@@ -42,30 +37,30 @@ const state = {
 function onSubmitHandler(e) {
     const {wizardFormName} = elSelector;
     const form = document.forms[wizardFormName];
-    const limit = form['limit'];
-
-    if (limit.value === '') {
-        limit.focus();
-        return false;
-    }
 
     const body = {
         ...state,
-        user_default_config: {
-            ...state.user_default_config,
-            criteria: {
-                max_views: limit.value
+        // user_default_config: {
+        //     ...state.user_default_config,
+        //     criteria: {
+        //     }
+        // },
+        // state['user_custom_config'].attachment = {
+        //     'list_id': $('.add-file .file-upload-container').attr('attached-txt-id')
+        // };
+        user_custom_config: {
+            attachment: {
+                'list_id': 'id_static'
             }
         },
-        user_custom_config: {},
         type: clsConst.pathType,
         username: usernameSelected
     };
 
-    if (body.subtype === CONST.url.tmTypes.storiesSubT[1]) {
-        const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
-        body.user_custom_config = {
-            competitors
+    if (state.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
+        // text file should be added
+        state['user_custom_config'].attachment = {
+            'list_id': $('.add-file .file-upload-container').attr('attached-txt-id')
         };
     }
 
@@ -89,30 +84,26 @@ function onSubmitHandler(e) {
     });
 }
 
-// todo refactor merge with fillDropdownUsers
-function dropdownOnSelectCb(e) {
-    const {selectClsLogsTaskType} = logsState;
-    clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-    // logsState.activeSubType = clsConst.pathSubType;
-    $('.js_logs-container').addClass('d-block');
-    $('option.js_empty-subtype').remove();
-}
-
-function fillDropdownUsers($wrapper, accounts) {
-    const {selectCls} = logsState;
-    const label = 'Доступные аккаунты';
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    accounts.forEach((name) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${name}
-        </option>`).appendTo($(`.${selectCls}`));
-    });
-    $(`.${selectCls}`).on('change', function () {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        // clsConst.pathSubType = logsState.activeSubType;
-        logs.init(selectCls, clsConst);
-    });
+const logsSubtypes = CONST.url.tmTypes.unfollowingSubT;
+function initLogsTab() {
+    function dropdownOnSelectCb(e) {
+        const {selectClsLogsTaskType} = logsState;
+        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+        // logsState.activeSubType = clsConst.pathSubType;
+        $('.js_logs-container').addClass('d-block');
+        $('option.js_empty-subtype').remove();
+    }
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            logs.init(selectCls, clsConst);
+        });
+    }
+    const textRusArray = ['По списку', 'От всех', 'От невзаимных'];
+    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb, textRusArray});
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
 /**
@@ -120,7 +111,7 @@ function fillDropdownUsers($wrapper, accounts) {
  */
 function initHandlers() {
 
-    $('.js_get-stories-type input[type=radio]').on('click', (e) => {
+    $(`${elSelector.typeRadioGroup} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
         state.subtype = value.toUpperCase();
         console.log(state);
@@ -139,16 +130,20 @@ function initHandlers() {
         $('#v-pills-runned-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
+}
 
-    addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
-    tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
+function addUploadButton() {
+    console.log('addUploadButton', CONST.url.tmTypes.unfollowingSubT[0]);
 }
 
 function renderTaskMode(defaultCfg) {
     const {cfg: {task_modes}} = defaultCfg;
     const {taskMode: taskModeSelector} = elSelector;
 
-    fillRadioGroupList($(taskModeSelector), task_modes, ' ');
+    fillRadioGroupList($(taskModeSelector), task_modes, 'отписок');
+    if (defaultCfg.id.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
+        addUploadButton();
+    }
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
@@ -176,9 +171,9 @@ function getConfig() {
                 found
             }
         } = result;
-        const limitVal = found.cfg.criteria.max_views;
+        // $('#limit').val(limitVal);
+        // const limitVal = found.cfg.criteria.max_views;
         renderTaskMode(found);
-        $('#limit').val(limitVal);
     });
 }
 
@@ -188,7 +183,7 @@ function setUserName(state) {
 
 function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
-    if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
+    if (state.subtype === CONST.url.tmTypes.unfollowingSubT[1]) {
         const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
         const tpl = `<div class="row">
             <label class="">Конкуренты</label>
@@ -229,7 +224,8 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
-    storiesStatus.init({
+    initLogsTab();
+    tabStatus.init({
         isInStoriesPage: isInCurrentPage
     });
     // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {

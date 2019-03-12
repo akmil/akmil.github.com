@@ -220,15 +220,10 @@ function initSteps(formSelector) {
 
     // submit
     $form.on('submit', function (e) {
-        // todo:  get data from attachment
-
-        // const genderVal = $(this).find('.select-gender option:selected').val();
 
         state.user_default_config = {
             ...state.user_default_config,
-            criteria: {
-                // gender: genderVal.toUpperCase()
-            }
+            criteria: {}
         };
         const limit = document.forms['follow-form']['limit'];
         const have_posts = {
@@ -267,7 +262,7 @@ function initSteps(formSelector) {
         });
 
         state.type = CONST.url.tmTypes.followingT; // 'FOLLOWING';
-        console.log('----+ state.subtype +----', state.subtype);
+        // console.log('----+ state.subtype +----', state.subtype);
         if (state.subtype === 'FOLLOWING_BY_LIST') {
             // text file should be added
             state['user_custom_config'].attachment = {
@@ -313,11 +308,7 @@ const clsConst = {
 };
 const logsSubtypes = CONST.url.tmTypes.followingSubT;
 const {addDropdown} = viewUtils;
-const logsState = {
-    selectCls: 'js_logs-accounts',
-    selectClsLogsTaskType: 'js_logs-subtypes',
-    wrapperSubtype: '.log-subype'
-};
+const logsState = CONST.logsState;
 // todo refactor merge with fillDropdownUsers
 function dropdownOnSelectCb(e) {
     const {selectClsLogsTaskType} = logsState;
@@ -327,26 +318,17 @@ function dropdownOnSelectCb(e) {
     $('option.js_empty-subtype').remove();
 }
 
-function fillDropdownUsers($wrapper, accounts) {
-    const {selectCls} = logsState;
-    const label = 'Доступные аккаунты';
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    accounts.forEach((name) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${name}
-        </option>`).appendTo($(`.${selectCls}`));
-    });
-    $(`.${selectCls}`).on('change', function () {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        // clsConst.pathSubType = logsState.activeSubType;
-        logs.init(selectCls, clsConst);
-    });
-}
-
 function initLogsTab() {
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            logs.init(selectCls, clsConst);
+        });
+    }
     addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
-    tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
 /*

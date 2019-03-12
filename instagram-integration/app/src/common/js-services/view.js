@@ -102,8 +102,21 @@ function viewUtils() {
      * cfg ={ logsState, cbFN() }
      */
     function addDropdown($wrapper, items, cfg) {
-        const {selectClsLogsTaskType} = cfg.logsState;
+        const {textRusArray, logsState} = cfg;
+        const {selectClsLogsTaskType} = logsState;
         const label = 'Доступные задания';
+        const getRus = (idx) => {
+            const isTextUnfollow = textRusArray && !!textRusArray.length;
+            switch (idx) {
+                case 0 :
+                    return (isTextUnfollow) ? textRusArray[idx] : 'По подписчикам';
+                case 1 :
+                    return (isTextUnfollow) ? textRusArray[idx] : 'По активной аудитории конкурентов';
+                case 2 :
+                    return (isTextUnfollow) ? textRusArray[idx] : 'default - (3)';
+                default: return 'default';
+            }
+        };
         $wrapper.empty().addClass('border-light-color');
         $(`<div class="">${label}</div><select name="task-subtype" class="${selectClsLogsTaskType}"></select>`).appendTo($wrapper);
         if (!items.length) {
@@ -112,8 +125,8 @@ function viewUtils() {
         $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
         items.forEach((name, idx) => {
             $(`<option class="list-group-item py-2" value="${name}">
-            ${idx === 0 ? 'По подписчикам' : 'По активной аудитории конкурентов'}
-        </option>`).appendTo($(`.${selectClsLogsTaskType}`));
+                ${getRus(idx)}
+            </option>`).appendTo($(`.${selectClsLogsTaskType}`));
         });
         $(`.${selectClsLogsTaskType}`).on('change', function () {
             cfg.dropdownOnSelectCb();

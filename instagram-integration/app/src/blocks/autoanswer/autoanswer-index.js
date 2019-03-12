@@ -125,19 +125,37 @@ function onSubmitHandler(e) {
     });
 }
 
-function fillListUsers($wrapper, accounts) {
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    accounts.forEach((name) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${name}
-        </option>`).appendTo($(`.${selectCls}`));
-    });
-    $(`.${selectCls}`).on('change', function () {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        logs.init(selectCls, clsConst);
-    });
+// function fillListUsers($wrapper, accounts) {
+//     $wrapper.empty().addClass('border-light-color');
+//     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+//     accounts.forEach((name) => {
+//         $(`<option class="list-group-item py-2" value="${name}">
+//             ${name}
+//         </option>`).appendTo($(`.${selectCls}`));
+//     });
+//     $(`.${selectCls}`).on('change', function () {
+//         usernameSelected = $(`.${selectCls} option:selected`).val();
+//         logs.init(selectCls, clsConst);
+//     });
+// }
+const logsState = {
+    selectCls: 'js_logs-accounts',
+    selectClsLogsTaskType: 'js_logs-subtypes',
+    wrapperSubtype: '.log-subype'
+};
+function initLogsTab() {
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            logs.init(selectCls, clsConst);
+        });
+    }
+    // addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
+
 function removeExtraTextFields() {
     $(`${elSelector.fields}:not(:first-child)`).remove();
 }
@@ -170,7 +188,8 @@ function initHandlers() {
         removeExtraTextFields();
     });
 
-    tabs.init(fillListUsers);
+    // tabs.init(fillListUsers);
+    initLogsTab();
 }
 
 function setUserName(state) {

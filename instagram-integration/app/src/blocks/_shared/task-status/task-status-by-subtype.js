@@ -11,9 +11,8 @@ const wrappers = {
     $all: $('.tasks-all'),
     $stopped: $('.tasks-stopped')
 };
-const logsState = {
+const logsStateStatus = {
     wrapperSubtype: $('.subtype--box')
-    // selectClsLogsTaskType: 'subtype-select-wrapper'
 };
 
 function dropdownOnSelectCb(e) {
@@ -25,7 +24,7 @@ function dropdownOnSelectCb(e) {
     getTasksData(wrappers, pathUpdated);
 }
 
-export function init({isInCorrectPage, initialPath}) {
+export function init({isInCorrectPage, initialPath, textRusArray}) {
     if (!isInCorrectPage) {
         return;
     }
@@ -34,7 +33,12 @@ export function init({isInCorrectPage, initialPath}) {
         subtype: initialPath.subtype
     };
 
-    dropDown.addDropdown(logsState.wrapperSubtype, initialPath.subtypes, {logsState, dropdownOnSelectCb});
+    // todo: merge with viewUtils.js Dropdown
+    dropDown.addDropdown(
+        logsStateStatus.wrapperSubtype,
+        initialPath.subtypes,
+        {logsState: logsStateStatus, dropdownOnSelectCb, textRusArray}
+    );
 
     // getTasksData(wrappers, path);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {

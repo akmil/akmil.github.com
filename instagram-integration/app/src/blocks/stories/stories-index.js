@@ -10,12 +10,7 @@ import * as tabs from '../_shared/tebs-pils/tabs';
 import * as logs from '../_shared/logs/logs';
 
 let usernameSelected = '';
-const logsState = {
-    selectCls: 'js_logs-accounts',
-    selectClsLogsTaskType: 'js_logs-subtypes',
-    wrapperSubtype: '.log-subype'
-    // activeSubType: CONST.url.tmTypes.storiesSubT[0]
-};
+const logsState = CONST.logsState;
 const clsConst = {
     currentPageCls: '.stories-page',
     tasksList: '.log-tasks',
@@ -90,29 +85,51 @@ function onSubmitHandler(e) {
 }
 
 // todo refactor merge with fillDropdownUsers
-function dropdownOnSelectCb(e) {
-    const {selectClsLogsTaskType} = logsState;
-    clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-    // logsState.activeSubType = clsConst.pathSubType;
-    $('.js_logs-container').addClass('d-block');
-    $('option.js_empty-subtype').remove();
-}
+// function dropdownOnSelectCb(e) {
+//     const {selectClsLogsTaskType} = logsState;
+//     clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+//     // logsState.activeSubType = clsConst.pathSubType;
+//     $('.js_logs-container').addClass('d-block');
+//     $('option.js_empty-subtype').remove();
+// }
+//
+// function fillDropdownUsers($wrapper, accounts) {
+//     const {selectCls} = logsState;
+//     const label = 'Доступные аккаунты';
+//     $wrapper.empty().addClass('border-light-color');
+//     $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+//     accounts.forEach((name) => {
+//         $(`<option class="list-group-item py-2" value="${name}">
+//             ${name}
+//         </option>`).appendTo($(`.${selectCls}`));
+//     });
+//     $(`.${selectCls}`).on('change', function () {
+//         usernameSelected = $(`.${selectCls} option:selected`).val();
+//         // clsConst.pathSubType = logsState.activeSubType;
+//         logs.init(selectCls, clsConst);
+//     });
+// }
 
-function fillDropdownUsers($wrapper, accounts) {
-    const {selectCls} = logsState;
-    const label = 'Доступные аккаунты';
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    accounts.forEach((name) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${name}
-        </option>`).appendTo($(`.${selectCls}`));
-    });
-    $(`.${selectCls}`).on('change', function () {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        // clsConst.pathSubType = logsState.activeSubType;
-        logs.init(selectCls, clsConst);
-    });
+const logsSubtypes = CONST.url.tmTypes.storiesSubT;
+function initLogsTab() {
+    function dropdownOnSelectCb(e) {
+        const {selectClsLogsTaskType} = logsState;
+        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
+        // logsState.activeSubType = clsConst.pathSubType;
+        $('.js_logs-container').addClass('d-block');
+        $('option.js_empty-subtype').remove();
+    }
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            logs.init(selectCls, clsConst);
+        });
+    }
+    // const textRusArray = ['По списку', 'От всех', 'От невзаимных'];
+    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
 /**
@@ -140,8 +157,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    addDropdown($(logsState.wrapperSubtype), CONST.url.tmTypes.storiesSubT, {logsState, dropdownOnSelectCb});
-    tabs.init(fillDropdownUsers); // makes double request : OPTION and GET
+    initLogsTab();
 }
 
 function renderTaskMode(defaultCfg) {

@@ -65,19 +65,33 @@ function onSubmitHandler(e) {
     });
 }
 
-function fillListUsers($wrapper, data) {
-    $wrapper.empty().addClass('border-light-color');
-    $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-    data.forEach((name) => {
-        $(`<option class="list-group-item py-2" value="${name}">
-            ${name}
-        </option>`).appendTo($(`.${selectCls}`));
-    });
-    $(`.${selectCls}`).on('change', function () {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        console.log(usernameSelected);
-        chatBotLogs.init(selectCls, clsConst);
-    });
+// function fillListUsers($wrapper, data) {
+//     $wrapper.empty().addClass('border-light-color');
+//     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
+//     data.forEach((name) => {
+//         $(`<option class="list-group-item py-2" value="${name}">
+//             ${name}
+//         </option>`).appendTo($(`.${selectCls}`));
+//     });
+//     $(`.${selectCls}`).on('change', function () {
+//         usernameSelected = $(`.${selectCls} option:selected`).val();
+//         console.log(usernameSelected);
+//         chatBotLogs.init(selectCls, clsConst);
+//     });
+// }
+
+const logsState = CONST.logsState;
+function initLogsTab() {
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            chatBotLogs.init(selectCls, clsConst);
+        });
+    }
+    // addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
 /**
@@ -116,7 +130,8 @@ function initHandlers() {
         // const $wrapper = $('.log-users-list');
         // fillListUsers($wrapper, userListInstagram);
     // });
-    tabs.init(fillListUsers);
+    // tabs.init(fillListUsers);
+    initLogsTab();
 }
 
 function setUserName(state) {

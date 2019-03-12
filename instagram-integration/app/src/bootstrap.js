@@ -16,7 +16,7 @@ import * as burgerMenu from './blocks/header/burger-menu/burger-menu';
 import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-accounts-list';
 import * as messages from './blocks/messages/messages';
 import * as follow from './blocks/follow/follow';
-import * as unfollow from './blocks/unfollow/unfollow';
+import * as unfollow from './blocks/unfollow/unfollow-index';
 import * as autoanswer from './blocks/autoanswer/autoanswer-index';
 import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';

@@ -3,6 +3,8 @@ export const CONST = {
         tmTypes: {
             followingT: 'FOLLOWING',
             followingSubT: ['FOLLOWING_BY_LIST', 'FOLLOWING_BY_ACTIVE_AUDIENCE'],
+            unfollowingT: 'UNFOLLOWING',
+            unfollowingSubT: ['UNFOLLOWING_BY_LIST', 'UNFOLLOWING_BY_ALL', 'UNFOLLOWING_BY_NON_RECIPRECOL'],
             chatBotT: 'CHAT_BOT',
             chatBotSubT: ['DEFAULT_CHAT_BOT'],
             autoanswerT: 'AUTO_ANSWER',
@@ -80,6 +82,11 @@ export const CONST = {
         logs: {
             STOP_LOGS: 'stop_logs'
         }
+    },
+    logsState: {
+        selectCls: 'js_logs-accounts',
+        selectClsLogsTaskType: 'js_logs-subtypes',
+        wrapperSubtype: '.log-subype'
     },
     getPath(name, id) {
         if (typeof this.url[name] === 'function' && id) {

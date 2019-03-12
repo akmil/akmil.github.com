@@ -64,10 +64,21 @@ function fillListByState(taskState, $list, item) {
             </div>
 
         </div>`;
-    // const tplFinished = `<div class="col task-progress">
-    //             <p class="mt-0 mb-1 name"><b>ID:</b> ${task_id}</p>
-    //         </div>
-    //         <button class="btn btn-warning js_btn-delete-task">Удалить</button>`;
+    const tplFinished = `<div class="no-gutters px-2 row task-progress">
+            <div class="col-6 align-items-center d-flex">
+                <img src="${sessionStorage.getItem(username)}" class="rounded-circle avatar" alt="аватар"/>
+                <h2 class="mt-0 mb-1 ml-2">${username}</h2>
+            </div>
+            <div class="col-6 col-6--with-borders">
+                <p class="pb-1 name"><b>ID:</b> ${task_id}</p>
+                ${created_at ? `<p class="pb-1"><b>Запущено:</b> ${viewUtils.getFormattedDateUtil(created_at, 'showFullTime')}</p>` : ''}
+                ${mode ? `<p class="pb-1"><b>Режим:</b> ${modeRus(mode)}</p>` : ''}
+                <div class="text-center">
+                    <!--<button class="btn btn-outline-primary js_btn-stop-task"><i class="far fa-pause-circle fa-lg"></i></button>-->
+                    <button class="btn btn-warning js_btn-delete-task ml-3"><i class="far fa-trash-alt fa-lg"></i></button>
+                </div>
+            </div>
+        </div>`;
     switch (taskState) {
         case 'PAUSED':
             addItem(tplPaused);
@@ -82,7 +93,7 @@ function fillListByState(taskState, $list, item) {
             addItem(tplStop);
             break;
         case 'FINISHED':
-            addItem(tplProgress);
+            addItem(tplFinished);
             break;
         default:
             break;

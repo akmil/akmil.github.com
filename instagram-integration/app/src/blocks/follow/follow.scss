@@ -1,15 +1,7 @@
 $transition-follow: all .3s;
 $border-radius-follow: 4px;
 
-
-
 .follow {
-    a {
-        color: $primary;
-        text-decoration: none;
-        background-color: transparent;
-        -webkit-text-decoration-skip: objects;
-    }
 
     .spinner-box {
         background-color: transparent;
@@ -190,7 +182,7 @@ $border-radius-follow: 4px;
         width: 100%;
         background: none;
         font-weight: 600;
-        
+
         &::-webkit-input-placeholder {
             color: #333;
         }
@@ -338,7 +330,7 @@ $border-radius-follow: 4px;
             }
         }
     }
-    
+
     @media (max-width: 1500px) {
         .steps {
             bottom: -40px;

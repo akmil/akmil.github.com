@@ -2,7 +2,7 @@
     <div class="form-top">
         <div class="form-top-left">
             <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите аккаунт</h3>
-            <p>Шаг 1/4</p>
+            <p>Шаг 1/3</p>
         </div>
     </div>
 
@@ -14,20 +14,22 @@
     </div>
 </fieldset>
 <fieldset>
-    {{>step-select-subtype
-        titleHeader='Тип'
-        subTitle='Шаг 2/5'
-        pageName='follow'
-        subtype-1='FOLLOWING_BY_LIST'
+    {{> step-select-subtype
+        titleHeader='Типы отписок'
+        subTitle='Шаг 2/3'
+        pageName='unfollow'
+        subtype-1='UNFOLLOWING_BY_LIST'
         subtype-1-text='По списку'
-        subtype-2='FOLLOWING_BY_ACTIVE_AUDIENCE'
-        subtype-2-text='По активной аудитории конкурентов'
+        subtype-2='UNFOLLOWING_BY_ALL'
+        subtype-2-text='От всех'
+        subtype-3='UNFOLLOWING_BY_NON_RECIPRECOL'
+        subtype-3-text='От невзаимных'
     }}
 </fieldset>
 <fieldset>
     {{> unfollow-step-3
         titleHeader='Скорость'
-        subTitle='Шаг 3/4'
+        subTitle='Шаг 3/3'
     }}
 </fieldset>
 
