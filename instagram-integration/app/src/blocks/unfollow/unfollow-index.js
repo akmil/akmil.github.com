@@ -86,6 +86,7 @@ function onSubmitHandler(e) {
 }
 
 const logsSubtypes = CONST.url.tmTypes.unfollowingSubT;
+
 function initLogsTab() {
     function dropdownOnSelectCb(e) {
         const {selectClsLogsTaskType} = logsState;
