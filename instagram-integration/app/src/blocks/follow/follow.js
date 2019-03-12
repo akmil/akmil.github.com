@@ -80,31 +80,25 @@ function getDataStep2() {
 }
 
 function getDataStepSpeed() {
-    // const users = $('#followers').val()
-    //     .trim()
-    //     .replace(/ /g, '')
-    //     .split(',')
-    //     .filter(i => i.length > 0);
-
-    // state['user_custom_config'] = {
-    //     users
-    // };
     const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
         type: CONST.url.tmTypes.followingT,
         subtype: state.subtype || CONST.url.tmTypes.followingSubT[0]
     };
+    function toggleAddTextBtn(subtype) {
+        if (path.subtype === 'FOLLOWING_BY_LIST') {
+            // show txt fileUpload
+            $('.add-file').addClass('d-block');
+            $('.add-competitors').addClass('d-none').removeClass('d-block');
+        } else {
+            // show competitors
+            $('.add-competitors').addClass('d-block');
+            $('.add-file').addClass('d-none').removeClass('d-block');
+        }
+    }
     console.log('path.subtype', path.subtype);
 
-    if (path.subtype === 'FOLLOWING_BY_LIST') {
-        // show txt fileUpload
-        $('.add-file').addClass('d-block');
-        $('.add-competitors').addClass('d-none').removeClass('d-block');
-    } else {
-        // show competitors
-        $('.add-competitors').addClass('d-block');
-        $('.add-file').addClass('d-none').removeClass('d-block');
-    }
+    toggleAddTextBtn(path.subtype);
 
     // draw criteria
     UserTaskManager.getDefaultConfigs(path).then((result) => {

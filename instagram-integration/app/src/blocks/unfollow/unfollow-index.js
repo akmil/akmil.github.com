@@ -2,6 +2,7 @@ import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 const {addDropdown, fillRadioGroupList} = viewUtils;
+import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as tabStatus from './unfollow-status';
@@ -59,7 +60,7 @@ function onSubmitHandler(e) {
 
     if (state.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
         // text file should be added
-        state['user_custom_config'].attachment = {
+        body['user_custom_config'].attachment = {
             'list_id': $('.add-file .file-upload-container').attr('attached-txt-id')
         };
     }
@@ -132,7 +133,19 @@ function initHandlers() {
     });
 }
 
-function addUploadButton() {
+function addUploadButton(subtype) {
+    function toggleAddTextBtn(subtype) {
+        if (subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
+            // show txt fileUpload
+            $('.add-file').addClass('d-block');
+            // $('.add-competitors').addClass('d-none').removeClass('d-block');
+        } else {
+            // hide txt fileUpload
+            // $('.add-competitors').addClass('d-block');
+            $('.add-file').addClass('d-none').removeClass('d-block');
+        }
+    }
+    toggleAddTextBtn(subtype);
     console.log('addUploadButton', CONST.url.tmTypes.unfollowingSubT[0]);
 }
 
@@ -142,7 +155,7 @@ function renderTaskMode(defaultCfg) {
 
     fillRadioGroupList($(taskModeSelector), task_modes, 'отписок');
     if (defaultCfg.id.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
-        addUploadButton();
+        addUploadButton(defaultCfg.id.subtype);
     }
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
@@ -224,6 +237,7 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
+    attachTxtFileHandler('.file-upload-container');
     initLogsTab();
     tabStatus.init({
         isInStoriesPage: isInCurrentPage

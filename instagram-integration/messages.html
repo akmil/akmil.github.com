@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -100,8 +100,10 @@
                   <li class="nav-item"><a class="nav-link text-light" href="./messages.html">
                       <i class="fas fa-comments mr-1"></i>Direct</a></li>
                   <li class="nav-item"><a class="nav-link text-light" href="./follow.html">
-                      <i class="far fa-newspaper mr-1"></i>Подписки</a>
+                      <i class="fas fa-sign-in-alt mr-1"></i>Подписки</a>
                   </li>
+                  <li class="nav-item"><a class="nav-link text-light" href="./unfollow.html">
+                      <i class="fas fa-sign-out-alt mr-1"></i>Отписки</a></li>
                   <li class="nav-item"><a class="nav-link text-light" href="./autoanswer.html">
                       <i class="fas fa-handshake mr-1"></i>
                       Автоответ</a></li>
@@ -177,7 +179,7 @@
             
             </main></div>
             
-            <script>function handleFileSelect(e){for(var t,n=e.target.files,a=0;t=n[a];a++)if(t.type.match("image.*")){var l=new FileReader;l.onload=function(e){return function(t){var n=document.createElement("span");n.innerHTML=['<img class="thumb" src="',t.target.result,'" title="',escape(e.name),'"/>'].join(""),document.getElementById("list").insertBefore(n,null)}}(t),l.readAsDataURL(t)}}document.getElementById("sndFile").addEventListener("change",handleFileSelect,!1)</script>
+            <script>function handleFileSelect(e){for(var t,n=e.target.files,a=0;t=n[a];a++)if(t.type.match("image.*")){var l=new FileReader;l.onload=function(n){return function(e){var t=document.createElement("span");t.innerHTML=['<img class="thumb" src="',e.target.result,'" title="',escape(n.name),'"/>'].join(""),document.getElementById("list").insertBefore(t,null)}}(t),l.readAsDataURL(t)}}document.getElementById("sndFile").addEventListener("change",handleFileSelect,!1)</script>
             
         
       
