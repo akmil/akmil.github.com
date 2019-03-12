@@ -209,7 +209,9 @@ function addTextArea(stepNumber) {
         const tpl = `<div class="row">
             <label class="">Конкуренты</label>
             <textarea class="form-control stories-competitors mb-2" rows="1"></textarea></div>`;
-        $(fieldLast).find('.form-bottom>.row').after(tpl);
+        if (!$('.stories-competitors').length) {
+            $(fieldLast).find('.form-bottom>.row').after(tpl);
+        }
         console.log('end');
     }
 }
