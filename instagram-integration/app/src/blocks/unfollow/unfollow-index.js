@@ -121,14 +121,14 @@ function initHandlers() {
     // alert close
     $('.form-submit-finish .close').on('click', function () {
         // console.log('alert close');
-        $('#v-pills-runned-tab').trigger('click');
+        $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
     // alert close
     $('.form-submit-finish--error .close').on('click', function () {
         // console.log('alert close');
-        $('#v-pills-runned-tab').trigger('click');
+        $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
@@ -154,9 +154,7 @@ function renderTaskMode(defaultCfg) {
     const {taskMode: taskModeSelector} = elSelector;
 
     fillRadioGroupList($(taskModeSelector), task_modes, 'отписок');
-    if (defaultCfg.id.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
-        addUploadButton(defaultCfg.id.subtype);
-    }
+    addUploadButton(defaultCfg.id.subtype);
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
@@ -225,6 +223,14 @@ function stepReducer(stepNumber, state) {
             console.log('default', stepNumber);
     }
 }
+
+function onSuccessFileUploadCb() {
+    const {wizardForm} = elSelector;
+    // const form = document.forms[wizardFormName];
+
+    $(wizardForm).find('button[type="submit"]').attr('disabled', false);
+}
+
 export function init() {
     const isInCurrentPage = $(clsConst.currentPageCls).length;
     if (!isInCurrentPage) {
@@ -237,7 +243,7 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
-    attachTxtFileHandler('.file-upload-container');
+    attachTxtFileHandler('.file-upload-container', onSuccessFileUploadCb);
     initLogsTab();
     tabStatus.init({
         isInStoriesPage: isInCurrentPage

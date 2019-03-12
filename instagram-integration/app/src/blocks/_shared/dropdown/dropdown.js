@@ -6,18 +6,18 @@ function dropDown() {
      * cfg ={ logsState, cbFN() }
      */
     function addDropdown($wrapper, items, cfg) {
-        console.log('addDropdown');
+        // console.log('addDropdown');
         const {textRusArray, logsState} = cfg;
         const {selectClsLogsTaskType} = logsState;
         const getRus = (idx) => {
-            const isTextUnfollow = textRusArray && !!textRusArray.length;
+            const isTextRusArray = textRusArray && !!textRusArray.length;
             switch (idx) {
                 case 0 :
-                    return (isTextUnfollow) ? textRusArray[idx] : 'По подписчикам';
+                    return (isTextRusArray) ? textRusArray[idx] : 'По подписчикам';
                 case 1 :
-                    return (isTextUnfollow) ? textRusArray[idx] : 'По активной аудитории конкурентов';
+                    return (isTextRusArray) ? textRusArray[idx] : 'По активной аудитории конкурентов';
                 case 2 :
-                    return (isTextUnfollow) ? textRusArray[idx] : 'default - (3)';
+                    return (isTextRusArray) ? textRusArray[idx] : 'default - (3)';
                 default: return 'default';
             }
         };

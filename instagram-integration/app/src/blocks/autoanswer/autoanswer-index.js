@@ -175,7 +175,7 @@ function initHandlers() {
     // alert close
     $('.form-submit-finish .close').on('click', function () {
         // console.log('alert close');
-        $('#v-pills-runned-tab').trigger('click');
+        $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
         removeExtraTextFields();
     });
@@ -183,7 +183,7 @@ function initHandlers() {
     // alert close
     $('.form-submit-finish--error .close').on('click', function () {
         // console.log('alert close');
-        $('#v-pills-runned-tab').trigger('click');
+        $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
         removeExtraTextFields();
     });

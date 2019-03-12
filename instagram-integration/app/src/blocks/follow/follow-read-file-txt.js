@@ -1,5 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
+import Spinner from '../../common/js-services/spinner';
 // import viewUtils from '../../common/js-services/view';
 
 /*
@@ -38,6 +39,7 @@ function handleSubmit(input) {
             window.PubSub.publish(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, {'response': this.responseText, 'el': input});
         }
     });
+    Spinner.add($('.add-file'), '');
 }
 
 function readURL(input) {
@@ -78,7 +80,7 @@ function readURL(input) {
     }
 }
 
-export function attachTxtFileHandler(_fileUploadBox) {
+export function attachTxtFileHandler(_fileUploadBox, onSuccessFileUploadCb) {
     fileUploadBox = _fileUploadBox;
     $('.input-txt-file').change(function() {
         if ($(this).val() !== '') {
@@ -93,6 +95,8 @@ export function attachTxtFileHandler(_fileUploadBox) {
         const result = (response.length) ? JSON.parse(response) : '';
         const imageId = result && result.data && result.data.list_id;
         $(res.el).closest(fileUploadBox).attr('attached-txt-id', imageId);
-        console.log('txt_loaded', res);
+        onSuccessFileUploadCb();
+        Spinner.remove();
+        console.log('***TEXT_FILE_UPLOADED, onSuccessFileUploadCb', res);
     });
 }
