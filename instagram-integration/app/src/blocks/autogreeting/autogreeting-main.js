@@ -36,7 +36,7 @@ function onSubmitHandler(e) {
         const message = $(item).find('textarea.answer-words').val();
         // const answer = $(item).find('textarea.chat-messages').val();
         // reqBody.push({'key_words': keyWord, answer});
-        reqBody.push(message);
+        reqBody.push({'answer': message});
     });
     const nReqBody = {
         'username': usernameSelected || 'the_rostyslav',
@@ -46,9 +46,7 @@ function onSubmitHandler(e) {
             'task_mode': state.user_default_config.task_mode // todo
         },
         'user_custom_config': {
-            'forms': {
-                'answer': reqBody
-            }
+            'forms': reqBody
         }
     };
     console.log('make request here**', nReqBody);
