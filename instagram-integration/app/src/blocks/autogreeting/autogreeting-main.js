@@ -46,10 +46,12 @@ function onSubmitHandler(e) {
             'task_mode': state.user_default_config.task_mode // todo
         },
         'user_custom_config': {
-            'messages': reqBody
+            'forms': {
+                'answer': reqBody
+            }
         }
     };
-    console.log('make request here**', nReqBody, JSON.stringify(nReqBody));
+    console.log('make request here**', nReqBody);
     function cbError(res) {
         const msg = res.status.message;
         $('.form-submit-finish--error').addClass('d-block')

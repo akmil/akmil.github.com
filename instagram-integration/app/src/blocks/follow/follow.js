@@ -147,6 +147,12 @@ function stepReducer(stepNumber) {
     }
 }
 
+function cbError(res) {
+    const msg = res.status.message;
+    $('.form-submit-finish--error').addClass('d-block')
+        .find('.alert').append(`<p>${msg}</p>`);
+}
+
 /**
  * Init header
  */
@@ -265,13 +271,13 @@ function initSteps(formSelector) {
         }
         if (state.subtype === CONST.url.tmTypes.followingSubT[1]) {
             // const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
-            state.user_custom_config = {
-                competitors: 'competitors'
-            };
+            // state.user_custom_config = {
+            //     competitors: 'competitors'
+            // };
         }
         console.log('make request**  post: StartFollowingList', state);
 
-        UserTaskManager.postStartFollowingList(state).then((result) => {
+        UserTaskManager.postStartFollowingList(state, cbError).then((result) => {
             if (result.status.state === 'ok') {
                 console.log(JSON.stringify(result));
                 $('.form-submit-finish').addClass('d-block')
@@ -284,6 +290,13 @@ function initSteps(formSelector) {
     // alert close
     $('.form-submit-finish .close').on('click', function () {
         // $(this).closest('form-submit-finish').removeClass('d-block');
+        $('#v-pills-all-tab').trigger('click');
+        window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+    });
+
+    // alert close
+    $('.form-submit-finish--error .close').on('click', function () {
+        // console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });

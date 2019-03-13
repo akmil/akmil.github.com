@@ -133,6 +133,11 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
+function onSuccessFileUploadCb() {
+    const {wizardForm} = elSelector;
+
+    $(wizardForm).find('button[type="submit"]').attr('disabled', false);
+}
 
 function addUploadButton(subtype) {
     function toggleAddTextBtn(subtype) {
@@ -144,6 +149,7 @@ function addUploadButton(subtype) {
             // hide txt fileUpload
             // $('.add-competitors').addClass('d-block');
             $('.add-file').addClass('d-none').removeClass('d-block');
+            onSuccessFileUploadCb();
         }
     }
     toggleAddTextBtn(subtype);
@@ -223,13 +229,6 @@ function stepReducer(stepNumber, state) {
         default:
             console.log('default', stepNumber);
     }
-}
-
-function onSuccessFileUploadCb() {
-    const {wizardForm} = elSelector;
-    // const form = document.forms[wizardFormName];
-
-    $(wizardForm).find('button[type="submit"]').attr('disabled', false);
 }
 
 export function init() {

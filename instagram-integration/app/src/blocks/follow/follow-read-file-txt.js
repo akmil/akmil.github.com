@@ -95,7 +95,9 @@ export function attachTxtFileHandler(_fileUploadBox, onSuccessFileUploadCb) {
         const result = (response.length) ? JSON.parse(response) : '';
         const imageId = result && result.data && result.data.list_id;
         $(res.el).closest(fileUploadBox).attr('attached-txt-id', imageId);
-        onSuccessFileUploadCb();
+        if (onSuccessFileUploadCb && typeof onSuccessFileUploadCb === 'function') {
+            onSuccessFileUploadCb();
+        }
         Spinner.remove();
         console.log('***TEXT_FILE_UPLOADED, onSuccessFileUploadCb', res);
     });
