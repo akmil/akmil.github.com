@@ -14,7 +14,7 @@ export default class RegisterForm {
         this.user = User;
         this.$form = $(selectorCls.form);
         this.$email = this.$form.find('input[name="mail"]');
-        this.$textAreaDescription = $('#description');
+        this.$textAreaDescription = $('.register--confirm');
         this.formData = {'email': 'test1_email@m.ru', 'password': 'password'};
     }
 
@@ -49,9 +49,9 @@ export default class RegisterForm {
                     cookieStorage.set(CONST.cookieStorage.token, result.data.token);
                     // console.log('request succeeded with JSON response', result);
                     PubSub.publish(CONST.events.USER_LOGGED);
-                    viewUtils.showInfoMessage(this.$textAreaDescription,
-                        result.status.state,
-                        result.status.message || 'Register and Login succsess');
+                    // viewUtils.showInfoMessage(this.$textAreaDescription,
+                    //     result.status.state,
+                    //     result.status.message || 'Register and Login succsess');
                 } else {
                     viewUtils.showInfoMessage(this.$textAreaDescription,
                         result.status.state,
@@ -95,6 +95,10 @@ export default class RegisterForm {
                     this.$form.addClass(cssValidationClass);
                 }
             }
+        });
+
+        PubSub.subscribe(CONST.events.USER_LOGGED, (e, result) => {
+            $('.register--confirm').removeClass('d-none');
         });
 
         $(document).on('click', (event) => {

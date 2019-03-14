@@ -25,14 +25,16 @@
                 <button class="file-upload-btn btn btn-success" type="button"
                     data-toggle="tooltip" data-placement="top" title="Добавить изображение"
                 ><i class="far fa-image fa-lg"></i></button>
-                
+
                 {{!-- post-upload --}}
-                <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
-                    data-toggle="tooltip" data-placement="top" title="Добавить публикацию"
-                        data-toggle="modal" 
-                        data-post-info="todo: get req to user: "
-                        data-target="#postsGridModal">
+                <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
+                    title="Добавить публикацию"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-post-info="todo: get req to user: ">
+                    <span data-toggle="modal" data-target="#postsGridModal">
                     <i class="far fa-images fa-lg"></i>
+                    </span>
                 </button>
                 <div class="mt-2">
                     {{> image-upload }}
@@ -61,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                
+
                 <div class="row">
                 <div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
                     <ul class="list-unstyled posts-list row"></ul>
