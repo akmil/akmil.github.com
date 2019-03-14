@@ -68,7 +68,7 @@ export default class RegisterForm {
                 console.log('request failed', error);
                 viewUtils.showInfoMessage(this.$textAreaDescription,
                     error.message);
-                console.log('do something');
+                // console.log('do something');
             });
     }
 
@@ -97,7 +97,7 @@ export default class RegisterForm {
             }
         });
 
-        PubSub.subscribe(CONST.events.USER_LOGGED, (e, result) => {
+        PubSub.subscribe(CONST.events.USER_LOGGED, () => {
             $('.register--confirm').removeClass('d-none');
         });
 

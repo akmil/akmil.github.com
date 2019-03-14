@@ -122,17 +122,17 @@ function viewUtils() {
         if (!items.length) {
             return;
         }
-        $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
+        if (cfg.isRenderEmptyOption) {
+            $('<option class="list-group-item py-2 js_empty-subtype" value="---">---</option>').appendTo($(`.${selectClsLogsTaskType}`));
+        }
         items.forEach((name, idx) => {
             $(`<option class="list-group-item py-2" value="${name}">
                 ${getRus(idx)}
             </option>`).appendTo($(`.${selectClsLogsTaskType}`));
         });
-        $(`.${selectClsLogsTaskType}`).on('change', function () {
-            cfg.dropdownOnSelectCb();
-
-            /* logs.init(selectClsLogsTaskType, clsConst); */
-        });
+        // $(`.${selectClsLogsTaskType}`).on('change', function () {
+        //     cfg.isRenderEmptyOption();
+        // });
     }
 
     return {

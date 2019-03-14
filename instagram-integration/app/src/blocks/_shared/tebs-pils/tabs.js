@@ -51,7 +51,7 @@ function getMetaLazy() {
     });
 }
 
-function tabHandler() {
+function tabHandler(isComputeMultyDropdown) {
     $('#v-pills-logs-tab').on('click', (e) => {
         getMetaLazy();
     });

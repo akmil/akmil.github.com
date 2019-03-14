@@ -84,52 +84,35 @@ function onSubmitHandler(e) {
     });
 }
 
-// todo refactor merge with fillDropdownUsers
-// function dropdownOnSelectCb(e) {
-//     const {selectClsLogsTaskType} = logsState;
-//     clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-//     // logsState.activeSubType = clsConst.pathSubType;
-//     $('.js_logs-container').addClass('d-block');
-//     $('option.js_empty-subtype').remove();
-// }
-//
-// function fillDropdownUsers($wrapper, accounts) {
-//     const {selectCls} = logsState;
-//     const label = 'Доступные аккаунты';
-//     $wrapper.empty().addClass('border-light-color');
-//     $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-//     accounts.forEach((name) => {
-//         $(`<option class="list-group-item py-2" value="${name}">
-//             ${name}
-//         </option>`).appendTo($(`.${selectCls}`));
-//     });
-//     $(`.${selectCls}`).on('change', function () {
-//         usernameSelected = $(`.${selectCls} option:selected`).val();
-//         // clsConst.pathSubType = logsState.activeSubType;
-//         logs.init(selectCls, clsConst);
-//     });
-// }
-
 const logsSubtypes = CONST.url.tmTypes.storiesSubT;
 function initLogsTab() {
+    const {selectCls} = logsState;
+    const {selectClsLogsTaskType} = logsState;
+
     function dropdownOnSelectCb(e) {
-        const {selectClsLogsTaskType} = logsState;
         clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-        // logsState.activeSubType = clsConst.pathSubType;
         $('.js_logs-container').addClass('d-block');
         $('option.js_empty-subtype').remove();
     }
+
     function OnChangeSelect() {
-        const {selectCls} = logsState;
-        $(`.${selectCls}`).on('change', function () {
-            usernameSelected = $(`.${selectCls} option:selected`).val();
-            // clsConst.pathSubType = logsState.activeSubType;
+        usernameSelected = $(`.${selectCls} option:selected`).val();
+        logs.init(selectCls, clsConst);
+    }
+    function handleLogsDropdowns() {
+        dropdownOnSelectCb();
+        OnChangeSelect();
+        $(`.${selectClsLogsTaskType}`).on('change', function () {
+            dropdownOnSelectCb();
             logs.init(selectCls, clsConst);
         });
+
+        $(`.${selectCls}`).on('change', function () {
+            OnChangeSelect();
+        });
     }
-    // const textRusArray = ['По списку', 'От всех', 'От невзаимных'];
-    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
-    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
+    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, isRenderEmptyOption: false});
+    tabs.init(handleLogsDropdowns, logsState); // makes double request : OPTION and GET
 }
 
 /**
@@ -250,9 +233,11 @@ export function init() {
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
-    // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
-    //     logs.init(selectCls, clsConst);
-    // });
+    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+        console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
+        console.log('logsSubtypes', logsSubtypes);
+        console.log('accounts', accounts);
+    });
     // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
     //     const result = JSON.parse(res.response);
     //     const imageId = result && result.data && result.data.image_id;
