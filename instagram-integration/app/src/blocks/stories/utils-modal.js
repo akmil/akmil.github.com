@@ -48,7 +48,7 @@ export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
             const {data} = result;
             const modalFooter = modal ? $('.modal-footer', modal) : null;
             const $list = $('.modal-body .posts-list', modal);
-            if (modal) {
+            if (modal && data.posts.length) {
                 fillPosts($list, data.posts);
                 modal.modal('handleUpdate');
                 imageSelectHandler($list, modal, targetButton);

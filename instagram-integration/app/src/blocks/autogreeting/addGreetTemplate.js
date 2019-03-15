@@ -11,7 +11,7 @@ $(`<div class="${mainCls}">
                     title="" data-original-title="Добавить изображение"><i class="far fa-image fa-lg"></i></button>
 
                 <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
-                  title=""
+                  title="Добавить публикацию"
                   data-toggle="tooltip"
                   data-placement="top" 
                   data-post-info="todo: get req to user: " 
