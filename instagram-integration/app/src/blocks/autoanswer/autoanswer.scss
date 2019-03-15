@@ -3,9 +3,14 @@
     .post-upload-btn {
         top: -35px;
         position: relative;
-        padding: 4px 8px;
         width: auto !important;
         min-width: initial !important;
+
+        padding: 0; // todo: refactor me
+        height: 34px; // todo: refactor me
+        span {
+            padding: 8px 4px; // todo: refactor me
+        }
     }
 }
 

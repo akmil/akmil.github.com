@@ -27,6 +27,11 @@ const elSelector = {
     fileUploadBox: '.file-upload',
     addPostBtns: '.js_autoanswer-add-post'
 };
+const logsState = {
+    selectCls: 'js_logs-accounts',
+    selectClsLogsTaskType: 'js_logs-subtypes',
+    wrapperSubtype: '.log-subype'
+};
 
 function initEmojii() {
     emoji({
@@ -34,6 +39,7 @@ function initEmojii() {
         styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
     });
 }
+
 function validateIsEmpty($elements, e) {
     $elements.each(function () {
         if ($(this).val() === '') {
@@ -46,6 +52,7 @@ function validateIsEmpty($elements, e) {
         }
     });
 }
+
 function onSubmitHandler(e) {
     const fields = $(elSelector.fields);
     const keyWords = $el => $el.val()
@@ -125,24 +132,6 @@ function onSubmitHandler(e) {
     });
 }
 
-// function fillListUsers($wrapper, accounts) {
-//     $wrapper.empty().addClass('border-light-color');
-//     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-//     accounts.forEach((name) => {
-//         $(`<option class="list-group-item py-2" value="${name}">
-//             ${name}
-//         </option>`).appendTo($(`.${selectCls}`));
-//     });
-//     $(`.${selectCls}`).on('change', function () {
-//         usernameSelected = $(`.${selectCls} option:selected`).val();
-//         logs.init(selectCls, clsConst);
-//     });
-// }
-const logsState = {
-    selectCls: 'js_logs-accounts',
-    selectClsLogsTaskType: 'js_logs-subtypes',
-    wrapperSubtype: '.log-subype'
-};
 function initLogsTab() {
     function OnChangeSelect() {
         const {selectCls} = logsState;
@@ -207,6 +196,8 @@ function stepReducer(stepNumber, state) {
             console.log('default', stepNumber);
     }
 }
+
+/* TODO: refactor -> move initModalHandler to separate file */
 let targetButton = {};
 
 function loadMoreHandler(getPosts) {
@@ -230,6 +221,8 @@ function initModalHandler() {
         modal.find('.modal-title').text('Публикации');
     });
 }
+
+/* TODO: refactor -> move initModalHandler to separate file END*/
 
 export function init() {
     if ($(clsConst.currentPageCls).length) {

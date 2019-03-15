@@ -51,6 +51,7 @@ function updateProgress(evt, progress) {
         }
     }
 }
+
 function isFileTypeOk(acceptedFile) {
     return acceptedFile.type === 'image/jpeg';
 }

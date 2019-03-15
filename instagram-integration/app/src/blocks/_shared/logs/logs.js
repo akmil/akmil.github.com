@@ -104,7 +104,7 @@ function fillListMeta($list, dataArray, isRuns) {
         const {level, value} = item;
         $(`<li class="list-group-item p-0 py-2">
               <div class="media-body d-flex">
-                  <div class="col task-type ${(level === 'ERROR') ? 'text-danger' : ''}">
+                  <div class="col task-type ${(level === 'ERROR') ? 'text-danger' : ''} ${(level === 'WARN') ? 'text-warning' : ''}">
                       ${(value) ? `${value}` : ''}
                   </div>
               </div>
@@ -119,9 +119,9 @@ function fillListMeta($list, dataArray, isRuns) {
 }
 
 function tabStopReqHandler() {
-    const $allRsideTabs = $('#v-pills-tab');
-    $allRsideTabs.off();
-    $allRsideTabs.on('click', 'a', (e) => {
+    const $allAsideTabs = $('#v-pills-tab');
+    $allAsideTabs.off();
+    $allAsideTabs.on('click', 'a', (e) => {
         e.preventDefault();
         const tab = $(e.target);
         if (tab.attr('id') !== 'v-pills-logs-tab') {

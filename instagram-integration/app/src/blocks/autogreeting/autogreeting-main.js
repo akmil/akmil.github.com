@@ -4,6 +4,9 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as chatBotStatus from './autogreeting-status';
 import * as chatBotLogs from '../_shared/logs/logs';
+import {emoji} from '../../common/js-services/emoji';
+import * as imageUpload from '../_shared/image-upload/image-upload';
+import {getPosts} from '../stories/utils-modal';
 
 let usernameSelected = '';
 // let userListInstagram = [];
@@ -17,6 +20,9 @@ const clsConst = {
     paginationPgNumber: '.page-number',
     pathType: CONST.url.tmTypes.autogreetT,
     pathSubType: CONST.url.tmTypes.autogreetSubT[0]
+};
+const elSelector = {
+    fields: '.autogreeting-text-fields'
 };
 const state = {
     user_default_config: {
@@ -34,8 +40,6 @@ function onSubmitHandler(e) {
     const reqBody = [];
     fields.each((idx, item) => {
         const message = $(item).find('textarea.answer-words').val();
-        // const answer = $(item).find('textarea.chat-messages').val();
-        // reqBody.push({'key_words': keyWord, answer});
         reqBody.push({'answer': message});
     });
     const nReqBody = {
@@ -94,6 +98,17 @@ function initLogsTab() {
     tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
+function initEmojii() {
+    emoji({
+        page: clsConst.currentPageCls,
+        styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
+    });
+}
+
+function removeExtraTextFields() {
+    $(`${elSelector.fields}:not(:first-child)`).remove();
+}
+
 /**
  * Init header
  */
@@ -107,9 +122,11 @@ function initHandlers() {
     </div>`);
 
     $('.js_add-autoanswer').on('click', (e) => {
-        const lastTextField = $('.autoanswer-text-fields').last();
+        const lastTextField = $('.autogreeting-text-fields').last();
         const msg = 'Введите приветствие';
         tplTextField(msg).insertAfter(lastTextField);
+        initEmojii();
+        imageUpload.init();
     });
 
     // alert close
@@ -117,6 +134,7 @@ function initHandlers() {
         console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        removeExtraTextFields();
     });
 
     // alert close
@@ -124,6 +142,7 @@ function initHandlers() {
         console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+        removeExtraTextFields();
     });
     // $('#v-pills-logs-tab').on('click', (e) => {
         // at this point of time setInterval is working
@@ -204,6 +223,33 @@ function stepReducer(stepNumber, state) {
     }
 }
 
+/* TODO: refactor -> move initModalHandler to separate file */
+let targetButton = {};
+
+function loadMoreHandler(getPosts) {
+    $('#load-more').on('click', (e) => {
+        const $btn = $(e.target);
+        const cursor = $btn.attr('cursor');
+        console.log('load more click');
+        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
+    });
+}
+
+function initModalHandler() {
+    const modal = $('#postsGridModal');
+    modal.on('show.bs.modal', function (event) {
+        targetButton = $(event.relatedTarget); // Button that triggered the modal
+        // const recipient = button.data('post-info'); // Extract info from data-* attributes
+        // console.log(recipient);
+        // Update the modal's content.
+        const modal = $(this);
+        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text('Публикации');
+    });
+}
+
+/* TODO: refactor -> move initModalHandler to separate file END*/
+
 export function init() {
     if ($(clsConst.currentPageCls).length) {
         const wizardCfg = {
@@ -222,5 +268,9 @@ export function init() {
             // console.log(accounts);
             chatBotLogs.init(selectCls, clsConst);
         });
+
+        initModalHandler();
+        initEmojii();
+        imageUpload.init();
     }
 }
