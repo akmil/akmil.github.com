@@ -7,6 +7,7 @@ import * as chatBotLogs from '../_shared/logs/logs';
 import {emoji} from '../../common/js-services/emoji';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {getPosts} from '../stories/utils-modal';
+import {tplTextFieldGreet} from './addGreetTemplate';
 
 let usernameSelected = '';
 // let userListInstagram = [];
@@ -22,7 +23,8 @@ const clsConst = {
     pathSubType: CONST.url.tmTypes.autogreetSubT[0]
 };
 const elSelector = {
-    fields: '.autogreeting-text-fields'
+    fields: '.autogreeting-text-fields',
+    fileUploadBox: '.file-upload'
 };
 const state = {
     user_default_config: {
@@ -31,16 +33,17 @@ const state = {
 };
 
 function onSubmitHandler(e) {
-    const fields = $('.autoanswer-text-fields');
-    // const keyWords = $el => $el.val()
-    //     .trim()
-    //     .replace(/ /g, '')
-    //     .split(',')
-    //     .filter(i => i.length > 0);
+    const fields = $(elSelector.fields);
     const reqBody = [];
     fields.each((idx, item) => {
         const message = $(item).find('textarea.answer-words').val();
-        reqBody.push({'answer': message});
+        const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
+        reqBody.push({
+            'answer': message,
+            'attachment': imageId ? {
+                'image_id': imageId
+            } : undefined
+        });
     });
     const nReqBody = {
         'username': usernameSelected || 'the_rostyslav',
@@ -113,18 +116,10 @@ function removeExtraTextFields() {
  * Init header
  */
 function initHandlers() {
-    const tplTextField = (msg) => $(`<div class="autoanswer-text-fields mt-2">
-        <div class="row">
-            <div class="col">
-                <textarea class="form-control answer-words" rows="4" placeholder="${msg}"></textarea>
-            </div>
-        </div>
-    </div>`);
 
     $('.js_add-autoanswer').on('click', (e) => {
-        const lastTextField = $('.autogreeting-text-fields').last();
-        const msg = 'Введите приветствие';
-        tplTextField(msg).insertAfter(lastTextField);
+        const lastTextField = $(elSelector.fields).last();
+        tplTextFieldGreet(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
     });
@@ -272,5 +267,12 @@ export function init() {
         initModalHandler();
         initEmojii();
         imageUpload.init();
+        window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
+            const {response} = res;
+            const result = (response.length) ? JSON.parse(response) : '';
+            const imageId = result && result.data && result.data.image_id;
+            $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
+            console.log('image_loaded', res);
+        });
     }
 }

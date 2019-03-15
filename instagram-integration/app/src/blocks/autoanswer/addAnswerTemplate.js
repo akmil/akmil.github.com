@@ -1,5 +1,5 @@
-export const tplTextField = () =>
-$(`<div class="autoanswer-text-fields mt-2">
+export const tplTextField = (mainCls) =>
+$(`<div class="${mainCls} mt-2">
     <div class="row">
         <div class="col">
             <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова на которые будет срабатывать автоответ"></textarea>

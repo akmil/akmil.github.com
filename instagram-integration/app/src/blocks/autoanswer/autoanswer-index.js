@@ -156,7 +156,7 @@ function initHandlers() {
 
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
-        tplTextField().insertAfter(lastTextField);
+        tplTextField(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
     });

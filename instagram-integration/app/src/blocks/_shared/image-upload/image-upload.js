@@ -154,5 +154,6 @@ export function init() {
     $removeImgBtn.on('click', (e) => {
         const $container = $(e.target).closest('.col').find(fileUploadBox);
         removeUpload($container);
+        $container.removeAttr('attached-img-id');
     });
 }
