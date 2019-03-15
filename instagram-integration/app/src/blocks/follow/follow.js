@@ -5,8 +5,9 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
-import * as tabs from '../_shared/tebs-pils/tabs';
-import * as logs from '../_shared/logs/logs';
+// import * as tabs from '../_shared/tebs-pils/tabs';
+// import * as logs from '../_shared/logs/logs';
+import {initLogsTab} from '../_shared/logs/logs-tabs';
 
 const state = {
     username: '',
@@ -313,29 +314,9 @@ const clsConst = {
     pathType: CONST.url.tmTypes.followingT,
     pathSubType: CONST.url.tmTypes.followingSubT[0]
 };
-const logsSubtypes = CONST.url.tmTypes.followingSubT;
-const {addDropdown} = viewUtils;
-const logsState = CONST.logsState;
-// todo refactor merge with fillDropdownUsers
-function dropdownOnSelectCb(e) {
-    const {selectClsLogsTaskType} = logsState;
-    clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-    // logsState.activeSubType = clsConst.pathSubType;
-    $('.js_logs-container').addClass('d-block');
-    $('option.js_empty-subtype').remove();
-}
 
-function initLogsTab() {
-    function OnChangeSelect() {
-        const {selectCls} = logsState;
-        $(`.${selectCls}`).on('change', function () {
-            usernameSelected = $(`.${selectCls} option:selected`).val();
-            // clsConst.pathSubType = logsState.activeSubType;
-            logs.init(selectCls, clsConst);
-        });
-    }
-    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
-    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
+function setUserNameCb(_usernameSelected) {
+    usernameSelected = _usernameSelected;
 }
 
 /*
@@ -349,6 +330,7 @@ function fixStepIndicator(n) {
     x[n].className += " active";
 }*/
 
+// TODO : use from wizard
 export function modifyAccList() {
     // const radioBtn = (idx) => `<div class="col custom-control custom-radio js_user-radio">
     //         <input type="radio" name="userAccountRadio" id="customRadio-${idx}" class="custom-control-input" value="">
@@ -449,7 +431,10 @@ export function init() {
         };
         followStatusBySubtype.init({isInCorrectPage, initialPath});
         initSteps('.follow-form');
-        initLogsTab();
+        console.log(clsConst.currentPageCls);
+        initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb});
+
+        // TODO : use wizard.init()
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
             modifyAccList();
             // console.log('modifyAccList');

@@ -13,8 +13,10 @@ export function initMenu() {
         'messages',
         'chat-bot'
     ];
+    const pathName = window.location.pathname;
     urlToCheck.forEach(item => {
-        if (window.location.pathname === `/${item}.html`) {
+        const isActiveUrl = (pathName === `/instagram-integration/${item}.html` || pathName === `/${item}.html`);
+        if (isActiveUrl) {
             $(`nav.aside-burger-menu a[href*="/${item}"]`)
                 .addClass('text-info')
                 .removeClass('text-light');

@@ -130,9 +130,11 @@ function viewUtils() {
                 ${getRus(idx)}
             </option>`).appendTo($(`.${selectClsLogsTaskType}`));
         });
-        // $(`.${selectClsLogsTaskType}`).on('change', function () {
-        //     cfg.isRenderEmptyOption();
-        // });
+        if (cfg.dropdownOnSelectCb) {
+            $(`.${selectClsLogsTaskType}`).on('change', function () {
+                cfg.dropdownOnSelectCb();
+            });
+        }
     }
 
     return {

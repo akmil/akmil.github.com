@@ -2,12 +2,13 @@ import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 // import {addDropdown, getValByCommaSeparator, fillRadioGroupList} from '../../common/js-services/view';
-const {addDropdown, getValByCommaSeparator, fillRadioGroupList} = viewUtils;
+const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
-import * as tabs from '../_shared/tebs-pils/tabs';
-import * as logs from '../_shared/logs/logs';
+// import * as tabs from '../_shared/tebs-pils/tabs';
+// import * as logs from '../_shared/logs/logs';
+import {initLogsTab} from '../_shared/logs/logs-tabs';
 
 let usernameSelected = '';
 const logsState = CONST.logsState;
@@ -84,35 +85,12 @@ function onSubmitHandler(e) {
     });
 }
 
-const logsSubtypes = CONST.url.tmTypes.storiesSubT;
-function initLogsTab() {
-    const {selectCls} = logsState;
-    const {selectClsLogsTaskType} = logsState;
+function setUserNameCb(_usernameSelected) {
+    usernameSelected = _usernameSelected;
+}
 
-    function dropdownOnSelectCb(e) {
-        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-        $('.js_logs-container').addClass('d-block');
-        $('option.js_empty-subtype').remove();
-    }
-
-    function OnChangeSelect() {
-        usernameSelected = $(`.${selectCls} option:selected`).val();
-        logs.init(selectCls, clsConst);
-    }
-    function handleLogsDropdowns() {
-        dropdownOnSelectCb();
-        OnChangeSelect();
-        $(`.${selectClsLogsTaskType}`).on('change', function () {
-            dropdownOnSelectCb();
-            logs.init(selectCls, clsConst);
-        });
-
-        $(`.${selectCls}`).on('change', function () {
-            OnChangeSelect();
-        });
-    }
-    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, isRenderEmptyOption: false});
-    tabs.init(handleLogsDropdowns, logsState); // makes double request : OPTION and GET
+function setUserNameFirstStep(state) {
+    usernameSelected = state.username;
 }
 
 /**
@@ -120,6 +98,7 @@ function initLogsTab() {
  */
 function initHandlers() {
 
+    // radio-group step 2
     $('.js_get-stories-type input[type=radio]').on('click', (e) => {
         const value = $(e.target).attr('value');
         state.subtype = value.toUpperCase();
@@ -133,14 +112,12 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    // alert close
+    // alert error close
     $('.form-submit-finish--error .close').on('click', function () {
         // console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
-
-    initLogsTab();
 }
 
 function renderTaskMode(defaultCfg) {
@@ -181,10 +158,6 @@ function getConfig() {
     });
 }
 
-function setUserName(state) {
-    usernameSelected = state.username;
-}
-
 function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
     if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
@@ -203,11 +176,10 @@ function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
             // console.log(state, stepNumber);
-            setUserName(state);
+            setUserNameFirstStep(state);
             break;
         case 1:
             // console.log(state, stepNumber);
-            // setSubtype(state);
             getConfig();
             break;
         case 2:
@@ -218,6 +190,7 @@ function stepReducer(stepNumber, state) {
             console.log('default', stepNumber);
     }
 }
+
 export function init() {
     const isInCurrentPage = $(clsConst.currentPageCls).length;
     if (!isInCurrentPage) {
@@ -230,19 +203,13 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
+    initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.storiesSubT, clsConst, setUserNameCb});
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
-    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
-        console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
-        console.log('logsSubtypes', logsSubtypes);
-        console.log('accounts', accounts);
-    });
-    // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
-    //     const result = JSON.parse(res.response);
-    //     const imageId = result && result.data && result.data.image_id;
-    //     $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
-    //     console.log('image_loaded', res);
+    // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+    //     console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
+    //     console.log('logsSubtypes', logsSubtypes);
+    //     console.log('accounts', accounts);
     // });
-
 }

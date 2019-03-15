@@ -1,16 +1,15 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
-const {addDropdown, fillRadioGroupList} = viewUtils;
+const {fillRadioGroupList} = viewUtils;
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as tabStatus from './unfollow-status';
-import * as tabs from '../_shared/tebs-pils/tabs';
-import * as logs from '../_shared/logs/logs';
+import {initLogsTab} from '../_shared/logs/logs-tabs';
 
 let usernameSelected = '';
-const logsState = CONST.logsState;
+const logsSubtypes = CONST.url.tmTypes.unfollowingSubT;
 const clsConst = {
     currentPageCls: '.unfollow-page',
     tasksList: '.log-tasks',
@@ -41,14 +40,6 @@ function onSubmitHandler(e) {
 
     const body = {
         ...state,
-        // user_default_config: {
-        //     ...state.user_default_config,
-        //     criteria: {
-        //     }
-        // },
-        // state['user_custom_config'].attachment = {
-        //     'list_id': $('.add-file .file-upload-container').attr('attached-txt-id')
-        // };
         user_custom_config: {
             attachment: {
                 'list_id': 'id_static'
@@ -85,29 +76,6 @@ function onSubmitHandler(e) {
     });
 }
 
-const logsSubtypes = CONST.url.tmTypes.unfollowingSubT;
-
-function initLogsTab() {
-    function dropdownOnSelectCb(e) {
-        const {selectClsLogsTaskType} = logsState;
-        clsConst.pathSubType = $(`.${selectClsLogsTaskType} option:selected`).val();
-        // logsState.activeSubType = clsConst.pathSubType;
-        $('.js_logs-container').addClass('d-block');
-        $('option.js_empty-subtype').remove();
-    }
-    function OnChangeSelect() {
-        const {selectCls} = logsState;
-        $(`.${selectCls}`).on('change', function () {
-            usernameSelected = $(`.${selectCls} option:selected`).val();
-            // clsConst.pathSubType = logsState.activeSubType;
-            logs.init(selectCls, clsConst);
-        });
-    }
-    const textRusArray = ['По списку', 'От всех', 'От невзаимных'];
-    addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb, textRusArray});
-    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
-}
-
 /**
  * Init Handlers
  */
@@ -133,6 +101,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 }
+
 function onSuccessFileUploadCb() {
     const {wizardForm} = elSelector;
 
@@ -153,7 +122,7 @@ function addUploadButton(subtype) {
         }
     }
     toggleAddTextBtn(subtype);
-    console.log('addUploadButton', CONST.url.tmTypes.unfollowingSubT[0]);
+    // console.log('addUploadButton', CONST.url.tmTypes.unfollowingSubT[0]);
 }
 
 function renderTaskMode(defaultCfg) {
@@ -195,7 +164,11 @@ function getConfig() {
     });
 }
 
-function setUserName(state) {
+function setUserNameCb(_usernameSelected) {
+    usernameSelected = _usernameSelected;
+}
+
+function setUserNameFirstStep(state) {
     usernameSelected = state.username;
 }
 
@@ -215,11 +188,10 @@ function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
             // console.log(state, stepNumber);
-            setUserName(state);
+            setUserNameFirstStep(state);
             break;
         case 1:
             // console.log(state, stepNumber);
-            // setSubtype(state);
             getConfig();
             break;
         case 2:
@@ -244,13 +216,11 @@ export function init() {
     wizardForm.init(wizardCfg);
     initHandlers();
     attachTxtFileHandler('.file-upload-container', onSuccessFileUploadCb);
-    initLogsTab();
+    const textRusArray = ['По списку', 'От всех', 'От невзаимных'];
+    initLogsTab({logsState: CONST.logsState, logsSubtypes, clsConst, setUserNameCb, textRusArray});
     tabStatus.init({
         isInStoriesPage: isInCurrentPage
     });
-    // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
-    //     logs.init(selectCls, clsConst);
-    // });
     // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
     //     const result = JSON.parse(res.response);
     //     const imageId = result && result.data && result.data.image_id;

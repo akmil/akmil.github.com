@@ -119,11 +119,13 @@ function fillListMeta($list, dataArray, isRuns) {
 }
 
 function tabStopReqHandler() {
-    $('#v-pills-tab').on('click', 'a', (e) => {
+    const $allRsideTabs = $('#v-pills-tab');
+    $allRsideTabs.off();
+    $allRsideTabs.on('click', 'a', (e) => {
         e.preventDefault();
         const tab = $(e.target);
         if (tab.attr('id') !== 'v-pills-logs-tab') {
-            console.log('stop req');
+            // console.log('stop req');
             if (intervalId) {
                 clearInterval(intervalId);
             }
