@@ -104,7 +104,7 @@ function viewUtils() {
     function addDropdown($wrapper, items, cfg) {
         const {textRusArray, logsState} = cfg;
         const {selectClsLogsTaskType} = logsState;
-        const label = 'Доступные задания';
+        const label = 'Выберите тип';
         const getRus = (idx) => {
             const isTextUnfollow = textRusArray && !!textRusArray.length;
             switch (idx) {

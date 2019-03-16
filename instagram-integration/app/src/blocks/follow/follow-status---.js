@@ -29,7 +29,7 @@ function fillListMeta($list, dataArray, isRuns) {
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">
-                <p>В этом разделе нет ни одной задачи.</p>
+                <p>Нет ни одной задачи.</p>
             </li>`).appendTo($list);
         return;
     }
@@ -90,7 +90,7 @@ function fillListMeta($list, dataArray, isRuns) {
         }
         if (!$('li', $list).length) {
             $(`<li class="list-group-item py-2" data-task-id="${task_id}">
-                <p>В этом разделе нет ни одной задачи.</p>
+                <p>Нет ни одной задачи.</p>
             </li>`).appendTo($list);
         }
     });

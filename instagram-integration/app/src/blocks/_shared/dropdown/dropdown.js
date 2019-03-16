@@ -21,7 +21,7 @@ function dropDown() {
                 default: return 'default';
             }
         };
-        const label = 'Доступные задания';
+        const label = 'Выберите тип';
         $wrapper.empty().addClass('border-light-color');
         $(`<div class="">${label}</div><select name="task-subtype" class="${selectClsLogsTaskType}"></select>`).appendTo($wrapper);
         if (!items.length) {

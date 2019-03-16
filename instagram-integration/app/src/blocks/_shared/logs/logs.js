@@ -94,7 +94,7 @@ function fillListMeta($list, dataArray, isRuns) {
     $list.empty();
     if (!items.length) {
         $(`<li class="list-group-item py-2">
-            <p>В этом разделе нет ни одной задачи.</p>
+            <p>Нет ни одного лога.</p>
         </li>`).appendTo($list);
         clearPagination($wrapperPagination);
         return;
@@ -112,7 +112,7 @@ function fillListMeta($list, dataArray, isRuns) {
 
         if (!$('li', $list).length) {
             $(`<li class="list-group-item py-2" >
-                <p>В этом разделе нет ни одной задачи.</p>
+                <p>Нет ни одного лога.</p>
             </li>`).appendTo($list);
         }
     });

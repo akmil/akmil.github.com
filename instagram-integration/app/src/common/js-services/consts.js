@@ -4,7 +4,7 @@ export const CONST = {
             followingT: 'FOLLOWING',
             followingSubT: ['FOLLOWING_BY_LIST', 'FOLLOWING_BY_ACTIVE_AUDIENCE'],
             unfollowingT: 'UNFOLLOWING',
-            unfollowingSubT: ['UNFOLLOWING_BY_LIST', 'UNFOLLOWING_BY_ALL', 'UNFOLLOWING_BY_NON_RECIPRECOL'],
+            unfollowingSubT: ['UNFOLLOWING_BY_LIST', 'UNFOLLOWING_BY_ALL', 'UNFOLLOWING_BY_NON_RECIPROCAL'],
             chatBotT: 'CHAT_BOT',
             chatBotSubT: ['DEFAULT_CHAT_BOT'],
             autoanswerT: 'AUTO_ANSWER',
