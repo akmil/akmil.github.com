@@ -87,7 +87,7 @@ export function attachTxtFileHandler(_fileUploadBox, onSuccessFileUploadCb) {
             $(this).prev().text(`Выбрано файлов: ${$(this)[0].files.length}`);
             readURL($(this)[0]);
         } else {
-            $(this).prev().text('Выберите файл');
+            $(this).prev().text('Выберете файл');
         }
     });
     window.PubSub.subscribe(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, (e, res) => {
