@@ -13,7 +13,7 @@ function dropDown() {
             const isTextRusArray = textRusArray && !!textRusArray.length;
             switch (idx) {
                 case 0 :
-                    return (isTextRusArray) ? textRusArray[idx] : 'По подписчикам';
+                    return (isTextRusArray) ? textRusArray[idx] : 'По списку';
                 case 1 :
                     return (isTextRusArray) ? textRusArray[idx] : 'По активной аудитории конкурентов';
                 case 2 :

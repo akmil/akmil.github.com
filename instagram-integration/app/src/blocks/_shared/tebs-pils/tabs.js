@@ -29,7 +29,7 @@ const fillDropdownUsersCfg = {};
 
 function fillDropdownUsers({$wrapper, logsState, OnChangeSelectCb}, accounts) {
     const {selectCls} = logsState;
-    const label = 'Доступные аккаунты';
+    const label = 'Выберите аккаунты';
     $wrapper.empty().addClass('border-light-color');
     $(`<div class="">${label}</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
     accounts.forEach((name) => {
