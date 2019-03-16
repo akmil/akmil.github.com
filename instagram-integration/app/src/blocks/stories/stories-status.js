@@ -31,7 +31,8 @@ export function init({isInStoriesPage}) {
     }
     // toDO : refactor
     // render status dropdown
-    dropDown.addDropdown(logsStateStatus.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState: logsStateStatus, dropdownOnSelectCb});
+    const textRusArray = ['По подписчикам', 'По активной аудитории конкурентов'];
+    dropDown.addDropdown(logsStateStatus.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState: logsStateStatus, dropdownOnSelectCb, textRusArray});
 
     // getTasksData(wrappers, path);
     window.PubSub.subscribe(CONST.events.tasks.NEW_TASK_CREATED, (eventName, data) => {
