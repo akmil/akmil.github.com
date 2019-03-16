@@ -163,8 +163,11 @@ function addTextArea(stepNumber) {
     if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
         const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
         const tpl = `<div class="row">
-            <label class="">Конкуренты</label>
-            <textarea class="form-control stories-competitors mb-2" rows="1"></textarea></div>`;
+                <div class="form-group col-md-6 col-sm-6">
+                    <label class="">Конкуренты</label>
+                    <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
+                </div>
+            </div>`;
         if (!$('.stories-competitors').length) {
             $(fieldLast).find('.form-bottom>.row').after(tpl);
         }
