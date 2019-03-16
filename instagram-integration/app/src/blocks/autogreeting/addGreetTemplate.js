@@ -4,7 +4,7 @@ $(`<div class="${mainCls}">
             <div class="col">
                 <div>                
                     <textarea class="form-control answer-words" rows="4" 
-                        data-emoji-picker="true" placeholder="Введите текст, который будет отправлен новому подписчику"></textarea>    
+                        data-emoji-picker="true" placeholder="Введите сообщение"></textarea>    
                 </div>
 
                 <button class="file-upload-btn btn btn-success" type="button" data-toggle="tooltip" data-placement="top" 
