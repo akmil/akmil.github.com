@@ -432,7 +432,8 @@ export function init() {
         followStatusBySubtype.init({isInCorrectPage, initialPath});
         initSteps('.follow-form');
         console.log(clsConst.currentPageCls);
-        initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb});
+        const textRusArray = ['По списку', 'По активной аудитории конкурентов'];
+        initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb, textRusArray});
 
         // TODO : use wizard.init()
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

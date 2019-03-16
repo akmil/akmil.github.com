@@ -6,11 +6,10 @@ import * as chatBotStatus from './autogreeting-status';
 import * as chatBotLogs from '../_shared/logs/logs';
 import {emoji} from '../../common/js-services/emoji';
 import * as imageUpload from '../_shared/image-upload/image-upload';
-import {getPosts} from '../stories/utils-modal';
+import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextFieldGreet} from './addGreetTemplate';
 
 let usernameSelected = '';
-// let userListInstagram = [];
 const selectCls = 'js_logs-accounts';
 const speedType = '.js_autogreeting-speed';
 const clsConst = {
@@ -112,6 +111,30 @@ function removeExtraTextFields() {
     $(`${elSelector.fields}:not(:first-child)`).remove();
 }
 
+/* TODO: refactor -> move initModalHandler to separate file */
+let targetButton = {};
+
+function loadMoreHandler(getPosts) {
+    $('#load-more').on('click', (e) => {
+        const $btn = $(e.target);
+        const cursor = $btn.attr('cursor');
+        console.log('load more click');
+        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
+    });
+}
+
+function initModalHandler() {
+    $('.js_open-posts-gridModal').on('click', function (event) {
+        targetButton = $(this); // Button that triggered the modal
+        // Update the modal's content
+        const modal = $('#postsGridModal');
+        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text('Публикации');
+    });
+}
+
+/* TODO: refactor -> move initModalHandler to separate file END*/
+
 /**
  * Init header
  */
@@ -122,6 +145,9 @@ function initHandlers() {
         tplTextFieldGreet(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
+        initModalHandler();
     });
 
     // alert close
@@ -217,33 +243,6 @@ function stepReducer(stepNumber, state) {
             console.log('default', stepNumber);
     }
 }
-
-/* TODO: refactor -> move initModalHandler to separate file */
-let targetButton = {};
-
-function loadMoreHandler(getPosts) {
-    $('#load-more').on('click', (e) => {
-        const $btn = $(e.target);
-        const cursor = $btn.attr('cursor');
-        console.log('load more click');
-        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
-    });
-}
-
-function initModalHandler() {
-    const modal = $('#postsGridModal');
-    modal.on('show.bs.modal', function (event) {
-        targetButton = $(event.relatedTarget); // Button that triggered the modal
-        // const recipient = button.data('post-info'); // Extract info from data-* attributes
-        // console.log(recipient);
-        // Update the modal's content.
-        const modal = $(this);
-        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
-        modal.find('.modal-title').text('Публикации');
-    });
-}
-
-/* TODO: refactor -> move initModalHandler to separate file END*/
 
 export function init() {
     if ($(clsConst.currentPageCls).length) {

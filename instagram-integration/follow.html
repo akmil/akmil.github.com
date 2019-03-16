@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -126,14 +126,14 @@
               <div class="container-fluid follow-page">
             
                 <h3>Подписки</h3>
-                <p>Система будет подписываеться на профили по заданным критериям.</p>
+                <p>Система будет подписываться на пользователей по заданным настройкам.</p>
             
                   <div class="container-fluid follow">
                       <div class="row">
                           <div class="col-3">
                               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                   <a class="nav-link active" id="v-pills-create-task-tab" data-toggle="pill" href="#create-task" role="tab" aria-controls="create-task" aria-selected="false">Создать задание</a>
-                                  <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#all" role="tab" aria-controls="all" aria-selected="true">Задания</a>
+                                  <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#all" role="tab" aria-controls="all" aria-selected="true">История заданий</a>
                                   <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#logs" role="tab" aria-controls="logs" aria-selected="true">Логи</a>
                               </div>
                           </div>
@@ -145,7 +145,7 @@
                                           <div class="subtype-select-wrapper"></div>
                                       </div>
                                       <div class="tasks tasks-all--box">
-                                          <h3>Задания</h3>
+                                          <h3>История заданий</h3>
                                           <ul class="tasks-all list-unstyled"></ul>
                                       </div>
                                       
@@ -209,7 +209,7 @@
                                                       <fieldset>
                                                           <div class="form-top">
                                                               <div class="form-top-left">
-                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Тип</h3>
+                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберете тип</h3>
                                                                   <p>Шаг 2/5</p>
                                                               </div>
                                                           </div><div class="form-bottom">
@@ -233,7 +233,7 @@
                                                           <div class="add-file d-none">
                                                               <div class="form-top">
                                                                   <div class="form-top-left">
-                                                                      <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Добавте файл</h3>
+                                                                      <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Добавьте файл с пользователями</h3>
                                                                       <p>Шаг 3/5</p>
                                                                   </div>
                                                               </div>
@@ -242,7 +242,7 @@
                                                                   <div class="row">
                                                                       <div class="form-group col-md-8 col-sm-8">
                                                                           <div class="file-upload-container">
-                                                                              <label for="txt-file" class="label-chous btn btn-success">Выберите файл</label>
+                                                                              <label for="txt-file" class="label-chous btn btn-success">Добавить</label>
                                                                               <input type="file" class="input-txt-file" id="txt-file" name="txt-file"/>
                                                                           </div>
                                                                       </div>
@@ -273,15 +273,12 @@
                                                       <fieldset>
                                                           <div class="form-top">
                                                               <div class="form-top-left">
-                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Скорость</h3>
+                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите режим</h3>
                                                                   <p>Шаг 4/5</p>
                                                               </div>
                                                           </div>
                                                           <div class="form-bottom">
-                                                              <div class="form-group row col-lg-12">
-                                                                  <label class="col-3 col-form-label">Скорость</label>
-                                                                  <div class="col-9 js_follow-speed">
-                                                                  </div>
+                                                              <div class="form-group row col-lg-12 js_follow-speed">
                                                               </div>
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
                                                               <button type="button" class="btn btn-blue btn-next">Дальше</button>

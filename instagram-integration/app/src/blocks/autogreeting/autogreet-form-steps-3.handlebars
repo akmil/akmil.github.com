@@ -17,11 +17,12 @@
 
                 {{!-- post-upload --}}
                 <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
-                        title="Добавить публикацию"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        data-post-info="todo: get req to user: ">
-                    <span data-toggle="modal" data-target="#postsGridModal">
+                    title="Добавить публикацию"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-post-info="todo: get req to user: ">
+                    <span class="js_open-posts-gridModal"
+                        data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
                     <i class="far fa-images fa-lg"></i>
                     </span>
                 </button>

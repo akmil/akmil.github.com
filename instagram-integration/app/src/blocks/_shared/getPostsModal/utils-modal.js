@@ -1,5 +1,5 @@
 // import {CONST} from '../../common/js-services/consts';
-import UserTaskManager from '../../common/js-services/api-task-manager';
+import UserTaskManager from '../../../common/js-services/api-task-manager';
 
 /* ---- modal*/
 export function fillPosts($list, items, isAppendToList) {
@@ -33,11 +33,16 @@ function hidePagination(modalFooter) {
 function imageSelectHandler($list, modal, targetButton) {
     $('li', $list).on('click', (e) => {
         const $btnLi = $(e.target).closest('li');
+        // const uploadedImgFromPosts = $btnLi.find('img').html();
         const imgId = $btnLi.attr('data-img-id');
         targetButton.attr('data-post-img-id', imgId);
         console.log('click', imgId, modal);
         // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_POST_SELECTED, imgId);
         modal.modal('hide');
+        if ($('.js_uploaded-img-from-posts').length) {
+            $('.js_uploaded-img-from-posts').empty();
+        }
+        targetButton.closest('.col').append($btnLi.find('img')).wrap('<div class="js_uploaded-img-from-posts"></div>');
     });
 }
 
@@ -48,8 +53,19 @@ export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
             const {data} = result;
             const modalFooter = modal ? $('.modal-footer', modal) : null;
             const $list = $('.modal-body .posts-list', modal);
-            if (modal && data.posts.length) {
+            if (!data.posts.length) {
+                // show message 'no posts found'
+                // $('[data-toggle="popover"]').popover();
+                targetButton.popover('show');
+                setTimeout(() => {
+                    targetButton.popover('hide');
+                }, 4000);
+                return;
+            }
+
+            if (modal) {
                 fillPosts($list, data.posts);
+                modal.modal('show');
                 modal.modal('handleUpdate');
                 imageSelectHandler($list, modal, targetButton);
             } else if (data.posts) {
@@ -63,6 +79,9 @@ export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
             } else {
                 hidePagination($('.modal-footer', modal));
             }
+
+        } else {
+            // show message error
         }
     });
 }

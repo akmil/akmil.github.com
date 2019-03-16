@@ -37,28 +37,12 @@ $border-radius-follow: 4px;
     }
 
     input[type="file"] {
-        height: 5px;
+        height: 0;
+        width: 0;
         margin: 0;
-        padding: 0 20px;
+        padding: 0;
         vertical-align: bottom;
-        background: #f8f8f8;
-        border: 3px solid #ddd;
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 30px;
-        color: #888;
-        -moz-border-radius: $border-radius-follow;
-        -webkit-border-radius: $border-radius-follow;
-        border-radius: $border-radius-follow;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        -o-transition: $transition-follow;
-        -moz-transition: $transition-follow;
-        -webkit-transition: $transition-follow;
-        -ms-transition: $transition-follow;
-        transition: $transition-follow;
+        border: 0;
     }
 
     input[type=radio] {

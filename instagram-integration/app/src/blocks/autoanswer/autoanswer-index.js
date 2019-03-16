@@ -6,7 +6,7 @@ import * as autoanswerStatus from './autoanswer-status';
 import * as logs from '../_shared/logs/logs';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
-import {getPosts} from './utils-modal';
+import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
 
 let usernameSelected = '';
@@ -149,16 +149,59 @@ function removeExtraTextFields() {
     $(`${elSelector.fields}:not(:first-child)`).remove();
 }
 
+/* TODO: refactor -> move initModalHandler to separate file, remove initModalHandler in autogreeting-main.js */
+let targetButton = {};
+
+function loadMoreHandler(getPosts) {
+    $('#load-more').on('click', (e) => {
+        const $btn = $(e.target);
+        const cursor = $btn.attr('cursor');
+        console.log('load more click');
+        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
+    });
+}
+
+function initModalHandler() {
+
+    /*
+    * .on('show.bs.modal') Exemple
+
+    const modal = $('#postsGridModal');
+    modal.on('show.bs.modal', function (event) {
+        targetButton = $(event.relatedTarget); // Button that triggered the modal
+        // const recipient = button.data('post-info'); // Extract info from data-* attributes
+        // console.log(recipient);
+        // Update the modal's content.
+        const modal = $(this);
+        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text('Публикации');
+    });
+    */
+
+    $('.js_open-posts-gridModal').on('click', function (event) {
+        targetButton = $(this); // Button that triggered the modal
+        // Update the modal's content
+        const modal = $('#postsGridModal');
+        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text('Публикации');
+    });
+}
+
+/* TODO: refactor -> move initModalHandler to separate file END */
+
 /**
  * Init Handlers
  */
 function initHandlers() {
-
+    // TODO: refactor with autogreet.js initHandlers
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextField(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
+        initModalHandler();
     });
 
     // alert close
@@ -197,33 +240,6 @@ function stepReducer(stepNumber, state) {
     }
 }
 
-/* TODO: refactor -> move initModalHandler to separate file */
-let targetButton = {};
-
-function loadMoreHandler(getPosts) {
-    $('#load-more').on('click', (e) => {
-        const $btn = $(e.target);
-        const cursor = $btn.attr('cursor');
-        console.log('load more click');
-        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
-    });
-}
-
-function initModalHandler() {
-    const modal = $('#postsGridModal');
-    modal.on('show.bs.modal', function (event) {
-        targetButton = $(event.relatedTarget); // Button that triggered the modal
-        // const recipient = button.data('post-info'); // Extract info from data-* attributes
-        // console.log(recipient);
-        // Update the modal's content.
-        const modal = $(this);
-        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
-        modal.find('.modal-title').text('Публикации');
-    });
-}
-
-/* TODO: refactor -> move initModalHandler to separate file END*/
-
 export function init() {
     if ($(clsConst.currentPageCls).length) {
         const wizardCfg = {
@@ -242,6 +258,11 @@ export function init() {
             const imageId = result && result.data && result.data.image_id;
             $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
             console.log('image_loaded', res);
+
+            // todo: make as callBack
+            if ($('.js_uploaded-img-from-posts').length) {
+                $('.js_uploaded-img-from-posts').empty();
+            }
         });
         // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_POST_SELECTED, (e, id) => {
         //     console.log('IMAGE_POST_SELECTED', id);

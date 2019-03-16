@@ -14,12 +14,15 @@ $(`<div class="${mainCls} mt-2">
                 <i class="far fa-image fa-lg"></i>
             </button>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post" 
-                data-toggle="tooltip" data-placement="top" title="Добавить изображение"
-                    data-toggle="modal" 
-                    data-post-info="todo: get req to user: "
-                    data-target="#postsGridModal">
+            <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
+                title="Добавить публикацию"
+                data-toggle="tooltip"
+                data-placement="top"
+                data-post-info="todo: get req to user: ">
+                <span class="js_open-posts-gridModal"
+                    data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
                 <i class="far fa-images fa-lg"></i>
+                </span>
             </button>
 
             <div class="mt-2">
