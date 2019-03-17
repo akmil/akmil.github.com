@@ -136,6 +136,22 @@ function setCompetitors() {
     };
 }
 
+function nextBtnvalidateCompetitorsHandler() {
+    const $competitorsTextArea = $('.js_follow-competitors');
+    const nextStepBtn = $competitorsTextArea.closest('.add-competitors').find('.btn-next');
+    // disable on init
+    nextStepBtn.attr('disabled', 'disabled');
+    $competitorsTextArea.on('input', () => {
+        const lengthText = $competitorsTextArea.val().length;
+        // disable on checnge
+        nextStepBtn.attr('disabled', 'disabled');
+        if (lengthText) {
+            // enable on checnge if lengthText>1
+            nextStepBtn.removeAttr('disabled', 'disabled');
+        }
+    });
+}
+
 function stepReducer(stepNumber) {
     switch (stepNumber) {
         case 0:
@@ -144,6 +160,7 @@ function stepReducer(stepNumber) {
             break;
         case 1:
             getDataStepSpeed(stepNumber);
+            nextBtnvalidateCompetitorsHandler();
             break;
         case 2:
             setCompetitors();
@@ -305,6 +322,12 @@ function initSteps(formSelector) {
         // console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
+    });
+
+    // prev btn: clear-competitors
+    $('.js_follow-clear-competitors').on('click', function () {
+        const $competitorsTextArea = $('.js_follow-competitors');
+        $competitorsTextArea.val('');
     });
 }
 
