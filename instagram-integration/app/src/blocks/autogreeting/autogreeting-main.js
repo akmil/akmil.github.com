@@ -165,11 +165,7 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
         removeExtraTextFields();
     });
-    // $('#v-pills-logs-tab').on('click', (e) => {
-        // at this point of time setInterval is working
-        // const $wrapper = $('.log-users-list');
-        // fillListUsers($wrapper, userListInstagram);
-    // });
+
     // tabs.init(fillListUsers);
     initLogsTab();
 }

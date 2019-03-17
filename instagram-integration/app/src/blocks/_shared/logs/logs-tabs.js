@@ -2,6 +2,17 @@ import viewUtils from '../../../common/js-services/view';
 import * as logs from './logs';
 import * as tabs from '../../_shared/tebs-pils/tabs';
 
+function moveInOneRow(userListBox, subTypeBox) {
+    if (!subTypeBox.length || !userListBox.length) {
+        return;
+    }
+    userListBox.appendTo(subTypeBox);
+
+    userListBox.addClass('col');
+    subTypeBox.addClass('row');
+    subTypeBox.find('.log-subype').addClass('col');
+}
+
 /**
  * Cfg
  * @param logsState
@@ -40,4 +51,8 @@ export function initLogsTab({logsState, logsSubtypes, clsConst, setUserNameCb, t
     }
     viewUtils.addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, isRenderEmptyOption: false, textRusArray});
     tabs.init(handleLogsDropdowns, logsState); // makes double request : OPTION and GET
+
+    const userListBox = $('.log-users-list ');
+    const subTypeBox = $('.log-subype--box');
+    moveInOneRow(userListBox, subTypeBox);
 }
