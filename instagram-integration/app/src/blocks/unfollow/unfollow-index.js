@@ -41,9 +41,9 @@ function onSubmitHandler(e) {
     const body = {
         ...state,
         user_custom_config: {
-            attachment: {
-                'list_id': 'id_static'
-            }
+            // attachment: {
+            //     'list_id': 'id_static'
+            // }
         },
         type: clsConst.pathType,
         username: usernameSelected
