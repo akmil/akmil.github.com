@@ -1,15 +1,12 @@
 import {CONST} from '../../common/js-services/consts';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
-// import {addDropdown, getValByCommaSeparator, fillRadioGroupList} from '../../common/js-services/view';
-const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
-
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
-// import * as tabs from '../_shared/tebs-pils/tabs';
-// import * as logs from '../_shared/logs/logs';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
+import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 
+const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';
 const logsState = CONST.logsState;
 const clsConst = {
@@ -64,6 +61,12 @@ function onSubmitHandler(e) {
             competitors
         };
     }
+    if (body.subtype === CONST.url.tmTypes.storiesSubT[2]) {
+        // text file should be added
+        body['user_custom_config'].attachment = {
+            'list_id': $('.stories__file-upload-box .file-upload-container').attr('attached-txt-id')
+        };
+    }
 
     $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
         if ($(this).val() === '') {
@@ -97,6 +100,8 @@ function setUserNameFirstStep(state) {
  * Init Handlers
  */
 function initHandlers() {
+
+    attachTxtFileHandler('.file-upload-container');
 
     // radio-group step 2
     $('.js_get-stories-type input[type=radio]').on('click', (e) => {
@@ -175,6 +180,19 @@ function addTextArea(stepNumber) {
     }
 }
 
+function addFileUploadBox(stepNumber) {
+    const {wizardForm} = elSelector;
+    const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
+    const $fileUploadBox = $(fieldLast).find('.stories__file-upload-box');
+    if (state.subtype === CONST.url.tmTypes.storiesSubT[2]) {
+        $fileUploadBox.removeClass('d-none');
+        $('.js_validate-txt-file-is-uploaded').attr('disabled', 'disabled');
+    } else {
+        $fileUploadBox.addClass('d-none');
+    }
+    console.log('addFileUploadBox done');
+}
+
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
@@ -188,6 +206,7 @@ function stepReducer(stepNumber, state) {
         case 2:
             console.log(state, stepNumber);
             addTextArea(stepNumber);
+            addFileUploadBox(stepNumber);
             break;
         default:
             console.log('default', stepNumber);
@@ -215,4 +234,7 @@ export function init() {
     //     console.log('logsSubtypes', logsSubtypes);
     //     console.log('accounts', accounts);
     // });
+    window.PubSub.subscribe(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, (e, res) => {
+        $('.js_validate-txt-file-is-uploaded').removeAttr('disabled');
+    });
 }
