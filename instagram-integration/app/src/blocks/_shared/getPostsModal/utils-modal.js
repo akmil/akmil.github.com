@@ -42,7 +42,9 @@ function imageSelectHandler($list, modal, targetButton) {
         if ($('.js_uploaded-img-from-posts').length) {
             $('.js_uploaded-img-from-posts').empty();
         }
-        targetButton.closest('.col').append($btnLi.find('img')).wrap('<div class="js_uploaded-img-from-posts"></div>');
+
+        const tplImageBox = $('<div class="js_uploaded-img-from-posts"></div>').append($btnLi.find('img'));
+        targetButton.closest('.col').append(tplImageBox);
     });
 }
 

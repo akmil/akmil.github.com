@@ -98,6 +98,9 @@ export function attachTxtFileHandler(_fileUploadBox, onSuccessFileUploadCb) {
         if (onSuccessFileUploadCb && typeof onSuccessFileUploadCb === 'function') {
             onSuccessFileUploadCb();
         }
+        // make next-btn available
+        const nextStep = $('.js_add-new-task fieldset').get(2);
+        $(nextStep).find('.btn-next').removeAttr('disabled');
         Spinner.remove();
         console.log('***TEXT_FILE_UPLOADED, onSuccessFileUploadCb', res);
     });

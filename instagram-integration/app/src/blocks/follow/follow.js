@@ -80,7 +80,7 @@ function getDataStep2() {
     getTasksData(path);
 }
 
-function getDataStepSpeed() {
+function getDataStepSpeed(stepNumber) {
     const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
         type: CONST.url.tmTypes.followingT,
@@ -91,10 +91,15 @@ function getDataStepSpeed() {
             // show txt fileUpload
             $('.add-file').addClass('d-block');
             $('.add-competitors').addClass('d-none').removeClass('d-block');
+            const nextStep = $('.js_add-new-task fieldset').get(stepNumber + 1);
+            $(nextStep).find('.btn-next').attr('disabled', 'disabled');
+            // console.log(nextStepProceedBtn);
         } else {
             // show competitors
             $('.add-competitors').addClass('d-block');
             $('.add-file').addClass('d-none').removeClass('d-block');
+            const nextStep = $('.js_add-new-task fieldset').get(stepNumber + 1);
+            $(nextStep).find('.btn-next').removeAttr('disabled');
         }
     }
     console.log('path.subtype', path.subtype);
@@ -138,7 +143,7 @@ function stepReducer(stepNumber) {
             // console.log(state);
             break;
         case 1:
-            getDataStepSpeed();
+            getDataStepSpeed(stepNumber);
             break;
         case 2:
             setCompetitors();

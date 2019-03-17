@@ -261,7 +261,7 @@ export function init() {
 
             // todo: make as callBack
             if ($('.js_uploaded-img-from-posts').length) {
-                $('.js_uploaded-img-from-posts').empty();
+                $('.js_uploaded-img-from-posts').remove();
             }
         });
         // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_POST_SELECTED, (e, id) => {
