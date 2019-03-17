@@ -12,6 +12,12 @@ export function init() {
             $stopped: $('.tasks-stopped'),
             $all: $('.tasks-all')
         };
+
+        // task-status has one subtype, so do not add dropdown
+        // render status dropdown
+        // const textRusArray = ['По DEFAULT_AUTO_ANSWER'];
+        // dropDown.addDropdown(logsStateStatus.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState: logsStateStatus, dropdownOnSelectCb, textRusArray});
+
         getTasksData(wrappers, path);
         // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
         //     getTasksData(wrappers, path);

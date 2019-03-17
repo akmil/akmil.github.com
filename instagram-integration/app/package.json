@@ -1,13 +1,13 @@
 {
   "name": "luxgram",
   "version": "0.0.1",
-  "description": "Luxgram instagram integration",
+  "description": "Luxgram integration",
   "scripts": {
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "build": "SET NODE_ENV=production & webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src"
   },
-  "author": "Pavlo Oliinyk",
+  "author": "Service",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "whatwg-fetch": "^3.0.0"

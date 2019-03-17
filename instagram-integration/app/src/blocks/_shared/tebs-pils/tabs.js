@@ -1,30 +1,6 @@
 import {CONST} from '../../../common/js-services/consts';
 import User from '../../../common/js-services/user';
 
-// function initCfg() {
-//     this.$wrapper = '';
-//     this.OnChangeSelect = '';
-//     this.logsState = {};
-//
-//     function setCfg($wrapper, OnChangeSelect, logsState) {
-//         this.$wrapper = $wrapper;
-//         this.OnChangeSelect = OnChangeSelect;
-//         this.logsState = logsState;
-//     }
-//     function getCfg() {
-//         return {
-//             $wrapper: this.$wrapper,
-//             logsState: this.logsState,
-//             OnChangeSelect: this.OnChangeSelect
-//         };
-//     }
-//
-//     return {
-//         setCfg,
-//         getCfg
-//     };
-// }
-
 const fillDropdownUsersCfg = {};
 
 function fillDropdownUsers({$wrapper, logsState, OnChangeSelectCb}, accounts) {
