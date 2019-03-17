@@ -225,7 +225,8 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
-    initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.storiesSubT, clsConst, setUserNameCb});
+    const textRusArray = ['По подписчикам', 'По активной аудитории конкурентов', 'По списку'];
+    initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.storiesSubT, clsConst, setUserNameCb, textRusArray});
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
