@@ -15,7 +15,7 @@ export function fillPosts($list, items, isAppendToList) {
     }
     items.forEach((item, idx) => {
         const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
-            ${(item.type !== 'photo')
+            ${(item.type === 'photo')
                 ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 200px;"/>`
                 : `<div class="${item.type}" 
                     style="display: flex;
@@ -26,13 +26,6 @@ export function fillPosts($list, items, isAppendToList) {
                   </div>`
             }
         </li>`);
-        const tpl2 = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
-            ${(item.type === 'photo')
-                ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 200px;"/>`
-                : `<div class="${item.type}"><i class="fas fa-video"></i></div>`
-            }
-        </li>`);
-        addToList(isAppendToList, tpl2, $list); // toDo refactor me, less DOM manipulation
         addToList(isAppendToList, tpl, $list); // toDo refactor me, less DOM manipulation
     });
 }

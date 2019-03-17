@@ -103,7 +103,8 @@ export default class RegisterForm {
         });
 
         PubSub.subscribe(CONST.events.USER_LOGGED, () => {
-            $('.register--confirm').removeClass('d-none');
+            // $('.register--confirm').removeClass('d-none');
+            window.location.href = '/instagram-integration/';
         });
 
         $(document).on('click', (event) => {
