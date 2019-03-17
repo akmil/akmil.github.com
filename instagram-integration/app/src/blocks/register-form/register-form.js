@@ -26,15 +26,20 @@ export default class RegisterForm {
 
     submitForm(formDataObj) {
         const email = this.$email.val();
+        const borderDangerCls = 'border-danger';
         const $password = this.$form.find('input[name="pass"]'),
             $passwordConfirm = this.$form.find('input[name="pass-confirm"]'),
             password = this.$form.find('input[name="pass"]').val(),
             passwordConfirm = this.$form.find('input[name="pass-confirm"]').val();
 
+        // Highlight errors
         if (passwordConfirm !== password) {
-            $password.addClass('input-error');
-            $passwordConfirm.addClass('input-error');
+            $password.addClass(borderDangerCls);
+            $passwordConfirm.addClass(borderDangerCls);
             return;
+        } else {
+            $password.removeClass(borderDangerCls);
+            $passwordConfirm.removeClass(borderDangerCls);
         }
         this.$email.val(this.$email.val().toLocaleLowerCase());
         this.formData = formDataObj || {email, password};
@@ -45,9 +50,7 @@ export default class RegisterForm {
 
                     // save the item
                     cookieStorage.set(CONST.cookieStorage.emailConfirmed, 'false');
-
                     cookieStorage.set(CONST.cookieStorage.token, result.data.token);
-                    // console.log('request succeeded with JSON response', result);
                     PubSub.publish(CONST.events.USER_LOGGED);
                     // viewUtils.showInfoMessage(this.$textAreaDescription,
                     //     result.status.state,
@@ -65,10 +68,12 @@ export default class RegisterForm {
                     $('.login-box').show();
                 }
             }).catch((error) => {
+                const modal = $('#register-error-modal');
+                modal.modal('show');
+
                 console.log('request failed', error);
-                viewUtils.showInfoMessage(this.$textAreaDescription,
-                    error.message);
-                // console.log('do something');
+                // viewUtils.showInfoMessage(this.$textAreaDescription,
+                //     error.message);
             });
     }
 

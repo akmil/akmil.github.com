@@ -20,7 +20,10 @@ export function LoginPage(selectorCss) {
 
     const userLoginHeader = (_formData) => {
         const cbError = (result) => {
-            $(_loginBox).append('<p>result.status.message</p>');
+            // $(_loginBox).append(`<p>${result.status.message}</p>`);
+            const modal = $('#error-modal');
+            modal.modal('show');
+            console.log(result.status.message);
         };
 
         return user.login(_formData, cbError)
