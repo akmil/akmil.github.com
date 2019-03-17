@@ -55,7 +55,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) 
                 }
                 <div>
                     <p class="chat-username text-muted">${message.username}</p>
-                    ${insertMsg(message.value, message.type, 'text-left')}
+                    ${insertMsg(value, message.type, 'text-left')}
                 </div>
                     <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
