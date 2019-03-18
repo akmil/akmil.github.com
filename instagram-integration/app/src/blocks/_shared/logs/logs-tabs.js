@@ -10,7 +10,8 @@ function moveInOneRow(userListBox, subTypeBox) {
 
     userListBox.addClass('col');
     subTypeBox.addClass('row');
-    subTypeBox.find('.log-subype').addClass('col');
+    // add "col-auto" to first column
+    subTypeBox.find('.log-subype').addClass('col-auto');
 }
 
 /**

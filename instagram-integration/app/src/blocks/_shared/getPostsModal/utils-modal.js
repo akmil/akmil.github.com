@@ -18,11 +18,9 @@ export function fillPosts($list, items, isAppendToList) {
             ${(item.type === 'photo')
                 ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 200px;"/>`
                 : `<div class="${item.type}" 
-                    style="display: flex;
-                        justify-content: center;
-                        height: 100%;
-                        align-items: center;
-                    "><i class="fas fa-video fa-3x text-secondary"></i>
+                    style="background: url(${item.url}) no-repeat;
+                    "><i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
+                    <img src="${item.url}" class="img-responsive p-2 w-100" alt="image" style="max-height: 200px;"/>
                   </div>`
             }
         </li>`);
