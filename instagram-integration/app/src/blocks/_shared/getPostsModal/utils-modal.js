@@ -16,7 +16,7 @@ export function fillPosts($list, items, isAppendToList) {
     items.forEach((item, idx) => {
         const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
             ${(item.type === 'photo')
-                ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 200px;"/>`
+                ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-width:50%;"/>`
                 : `<div class="${item.type}" >
                     <!--style="background: url(${item.url}) no-repeat;"-->                    
                     <i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
