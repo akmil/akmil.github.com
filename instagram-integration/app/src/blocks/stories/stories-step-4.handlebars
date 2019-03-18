@@ -6,14 +6,13 @@
             <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
         </div>
     </div>
-    <div class="row stories__file-upload-box add-file d-none">
-        <div class="form-group col-md-8 col-sm-8">
-            <div class="file-upload-container">
-                <label for="txt-file" class="label-chous btn btn-success">Добавить</label>
-                <input type="file" accept=".txt" class="input-txt-file" id="txt-file" name="txt-file"/>
-            </div>
+    <div class="row js_stories-competitors d-none">
+        <div class="form-group col-md-6 col-sm-6">
+            <label class="">Конкуренты</label>
+            <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
         </div>
     </div>
+
     <button type="button" class="btn btn-blue btn-previous">Назад</button>
-    <button type="submit" class="btn btn-blue js_validate-txt-file-is-uploaded">Запустить</button>
+    <button type="submit" class="btn btn-blue js_stories-competitors-btn">Запустить</button>
 </div>

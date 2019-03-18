@@ -31,7 +31,7 @@ export function init({isInStoriesPage}) {
     }
     // toDO : refactor
     // render status dropdown
-    const textRusArray = ['По подписчикам', 'По активной аудитории конкурентов', 'По списку'];
+    const textRusArray = ['По списку', 'По подписчикам', 'По активной аудитории конкурентов'];
     dropDown.addDropdown(logsStateStatus.wrapperSubtype, CONST.url.tmTypes.storiesSubT, {logsState: logsStateStatus, dropdownOnSelectCb, textRusArray});
 
     // getTasksData(wrappers, path);

@@ -204,23 +204,24 @@
                                                       <fieldset>
                                                           <div class="form-top">
                                                               <div class="form-top-left">
-                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите тип</h3>
+                                                                  <h3>Выберите тип</h3>
                                                                   <p>Шаг 2/4</p>
                                                               </div>
-                                                          </div><div class="form-bottom">
+                                                          </div>
+                                                          <div class="form-bottom">
                                                               <div class="form-group row col-lg-12">
                                                                   <div class="col-9 js_get-stories-type">
                                                                       <div class="custom-control custom-radio">
-                                                                          <input type="radio" id="STORIES_BY_FOLLOWERS" name="customRadio" value="STORIES_BY_FOLLOWERS" class="custom-control-input" checked="">
+                                                                          <input type="radio" id="STORIES_BY_LIST" name="customRadio" value="STORIES_BY_LIST" class="custom-control-input" checked="">
+                                                                          <label class="custom-control-label" for="STORIES_BY_LIST">По списку</label>
+                                                                      </div>
+                                                                      <div class="custom-control custom-radio">
+                                                                          <input type="radio" id="STORIES_BY_FOLLOWERS" name="customRadio" value="STORIES_BY_FOLLOWERS" class="custom-control-input">
                                                                           <label class="custom-control-label" for="STORIES_BY_FOLLOWERS">По подписчикам</label>
                                                                       </div>
                                                                       <div class="custom-control custom-radio">
                                                                           <input type="radio" id="STORIES_BY_ACTIVE_AUDIENCE" name="customRadio" value="STORIES_BY_ACTIVE_AUDIENCE" class="custom-control-input">
                                                                           <label class="custom-control-label" for="STORIES_BY_ACTIVE_AUDIENCE">По активной аудитории конкурентов</label>
-                                                                      </div>
-                                                                      <div class="custom-control custom-radio">
-                                                                          <input type="radio" id="STORIES_BY_LIST" name="customRadio" value="STORIES_BY_LIST" class="custom-control-input">
-                                                                          <label class="custom-control-label" for="STORIES_BY_LIST">По списку</label>
                                                                       </div>
                                                                   </div>
                                                               </div>
@@ -231,10 +232,11 @@
                                                       <fieldset>
                                                           <div class="form-top">
                                                               <div class="form-top-left">
-                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите режим</h3>
+                                                                  <h3>Выберите режим</h3>
                                                                   <p>Шаг 3/4</p>
                                                               </div>
-                                                          </div><div class="form-bottom">
+                                                          </div>
+                                                          <div class="form-bottom">
                                                               <div class="form-group row col-lg-12">
                                                                   <div class="col-9 js_task-mode"> 
                                                                   </div>
@@ -244,18 +246,39 @@
                                                           </div>
                                                       </fieldset>
                                                       <fieldset>
-                                                          <div class="form-top">
-                                                              <div class="form-top-left">
-                                                                  <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Задайте настройки</h3>
-                                                                  <p>Шаг 4/4</p>
-                                                              </div>
-                                                          </div><div class="form-bottom">
-                                                              <div class="row">
-                                                                  <div class="form-group col-md-6 col-sm-6">
-                                                                      <label for="limit">Лимит просмотров</label>
-                                                                      <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
+                                                          <div class="js_add-settings-step-4">
+                                                              <div class="form-top">
+                                                                  <div class="form-top-left">
+                                                                      <h3>Задайте настройки</h3>
+                                                                      <p>Шаг 4/4</p>
                                                                   </div>
                                                               </div>
+                                                              <div class="form-bottom">
+                                                                  <div class="row">
+                                                                      <div class="form-group col-md-6 col-sm-6">
+                                                                          <label for="limit">Лимит просмотров</label>
+                                                                          <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="row js_stories-competitors d-none">
+                                                                      <div class="form-group col-md-6 col-sm-6">
+                                                                          <label>Конкуренты</label>
+                                                                          <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
+                                                                      </div>
+                                                                  </div>
+                                                              
+                                                                  <button type="button" class="btn btn-blue btn-previous">Назад</button>
+                                                                  <button type="submit" class="btn btn-blue js_stories-competitors-btn">Запустить</button>
+                                                              </div>
+                                                          </div>
+                                                          <div class="js_add-file-title d-none">
+                                                          <div class="form-top">
+                                                              <div class="form-top-left">
+                                                                  <h3>Добавьте файл с пользователями</h3>
+                                                                  <p>Шаг 4/4</p>
+                                                              </div>
+                                                          </div>
+                                                          <div class="form-bottom">
                                                               <div class="row stories__file-upload-box add-file d-none">
                                                                   <div class="form-group col-md-8 col-sm-8">
                                                                       <div class="file-upload-container">
@@ -266,13 +289,16 @@
                                                               </div>
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
                                                               <button type="submit" class="btn btn-blue js_validate-txt-file-is-uploaded">Запустить</button>
-                                                          </div></fieldset>
+                                                          </div>
+                                                          </div>
+                                                      </fieldset>
                                                       <div class="form-submit-finish position-absolute d-none">
                                                           <div class="alert alert-success fade show">
                                                               <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                                               <h2>Задание создано успешно!</h2>
                                                           </div>
-                                                      </div>    
+                                                      </div>
+                
                 <div class="form-submit-finish position-absolute d-none">
                     <div class="alert alert-success fade show">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>

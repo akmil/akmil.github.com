@@ -55,17 +55,18 @@ function onSubmitHandler(e) {
         username: usernameSelected
     };
 
-    if (body.subtype === CONST.url.tmTypes.storiesSubT[1]) {
+    if (body.subtype === CONST.url.tmTypes.storiesSubT[2]) {
         const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
         body.user_custom_config = {
             competitors
         };
     }
-    if (body.subtype === CONST.url.tmTypes.storiesSubT[2]) {
+    if (body.subtype === CONST.url.tmTypes.storiesSubT[0]) {
         // text file should be added
         body['user_custom_config'].attachment = {
             'list_id': $('.stories__file-upload-box .file-upload-container').attr('attached-txt-id')
         };
+        delete body.user_default_config.criteria.max_views;
     }
 
     $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
@@ -96,12 +97,33 @@ function setUserNameFirstStep(state) {
     usernameSelected = state.username;
 }
 
+// todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
+const containerCls = '.js_add-settings-step-4';
+const $container = $(containerCls);
+const $competitorsTextArea = $container.find('.js_stories-competitors textarea');
+const nextStepBtn = $container.find('.js_stories-competitors-btn');
+
+function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
+    // disable on init
+    nextStepBtn.attr('disabled', 'disabled');
+    $competitorsTextArea.on('input', () => {
+        const lengthText = $competitorsTextArea.val().length;
+        // disable on checnge
+        nextStepBtn.attr('disabled', 'disabled');
+        if (lengthText) {
+            // enable on checnge if lengthText>1
+            nextStepBtn.removeAttr('disabled', 'disabled');
+        }
+    });
+}
+
 /**
  * Init Handlers
  */
 function initHandlers() {
 
     attachTxtFileHandler('.file-upload-container');
+    nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn);
 
     // radio-group step 2
     $('.js_get-stories-type input[type=radio]').on('click', (e) => {
@@ -165,18 +187,21 @@ function getConfig() {
 
 function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
-    if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
-        const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
-        const tpl = `<div class="row">
-                <div class="form-group col-md-6 col-sm-6">
-                    <label class="">Конкуренты</label>
-                    <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
-                </div>
-            </div>`;
-        if (!$('.stories-competitors').length) {
-            $(fieldLast).find('.form-bottom>.row').after(tpl);
-        }
+    const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
+    if (state.subtype === CONST.url.tmTypes.storiesSubT[2]) {
+        // const tpl = `<div class="row">
+        //         <div class="form-group col-md-6 col-sm-6">
+        //             <label class="">Конкуренты</label>
+        //             <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
+        //         </div>
+        //     </div>`;
+        // if (!$('.stories-competitors').length) {
+        //     $(fieldLast).find('.form-bottom>.row').after(tpl);
+        // }
+        $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
         console.log('end');
+    } else {
+        $(fieldLast).find('.js_stories-competitors').addClass('d-none');
     }
 }
 
@@ -184,11 +209,17 @@ function addFileUploadBox(stepNumber) {
     const {wizardForm} = elSelector;
     const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
     const $fileUploadBox = $(fieldLast).find('.stories__file-upload-box');
-    if (state.subtype === CONST.url.tmTypes.storiesSubT[2]) {
+    const $titleStepBox = $(fieldLast).find('.js_add-file-title');
+    const $addSettings = $(fieldLast).find('.js_add-settings-step-4');
+    if (state.subtype === CONST.url.tmTypes.storiesSubT[0]) {
         $fileUploadBox.removeClass('d-none');
         $('.js_validate-txt-file-is-uploaded').attr('disabled', 'disabled');
+        $titleStepBox.removeClass('d-none');
+        $addSettings.addClass('d-none');
     } else {
         $fileUploadBox.addClass('d-none');
+        $titleStepBox.addClass('d-none');
+        $addSettings.removeClass('d-none');
     }
     console.log('addFileUploadBox done');
 }
@@ -225,7 +256,7 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
-    const textRusArray = ['По подписчикам', 'По активной аудитории конкурентов', 'По списку'];
+    const textRusArray = ['По списку', 'По подписчикам', 'По активной аудитории конкурентов'];
     initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.storiesSubT, clsConst, setUserNameCb, textRusArray});
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
