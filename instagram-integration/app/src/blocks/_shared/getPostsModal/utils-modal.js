@@ -16,9 +16,9 @@ export function fillPosts($list, items, isAppendToList) {
     items.forEach((item, idx) => {
         const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
             ${(item.type === 'photo')
-                ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-width:50%;"/>`
+                ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 230px;"/>`
                 : `<div class="${item.type}" >
-                    <!--style="background: url(${item.url}) no-repeat;"-->                    
+                    <!--style="background: url(${item.url}) no-repeat;"-->
                     <i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
                     <img src="${item.url}" class="img-responsive p-2 w-100" alt="video-cover" style="max-height: 200px;"/>
                   </div>`
@@ -50,7 +50,7 @@ function imageSelectHandler($list, modal, targetButton) {
             $('.js_uploaded-img-from-posts').empty();
         }
 
-        const tplImageBox = $('<div class="js_uploaded-img-from-posts"></div>').append($btnLi.find('img'));
+        const tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('img'));
         targetButton.closest('.col').append(tplImageBox);
     });
 }

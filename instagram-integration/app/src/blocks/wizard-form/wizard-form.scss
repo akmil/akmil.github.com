@@ -180,11 +180,11 @@ $border-radius-follow: 4px;
         border-radius: 0 0 4px 4px;
         text-align: left;
         transition: all .4s ease-in-out;
-    }
 
-    .form-bottom:hover {
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        &:hover {
+            -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        }
     }
 
     form .form-bottom button.btn {
@@ -251,5 +251,11 @@ $border-radius-follow: 4px;
     }
     .progress {
         height: initial;
+    }
+
+    .uploaded-img-from-posts{
+        img {
+            max-width: 50%;
+        }
     }
 }
