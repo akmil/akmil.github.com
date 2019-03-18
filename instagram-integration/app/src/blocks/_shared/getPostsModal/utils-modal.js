@@ -17,10 +17,10 @@ export function fillPosts($list, items, isAppendToList) {
         const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
             ${(item.type === 'photo')
                 ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 200px;"/>`
-                : `<div class="${item.type}" 
-                    style="background: url(${item.url}) no-repeat;
-                    "><i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
-                    <img src="${item.url}" class="img-responsive p-2 w-100" alt="image" style="max-height: 200px;"/>
+                : `<div class="${item.type}" >
+                    <!--style="background: url(${item.url}) no-repeat;"-->                    
+                    <i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
+                    <img src="${item.url}" class="img-responsive p-2 w-100" alt="video-cover" style="max-height: 200px;"/>
                   </div>`
             }
         </li>`);
