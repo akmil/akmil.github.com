@@ -28,12 +28,12 @@ const pages = [
         source: '_autoanswer/autoanswer'
     },
     {
-        title: 'Подтверждение регистрации',
+        title: 'Завершение регистрации',
         name: 'confirm-registration',
         source: '_confirm-registration/confirm-registration'
     },
     {
-        title: 'Удачная регистрация',
+        title: 'Подтверждение регистрации',
         name: 'registration-success',
         source: '_registration-success/registration-success'
     },

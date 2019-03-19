@@ -44,7 +44,13 @@ function onSubmitHandler(e) {
             id: postItemId,
             type: postItemType || 'type-error'
         };
-        const attachment = post || (imageId) ? {'image_id': imageId} : undefined;
+        let attachment = null;
+
+        if (postItemId) {
+            attachment = {post};
+        } else if (imageId) {
+            attachment = {'image_id': imageId};
+        }
 
         reqBody.push({
             'answer': message,
