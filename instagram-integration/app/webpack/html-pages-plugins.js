@@ -33,6 +33,11 @@ const pages = [
         source: '_confirm-registration/confirm-registration'
     },
     {
+        title: 'Удачная регистрация',
+        name: 'registration-success',
+        source: '_registration-success/registration-success'
+    },
+    {
         title: 'Instagram аккаунты',
         name: 'instagram-accounts',
         source: '_instagram-accounts/instagram-accounts'

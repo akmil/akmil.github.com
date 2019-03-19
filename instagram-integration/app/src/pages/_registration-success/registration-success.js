@@ -1,5 +1,5 @@
-// import $ from 'jquery';
-import PubSub from 'pubsub-js'; // https://www.npmjs.com/package/pubsub-js
+/*
+import PubSub from 'pubsub-js';
 import User from '../../common/js-services/user';
 import cookieStorage from '../../common/js-services/cookie';
 import {CONST} from '../../common/js-services/consts';
@@ -104,7 +104,7 @@ export default class RegisterForm {
 
         PubSub.subscribe(CONST.events.USER_LOGGED, () => {
             // $('.register--confirm').removeClass('d-none');
-            window.location.href = '/instagram-integration/registration-success.html';
+            window.location.href = '/instagram-integration/';
         });
 
         $(document).on('click', (event) => {
@@ -116,3 +116,4 @@ export default class RegisterForm {
         });
     }
 }
+*/
