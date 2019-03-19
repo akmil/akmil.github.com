@@ -40,20 +40,15 @@ function onSubmitHandler(e) {
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
-        // if (postItemId) {
-        //     submitBodyItem.attachment = {
-        //         ...submitBodyItem.attachment,
-        //         post: {
-        //             id: postItemId,
-        //             type: postItemType || 'type-error'
-        //         }
-        //     };
-        // }
+        const post = {
+            id: postItemId,
+            type: postItemType || 'type-error'
+        };
+        const attachment = post || (imageId) ? {'image_id': imageId} : undefined;
+
         reqBody.push({
             'answer': message,
-            'attachment': imageId ? {
-                'image_id': imageId
-            } : undefined
+            attachment
         });
     });
     const nReqBody = {
@@ -152,14 +147,11 @@ function initModalHandler() {
  */
 function initHandlers() {
     // TODO: refactor with autogreet.js initHandlers
-    // $('[data-toggle="popover"]').popover();
-    // $('[data-toggle="tooltip"]').tooltip();
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextFieldGreet(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
-        // $('[data-toggle="popover"]').popover(); // reinit
         $('[data-toggle="tooltip"]').tooltip(); // reinit
         initModalHandler();
     });
