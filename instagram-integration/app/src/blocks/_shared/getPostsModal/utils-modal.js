@@ -17,10 +17,10 @@ export function fillPosts($list, items, isAppendToList) {
         const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
             ${(item.type === 'photo')
                 ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 230px;"/>`
-                : `<div class="${item.type}" >
-                    <!--style="background: url(${item.url}) no-repeat;"-->
-                    <i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
+                : `<div class="${item.type} h-100">
+                    <!--style="background-image: url(${item.url});"-->
                     <img src="${item.url}" class="img-responsive p-2 w-100" alt="video-cover" style="max-height: 200px;"/>
+                    <i class="fas fa-video fa-2x position-absolute text-white align-self-start"></i>
                   </div>`
             }
         </li>`);
@@ -46,11 +46,14 @@ function imageSelectHandler($list, modal, targetButton) {
         console.log('click', imgId, modal);
         // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_POST_SELECTED, imgId);
         modal.modal('hide');
-        if ($('.js_uploaded-img-from-posts').length) {
-            $('.js_uploaded-img-from-posts').empty();
+        if (targetButton.closest('.col').find('.js_uploaded-img-from-posts').length) {
+            targetButton.closest('.col').find('.js_uploaded-img-from-posts').empty();
         }
 
         const tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('img'));
+        // if (!tplImageBox.length) {
+        //     tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('.video'));
+        // }
         targetButton.closest('.col').append(tplImageBox);
     });
 }
@@ -64,10 +67,13 @@ export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
             const $list = $('.modal-body .posts-list', modal);
             if (!data.posts.length) {
                 // show message 'no posts found'
-                // $('[data-toggle="popover"]').popover();
-                targetButton.popover('show');
+                targetButton.popover({
+                    container: 'body',
+                    content: 'У текущего аккаунта нет ни одного поста',
+                    placement: 'bottom'
+                });
                 setTimeout(() => {
-                    targetButton.popover('hide');
+                    targetButton.popover('destroy');
                 }, 4000);
                 return;
             }

@@ -7,8 +7,12 @@ $(`<div class="${mainCls}">
                         data-emoji-picker="true" placeholder="Введите сообщение"></textarea>    
                 </div>
 
-                <button class="file-upload-btn btn btn-success" type="button" data-toggle="tooltip" data-placement="top" 
-                    title="" data-original-title="Добавить изображение"><i class="far fa-image fa-lg"></i></button>
+                <!-- file-upload -->
+                <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                    <button class="file-upload-btn btn btn-success" type="button">
+                        <i class="far fa-image fa-lg"></i>
+                    </button>
+                </div>
 
                 <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
                     title="Добавить публикацию"

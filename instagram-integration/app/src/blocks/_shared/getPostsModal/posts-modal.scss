@@ -1,9 +1,17 @@
 #postsGridModal {
     .video {
-        display: flex;
-        justify-content: flex-end;
-        height: 100%;
-        align-items: center;
+        //display: flex;
+        //justify-content: flex-end;
+        //height: 100%;
+        //align-items: center;
+        //background-size: cover;
+        //background-repeat: no-repeat;
+        //background-position: center;
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+        max-width: calc(100% - 0.5rem);
+
         //&::before {
         //    content: '';
         //    background-color: white;
@@ -14,9 +22,17 @@
         //    z-index: 0;
         //}
 
-        //img {
-        //    z-index: 1;
-        //}
+        img {
+            // z-index: 1;
+            max-height: 200px;
+            position: absolute;
+            z-index: 0;
+            /* width: 100%; */
+            min-height: 100%;
+            text-align: center;
+            align-self: center;
+            transform: translateX(-50%);
+        }
         i.fa-video {
             right: 10px;
             top: 10px;

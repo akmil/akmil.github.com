@@ -2,17 +2,19 @@ export const tplTextField = (mainCls) =>
 $(`<div class="${mainCls} mt-2">
     <div class="row">
         <div class="col">
-            <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова на которые будет срабатывать автоответ"></textarea>
+            <textarea class="form-control answer-words" rows="4" placeholder="Введите ключевые слова"></textarea>
         </div>
         <div class="col">
             <textarea class="form-control answer-messages" rows="4"
                 data-emoji-picker="true" style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
                 placeholder="Введите сообщение"
             ></textarea>
-            <button class="file-upload-btn btn btn-success" type="button"
-                    data-toggle="tooltip" data-placement="top" title="Добавить изображение">
-                <i class="far fa-image fa-lg"></i>
-            </button>
+            <!-- file-upload -->
+            <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                <button class="file-upload-btn btn btn-success" type="button">
+                    <i class="far fa-image fa-lg"></i>
+                </button>
+            </div>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
                 title="Добавить публикацию"

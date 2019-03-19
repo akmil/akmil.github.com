@@ -139,14 +139,16 @@ function initModalHandler() {
  * Init header
  */
 function initHandlers() {
-
+    // TODO: refactor with autogreet.js initHandlers
+    // $('[data-toggle="popover"]').popover();
+    // $('[data-toggle="tooltip"]').tooltip();
     $('.js_add-autoanswer').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextFieldGreet(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
         imageUpload.init();
-        $('[data-toggle="popover"]').popover();
-        $('[data-toggle="tooltip"]').tooltip();
+        // $('[data-toggle="popover"]').popover(); // reinit
+        $('[data-toggle="tooltip"]').tooltip(); // reinit
         initModalHandler();
     });
 
