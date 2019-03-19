@@ -14,7 +14,8 @@ export function fillPosts($list, items, isAppendToList) {
         $list.empty();
     }
     items.forEach((item, idx) => {
-        const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-img-id="${item.id}">
+        const {id, type} = item;
+        const tpl = $(`<li class="col-4 list-group list-inline-item m-0 p-0" data-post-id="${id}" data-post-type="${type}">
             ${(item.type === 'photo')
                 ? `<img src="${item.url}" class="img-responsive p-2" alt="image" style="max-height: 230px;"/>`
                 : `<div class="${item.type} h-100">
@@ -41,16 +42,18 @@ function imageSelectHandler($list, modal, targetButton) {
     $('li', $list).on('click', (e) => {
         const $btnLi = $(e.target).closest('li');
         // const uploadedImgFromPosts = $btnLi.find('img').html();
-        const imgId = $btnLi.attr('data-img-id');
-        targetButton.attr('data-post-img-id', imgId);
-        console.log('click', imgId, modal);
+        const postId = $btnLi.attr('data-post-id');
+        const postType = $btnLi.attr('data-post-type');
+        // targetButton.closest('button').attr('data-post-img-id', imgId);
+        console.log('click', postType, postId, modal);
         // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_POST_SELECTED, imgId);
         modal.modal('hide');
         if (targetButton.closest('.col').find('.js_uploaded-img-from-posts').length) {
-            targetButton.closest('.col').find('.js_uploaded-img-from-posts').empty();
+            targetButton.closest('.col').find('.js_uploaded-img-from-posts').remove();
         }
 
-        const tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('img'));
+        const tplImageBox = $(`<div class="js_uploaded-img-from-posts uploaded-img-from-posts" 
+                data-post-id="${postId}" data-post-type="${postType}"></div`).append($btnLi.find('img'));
         // if (!tplImageBox.length) {
         //     tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('.video'));
         // }

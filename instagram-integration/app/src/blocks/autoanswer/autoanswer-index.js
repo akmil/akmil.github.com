@@ -72,7 +72,12 @@ function onSubmitHandler(e) {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
-        const postImgId = $(item).find(elSelector.addPostBtns).attr('data-post-img-id');
+        // const imageIdPost = $(item).find('.js_uploaded-img-from-posts').data('postImgId');
+        const postItemId = $(item).find('.js_uploaded-img-from-posts').data('postId');
+        const postItemType = $(item).find('.js_uploaded-img-from-posts').data('postType');
+
+        // data-post-id="${postId}" data-post-type="${postType}"
+
         if (!keyWord.length || !answer.length) {
             // console.log('keyWord is empty, not push me to request');
             $(item).append(`
@@ -92,12 +97,12 @@ function onSubmitHandler(e) {
             } : undefined
         };
 
-        if (postImgId) {
+        if (postItemId) {
             submitBodyItem.attachment = {
                 ...submitBodyItem.attachment,
                 post: {
-                    id: postImgId,
-                    type: 'photo'
+                    id: postItemId,
+                    type: postItemType || 'type-error'
                 }
             };
         }
