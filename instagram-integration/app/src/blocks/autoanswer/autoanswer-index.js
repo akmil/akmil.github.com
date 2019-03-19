@@ -153,6 +153,7 @@ function removeExtraTextFields() {
 let targetButton = {};
 
 function loadMoreHandler(getPosts) {
+    $('#load-more').off();
     $('#load-more').on('click', (e) => {
         const $btn = $(e.target);
         const cursor = $btn.attr('cursor');
