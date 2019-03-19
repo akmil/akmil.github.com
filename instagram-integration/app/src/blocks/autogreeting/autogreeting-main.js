@@ -37,6 +37,18 @@ function onSubmitHandler(e) {
     fields.each((idx, item) => {
         const message = $(item).find('textarea.answer-words').val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
+        const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
+        const postItemId = $imagePostBox.data('postId');
+        const postItemType = $imagePostBox.data('postType');
+        // if (postItemId) {
+        //     submitBodyItem.attachment = {
+        //         ...submitBodyItem.attachment,
+        //         post: {
+        //             id: postItemId,
+        //             type: postItemType || 'type-error'
+        //         }
+        //     };
+        // }
         reqBody.push({
             'answer': message,
             'attachment': imageId ? {

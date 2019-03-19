@@ -72,9 +72,9 @@ function onSubmitHandler(e) {
         const keyWord = keyWords($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
-        // const imageIdPost = $(item).find('.js_uploaded-img-from-posts').data('postImgId');
-        const postItemId = $(item).find('.js_uploaded-img-from-posts').data('postId');
-        const postItemType = $(item).find('.js_uploaded-img-from-posts').data('postType');
+        const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
+        const postItemId = $imagePostBox.data('postId');
+        const postItemType = $imagePostBox.data('postType');
 
         // data-post-id="${postId}" data-post-type="${postType}"
 
