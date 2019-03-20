@@ -65,7 +65,10 @@ module.exports = webpackMerge(webpackCommon, {
     new UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
-        warnings: false
+        // remove warnings
+        warnings: false,
+        // Drop console statements
+        drop_console: true
       },
       mangle: {
         screw_ie8: true

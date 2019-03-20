@@ -34,8 +34,7 @@ const state = {
 function onSubmitHandler(e) {
     const fields = $(elSelector.fields);
     const reqBody = [];
-    fields.each((idx, item) => {
-        const message = $(item).find('textarea.answer-words').val();
+    const getAttachment = (item) => {
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
@@ -51,10 +50,29 @@ function onSubmitHandler(e) {
         } else if (imageId) {
             attachment = {'image_id': imageId};
         }
+        return attachment;
+    };
+    fields.each((idx, item) => {
+        const message = $(item).find('textarea.answer-words').val();
+        // const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
+        // const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
+        // const postItemId = $imagePostBox.data('postId');
+        // const postItemType = $imagePostBox.data('postType');
+        // const post = {
+        //     id: postItemId,
+        //     type: postItemType || 'type-error'
+        // };
 
+        // if (postItemId) {
+        //     attachment = {post};
+        // } else if (imageId) {
+        //     attachment = {'image_id': imageId};
+        // }
+
+        const attachmentImg = getAttachment(item);
         reqBody.push({
             'answer': message,
-            attachment
+            'attachment': (attachmentImg) ? attachmentImg : undefined
         });
     });
     const nReqBody = {
