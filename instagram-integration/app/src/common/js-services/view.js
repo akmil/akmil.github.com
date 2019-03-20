@@ -92,10 +92,10 @@ function viewUtils() {
 
     function getValByCommaSeparator($el) {
         return $el.val()
-            .trim()
-            .replace(/ /g, '')
-            .split(',')
-            .filter(i => i.length > 0);
+                .trim()
+                .split(',')
+                .map(i => i.trim())
+                .filter(i => i.length > 0);
     }
 
     /**

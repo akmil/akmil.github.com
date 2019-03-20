@@ -92,12 +92,18 @@ export function fillUserList($list, dataArray) {
     const addConversations = function(conversations) {
         let tpl = '';
         conversations.forEach((item) => {
+            const isLastMsg = item['last_message'] && (parseInt(item['last_message'].length, 10));
+            const isAddDot = isLastMsg > 0 && item.to.length > 1 && item['is_unread'];
             tpl += `
             <div class="media p-1" data-conversation-id="${item.id}">
                 ${conversationDetail(item.to)}
                 <div class="media-body">
-                    <h5 class="title">${item.title}</h5>
-                    ${(item['last_message'] && (parseInt(item['last_message'].length, 10)) > 0 && item.to.length === 1)
+                    ${(isAddDot)
+                        ? '<span class="summary-dot summary-dot--inside-group"></span>'
+                        : ''
+                    }
+                    <h5 class="title ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
+                    ${(isLastMsg > 0 && item.to.length === 1)
                     ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
                             ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
                     : ''}
