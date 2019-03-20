@@ -72,6 +72,9 @@ export const CONST = {
             INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered',
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
+        modal: {
+            IMAGE_POST_SELECTED: 'image_post_selected'
+        },
         autoarnswer: {
             IMAGE_UPLOADED: 'image_loaded',
             TEXT_FILE_UPLOADED: 'text_file_uploaded'

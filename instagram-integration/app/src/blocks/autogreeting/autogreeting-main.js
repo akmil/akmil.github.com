@@ -3,7 +3,7 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as chatBotStatus from './autogreeting-status';
-import * as chatBotLogs from '../_shared/logs/logs';
+import * as logs from '../_shared/logs/logs';
 import {emoji} from '../../common/js-services/emoji';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
@@ -113,7 +113,7 @@ function onSubmitHandler(e) {
 //     $(`.${selectCls}`).on('change', function () {
 //         usernameSelected = $(`.${selectCls} option:selected`).val();
 //         console.log(usernameSelected);
-//         chatBotLogs.init(selectCls, clsConst);
+//         logs.init(selectCls, clsConst);
 //     });
 // }
 
@@ -124,7 +124,7 @@ function initLogsTab() {
         $(`.${selectCls}`).on('change', function () {
             usernameSelected = $(`.${selectCls} option:selected`).val();
             // clsConst.pathSubType = logsState.activeSubType;
-            chatBotLogs.init(selectCls, clsConst);
+            logs.init(selectCls, clsConst);
         });
     }
     // addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
@@ -279,14 +279,9 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         chatBotStatus.init(clsConst);
-        // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (e, dataObj) => {
-        //     console.log('INSTAGRAM_ACCOUNS_RENDERED', dataObj);
-        //     userListInstagram = dataObj.dataArray;
-        //     chatBotStatus.init(clsConst);
-        // });
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             // console.log(accounts);
-            chatBotLogs.init(selectCls, clsConst);
+            logs.init(selectCls, clsConst);
         });
 
         initModalHandler();
@@ -298,6 +293,19 @@ export function init() {
             const imageId = result && result.data && result.data.image_id;
             $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
             console.log('image_loaded', res);
+
+            // todo: make as callBack
+            const $imageBox = $(res.el).closest('.col').find('.js_uploaded-img-from-posts');
+            if ($imageBox.length) {
+                $imageBox.remove();
+            }
+        });
+        window.PubSub.subscribe(CONST.events.modal.IMAGE_POST_SELECTED, (e, data) => {
+            const $imageBox = $(data.closestCol).find('.file-upload-content');
+            console.log('$imageBox', $imageBox);
+            if ($imageBox.length) {
+                $imageBox.hide();
+            }
         });
     }
 }

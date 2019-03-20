@@ -143,7 +143,7 @@ export function init() {
     $removeImgBtn.off();
 
     $uploadBtn.on('click', (e) => {
-        const input = $(e.target).closest('.col').find(fileUploadBox).find('input');
+        const input = $(e.target).closest('.col').find(fileUploadBox).find('input.file-upload-input');
         input.trigger('click');
     });
 

@@ -202,12 +202,6 @@ $border-radius-follow: 4px;
 }
 
 .wizard-form {
-    //a {
-    //    color: $primary;
-    //    text-decoration: none;
-    //    background-color: transparent;
-    //    -webkit-text-decoration-skip: objects;
-    //}
 
     .spinner-box {
         background-color: transparent;
@@ -253,10 +247,16 @@ $border-radius-follow: 4px;
         height: initial;
     }
 
-    .uploaded-img-from-posts{
+
+
+    .uploaded-img-from-posts {
         img {
             width: 50%;
             max-width: 220px;
+            display: block;
+        }
+        &--remove-btn {
+
         }
     }
 }

@@ -1,4 +1,4 @@
-// import {CONST} from '../../common/js-services/consts';
+import {CONST} from '../../../common/js-services/consts';
 import UserTaskManager from '../../../common/js-services/api-task-manager';
 
 /* ---- modal*/
@@ -40,24 +40,32 @@ function hidePagination(modalFooter) {
 
 function imageSelectHandler($list, modal, targetButton) {
     $('li', $list).on('click', (e) => {
+        const imageBoxCls = 'js_uploaded-img-from-posts';
+        const imageDelBtnCls = 'js_delete-post-img';
+        const imageBoxSelector = `.${imageBoxCls}`;
         const $btnLi = $(e.target).closest('li');
-        // const uploadedImgFromPosts = $btnLi.find('img').html();
         const postId = $btnLi.attr('data-post-id');
         const postType = $btnLi.attr('data-post-type');
+        const closestCol = targetButton.closest('.col');
         // targetButton.closest('button').attr('data-post-img-id', imgId);
         console.log('click', postType, postId, modal);
-        // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_POST_SELECTED, imgId);
+        window.PubSub.publish(CONST.events.modal.IMAGE_POST_SELECTED,
+            {$btnLi, closestCol});
         modal.modal('hide');
-        if (targetButton.closest('.col').find('.js_uploaded-img-from-posts').length) {
-            targetButton.closest('.col').find('.js_uploaded-img-from-posts').remove();
+        if (targetButton.closest('.col').find(imageBoxSelector).length) {
+            targetButton.closest('.col').find(imageBoxSelector).remove();
         }
 
-        const tplImageBox = $(`<div class="js_uploaded-img-from-posts uploaded-img-from-posts" 
-                data-post-id="${postId}" data-post-type="${postType}"></div`).append($btnLi.find('img'));
-        // if (!tplImageBox.length) {
-        //     tplImageBox = $('<div class="js_uploaded-img-from-posts uploaded-img-from-posts"></div>').append($btnLi.find('.video'));
-        // }
+        const tplImageBox = $(`<div class="${imageBoxCls} uploaded-img-from-posts" 
+                data-post-id="${postId}" data-post-type="${postType}">
+                    <button class="btn btn-warning uploaded-img-from-posts--remove-btn ml-2 ${imageDelBtnCls}">Удалить</button>
+                </div`).prepend($btnLi.find('img'));
         targetButton.closest('.col').append(tplImageBox);
+
+        $(`.${imageDelBtnCls}`).off().on('click', (e) => {
+            const currentImageBox = $(e.target).closest('.col').find(imageBoxSelector);
+            currentImageBox.remove();
+        });
     });
 }
 

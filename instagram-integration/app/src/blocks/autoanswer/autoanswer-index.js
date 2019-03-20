@@ -1,5 +1,6 @@
 import {CONST} from '../../common/js-services/consts';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
+import viewUtils from '../../common/js-services/view';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as autoanswerStatus from './autoanswer-status';
@@ -9,6 +10,7 @@ import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
 
+const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
@@ -55,11 +57,6 @@ function validateIsEmpty($elements, e) {
 
 function onSubmitHandler(e) {
     const fields = $(elSelector.fields);
-    const keyWords = $el => $el.val()
-        .trim()
-        .replace(/ /g, '')
-        .split(',')
-        .filter(i => i.length > 0);
     const reqBody = [];
     let validation = true;
     const $elementsKeyWord = fields.find(elSelector.keyWord);
@@ -69,14 +66,12 @@ function onSubmitHandler(e) {
     validateIsEmpty($elementsAnswer, e);
 
     fields.each((idx, item) => {
-        const keyWord = keyWords($(item).find(elSelector.keyWord));
+        const keyWord = getValByCommaSeparator($(item).find(elSelector.keyWord));
         const answer = $(item).find(elSelector.answer).val();
         const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
-
-        // data-post-id="${postId}" data-post-type="${postType}"
 
         if (!keyWord.length || !answer.length) {
             // console.log('keyWord is empty, not push me to request');
@@ -168,21 +163,6 @@ function loadMoreHandler(getPosts) {
 
 function initModalHandler() {
 
-    /*
-    * .on('show.bs.modal') Exemple
-
-    const modal = $('#postsGridModal');
-    modal.on('show.bs.modal', function (event) {
-        targetButton = $(event.relatedTarget); // Button that triggered the modal
-        // const recipient = button.data('post-info'); // Extract info from data-* attributes
-        // console.log(recipient);
-        // Update the modal's content.
-        const modal = $(this);
-        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
-        modal.find('.modal-title').text('Публикации');
-    });
-    */
-
     $('.js_open-posts-gridModal').on('click', function (event) {
         targetButton = $(this); // Button that triggered the modal
         // Update the modal's content
@@ -255,6 +235,10 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         autoanswerStatus.init();
+        initModalHandler();
+        initEmojii();
+        imageUpload.init();
+
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);
         });
@@ -266,15 +250,17 @@ export function init() {
             console.log('image_loaded', res);
 
             // todo: make as callBack
-            if ($('.js_uploaded-img-from-posts').length) {
-                $('.js_uploaded-img-from-posts').remove();
+            const $imageBox = $(res.el).closest('.col').find('.js_uploaded-img-from-posts');
+            if ($imageBox.length) {
+                $imageBox.remove();
             }
         });
-        // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_POST_SELECTED, (e, id) => {
-        //     console.log('IMAGE_POST_SELECTED', id);
-        // });
-        initModalHandler();
-        initEmojii();
-        imageUpload.init();
+        window.PubSub.subscribe(CONST.events.modal.IMAGE_POST_SELECTED, (e, data) => {
+            const $imageBox = $(data.closestCol).find('.file-upload-content');
+            console.log('$imageBox', $imageBox);
+            if ($imageBox.length) {
+                $imageBox.hide();
+            }
+        });
     }
 }
