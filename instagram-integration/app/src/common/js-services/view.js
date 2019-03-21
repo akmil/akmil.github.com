@@ -94,8 +94,9 @@ function viewUtils() {
         return $el.val()
                 .trim()
                 .split(',')
-                .map(i => i.trim())
-                .filter(i => i.length > 0);
+                .map(i => i.trim().replace('↵', ''))
+                .filter(i => i.length > 0)
+            ;
     }
 
     /**
