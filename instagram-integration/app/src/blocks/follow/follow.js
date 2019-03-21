@@ -139,15 +139,20 @@ function setCompetitors() {
 function nextBtnvalidateCompetitorsHandler() {
     const $competitorsTextArea = $('.js_follow-competitors');
     const nextStepBtn = $competitorsTextArea.closest('.add-competitors').find('.btn-next');
+
+    const englishChars = /^[A-Za-z0-9,._ \n]+$/;
     // disable on init
     nextStepBtn.attr('disabled', 'disabled');
     $competitorsTextArea.on('input', () => {
-        const lengthText = $competitorsTextArea.val().length;
+        const text = $competitorsTextArea.val();
         // disable on checnge
         nextStepBtn.attr('disabled', 'disabled');
-        if (lengthText) {
+        if (text.length && englishChars.test(text)) {
+            $competitorsTextArea.removeClass('border-danger');
             // enable on checnge if lengthText>1
             nextStepBtn.removeAttr('disabled', 'disabled');
+        } else {
+            $competitorsTextArea.addClass('border-danger');
         }
     });
 }

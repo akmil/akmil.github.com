@@ -104,15 +104,19 @@ const $competitorsTextArea = $container.find('.js_stories-competitors textarea')
 const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
 function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
+    const englishChars = /^[A-Za-z0-9,._ \n]+$/;  // /^[A-Za-z0-9]*$/;
     // disable on init
     nextStepBtn.attr('disabled', 'disabled');
     $competitorsTextArea.on('input', () => {
-        const lengthText = $competitorsTextArea.val().length;
+        const text = $competitorsTextArea.val();
         // disable on checnge
         nextStepBtn.attr('disabled', 'disabled');
-        if (lengthText) {
+        if (text.length && englishChars.test(text)) {
+            $competitorsTextArea.removeClass('border-danger');
             // enable on checnge if lengthText>1
             nextStepBtn.removeAttr('disabled', 'disabled');
+        } else {
+            $competitorsTextArea.addClass('border-danger');
         }
     });
 }
