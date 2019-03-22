@@ -86,7 +86,7 @@ function onSubmitHandler(e) {
             'forms': reqBody
         }
     };
-    console.log('make request here**', nReqBody);
+    console.log('make request **', nReqBody);
     function cbError(res) {
         const msg = res.status.message;
         $('.form-submit-finish--error').addClass('d-block')
