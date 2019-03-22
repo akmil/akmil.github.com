@@ -105,9 +105,7 @@ const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
 function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
     const englishChars = /^[A-Za-z0-9,._ \n]+$/;  // /^[A-Za-z0-9]*$/;
-    // disable on init
-    nextStepBtn.attr('disabled', 'disabled');
-    $competitorsTextArea.on('input', () => {
+    const checkTextArea = (e, isInit) => {
         const text = $competitorsTextArea.val();
         // disable on checnge
         nextStepBtn.attr('disabled', 'disabled');
@@ -115,10 +113,13 @@ function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, n
             $competitorsTextArea.removeClass('border-danger');
             // enable on checnge if lengthText>1
             nextStepBtn.removeAttr('disabled', 'disabled');
-        } else {
+        } else if (!isInit) {
             $competitorsTextArea.addClass('border-danger');
         }
-    });
+    };
+    // disable on init
+    checkTextArea(null, 'isInit');
+    $competitorsTextArea.on('input', checkTextArea);
 }
 
 /**
@@ -133,6 +134,11 @@ function initHandlers() {
     $('.js_get-stories-type input[type=radio]').on('click', (e) => {
         const value = $(e.target).attr('value');
         state.subtype = value.toUpperCase();
+        if (state.subtype === CONST.url.tmTypes.storiesSubT[1]) {
+            nextStepBtn.removeAttr('disabled', 'disabled'); // enable button 'Запустить'
+        } else {
+            nextStepBtn.attr('disabled', 'disabled');
+        }
         console.log(state);
     });
 
@@ -202,6 +208,7 @@ function addTextArea(stepNumber) {
         // if (!$('.stories-competitors').length) {
         //     $(fieldLast).find('.form-bottom>.row').after(tpl);
         // }
+        nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn);
         $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
         console.log('end');
     } else {
