@@ -172,6 +172,16 @@ function setUserNameFirstStep(state) {
     usernameSelected = state.username;
 }
 
+function checkTitleStep3(stepNumber) {
+    const {wizardForm} = elSelector;
+    const title = $(`${wizardForm} h3`).get(stepNumber + 1);
+    if (state.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
+        $(title).text('Выберите режим и добавьте файл с пользователями');
+    } else {
+        $(title).text('Выберите режим');
+    }
+}
+
 function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
     if (state.subtype === CONST.url.tmTypes.unfollowingSubT[1]) {
@@ -193,8 +203,10 @@ function stepReducer(stepNumber, state) {
         case 1:
             // console.log(state, stepNumber);
             getConfig();
+            checkTitleStep3(stepNumber);
             break;
         case 2:
+            // THis step is upreachable
             console.log(state, stepNumber);
             addTextArea(stepNumber);
             break;
