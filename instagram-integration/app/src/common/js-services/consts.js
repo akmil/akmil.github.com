@@ -36,7 +36,7 @@ export const CONST = {
         instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
         instagramTaskManager_postTextAttachment: 'instagram-task-manager/task/attachment/users_list',
         instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
-        instagramTaskManager_postStartChatBot: 'instagram-task-manager/task',
+        instagramTaskManager_postStartTask: 'instagram-task-manager/task',
         instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
     },
     user: {

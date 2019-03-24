@@ -47,7 +47,7 @@ function onSubmitHandler(e) {
         $('.form-submit-finish--error').addClass('d-block')
         .find('.alert').append(`<p>${msg}</p>`);
     }
-    UserTaskManager.postStartChatBot(nReqBody, cbError).then((result) => {
+    UserTaskManager.postStartTask(nReqBody, cbError).then((result) => {
         // console.log('postBot');
         if (result.status.state === 'ok') {
             // console.log(JSON.stringify(result));

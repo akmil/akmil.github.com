@@ -25,7 +25,7 @@ class UserTaskManager {
             }
         };
         this.postStartFollowingList = this.postStartFollowingList;
-        this.postStartChatBot = this.postStartChatBot;
+        this.postStartTask = this.postStartTask;
     }
 
     // isLoggedIn() {
@@ -107,8 +107,8 @@ class UserTaskManager {
             setting, cbError);
     }
 
-    postStartChatBot(body, cbError) {
-        const path = 'instagramTaskManager_postStartChatBot';
+    postStartTask(body, cbError) {
+        const path = 'instagramTaskManager_postStartTask';
         return this.postStartFollowingList(body, cbError, path);
     }
     postImageAutoanswer(body, cbError) {

@@ -124,7 +124,7 @@ function onSubmitHandler(e) {
         $('.form-submit-finish--error').addClass('d-block')
         .find('.alert').append(`<p>${msg}</p>`);
     }
-    UserTaskManager.postStartChatBot(nReqBody, cbError).then((result) => {
+    UserTaskManager.postStartTask(nReqBody, cbError).then((result) => {
         if (result.status.state === 'ok') {
             $('.form-submit-finish').addClass('d-block')
                 .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
