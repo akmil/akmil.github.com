@@ -194,7 +194,7 @@ function scrollHandler(scrollDelay, pagination) {
     // const $messages = $('.messages-info');
     let recentScroll = false;
     let makeReqOnce = true;
-    cursor = pagination.prev_cursor;
+    cursor = (pagination && pagination.prev_cursor) ? pagination.prev_cursor : null;
     function checkIsOnce(newCursor) {
         if (newCursor !== cursor) {
             cursor = newCursor;

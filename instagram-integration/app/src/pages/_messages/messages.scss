@@ -53,10 +53,13 @@ $avatar-conversation-size: 38px;
         border-radius: 10px;
         text-align: right;
         display: inline-block;
-        &--inside-group {
-            position: absolute;
-            left: 10px;
-        }
+        position: absolute;
+        right: 10px;
+
+        // &--inside-group {
+        //     position: absolute;
+        //     right: 10px;
+        // }
     }
 }
 

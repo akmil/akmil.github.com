@@ -1,5 +1,5 @@
 import viewUtils from '../../common/js-services/view';
-import UserConversation from '../../common/js-services/api-user-direct';
+// import UserConversation from '../../common/js-services/api-user-direct';
 
 export function clearMassagesList($list, stateCfg) {
     stateCfg.pageIncrement = 0;
@@ -93,21 +93,24 @@ export function fillUserList($list, dataArray) {
     const addConversations = function(conversations) {
         let tpl = '';
         conversations.forEach((item) => {
-            const isLastMsg = item['last_message'] && (parseInt(item['last_message'].length, 10));
-            const isAddDot = isLastMsg > 0 && item.to.length > 1 && item['is_unread'];
+            const isUnread = item['is_unread'];
+            const lastMessage = item['last_message'];
+            const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
+            const isAddDot = isLastMsg > 0 && item.to.length > 1 && isUnread;
             tpl += `
                 <div class="media p-1" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
                     <div class="media-body">
-                        ${(isAddDot)
-                            ? '<span class="summary-dot summary-dot--inside-group"></span>'
+                        ${(isAddDot || isUnread)
+                            ? '<span class="summary-dot"></span>'
                             : ''
                         }
-                        <h5 class="title ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
+                        <!-- {isUnread ? '<span class="summary-dot"></span>' : ''} -->
+                        <h5 class="title ${isUnread ? 'font-weight-bold' : ''} ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
                         ${(isLastMsg > 0 && item.to.length === 1)
-                        ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
-                                ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
-                        : ''}
+                            ? `<p class="summary text-muted">${lastMessage}</p>`
+                            : ''
+                        }
                     </div>
                 </div>
             `;
@@ -138,10 +141,8 @@ export function fillUserList($list, dataArray) {
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
                 ${addConversations(item.conversations, idx)}
             </div>
+            ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor) : null}
         </li>`;
-        if (pagination && pagination.prev_cursor) {
-            tpl += loadMoreBox(idx, pagination.prev_cursor);
-        }
     });
     $(tpl).appendTo(cList);
     $('.js_load-more-box button').on('click', (e) => {
@@ -160,7 +161,7 @@ export const messageAreaHendler = ($textArea, $sendMessageButton) => {
             if (e.ctrlKey) {
                 // console.log('ctrl+enter');
                 e.preventDefault();
-                e.target.value = `${e.target.value}\n`;
+                e.target.value += '\n';
             } else {
                 if (e.target.value.trim().length) {
                     $sendMessageButton.trigger('click');
