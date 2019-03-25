@@ -1,4 +1,5 @@
 import viewUtils from '../../common/js-services/view';
+import UserConversation from '../../common/js-services/api-user-direct';
 
 export function clearMassagesList($list, stateCfg) {
     stateCfg.pageIncrement = 0;
@@ -95,26 +96,31 @@ export function fillUserList($list, dataArray) {
             const isLastMsg = item['last_message'] && (parseInt(item['last_message'].length, 10));
             const isAddDot = isLastMsg > 0 && item.to.length > 1 && item['is_unread'];
             tpl += `
-            <div class="media p-1" data-conversation-id="${item.id}">
-                ${conversationDetail(item.to)}
-                <div class="media-body">
-                    ${(isAddDot)
-                        ? '<span class="summary-dot summary-dot--inside-group"></span>'
-                        : ''
-                    }
-                    <h5 class="title ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
-                    ${(isLastMsg > 0 && item.to.length === 1)
-                    ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
-                            ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
-                    : ''}
+                <div class="media p-1" data-conversation-id="${item.id}">
+                    ${conversationDetail(item.to)}
+                    <div class="media-body">
+                        ${(isAddDot)
+                            ? '<span class="summary-dot summary-dot--inside-group"></span>'
+                            : ''
+                        }
+                        <h5 class="title ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
+                        ${(isLastMsg > 0 && item.to.length === 1)
+                        ? `<p class="summary ${item['is_unread'] ? 'font-weight-bold' : 'text-muted'}">${item['last_message']}</p>
+                                ${item['is_unread'] ? '<span class="summary-dot"></span>' : ''}`
+                        : ''}
+                    </div>
                 </div>
-            </div>`;
+            `;
         });
         return tpl;
     };
+    const loadMoreBox = (idx, prev_cursor) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}">
+        <button type="button" class="btn btn-submit">SHOW MORE</button>
+    </div>`;
     cList.empty().addClass('border-light-color');
     // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
     items.forEach((item, idx) => {
+        const {pagination} = item;
         tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
                 aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="border-bottom mb-1 media pb-2" id="heading-${idx}">
@@ -133,8 +139,19 @@ export function fillUserList($list, dataArray) {
                 ${addConversations(item.conversations, idx)}
             </div>
         </li>`;
+        if (pagination && pagination.prev_cursor) {
+            tpl += loadMoreBox(idx, pagination.prev_cursor);
+        }
     });
     $(tpl).appendTo(cList);
+    $('.js_load-more-box button').on('click', (e) => {
+        const $btn = $(e.target);
+        const $btnBox = $btn.closest('.js_load-more-box');
+        const section = $btnBox.data('idx');
+        const cursor = $btnBox.data('cursor');
+
+        console.log('click', section, cursor);
+    });
 }
 
 export const messageAreaHendler = ($textArea, $sendMessageButton) => {
@@ -152,4 +169,29 @@ export const messageAreaHendler = ($textArea, $sendMessageButton) => {
             }
         }
     });
+};
+
+export const addMoreUsersAccordion = (conversations, conversationToAdd) => {
+    // const $btnMoreBox = $('#load-more-box');
+    // const $btnMore = $('button', $btnMoreBox);
+    // $btnMoreBox.show();
+    console.log('start add pagination to accordioin', conversationToAdd);
+    // conversations.forEach((item, idx) => {
+    //     if (item.pagination && item.pagination.prev_cursor) {
+    //         console.log('conversation - >', item.pagination);
+    //         $btnMore.on('click', () => {
+    //             console.log('click - >', item.pagination);
+    //             const details = {
+    //                 username: '',
+    //                 cursor: item.pagination.prev_cursor
+    //             };
+    //             UserConversation.getMetadataDetailUsers(details).then((result) => {
+    //                 if (!result.data) {
+    //                     return;
+    //                 }
+    //                 console.log('**getMetadataDetailUsers** result - >', result);
+    //             });
+    //         });
+    //     }
+    // });
 };

@@ -31,7 +31,13 @@ class UserConversation {
     }
 
     getMetadata(token, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}`, {headers: {token}}, cbError);
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}`, {headers: {'token': this.getToken()}}, cbError);
+    }
+
+    getMetadataDetailUsers(details, cbError) {
+        const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}${cursor}`,
+         {headers: {'token': this.getToken()}}, cbError);
     }
 
     getMetadataDetailConversation(token, details, cbError) {

@@ -3,7 +3,7 @@ import EmojiPicker from 'vanilla-emoji-picker';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import {fillMassagesList, fillUserList, messageAreaHendler} from './utils';
+import {fillMassagesList, fillUserList, messageAreaHendler, addMoreUsersAccordion} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
@@ -101,28 +101,46 @@ $(document).ready(() => {
         }
     });*/
 });
-
+let isTimeOutRunned = false;
 function getAndFillUserList(isActiveFirst) {
     const $userList = $('.messages-user-list');
-    const metadata = UserConversation.getMetadata(token);
     let prevActiveDialogId = '';
     if (!isActiveFirst) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
     }
-    metadata.then((result) => {
+    UserConversation.getMetadata(token).then((result) => {
         if (!result.data) {
             return;
         }
-        result.data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
+        const {data} = result;
+        data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
         // messages-user-list from utils.js
-        fillUserList($userList, result.data);
-        if (result.data.settings && result.data.settings.invoke_in_millis) {
-            updateInterval = result.data.settings.invoke_in_millis;
+        fillUserList($userList, data);
+        if (data.settings && data.settings.invoke_in_millis) {
+            updateInterval = data.settings.invoke_in_millis;
+            updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
         }
         if (isActiveFirst) {
             $userList.find('li:first-child .collapse').addClass('show');
         } else {
             $(`#${prevActiveDialogId}`).addClass('show');
+        }
+        if (data.pagination && data.pagination.prev_cursor) {
+            const conversationToAdd = {
+                tpl: `<div class="list-footer text-center" style="display: none;" id="load-more-box">
+                        <button id="js_-accordion-more_btn" type="button" class="btn btn-submit">SHOW MORE</button>
+                    </div>`
+            };
+            console.log('start add pagination to accordioin', conversationToAdd);
+            addMoreUsersAccordion(data.meta, conversationToAdd);
+        }
+        // do it once
+        if (!isTimeOutRunned) {
+            setInterval(() => {
+                console.log('setInterval');
+                getAndFillUserList();
+            }, updateInterval);
+            isTimeOutRunned = true;
         }
     });
 }
@@ -267,7 +285,6 @@ function addHandlers() {
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation(username, conversationId, 'isScrollDown');
         flagInitialVal = true; // reset first value flag
-        updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
         // resend request
         if (intervalId) {
             clearInterval(intervalId);
@@ -278,9 +295,9 @@ function addHandlers() {
             getAndFillConversation(username, conversationId);
         }, updateInterval);
 
-        setInterval(() => {
-            getAndFillUserList();
-        }, updateInterval);
+        // setInterval(() => {
+        //     getAndFillUserList();
+        // }, updateInterval);
     });
 
     window.PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
