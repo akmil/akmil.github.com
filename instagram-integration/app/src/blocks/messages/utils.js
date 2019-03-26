@@ -75,50 +75,59 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) 
     });
 }
 
-export function fillUserList($list, dataArray) {
-    const items = dataArray.meta;
-    const cList = $list;
+const conversationDetail = function(items) {
     let tpl = '';
-    const conversationDetail = function(items) {
-        let tpl = '';
-        items.forEach((item) => {
-            if (items.length > 1) {
-                tpl += `<img src="${item['profile_pic_url']}" alt='image' class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
-            } else {
-                tpl += `<img src="${item['profile_pic_url']}" alt='image' class="media-photo mr-1" style="width: 24px;">`;
-            }
-        });
-        return tpl;
-    };
-    const addConversations = function(conversations) {
-        let tpl = '';
-        conversations.forEach((item) => {
-            const isUnread = item['is_unread'];
-            const lastMessage = item['last_message'];
-            const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
-            const isAddDot = isLastMsg > 0 && item.to.length > 1 && isUnread;
-            tpl += `
+    items.forEach((item) => {
+        if (items.length > 1) {
+            tpl += `<img src="${item['profile_pic_url']}" alt='image' class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
+        } else {
+            tpl += `<img src="${item['profile_pic_url']}" alt='image' class="media-photo mr-1" style="width: 24px;">`;
+        }
+    });
+    return tpl;
+};
+const addConversations = function(conversations) {
+    let tpl = '';
+    conversations.forEach((item) => {
+        const isUnread = item['is_unread'];
+        const lastMessage = item['last_message'];
+        const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
+        const isAddDot = isLastMsg > 0 && item.to.length > 1 && isUnread;
+        tpl += `
                 <div class="media p-1" data-conversation-id="${item.id}">
                     ${conversationDetail(item.to)}
                     <div class="media-body">
                         ${(isAddDot || isUnread)
-                            ? '<span class="summary-dot"></span>'
-                            : ''
-                        }
+            ? '<span class="summary-dot"></span>'
+            : ''
+            }
                         <!-- {isUnread ? '<span class="summary-dot"></span>' : ''} -->
                         <h5 class="title ${isUnread ? 'font-weight-bold' : ''} ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
                         ${(isLastMsg > 0 && item.to.length === 1)
-                            ? `<p class="summary text-muted">${lastMessage}</p>`
-                            : ''
-                        }
+            ? `<p class="summary text-muted">${lastMessage}</p>`
+            : ''
+            }
                     </div>
                 </div>
             `;
-        });
-        return tpl;
-    };
+    });
+    return tpl;
+};
+
+export function appendUserList($list, item, details) {
+    const {cursor, section, username} = details;
+    const $collapse = $(`#collapse-${section}`);
+    console.log(cursor, username);
+    $collapse.append(addConversations(item.conversations));
+    // ${addConversations(item.conversations, idx)}
+}
+
+export function fillUserList($list, dataArray, loadMoreCbFunction) {
+    const items = dataArray.meta;
+    const cList = $list;
+    let tpl = '';
     const loadMoreBox = (idx, prev_cursor) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}">
-        <button type="button" class="btn btn-submit">SHOW MORE</button>
+        <button type="button" class="btn btn-submit">Загрузить еще</button>
     </div>`;
     cList.empty().addClass('border-light-color');
     // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
@@ -139,7 +148,7 @@ export function fillUserList($list, dataArray) {
                 </div>
             </div>
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
-                ${addConversations(item.conversations, idx)}
+                ${addConversations(item.conversations)}
             </div>
             ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor) : null}
         </li>`;
@@ -150,8 +159,11 @@ export function fillUserList($list, dataArray) {
         const $btnBox = $btn.closest('.js_load-more-box');
         const section = $btnBox.data('idx');
         const cursor = $btnBox.data('cursor');
+        const username = $btnBox.closest('li').data('username');
 
         console.log('click', section, cursor);
+        loadMoreCbFunction(cursor, section, username);
+        e.stopPropagation();
     });
 }
 

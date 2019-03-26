@@ -156,8 +156,8 @@ function fillList($list, dataArray) {
     const addSettingBtn = (username) => {
         if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
             return `<div class="account-setting col-1 d-flex flex-column">
-                <button class="btn btn-outline-success p-1 mb-1 js_acc-edit"><i class="fas fa-pen m-0"></i></button>
-                <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh"><i class="fas fa-retweet m-0"></i></button>
+                <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" data-username="${username}"><i class="fas fa-pen m-0"></i></button>
+                <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
                 <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
             </div>`;
         }
@@ -204,7 +204,7 @@ function fillList($list, dataArray) {
                     : ''}
                 </div>
                 ${stats(info)}
-                ${(addSettingBtn()) ? addSettingBtn() : ''}
+                ${(addSettingBtn()) ? addSettingBtn(item.username) : ''}
             </div>
         </li>`).appendTo(cList);
         }
@@ -262,7 +262,9 @@ function reloadList() {
         $('.spinner-box').addClass('d-none');
     });
     const cfg = {
-        deleteBtnCls: '.js_acc-delete'
+        deleteBtnCls: '.js_acc-delete',
+        updateBtnCls: '.js_acc-refresh',
+        editBtnCls: '.js_acc-edit'
     };
     settingButtonsHandler(cfg);
 }
@@ -393,7 +395,9 @@ export function init() {
     //    checkResponse(result, isResendRequest);
         checkResponse(result);
         const cfg = {
-            deleteBtnCls: '.js_acc-delete'
+            deleteBtnCls: '.js_acc-delete',
+            updateBtnCls: '.js_acc-refresh',
+            editBtnCls: '.js_acc-edit'
         };
         settingButtonsHandler(cfg);
     }).catch((err) => {

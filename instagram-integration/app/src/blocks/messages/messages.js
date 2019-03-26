@@ -3,7 +3,7 @@ import EmojiPicker from 'vanilla-emoji-picker';
 // import qq from 'fine-uploader'; //todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import {fillMassagesList, fillUserList, messageAreaHendler, addMoreUsersAccordion} from './utils';
+import {fillMassagesList, fillUserList, messageAreaHendler, addMoreUsersAccordion, appendUserList} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
@@ -18,6 +18,7 @@ const stateCfg = {
 let updateInterval = '';
 let intervalId = false;
 let cursor = '';
+let intervalUserList = false;
 
 const renderResults = function (cfg) {
     const {dataArray: data, $list: ulElement, stateCfg} = cfg;
@@ -102,12 +103,42 @@ $(document).ready(() => {
     });*/
 });
 let isTimeOutRunned = false;
+function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username) {
+    const $userList = $('.messages-user-list');
+    if (loadMoreCbArgsCursor) {
+        console.log('UserConversation', username);
+        UserConversation.getMetadataDetailUsers({cursor: loadMoreCbArgsCursor, username}).then((result) => {
+            if (!result.data) {
+                return;
+            }
+            const {data} = result;
+            // data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
+            appendUserList($userList, data.meta, {cursor: loadMoreCbArgsCursor, section, username});
+            const {pagination} = data;
+            if (pagination && pagination.prev_cursor) {
+              // make one more req?
+                console.error('found more pagination, but list not updated');
+                // TODO
+            } else {
+                // hide show more
+                const $collapse = $(`#collapse-${section}`).closest('li');
+                $collapse.find('.js_load-more-box').addClass('d-none');
+                // stop rerender list
+                console.error('stop updating user list');
+                clearInterval(intervalUserList);
+            }
+            console.log('section', section);
+        });
+    }
+}
+
 function getAndFillUserList(isActiveFirst) {
     const $userList = $('.messages-user-list');
     let prevActiveDialogId = '';
     if (!isActiveFirst) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
     }
+
     UserConversation.getMetadata(token).then((result) => {
         if (!result.data) {
             return;
@@ -115,7 +146,7 @@ function getAndFillUserList(isActiveFirst) {
         const {data} = result;
         data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
         // messages-user-list from utils.js
-        fillUserList($userList, data);
+        fillUserList($userList, data, getAndFillUserListCursor);
         if (data.settings && data.settings.invoke_in_millis) {
             updateInterval = data.settings.invoke_in_millis;
             updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
@@ -136,7 +167,7 @@ function getAndFillUserList(isActiveFirst) {
         }
         // do it once
         if (!isTimeOutRunned) {
-            setInterval(() => {
+            intervalUserList = setInterval(() => {
                 console.log('setInterval');
                 getAndFillUserList();
             }, updateInterval);

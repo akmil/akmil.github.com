@@ -20,6 +20,7 @@ export const CONST = {
         confirmation: 'registration/basic/confirmation?token',
         instagram_addAccount: 'instagram-accounts/', // toDO: check is redundant used to add Account
         instagram_deleteAccount: username => `instagram-accounts/${username}`,
+        instagram_modifyAccount: username => `instagram-accounts/meta/${username}`,
         instagramAccount_getMetaData: 'instagram-accounts/meta',
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',

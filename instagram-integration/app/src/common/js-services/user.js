@@ -72,6 +72,15 @@ class User {
         };
         return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount', username)}`, setting);
     }
+    updateInstagramAccount(username) {
+        const setting = {
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', username)}`, setting);
+    }
 
     // getInstagramAccount() {
     //     const setting = {
