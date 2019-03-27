@@ -117,97 +117,105 @@ function addListHandler() {
     });
 }
 
+const insertItem = (data, text, cssCls) => {
+    const liTpl = `${(data)
+        ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
+        : `<li class="list-inline-item ${cssCls}"><span class="figure">0</span><span>${text}</span></li>`}`;
+    return liTpl;
+};
+
+const stats = (info) => {
+    const tpl = `<div class="col">
+        <ul class="list-inline text-center counts-list">
+        ${(info)
+          ? `${insertItem(info['media_count'], 'Публикации', 'media-count')}
+            ${insertItem(info['follower_count'], 'Подписчики', 'follower-count')}
+            ${insertItem(info['following_count'], 'Подписки', 'following-count')}`
+          : `${insertItem(false, 'Публикации', 'media-count')}
+            ${insertItem(false, 'Подписчики', 'follower-count')}
+            ${insertItem(false, 'Подписки', 'following-count')}`
+        }
+        </ul>
+    </div>`;
+    return tpl;
+};
+
+const checkPointText = (checkpoint, item) => {
+    if (checkpoint.status === 'TRIGGERED') {
+        return `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+            data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
+            data-username="${item.username || ''}"
+            data-toggle="modal" data-target="#security-code">
+            <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
+    } else if (item.status === 'FAIL') {
+        return '<span class="text-danger">Ошибка при добавлении</span>';
+    }
+};
+
+const addSettingBtn = (username) => {
+    if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
+        return `<div class="account-setting col-1 d-flex flex-column">
+            <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" data-username="${username}"><i class="fas fa-pen m-0"></i></button>
+            <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
+            <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
+        </div>`;
+    }
+};
+
+export const renderItem = (item, cList, defaultAvatarSrc) => {
+    const info = item.info;
+    const checkpoint = item.checkpoint || item;
+    if (!info) {
+        return $(`<li class="media py-3" data-username="${item.username}">
+            <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
+            <div class="media-body d-flex">
+                <div class="col user-info">
+                    ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
+                </div>
+                <div class="col user-checkpoint">
+                    ${checkPointText(checkpoint, item)}
+                </div>
+                ${stats()}
+                ${addSettingBtn(item.username)}
+            </div>
+        </li>`).appendTo(cList);
+    } else {
+        return $(`<li class="media py-3" data-username="${item.username}">
+        ${(info['profile_pic_url'])
+            ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
+            : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
+        <div class="media-body d-flex">
+            <div class="col user-info">
+                ${(item.username) ? `<p class="mt-0 mb-1 name lead">${item.username}</p>` : ''}
+                ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
+                ${(info.name) ? '' : ''  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
+                 ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
+                
+            </div>
+            <div class="col user-checkpoint">
+                ${(checkpoint.status === 'TRIGGERED')
+                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                        data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
+                        data-username="${item.username || ''}" 
+                        data-toggle="modal" data-target="#security-code">
+                    <i class="fas fa-key"></i>Пройти чекпоинт</button>`
+                : ''}
+            </div>
+            ${stats(info)}
+            ${(addSettingBtn()) ? addSettingBtn(item.username) : ''}
+        </div>
+    </li>`);
+    }
+};
+
 function fillList($list, dataArray) {
     const items = dataArray;
     const cList = $list;
     const defaultAvatarSrc = CONST.user.defaulAvatar;
-    const insertItem = (data, text, cssCls) => {
-        const liTpl = `${(data)
-            ? `<li class="list-inline-item ${cssCls}"><span class="figure">${data}</span><span>${text}</span></li>`
-            : `<li class="list-inline-item ${cssCls}"><span class="figure">0</span><span>${text}</span></li>`}`;
-        return liTpl;
-    };
-    const stats = (info) => {
-        const tpl = `<div class="col">
-            <ul class="list-inline text-center counts-list">
-            ${(info)
-              ? `${insertItem(info['media_count'], 'Публикации', 'media-count')}
-                ${insertItem(info['follower_count'], 'Подписчики', 'follower-count')}
-                ${insertItem(info['following_count'], 'Подписки', 'following-count')}`
-              : `${insertItem(false, 'Публикации', 'media-count')}
-                ${insertItem(false, 'Подписчики', 'follower-count')}
-                ${insertItem(false, 'Подписки', 'following-count')}`
-            }
-            </ul>
-        </div>`;
-        return tpl;
-    };
-    const checkPointText = (checkpoint, item) => {
-        if (checkpoint.status === 'TRIGGERED') {
-            return `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
-                data-username="${item.username || ''}"
-                data-toggle="modal" data-target="#security-code">
-                <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
-        } else if (item.status === 'FAIL') {
-            return '<span class="text-danger">Ошибка при добавлении</span>';
-        }
-    };
-    const addSettingBtn = (username) => {
-        if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
-            return `<div class="account-setting col-1 d-flex flex-column">
-                <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" data-username="${username}"><i class="fas fa-pen m-0"></i></button>
-                <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
-                <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
-            </div>`;
-        }
-    };
+
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
-        const info = item.info;
-        const checkpoint = item.checkpoint || item;
-
-        if (!info) {
-            $(`<li class="media py-3" data-username="${item.username}">
-                <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
-                <div class="media-body d-flex">
-                    <div class="col user-info">
-                        ${(item.username) ? `<h4 class="mt-0 mb-1 name">${item.username}</h4>` : ''}
-                    </div>
-                    <div class="col user-checkpoint">
-                        ${checkPointText(checkpoint, item)}
-                    </div>
-                    ${stats()}
-                    ${addSettingBtn(item.username)}
-                </div>
-            </li>`).appendTo(cList);
-        } else {
-            $(`<li class="media py-3" data-username="${item.username}">
-            ${(info['profile_pic_url'])
-                ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
-                : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
-            <div class="media-body d-flex">
-                <div class="col user-info">
-                    ${(item.username) ? `<p class="mt-0 mb-1 name lead">${item.username}</p>` : ''}
-                    ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
-                    ${(info.name) ? '' : ''  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
-                     ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
-                    
-                </div>
-                <div class="col user-checkpoint">
-                    ${(checkpoint.status === 'TRIGGERED')
-                    ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
-                            data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
-                            data-username="${item.username || ''}" 
-                            data-toggle="modal" data-target="#security-code">
-                        <i class="fas fa-key"></i>Пройти чекпоинт</button>`
-                    : ''}
-                </div>
-                ${stats(info)}
-                ${(addSettingBtn()) ? addSettingBtn(item.username) : ''}
-            </div>
-        </li>`).appendTo(cList);
-        }
+        renderItem(item, cList, defaultAvatarSrc).appendTo(cList);
     });
     window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
