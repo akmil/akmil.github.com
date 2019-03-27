@@ -10,7 +10,6 @@ export function settingButtonsHandler(classCfg) {
     // DELETE .../instagram-accounts/{username}
     $(deleteBtnCls).on('click', (e) => {
         username = $(e.target).closest(deleteBtnCls).data('username');
-        console.log();
         modalConfirm.modal('show');
     });
     $('.js_acc-delete-confirm').on('click', (e) => {
@@ -23,7 +22,7 @@ export function settingButtonsHandler(classCfg) {
         });
     });
 
-    // get instagram-accounts/meta/{username}
+    // GET instagram-accounts/meta/{username}
     $(updateBtnCls).on('click', (e) => {
         const $li = $(e.target).closest('li');
         const username = $(e.target).closest(updateBtnCls).data('username');
@@ -42,12 +41,36 @@ export function settingButtonsHandler(classCfg) {
             Spinner.remove();
         });
     });
+
     // PUT instagram-accounts/{username}
+    const modalEdit = $('#edit-user-promt');
+    // eslint-disable-next-line no-unused-vars
+    let liUserEdit = {};
     $(editBtnCls).on('click', (e) => {
-        username = $(e.target).closest(editBtnCls).data('username');
+        liUserEdit = $(e.target).closest('li');
+        const username = $(e.target).closest(editBtnCls).data('username');
         console.log('editBtnCls', username);
-        User.updateInstagramAccount(username).then((result) => {
-            console.log(result);
-        });
+        modalEdit.modal('show');
+    });
+    $('.js_edit-profile-modify').on('click', (e) => {
+        const $form = modalEdit.find('form').get(0);
+        // const form = document.forms[wizardFormName];
+        const login = $form['login'];
+        const username = $form['username'];
+        const site = $form['site'];
+        const about = $form['about'];
+        console.log($form, login);
+        // const body = {
+        //     'username': '',
+        //     'name': '',
+        //     'biography': '',
+        //     'url': '',
+        //     'open': true
+        // };
+        // User.delInstagramAccount(username, body).then((result) => {
+        //     if (result.status.state === 'ok') {
+        //         modalConfirm.hide();
+        //     }
+        // });
     });
 }

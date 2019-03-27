@@ -62,18 +62,29 @@ class User {
 
         return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
     }
-    delInstagramAccount(username) {
+    editInstagramAccount(username, body) {
         const setting = {
-            method: 'DELETE',
+            method: 'PUT',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            },
+            body
+        };
+        return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', username)}`, setting);
+    }
+    updateInstagramAccount(username) {
+        const setting = {
             headers: {
                 ...this.settingPost.headers,
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(`${CONST.getPath('instagram_deleteAccount', username)}`, setting);
+        return this.network.sendRequest(`${CONST.getPath('instagram_getAccountByUser', username)}`, setting);
     }
-    updateInstagramAccount(username) {
+    delInstagramAccount(username) {
         const setting = {
+            method: 'DELETE',
             headers: {
                 ...this.settingPost.headers,
                 'token': this.getToken()

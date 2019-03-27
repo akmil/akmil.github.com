@@ -18,26 +18,36 @@ export const CONST = {
         registration: 'registration/basic/',
         login: 'registration/basic/login',
         confirmation: 'registration/basic/confirmation?token',
-        instagram_addAccount: 'instagram-accounts/', // toDO: check is redundant used to add Account
-        instagram_deleteAccount: username => `instagram-accounts/${username}`,
-        instagram_modifyAccount: username => `instagram-accounts/meta/${username}`,
+
+        // -------------------------
+        instagram_addAccount: 'instagram-accounts/',
         instagramAccount_getMetaData: 'instagram-accounts/meta',
+        instagram_getAccountByUser: username => `instagram-accounts/meta/${username}`,
+        instagram_modifyAccount: username => `instagram-accounts/${username}`,
+        instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
+
+        // -instagram-accounts------------------------
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',
-        instagramDirect_getMetaData: 'instagram-direct/meta',
+
+        // -instagram-direct------------------------
         instagramDirect_postMessage: 'instagram-direct/',
+        instagramDirect_getMetaData: 'instagram-direct/meta',
+
+        // -instagram-task-manager------------------------
         instagramTaskManager: 'instagram-task-manager/',
         instagramTaskManager_getMetaData: 'instagram-task-manager/meta',
-        instagramTaskManager_getTaskTypes: 'instagram-task-manager/task/types',
         instagramTaskManager_getTaskByTypes: 'instagram-task-manager/meta/type/',
+        // --------------
         instagramTaskManager_getDefaultConfigs: 'instagram-task-manager/config/type', // {TYPE}/subtype/{SUBTYPE}
+        // --------------
         instagramTaskManager_postStartFollowingList: 'instagram-task-manager/task',
+        instagramTaskManager_postStartTask: 'instagram-task-manager/task',
+        instagramTaskManager_getTaskTypes: 'instagram-task-manager/task/types',
         instagramTaskManager_putStopTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
         instagramTaskManager_postTextAttachment: 'instagram-task-manager/task/attachment/users_list',
-        instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
-        instagramTaskManager_postStartTask: 'instagram-task-manager/task',
         instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
     },
     user: {
