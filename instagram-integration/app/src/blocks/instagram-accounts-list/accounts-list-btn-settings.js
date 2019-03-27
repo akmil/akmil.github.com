@@ -59,6 +59,9 @@ export function settingButtonsHandler(classCfg) {
         const username = $form['username'];
         const site = $form['site'];
         const about = $form['about'];
+        if (about.value === '') {
+            console.error('about.value');
+        }
         console.log($form, login);
         // const body = {
         //     'username': '',
