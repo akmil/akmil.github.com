@@ -284,9 +284,24 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="form-group col-4">
-                                                <div class="form-group text-center">
-                                                    <img class="rounded-circle user-avatar" alt="User photo" src="https://scontent-frt3-2.cdninstagram.com/vp/3d63ce062bf5bba2871514442dea97f4/5D1581B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=scontent-frt3-2.cdninstagram.com">
+                                                <div class="form-group text-center modal-image-holder">
+                                                    <img class="rounded-circle user-avatar" name="userAvatar" alt="User photo" src="https://scontent-frt3-2.cdninstagram.com/vp/3d63ce062bf5bba2871514442dea97f4/5D1581B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=scontent-frt3-2.cdninstagram.com">
                                                     <button type="button" class="btn btn-success btn-sm js_edit-profile-img-upd" data-dismiss="modal">Изменить</button>
+                                                    
+                                                    
+                    
+                                                    <div class="file-upload">
+                                                        <div class="image-upload-wrap">
+                                                            <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                        </div>
+                                                        <div class="file-upload-content">
+                                                            <img class="file-upload-image" src="#" alt="your image"/>
+                                                            <div class="image-title-wrap">
+                                                            <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
                                                 </div>
                                                 <div class="user-info mt-3">
                                                     <p class="mt-0 mb-1 name">Закрытый профиль:</p>
@@ -321,7 +336,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>О себе</label>
-                                                    <textarea class="form-control" rows="4" name="about" placeholder="О себе"></textarea>
+                                                    <textarea class="form-control" rows="4" name="biography" placeholder="О себе"></textarea>
                                                 </div>
                                             </div>
                                         </div>

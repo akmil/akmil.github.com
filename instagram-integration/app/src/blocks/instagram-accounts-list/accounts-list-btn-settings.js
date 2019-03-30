@@ -2,11 +2,19 @@ import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
 import {renderItem} from './instagram-accounts-list';
 import Spinner from '../../common/js-services/spinner';
+import * as imageUpload from '../_shared/image-upload/image-upload';
 
 export function settingButtonsHandler(classCfg) {
     const {deleteBtnCls, updateBtnCls, editBtnCls} = classCfg;
     const modalConfirm = $('#delete-user-promt');
     let username = '';
+    const replaceWithCfg = {
+        replaceWith: true,
+        holderCls: '.modal-image-holder',
+        uploadBtnCls: '.js_edit-profile-img-upd',
+        imageCls: 'img.user-avatar'
+    };
+    imageUpload.init(replaceWithCfg);
     // DELETE .../instagram-accounts/{username}
     $(deleteBtnCls).on('click', (e) => {
         username = $(e.target).closest(deleteBtnCls).data('username');
@@ -45,43 +53,60 @@ export function settingButtonsHandler(classCfg) {
     // PUT instagram-accounts/{username}
     const modalEdit = $('#edit-user-promt');
     // eslint-disable-next-line no-unused-vars
-    let liUserEdit = {};
+    let usernameOriginal = '';
     $(editBtnCls).on('click', (e) => {
-        liUserEdit = $(e.target).closest('li');
-        const username = $(e.target).closest(editBtnCls).data('username');
+        const $editBtn = $(e.target).closest(editBtnCls);
+        const username = $editBtn.data('username');
+        const login = $editBtn.data('name');
+        const site = $editBtn.data('url');
+        const about = $editBtn.data('biography');
+        const imgSrc = $editBtn.data('img');
 
         const $form = modalEdit.find('form').get(0);
         const formFields = {
             login: $form['login'],
             username: $form['username'],
             site: $form['site'],
-            about: $form['about']
+            about: $form['biography'],
+            userAvatarImg: $form['userAvatar']
         };
-        formFields.login.value = username;
+        usernameOriginal = username;
+        replaceWithCfg.username = username;
+
+        formFields.login.value = login;
+        formFields.username.value = username;
+        formFields.site.value = site;
+        formFields.about.value = about;
+        formFields.userAvatarImg.src = imgSrc;
         modalEdit.modal('show');
     });
     $('.js_edit-profile-modify').on('click', (e) => {
         const $form = modalEdit.find('form').get(0);
-        // const form = document.forms[wizardFormName];
-        const login = $form['login'];
-        const username = $form['username'];
-        const site = $form['site'];
-        const about = $form['about'];
-        if (about.value === '') {
-            console.error('about.value');
+        const formFields = {
+            login: $form['login'],
+            username: $form['username'],
+            site: $form['site'],
+            about: $form['biography'],
+            userAvatarImg: $form['userAvatar']
+        };
+        const typeSelected = $(e.target).closest(modalEdit).find('.js_btn-prof-type-switcher input:checked');
+        const isOpen = typeSelected.val() === 'closed-profile-on';
+        // console.log($form, formFields.login, username, formFields.site);
+        const body = {
+            'username': formFields.username.value,
+            'name': formFields.login.value,
+            'biography': formFields.about.value,
+            'url': formFields.site.value,
+            'open': isOpen
+        };
+        if (formFields.about.value === '') {
+            console.info('about.value is empty');
         }
-        console.log($form, login, username, site);
-        // const body = {
-        //     'username': '',
-        //     'name': '',
-        //     'biography': '',
-        //     'url': '',
-        //     'open': true
-        // };
-        // User.delInstagramAccount(username, body).then((result) => {
-        //     if (result.status.state === 'ok') {
-        //         modalConfirm.hide();
-        //     }
-        // });
+        User.editInstagramAccount(usernameOriginal || '', JSON.stringify(body)).then((result) => {
+            if (result.status.state === 'ok') {
+                console.log('result', result);
+                modalConfirm.hide();
+            }
+        });
     });
 }

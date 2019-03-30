@@ -71,15 +71,20 @@ class User {
             },
             body
         };
+        const url = `${CONST.getPath('instagram_modifyAccount', username)}`;
+        console.log(url);
         return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', username)}`, setting);
     }
-    updateInstagramAccount(username) {
+    updateInstagramAccount(username, body) {
         const setting = {
             headers: {
                 ...this.settingPost.headers,
                 'token': this.getToken()
-            }
+            },
+            body
         };
+        // const url = `${CONST.getPath('instagram_modifyAccount', username)}`;
+        // console.log(url);
         return this.network.sendRequest(`${CONST.getPath('instagram_getAccountByUser', username)}`, setting);
     }
     delInstagramAccount(username) {

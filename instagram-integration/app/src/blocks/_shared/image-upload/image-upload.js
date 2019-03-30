@@ -61,7 +61,7 @@ function isImgSizeOk(acceptedFile) {
     return MAX_IMG_FILE_SIZE_BYTE > imgSize;
 }
 
-function handleSubmit(input) {
+function handleSubmit(input, replaceWithCfg) {
     const url = CONST.getPath('instagramTaskManager_postImageAttachment');
     const token = UserTaskManager.getToken();
     const acceptedFile = input.files[0];
@@ -81,6 +81,25 @@ function handleSubmit(input) {
     formData.append('image', acceptedFile, acceptedFile.name);
 
     const request = new XMLHttpRequest();
+
+    if (replaceWithCfg && replaceWithCfg.replaceWith) {
+        // PUT http://api.luxgram.ru/v1/instagram-accounts/{username}/photo
+        // form-data: "photo" (jpg)
+        const {username} = replaceWithCfg;
+        request.open('PUT', `http://api.luxgram.ru/v1/instagram-accounts/${username}/photo`);
+        // request.withCredentials = true;
+        request.setRequestHeader('token', token);
+        request.setRequestHeader('Accept', 'application/json');
+        request.setRequestHeader('cache-control', 'no-cache');
+        request.send(formData);
+        request.addEventListener('readystatechange', function () {
+            if (this.readyState === 4) {
+                console.log('PUT', this.responseText, this);
+                // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_UPLOADED, {'response': this.responseText, 'el': input});
+            }
+        });
+        return;
+    }
     request.open('POST', url);
     // request.withCredentials = true;
     request.setRequestHeader('token', token);
@@ -95,7 +114,8 @@ function handleSubmit(input) {
     });
 }
 
-function readURL(input) {
+function readURL(input, replaceWithCfg) {
+    const {replaceWith} = replaceWithCfg;
     const $container = $(input).closest(fileUploadBox);
     if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -105,7 +125,7 @@ function readURL(input) {
             $(fileUploadBox).append(`
                 <div class="warning-image text-danger">
                     <p>Доступный формат изображения jpeg или jpg</p>
-                    <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE}MB</p>
+                    <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE / 1024}MB</p>
                 </div>
             `);
             setTimeout(() => {
@@ -115,16 +135,22 @@ function readURL(input) {
         }
 
         reader.onload = function(e) {
-            $container.find('.image-upload-wrap').hide();
-            $container.find('.file-upload-image').attr('src', e.target.result);
-            $container.find(fileUploadContent).show();
-            $container.find('.image-title').html(input.files[0].name);
+            if (!replaceWith) {
+                $container.find('.image-upload-wrap').hide();
+                $container.find('.file-upload-image').attr('src', e.target.result);
+                $container.find(fileUploadContent).show();
+                $container.find('.image-title').html(input.files[0].name);
+            } else {
+                const {imageCls} = replaceWithCfg;
+                $container.find(imageCls).attr('src', e.target.result);
+            }
         };
+
         reader.onerror = errorHandler;
         reader.onprogress = updateProgress;
 
         reader.readAsDataURL(input.files[0]);
-        setTimeout(() => handleSubmit(input), 2000);
+        setTimeout(() => handleSubmit(input, replaceWithCfg), 2000);
         // Read in the image file as a binary string.
         // reader.readAsBinaryString(input.files[0]);
 
@@ -133,8 +159,9 @@ function readURL(input) {
     }
 }
 
-export function init() {
-    const $uploadBtn = $('.file-upload-btn');
+export function init(replaceWithCfg) {
+    const uploadBtnCls = (!replaceWithCfg.replaceWith) ? '.file-upload-btn' : replaceWithCfg.uploadBtnCls;
+    const $uploadBtn = $(uploadBtnCls);
     const $uploadInput = $('.file-upload-input');
     const $removeImgBtn = $('.remove-image');
 
@@ -143,12 +170,14 @@ export function init() {
     $removeImgBtn.off();
 
     $uploadBtn.on('click', (e) => {
-        const input = $(e.target).closest('.col').find(fileUploadBox).find('input.file-upload-input');
+        const toParentCls = (!replaceWithCfg.replaceWith) ? '.col' : replaceWithCfg.holderCls;
+        const input = $(e.target).closest(toParentCls).find(fileUploadBox).find('input.file-upload-input');
         input.trigger('click');
+        e.stopPropagation();
     });
 
     $uploadInput.on('change', (e) => {
-        readURL(e.target);
+        readURL(e.target, replaceWithCfg);
     });
 
     $removeImgBtn.on('click', (e) => {
