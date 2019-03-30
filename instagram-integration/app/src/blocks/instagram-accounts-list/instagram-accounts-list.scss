@@ -54,6 +54,7 @@ $avatar-size: 70px;
         .media {
             //discuss: make as clickable, click for edit
             border-bottom: 1px solid $border-color;
+            position: relative;
             &:last-child {
                 border-bottom: none;
             }
@@ -61,6 +62,16 @@ $avatar-size: 70px;
                 background-color: $gray-200;
                 .account-setting {
                     opacity: 1;
+                }
+            }
+            .spinner-box {
+                display: block; 
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                .spin-animation {
+                    margin: 20px auto;
                 }
             }
             .badge {

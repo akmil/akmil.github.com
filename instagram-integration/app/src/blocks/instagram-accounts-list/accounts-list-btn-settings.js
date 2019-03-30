@@ -35,7 +35,7 @@ export function settingButtonsHandler(classCfg) {
         const $li = $(e.target).closest('li');
         const username = $(e.target).closest(updateBtnCls).data('username');
         const defaultAvatarSrc = CONST.user.defaulAvatar;
-        Spinner.add($li, 'my-5 py-5');
+        Spinner.add($li, '');
         User.updateInstagramAccount(username).then((result) => {
             console.log(result);
             const {data: {account}} = result;
@@ -45,6 +45,9 @@ export function settingButtonsHandler(classCfg) {
                 updateBtnCls: '.js_acc-refresh',
                 editBtnCls: '.js_acc-edit'
             };
+            // $(cfg.editBtnCls).off();
+            $(cfg.updateBtnCls).off(); // Reload button clear listener
+            // $(cfg.deleteBtnCls).off();
             settingButtonsHandler(cfg);
             Spinner.remove();
         });

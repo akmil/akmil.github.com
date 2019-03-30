@@ -115,8 +115,9 @@ function handleSubmit(input, replaceWithCfg) {
 }
 
 function readURL(input, replaceWithCfg) {
-    const {replaceWith} = replaceWithCfg;
-    const $container = $(input).closest(fileUploadBox);
+    const {replaceWith, holderCls} = replaceWithCfg;
+    const holder = (holderCls) ? holderCls : fileUploadBox;
+    const $container = $(input).closest(holder);
     if (input.files && input.files[0]) {
         const reader = new FileReader();
         console.log('readURL');
