@@ -141,11 +141,11 @@
                     <div class="form-row">
                         <div class="form-group col-4">
                             <div class="form-group text-center">
-                                <img class="rounded-circle" alt="User photo" src="https://scontent-frt3-2.cdninstagram.com/vp/3d63ce062bf5bba2871514442dea97f4/5D1581B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=scontent-frt3-2.cdninstagram.com">
+                                <img class="rounded-circle user-avatar" alt="User photo" src="https://scontent-frt3-2.cdninstagram.com/vp/3d63ce062bf5bba2871514442dea97f4/5D1581B8/t51.2885-19/s150x150/41710527_319004788655082_1651515706719600640_n.jpg?_nc_ht=scontent-frt3-2.cdninstagram.com">
                                 <button type="button" class="btn btn-success btn-sm js_edit-profile-img-upd" data-dismiss="modal">Изменить</button>
                             </div>
-                            <div class="col user-info mt-3">
-                                <p class="mt-0 mb-1 name lead">Закрытый профиль:</p>
+                            <div class="user-info mt-3">
+                                <p class="mt-0 mb-1 name">Закрытый профиль:</p>
                             </div>
                             <div class="js_btn-prof-type-switcher btn-group btn-group-toggle justify-content-center mb-3 w-100" data-toggle="buttons">
                                 <label class="btn btn-secondary active">
@@ -156,22 +156,28 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group col-8">
-                            <div class="form-group">
-                                <label class="sr-only">Логин</label>
-                                <input type="text" class="form-control" name="login" placeholder="Логин" required>
+                        <div class="form-group container-fluid col-7">
+                            <div class="form-group row">
+                                <label class="">Логин</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="login" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="">Имя</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="username"  required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="">Сайт</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="site"  required>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="sr-only">Имя пользователя</label>
-                                <input type="text" class="form-control" name="username" placeholder="Имя пользователя" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only">Сайт</label>
-                                <input type="text" class="form-control" name="site" placeholder="Сайт" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only">О себе</label>
-                                <input type="text" class="form-control" name="about" placeholder="О себе" required>
+                                <label class="">О себе</label>
+                                <textarea class="form-control " rows="4" name="about" placeholder="О себе"></textarea>
                             </div>
                         </div>
                     </div>

@@ -124,3 +124,20 @@ $avatar-size: 70px;
         // right: 0;
     }
 }
+.modal-content{
+    .user-avatar {
+        width: $avatar-size;
+        height: $avatar-size;
+    }
+}
+
+#edit-user-promt {
+    form .form-group {
+        input.form-control {
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            
+        }
+    }
+}

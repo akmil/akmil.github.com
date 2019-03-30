@@ -70,7 +70,7 @@ export function settingButtonsHandler(classCfg) {
         if (about.value === '') {
             console.error('about.value');
         }
-        console.log($form, login);
+        console.log($form, login, username, site);
         // const body = {
         //     'username': '',
         //     'name': '',
