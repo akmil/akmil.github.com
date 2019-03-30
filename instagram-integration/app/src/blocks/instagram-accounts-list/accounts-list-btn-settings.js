@@ -49,7 +49,15 @@ export function settingButtonsHandler(classCfg) {
     $(editBtnCls).on('click', (e) => {
         liUserEdit = $(e.target).closest('li');
         const username = $(e.target).closest(editBtnCls).data('username');
-        console.log('editBtnCls', username);
+
+        const $form = modalEdit.find('form').get(0);
+        const formFields = {
+            login: $form['login'],
+            username: $form['username'],
+            site: $form['site'],
+            about: $form['about']
+        };
+        formFields.login.value = username;
         modalEdit.modal('show');
     });
     $('.js_edit-profile-modify').on('click', (e) => {
