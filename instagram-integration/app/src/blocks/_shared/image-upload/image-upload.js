@@ -78,13 +78,13 @@ function handleSubmit(input, replaceWithCfg) {
     //     return;
     // }
     const formData = new FormData();
-    formData.append('image', acceptedFile, acceptedFile.name);
 
     const request = new XMLHttpRequest();
 
     if (replaceWithCfg && replaceWithCfg.replaceWith) {
         // PUT http://api.luxgram.ru/v1/instagram-accounts/{username}/photo
         // form-data: "photo" (jpg)
+        formData.append('photo', acceptedFile, acceptedFile.name);
         const {username} = replaceWithCfg;
         request.open('PUT', `http://api.luxgram.ru/v1/instagram-accounts/${username}/photo`);
         // request.withCredentials = true;
@@ -100,6 +100,7 @@ function handleSubmit(input, replaceWithCfg) {
         });
         return;
     }
+    formData.append('image', acceptedFile, acceptedFile.name);
     request.open('POST', url);
     // request.withCredentials = true;
     request.setRequestHeader('token', token);

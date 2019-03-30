@@ -56,7 +56,7 @@ export function settingButtonsHandler(classCfg) {
     // PUT instagram-accounts/{username}
     const modalEdit = $('#edit-user-promt');
     // eslint-disable-next-line no-unused-vars
-    let usernameOriginal = '';
+    let userOriginal = {};
     $(editBtnCls).on('click', (e) => {
         const $editBtn = $(e.target).closest(editBtnCls);
         const username = $editBtn.data('username');
@@ -73,7 +73,9 @@ export function settingButtonsHandler(classCfg) {
             about: $form['biography'],
             userAvatarImg: $form['userAvatar']
         };
-        usernameOriginal = username;
+        userOriginal = {
+            login, username, site, about
+        };
         replaceWithCfg.username = username;
 
         formFields.login.value = login;
@@ -92,20 +94,45 @@ export function settingButtonsHandler(classCfg) {
             about: $form['biography'],
             userAvatarImg: $form['userAvatar']
         };
-        const typeSelected = $(e.target).closest(modalEdit).find('.js_btn-prof-type-switcher input:checked');
-        const isOpen = typeSelected.val() === 'closed-profile-on';
-        // console.log($form, formFields.login, username, formFields.site);
         const body = {
-            'username': formFields.username.value,
-            'name': formFields.login.value,
-            'biography': formFields.about.value,
-            'url': formFields.site.value,
-            'open': isOpen
+            // 'username': (userOriginal.username !== formFields.username.value) ? formFields.username.value : '',
+            // 'name': formFields.login.value,
+            // 'biography': formFields.about.value,
+            // 'url': formFields.site.value,
+            // 'open': isOpen
         };
+        if (userOriginal.username !== formFields.username.value) {
+            body['username'] = formFields.username.value;
+        }
+        if (userOriginal.login !== formFields.login.value) {
+            body['name'] = formFields.login.value;
+        }
+        if (userOriginal.about !== formFields.about.value) {
+            body['biography'] = formFields.about.value;
+        }
+        if (userOriginal.site !== formFields.site.value) {
+            body['url'] = formFields.site.value;
+        }
+        // ----validate
         if (formFields.about.value === '') {
             console.info('about.value is empty');
         }
-        User.editInstagramAccount(usernameOriginal || '', JSON.stringify(body)).then((result) => {
+        User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
+            if (result.status.state === 'ok') {
+                console.log('result', result);
+                modalConfirm.hide();
+            }
+        });
+    });
+    // const modeSelector = $('.js_btn-prof-type-switcher');
+    $('.js_btn-prof-type-switcher label').on('click', (e) => {
+        const value = $(e.target).find('input[type=radio]').attr('value');
+        console.log('click', value);
+        const isOpen = value === 'closed-profile-off';
+        const body = {
+            'open': isOpen
+        };
+        User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
                 console.log('result', result);
                 modalConfirm.hide();
