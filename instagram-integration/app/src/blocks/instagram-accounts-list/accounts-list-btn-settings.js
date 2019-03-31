@@ -28,6 +28,7 @@ export function settingButtonsHandler(classCfg) {
     };
     let userOriginal = {};
     imageUpload.init(replaceWithCfg);
+    // image-upload subscriber
     window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED_AVATAR, (e, res) => {
         const result = JSON.parse(res.response);
         const {profile_pic_url} = result.data.profile;
@@ -78,7 +79,6 @@ export function settingButtonsHandler(classCfg) {
 
     // PUT instagram-accounts/{username}
     const modalEdit = $('#edit-user-promt');
-    // eslint-disable-next-line no-unused-vars
     $(editBtnCls).on('click', (e) => {
         const $li = $(e.target).closest('li');
         const $editBtn = $li.find(editBtnCls);
@@ -153,15 +153,11 @@ export function settingButtonsHandler(classCfg) {
 
         User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
-                // console.log('result', result);
                 console.log('/*UPDATE VIEW HERE*/');
-                // const profile = result.data
                 const {data: {profile}} = result;
-                // updateUserItem();
                 profile.info = result.data.profile;
                 profile.info = {
                     ...profile.info,
-                    // follower_count, following_count, media_count
                     follower_count: userOriginal.followerC,
                     following_count: userOriginal.followingC,
                     media_count: userOriginal.mediaC

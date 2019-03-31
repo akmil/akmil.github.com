@@ -5,21 +5,63 @@ export function clearMassagesList($list, stateCfg) {
     stateCfg.pageIncrement = 0;
     $list.empty();
 }
-export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) {
+export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, currentUserData}) {
     const items = dataArray;
     const cList = $list;
-    // const defaultAvatarSrc = 'https://i.imgur.com/jNNT4LE.png';
-    const insertMsg = (value, type, cssCls) => {
+    // const listDataConversation = $('.messages-list').attr('data-conversation');
+    // const currentUsername = JSON.parse(listDataConversation);
+    const insertMsg = (value, message, cssCls) => {
         let str = '';
+        let valueWithUrl = '';
+        const {type, username, profile_pic_url, caption} = message;
+        const userHeader = {username, profile_pic_url};
+        if (cssCls === 'text-right') {
+            userHeader.username = currentUserData.username;
+            userHeader.profile_pic_url = currentUserData.useravatar;
+        }
+        if (type === 'TEXT') {
+            // eslint-disable-next-line no-useless-escape
+            const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gm;
+            const subst = '<a href=$& target="_blank">$&</a>';
+            valueWithUrl = value.replace(regex, subst);
+        }
         switch (type.toLowerCase()) {
             case 'photo':
                 str = `<div class="chat-img">
                     <img src="${value}" alt="Content Image" class="content-image">
                 </div>`;
                 break;
-            case 'link':
+            case 'video':
+                str = `<div class="chat-video">
+                    <a target="_blank" href="${value}" class="position-relative">
+                        <i class="fa-3x fa-play-circle far position-absolute text-white chat-video--icon"></i>
+                        <img src="${message.preview_value}" alt="Content Image" class="chat-video--image">
+                    </a>
+                </div>`;
+                break;
+            case 'gif':
                 str = `<div class="chat-img">
-                <a target="_blank" href="${value}">${value}</a></div>`;
+                    <img src="${value}" alt="Content Image" class="content-image">
+                </div>`;
+                break;
+            case 'like':
+                str = `<div class="chat-text ${cssCls}" >${value}</div>`;
+                break;
+            case 'post':
+                str = `<div class="chat-post-message">
+                    <a target="_blank" href="${value}" class="text-body text-decoration-none">
+                        <div class="chat-post-message--header">
+                            <img src="${userHeader.profile_pic_url}" alt="Content Image" class="user-avatar mr-3">
+                            ${userHeader.username}
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <img src="${message.preview_value}" alt="Content Image" class="content-image">
+                        ${(caption) ? `<p class="chat-post-caption m-3">${caption}<p>` : ''}
+                    </a>
+                </div>`;
+                break;
+            case 'text':
+                str = `<div class="chat-text ${cssCls}" >${valueWithUrl}</div>`;
                 break;
             default: str = `<div class="chat-text ${cssCls}" >${value}</div>`;
         }
@@ -56,7 +98,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) 
                 }
                 <div>
                     <p class="chat-username text-muted">${message.username}</p>
-                    ${insertMsg(value, message.type, 'text-left')}
+                    ${insertMsg(value, message, 'text-left')}
                 </div>
                     <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
@@ -66,7 +108,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg}) 
         } else {
             const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
                 <div class="d-flex justify-content-end">
-                    ${insertMsg(value, message.type, 'text-right')}
+                    ${insertMsg(value, message, 'text-right')}
                     <small class="pull-right chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`);
@@ -127,13 +169,15 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
     const cList = $list;
     let tpl = '';
     const loadMoreBox = (idx, prev_cursor) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}">
-        <button type="button" class="btn btn-submit">Загрузить еще</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm btn-submit">Загрузить еще</button>
     </div>`;
     cList.empty().addClass('border-light-color');
     // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
     items.forEach((item, idx) => {
         const {pagination} = item;
-        tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" data-username="${item.username}" 
+        tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" 
+                data-username="${item.username}"
+                data-userAvatar="${item.profile_pic_url}"
                 aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="border-bottom mb-1 media pb-2" id="heading-${idx}">
                 <span class="mr-3">
@@ -150,7 +194,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
                 ${addConversations(item.conversations)}
             </div>
-            ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor) : null}
+            ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor) : ''}
         </li>`;
     });
     $(tpl).appendTo(cList);

@@ -30,6 +30,14 @@ $avatar-conversation-size: 38px;
           .media:hover {
             background-color: $gray-200;
           }
+          ~.list-footer {
+            display: none;
+          }
+          &.show {
+            ~.list-footer {
+               display: block;
+            }
+          }
         }
     }
     .time {
@@ -83,6 +91,31 @@ $avatar-conversation-size: 38px;
     font-size: 1rem;
     flex: 1 0 auto;
     flex-grow: 0;
+  }
+  .chat-post-message {
+    border: 1px solid #999;
+    border-radius: 20px;
+    overflow: hidden;
+    &--header {
+        padding: 10px;
+        .user-avatar {
+            border-radius: 50%;
+        }
+    }
+    .content-image {
+        width: 100%;
+    }
+    .chat-post-caption {
+        @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 2, $bgColor: white);
+    }
+  }
+  .chat-video {
+      &--icon {
+        bottom: -50%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      &--image { width: 200px; }
   }
   .chat-item-left {
     >div.d-flex {

@@ -153,6 +153,7 @@ $avatar-size: 70px;
         &.user-profile-label label {
             line-height: 38px;
             margin-bottom: 0;
+            min-width: 40px;
         }
     }
 }

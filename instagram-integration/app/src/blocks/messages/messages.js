@@ -263,11 +263,12 @@ function scrollHandler(scrollDelay, pagination) {
 let initialVal = '';
 let flagInitialVal = true;
 
-function getAndFillConversation(username, conversationId, isScrollDown) {
+function getAndFillConversation({username, conversationId, useravatar}, isScrollDown) {
     const TIME_SCROLL = 10;
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
-        fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg});
+        const currentUserData = {useravatar, username};
+        fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg, currentUserData});
         Spinner.remove();
         $('.js_send-message-box').removeClass('d-none');
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
@@ -295,11 +296,11 @@ function addHandlers() {
     $('#sendMessageButton').on('click', (e) => {
         const value = $textArea.val();
         const userData = $msgList.data('conversation');
-        const {username, conversationId} = userData;
+        const {username, conversationId, useravatar} = userData;
         Spinner.add($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
             if (result && result.status && result.status.state === 'ok') {
-                getAndFillConversation(username, conversationId);
+                getAndFillConversation({username, conversationId, useravatar});
                 $textArea.val('');
                 Spinner.remove();
                 window.PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value, result});
@@ -311,10 +312,11 @@ function addHandlers() {
 
     $(document).on('click', '.list-group-item .collapse', function(e) {
         e.stopPropagation();
-        const username = $(e.target).closest('.list-group-item').data('username');
+        const userData = $(e.target).closest('.list-group-item').data();
+        const {username, useravatar} = userData;
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
-        getAndFillConversation(username, conversationId, 'isScrollDown');
+        getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown');
         flagInitialVal = true; // reset first value flag
         // resend request
         if (intervalId) {
@@ -323,7 +325,7 @@ function addHandlers() {
         intervalId = setInterval(() => {
             conversationId = $(e.target).closest('.media').data('conversation-id');
             console.log(intervalId, conversationId);
-            getAndFillConversation(username, conversationId);
+            getAndFillConversation({username, conversationId, useravatar});
         }, updateInterval);
 
         // setInterval(() => {
