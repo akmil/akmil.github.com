@@ -150,5 +150,9 @@ $avatar-size: 70px;
             border-right: 0;
             
         }
+        &.user-profile-label label {
+            line-height: 38px;
+            margin-bottom: 0;
+        }
     }
 }

@@ -153,7 +153,9 @@ const checkPointText = (checkpoint, item) => {
 };
 
 const addSettingBtn = (account) => {
-    const {username, info: {name, email, url, biography, profile_pic_url}} = account;
+    const {username = '',
+        info: {name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count}
+    } = account;
     if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
         return `<div class="account-setting col-1 d-flex flex-column">
             <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" 
@@ -163,6 +165,9 @@ const addSettingBtn = (account) => {
                 data-url="${url}"
                 data-biography="${biography}"
                 data-img="${profile_pic_url}"
+                data-follower_count="${follower_count}"
+                data-following_count="${following_count}"
+                data-media_count="${media_count}"
             ><i class="fas fa-pen m-0"></i></button>
             <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
             <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
@@ -170,9 +175,10 @@ const addSettingBtn = (account) => {
     }
 };
 
-export const renderItem = (item, cList, defaultAvatarSrc) => {
+export const renderItem = (item, cList, _defaultAvatarSrc) => {
     const info = item.info;
     const checkpoint = item.checkpoint || item;
+    const defaultAvatarSrc = _defaultAvatarSrc || CONST.user.defaulAvatar;
     if (!info) {
         return $(`<li class="media py-3" data-username="${item.username}">
             <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">

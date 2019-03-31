@@ -96,6 +96,7 @@ function handleSubmit(input, replaceWithCfg) {
             if (this.readyState === 4) {
                 console.log('PUT', this.responseText, this);
                 // window.PubSub.publish(CONST.events.autoarnswer.IMAGE_UPLOADED, {'response': this.responseText, 'el': input});
+                window.PubSub.publish(CONST.events.autoarnswer.IMAGE_UPLOADED_AVATAR, {'response': this.response});
             }
         });
         return;

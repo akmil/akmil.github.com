@@ -84,7 +84,8 @@ export const CONST = {
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
         modal: {
-            IMAGE_POST_SELECTED: 'image_post_selected'
+            IMAGE_POST_SELECTED: 'image_post_selected',
+            IMAGE_UPLOADED_AVATAR: 'IMAGE_UPLOADED_AVATAR'
         },
         autoarnswer: {
             IMAGE_UPLOADED: 'image_loaded',

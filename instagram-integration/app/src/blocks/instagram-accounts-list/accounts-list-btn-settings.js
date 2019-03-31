@@ -4,6 +4,18 @@ import {renderItem} from './instagram-accounts-list';
 import Spinner from '../../common/js-services/spinner';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 
+function updateButtonsDataAttr (settingButtonsHandlerCb) {
+    const cfg = {
+        deleteBtnCls: '.js_acc-delete',
+        updateBtnCls: '.js_acc-refresh',
+        editBtnCls: '.js_acc-edit'
+    };
+    // $(cfg.editBtnCls).off();
+    $(cfg.updateBtnCls).off(); // Reload button clear listener
+    // $(cfg.deleteBtnCls).off();
+    settingButtonsHandlerCb(cfg);
+}
+
 export function settingButtonsHandler(classCfg) {
     const {deleteBtnCls, updateBtnCls, editBtnCls} = classCfg;
     const modalConfirm = $('#delete-user-promt');
@@ -14,7 +26,14 @@ export function settingButtonsHandler(classCfg) {
         uploadBtnCls: '.js_edit-profile-img-upd',
         imageCls: 'img.user-avatar'
     };
+    let userOriginal = {};
     imageUpload.init(replaceWithCfg);
+    window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED_AVATAR, (e, res) => {
+        const result = JSON.parse(res.response);
+        const {profile_pic_url} = result.data.profile;
+        userOriginal.$li.find('img').attr('src', profile_pic_url);
+        console.log('userOriginal', userOriginal);
+    });
     // DELETE .../instagram-accounts/{username}
     $(deleteBtnCls).on('click', (e) => {
         username = $(e.target).closest(deleteBtnCls).data('username');
@@ -40,6 +59,8 @@ export function settingButtonsHandler(classCfg) {
             console.log(result);
             const {data: {account}} = result;
             $li.replaceWith(renderItem(account, $li, defaultAvatarSrc));
+
+            /*
             const cfg = {
                 deleteBtnCls: '.js_acc-delete',
                 updateBtnCls: '.js_acc-refresh',
@@ -49,6 +70,8 @@ export function settingButtonsHandler(classCfg) {
             $(cfg.updateBtnCls).off(); // Reload button clear listener
             // $(cfg.deleteBtnCls).off();
             settingButtonsHandler(cfg);
+            */
+            updateButtonsDataAttr(settingButtonsHandler);
             Spinner.remove();
         });
     });
@@ -56,14 +79,15 @@ export function settingButtonsHandler(classCfg) {
     // PUT instagram-accounts/{username}
     const modalEdit = $('#edit-user-promt');
     // eslint-disable-next-line no-unused-vars
-    let userOriginal = {};
     $(editBtnCls).on('click', (e) => {
-        const $editBtn = $(e.target).closest(editBtnCls);
+        const $li = $(e.target).closest('li');
+        const $editBtn = $li.find(editBtnCls);
         const username = $editBtn.data('username');
         const login = $editBtn.data('name');
         const site = $editBtn.data('url');
         const about = $editBtn.data('biography');
         const imgSrc = $editBtn.data('img');
+        // follower_count, following_count, media_count
 
         const $form = modalEdit.find('form').get(0);
         const formFields = {
@@ -74,7 +98,14 @@ export function settingButtonsHandler(classCfg) {
             userAvatarImg: $form['userAvatar']
         };
         userOriginal = {
-            login, username, site, about
+            login,
+            username,
+            site,
+            about,
+            $li,
+            followerC: $editBtn.data('follower_count'),
+            followingC: $editBtn.data('following_count'),
+            mediaC: $editBtn.data('media_count')
         };
         replaceWithCfg.username = username;
 
@@ -101,8 +132,10 @@ export function settingButtonsHandler(classCfg) {
             // 'url': formFields.site.value,
             // 'open': isOpen
         };
+        let updateDataAttrUsername = false;
         if (userOriginal.username !== formFields.username.value) {
             body['username'] = formFields.username.value;
+            updateDataAttrUsername = true;
         }
         if (userOriginal.login !== formFields.login.value) {
             body['name'] = formFields.login.value;
@@ -117,9 +150,29 @@ export function settingButtonsHandler(classCfg) {
         if (formFields.about.value === '') {
             console.info('about.value is empty');
         }
+
         User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
-                console.log('result', result);
+                // console.log('result', result);
+                console.log('/*UPDATE VIEW HERE*/');
+                // const profile = result.data
+                const {data: {profile}} = result;
+                // updateUserItem();
+                profile.info = result.data.profile;
+                profile.info = {
+                    ...profile.info,
+                    // follower_count, following_count, media_count
+                    follower_count: userOriginal.followerC,
+                    following_count: userOriginal.followingC,
+                    media_count: userOriginal.mediaC
+                };
+                userOriginal.$li.replaceWith(renderItem(profile, userOriginal.$li, false));
+                updateButtonsDataAttr(settingButtonsHandler);
+                if (updateDataAttrUsername) {
+                    const $editBtn = userOriginal.$li.find(editBtnCls);
+                    $editBtn.data('username', profile.info.username);
+                    updateDataAttrUsername = false;
+                }
                 modalConfirm.hide();
             }
         });
