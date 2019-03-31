@@ -20,13 +20,13 @@ export function settingButtonsHandler(classCfg) {
     const {deleteBtnCls, updateBtnCls, editBtnCls} = classCfg;
     const modalConfirm = $('#delete-user-promt');
     let username = '';
+    let userOriginal = {};
     const replaceWithCfg = {
         replaceWith: true,
         holderCls: '.modal-image-holder',
         uploadBtnCls: '.js_edit-profile-img-upd',
         imageCls: 'img.user-avatar'
     };
-    let userOriginal = {};
     imageUpload.init(replaceWithCfg);
     // image-upload subscriber
     window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED_AVATAR, (e, res) => {
@@ -87,7 +87,8 @@ export function settingButtonsHandler(classCfg) {
         const site = $editBtn.data('url');
         const about = $editBtn.data('biography');
         const imgSrc = $editBtn.data('img');
-        // follower_count, following_count, media_count
+        const isBusiness = $editBtn.data('is_business');
+        // 'is_business'=true
 
         const $form = modalEdit.find('form').get(0);
         const formFields = {
@@ -114,6 +115,11 @@ export function settingButtonsHandler(classCfg) {
         formFields.site.value = site;
         formFields.about.value = about;
         formFields.userAvatarImg.src = imgSrc;
+        if (isBusiness) {
+            modalEdit.find('.bussines-profile').addClass('d-none');
+        } else {
+            modalEdit.find('.bussines-profile').addClass('d-block');
+        }
         modalEdit.modal('show');
     });
     $('.js_edit-profile-modify').on('click', (e) => {

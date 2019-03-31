@@ -1,12 +1,13 @@
 // import MeteorEmoji from 'meteor-emoji';
 import EmojiPicker from 'vanilla-emoji-picker';
-// import qq from 'fine-uploader'; //todo: fine-uploade
+import qq from 'fine-uploader'; // todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import {fillMassagesList, fillUserList, messageAreaHendler, addMoreUsersAccordion, appendUserList} from './utils';
+import {fillMassagesList, fillUserList, messageAreaHendler, /* addMoreUsersAccordion,*/ appendUserList} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
+import * as imageUpload from '../_shared/image-upload/image-upload';
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
@@ -80,8 +81,7 @@ $(document).ready(() => {
     const styleNew = style.replace('top: 20px;', 'top: -210px;');
     $picker.attr('style', styleNew);
 
-    /*
-    //todo: fine-uploade
+    // todo: fine-uploade
     // eslint-disable-next-line no-unused-vars
     const restrictedUploader = new qq.FineUploader({
         element: document.getElementById('fine-uploader-validation'),
@@ -96,11 +96,11 @@ $(document).ready(() => {
             }
         },
         validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'txt'],
+            allowedExtensions: ['jpeg', 'jpg'],
             itemLimit: 3,
             sizeLimit: 500 * 1024
         }
-    });*/
+    });
 });
 let isTimeOutRunned = false;
 function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username) {
@@ -156,15 +156,15 @@ function getAndFillUserList(isActiveFirst) {
         } else {
             $(`#${prevActiveDialogId}`).addClass('show');
         }
-        if (data.pagination && data.pagination.prev_cursor) {
-            const conversationToAdd = {
-                tpl: `<div class="list-footer text-center" style="display: none;" id="load-more-box">
-                        <button id="js_-accordion-more_btn" type="button" class="btn btn-submit">SHOW MORE</button>
-                    </div>`
-            };
-            console.log('start add pagination to accordioin', conversationToAdd);
-            addMoreUsersAccordion(data.meta, conversationToAdd);
-        }
+        // if (data.pagination && data.pagination.prev_cursor) {
+        //     const conversationToAdd = {
+        //         tpl: `<div class="list-footer text-center" style="display: none;" id="load-more-box">
+        //                 <button id="js_-accordion-more_btn" type="button" class="btn btn-submit">SHOW MORE</button>
+        //             </div>`
+        //     };
+        //     console.log('start add pagination to accordioin', conversationToAdd);
+        //     addMoreUsersAccordion(data.meta, conversationToAdd);
+        // }
         // do it once
         if (!isTimeOutRunned) {
             intervalUserList = setInterval(() => {
@@ -340,6 +340,15 @@ function addHandlers() {
         console.log('resultFromServer: ', resultFromServer);
         $dialog.find('.summary').text(value);
     });
+
+    // send image {igUsername}/{id}/photo
+    const replaceWithCfg = {
+        replaceWith: true,
+        holderCls: '.modal-image-holder',
+        uploadBtnCls: '.js_edit-profile-img-upd',
+        imageCls: 'img.user-avatar'
+    };
+    imageUpload.init(replaceWithCfg);
 }
 
 export function init() {

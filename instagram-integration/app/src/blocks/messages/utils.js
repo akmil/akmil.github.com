@@ -179,7 +179,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
                 data-username="${item.username}"
                 data-userAvatar="${item.profile_pic_url}"
                 aria-expanded="true" aria-controls="collapse-${idx}">
-            <div class="border-bottom mb-1 media pb-2" id="heading-${idx}">
+            <div class="conversation-head mb-1 media pb-2" id="heading-${idx}">
                 <span class="mr-3">
                     <img src="${item.profile_pic_url}" alt="avatar"
                     class="media-photo rounded-circle">
@@ -228,11 +228,11 @@ export const messageAreaHendler = ($textArea, $sendMessageButton) => {
     });
 };
 
-export const addMoreUsersAccordion = (conversations, conversationToAdd) => {
+// export const addMoreUsersAccordion = (conversations, conversationToAdd) => {
     // const $btnMoreBox = $('#load-more-box');
     // const $btnMore = $('button', $btnMoreBox);
     // $btnMoreBox.show();
-    console.log('start add pagination to accordioin', conversationToAdd);
+    // console.log('start add pagination to accordioin', conversationToAdd);
     // conversations.forEach((item, idx) => {
     //     if (item.pagination && item.pagination.prev_cursor) {
     //         console.log('conversation - >', item.pagination);
@@ -251,4 +251,4 @@ export const addMoreUsersAccordion = (conversations, conversationToAdd) => {
     //         });
     //     }
     // });
-};
+// };

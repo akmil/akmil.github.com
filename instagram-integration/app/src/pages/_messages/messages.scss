@@ -26,9 +26,16 @@ $avatar-conversation-size: 38px;
     .list-group-item {
         cursor: pointer;
         padding: 0.75rem 1rem;
+        // .conversation-head {
+        // }
         .collapse {
-          .media:hover {
-            background-color: $gray-200;
+          .media {
+              &:hover {
+                background-color: $gray-200;
+              }
+              &:first-child {
+                border-top:  1px solid $border-color;
+              }
           }
           ~.list-footer {
             display: none;
@@ -37,7 +44,13 @@ $avatar-conversation-size: 38px;
             ~.list-footer {
                display: block;
             }
+            ~.conversation-head {
+                border-bottom: 0;
+            }
           }
+        }
+        .collapse.show ~ .conversation-head {
+            border-bottom-color: red;
         }
     }
     .time {
@@ -96,10 +109,20 @@ $avatar-conversation-size: 38px;
     border: 1px solid #999;
     border-radius: 20px;
     overflow: hidden;
+    width: 300px;
+    position: relative;
     &--header {
         padding: 10px;
         .user-avatar {
             border-radius: 50%;
+        }
+        i {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            transform: translate(0, 50%);
+            height: 64px;
         }
     }
     .content-image {
@@ -134,7 +157,7 @@ $avatar-conversation-size: 38px;
     }
 
     .chat-text {
-      background-color: #bae3fa;
+      background-color: $gray-100;
       display: inline-table;
       padding: 0.2rem;
     }

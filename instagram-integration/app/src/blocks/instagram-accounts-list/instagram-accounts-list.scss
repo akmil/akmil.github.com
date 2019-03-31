@@ -148,12 +148,14 @@ $avatar-size: 70px;
             border-top: 0;
             border-left: 0;
             border-right: 0;
-            
+            padding-left: 0;
+            color: #000;
         }
         &.user-profile-label label {
             line-height: 38px;
             margin-bottom: 0;
             min-width: 40px;
+            color: $gray-800;
         }
     }
 }
