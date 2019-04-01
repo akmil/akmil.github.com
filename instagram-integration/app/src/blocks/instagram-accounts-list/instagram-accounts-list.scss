@@ -58,14 +58,14 @@ $avatar-size: 70px;
             &:last-child {
                 border-bottom: none;
             }
-            &:hover{ 
+            &:hover{
                 background-color: $gray-200;
                 .account-setting {
                     opacity: 1;
                 }
             }
             .spinner-box {
-                display: block; 
+                display: block;
                 top: 0;
                 bottom: 0;
                 left: 0;
@@ -120,7 +120,7 @@ $avatar-size: 70px;
             }
         }
 
-        .title {            
+        .title {
             display: inline-block;
             font-size: 1.7em;
             font-weight: bold;
@@ -156,6 +156,14 @@ $avatar-size: 70px;
             margin-bottom: 0;
             min-width: 40px;
             color: $gray-800;
+        }
+        .bussines-profile {
+            .btn-secondary:not(:disabled):not(.disabled).active {
+                color: $gray-600;
+                background-color: #545b62;
+                border-color: #4e555b;
+                box-shadow: 0 0 30px $gray-900 inset;
+            }
         }
     }
 }

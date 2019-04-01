@@ -163,7 +163,7 @@ function readURL(input, replaceWithCfg) {
 }
 
 export function init(replaceWithCfg) {
-    const uploadBtnCls = (!replaceWithCfg.replaceWith) ? '.file-upload-btn' : replaceWithCfg.uploadBtnCls;
+    const uploadBtnCls = (!(replaceWithCfg && replaceWithCfg.replaceWith)) ? '.file-upload-btn' : replaceWithCfg.uploadBtnCls;
     const $uploadBtn = $(uploadBtnCls);
     const $uploadInput = $('.file-upload-input');
     const $removeImgBtn = $('.remove-image');

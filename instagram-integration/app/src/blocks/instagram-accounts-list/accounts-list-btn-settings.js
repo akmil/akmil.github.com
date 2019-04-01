@@ -116,7 +116,7 @@ export function settingButtonsHandler(classCfg) {
         formFields.about.value = about;
         formFields.userAvatarImg.src = imgSrc;
         if (isBusiness) {
-            modalEdit.find('.bussines-profile').addClass('d-none');
+            modalEdit.find('.bussines-profile').addClass('d-none').removeClass('d-block');
         } else {
             modalEdit.find('.bussines-profile').addClass('d-block');
         }

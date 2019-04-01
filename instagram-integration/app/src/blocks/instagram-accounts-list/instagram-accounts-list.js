@@ -191,7 +191,7 @@ export const renderItem = (item, cList, _defaultAvatarSrc) => {
                     ${checkPointText(checkpoint, item)}
                 </div>
                 ${stats()}
-                ${addSettingBtn(item || {})}
+                ${addSettingBtn(item) || ''}
             </div>
         </li>`).appendTo(cList);
     } else {
@@ -205,19 +205,19 @@ export const renderItem = (item, cList, _defaultAvatarSrc) => {
                 ${(info.name) ? `<h4 class="mt-0 mb-1">${info.name}</h4>` : ''}
                 ${(info.name) ? '' : ''  /* ${(info.email) ? `<p class="mt-0 mb-1">${info.email}</p>` : ''}
                  ${(info.phone) ? `<p class="mt-0 mb-1">${info.phone}</p>` : ''} */ }
-                
+
             </div>
             <div class="col user-checkpoint">
                 ${(checkpoint.status === 'TRIGGERED')
-                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
+                ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto"
                         data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
-                        data-username="${item.username || ''}" 
+                        data-username="${item.username || ''}"
                         data-toggle="modal" data-target="#security-code">
                     <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                 : ''}
             </div>
             ${stats(info)}
-            ${addSettingBtn(item || {})}
+            ${addSettingBtn(item) || ''}
         </div>
     </li>`);
     }
