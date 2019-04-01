@@ -126,6 +126,7 @@ function onSubmitHandler(e) {
     }
     UserTaskManager.postStartTask(nReqBody, cbError).then((result) => {
         if (result.status.state === 'ok') {
+            $('.form-submit-finish').find('.alert p').remove();
             $('.form-submit-finish').addClass('d-block')
                 .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
         }
@@ -145,8 +146,9 @@ function initLogsTab() {
     tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
 }
 
-function removeExtraTextFields() {
-    $(`${elSelector.fields}:not(:first-child)`).remove();
+function removeExtraTextFields(e) {
+    $(`${elSelector.fields}:not(:first-child)`).removeClass('d-block');
+    e.stopPropagation();
 }
 
 /* TODO: refactor -> move initModalHandler to separate file, remove initModalHandler in autogreeting-main.js */
@@ -190,12 +192,12 @@ function initHandlers() {
         initModalHandler();
     });
 
-    // alert close
-    $('.form-submit-finish .close').on('click', function () {
+    // alert success close
+    $('.form-submit-finish .close').on('click', function (e) {
         // console.log('alert close');
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
-        removeExtraTextFields();
+        // removeExtraTextFields(e);
     });
 
     // alert close

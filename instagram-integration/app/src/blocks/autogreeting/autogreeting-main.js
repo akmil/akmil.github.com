@@ -96,6 +96,7 @@ function onSubmitHandler(e) {
         console.log('postBot');
         if (result.status.state === 'ok') {
             console.log(JSON.stringify(result));
+            $('.form-submit-finish').find('.alert p').remove();
             $('.form-submit-finish').addClass('d-block')
                 .find('.alert').append(`<p>task_id: ${result.data.task_id}</p>`);
         }

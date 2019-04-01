@@ -85,8 +85,10 @@ function initSteps(formSelector, wizardCfg) {
     });
 
     // alert close
-    $('.form-submit-finish .close').on('click', function () {
+    $('.form-submit-finish .close').on('click', function (e) {
         console.log('form-submit-finish .close');
+        $(this).closest('.form-submit-finish').removeClass('d-block');
+        e.stopPropagation();
         // $(this).closest('form-submit-finish').removeClass('d-block');
         // $('#v-pills-runned-tab').trigger('click');
         // window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
