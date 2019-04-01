@@ -202,9 +202,9 @@ export function settingButtonsHandler(classCfg) {
     $('.js_btn-prof-type-switcher label').on('click', (e) => {
         const value = $(e.target).find('input[type=radio]').attr('value');
         // console.log('click', value);
-        // const isOpen = value === 'closed-profile-off';
+        const isOpen = value === 'closed-profile-off';
         const body = {
-            'open': true
+            'open': isOpen
         };
         User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
