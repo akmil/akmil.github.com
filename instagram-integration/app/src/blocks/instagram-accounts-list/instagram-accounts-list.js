@@ -154,7 +154,7 @@ const checkPointText = (checkpoint, item) => {
 
 const addSettingBtn = (account) => {
     const {username = '',
-        info: {name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count, is_business}
+        info: {name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count, is_business, is_private}
     } = account;
     if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
         return `<div class="account-setting col-1 d-flex flex-column">
@@ -169,6 +169,7 @@ const addSettingBtn = (account) => {
                 data-following_count="${following_count}"
                 data-media_count="${media_count}"
                 data-is_business="${is_business}"
+                data-is_private="${is_private}"
             ><i class="fas fa-pen m-0"></i></button>
             <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
             <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>

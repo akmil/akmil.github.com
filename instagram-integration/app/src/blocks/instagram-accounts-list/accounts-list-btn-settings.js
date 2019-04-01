@@ -88,6 +88,7 @@ export function settingButtonsHandler(classCfg) {
         const about = $editBtn.data('biography');
         const imgSrc = $editBtn.data('img');
         const isBusiness = $editBtn.data('is_business');
+        const isPrivate = $editBtn.data('is_private');
         // 'is_business'=true
 
         const $form = modalEdit.find('form').get(0);
@@ -115,11 +116,29 @@ export function settingButtonsHandler(classCfg) {
         formFields.site.value = site;
         formFields.about.value = about;
         formFields.userAvatarImg.src = imgSrc;
+        const $profileBox = modalEdit.find('.bussines-profile');
         if (isBusiness) {
-            modalEdit.find('.bussines-profile').addClass('d-none').removeClass('d-block');
+            $profileBox.addClass('d-none').removeClass('d-block');
         } else {
-            modalEdit.find('.bussines-profile').addClass('d-block');
+            $profileBox.addClass('d-block');
+            // isPrivat, todo:refactor me
+            if (isPrivate) {
+                $profileBox.find('.js_btn-prof-type-switcher #closed-profile-on').closest('label').addClass('active')
+                    .find('#closed-profile-on').attr('checked', 'checked');
+                // off - disable
+                $profileBox.find('.js_btn-prof-type-switcher #closed-profile-off').closest('label').removeClass('active')
+                    .find('#closed-profile-off').attr('checked', false);
+            } else {
+                $profileBox.find('.js_btn-prof-type-switcher #closed-profile-off').closest('label').addClass('active')
+                    .find('#closed-profile-off').attr('checked', 'checked');
+                // on - disable
+                $profileBox.find('.js_btn-prof-type-switcher #closed-profile-on').closest('label').removeClass('active')
+                    .find('#closed-profile-on').attr('checked', false);
+            }
         }
+        window.PubSub.subscribe('update_data_private_on_acc_list', (e, value) => {
+            $editBtn.data('is_private', value !== 'closed-profile-off');
+        });
         modalEdit.modal('show');
     });
     $('.js_edit-profile-modify').on('click', (e) => {
@@ -182,15 +201,15 @@ export function settingButtonsHandler(classCfg) {
     // const modeSelector = $('.js_btn-prof-type-switcher');
     $('.js_btn-prof-type-switcher label').on('click', (e) => {
         const value = $(e.target).find('input[type=radio]').attr('value');
-        console.log('click', value);
-        const isOpen = value === 'closed-profile-off';
+        // console.log('click', value);
+        // const isOpen = value === 'closed-profile-off';
         const body = {
-            'open': isOpen
+            'open': true
         };
         User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
                 console.log('result', result);
-                modalConfirm.hide();
+                window.PubSub.publish('update_data_private_on_acc_list', value);
             }
         });
     });
