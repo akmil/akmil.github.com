@@ -24,8 +24,8 @@
                             <div class="container">
                             <div class="row no-gutters">
                                 <div class="col-12 col-sm-7 mr-1">
-                                    <textarea data-emoji-picker="true" style="padding: 0.25rem; width: 100%;min-height: 42px;" 
-                                        id="sendMessageTextArea" 
+                                    <textarea data-emoji-picker="true" style="padding: 0.25rem; width: 100%;min-height: 42px;"
+                                        id="sendMessageTextArea"
                                         class="chat-text-area"
                                         placeholder="Напишите сообщение">
                                     </textarea>
@@ -33,21 +33,28 @@
                                 <div class="col">
                                     <td class="chat-col-btn">
                                         <div class="">
-                                            <form enctype="multipart/form-data">
+                                            <!--<form enctype="multipart/form-data">
                                                 <input type="file" id="imgupload" style="display: block"
                                                        accept="image/*">
-                                            </form>
+                                            </form>-->
                                             <button id="sendMessageButton"
                                                     class="btn btn-success chat-button">
                                                     {{!-- <i class="fas fa-feather-alt mr-1"></i> --}} Отправить
                                             </button>
-                                            {{!-- <button id="Imoji" class="btn btn-success chat-button"><i
-                                                    class="fas fa-smile"></i>Imoji
-                                            </button> --}}
+                                            <button id="" class="btn btn-outline-dark chat-button file-upload-btn">
+                                                <i class="fa fa-upload"></i>
+                                            </button>
+                                            <div class="file-upload">
+                                                <div class="image-upload-wrap">
+                                                    <input class="file-upload-input" type='file' accept=".jpg, .jpeg" />
+                                                </div>
+                                            </div>
+                                            {{!--
                                             <span id="sndFile" class="btn btn-success chat-button hiddenFileInput">
-                                                    {{!-- <i class="fa fa-upload"></i> --}}
-                                                <input type="file" name="theFile"/>
+                                                    {{!-- <i class="fa fa-upload"></i> --}
+                                                <input type="file" name="theFile" class="file-upload-input"/>
                                                 </span>
+                                            --}}
                                         </div>
                                     </td>
                                 </div>

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -147,15 +147,18 @@
                                             <div class="col">
                                                 <td class="chat-col-btn">
                                                     <div>
-                                                        <form enctype="multipart/form-data">
-                                                            <input type="file" id="imgupload" style="display:block" accept="image/*">
-                                                        </form>
+                                                        
                                                         <button id="sendMessageButton" class="btn btn-success chat-button">
                                                                  Отправить
                                                         </button>
-                                                        <span id="sndFile" class="btn btn-success chat-button hiddenFileInput">
-                                                            <input type="file" name="theFile"/>
-                                                            </span>
+                                                        <button class="btn btn-outline-dark chat-button file-upload-btn">
+                                                            <i class="fa fa-upload"></i>
+                                                        </button>
+                                                        <div class="file-upload">
+                                                            <div class="image-upload-wrap">
+                                                                <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </div>
@@ -180,7 +183,7 @@
             
             </main></div>
             
-            <script>function handleFileSelect(e){for(var t,n=e.target.files,a=0;t=n[a];a++)if(t.type.match("image.*")){var l=new FileReader;l.onload=function(n){return function(e){var t=document.createElement("span");t.innerHTML=['<img class="thumb" src="',e.target.result,'" title="',escape(n.name),'"/>'].join(""),document.getElementById("list").insertBefore(t,null)}}(t),l.readAsDataURL(t)}}document.getElementById("sndFile").addEventListener("change",handleFileSelect,!1)</script>
+            <script>function handleFileSelect(e){for(var t,n=e.target.files,a=0;t=n[a];a++)if(t.type.match("image.*")){var l=new FileReader;l.onload=function(e){return function(t){var n=document.createElement("span");n.innerHTML=['<img class="thumb" src="',t.target.result,'" title="',escape(e.name),'"/>'].join(""),document.getElementById("list").insertBefore(n,null)}}(t),l.readAsDataURL(t)}}document.getElementById("sndFile").addEventListener("change",handleFileSelect,!1)</script>
             
         
       

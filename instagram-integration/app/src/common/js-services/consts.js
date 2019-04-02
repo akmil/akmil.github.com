@@ -31,8 +31,10 @@ export const CONST = {
         instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',
 
         // -instagram-direct------------------------
+        instagramDirect_Basic: 'instagram-direct',
         instagramDirect_postMessage: 'instagram-direct/',
         instagramDirect_getMetaData: 'instagram-direct/meta',
+        // http://api.luxgram.ru/v1/instagram-direct/{username}/{id}/photo
 
         // -instagram-task-manager------------------------
         instagramTaskManager: 'instagram-task-manager/',
