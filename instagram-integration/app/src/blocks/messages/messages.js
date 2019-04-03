@@ -289,50 +289,7 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
     });
 }
 
-/*
-function imageReadURLCb (input, {fileUploadBox, isImgSizeOk, isFileTypeOk, removeUpload, errorHandler, updateProgress, MAX_IMG_FILE_SIZE_BYTE, fileUploadContent}) {
-    const holder = fileUploadBox;
-    const $container = $(input).closest(holder);
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        console.log('imageReadURLCb');
-        if (!isImgSizeOk(input.files[0]) || !isFileTypeOk(input.files[0])) {
-            console.log('show error message, imgSize to big ');
-            $(fileUploadBox).append(`
-            <div class="warning-image text-danger">
-                <p>Доступный формат изображения jpeg или jpg</p>
-                <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки ${MAX_IMG_FILE_SIZE_BYTE / 1024}MB</p>
-            </div>
-        `);
-            setTimeout(() => {
-                $('.warning-image').addClass('d-none');
-            }, 5000);
-            return;
-        }
-
-        reader.onload = function(e) {
-            $container.find('.image-upload-wrap').hide();
-            $container.find('.file-upload-image').attr('src', e.target.result);
-            $container.find(fileUploadContent).show();
-            $container.find('.image-title').html(input.files[0].name);
-        };
-
-        reader.onerror = errorHandler;
-        reader.onprogress = updateProgress;
-
-        reader.readAsDataURL(input.files[0]);
-        setTimeout(() => handleSubmit(input), 2000);
-        // Read in the image file as a binary string.
-        // reader.readAsBinaryString(input.files[0]);
-
-    } else {
-        removeUpload($container);
-    }
-
-}
-*/
-
-function handleSubmitCb(input, token) {
+function imageLoadSubmitCb(input, token) {
     const userData = $msgList.data('conversation');
     const {username, conversationId} = userData;
     const url = `${CONST.getPath('instagramDirect_Basic')}/${username}/${conversationId}/photo`;
@@ -352,6 +309,7 @@ function handleSubmitCb(input, token) {
     request.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
             console.log('this', this.responseText, this);
+            input.value = '';
             window.PubSub.publish(CONST.events.autoarnswer.IMAGE_UPLOADED, {'response': this.responseText, 'el': input});
         }
     });
@@ -360,6 +318,7 @@ function handleSubmitCb(input, token) {
 function addHandlers() {
     let conversationId = '';
     const $textArea = $('#sendMessageTextArea');
+    $textArea.val('');
 
     $('#sendMessageButton').on('click', (e) => {
         const value = $textArea.val();
@@ -410,7 +369,7 @@ function addHandlers() {
     });
 
     // send image {igUsername}/{id}/photo
-    imageUpload.init(false, handleSubmitCb);
+    imageUpload.init(false, imageLoadSubmitCb);
 }
 
 export function init() {
