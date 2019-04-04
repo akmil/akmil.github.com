@@ -175,6 +175,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
     // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
     items.forEach((item, idx) => {
         const {pagination} = item;
+        console.log(item.pending_requests);
         tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" 
                 data-username="${item.username}"
                 data-userAvatar="${item.profile_pic_url}"
@@ -189,6 +190,8 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
                     <h4 class="title">
                         ${item.username}
                     </h4>
+                    ${(item.pending_requests === 1) ? `<p>${item.pending_requests} запрос</p>` : ''}
+                    ${(item.pending_requests > 1) ? `<p>${item.pending_requests} запроса</p>` : ''}                    
                 </div>
             </div>
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
