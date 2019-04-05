@@ -15,6 +15,9 @@ Endpoint на получение запросов: GET http://api.luxgram.ru/v1/
 
 export const addConfirgButtons = (conversationId, username) => {
     console.log('addConfirgButtons proceed', username, conversationId);
+    const liLast = $('.messages-list li:last-child');
+    const tpl = '<p>buttons goes here</p>';
+    $(tpl).appendTo(liLast);
 };
 const conversationDetail = function(items) {
     let tpl = '';
