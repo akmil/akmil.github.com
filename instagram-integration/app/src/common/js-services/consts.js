@@ -34,6 +34,7 @@ export const CONST = {
         instagramDirect_Basic: 'instagram-direct',
         instagramDirect_postMessage: 'instagram-direct/',
         instagramDirect_getMetaData: 'instagram-direct/meta',
+        instagramDirect_RequestPending: 'instagram-direct/pending',
         // http://api.luxgram.ru/v1/instagram-direct/{username}/{id}/photo
 
         // -instagram-task-manager------------------------

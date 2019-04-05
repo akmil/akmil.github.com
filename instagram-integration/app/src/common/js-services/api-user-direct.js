@@ -57,6 +57,11 @@ class UserConversation {
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.username}/${details.conversationId}/text`,
             setting, cbError);
     }
+    getRequestPending(username, cbError) {
+        // const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}`,
+        {headers: {'token': this.getToken()}}, cbError);
+    }
 
 }
 

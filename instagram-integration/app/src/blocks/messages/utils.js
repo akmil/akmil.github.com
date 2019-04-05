@@ -128,7 +128,7 @@ const conversationDetail = function(items) {
     });
     return tpl;
 };
-const addConversations = function(conversations) {
+export const addConversations = function(conversations) {
     let tpl = '';
     conversations.forEach((item) => {
         const isUnread = item['is_unread'];
@@ -165,7 +165,7 @@ export function appendUserList($list, item, details) {
 }
 
 export function fillUserList($list, dataArray, loadMoreCbFunction) {
-    const items = dataArray.meta;
+    const items = dataArray;
     const cList = $list;
     let tpl = '';
     const loadMoreBox = (idx, prev_cursor) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}">
@@ -190,8 +190,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
                     <h4 class="title">
                         ${item.username}
                     </h4>
-                    ${(item.pending_requests === 1) ? `<p>${item.pending_requests} запрос</p>` : ''}
-                    ${(item.pending_requests > 1) ? `<p>${item.pending_requests} запроса</p>` : ''}                    
+                    ${(item.pending_requests) ? `<p>${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
                 </div>
             </div>
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">

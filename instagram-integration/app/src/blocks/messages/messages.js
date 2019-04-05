@@ -1,6 +1,6 @@
 // import MeteorEmoji from 'meteor-emoji';
 import EmojiPicker from 'vanilla-emoji-picker';
-import qq from 'fine-uploader'; // todo: fine-uploade
+// import qq from 'fine-uploader'; // todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
 import {fillMassagesList, fillUserList, messageAreaHendler, /* addMoreUsersAccordion,*/ appendUserList} from './utils';
@@ -8,6 +8,7 @@ import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';
 import * as imageUpload from '../_shared/image-upload/image-upload';
+import {initRequests, addConfirgButtons} from './requests';
 
 const token = User.getToken();
 const $msgList = $('.messages-list');
@@ -20,6 +21,17 @@ let updateInterval = '';
 let intervalId = false;
 let cursor = '';
 let intervalUserList = false;
+let initialVal = '';
+let flagInitialVal = true;
+const currentUserData = {
+    useravatar: 'link',
+    username: 'name'
+};
+const scrollLoaderState = {
+    cursor: 'pagination.prev_cursor',
+    firstLoad: true,
+    allMsgLoaded: false
+};
 
 const renderResults = function (cfg) {
     const {dataArray: data, $list: ulElement, stateCfg} = cfg;
@@ -82,6 +94,7 @@ $(document).ready(() => {
     $picker.attr('style', styleNew);
 
     // todo: fine-uploade
+    /*
     // eslint-disable-next-line no-unused-vars
     const restrictedUploader = new qq.FineUploader({
         element: document.getElementById('fine-uploader-validation'),
@@ -101,6 +114,7 @@ $(document).ready(() => {
             sizeLimit: 500 * 1024
         }
     });
+    */
 });
 let isTimeOutRunned = false;
 function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username) {
@@ -132,8 +146,8 @@ function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username) {
     }
 }
 
-function getAndFillUserList(isActiveFirst) {
-    const $userList = $('.messages-user-list');
+function getAndFillUserList(isActiveFirst, userList) {
+    const $userList = userList || $('.messages-user-list');
     let prevActiveDialogId = '';
     if (!isActiveFirst) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
@@ -146,7 +160,7 @@ function getAndFillUserList(isActiveFirst) {
         const {data} = result;
         data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
         // messages-user-list from utils.js
-        fillUserList($userList, data, getAndFillUserListCursor);
+        fillUserList($userList, data.meta, getAndFillUserListCursor);
         if (data.settings && data.settings.invoke_in_millis) {
             updateInterval = data.settings.invoke_in_millis;
             updateInterval = (updateInterval > 6000) ? updateInterval : 10000;
@@ -175,11 +189,7 @@ function getAndFillUserList(isActiveFirst) {
         }
     });
 }
-const scrollLoaderState = {
-    cursor: 'pagination.prev_cursor',
-    firstLoad: true,
-    allMsgLoaded: false
-};
+
 function addPagination(pagination, cbFn) {
     if (scrollLoaderState.allMsgLoaded) {
         return;
@@ -200,7 +210,8 @@ function addPagination(pagination, cbFn) {
             $list: $msgList,
             dataArray: result.data.meta.messages,
             isAppendPrevMsg: 'appentPrevMsg',
-            stateCfg
+            stateCfg,
+            currentUserData
         });
         // set new cursor
         if (newCursor) {
@@ -215,7 +226,7 @@ function addPagination(pagination, cbFn) {
         // stop update interval
         if (intervalId) {
             clearInterval(intervalId);
-            cbFn(result.data.meta.pagination.prev_cursor);
+            cbFn(newCursor);
         }
 
     });
@@ -260,14 +271,13 @@ function scrollHandler(scrollDelay, pagination) {
         });
     }, (scrollDelay + 200));
 }
-let initialVal = '';
-let flagInitialVal = true;
 
 function getAndFillConversation({username, conversationId, useravatar}, isScrollDown) {
     const TIME_SCROLL = 10;
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
-        const currentUserData = {useravatar, username};
+        currentUserData.useravatar = useravatar;
+        currentUserData.username = username;
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg, currentUserData});
         Spinner.remove();
         $('.js_send-message-box').removeClass('d-none');
@@ -337,10 +347,10 @@ function addHandlers() {
 
     messageAreaHendler($textArea, $('#sendMessageButton'));
 
-    $(document).on('click', '.list-group-item .collapse', function(e) {
-        e.stopPropagation();
-        const userData = $(e.target).closest('.list-group-item').data();
+    function userShowConversetionHandler(e, userData) {
+        console.log('click');
         const {username, useravatar} = userData;
+        e.stopPropagation();
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown');
@@ -358,12 +368,19 @@ function addHandlers() {
         // setInterval(() => {
         //     getAndFillUserList();
         // }, updateInterval);
+    }
+
+    $(document).on('click', '.list-group-item .collapse', userShowConversetionHandler);
+    $(document).on('click', '.js_messages-request', function(e) {
+        const userData = $(e.target).closest('.list-group-item').data();
+        userShowConversetionHandler(e, userData);
+        console.log('addConfirgButtons', conversationId);
+        addConfirgButtons(conversationId, userData.username);
     });
 
     window.PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
         const {username, conversationId, value, resultFromServer} = data;
         const $dialog = $(`.messages-user-list .list-group-item[data-username="${username}"] div[data-conversation-id="${conversationId}"]`);
-        console.log('set val from text-area', value);
         console.log('resultFromServer: ', resultFromServer);
         $dialog.find('.summary').text(value);
     });
@@ -380,4 +397,9 @@ export function init() {
 
     getAndFillUserList('setActiveFirst');
     addHandlers();
+    const cfg = {
+        username: 'your_dieta',
+        fillUserListFn: fillUserList
+    };
+    initRequests(cfg);
 }

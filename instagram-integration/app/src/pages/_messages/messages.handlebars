@@ -12,7 +12,7 @@
         <div class="container px-0 pt-sm-2">
 
             <div class="row">
-                <div class="col-12 col-sm-8 pt-4 pt-sm-0">
+                <div class="col-12 col-sm-4 pt-4 pt-sm-0">
                     <div id="mainChatPart" class="panel panel-default mypanel"
                          style="border-color: #ffffff; width: 100%; display: block">
                         <div class="messages-list-box">
@@ -49,12 +49,6 @@
                                                     <input class="file-upload-input" type='file' accept=".jpg, .jpeg" />
                                                 </div>
                                             </div>
-                                            {{!--
-                                            <span id="sndFile" class="btn btn-success chat-button hiddenFileInput">
-                                                    {{!-- <i class="fa fa-upload"></i> --}
-                                                <input type="file" name="theFile" class="file-upload-input"/>
-                                                </span>
-                                            --}}
                                         </div>
                                     </td>
                                 </div>
@@ -127,10 +121,17 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-12 col-sm-4 user-list-box ">
                     <p>Cписок бесед</p>
                     <ul class="list-group list-unstyled messages-user-list" id="accordion">
                         <li>loading...</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-4 user-requests-box ">
+                    <p>Запросы</p>
+                    <div class="list-group list-unstyled messages-requests-list" id="accordion-requests">
+                        {{!-- <li>loading...</li> --}}
                     </ul>
                 </div>
             </div>
@@ -139,7 +140,7 @@
     </div>
 
 </div>
-
+<!--
 <script>
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -172,5 +173,6 @@
 
   document.getElementById('sndFile').addEventListener('change', handleFileSelect, false);
 </script>
+-->
 
 {{/ base }}
