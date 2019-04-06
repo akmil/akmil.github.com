@@ -243,6 +243,7 @@ function scrollHandler(scrollDelay, pagination) {
             console.log('prevCursor', newCursor);
         }
     }
+
     setTimeout(() => {
         $msgList.on('scroll', function() {
             const scrollTop = $(this).scrollTop();
@@ -283,9 +284,11 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
 
         if (isScrollDown) {
-            $msgList.animate({
-                scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
-            }, TIME_SCROLL);
+            setTimeout(() => {
+                $msgList.animate({
+                    scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
+                }, TIME_SCROLL);
+            }, TIME_SCROLL * 2);
             // save first value
             if (flagInitialVal) {
                 initialVal = result.data.meta.messages[result.data.meta.messages.length - 1];
@@ -305,8 +308,9 @@ function imageLoadSubmitCb(input, token) {
     const acceptedFile = input.files[0];
     console.log('**handleSubmitCb');
     const formData = new FormData();
-
     const request = new XMLHttpRequest();
+
+    Spinner.startButtonSpinner($('.file-upload-btn'), 'spinner-box--sendMsg');
 
     formData.append('photo', acceptedFile, acceptedFile.name);
     request.open('POST', url);
@@ -333,7 +337,7 @@ function addHandlers() {
         const value = $textArea.val();
         const userData = $msgList.data('conversation');
         const {username, conversationId, useravatar} = userData;
-        Spinner.add($(e.target), 'spinner-box--sendMsg');
+        Spinner.startButtonSpinner($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
             if (result && result.status && result.status.state === 'ok') {
                 getAndFillConversation({username, conversationId, useravatar});
@@ -350,11 +354,14 @@ function addHandlers() {
         console.log('click');
         let userDataFromLiGroup = '';
         if (!userData) {
+            // clicked on normal conversation
             userDataFromLiGroup = $(e.target).closest('.list-group-item').data();
+            $('.confirm-buttons-box').addClass('d-none');
         }
         const {username, useravatar} = userData || userDataFromLiGroup;
         e.stopPropagation();
         conversationId = $(e.target).closest('.media').data('conversation-id');
+        Spinner.remove();
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown');
         flagInitialVal = true; // reset first value flag

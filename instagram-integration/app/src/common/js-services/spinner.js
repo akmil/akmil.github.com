@@ -58,7 +58,9 @@ class Spinner {
     }
 
     remove() {
-        this.$el.find('.spinner-box').remove();
+        if (this.$el && this.$el.length) {
+            this.$el.find('.spinner-box').remove();
+        }
     }
 
     /**
