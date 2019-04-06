@@ -348,7 +348,11 @@ function addHandlers() {
 
     function userShowConversetionHandler(e, userData) {
         console.log('click');
-        const {username, useravatar} = userData;
+        let userDataFromLiGroup = '';
+        if (!userData) {
+            userDataFromLiGroup = $(e.target).closest('.list-group-item').data();
+        }
+        const {username, useravatar} = userData || userDataFromLiGroup;
         e.stopPropagation();
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
