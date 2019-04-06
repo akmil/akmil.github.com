@@ -57,10 +57,36 @@ class UserConversation {
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.username}/${details.conversationId}/text`,
             setting, cbError);
     }
+    // --- Request Pending
     getRequestPending(username, cbError) {
         // const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}`,
         {headers: {'token': this.getToken()}}, cbError);
+    }
+    putRequestPending(confirmUserData, cbError) {
+        const setting = {
+            ...this.settingPost,
+            method: 'PUT',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        const {username, conversationId} = confirmUserData;
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}/${conversationId}`,
+            setting, cbError);
+    }
+    delRequestPending(confirmUserData, cbError) {
+        const setting = {
+            method: 'DELETE',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        const {username, conversationId} = confirmUserData;
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}/${conversationId}`,
+            setting, cbError);
     }
 
 }

@@ -12,12 +12,13 @@ Endpoint на получение запросов: GET http://api.luxgram.ru/v1/
 //     username: 'your_dieta',
 //     getAndFillUserListFn: 'getAndFillUserList_Function'
 // };
-
+const confirmUserData = {};
 export const addConfirgButtons = (conversationId, username) => {
     console.log('addConfirgButtons proceed', username, conversationId);
-    const liLast = $('.messages-list li:last-child');
-    const tpl = '<p>buttons goes here</p>';
-    $(tpl).appendTo(liLast);
+    const $confirmBtnBox = $('.js_request-confirm-box');
+    $confirmBtnBox.removeClass('d-none');
+    confirmUserData.username = username;
+    confirmUserData.conversationId = conversationId;
 };
 const conversationDetail = function(items) {
     let tpl = '';
@@ -36,15 +37,15 @@ const addConversations = function(conversations) {
     let tpl = '';
     conversations.forEach((item) => {
         const {users, id, title} = item;
-        const isUnread = item['is_unread'];
-        const lastMessage = item['lastMessage'];
-        const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
-        const isAddDot = isLastMsg > 0 && users.length > 1 && isUnread;
+        // const isUnread = item['is_unread'];
+        // const lastMessage = item['lastMessage'];
+        // const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
+        // const isAddDot = isLastMsg > 0 && users.length > 1 && isUnread;
         tpl += `
                 <div class="media p-1 js_messages-request" data-conversation-id="${id}">
                     ${conversationDetail(users)}
                     <div class="media-body">
-                        <h5 class="title ${isUnread ? 'font-weight-bold' : ''} ${(isAddDot) ? 'mr-2' : ''}">${title}</h5>
+                        <h5 class="title">${title}</h5>
                     </div>
                 </div>
             `;
@@ -78,8 +79,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
         console.log(item.pending_requests);
         if (item.pending_requests) {
             getRequestPending(item.username, elId);
-        }
-        tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#${elId}" 
+            tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#${elId}" 
                 data-username="${item.username}"
                 data-userAvatar="${item.profile_pic_url}"
                 aria-expanded="true" aria-controls="collapse-${idx}">
@@ -92,7 +92,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
                     <h4 class="title">
                         ${item.username}
                     </h4>
-                    ${(item.pending_requests) ? `<p>${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
+                    ${(item.pending_requests) ? `<p class="text-success">${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
                 </div>
             </div>
             <div id="${elId}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion-requests">
@@ -100,6 +100,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
             </div>
             <!-- {(pagination && pagination.prev_cursor) ? 'loadMoreBox(idx, pagination.prev_cursor)' : ''} -->
         </li>`;
+        }
     });
     $(tpl).appendTo(cList);
 
@@ -115,6 +116,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
     //     e.stopPropagation();
     // });
 }
+
 const token = User.getToken();
 function getAndFillUserList(isActiveFirst, userList) {
     const $userList = userList || $('.messages-user-list');
@@ -152,9 +154,39 @@ function getAndFillUserList(isActiveFirst, userList) {
     });
 }
 
+function initHandlers() {
+    const $confirmBtnBox = $('.js_request-confirm-box');
+    const $reqConfirmBtn = $('.js_request-confirm', $confirmBtnBox);
+    const $reqRejectBtn = $('.js_request-reject', $confirmBtnBox);
+
+    $reqConfirmBtn.on('click', (e) => {
+        // PUT http://api.luxgram.ru/v1/instagram-direct/pending/{username}/{id}
+        UserConversation.putRequestPending(confirmUserData).then((result) => {
+            if (result.status.state === 'ok') {
+                console.info('result: ', result);
+                $confirmBtnBox.addClass('d-none');
+            }
+        });
+    });
+    $reqRejectBtn.on('click', (e) => {
+        UserConversation.delRequestPending(confirmUserData).then((result) => {
+            if (result.status.state === 'ok') {
+                console.info('result: ', result);
+                $confirmBtnBox.addClass('d-none');
+            }
+        });
+    });
+
+    const $showUserList = $('.js_show-messages-user-list');
+    $showUserList.on('click', (e) => {
+        $(e.target).closest('.user-requests-box').removeClass('user-requests-box--show');
+        $('.user-list-box').removeClass('user-list-box--hide');
+    });
+}
 export function initRequests(cfg) {
     const $list = $('.messages-requests-list');
     getAndFillUserList('setActiveFirst', $list);
+    initHandlers();
 }
 
 /*

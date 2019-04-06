@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -127,14 +127,17 @@
             
                     
             
-                    <div class="container px-0 pt-sm-2">
+                    <div class="px-0 pt-sm-2">
             
                         <div class="row">
                             <div class="col-12 col-sm-8 pt-4 pt-sm-0">
                                 <div id="mainChatPart" class="panel panel-default mypanel" style="border-color:#fff;width:100%;display:block">
                                     <div class="messages-list-box">
-                                        <div class="messages-info"></div>
                                         <ul class="messages-list list-unstyled mb-5 d-flex flex-column align-items-end"></ul>
+                                        <div class="js_request-confirm-box confirm-buttons-box d-none">
+                                            <button class="btn btn-success js_request-confirm mx-2">Подтвердить</button>
+                                            <button class="btn btn-secondary js_request-reject mx-2">Отменить</button>
+                                        </div>
                                     </div>
             
                                     <div class="send-message-box js_send-message-box d-none">
@@ -170,27 +173,32 @@
                                     </div>
                                 </div>
                             </div>
-                            
+            
                             <div class="col-12 col-sm-4 user-list-box">
                                 <p>Cписок бесед</p>
                                 <ul class="list-group list-unstyled messages-user-list" id="accordion">
                                     <li>loading...</li>
                                 </ul>
                             </div>
+                            <div class="col-12 col-sm-4 user-requests-box">
+                                <p class="js_show-messages-user-list"><i class="fas fa-chevron-left mr-2"></i> Запросы</p>
+                                <div class="list-group list-unstyled messages-requests-list" id="accordion-requests">
+                                
+                            </div>
                         </div>
                     </div>
             
                 </div>
             
-            </main></div>
+            </div>
             
             
         
-      
+      </main>
 
     </div>
   </div>
-
+</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

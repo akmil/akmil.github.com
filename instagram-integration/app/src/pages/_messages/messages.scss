@@ -22,6 +22,38 @@ $avatar-conversation-size: 38px;
   }
 }
 
+.user-requests-box {
+  //position: fixed;
+  //right: 24px;
+  //max-width: calc(60.26666% - 33.333333%);
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.user-requests-box,
+.user-list-box {
+  position: fixed;
+  right: 24px;
+  max-width: calc(60.26666% - 33.333333%);
+  transition: 0.2s;
+  &--show {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  &--hide {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.confirm-buttons-box {
+  top: -60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+
 .messages-user-list {
     .list-group-item {
         cursor: pointer;

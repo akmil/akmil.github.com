@@ -190,7 +190,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
                     <h4 class="title">
                         ${item.username}
                     </h4>
-                    ${(item.pending_requests) ? `<p>${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
+                    ${(item.pending_requests) ? `<p class="js_show-request-box btn btn-outline-dark btn-sm">${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
                 </div>
             </div>
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
@@ -209,6 +209,11 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
 
         console.log('click', section, cursor);
         loadMoreCbFunction(cursor, section, username);
+        e.stopPropagation();
+    });
+    $('.js_show-request-box').on('click', (e) => {
+        $(e.target).closest('.user-list-box').addClass('user-list-box--hide');
+        $('.user-requests-box').addClass('user-requests-box--show');
         e.stopPropagation();
     });
 }
