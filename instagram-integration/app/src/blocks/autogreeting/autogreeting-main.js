@@ -172,7 +172,7 @@ function initModalHandler() {
  */
 function initHandlers() {
     // TODO: refactor with autogreet.js initHandlers
-    $('.js_add-autoanswer').on('click', (e) => {
+    $('.js_add-automessages').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextFieldGreet(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();

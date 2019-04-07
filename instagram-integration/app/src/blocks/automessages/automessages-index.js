@@ -3,7 +3,7 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import viewUtils from '../../common/js-services/view';
 import UserTaskManager from '../../common/js-services/api-task-manager';
 import * as tabs from '../_shared/tebs-pils/tabs';
-import * as autoanswerStatus from './autoanswer-status';
+import * as automessagesStatus from './automessages-status';
 import * as logs from '../_shared/logs/logs';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
@@ -14,20 +14,20 @@ const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
-    currentPageCls: '.autoanswer-page',
+    currentPageCls: '.automessages-page',
     tasksList: '.log-tasks',
     logsTabBtn: '#v-pills-logs-tab',
     pagination: '.logs-pagination',
     paginationPgNumber: '.page-number',
-    pathType: CONST.url.tmTypes.autoanswerT,
-    pathSubType: CONST.url.tmTypes.autoanswerSubT[0]
+    pathType: CONST.url.tmTypes.automessagesT,
+    pathSubType: CONST.url.tmTypes.automessagesSubT[0]
 };
 const elSelector = {
-    fields: '.autoanswer-text-fields',
+    fields: '.automessages-text-fields',
     keyWord: 'textarea.answer-words',
     answer: 'textarea.answer-messages',
     fileUploadBox: '.file-upload',
-    addPostBtns: '.js_autoanswer-add-post'
+    addPostBtns: '.js_automessages-add-post'
 };
 const logsState = {
     selectCls: 'js_logs-accounts',
@@ -182,7 +182,7 @@ function initModalHandler() {
 function initHandlers() {
     // TODO: refactor with autogreet.js initHandlers
     // $('[data-toggle="popover"]').popover(); // init
-    $('.js_add-autoanswer').on('click', (e) => {
+    $('.js_add-automessages').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextField(elSelector.fields.substr(1)).insertAfter(lastTextField);
         initEmojii();
@@ -236,7 +236,7 @@ export function init() {
         };
         wizardForm.init(wizardCfg);
         initHandlers();
-        autoanswerStatus.init();
+        automessagesStatus.init();
         initModalHandler();
         initEmojii();
         imageUpload.init();

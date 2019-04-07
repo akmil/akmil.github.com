@@ -21,7 +21,7 @@ const clsConst = {
 const elSelector = {
     wizardForm: '.wizard-form',
     wizardFormName: 'wizard-form',
-    fields: '.autoanswer-text-fields',
+    fields: '.automessages-text-fields',
     taskMode: '.js_task-mode',
     competitors: 'textarea.stories-competitors'
 };

@@ -17,7 +17,7 @@ import * as instagramAccounts from './blocks/instagram-accounts-list/instagram-a
 import * as messages from './blocks/messages/messages';
 import * as follow from './blocks/follow/follow';
 import * as unfollow from './blocks/unfollow/unfollow-index';
-import * as autoanswer from './blocks/autoanswer/autoanswer-index';
+import * as automessages from './blocks/automessages/automessages-index';
 import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
 import * as stories from './blocks/stories/stories-index';
@@ -67,7 +67,7 @@ const init = () => {
     unfollow.init();
     instagramAccounts.init();
     messages.init();
-    autoanswer.init();
+    automessages.init();
     autogreeting.init();
     chatBot.init();
     stories.init();

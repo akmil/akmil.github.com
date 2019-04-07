@@ -5,7 +5,7 @@
 export function initMenu() {
     const urlToCheck = [
         'instagram-accounts',
-        'autoanswer',
+        'automessages',
         'stories',
         'autogreeting',
         'follow',

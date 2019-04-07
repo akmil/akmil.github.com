@@ -16,7 +16,7 @@ $(`<div class="${mainCls} mt-2">
                 </button>
             </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success post-upload-btn js_autoanswer-add-post"
+            <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post"
                 title="Добавить публикацию"
                 data-toggle="tooltip"
                 data-placement="top"

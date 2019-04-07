@@ -111,7 +111,7 @@ class UserTaskManager {
         const path = 'instagramTaskManager_postStartTask';
         return this.postStartFollowingList(body, cbError, path);
     }
-    postImageAutoanswer(body, cbError) {
+    postImageAutomessages(body, cbError) {
         const setting = {
             method: 'POST',
             headers: {
@@ -134,7 +134,7 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
-    getPostsAutoanswer(details, cbError) {
+    getPostsAutomessages(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
         // eslint-disable-next-line no-param-reassign
         const urlByUserName = `${CONST.getPath('instagramTaskManager_getPosts', details.userName || 'user_not_selected')}${cursor}`;

@@ -24,8 +24,8 @@ const pages = [
     },
     {
         title: 'Автоответ',
-        name: 'autoanswer',
-        source: '_autoanswer/autoanswer'
+        name: 'automessages',
+        source: '_automessages/automessages'
     },
     {
         title: 'Завершение регистрации',

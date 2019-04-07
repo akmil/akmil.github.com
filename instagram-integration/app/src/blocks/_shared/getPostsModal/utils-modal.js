@@ -70,7 +70,7 @@ function imageSelectHandler($list, modal, targetButton) {
 }
 
 export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
-    UserTaskManager.getPostsAutoanswer(details).then((result) => {
+    UserTaskManager.getPostsAutomessages(details).then((result) => {
         // console.log(result);
         if (result.status.state === 'ok') {
             const {data} = result;
