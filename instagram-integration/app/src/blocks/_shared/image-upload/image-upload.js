@@ -82,6 +82,7 @@ function handleSubmit(input, replaceWithCfg) {
     const request = new XMLHttpRequest();
 
     if (replaceWithCfg && replaceWithCfg.replaceWith) {
+        // ** edit USER **
         // PUT http://api.luxgram.ru/v1/instagram-accounts/{username}/photo
         // form-data: "photo" (jpg)
         formData.append('photo', acceptedFile, acceptedFile.name);

@@ -12,7 +12,9 @@ export const CONST = {
             autogreetT: 'AUTO_GREETING',
             autogreetSubT: ['DEFAULT_AUTO_GREETING'],
             storiesT: 'STORIES',
-            storiesSubT: ['STORIES_BY_LIST', 'STORIES_BY_FOLLOWERS', 'STORIES_BY_ACTIVE_AUDIENCE']
+            storiesSubT: ['STORIES_BY_LIST', 'STORIES_BY_FOLLOWERS', 'STORIES_BY_ACTIVE_AUDIENCE'],
+            autocommentT: 'AUTO_COMMENT',
+            autocommentSubT: ['DEFAULT_AUTO_COMMENT']
         },
         base: 'http://api.luxgram.ru/v1/',
         registration: 'registration/basic/',

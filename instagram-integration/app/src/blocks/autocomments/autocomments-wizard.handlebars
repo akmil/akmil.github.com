@@ -1,0 +1,18 @@
+<fieldset>
+    <div class="form-top">
+        <div class="form-top-left">
+            <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите аккаунт</h3>
+            <p>Шаг 1/2</p>
+        </div>
+    </div>
+
+    <div class="form-bottom">
+        <div class="profile-user js_profile-user-follow">
+            {{> instagram-accounts-list}}
+        </div>
+        <button type="button" class="btn btn-blue btn-next" disabled="disabled">Дальше</button>
+    </div>
+</fieldset>
+<fieldset>
+    {{> autocomments-step-2 }}
+</fieldset>

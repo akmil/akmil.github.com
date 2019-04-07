@@ -61,6 +61,11 @@ const pages = [
         title: 'Просмотр Stories',
         name: 'stories',
         source: '_stories/stories'
+    },
+    {
+        title: 'Автокомментарии',
+        name: 'autocomments',
+        source: '_autocomments/autocomments'
     }
 // unused
 /*
@@ -73,11 +78,6 @@ const pages = [
         title: 'Чат бот очистка',
         name: 'bot-cleaner',
         source: '_bot-cleaner/bot-cleaner'
-    },
-    {
-        title: 'User _autoposting',
-        name: 'autoposting',
-        source: '_autoposting/autoposting'
     },
     {
         title: 'Коментарии',
