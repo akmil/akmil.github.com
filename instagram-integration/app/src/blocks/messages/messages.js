@@ -272,7 +272,7 @@ function scrollHandler(scrollDelay, pagination) {
     }, (scrollDelay + 200));
 }
 
-function getAndFillConversation({username, conversationId, useravatar}, isScrollDown) {
+function getAndFillConversation({username, conversationId, useravatar}, isScrollDown, isClickFromRequestConfirm) {
     const TIME_SCROLL = 10;
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
@@ -280,7 +280,13 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
         currentUserData.username = username;
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg, currentUserData});
         Spinner.remove();
-        $('.js_send-message-box').removeClass('d-none');
+        if (isClickFromRequestConfirm) {
+            // clicked on normal conversation
+            $('.js_send-message-box').removeClass('d-none');
+        } else {
+            // clicked on request
+            $('.js_send-message-box').addClass('d-none');
+        }
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
 
         if (isScrollDown) {
@@ -358,9 +364,9 @@ function addHandlers() {
             // clicked on normal conversation
             userDataFromLiGroup = $(e.target).closest('.list-group-item').data();
             $('.confirm-buttons-box').addClass('d-none');
-            // $('.js_send-message-box').removeClass('d-none');
+            $('.js_send-message-box').removeClass('d-none');
         } else {
-            // $('.js_send-message-box').addClass('d-none');
+            $('.js_send-message-box').addClass('d-none');
         }
         const {username, useravatar} = userData || userDataFromLiGroup;
         $('#mainChatPart').removeClass('d-none');
@@ -368,7 +374,7 @@ function addHandlers() {
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.remove();
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
-        getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown');
+        getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown', isClickFromRequestConfirm);
         flagInitialVal = true; // reset first value flag
         // resend request
         if (intervalId) {
@@ -377,7 +383,7 @@ function addHandlers() {
         intervalId = setInterval(() => {
             conversationId = $(e.target).closest('.media').data('conversation-id');
             console.log(intervalId, conversationId);
-            getAndFillConversation({username, conversationId, useravatar});
+            getAndFillConversation({username, conversationId, useravatar}, false, isClickFromRequestConfirm);
         }, updateInterval);
 
         // setInterval(() => {

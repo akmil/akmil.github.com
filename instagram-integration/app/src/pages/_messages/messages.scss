@@ -32,10 +32,11 @@ $avatar-conversation-size: 38px;
 
 .user-requests-box,
 .user-list-box {
-  position: fixed;
-  right: 24px;
-  max-width: calc(60.26666% - 33.333333%);
-  transition: 0.2s;
+//   position: fixed;
+//   right: 24px;
+//   max-width: calc(60.26666% - 33.333333%);
+//   transition: 0.2s;
+  max-width: 33.333333%;
   &--show {
     transform: translateX(0%);
     opacity: 1;
@@ -43,6 +44,9 @@ $avatar-conversation-size: 38px;
   &--hide {
     transform: translateX(100%);
     opacity: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    position: fixed;
   }
 }
 

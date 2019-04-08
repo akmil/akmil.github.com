@@ -89,7 +89,6 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
                     <h4 class="title">
                         ${item.username}
                     </h4>
-                    ${(item.pending_requests) ? `<p class="text-success">${item.pending_requests} запрос${(item.pending_requests > 1) ? 'a' : ''}</p>` : ''}
                 </div>
             </div>
             <div id="${elId}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion-requests">
@@ -162,6 +161,7 @@ function initHandlers() {
             if (result.status.state === 'ok') {
                 console.info('result: ', result);
                 $confirmBtnBox.addClass('d-none');
+                $('.js_show-messages-user-list').trigger('click');
             }
         });
     });
@@ -170,6 +170,7 @@ function initHandlers() {
             if (result.status.state === 'ok') {
                 console.info('result: ', result);
                 $confirmBtnBox.addClass('d-none');
+                $('.js_show-messages-user-list').trigger('click');
             }
         });
     });
