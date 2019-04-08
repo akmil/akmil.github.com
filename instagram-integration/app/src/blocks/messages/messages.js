@@ -279,13 +279,14 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
         currentUserData.useravatar = useravatar;
         currentUserData.username = username;
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg, currentUserData});
+        $('#mainChatPart').removeClass('d-none');
         Spinner.remove();
         if (isClickFromRequestConfirm) {
-            // clicked on normal conversation
-            $('.js_send-message-box').removeClass('d-none');
-        } else {
             // clicked on request
             $('.js_send-message-box').addClass('d-none');
+        } else {
+            // clicked on normal conversation
+            $('.js_send-message-box').removeClass('d-none');
         }
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
 
@@ -358,18 +359,17 @@ function addHandlers() {
 
     function userShowConversetionHandler(e, userData) {
         console.log('click');
-        const isClickFromRequestConfirm = !userData;
+        const isClickFromRequestConfirm = userData;
         let userDataFromLiGroup = '';
         if (isClickFromRequestConfirm) {
+            $('.js_send-message-box').addClass('d-none');
+        } else {
             // clicked on normal conversation
             userDataFromLiGroup = $(e.target).closest('.list-group-item').data();
             $('.confirm-buttons-box').addClass('d-none');
             $('.js_send-message-box').removeClass('d-none');
-        } else {
-            $('.js_send-message-box').addClass('d-none');
         }
         const {username, useravatar} = userData || userDataFromLiGroup;
-        $('#mainChatPart').removeClass('d-none');
         e.stopPropagation();
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.remove();
