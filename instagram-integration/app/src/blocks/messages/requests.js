@@ -1,8 +1,5 @@
-// import viewUtils from '../../common/js-services/view';
 import UserConversation from '../../common/js-services/api-user-direct';
 import User from '../../common/js-services/user';
-// import {addConversations} from './utils';
-// import {CONST} from '../../common/js-services/consts';
 
 /*
 Endpoint на получение запросов: GET http://api.luxgram.ru/v1/instagram-direct/pending/{username}
@@ -42,7 +39,7 @@ const addConversations = function(conversations) {
         // const isLastMsg = lastMessage && (parseInt(lastMessage.length, 10));
         // const isAddDot = isLastMsg > 0 && users.length > 1 && isUnread;
         tpl += `
-                <div class="media p-1 js_messages-request" data-conversation-id="${id}">
+                <div class="media p-1 js_messages-request messages-request" data-conversation-id="${id}">
                     ${conversationDetail(users)}
                     <div class="media-body">
                         <h5 class="title">${title}</h5>
@@ -181,6 +178,7 @@ function initHandlers() {
     $showUserList.on('click', (e) => {
         $(e.target).closest('.user-requests-box').removeClass('user-requests-box--show');
         $('.user-list-box').removeClass('user-list-box--hide');
+        $('#mainChatPart').addClass('d-none');
     });
 }
 export function initRequests(cfg) {
@@ -188,15 +186,3 @@ export function initRequests(cfg) {
     getAndFillUserList('setActiveFirst', $list);
     initHandlers();
 }
-
-/*
-Чтобы получить все сообщения этого запроса (при нажатии на запрос) и показать чат - используй endpoint
-GET http://api.luxgram.ru/v1/instagram-direct/meta/{username}/{id}. Это тот же ендпоинт, который используется в обычных беседах.
-
-Endpoint для подтверждения запроса: PUT http://api.luxgram.ru/v1/instagram-direct/pending/{username}/{id}
-Endpoint для отмены запроса: DELETE http://api.luxgram.ru/v1/instagram-direct/pending/{username}/{id}
-
-Чтобы протестировать на реальных примерах, используй аккаунт your_dieta, там есть запрос от аккаунта missdi_mar.
-Только не отправляй реквест на подтверждение или отмену, так как мне лень снова подготавливать новый запрос на беседу.
-Как только убедишься что все готово, тогда и можно будет отправить запрос на подтверждение :)
-*/

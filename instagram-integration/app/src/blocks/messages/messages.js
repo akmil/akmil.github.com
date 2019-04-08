@@ -352,13 +352,18 @@ function addHandlers() {
 
     function userShowConversetionHandler(e, userData) {
         console.log('click');
+        const isClickFromRequestConfirm = !userData;
         let userDataFromLiGroup = '';
-        if (!userData) {
+        if (isClickFromRequestConfirm) {
             // clicked on normal conversation
             userDataFromLiGroup = $(e.target).closest('.list-group-item').data();
             $('.confirm-buttons-box').addClass('d-none');
+            // $('.js_send-message-box').removeClass('d-none');
+        } else {
+            // $('.js_send-message-box').addClass('d-none');
         }
         const {username, useravatar} = userData || userDataFromLiGroup;
+        $('#mainChatPart').removeClass('d-none');
         e.stopPropagation();
         conversationId = $(e.target).closest('.media').data('conversation-id');
         Spinner.remove();
@@ -384,7 +389,7 @@ function addHandlers() {
     $(document).on('click', '.js_messages-request', function(e) {
         const userData = $(e.target).closest('.list-group-item').data();
         userShowConversetionHandler(e, userData);
-        console.log('addConfirgButtons', conversationId);
+        console.log('addConfigButtons', conversationId);
         addConfirgButtons(conversationId, userData.username);
     });
 
