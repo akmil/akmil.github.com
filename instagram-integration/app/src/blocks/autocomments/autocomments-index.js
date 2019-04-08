@@ -237,32 +237,32 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         autocommentsStatus.init();
-        initModalHandler();
+        // initModalHandler();
         initEmojii();
-        imageUpload.init();
+        // imageUpload.init();
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);
         });
-        window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
-            const {response} = res;
-            const result = (response.length) ? JSON.parse(response) : '';
-            const imageId = result && result.data && result.data.image_id;
-            $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
-            console.log('image_loaded', res);
-
-            // todo: make as callBack
-            const $imageBox = $(res.el).closest('.col').find('.js_uploaded-img-from-posts');
-            if ($imageBox.length) {
-                $imageBox.remove();
-            }
-        });
-        window.PubSub.subscribe(CONST.events.modal.IMAGE_POST_SELECTED, (e, data) => {
-            const $imageBox = $(data.closestCol).find('.file-upload-content');
-            console.log('$imageBox', $imageBox);
-            if ($imageBox.length) {
-                $imageBox.hide();
-            }
-        });
+        // window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
+        //     const {response} = res;
+        //     const result = (response.length) ? JSON.parse(response) : '';
+        //     const imageId = result && result.data && result.data.image_id;
+        //     $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
+        //     console.log('image_loaded', res);
+        //
+        //     // todo: make as callBack
+        //     const $imageBox = $(res.el).closest('.col').find('.js_uploaded-img-from-posts');
+        //     if ($imageBox.length) {
+        //         $imageBox.remove();
+        //     }
+        // });
+        // window.PubSub.subscribe(CONST.events.modal.IMAGE_POST_SELECTED, (e, data) => {
+        //     const $imageBox = $(data.closestCol).find('.file-upload-content');
+        //     console.log('$imageBox', $imageBox);
+        //     if ($imageBox.length) {
+        //         $imageBox.hide();
+        //     }
+        // });
     }
 }

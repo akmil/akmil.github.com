@@ -8,6 +8,7 @@ export function initMenu() {
         'automessages',
         'stories',
         'autogreeting',
+        'autocomments',
         'follow',
         'unfollow',
         'messages',

@@ -20,6 +20,7 @@ import * as unfollow from './blocks/unfollow/unfollow-index';
 import * as automessages from './blocks/automessages/automessages-index';
 import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
+import * as autocomments from './blocks/autocomments/autocomments-index';
 import * as stories from './blocks/stories/stories-index';
 
 // const selectorCssLoginForm = {
@@ -69,6 +70,7 @@ const init = () => {
     messages.init();
     automessages.init();
     autogreeting.init();
+    autocomments.init();
     chatBot.init();
     stories.init();
 };

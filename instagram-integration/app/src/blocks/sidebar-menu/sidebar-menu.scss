@@ -9,6 +9,11 @@
     height: initial;
     .nav-link {
       text-decoration: none;
+      padding-left: 0;
+      i {
+        min-width: 26px;
+        font-size: 18px;
+      }
     }
   }
 

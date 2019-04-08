@@ -1,8 +1,8 @@
 {{#> base }}
 
-<div class="container-fluid automessages-page">
+<div class="container-fluid autocomments-page">
     <h3>Автокомментарии</h3>
-    {{!-- <p>Система будет отправлять сообщения пользователям по ключевым словам.</p> --}}
+    <p>Система будет отправлять ответы пользователям по ключевым словам комментариев.</p>
 
     <div class="container-fluid">
         <div class="row">
@@ -15,23 +15,15 @@
         </div>
         <div class="col-9">
             <div class="tab-content" id="v-pills-tabContent">
-                {{!-- <div class="tab-pane fade show" id="runned" role="tabpanel" aria-labelledby="v-pills-runned-tab">
-                    {{>task-status wrapperCls='tasks-runs--box' listCls = 'tasks-runs' title='Запущеные'}}
-                </div>
-                <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
-                    {{>task-status wrapperCls='tasks-stopped--box' listCls='tasks-stopped' title='Остановленные'}}
-                </div> --}}
                 <div class="tab-pane fade show" id="all-tasks" role="tabpanel" aria-labelledby="v-pills-all-tab">
-                    {{!-- > dropdown wrapperCls='subtype' selectBoxCls='subtype-select-wrapper' title='Тип' --}}
-                    {{!-- task-status has one subtype, so do not add dropdown--}}
                     {{>task-status wrapperCls='tasks-all--box' listCls='tasks-all' title=""}}
                 </div>
                 <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
                     {{>logs}}
                 </div>
                 <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
-                    <div class="js_add-new-task">
-                        
+                    <div class="js_add-new-task add-new-task-box">
+
                         <div class="row">
                             <div class="col-md-12 form-box">
                                 {{#> wizard-form }}

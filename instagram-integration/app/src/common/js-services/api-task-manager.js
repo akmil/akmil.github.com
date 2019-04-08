@@ -111,6 +111,10 @@ class UserTaskManager {
         const path = 'instagramTaskManager_postStartTask';
         return this.postStartFollowingList(body, cbError, path);
     }
+    postStartComments(body, cbError) {
+        const path = 'instagramTaskManager_postStartTask';
+        return this.postStartFollowingList(body, cbError, path);
+    }
     postImageAutomessages(body, cbError) {
         const setting = {
             method: 'POST',
