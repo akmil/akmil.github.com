@@ -1,5 +1,6 @@
 // import MeteorEmoji from 'meteor-emoji';
-import EmojiPicker from 'vanilla-emoji-picker';
+// import EmojiPicker from 'vanilla-emoji-picker';
+import 'emojioneArea';
 // import qq from 'fine-uploader'; // todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
@@ -86,12 +87,25 @@ $(document).ready(() => {
         return;
     }
     // eslint-disable-next-line no-unused-vars
-    const ep = new EmojiPicker();
-    // const m = new MeteorEmoji();
-    const $picker = $('textarea[data-emoji-picker="true"] ~ div');
-    const style = $picker.attr('style');
-    const styleNew = style.replace('top: 20px;', 'top: -210px;');
-    $picker.attr('style', styleNew);
+    // const ep = new EmojiPicker();
+    // // const m = new MeteorEmoji();
+    // const $picker = $('textarea[data-emoji-picker="true"] ~ div');
+    // const style = $picker.attr('style');
+    // const styleNew = style.replace('top: 20px;', 'top: -210px;');
+    // $picker.attr('style', styleNew);
+
+    $('textarea[data-emoji-picker="true"]').emojioneArea({
+        pickerPosition: 'top',
+        tonesStyle: 'square',
+        filtersPosition: 'bottom',
+        autocomplete: true
+        // events: {
+        //     keyup (editor, event) {
+        //         console.log(editor.html());
+        //         console.log(this.getText());
+        //     }
+        // }
+    });
 
     // todo: fine-uploade
     /*

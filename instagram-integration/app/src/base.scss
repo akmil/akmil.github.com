@@ -1,6 +1,7 @@
 // vendors
 @import '../node_modules/normalize-scss/sass/normalize/import-now';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import '../node_modules/emojioneArea/dist/emojionearea.min.css';
 
 // common
 @import './common/variables';
@@ -13,6 +14,7 @@
 
 @import './common/mixins.scss';
 @import './common/general';
+@import './common/emojiArea';
 @import './common/dashbordBootstrap';
 @import './common/spinner';
 @import './blocks/_shared/image-upload/image-upload';
