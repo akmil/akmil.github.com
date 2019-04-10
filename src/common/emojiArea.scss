@@ -4,6 +4,7 @@ textarea[data-emoji-picker="true"] {
   border: none;
   box-shadow: none;
 }
+
 textarea[data-emoji-picker="true"] ~ .emojionearea,
 textarea[data-emoji-picker="true"] ~ .emojionearea.form-control {
   max-height: 150px;
