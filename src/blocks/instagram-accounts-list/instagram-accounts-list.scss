@@ -1,0 +1,169 @@
+$border-color: $gray-300;
+$avatar-size: 70px;
+
+@keyframes custom-spin {
+    from  {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+.spinner-box {
+    display: flex;
+
+    .spin-animation {
+        width: 30px;
+        animation: custom-spin 2s infinite linear;
+    }
+}
+
+
+
+.profile-user {
+    .heading {
+        .actions {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+    }
+    .btn {
+        i {
+            margin-right: 0.5rem;
+        }
+    }
+
+    .account-setting {
+        opacity: 0.25;
+        padding: 0;
+        max-width: 40px;
+        .btn {
+            max-width: 32px;
+        }
+    }
+
+    .accounts-list {
+        border-radius: 4px;
+        border: 1px solid transparent;
+        &.border-light-color {
+            border-color: $border-color
+        }
+
+        .media {
+            //discuss: make as clickable, click for edit
+            border-bottom: 1px solid $border-color;
+            position: relative;
+            &:last-child {
+                border-bottom: none;
+            }
+            &:hover{
+                background-color: $gray-200;
+                .account-setting {
+                    opacity: 1;
+                }
+            }
+            .spinner-box {
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                .spin-animation {
+                    margin: 20px auto;
+                }
+            }
+            .badge {
+                border-radius: 10rem;
+            }
+            img {
+                width: $avatar-size;
+                height: $avatar-size;
+                border-radius: 15rem!important;
+            }
+            .user-info {
+                color: $text-muted;
+                font-size: $font-size-sm;
+                .name {
+                    font-weight: bolder;
+                    color: $gray-900;
+                }
+            }
+            .counts-list {
+                .media-count,
+                .follower-count,
+                .following-count {
+                    span {
+                        font-size: $font-size-base * .75;
+                        &.figure {
+                            display: block;
+                            font-size: 2.25rem;
+                        }
+                    }
+                }
+                .media-count {
+                    color: $green;
+                }
+                .follower-count{
+                    color: $orange;
+                }
+                .following-count {
+                    color: $gray-700;
+                }
+            }
+
+            img,
+            .col {
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+        }
+
+        .title {
+            display: inline-block;
+            font-size: 1.7em;
+            font-weight: bold;
+            padding: 5px 15px;
+        }
+    }
+}
+
+#modal-new-account {
+    .close {
+        // position: absolute;
+        // right: 0;
+    }
+}
+.modal-content{
+    .user-avatar {
+        width: $avatar-size;
+        height: $avatar-size;
+    }
+}
+
+#edit-user-promt {
+    form .form-group {
+        input.form-control {
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            padding-left: 0;
+            color: #000;
+        }
+        &.user-profile-label label {
+            line-height: 38px;
+            margin-bottom: 0;
+            min-width: 40px;
+            color: $gray-800;
+        }
+        .bussines-profile {
+            .btn-secondary:not(:disabled):not(.disabled).active {
+                color: $gray-600;
+                background-color: #545b62;
+                border-color: #4e555b;
+                box-shadow: 0 0 30px $gray-900 inset;
+            }
+        }
+    }
+}

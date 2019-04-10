@@ -1,0 +1,15 @@
+# IDE
+.idea/
+.vscode
+
+# nodejs
+node_modules/
+/node_modules/
+npm-debug.log
+yarn-error.log
+yarn-lock
+
+# project
+dist/
+temp.js
+/package-lock.json

@@ -1,0 +1,25 @@
+
+.aside-burger-menu {
+  transition: $transition-base;
+  background-color: $dark;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .sidebar-sticky {
+    height: initial;
+    .nav-link {
+      text-decoration: none;
+      padding-left: 0;
+      i {
+        min-width: 26px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media (min-width: $tabletBreakpoint) {
+    .sidebar-sticky {
+      height: calc(100vh - #{$headerHeight});
+    }
+  }
+}

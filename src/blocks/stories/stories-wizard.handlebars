@@ -1,0 +1,42 @@
+<fieldset>
+    <div class="form-top">
+        <div class="form-top-left">
+            <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите аккаунт</h3>
+            <p>Шаг 1/4</p>
+        </div>
+    </div>
+
+    <div class="form-bottom">
+        <div class="profile-user js_profile-user-follow">
+            {{> instagram-accounts-list}}
+        </div>
+        <button type="button" class="btn btn-blue btn-next" disabled="disabled">Дальше</button>
+    </div>
+</fieldset>
+<fieldset>
+    {{> stories-step-2
+        titleHeader='Выберите тип'
+        subTitle='Шаг 2/4'
+    }}
+</fieldset>
+<fieldset>
+    {{> stories-step-3
+        titleHeader='Выберите режим'
+        subTitle='Шаг 3/4'
+    }}
+</fieldset>
+<fieldset>
+    <div class="js_add-settings-step-4">
+        {{> stories-step-4
+            titleHeader='Задайте настройки'
+            subTitle='Шаг 4/4'
+        }}
+    </div>
+    <div class="js_add-file-title d-none">
+    {{> stories-step-4-add-file
+            titleHeader='Добавьте файл с пользователями'
+            subTitle='Шаг 4/4'
+    }}
+    </div>
+</fieldset>
+

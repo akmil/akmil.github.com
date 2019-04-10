@@ -1,0 +1,18 @@
+{{>step-header title=titleHeader subTitle=subTitle}}
+<div class="form-bottom">
+    <div class="row">
+        <div class="form-group col-md-6 col-sm-6">
+            <label class="" for="limit">Лимит просмотров</label>
+            <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
+        </div>
+    </div>
+    <div class="row js_stories-competitors d-none">
+        <div class="form-group col-md-6 col-sm-6">
+            <label class="">Конкуренты</label>
+            <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-blue btn-previous">Назад</button>
+    <button type="submit" class="btn btn-blue js_stories-competitors-btn">Запустить</button>
+</div>

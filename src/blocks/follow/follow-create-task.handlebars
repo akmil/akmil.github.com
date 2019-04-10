@@ -1,0 +1,176 @@
+<form role="form" name="follow-form" class="follow-form was-validated---" action="javascript:void(0);">
+    <fieldset>
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите аккаунт</h3>
+                <p>Шаг 1/5</p>
+            </div>
+        </div>
+
+        <div class="form-bottom">
+            <div class="profile-user js_profile-user-follow">
+                {{> instagram-accounts-list}}
+            </div>
+            <button type="button" class="btn btn-blue btn-next" disabled="disabled">Дальше</button>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        {{>step-select-subtype
+            titleHeader='Выберете тип'
+            subTitle='Шаг 2/5'
+            pageName='follow'
+            subtype-1='FOLLOWING_BY_LIST'
+            subtype-1-text='По списку'
+            subtype-2='FOLLOWING_BY_ACTIVE_AUDIENCE'
+            subtype-2-text='По активной аудитории конкурентов'
+        }}
+    </fieldset>
+
+    <fieldset>
+        <div class="add-file d-none">
+            <div class="form-top">
+                <div class="form-top-left">
+                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Добавьте файл с пользователями</h3>
+                    <p>Шаг 3/5</p>
+                </div>
+            </div>
+
+            <div class="form-bottom">
+                <div class="row">
+                    <div class="form-group col-md-8 col-sm-8">
+                        <div class="file-upload-container">
+                            <label for="txt-file" class="label-chous btn btn-success">Добавить</label>
+                            <input type="file" accept=".txt" class="input-txt-file" id="txt-file" name="txt-file"/>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-blue btn-previous">Назад</button>
+                <button type="button" class="btn btn-blue btn-next">Дальше</button>
+            </div>
+        </div>
+        <div class="add-competitors d-none">
+            <div class="form-top">
+                <div class="form-top-left">
+                    <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Введите конкурентов</h3>
+                    <p>Шаг 3/5</p>
+                </div>
+            </div>
+            <div class="form-bottom">
+
+                <div class="row">
+                    <div class="form-group col-md-8 col-sm-8">
+                        <textarea class="form-control js_follow-competitors" rows="4" placeholder="" id="followers"></textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-blue btn-previous js_follow-clear-competitors">Назад</button>
+                <button type="button" class="btn btn-blue btn-next">Дальше</button>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Выберите режим</h3>
+                <p>Шаг 4/5</p>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <div class="form-group row col-lg-12 ">
+                    {{!-- follow-speed from Ajax --}}
+                    <div class="col-12 js_follow-speed"> 
+                    </div>
+            </div>
+            <button type="button" class="btn btn-blue btn-previous">Назад</button>
+            <button type="button" class="btn btn-blue btn-next">Дальше</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Задайте настройки</h3>
+                <p>Шаг 5/5</p>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-6">
+                    <label class="" for="limit">Лимит подписок</label>
+                    <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" value="7500">
+                </div>
+                <div class="form-group col-md-6 col-sm-6">
+                    {{!-- <div class="form-group col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="unfollow_then">
+                            <label class="custom-control-label" for="unfollow_then">Отписаться по окончанию</label>
+                        </div>
+                    </div> --}}
+                    <div class="form-group col-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="follow_on_closed_profiles">
+                            <label class="custom-control-label" for="follow_on_closed_profiles">Подписываться на закрытые профили</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom:3px;">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        Количество постов
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_posts_from" placeholder="have_posts from"
+                               id="have_posts-from" min="0" value="3">
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_posts_to" placeholder="have_posts to"
+                               id="have_posts-to" min="0" value="999999">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        Количество подписчиков
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_followers_from" placeholder="have_followers from"
+                               id="have_followers-from" min="0" value="30">
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_followers_to" placeholder="have_followers to"
+                               id="have_followers-to" min="0" value="99999">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        Количество подписок
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_followings_from" placeholder="have_followings from"
+                               id="have_followings-from" min="0" value="0">
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3">
+                        <input type="number" class="form-control" name="have_followings_to" placeholder="have_followings to"
+                               id="have_followings-to" min="0" value="999">
+                    </div>
+                </div>
+            </div>
+            {{!-- <div class="form-group">
+                <label class="col-3 col-form-label">Пол</label>
+                <select class="form-control select-gender">
+                    <option value="any">Любой</option>
+                    <option value="men">Мужской</option>
+                    <option value="women">Женский</option>
+                </select>
+            </div> --}}
+
+            <button type="button" class="btn btn-blue btn-previous">Назад</button>
+            <button type="submit" class="btn btn-blue ">Запустить</button>
+        </div>
+    </fieldset>
+    <div class="form-submit-finish position-absolute d-none">
+        <div class="alert alert-success fade show">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <h2>Задание создано успешно!</h2>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+{{>step-header title=titleHeader subTitle=subTitle}}
+<div class="form-bottom">
+    <div class="form-group row col-lg-12">
+        {{!-- <label class="col-3 col-form-label"></label> --}}
+        <div class="col-9 js_get-stories-type">
+            <div class="custom-control custom-radio">
+                <input type="radio" id="FOLLOWING_BY_LIST" name="customRadio" value="FOLLOWING_BY_LIST" class="custom-control-input"
+                    checked="">
+                <label class="custom-control-label" for="FOLLOWING_BY_LIST">По подписчикам</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="FOLLOWING_BY_ACTIVE_AUDIENCE" name="customRadio" value="FOLLOWING_BY_ACTIVE_AUDIENCE" class="custom-control-input">
+                <label class="custom-control-label" for="FOLLOWING_BY_ACTIVE_AUDIENCE">По активной аудитории конкурентов</label>
+            </div>
+        </div>
+    </div>
+    {{>step-buttons}}
+</div>

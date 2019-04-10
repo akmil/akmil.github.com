@@ -1,0 +1,22 @@
+nav.navbar {
+    height: $headerHeight;
+    background: #009efb;
+    /* Old browsers */
+    background: -moz-linear-gradient(right, #0178bc 0%, #00bdda 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(right, #0178bc 0%, #00bdda 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to left, #0178bc 0%, #00bdda 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    .navbar-brand {
+        background-color: $secondaryColor;
+        color: $thirdlyColor;
+        line-height: 1;
+        padding: ($headerHeight/2 - 0.5) 15px;
+    }
+    a {
+        text-decoration: none;
+    }
+}
+

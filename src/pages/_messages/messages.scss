@@ -1,0 +1,246 @@
+$time-margin: 0.25rem;
+$time-color: #999999;
+$time-intent: 10px;
+$avatar-conversation-size: 38px;
+
+.messages-page {
+  img {
+    width: 64px;
+    height: auto;
+  }
+  .content-image {
+    width: 50%;
+    min-width: 150px;
+    height: auto;
+  }
+}
+
+.user-list-box {
+  order: -1;
+  @media (min-width: $tabletBreakpoint) {
+    order: initial;
+  }
+}
+
+.user-requests-box {
+  //position: fixed;
+  //right: 24px;
+  //max-width: calc(60.26666% - 33.333333%);
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.user-requests-box,
+.user-list-box {
+//   position: fixed;
+//   right: 24px;
+//   max-width: calc(60.26666% - 33.333333%);
+//   transition: 0.2s;
+  max-width: 33.333333%;
+  &--show {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  &--hide {
+    transform: translateX(100%);
+    opacity: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    position: fixed;
+  }
+}
+
+.confirm-buttons-box {
+  top: -60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.user-requests-box,
+.messages-user-list {
+    .list-group-item {
+        cursor: pointer;
+        padding: 0.75rem 1rem;
+        // max-height: 440px;
+        // overflow-y: auto;
+        // .conversation-head {
+        // }
+        .collapse {
+          .media {
+              &:hover {
+                background-color: $gray-200;
+              }
+              &:first-child {
+                border-top:  1px solid $border-color;
+              }
+          }
+          ~.list-footer {
+            display: none;
+          }
+          &.show {
+            ~.list-footer {
+               display: block;
+            }
+            ~.conversation-head {
+                border-bottom: 0;
+            }
+          }
+        }
+        .collapse.show ~ .conversation-head {
+            border-bottom-color: red;
+        }
+    }
+    .time {
+        float: right;
+    }
+    .media-photo--group {
+      border-radius: 30px;
+      &:not(:first-child) {
+        margin-left: -10px;
+      }
+    }
+    .summary {
+        display: inline-block;
+        width: calc(100% - 15px);
+        margin: 0 0 0.5rem 0;
+    }
+    .summary-dot {
+        background-color: $blue;
+        height: 10px;
+        width: 10px;
+        border-radius: 10px;
+        text-align: right;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+
+        // &--inside-group {
+        //     position: absolute;
+        //     right: 10px;
+        // }
+    }
+}
+
+.messages-list {
+  overflow-y: auto;
+  height: calc(100vh - 62px - 20px - 80px);
+  width: 100%;
+  .chat-date-text {
+    text-align: center;
+    font-size: small;
+    color: $time-color;
+  }
+  .chat-item {
+    position: relative;
+    list-style-type: none;
+    margin-left: 0;
+    padding-right: 0;
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    flex: 1 0 auto;
+    flex-grow: 0;
+  }
+  .chat-post-message {
+    border: 1px solid #999;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 300px;
+    position: relative;
+    &--header {
+        padding: 10px;
+        font-weight: bold;
+        .user-avatar {
+            border-radius: 50%;
+        }
+        i {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            transform: translate(0, 50%);
+            height: 64px;
+        }
+    }
+    .content-image {
+        width: 100%;
+    }
+    .chat-post-caption {
+        @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 2, $bgColor: white);
+    }
+  }
+  .chat-video {
+      &--icon {
+        bottom: -50%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      &--image { width: 200px; }
+  }
+  .chat-item-left {
+    >div.d-flex {
+      width: 100%
+    }
+    .chat-img-box {
+      margin-right: $time-margin;
+      position: relative;
+      img {
+        width: $avatar-conversation-size;
+        height: $avatar-conversation-size;
+      }
+    }
+    .chat-username {
+        margin: 0;
+    }
+
+    .chat-text {
+      // background-color: $gray-100;
+      display: inline-table;
+      padding: 0.2rem;
+    }
+    .chat-time-text {
+      position: absolute;
+      right: $time-intent;
+      padding-right: 0;
+    }
+  }
+  .chat-item-right {
+      .chat-img {
+          text-align: right;
+      }
+  }
+  .chat-time-text {
+    margin-left: $time-margin;
+    color: $time-color;
+    padding-right: $time-intent;
+  }
+}
+.send-message-box {
+    margin-top: -40px;
+}
+.hiddenFileInput > input{
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    margin-left: -180px;
+    cursor: pointer;
+  }
+  .hiddenFileInput{
+    border: 1px solid #ccc;
+    width: 70px;
+    height: 42px;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+
+    /*for the background, optional*/
+    background: $primary center center no-repeat;
+    background-size: 75% 75%;
+    background-image:  url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9Ii01MyAxIDUxMSA1MTEuOTk5MDYiIHdpZHRoPSI1MTJweCI+CjxnIGlkPSJzdXJmYWNlMSI+CjxwYXRoIGQ9Ik0gMjc2LjQxMDE1NiAzLjk1NzAzMSBDIDI3NC4wNjI1IDEuNDg0Mzc1IDI3MC44NDM3NSAwIDI2Ny41MDc4MTIgMCBMIDY3Ljc3NzM0NCAwIEMgMzAuOTIxODc1IDAgMC41IDMwLjMwMDc4MSAwLjUgNjcuMTUyMzQ0IEwgMC41IDQ0NC44NDM3NSBDIDAuNSA0ODEuNjk5MjE5IDMwLjkyMTg3NSA1MTIgNjcuNzc3MzQ0IDUxMiBMIDMzOC44NjMyODEgNTEyIEMgMzc1LjcxODc1IDUxMiA0MDYuMTQwNjI1IDQ4MS42OTkyMTkgNDA2LjE0MDYyNSA0NDQuODQzNzUgTCA0MDYuMTQwNjI1IDE0NC45NDE0MDYgQyA0MDYuMTQwNjI1IDE0MS43MjY1NjIgNDA0LjY1NjI1IDEzOC42MzY3MTkgNDAyLjU1NDY4OCAxMzYuMjg1MTU2IFogTSAyNzkuOTk2MDk0IDQzLjY1NjI1IEwgMzY0LjQ2NDg0NCAxMzIuMzI4MTI1IEwgMzA5LjU1NDY4OCAxMzIuMzI4MTI1IEMgMjkzLjIzMDQ2OSAxMzIuMzI4MTI1IDI3OS45OTYwOTQgMTE5LjIxODc1IDI3OS45OTYwOTQgMTAyLjg5NDUzMSBaIE0gMzM4Ljg2MzI4MSA0ODcuMjY1NjI1IEwgNjcuNzc3MzQ0IDQ4Ny4yNjU2MjUgQyA0NC42NTIzNDQgNDg3LjI2NTYyNSAyNS4yMzQzNzUgNDY4LjA5NzY1NiAyNS4yMzQzNzUgNDQ0Ljg0Mzc1IEwgMjUuMjM0Mzc1IDY3LjE1MjM0NCBDIDI1LjIzNDM3NSA0NC4wMjczNDQgNDQuNTI3MzQ0IDI0LjczNDM3NSA2Ny43NzczNDQgMjQuNzM0Mzc1IEwgMjU1LjI2MTcxOSAyNC43MzQzNzUgTCAyNTUuMjYxNzE5IDEwMi44OTQ1MzEgQyAyNTUuMjYxNzE5IDEzMi45NDUzMTIgMjc5LjUwMzkwNiAxNTcuMDYyNSAzMDkuNTU0Njg4IDE1Ny4wNjI1IEwgMzgxLjQwNjI1IDE1Ny4wNjI1IEwgMzgxLjQwNjI1IDQ0NC44NDM3NSBDIDM4MS40MDYyNSA0NjguMDk3NjU2IDM2Mi4xMTMyODEgNDg3LjI2NTYyNSAzMzguODYzMjgxIDQ4Ny4yNjU2MjUgWiBNIDMzOC44NjMyODEgNDg3LjI2NTYyNSAiIHN0eWxlPSIgZmlsbC1ydWxlOm5vbnplcm87ZmlsbC1vcGFjaXR5OjE7IiBzdHJva2U9IiMwMDAwMDAiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTSAzMDUuMTAxNTYyIDQwMS45MzM1OTQgTCAxMDEuNTM5MDYyIDQwMS45MzM1OTQgQyA5NC43MzgyODEgNDAxLjkzMzU5NCA4OS4xNzE4NzUgNDA3LjQ5NjA5NCA4OS4xNzE4NzUgNDE0LjMwMDc4MSBDIDg5LjE3MTg3NSA0MjEuMTAxNTYyIDk0LjczODI4MSA0MjYuNjY3OTY5IDEwMS41MzkwNjIgNDI2LjY2Nzk2OSBMIDMwNS4yMjY1NjIgNDI2LjY2Nzk2OSBDIDMxMi4wMjczNDQgNDI2LjY2Nzk2OSAzMTcuNTkzNzUgNDIxLjEwMTU2MiAzMTcuNTkzNzUgNDE0LjMwMDc4MSBDIDMxNy41OTM3NSA0MDcuNDk2MDk0IDMxMi4wMjczNDQgNDAxLjkzMzU5NCAzMDUuMTAxNTYyIDQwMS45MzM1OTQgWiBNIDMwNS4xMDE1NjIgNDAxLjkzMzU5NCAiIHN0eWxlPSIgZmlsbC1ydWxlOm5vbnplcm87ZmlsbC1vcGFjaXR5OjE7IiBzdHJva2U9IiMwMDAwMDAiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTSAxNDAgMjY4Ljg2MzI4MSBMIDE5MC45NTMxMjUgMjE0LjA3NDIxOSBMIDE5MC45NTMxMjUgMzQ5LjEyNSBDIDE5MC45NTMxMjUgMzU1LjkyNTc4MSAxOTYuNTE5NTMxIDM2MS40OTIxODggMjAzLjMyMDMxMiAzNjEuNDkyMTg4IEMgMjEwLjEyNSAzNjEuNDkyMTg4IDIxNS42ODc1IDM1NS45MjU3ODEgMjE1LjY4NzUgMzQ5LjEyNSBMIDIxNS42ODc1IDIxNC4wNzQyMTkgTCAyNjYuNjQwNjI1IDI2OC44NjMyODEgQyAyNjkuMTEzMjgxIDI3MS40NTcwMzEgMjcyLjMzMjAzMSAyNzIuODIwMzEyIDI3NS42Njc5NjkgMjcyLjgyMDMxMiBDIDI3OC42MzY3MTkgMjcyLjgyMDMxMiAyODEuNzMwNDY5IDI3MS43MDcwMzEgMjg0LjA3ODEyNSAyNjkuNDgwNDY5IEMgMjg5LjAyNzM0NCAyNjQuNzgxMjUgMjg5LjM5ODQzOCAyNTYuOTg4MjgxIDI4NC42OTkyMTkgMjUyLjA0Mjk2OSBMIDIxMi4yMjY1NjIgMTc0LjI1MzkwNiBDIDIwOS44NzUgMTcxLjc4MTI1IDIwNi42NjAxNTYgMTcwLjI5Njg3NSAyMDMuMTk5MjE5IDE3MC4yOTY4NzUgQyAxOTkuNzM0Mzc1IDE3MC4yOTY4NzUgMTk2LjUxOTUzMSAxNzEuNzgxMjUgMTk0LjE3MTg3NSAxNzQuMjUzOTA2IEwgMTIxLjY5OTIxOSAyNTIuMDQyOTY5IEMgMTE3IDI1Ni45ODgyODEgMTE3LjM3MTA5NCAyNjQuOTAyMzQ0IDEyMi4zMTY0MDYgMjY5LjQ4MDQ2OSBDIDEyNy41MTE3MTkgMjc0LjE3OTY4OCAxMzUuMzAwNzgxIDI3My44MDg1OTQgMTQwIDI2OC44NjMyODEgWiBNIDE0MCAyNjguODYzMjgxICIgc3R5bGU9IiBmaWxsLXJ1bGU6bm9uemVybztmaWxsLW9wYWNpdHk6MTsiIHN0cm9rZT0iIzAwMDAwMCIgZmlsbD0iIzAwMDAwMCIvPgo8L2c+Cjwvc3ZnPgo=)
+  }
+
+  .js_show-messages-user-list {
+      cursor: pointer;
+  }

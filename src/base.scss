@@ -1,0 +1,45 @@
+// vendors
+@import '../node_modules/normalize-scss/sass/normalize/import-now';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+@import '../node_modules/emojioneArea/dist/emojionearea.min.css';
+
+// common
+@import './common/variables';
+//@import './common/variables-dark-theme';
+@import "../node_modules/bootstrap/scss/bootstrap";
+//@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+//@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+//@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+//@import "../node_modules/@fortawesome/fontawesome-free/scss/regular";
+
+@import './common/mixins.scss';
+@import './common/general';
+@import './common/emojiArea';
+@import './common/dashbordBootstrap';
+@import './common/spinner';
+@import './blocks/_shared/image-upload/image-upload';
+@import './blocks/_shared/task-status/task-status';
+@import './blocks/_shared/tebs-pils/tabs-pills';
+@import './blocks/_shared/getPostsModal/posts-modal';
+
+// blocks
+@import './blocks/wrapper/wrapper';
+@import './blocks/header/header';
+@import './blocks/header/burger-menu/burger-menu';
+@import './blocks/header/burger-menu/burger-menu';
+@import './blocks/register-form/register-form';
+@import './blocks/login-form/login-form';
+@import './blocks/sidebar-menu/sidebar-menu';
+@import './blocks/r-sidebar-menu/r-sidebar-menu';
+@import './blocks/instagram-accounts-list/instagram-accounts-list';
+@import './blocks/follow/follow';
+@import './blocks/unfollow/unfollow';
+@import './blocks/wizard-form/wizard-form';
+@import './blocks/automessages/automessages';
+@import './blocks/chat-bot/chat-bot';
+@import './blocks/autogreeting/autogreeting';
+@import './blocks/stories/stories';
+
+//pages
+@import './pages/_auth/auth';
+@import './pages/_messages/messages';

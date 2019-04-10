@@ -1,0 +1,288 @@
+<div class="container-fluid follow">
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-create-task-tab" data-toggle="pill" href="#create-task" role="tab" aria-controls="create-task" aria-selected="false">Создать задание</a>
+                <a class="nav-link" id="v-pills-all-tab" data-toggle="pill" href="#all" role="tab" aria-controls="all" aria-selected="true">История заданий</a>
+                {{!-- <a class="nav-link" id="v-pills-stopped-tab" data-toggle="pill" href="#stopped-tasks" role="tab" aria-controls="stopped-tasks" aria-selected="true">Остановленные/Выполненные задание</a> --}}
+                <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#logs" role="tab" aria-controls="logs" aria-selected="true">Логи</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show" id="all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+                    {{> dropdown wrapperCls='subtype' selectBoxCls='subtype-select-wrapper' title='Тип' }}
+                    {{> task-status wrapperCls='tasks-all--box' listCls = 'tasks-all' title=""}}
+                </div>
+                {{!-- <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
+                    <div class="follow-tasks-stopped--box">
+                        <h3>Остановленные</h3>
+                        <ul class="follow-tasks-stopped list-unstyled"></ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="stopped-tasks" role="tabpanel" aria-labelledby="v-pills-stopped-tab">
+                    <div class="follow-tasks-stopped--box">
+                        <h3>Остановленные</h3>
+                        <ul class="follow-tasks-all list-unstyled"></ul>
+                    </div>
+                </div> --}}
+                <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
+                    {{>logs-subtype}}
+                    <div class="js_logs-container d-none">
+                        {{>logs}}
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
+                    <div class="js_add-new-task add-new-task-box">
+                        <div class="row">
+                            <div class="col-md-12 form-box">
+                                {{>follow-create-task}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div id="form1"></div>-->
+
+
+{{!--<div class="follow-steps">
+    <div class="wrapper">
+        <form action="" id="wizard" role="application" class="wizard clearfix">
+            <div class="steps clearfix">
+                <ul role="tablist">
+                    <li role="tab" aria-disabled="false" class="first current" aria-selected="true">
+                        <a id="wizard-t-0" href="#wizard-h-0" aria-controls="wizard-p-0"><span
+                                class="current-info audible">current step: </span>
+                            <span class="number">1.</span> </a>
+                    </li>
+                    <li role="tab" aria-disabled="false">
+                        <a id="wizard-t-1" href="#wizard-h-1" aria-controls="wizard-p-1"><span class="number">2.</span>
+                    </a></li>
+                    <li role="tab" aria-disabled="false" class="last">
+                        <a id="wizard-t-2" href="#wizard-h-2"
+                                                                         aria-controls="wizard-p-2"><span
+                            class="number">3.</span> </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content clearfix">
+
+                <h4 id="wizard-h-0" tabindex="-1" class="title current"></h4>
+                <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body current"
+                         aria-hidden="false">
+                    <div class="inner">
+                        <a href="#" class="avartar">
+                            <img src="images/avartar.png" alt="">
+                        </a>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="password" class="form-control" placeholder="Password">
+                                <i class="zmdi zmdi-lock-open small"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Email">
+                                <i class="zmdi zmdi-email small"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Phone">
+                                <i class="zmdi zmdi-smartphone-android"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Address">
+                                <i class="zmdi zmdi-map small"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Nation">
+                                <i class="zmdi zmdi-account-box-o small"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <h4 id="wizard-h-1" tabindex="-1" class="title"></h4>
+                <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"
+                         style="display: none;">
+                    <div class="inner">
+                        <a href="#" class="avartar">
+                            <img src="images/avartar.png" alt="">
+                        </a>
+                        <div class="form-row">
+                            <div class="select">
+                                <div class="form-holder">
+                                    <div class="select-control">Gender</div>
+                                    <i class="zmdi zmdi-caret-down small"></i>
+                                </div>
+                                <ul class="dropdown">
+                                    <li rel="Male">Male</li>
+                                    <li rel="Female">Female</li>
+                                    <li rel="Other">Other</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="select">
+                                <div class="form-holder">
+                                    <div class="select-control">Language</div>
+                                    <i class="zmdi zmdi-caret-down small"></i>
+                                </div>
+                                <ul class="dropdown">
+                                    <li rel="English">English</li>
+                                    <li rel="France">France</li>
+                                    <li rel="Vietnamese">Vietnamese</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control datepicker-here" data-language="en"
+                                       data-date-format="dd - mm - yyyy" id="dp1" placeholder="Date of Birth">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Slogan">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Twitter">
+                                <i class="zmdi zmdi-twitter small"></i>
+                            </div>
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Linked In">
+                                <i class="zmdi zmdi-linkedin small"></i>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Facebook">
+                                <i class="zmdi zmdi-facebook small"></i>
+                            </div>
+                            <div class="form-holder">
+                                <input type="text" class="form-control" placeholder="Google">
+                                <i class="zmdi zmdi-google small"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <h4 id="wizard-h-2" tabindex="-1" class="title"></h4>
+                <section class="section-3 body" id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2"
+                         aria-hidden="true" style="display: none;">
+                    <div class="inner">
+                        <a href="#" class="avartar">
+                            <img src="images/avartar.png" alt="">
+                        </a>
+                        <h6>Payment Method</h6>
+                        <div class="payment-block">
+                            <div class="payment-item active">
+                                <div class="payment-logo">
+                                    <img src="images/visa.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/master-card.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/giropay.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/bleue.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/paypal.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/ideal.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/mister.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                            <div class="payment-item">
+                                <div class="payment-logo">
+                                    <img src="images/maestro.png" alt="">
+                                </div>
+                                <div class="payment-content">
+                                    <p>Visa ... 8314</p>
+                                    <p>Express 06/21</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="actions clearfix">
+                <ul role="menu" aria-label="Pagination">
+                    <li class="disabled" aria-disabled="true">
+                        <a href="#previous" role="menuitem">Back</a></li>
+                    <li aria-hidden="false" aria-disabled="false">
+                        <a href="#next" role="menuitem">Дальше</a></li>
+                    <li aria-hidden="true" style="display: none;">
+                        <a href="#finish" role="menuitem">Finish</a></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+--}}
+

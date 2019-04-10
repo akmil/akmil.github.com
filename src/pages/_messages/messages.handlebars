@@ -1,0 +1,118 @@
+{{#> base modificator='messagesModificatorTest'}}
+    <link href="https://fineuploader.com/source/fine-uploader-new.min.css" rel="stylesheet">
+    <div class="container-fluid messages-page">
+
+        {{!--<h2>Direct page</h2>
+
+        <div>
+            <p>Рассылка по direct - процесс отправки личных сообщений в директ в инстаграм по нужной вам аудитории. <u>Прочитать
+                инструкцию</u> или <u>посмотреть видео</u></p>
+        </div>--}}
+
+        <div class="px-0 pt-sm-2">
+
+            <div class="row">
+                <div class="col-12 col-sm-8 pt-4 pt-sm-0">
+                    <div id="mainChatPart" class="panel panel-default mypanel"
+                         style="border-color: #ffffff; width: 100%; display: block">
+                        <div class="messages-list-box">
+                            <ul class="messages-list list-unstyled mb-5 d-flex flex-column align-items-end"></ul>
+                            <div class="js_request-confirm-box confirm-buttons-box d-none">
+                                <button class="btn btn-success js_request-confirm mx-2">Подтвердить</button>
+                                <button class="btn btn-secondary js_request-reject mx-2">Отменить</button>
+                            </div>
+                        </div>
+
+                        <div class="send-message-box js_send-message-box d-none">
+                            <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-sm-7 mr-1">
+                                    <textarea data-emoji-picker="true" style="padding: 0.25rem; width: 100%;min-height: 42px;"
+                                        id="sendMessageTextArea"
+                                        class="chat-text-area"
+                                        placeholder="Напишите сообщение">
+                                    </textarea>
+                                </div>
+                                <div class="col">
+                                    <td class="chat-col-btn">
+                                        <div class="">
+                                            <!--<form enctype="multipart/form-data">
+                                                <input type="file" id="imgupload" style="display: block"
+                                                       accept="image/*">
+                                            </form>-->
+                                            <button id="sendMessageButton"
+                                                    class="btn btn-success chat-button">
+                                                    {{!-- <i class="fas fa-feather-alt mr-1"></i> --}} Отправить
+                                            </button>
+                                            <button id="" class="btn btn-outline-dark chat-button file-upload-btn">
+                                                <i class="fa fa-upload"></i>
+                                            </button>
+                                            <div class="file-upload">
+                                                <div class="image-upload-wrap">
+                                                    <input class="file-upload-input" type='file' accept=".jpg, .jpeg" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-4 user-list-box ">
+                    <p>Cписок бесед</p>
+                    <ul class="list-group list-unstyled messages-user-list" id="accordion">
+                        <li>loading...</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-4 user-requests-box ">
+                    <span class="js_show-messages-user-list btn btn-outline-dark btn-sm mb-3"><i class="fas fa-chevron-left mr-2"></i>Назад</span>
+                    {{!--<p class="">Запросы</p>--}}
+                    <div class="list-group list-unstyled messages-requests-list" id="accordion-requests">
+                        {{!-- <li>loading...</li> --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{{!--
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('sndFile').addEventListener('change', handleFileSelect, false);
+</script>
+--}}
+
+{{/ base }}

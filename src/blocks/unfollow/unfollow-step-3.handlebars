@@ -1,0 +1,23 @@
+{{>step-header title=titleHeader subTitle=subTitle}}
+<div class="form-bottom">
+    <div class="form-group row col-lg-12">
+        {{!-- <label class="col-3 col-form-label">Скорость</label> --}}
+        <div class="col-9 js_task-mode">
+            {{!-- follow-speed from Ajax
+                    9 простмотров в час
+                --}}
+        </div>
+    </div>
+    <div class="add-file d-none">
+        <div class="form-group col-md-8 col-sm-8">
+            {{!-- <textarea class="form-control" rows="4" placeholder="Введите ИД-пользователей через запятую" id="followers"></textarea> --}}
+            <div class="file-upload-container">
+                <label for="txt-file" class="label-chous btn btn-success">Добавить файл</label>
+                <input type="file" class="input-txt-file" id="txt-file" name="txt-file"/>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-blue btn-previous">Назад</button>
+    <button type="submit" class="btn btn-blue" disabled="disabled">Запустить</button>
+</div>

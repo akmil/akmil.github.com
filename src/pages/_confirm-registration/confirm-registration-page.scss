@@ -1,0 +1,36 @@
+
+.container,
+.container-fluid {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .col-half {
+
+    @media (min-width: $tabletBreakpoint) {
+      width: 50%;
+    }
+  }
+  .w-100 {
+    width: 100%!important;
+    flex: 0 0 100%;
+  }
+  .w-60 {
+    width: 60%!important;
+    flex: 0 0 60%;
+  }
+  .w-50 {
+    width: 50%!important;
+    flex: 0 0 50%;
+  }
+  .w-40 {
+    width: 40%!important;
+    flex: 0 0 40%;
+  }
+  .w-25 {
+    width: 25%!important;
+    flex: 0 0 25%;
+  }
+}
+

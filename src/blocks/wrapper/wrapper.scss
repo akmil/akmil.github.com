@@ -1,0 +1,18 @@
+$white-lilac: #F8F9FB;
+
+.wrapper {
+  background-color: $white-lilac;
+
+  &__content {
+    position: relative;
+    padding: $headerHeight 0 0;
+
+    // @media (min-width: $tabletBreakpoint) {
+    //   padding: $headerHeightTablet 0 60px;
+    // }
+
+    // @media (min-width: $desktopBreakpoint) {
+    //   padding: $headerHeightDesktop 0 60px;
+    // }
+  }
+}

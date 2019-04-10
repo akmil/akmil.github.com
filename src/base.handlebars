@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>{{htmlWebpackPlugin.options.title}}</title>
+  <link rel="shortcut icon" href="/instagram-integration/favicon.ico" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+  {{> header withMenu='true'}}
+
+  {{#> wrapper }}
+
+    {{> @partial-block }}
+
+  {{/ wrapper }}
+
+  {{> vendor-scripts}}
+</body>
+</html>

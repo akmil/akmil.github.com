@@ -1,0 +1,83 @@
+$fontFamily: 'Roboto', sans-serif;
+$lineHeight: 1.2;
+
+$tabletBreakpoint: 768px;
+$breakpoint-md: $tabletBreakpoint;
+$desktopBreakpoint: 1025px;
+$bigDesktopBreakpoint: 1444px;
+
+$modalBreakpoint: 1325px;
+
+$primaryTransitionDelay: .4s;
+
+$fontSize: 10px;
+$desktopFontSize: 16px;
+
+$defaultInputWidth: 200px;
+
+/*
+bootstrap vars:
+  --blue: #70bcbc;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #70bcbc;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #f27cff;
+  --light: #f8f9fa;
+  --dark: #536caf;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+*/
+$primaryColor: #FFF;
+$secondaryColor: #000;
+$thirdlyColor: #84dddd;
+$dark: #666666;
+
+// Settings for the `<body>` element.
+$body-bg: #292929;
+$body-color: #292929;
+
+$colors: (
+  //"blue": $thirdlyColor,
+  //"indigo": $indigo,
+  //"purple": $purple,
+  //"pink": $pink,
+  //"red": $red,
+  //"orange": $orange,
+  //"yellow": $yellow,
+  //"green": $green,
+  //"teal": $teal,
+  //"cyan": $cyan,
+  //"white": $white,
+  //"gray": $gray-600,
+  //"gray-dark": $gray-800
+) !default;
+
+$theme-colors: (
+  "primary": $thirdlyColor,
+  "danger": #f27cff,
+  "bg-light": #333222,
+  "light": #373737,
+  "white": #f27cff,
+  "body-bg": #292929,
+  "body-color": #232323
+);

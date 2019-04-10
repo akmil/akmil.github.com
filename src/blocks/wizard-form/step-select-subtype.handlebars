@@ -1,0 +1,24 @@
+{{>step-header title=titleHeader subTitle=subTitle}}
+<div class="form-bottom">
+    <div class="form-group row col-lg-12">
+        {{!-- <label class="col-3 col-form-label"></label> --}}
+        <div class="col-9 js_get-{{pageName}}-type">
+            <div class="custom-control custom-radio">
+                <input type="radio" id="{{subtype-1}}" name="customRadio" value="{{subtype-1}}" class="custom-control-input"
+                    checked="">
+                <label class="custom-control-label" for="{{subtype-1}}">{{subtype-1-text}}</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="{{subtype-2}}" name="customRadio" value="{{subtype-2}}" class="custom-control-input">
+                <label class="custom-control-label" for="{{subtype-2}}">{{subtype-2-text}}</label>
+            </div>
+            {{#if subtype-3}}
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="{{subtype-3}}" name="customRadio" value="{{subtype-3}}" class="custom-control-input">
+                    <label class="custom-control-label" for="{{subtype-3}}">{{subtype-3-text}}</label>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    {{>step-buttons}}
+</div>
