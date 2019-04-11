@@ -384,8 +384,14 @@ function addHandlers() {
             $('.js_send-message-box').removeClass('d-none');
         }
         const {username, useravatar} = userData || userDataFromLiGroup;
+        const $targetBtn = $(e.target).closest('.media');
+        const $title = $targetBtn.find('.title');
         e.stopPropagation();
-        conversationId = $(e.target).closest('.media').data('conversation-id');
+        conversationId = $targetBtn.data('conversation-id');
+        if ($title.hasClass('font-weight-bold')) {
+            $title.removeClass('font-weight-bold');
+            $targetBtn.find('.summary-dot').addClass('d-none');
+        }
         Spinner.remove();
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown', isClickFromRequestConfirm);
