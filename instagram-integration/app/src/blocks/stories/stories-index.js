@@ -24,7 +24,7 @@ const elSelector = {
     wizardFormName: 'wizard-form',
     fields: '.automessages-text-fields',
     taskMode: '.js_task-mode',
-    competitors: 'textarea.stories-competitors'
+    competitors: '.js_stories-competitors input[data-role="tagsinput"]'
 };
 const state = {
     subtype: CONST.url.tmTypes.storiesSubT[0],
@@ -102,26 +102,39 @@ function setUserNameFirstStep(state) {
 // todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
 const containerCls = '.js_add-settings-step-4';
 const $container = $(containerCls);
-const $competitorsTextArea = $container.find('.js_stories-competitors input');
+const $competitorsTextArea = $container.find('input[data-role="tagsinput"]');
 const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
 function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
     const englishChars = /^[A-Za-z0-9,._ \n]+$/;  // /^[A-Za-z0-9]*$/;
     const checkTextArea = (e, isInit) => {
-        const text = $competitorsTextArea.val();
+        const inputvalue = (!isInit) ? $(e.target).closest('div input').val() : '';
+        const text = (!isInit) ? `${$(e.target).closest('div').find('.bootstrap-tagsinput input').val()},${inputvalue}` : '';
+        const isRemoved = (!isInit && e.type === 'itemRemoved');
+        const textOnRemove = (isRemoved) ? inputvalue : '';
+        console.log('text', text);
         // disable on checnge
         nextStepBtn.attr('disabled', 'disabled');
-        if (text.length && englishChars.test(text)) {
-            $competitorsTextArea.removeClass('border-danger');
+        const isAddedTextValid = text.length && englishChars.test(text);
+        const isRemovedTextValid = textOnRemove.length && englishChars.test(textOnRemove);
+        if ((isAddedTextValid || isRemovedTextValid) && text !== ',') {
+            $('.bootstrap-tagsinput').removeClass('border-danger');
             // enable on checnge if lengthText>1
             nextStepBtn.removeAttr('disabled', 'disabled');
         } else if (!isInit) {
-            $competitorsTextArea.addClass('border-danger');
+            $('.bootstrap-tagsinput').addClass('border-danger');
         }
     };
     // disable on init
     checkTextArea(null, 'isInit');
-    $competitorsTextArea.on('input', checkTextArea);
+    console.log('$competitorsTextArea', $competitorsTextArea);
+
+    // event.item: contains the item
+    // event.cancel: set to true to prevent the item getting added
+    $('input').on('beforeItemAdd', checkTextArea);
+
+    // event.item: contains the item
+    $('input').on('itemRemoved', checkTextArea);
 }
 
 /**
@@ -201,15 +214,6 @@ function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
     const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
     if (state.subtype === CONST.url.tmTypes.storiesSubT[2]) {
-        // const tpl = `<div class="row">
-        //         <div class="form-group col-md-6 col-sm-6">
-        //             <label class="">Конкуренты</label>
-        //             <textarea class="form-control stories-competitors mb-2" rows="1"></textarea>
-        //         </div>
-        //     </div>`;
-        // if (!$('.stories-competitors').length) {
-        //     $(fieldLast).find('.form-bottom>.row').after(tpl);
-        // }
         nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn);
         $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
         console.log('end');
