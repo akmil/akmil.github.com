@@ -5,9 +5,8 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
-// import * as tabs from '../_shared/tebs-pils/tabs';
-// import * as logs from '../_shared/logs/logs';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
+import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const state = {
     username: '',
@@ -125,39 +124,16 @@ function getDataStepSpeed(stepNumber) {
     });
 }
 function setCompetitors() {
-    const competitors = $('#followers').val()
-        .trim()
-        .replace(/ /g, '')
-        .split(',')
-        .filter(i => i.length > 0);
+    const competitors = viewUtils.getValByCommaSeparator($('.follow-form').find('#followers'));
 
     state['user_custom_config'] = {
         competitors
     };
 }
 
-function nextBtnvalidateCompetitorsHandler() {
+function stepReducer(stepNumber) {
     const $competitorsTextArea = $('.js_follow-competitors');
     const nextStepBtn = $competitorsTextArea.closest('.add-competitors').find('.btn-next');
-
-    const englishChars = /^[A-Za-z0-9,._ \n]+$/;
-    // disable on init
-    nextStepBtn.attr('disabled', 'disabled');
-    $competitorsTextArea.on('input', () => {
-        const text = $competitorsTextArea.val();
-        // disable on checnge
-        nextStepBtn.attr('disabled', 'disabled');
-        if (text.length && englishChars.test(text)) {
-            $competitorsTextArea.removeClass('border-danger');
-            // enable on checnge if lengthText>1
-            nextStepBtn.removeAttr('disabled', 'disabled');
-        } else {
-            $competitorsTextArea.addClass('border-danger');
-        }
-    });
-}
-
-function stepReducer(stepNumber) {
     switch (stepNumber) {
         case 0:
             getDataStep2(state.username);
@@ -165,7 +141,7 @@ function stepReducer(stepNumber) {
             break;
         case 1:
             getDataStepSpeed(stepNumber);
-            nextBtnvalidateCompetitorsHandler();
+            nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
             break;
         case 2:
             setCompetitors();
@@ -468,6 +444,7 @@ export function init() {
         console.log(clsConst.currentPageCls);
         const textRusArray = ['По списку', 'По активной аудитории конкурентов'];
         initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb, textRusArray});
+        initTagsInput();
 
         // TODO : use wizard.init()
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

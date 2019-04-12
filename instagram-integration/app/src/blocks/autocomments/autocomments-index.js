@@ -9,6 +9,7 @@ import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
+import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
@@ -180,6 +181,10 @@ function initModalHandler() {
  * Init Handlers
  */
 function initHandlers() {
+    const $competitorsTextArea = $('.autocomments-text-fields input[data-role="tagsinput"]');
+    const nextStepBtn = $('form button[type="submit"]');
+    nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
+
     // TODO: refactor with autogreet.js initHandlers
     // $('[data-toggle="popover"]').popover(); // init
     $('.js_add-autocomments').on('click', (e) => {
@@ -190,6 +195,10 @@ function initHandlers() {
         // $('[data-toggle="popover"]').popover(); // reinit
         $('[data-toggle="tooltip"]').tooltip(); // reinit
         initModalHandler();
+
+        const $input = $('input[data-role="tagsinput"]', lastTextField);
+        initTagsInput();
+        nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
     });
 
     // alert success close
@@ -237,9 +246,8 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         autocommentsStatus.init();
-        // initModalHandler();
         initEmojii();
-        // imageUpload.init();
+        initTagsInput();
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);

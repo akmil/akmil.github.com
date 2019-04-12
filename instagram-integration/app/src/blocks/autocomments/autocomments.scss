@@ -12,6 +12,12 @@
             padding: 8px 4px; // todo: refactor me
         }
     }
+
+    .autocomments-text-fields {
+        .bootstrap-tagsinput {
+            min-height: 150px;
+        }
+    }
 }
 
 

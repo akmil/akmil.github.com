@@ -5,7 +5,7 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
-import 'bootstrap-tagsinput';
+import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';
@@ -105,45 +105,13 @@ const $container = $(containerCls);
 const $competitorsTextArea = $container.find('input[data-role="tagsinput"]');
 const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
-function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
-    const englishChars = /^[A-Za-z0-9,._ \n]+$/;  // /^[A-Za-z0-9]*$/;
-    const checkTextArea = (e, isInit) => {
-        const inputvalue = (!isInit) ? $(e.target).closest('div input').val() : '';
-        const text = (!isInit) ? `${$(e.target).closest('div').find('.bootstrap-tagsinput input').val()},${inputvalue}` : '';
-        const isRemoved = (!isInit && e.type === 'itemRemoved');
-        const textOnRemove = (isRemoved) ? inputvalue : '';
-        console.log('text', text);
-        // disable on checnge
-        nextStepBtn.attr('disabled', 'disabled');
-        const isAddedTextValid = text.length && englishChars.test(text);
-        const isRemovedTextValid = textOnRemove.length && englishChars.test(textOnRemove);
-        if ((isAddedTextValid || isRemovedTextValid) && text !== ',') {
-            $('.bootstrap-tagsinput').removeClass('border-danger');
-            // enable on checnge if lengthText>1
-            nextStepBtn.removeAttr('disabled', 'disabled');
-        } else if (!isInit) {
-            $('.bootstrap-tagsinput').addClass('border-danger');
-        }
-    };
-    // disable on init
-    checkTextArea(null, 'isInit');
-    console.log('$competitorsTextArea', $competitorsTextArea);
-
-    // event.item: contains the item
-    // event.cancel: set to true to prevent the item getting added
-    $('input').on('beforeItemAdd', checkTextArea);
-
-    // event.item: contains the item
-    $('input').on('itemRemoved', checkTextArea);
-}
-
 /**
  * Init Handlers
  */
 function initHandlers() {
 
     attachTxtFileHandler('.file-upload-container');
-    nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn);
+    nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
 
     // radio-group step 2
     $('.js_get-stories-type input[type=radio]').on('click', (e) => {
@@ -214,7 +182,7 @@ function addTextArea(stepNumber) {
     const {wizardForm} = elSelector;
     const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
     if (state.subtype === CONST.url.tmTypes.storiesSubT[2]) {
-        nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn);
+        nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
         $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
         console.log('end');
     } else {
@@ -278,7 +246,7 @@ export function init() {
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
-    $('input[data-role="tagsinput"]').tagsinput('items');
+    initTagsInput();
     // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
     //     console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
     //     console.log('logsSubtypes', logsSubtypes);

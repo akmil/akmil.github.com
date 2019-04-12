@@ -1,15 +1,20 @@
 
 .automessages-page {
-    .post-upload-btn {
-        top: -35px;
-        position: relative;
-        width: auto !important;
-        min-width: initial !important;
+    // .post-upload-btn {
+    //     top: -35px;
+    //     position: relative;
+    //     width: auto !important;
+    //     min-width: initial !important;
 
-        padding: 0; // todo: refactor me
-        height: 34px; // todo: refactor me
-        span {
-            padding: 8px 4px; // todo: refactor me
+    //     padding: 0; // todo: refactor me
+    //     height: 34px; // todo: refactor me
+    //     span {
+    //         padding: 8px 4px; // todo: refactor me
+    //     }
+    // }
+    .automessages-text-fields {
+        .bootstrap-tagsinput {
+            min-height: 150px;
         }
     }
 }
