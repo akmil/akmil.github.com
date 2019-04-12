@@ -9,7 +9,6 @@ textarea[data-emoji-picker="true"] ~ .emojionearea,
 textarea[data-emoji-picker="true"] ~ .emojionearea.form-control {
   max-height: 150px;
   height: 100%;
-  
   &:focus {
     //border: none;
     box-shadow: inset 0 0 0 3px #ccc;
@@ -30,17 +29,3 @@ textarea[data-emoji-picker="true"] ~ .emojionearea.form-control {
     box-shadow: inset 0 0 0 3px #ccc;
   }
 }
-
-$maxH-input-direct: 42px;
-.send-message-box {
-  textarea[data-emoji-picker="true"] ~ .emojionearea,
-  textarea[data-emoji-picker="true"] ~ .emojionearea.form-control {
-    max-height: $maxH-input-direct;
-    height: 100%;
-    .emojionearea-editor {
-      max-height: $maxH-input-direct;
-      height: 100%;
-    }
-  }
-}
-
