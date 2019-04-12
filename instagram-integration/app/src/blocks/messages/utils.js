@@ -13,12 +13,12 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
     const insertMsg = (value, message, cssCls) => {
         let str = '';
         let valueWithUrl = '';
-        const {type, username, profile_pic_url, caption} = message;
-        const userHeader = {username, profile_pic_url};
-        if (cssCls === 'text-right') {
-            userHeader.username = currentUserData.username;
-            userHeader.profile_pic_url = currentUserData.useravatar;
-        }
+        const {type, /* username, profile_pic_url, */ caption} = message;
+        // const userHeader = {username, profile_pic_url};
+        // if (cssCls === 'text-right') {
+        //     userHeader.username = currentUserData.username;
+        //     userHeader.profile_pic_url = currentUserData.useravatar;
+        // }
         if (type === 'TEXT') {
             // eslint-disable-next-line no-useless-escape
             const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gm;
@@ -51,8 +51,8 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
                 str = `<div class="chat-post-message">
                     <a target="_blank" href="${value}" class="text-body text-decoration-none">
                         <div class="chat-post-message--header">
-                            <img src="${userHeader.profile_pic_url}" alt="Content Image" class="user-avatar mr-3">
-                            ${userHeader.username}
+                            <img src="${message.profile_pic_url}" alt="Content Image" class="user-avatar mr-3">
+                            ${message.username}
                             <i class="fas fa-chevron-right"></i>
                         </div>
                         <img src="${message.preview_value}" alt="Content Image" class="content-image">
