@@ -406,9 +406,6 @@ function addHandlers() {
             getAndFillConversation({username, conversationId, useravatar}, false, isClickFromRequestConfirm);
         }, updateInterval);
 
-        // setInterval(() => {
-        //     getAndFillUserList();
-        // }, updateInterval);
     }
 
     $(document).on('click', '.list-group-item .collapse', userShowConversetionHandler);
