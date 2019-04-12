@@ -5,6 +5,7 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
+import 'bootstrap-tagsinput';
 
 const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';
@@ -101,7 +102,7 @@ function setUserNameFirstStep(state) {
 // todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
 const containerCls = '.js_add-settings-step-4';
 const $container = $(containerCls);
-const $competitorsTextArea = $container.find('.js_stories-competitors textarea');
+const $competitorsTextArea = $container.find('.js_stories-competitors input');
 const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
 function nextBtnvalidateCompetitorsHandler($competitorsTextArea, containerCls, nextStepBtn) {
@@ -273,6 +274,7 @@ export function init() {
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
+    $('input[data-role="tagsinput"]').tagsinput('items');
     // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
     //     console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
     //     console.log('logsSubtypes', logsSubtypes);

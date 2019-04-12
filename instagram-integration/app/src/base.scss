@@ -7,6 +7,7 @@
 @import './common/variables';
 //@import './common/variables-dark-theme';
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css";
 //@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 //@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
 //@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
@@ -17,6 +18,7 @@
 @import './common/emojiArea';
 @import './common/dashbordBootstrap';
 @import './common/spinner';
+@import './common/search-tags';
 @import './blocks/_shared/image-upload/image-upload';
 @import './blocks/_shared/task-status/task-status';
 @import './blocks/_shared/tebs-pils/tabs-pills';
