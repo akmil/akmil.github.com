@@ -5,7 +5,7 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './stories-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
-import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';

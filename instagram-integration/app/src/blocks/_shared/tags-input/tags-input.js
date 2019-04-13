@@ -27,14 +27,13 @@ export function nextBtnvalidateCompetitorsHandler($input, nextStepBtn, igroreReg
         }
         const isAddedTextValid = text.length && (englishChars.test(text) || !!igroreRegexCheck);
         const isRemovedTextValid = textOnRemove.length && (englishChars.test(textOnRemove) || !!igroreRegexCheck);
-        if (true) {
-            if ((isAddedTextValid || isRemovedTextValid) && text !== ',') {
-                // enable on checnge if lengthText>1
-                removeBorder();
-            } else if (!isInit) {
-                // $(e.target).closest('.js_tagsinput-box').find(tagsinputSelector).addClass('border-danger');
-                addBorder();
-            }
+
+        if ((isAddedTextValid || isRemovedTextValid) && text !== ',') {
+            // enable on checnge if lengthText>1
+            removeBorder();
+        } else if (!isInit) {
+            // $(e.target).closest('.js_tagsinput-box').find(tagsinputSelector).addClass('border-danger');
+            addBorder();
         }
         if (!textOnRemove.length && isRemoved && !isInit) {
             // enable on delete all

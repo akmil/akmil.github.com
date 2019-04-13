@@ -6,7 +6,7 @@ import viewUtils from '../../common/js-services/view';
 import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
-import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const state = {
     username: '',
