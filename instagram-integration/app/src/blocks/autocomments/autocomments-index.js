@@ -197,7 +197,7 @@ function initHandlers() {
         initModalHandler();
 
         const $input = $('input[data-role="tagsinput"]', lastTextField);
-        initTagsInput();
+        initTagsInput('.blacklist-box input');
         nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
     });
 
@@ -247,7 +247,7 @@ export function init() {
         initHandlers();
         autocommentsStatus.init();
         initEmojii();
-        initTagsInput();
+        // initTagsInput('.blacklist-box input');
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);

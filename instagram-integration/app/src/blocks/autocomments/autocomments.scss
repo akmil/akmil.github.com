@@ -17,6 +17,11 @@
         .bootstrap-tagsinput {
             min-height: 150px;
         }
+        .blacklist-box {
+            .bootstrap-tagsinput {
+                min-height: auto;
+            }
+        }
     }
 }
 
