@@ -74,7 +74,7 @@ function onSubmitHandler(e) {
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
         const blacklistWords = $(item).find('input.blacklist-words').val();
-        const blacklistWordsArr = getValByCommaSeparator($(item).find(elSelector.keyWord));
+        const blacklistWordsArr = getValByCommaSeparator(blacklistWords);
 
         if (!keyWord.length || !answer.length) {
             // console.log('keyWord is empty, not push me to request');
