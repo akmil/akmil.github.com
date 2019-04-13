@@ -197,7 +197,7 @@ function initHandlers() {
         initModalHandler();
 
         const $input = $('input[data-role="tagsinput"]', lastTextField);
-        initTagsInput();
+        // initTagsInput();
         nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
     });
 
@@ -249,7 +249,7 @@ export function init() {
         initModalHandler();
         initEmojii();
         imageUpload.init();
-        initTagsInput();
+        // initTagsInput();
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);

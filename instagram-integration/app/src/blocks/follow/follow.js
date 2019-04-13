@@ -444,7 +444,7 @@ export function init() {
         console.log(clsConst.currentPageCls);
         const textRusArray = ['По списку', 'По активной аудитории конкурентов'];
         initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb, textRusArray});
-        initTagsInput();
+        // initTagsInput();
 
         // TODO : use wizard.init()
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

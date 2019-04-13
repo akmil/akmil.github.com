@@ -246,7 +246,8 @@ export function init() {
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });
-    initTagsInput();
+    // initTagsInput();
+
     // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
     //     console.log('INSTAGRAM_ACCOUNS_RENDERED_LAZY');
     //     console.log('logsSubtypes', logsSubtypes);
