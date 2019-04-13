@@ -9,7 +9,7 @@ import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
-import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
@@ -197,7 +197,7 @@ function initHandlers() {
         initModalHandler();
 
         const $input = $('input[data-role="tagsinput"]', lastTextField);
-        initTagsInput();
+        // initTagsInput();
         nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
     });
 
@@ -249,7 +249,7 @@ export function init() {
         initModalHandler();
         initEmojii();
         imageUpload.init();
-        initTagsInput();
+        // initTagsInput();
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
             logs.init(selectCls, clsConst);

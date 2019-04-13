@@ -2,8 +2,8 @@ import 'bootstrap-tagsinput';
 
 const tagsinputSelector = '.bootstrap-tagsinput';
 
-export function nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn, stopValidateNextButton) {
-    const englishChars = /^[A-Za-z0-9,._ \n]+$/;  // /^[A-Za-z0-9]*$/;
+export function nextBtnvalidateCompetitorsHandler($input, nextStepBtn, igroreRegexCheck) {
+    const englishChars = /^[A-Za-z0-9,._ \n]+$/;
     const checkTextArea = (e, isInit) => {
         const inputvalue = (!isInit) ? $(e.target).closest('div input').val() : '';
         const text = (!isInit) ? `${$(e.target).closest('div').find('.bootstrap-tagsinput input').val()},${inputvalue}` : '';
@@ -12,7 +12,7 @@ export function nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStep
         const removeBorder = () => {
             // enable on delete all
             $(e.target).closest('.js_tagsinput-box').find(tagsinputSelector).removeClass('border-danger');
-            if (!stopValidateNextButton) {
+            if (nextStepBtn) {
                 // disable on checnge
                 nextStepBtn.removeAttr('disabled', 'disabled');
             }
@@ -21,12 +21,13 @@ export function nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStep
             $(e.target).closest('.js_tagsinput-box').find(tagsinputSelector).addClass('border-danger');
         };
         console.log('text', text);
-        if (!stopValidateNextButton) {
+        if (nextStepBtn) {
             // disable on checnge
             nextStepBtn.attr('disabled', 'disabled');
         }
-        const isAddedTextValid = text.length && englishChars.test(text);
-        const isRemovedTextValid = textOnRemove.length && englishChars.test(textOnRemove);
+        const isAddedTextValid = text.length && (englishChars.test(text) || !!igroreRegexCheck);
+        const isRemovedTextValid = textOnRemove.length && (englishChars.test(textOnRemove) || !!igroreRegexCheck);
+
         if ((isAddedTextValid || isRemovedTextValid) && text !== ',') {
             // enable on checnge if lengthText>1
             removeBorder();
@@ -41,16 +42,21 @@ export function nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStep
     };
     // disable on init
     checkTextArea(null, 'isInit');
-    console.log('$competitorsTextArea', $competitorsTextArea);
+    console.log('$competitorsTextArea', $input);
+
+    if (!nextStepBtn) {
+        // do not validate anything
+        return;
+    }
 
     // event.item: contains the item
     // event.cancel: set to true to prevent the item getting added
-    $('input').on('beforeItemAdd', checkTextArea.bind(stopValidateNextButton));
+    $input.on('beforeItemAdd', checkTextArea);
 
     // event.item: contains the item
-    $('input').on('itemRemoved', checkTextArea.bind(stopValidateNextButton));
+    $input.on('itemRemoved', checkTextArea);
 }
 
-export function initTagsInput (sel) {
-    $(sel).tagsinput('items');
+export function initTagsInput ($elInput) {
+    $elInput.tagsinput('items');
 }

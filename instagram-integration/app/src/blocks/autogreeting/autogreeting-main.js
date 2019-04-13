@@ -287,7 +287,7 @@ export function init() {
 
         initModalHandler();
         initEmojii();
-        imageUpload.init();
+        // imageUpload.init();
         window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
             const {response} = res;
             const result = (response.length) ? JSON.parse(response) : '';
