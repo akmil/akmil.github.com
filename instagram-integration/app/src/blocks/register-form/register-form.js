@@ -104,7 +104,7 @@ export default class RegisterForm {
 
         PubSub.subscribe(CONST.events.USER_LOGGED, () => {
             // $('.register--confirm').removeClass('d-none');
-            window.location.href = '/instagram-integration/registration-success.html';
+            window.location.href = './registration-success.html';
         });
 
         $(document).on('click', (event) => {

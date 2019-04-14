@@ -65,7 +65,7 @@ export function LoginPage(selectorCss) {
             $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData).then(() => {
                 // PubSub.publish(CONST.events.USER_LOGGED, 'login');
-                window.location.href = '/instagram-integration/instagram-accounts.html';
+                window.location.href = './instagram-accounts.html';
             });
         }
     };

@@ -9,7 +9,7 @@ import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
-import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
@@ -25,7 +25,7 @@ const clsConst = {
 };
 const elSelector = {
     fields: '.automessages-text-fields',
-    keyWord: '.answer-words input[data-role="tagsinput"]', // 'textarea.answer-words', // .answer-words input[data-role="tagsinput"]
+    keyWord: 'input.answer-words',
     answer: 'textarea.answer-messages',
     fileUploadBox: '.file-upload',
     addPostBtns: '.js_automessages-add-post'
@@ -73,6 +73,8 @@ function onSubmitHandler(e) {
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
+        const blacklistWords = $(item).find('input.blacklist-words');
+        const blacklistWordsArr = getValByCommaSeparator(blacklistWords);
 
         if (!keyWord.length || !answer.length) {
             // console.log('keyWord is empty, not push me to request');
@@ -88,6 +90,7 @@ function onSubmitHandler(e) {
         const submitBodyItem = {
             'key_words': keyWord,
             answer,
+            blacklist: blacklistWordsArr,
             'attachment': imageId ? {
                 'image_id': imageId
             } : undefined
@@ -181,9 +184,11 @@ function initModalHandler() {
  * Init Handlers
  */
 function initHandlers() {
-    const $competitorsTextArea = $('.automessages-text-fields input[data-role="tagsinput"]');
+    const $competitorsInput = $('.automessages-text-fields input.answer-words[data-role="tagsinput"]');
+    const $blackListInput = $('.automessages-text-fields input.blacklist-words[data-role="tagsinput"]');
     const nextStepBtn = $('form button[type="submit"]');
-    nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
+    nextBtnvalidateCompetitorsHandler($competitorsInput, nextStepBtn, 'ignoreRegexCheck');
+    nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
 
     // TODO: refactor with autogreet.js initHandlers
     // $('[data-toggle="popover"]').popover(); // init
@@ -196,9 +201,18 @@ function initHandlers() {
         $('[data-toggle="tooltip"]').tooltip(); // reinit
         initModalHandler();
 
-        const $input = $('input[data-role="tagsinput"]', lastTextField);
+        // const $input = $('input[data-role="tagsinput"]', lastTextField);
         // initTagsInput();
-        nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
+        // nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
+
+        const lastTextFieldAfterInsert = $(elSelector.fields).last();
+        const $inputAnswerWords = $('input.answer-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+        const $blackListInput = $('input.blacklist-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+
+        initTagsInput($inputAnswerWords); // reinit answer-words
+        initTagsInput($blackListInput); // reinit blacklist-words
+        nextBtnvalidateCompetitorsHandler($inputAnswerWords, nextStepBtn, 'ignoreRegexCheck');
+        nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
     });
 
     // alert success close

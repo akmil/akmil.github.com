@@ -73,7 +73,7 @@ function onSubmitHandler(e) {
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
-        const blacklistWords = $(item).find('input.blacklist-words').val();
+        const blacklistWords = $(item).find('input.blacklist-words');
         const blacklistWordsArr = getValByCommaSeparator(blacklistWords);
 
         if (!keyWord.length || !answer.length) {
