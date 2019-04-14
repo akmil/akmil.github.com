@@ -190,6 +190,9 @@ function initSteps(formSelector) {
             } else {
                 $(this).removeClass('input-error');
             }
+            if ($(this).parent().hasClass('bootstrap-tagsinput')) {
+                next_step = true;
+            }
         });
 
         if (next_step) {
