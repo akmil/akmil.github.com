@@ -6,7 +6,7 @@ import viewUtils from '../../common/js-services/view';
 import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
-import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const state = {
     username: '',
@@ -444,7 +444,7 @@ export function init() {
         console.log(clsConst.currentPageCls);
         const textRusArray = ['По списку', 'По активной аудитории конкурентов'];
         initLogsTab({logsState: CONST.logsState, logsSubtypes: initialPath.subtypes, clsConst, setUserNameCb, textRusArray});
-        initTagsInput();
+        // initTagsInput();
 
         // TODO : use wizard.init()
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

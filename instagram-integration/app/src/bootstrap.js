@@ -3,6 +3,8 @@ import './base.scss';
 // vendor
 import 'whatwg-fetch';
 import PubSub from 'pubsub-js';
+// import {emojionearea} from 'emojioneArea/dist/emojionearea';
+// $.fn.emojionearea = emojionearea;
 
 // components
 // import {CONST} from './common/js-services/consts';

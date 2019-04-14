@@ -25,7 +25,7 @@ const clsConst = {
 };
 const elSelector = {
     fields: '.autocomments-text-fields',
-    keyWord: 'textarea.answer-words',
+    keyWord: 'input.answer-words',
     answer: 'textarea.answer-messages',
     fileUploadBox: '.file-upload',
     addPostBtns: '.js_autocomments-add-post'
@@ -73,6 +73,8 @@ function onSubmitHandler(e) {
         const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
         const postItemId = $imagePostBox.data('postId');
         const postItemType = $imagePostBox.data('postType');
+        const blacklistWords = $(item).find('input.blacklist-words').val();
+        const blacklistWordsArr = getValByCommaSeparator(blacklistWords);
 
         if (!keyWord.length || !answer.length) {
             // console.log('keyWord is empty, not push me to request');
@@ -88,6 +90,7 @@ function onSubmitHandler(e) {
         const submitBodyItem = {
             'key_words': keyWord,
             answer,
+            blacklist: blacklistWordsArr,
             'attachment': imageId ? {
                 'image_id': imageId
             } : undefined
@@ -181,24 +184,31 @@ function initModalHandler() {
  * Init Handlers
  */
 function initHandlers() {
-    const $competitorsTextArea = $('.autocomments-text-fields input[data-role="tagsinput"]');
+    const $competitorsInput = $('.autocomments-text-fields input.answer-words[data-role="tagsinput"]');
+    const $blackListInput = $('.autocomments-text-fields input.blacklist-words[data-role="tagsinput"]');
     const nextStepBtn = $('form button[type="submit"]');
-    nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
+    nextBtnvalidateCompetitorsHandler($competitorsInput, nextStepBtn, 'ignoreRegexCheck');
+    nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
 
     // TODO: refactor with autogreet.js initHandlers
     // $('[data-toggle="popover"]').popover(); // init
     $('.js_add-autocomments').on('click', (e) => {
         const lastTextField = $(elSelector.fields).last();
         tplTextField(elSelector.fields.substr(1)).insertAfter(lastTextField);
-        initEmojii();
         imageUpload.init();
         // $('[data-toggle="popover"]').popover(); // reinit
         $('[data-toggle="tooltip"]').tooltip(); // reinit
         initModalHandler();
 
-        const $input = $('input[data-role="tagsinput"]', lastTextField);
-        initTagsInput('.blacklist-box input');
-        nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
+        const lastTextFieldAfterInsert = $(elSelector.fields).last();
+        const $inputAnswerWords = $('input.answer-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+        const $blackListInput = $('input.blacklist-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+
+        initTagsInput($inputAnswerWords); // reinit answer-words
+        initTagsInput($blackListInput); // reinit blacklist-words
+        nextBtnvalidateCompetitorsHandler($inputAnswerWords, nextStepBtn, 'ignoreRegexCheck');
+        nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
+        initEmojii();
     });
 
     // alert success close
@@ -246,7 +256,6 @@ export function init() {
         wizardForm.init(wizardCfg);
         initHandlers();
         autocommentsStatus.init();
-        initEmojii();
         // initTagsInput('.blacklist-box input');
 
         window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
@@ -272,5 +281,6 @@ export function init() {
         //         $imageBox.hide();
         //     }
         // });
+        initEmojii();
     }
 }
