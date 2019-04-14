@@ -1,5 +1,3 @@
-// import MeteorEmoji from 'meteor-emoji';
-// import EmojiPicker from 'vanilla-emoji-picker';
 import 'emojioneArea';
 
 export const emoji = (clsConst) => {
