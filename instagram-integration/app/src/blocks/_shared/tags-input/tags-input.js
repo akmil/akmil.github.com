@@ -1,4 +1,4 @@
-import 'bootstrap-tagsinput';
+import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js';
 
 const tagsinputSelector = '.bootstrap-tagsinput';
 
