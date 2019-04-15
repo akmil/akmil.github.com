@@ -81,7 +81,13 @@ function onSubmitHandler(e) {
 
     console.log('onSubmitHandler **request**  post: StartFollowingList', body);
 
-    UserTaskManager.postStartFollowingList(body).then((result) => {
+    function cbError(res) {
+        const msg = res.status.message;
+        $('.form-submit-finish--error').addClass('d-block')
+        .find('.alert').append(`<p>${msg}</p>`);
+    }
+
+    UserTaskManager.postStartFollowingList(body, cbError).then((result) => {
         if (result.status.state === 'ok') {
             console.log(JSON.stringify(result));
             $('.form-submit-finish').find('.alert p').remove();

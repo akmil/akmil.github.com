@@ -218,12 +218,12 @@ function initSteps(formSelector) {
     });
 
     // speed radio-btn group
-    $('.js_follow-speed input[type=radio]').on('click', function () {
-        const value = $(this).attr('value');
-        state.user_default_config = {
-            task_mode: value.toUpperCase()
-        };
-    });
+    // $('.js_follow-speed input[type=radio]').on('click', function () {
+    //     const value = $(this).attr('value');
+    //     state.user_default_config = {
+    //         task_mode: value.toUpperCase()
+    //     };
+    // });
 
     $('.js_get-follow-type input[type=radio]').on('click', (e) => {
         const value = $(e.target).attr('value');
