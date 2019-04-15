@@ -122,7 +122,6 @@ function onSubmitHandler(e) {
         }
     };
 
-    // console.log('make request here**', nReqBody);
     function cbError(res) {
         const msg = res.status.message;
         $('.form-submit-finish--error').addClass('d-block')
