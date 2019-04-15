@@ -120,6 +120,12 @@ function getDataStepSpeed(stepNumber) {
             } = result;
 
             fillSpeedList($('.js_follow-speed'), task_modes);
+            $('.js_follow-speed input[type=radio]').on('click', function () {
+                const value = $(this).attr('value');
+                state.user_default_config = {
+                    task_mode: value.toUpperCase()
+                };
+            });
         }
     });
 }
