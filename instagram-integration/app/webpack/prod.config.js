@@ -62,6 +62,7 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new ExtractTextPlugin('[name].css'), // -[chunkhash].min
     /* todo: turnOn UglifyJsPlugin for production */
+    /*
     new UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
@@ -80,6 +81,7 @@ module.exports = webpackMerge(webpackCommon, {
       },
       sourceMap: false // todo: set to FALSE for production
     }),
+    */
     new LoaderOptionsPlugin({
       options: {
         context: '/',
