@@ -218,7 +218,9 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
     });
 }
 
-export const messageAreaHendler = ($textArea, $sendMessageButton) => {
+export const messageAreaHendler = (textAreaSelector, $sendMessageButton) => {
+    const $textArea = $(textAreaSelector);
+    console.log('$textArea', $textArea);
     $textArea.on('keydown', (e) => {
         if (e.keyCode === 13) {
             if (e.ctrlKey) {

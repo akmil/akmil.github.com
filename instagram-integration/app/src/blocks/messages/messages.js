@@ -98,6 +98,7 @@ $(document).ready(() => {
         pickerPosition: 'top',
         tonesStyle: 'square',
         filtersPosition: 'bottom',
+        placeholder: 'Введите сообщение',
         autocomplete: true
         // events: {
         //     keyup (editor, event) {
@@ -105,7 +106,12 @@ $(document).ready(() => {
         //         console.log(this.getText());
         //     }
         // }
-    });
+    }).on('picker.keydown', messageAreaHendler);
+
+    const $textArea = $('.js_send-message-box .emojionearea-editor');
+    console.log('$textArea', $textArea);
+    messageAreaHendler('.js_send-message-box .emojionearea-editor', $('#sendMessageButton'));
+    $textArea.val('');
 
     // todo: fine-uploade
     /*
@@ -288,6 +294,10 @@ function scrollHandler(scrollDelay, pagination) {
 
 function getAndFillConversation({username, conversationId, useravatar}, isScrollDown, isClickFromRequestConfirm) {
     const TIME_SCROLL = 10;
+    const scrollHeight = $msgList[0].scrollHeight;
+    const scrollBottom = () => $msgList.animate({
+        scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
+    }, TIME_SCROLL);
     UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
         // messages-list from utils
         currentUserData.useravatar = useravatar;
@@ -303,13 +313,19 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
             $('.js_send-message-box').removeClass('d-none');
         }
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
-
+        const scrollHeightAfter = $msgList[0].scrollHeight;
+        console.log('scrollHeightAfter', scrollHeightAfter - 50);
+        console.log('scrollHeight', scrollHeight);
+        if (scrollHeight < (scrollHeightAfter - 50)) {
+            scrollBottom();
+        }
         if (isScrollDown) {
             setTimeout(() => {
-                $msgList.animate({
-                    scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
-                }, TIME_SCROLL);
-            }, TIME_SCROLL * 2);
+                // $msgList.animate({
+                //     scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
+                // }, TIME_SCROLL);
+                scrollBottom();
+            }, 200);
             // save first value
             if (flagInitialVal) {
                 initialVal = result.data.meta.messages[result.data.meta.messages.length - 1];
@@ -351,10 +367,11 @@ function imageLoadSubmitCb(input, token) {
 
 function addHandlers() {
     let conversationId = '';
-    const $textArea = $('#sendMessageTextArea');
-    $textArea.val('');
 
     $('#sendMessageButton').on('click', (e) => {
+        const emojioneareaEditor = $('.js_send-message-box .emojionearea-editor');
+        emojioneareaEditor.empty();
+        const $textArea = $('#sendMessageTextArea');
         const value = $textArea.val();
         const userData = $msgList.data('conversation');
         const {username, conversationId, useravatar} = userData;
@@ -368,8 +385,6 @@ function addHandlers() {
             }
         });
     });
-
-    messageAreaHendler($textArea, $('#sendMessageButton'));
 
     function userShowConversetionHandler(e, userData) {
         console.log('click');

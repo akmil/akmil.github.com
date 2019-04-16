@@ -37,8 +37,9 @@ $maxH-input-direct: 42px;
     max-height: $maxH-input-direct;
     height: 100%;
     .emojionearea-editor {
-      max-height: $maxH-input-direct;
-      height: 100%;
+      max-height: $maxH-input-direct;      
+      height: $maxH-input-direct - 4px;
+      min-height: 0;
     }
   }
 }
