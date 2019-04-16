@@ -99,19 +99,39 @@ $(document).ready(() => {
         tonesStyle: 'square',
         filtersPosition: 'bottom',
         placeholder: 'Введите сообщение',
-        autocomplete: true
-        // events: {
-        //     keyup (editor, event) {
-        //         console.log(editor.html());
-        //         console.log(this.getText());
-        //     }
-        // }
-    }).on('picker.keydown', messageAreaHendler);
+        autocomplete: true,
+        events: {
+            keydown (editor, e) {
+                // console.log(editor.html());
+                // console.log(this.getText());
+                if (e.keyCode === 13) {
+                    if (e.ctrlKey) {
+                        // console.log('ctrl+enter');
+                        e.preventDefault();
+                        // const value = this.getText();
+                        this.setText(`${this.getText()}</br>`);
+                        // e.target.value += '\n';
+                    } else {
+                        if (this.getText().length) {
+                            e.target.value = this.getText();
+                            $('#sendMessageButton').trigger('click');
+                        }
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+    });
+    // .on('picker.keydown', (button, e) => {
+    //     console.log(e.target);
+    // }).on('emojibtn.click', function(button, event) {
+    //     console.log(`event:emojibtn.click, emoji=${button.children().data('name')}`);
+    // });
 
     const $textArea = $('.js_send-message-box .emojionearea-editor');
-    console.log('$textArea', $textArea);
-    messageAreaHendler('.js_send-message-box .emojionearea-editor', $('#sendMessageButton'));
-    $textArea.val('');
+    // console.log('$textArea', $textArea);
+    // messageAreaHendler('.js_send-message-box .emojionearea-editor', $('#sendMessageButton'));
+    $textArea.empty();
 
     // todo: fine-uploade
     /*
@@ -370,9 +390,9 @@ function addHandlers() {
 
     $('#sendMessageButton').on('click', (e) => {
         const emojioneareaEditor = $('.js_send-message-box .emojionearea-editor');
-        emojioneareaEditor.empty();
         const $textArea = $('#sendMessageTextArea');
-        const value = $textArea.val();
+        const value = (e.isTriggered) ? emojioneareaEditor.val() : $textArea.val();
+        emojioneareaEditor.empty();
         const userData = $msgList.data('conversation');
         const {username, conversationId, useravatar} = userData;
         Spinner.startButtonSpinner($(e.target), 'spinner-box--sendMsg');
