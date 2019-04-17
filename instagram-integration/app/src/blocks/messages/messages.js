@@ -4,7 +4,7 @@ import 'emojioneArea';
 // import qq from 'fine-uploader'; // todo: fine-uploade
 import User from '../../common/js-services/user';
 import UserConversation from '../../common/js-services/api-user-direct';
-import {fillMassagesList, fillUserList, messageAreaHendler, /* addMoreUsersAccordion,*/ appendUserList} from './utils';
+import {fillMassagesList, fillUserList, /* messageAreaHendler, /* addMoreUsersAccordion,*/ appendUserList} from './utils';
 import Spinner from '../../common/js-services/spinner';
 // import PubSub from 'pubsub-js';// https://www.npmjs.com/package/pubsub-js
 import {CONST} from '../../common/js-services/consts';

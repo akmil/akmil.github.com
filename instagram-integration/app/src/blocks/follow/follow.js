@@ -79,6 +79,20 @@ function getDataStep2() {
     getTasksData(path);
 }
 
+function addSmoothStart(defaultCfg) {
+    const {cfg: {smooth_starting}} = defaultCfg;
+    if (!smooth_starting) {
+        return;
+    }
+    state.user_default_config.smooth_starting = true;
+    $('.js_smooth-starting').removeClass('d-none');
+
+    $('.js_smooth-starting').on('change', (e) => {
+        // console.log(e.target.checked, smooth_starting);
+        state.user_default_config.smooth_starting = e.target.checked;
+    });
+}
+
 function getDataStepSpeed(stepNumber) {
     const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
@@ -119,6 +133,7 @@ function getDataStepSpeed(stepNumber) {
               }
             } = result;
 
+            addSmoothStart(result.data.found);
             fillSpeedList($('.js_follow-speed'), task_modes);
             $('.js_follow-speed input[type=radio]').on('click', function () {
                 const value = $(this).attr('value');
@@ -216,14 +231,6 @@ function initSteps(formSelector) {
             $(this).prev().fadeIn();
         });
     });
-
-    // speed radio-btn group
-    // $('.js_follow-speed input[type=radio]').on('click', function () {
-    //     const value = $(this).attr('value');
-    //     state.user_default_config = {
-    //         task_mode: value.toUpperCase()
-    //     };
-    // });
 
     $('.js_get-follow-type input[type=radio]').on('click', (e) => {
         const value = $(e.target).attr('value');

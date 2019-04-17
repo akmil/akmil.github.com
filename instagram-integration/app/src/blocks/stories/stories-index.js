@@ -158,6 +158,20 @@ function renderTaskMode(defaultCfg) {
     });
 }
 
+function addSmoothStart(defaultCfg) {
+    const {cfg: {smooth_starting}} = defaultCfg;
+    if (!smooth_starting) {
+        return;
+    }
+    state.user_default_config.smooth_starting = true;
+    $('.js_smooth-starting').removeClass('d-none');
+
+    $('.js_smooth-starting').on('change', (e) => {
+        // console.log(e.target.checked, smooth_starting);
+        state.user_default_config.smooth_starting = e.target.checked;
+    });
+}
+
 function getConfig() {
     const path = {
         type: clsConst.pathType,
@@ -181,6 +195,9 @@ function getConfig() {
         const limitVal = found.cfg.criteria.max_views;
         renderTaskMode(found);
         $('#limit').val(limitVal);
+
+        // Плавный старт
+        addSmoothStart(found);
     });
 }
 

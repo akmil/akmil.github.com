@@ -36,6 +36,12 @@ const logsState = {
     wrapperSubtype: '.log-subype'
 };
 
+const state = {
+    user_default_config: {
+        smooth_starting: true
+    }
+};
+
 function initEmojii() {
     emoji({
         page: clsConst.currentPageCls,
@@ -116,7 +122,9 @@ function onSubmitHandler(e) {
         'username': usernameSelected,
         'type': clsConst.pathType,
         'subtype': clsConst.pathSubType,
-        'user_default_config': {},
+        'user_default_config': {
+            ...state.user_default_config
+        },
         'user_custom_config': {
             'forms': reqBody
         }
@@ -240,10 +248,25 @@ function setUserName(state) {
     usernameSelected = state.username;
 }
 
+function addSmoothStart(/* defaultCfg */) {
+    // const {cfg: {smooth_starting}} = defaultCfg;
+    // if (!smooth_starting) {
+    //     return;
+    // }
+    state.user_default_config.smooth_starting = true;
+    $('.js_smooth-starting').removeClass('d-none');
+
+    $('.js_smooth-starting').on('change', (e) => {
+        // console.log(e.target.checked, smooth_starting);
+        state.user_default_config.smooth_starting = e.target.checked;
+    });
+}
+
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
             setUserName(state);
+            addSmoothStart();
             // console.log(state, stepNumber);
             break;
         default:

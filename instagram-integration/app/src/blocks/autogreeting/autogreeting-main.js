@@ -80,7 +80,8 @@ function onSubmitHandler(e) {
         'type': CONST.url.tmTypes.autogreetT,
         'subtype': CONST.url.tmTypes.autogreetSubT[0],
         'user_default_config': {
-            'task_mode': state.user_default_config.task_mode // todo
+            ...state.user_default_config,
+            'task_mode': state.user_default_config.task_mode
         },
         'user_custom_config': {
             'forms': reqBody
@@ -206,6 +207,20 @@ function setUserName(state) {
     usernameSelected = state.username;
 }
 
+function addSmoothStart(defaultCfg) {
+    const {cfg: {smooth_starting}} = defaultCfg;
+    if (!smooth_starting) {
+        return;
+    }
+    state.user_default_config.smooth_starting = true;
+    $('.js_smooth-starting').removeClass('d-none');
+
+    $('.js_smooth-starting').on('change', (e) => {
+        // console.log(e.target.checked, smooth_starting);
+        state.user_default_config.smooth_starting = e.target.checked;
+    });
+}
+
 function getDataStepSpeed() {
 
     // TODO: refactor get from - view.fillRadioGroupList
@@ -246,6 +261,7 @@ function getDataStepSpeed() {
         // console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
             fillSpeedList($(speedType), result.data.found);
+            addSmoothStart(result.data.found);
             // speed radio-btn group
             $(`${speedType} input[type=radio]`).on('click', (e) => {
                 const value = $(e.target).attr('value');
