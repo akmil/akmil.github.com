@@ -51,8 +51,7 @@ function readURL(input) {
             console.log('show error message, imgSize to big ');
             $(fileUploadBox).append(`
                 <div class="warning-image text-danger">
-                    <p>Доступный формат изображения ${FILE_TYPE}</p>
-                    <p class="msg-max-size-img text-danger">Максимальный допустимый размер картинки 100 MB</p>
+                    <p>Доступный формат изображения - *.${FILE_TYPE}</p>
                 </div>
             `);
             setTimeout(() => {
