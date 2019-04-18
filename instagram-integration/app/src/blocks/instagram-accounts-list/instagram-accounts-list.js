@@ -147,8 +147,12 @@ const checkPointText = (checkpoint, item) => {
             data-username="${item.username || ''}"
             data-toggle="modal" data-target="#security-code">
             <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
-    } else if (item.status === 'FAIL') {
-        return '<span class="text-danger">Ошибка при добавлении</span>';
+    } else if (item.status.state === 'fail') {
+        if (item.status.message === 'it looks like proxy doesn\'t respond') {
+            return '<span class="text-danger">Проблема с прокси, проверьте правильность введенных данных</span>';
+        }
+    } else {
+        return '<span class="text-danger">Ошибка при работе с аккаунтом</span>';
     }
 };
 

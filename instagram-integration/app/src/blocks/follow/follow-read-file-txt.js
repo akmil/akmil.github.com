@@ -8,9 +8,9 @@ import Spinner from '../../common/js-services/spinner';
 */
 let fileUploadBox = '';
 const MAX_IMG_FILE_SIZE_BYTE = 1048576 * 100;
-const FILE_TYPE = 'txt';
+const FILE_TYPE = 'txt, rtf';
 function isFileTypeOk(acceptedFile) {
-    return acceptedFile.type === 'text/plain' || acceptedFile.type === 'application/msword';
+    return acceptedFile.type === 'text/plain' || acceptedFile.type === 'application/rtf';
 }
 
 function isImgSizeOk(acceptedFile) {
