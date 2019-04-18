@@ -46,6 +46,10 @@ $border-radius-follow: 4px;
         margin-top: 8px !important;
     }
 
+    input[type="number"] {
+        padding-right: 0px; 
+    }
+
     textarea,
     textarea.form-control {
         padding-top: 10px;

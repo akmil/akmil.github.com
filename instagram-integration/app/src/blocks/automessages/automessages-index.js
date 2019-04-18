@@ -38,7 +38,7 @@ const logsState = {
 
 const state = {
     user_default_config: {
-        smooth_starting: true
+        smooth_starting_enabled: true
     }
 };
 
@@ -253,12 +253,12 @@ function addSmoothStart(/* defaultCfg */) {
     // if (!smooth_starting) {
     //     return;
     // }
-    state.user_default_config.smooth_starting = true;
+    state.user_default_config.smooth_starting_enabled = true;
     $('.js_smooth-starting').removeClass('d-none');
 
     $('.js_smooth-starting').on('change', (e) => {
         // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting = e.target.checked;
+        state.user_default_config.smooth_starting_enabled = e.target.checked;
     });
 }
 

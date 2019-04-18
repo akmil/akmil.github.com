@@ -44,7 +44,7 @@ function onSubmitHandler(e) {
             // attachment: {
             //     'list_id': 'id_static'
             // }
-            ...state.user_default_config.smooth_starting
+            ...state.user_default_config.smooth_starting_enabled
         },
         type: clsConst.pathType,
         username: usernameSelected
@@ -145,12 +145,12 @@ function addSmoothStart(defaultCfg) {
     if (!smooth_starting) {
         return;
     }
-    state.user_default_config.smooth_starting = true;
+    state.user_default_config.smooth_starting_enabled = true;
     $('.js_smooth-starting').removeClass('d-none');
 
     $('.js_smooth-starting').on('change', (e) => {
         // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting = e.target.checked;
+        state.user_default_config.smooth_starting_enabled = e.target.checked;
     });
 }
 
