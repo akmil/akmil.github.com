@@ -10,7 +10,7 @@ let fileUploadBox = '';
 const MAX_IMG_FILE_SIZE_BYTE = 1048576 * 100;
 const FILE_TYPE = 'txt';
 function isFileTypeOk(acceptedFile) {
-    return acceptedFile.type === 'text/plain';
+    return acceptedFile.type === 'text/plain' || acceptedFile.type === 'application/msword';
 }
 
 function isImgSizeOk(acceptedFile) {
