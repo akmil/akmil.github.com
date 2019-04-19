@@ -199,7 +199,6 @@ export const renderItem = (item, cList, _defaultAvatarSrc) => {
                     ${checkPointText(checkpoint, item)}
                 </div>
                 ${stats()}
-                ${addSettingBtn(item) || ''}
             </div>
         </li>`).appendTo(cList);
     } else {
