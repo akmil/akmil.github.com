@@ -10,7 +10,7 @@ let fileUploadBox = '';
 const MAX_IMG_FILE_SIZE_BYTE = 1048576 * 100;
 const FILE_TYPE = 'txt, rtf';
 function isFileTypeOk(acceptedFile) {
-    return acceptedFile.type === 'text/plain' || acceptedFile.type === 'application/rtf';
+    return acceptedFile.type === 'text/plain' || acceptedFile.type === 'application/rtf' || acceptedFile.type === 'application/msword';
 }
 
 function isImgSizeOk(acceptedFile) {
@@ -51,7 +51,7 @@ function readURL(input) {
             console.log('show error message, imgSize to big ');
             $(fileUploadBox).append(`
                 <div class="warning-image text-danger">
-                    <p>Доступный формат изображения - *.${FILE_TYPE}</p>
+                    <p>Доступный формат - *.${FILE_TYPE}</p>
                 </div>
             `);
             setTimeout(() => {

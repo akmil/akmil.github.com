@@ -141,16 +141,19 @@ const stats = (info) => {
 };
 
 const checkPointText = (checkpoint, item) => {
+    if (item.status.state === 'fail') {
+        if (item.status.message === 'it looks like proxy doesn\'t respond') {
+            return '<span class="text-danger">Проблема с прокси, проверьте правильность введенных данных</span>';
+        } else {
+            return '<span class="text-danger">Ошибка при работе с аккаунтом</span>';
+        }
+    }
     if (checkpoint.status === 'TRIGGERED') {
         return `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
             data-username="${item.username || ''}"
             data-toggle="modal" data-target="#security-code">
             <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
-    } else if (item.status.state === 'fail') {
-        if (item.status.message === 'it looks like proxy doesn\'t respond') {
-            return '<span class="text-danger">Проблема с прокси, проверьте правильность введенных данных</span>';
-        }
     } else {
         return '<span class="text-danger">Ошибка при работе с аккаунтом</span>';
     }
