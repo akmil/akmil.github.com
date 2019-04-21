@@ -104,21 +104,6 @@ function onSubmitHandler(e) {
     });
 }
 
-// function fillListUsers($wrapper, data) {
-//     $wrapper.empty().addClass('border-light-color');
-//     $(`<div class="">Доступные аккаунты</div><select name="task-type" class="${selectCls}"></select>`).appendTo($wrapper);
-//     data.forEach((name) => {
-//         $(`<option class="list-group-item py-2" value="${name}">
-//             ${name}
-//         </option>`).appendTo($(`.${selectCls}`));
-//     });
-//     $(`.${selectCls}`).on('change', function () {
-//         usernameSelected = $(`.${selectCls} option:selected`).val();
-//         console.log(usernameSelected);
-//         logs.init(selectCls, clsConst);
-//     });
-// }
-
 const logsState = CONST.logsState;
 function initLogsTab() {
     function OnChangeSelect() {
@@ -303,7 +288,7 @@ export function init() {
 
         initModalHandler();
         initEmojii();
-        // imageUpload.init();
+        imageUpload.init();
         window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
             const {response} = res;
             const result = (response.length) ? JSON.parse(response) : '';

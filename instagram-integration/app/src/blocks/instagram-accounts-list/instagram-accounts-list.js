@@ -296,7 +296,9 @@ function reloadList() {
         updateBtnCls: '.js_acc-refresh',
         editBtnCls: '.js_acc-edit'
     };
-    settingButtonsHandler(cfg);
+    if (isInstagramAccPage) { // avoid calling image-upload on other pages
+        settingButtonsHandler(cfg);
+    }
 }
 
 // После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
@@ -424,12 +426,14 @@ export function init() {
         */
     //    checkResponse(result, isResendRequest);
         checkResponse(result);
-        const cfg = {
-            deleteBtnCls: '.js_acc-delete',
-            updateBtnCls: '.js_acc-refresh',
-            editBtnCls: '.js_acc-edit'
-        };
-        settingButtonsHandler(cfg);
+        if (isInstagramAccPage) { // avoid calling image-upload on other pages
+            const cfg = {
+                deleteBtnCls: '.js_acc-delete',
+                updateBtnCls: '.js_acc-refresh',
+                editBtnCls: '.js_acc-edit'
+            };
+            settingButtonsHandler(cfg);
+        }
     }).catch((err) => {
         setTimeout(() => {
             viewUtils.showInfoMessage($('.error-msg'),

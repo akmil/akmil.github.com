@@ -83,11 +83,11 @@ function handleSubmit(input, replaceWithCfg) {
 
     if (replaceWithCfg && replaceWithCfg.replaceWith) {
         // ** edit USER **
-        // PUT http://api.luxgram.ru/v1/instagram-accounts/{username}/photo
+        // PUT .../instagram-accounts/{username}/photo
         // form-data: "photo" (jpg)
         formData.append('photo', acceptedFile, acceptedFile.name);
         const {username} = replaceWithCfg;
-        request.open('PUT', `http://api.luxgram.ru/v1/instagram-accounts/${username}/photo`);
+        request.open('PUT', `${CONST.url.base}instagram-accounts/${username}/photo`);
         // request.withCredentials = true;
         request.setRequestHeader('token', token);
         request.setRequestHeader('Accept', 'application/json');
@@ -118,7 +118,8 @@ function handleSubmit(input, replaceWithCfg) {
 }
 
 function readURL(input, replaceWithCfg, handleSubmitCb) {
-    const {replaceWith, holderCls} = replaceWithCfg;
+    const holderCls = replaceWithCfg && replaceWithCfg.holderCls;
+    const replaceWith = replaceWithCfg && replaceWithCfg.replaceWith;
     const holder = (holderCls) ? holderCls : fileUploadBox;
     const $container = $(input).closest(holder);
     if (input.files && input.files[0]) {

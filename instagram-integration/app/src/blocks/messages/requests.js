@@ -2,7 +2,7 @@ import UserConversation from '../../common/js-services/api-user-direct';
 import User from '../../common/js-services/user';
 
 /*
-Endpoint на получение запросов: GET http://api.luxgram.ru/v1/instagram-direct/pending/{username}
+Endpoint на получение запросов: GET instagram-direct/pending/{username}
 Это ендпоинт должен быть вызван только при нажатии на текст с количеством запросов.
 */
 // const cfgT = {
@@ -156,7 +156,7 @@ function initHandlers() {
     const $reqRejectBtn = $('.js_request-reject', $confirmBtnBox);
 
     $reqConfirmBtn.on('click', (e) => {
-        // PUT http://api.luxgram.ru/v1/instagram-direct/pending/{username}/{id}
+        // PUT instagram-direct/pending/{username}/{id}
         UserConversation.putRequestPending(confirmUserData).then((result) => {
             if (result.status.state === 'ok') {
                 console.info('result: ', result);
