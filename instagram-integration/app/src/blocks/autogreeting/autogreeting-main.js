@@ -54,26 +54,13 @@ function onSubmitHandler(e) {
     };
     fields.each((idx, item) => {
         const message = $(item).find('textarea.answer-words').val();
-        // const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
-        // const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
-        // const postItemId = $imagePostBox.data('postId');
-        // const postItemType = $imagePostBox.data('postType');
-        // const post = {
-        //     id: postItemId,
-        //     type: postItemType || 'type-error'
-        // };
-
-        // if (postItemId) {
-        //     attachment = {post};
-        // } else if (imageId) {
-        //     attachment = {'image_id': imageId};
-        // }
-
         const attachmentImg = getAttachment(item);
-        reqBody.push({
-            'answer': message,
-            'attachment': (attachmentImg) ? attachmentImg : undefined
-        });
+        if (message.length || attachmentImg) {
+            reqBody.push({
+                'answer': (message.length) ? message : undefined,
+                'attachment': (attachmentImg) ? attachmentImg : undefined
+            });
+        }
     });
     const nReqBody = {
         'username': usernameSelected || 'the_rostyslav',
