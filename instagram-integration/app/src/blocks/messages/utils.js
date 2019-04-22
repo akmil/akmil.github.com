@@ -51,8 +51,8 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
                 str = `<div class="chat-post-message">
                     <a target="_blank" href="${value}" class="text-body text-decoration-none">
                         <div class="chat-post-message--header">
-                            <img src="${message.profile_pic_url}" alt="Content Image" class="user-avatar mr-3">
-                            ${message.username}
+                            <img src="${message.post_author.profilePicUrl}" alt="Content Image" class="user-avatar mr-3">
+                            ${message.post_author.username}
                             <i class="fas fa-chevron-right"></i>
                         </div>
                         <img src="${message.preview_value}" alt="Content Image" class="content-image">
