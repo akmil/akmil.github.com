@@ -104,17 +104,19 @@ $(document).ready(() => {
             keydown (editor, e) {
                 // console.log(editor.html());
                 // console.log(this.getText());
+                const event = jQuery.Event('click');
                 if (e.keyCode === 13) {
+                    const message = this.getText();
                     if (e.ctrlKey) {
                         // console.log('ctrl+enter');
                         e.preventDefault();
-                        // const value = this.getText();
-                        this.setText(`${this.getText()}</br>`);
+                        // this.setText(`${message}</br>`);
+                        e.target.value = `${message}\n`;
                         // e.target.value += '\n';
                     } else {
                         if (this.getText().length) {
-                            e.target.value = this.getText();
-                            $('#sendMessageButton').trigger('click');
+                            e.target.value = message;
+                            $('#sendMessageButton').trigger(event, message);
                         }
                         e.preventDefault();
                     }
@@ -388,10 +390,10 @@ function imageLoadSubmitCb(input, token) {
 function addHandlers() {
     let conversationId = '';
 
-    $('#sendMessageButton').on('click', (e) => {
+    $('#sendMessageButton').on('click', (e, message) => {
         const emojioneareaEditor = $('.js_send-message-box .emojionearea-editor');
         const $textArea = $('#sendMessageTextArea');
-        const value = (e.isTriggered) ? emojioneareaEditor.val() : $textArea.val();
+        const value = (e.isTrigger) ? message : $textArea.val();
         emojioneareaEditor.empty();
         const userData = $msgList.data('conversation');
         const {username, conversationId, useravatar} = userData;
