@@ -32,6 +32,7 @@ export function LoginPage(selectorCss) {
                     // save the item
                     cookieStorage.set(CONST.cookieStorage.token, result.data.token);
                     $('.nav-link.js_logOut').parent().show();
+                    $('.nav-link.js_profile').parent().show();
                     // console.log('request succeeded with JSON response', result);
                     viewUtils.showInfoMessage($textAreaDescription,
                         result.status.state,
@@ -120,6 +121,7 @@ export function LoginPage(selectorCss) {
             $(CONST.uiSelectors.headerNavLoginBtn).addClass(openedClass).removeClass(closeClass); // .show();
             $(CONST.uiSelectors.headerRegBtn).addClass(openedClass).removeClass(closeClass);
             $('.nav-link.js_logOut').addClass(closeClass).removeClass(openedClass); // .hide();
+            $('.nav-link.js_profile').addClass(closeClass).removeClass(openedClass); // .hide();
             const selectorLoginState = '.js_message_logged--text';
             $(selectorLoginState).text('Вы вышли из аккаунта');
         });

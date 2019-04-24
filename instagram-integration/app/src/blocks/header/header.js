@@ -20,6 +20,7 @@ function onLoginSubscribe(msg, data) {
     $(CONST.uiSelectors.headerLoginBox).addClass(closeClass).removeClass(openedClass);
 
     $('.nav-link.js_logOut').addClass(openedClass).removeClass(closeClass); // show
+    $('.nav-link.js_profile').addClass(openedClass).removeClass(closeClass); // show
     const $loginMsg = $(selectorLoginState);
     $loginMsg.text('**onLoginSubscribe** вы залогинились в Luxgram успешно').css('color', 'lightblue');
     const isEmailConfirmed = User.isEmailConfirmed();
@@ -38,6 +39,7 @@ function showLogout() {
     // console.log('isLogged', isLogged);
     if (isLogged) {
         $('.nav-link.js_logOut').parent().show();
+        $('.nav-link.js_profile').parent().show();
         $('.js_email-confirm--text').text('вы залогинились успешно');
         const oldURL = document.referrer;
         // console.log(oldURL);

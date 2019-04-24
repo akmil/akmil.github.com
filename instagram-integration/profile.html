@@ -17,6 +17,9 @@
           <li class="nav-item text-nowrap mr-3">
               <a class="nav-link js_login" href="./login.html">Логин</a>
           </li>
+          <li class="nav-item text-nowrap mr-3">            
+              <a class="nav-link js_profile" href="./profile.html"><i class="fas fa-user"></i></a>
+          </li>
           <li class="nav-item text-nowrap mr-3" style="display:none">
               <a class="nav-link js_logOut" href="#">Выход</a>
           </li>
@@ -124,14 +127,37 @@
         
             
               <div class="container-fluid">
-            
-                <div>
-                  На этой странице пользователь имеет возможность управлять своим профилем в Инстаграм. А именно: удалить/изменить аватарку, изменить описание профиля и все доступные настройки
-                </div>
                 
-                <div class="profile-user">
-                    
-                    <h1>profile-user</h1>
+                <div class="profile-user row">
+                        
+                    <div class="col-3 pr-4">
+                        <div class="card">
+                            <div class="card-header">Персональные настройки</div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a class="js-selected-navigation-item selected menu-item" aria-current="page" data-selected-links=" /profile" href="/profile.html">Account</a>
+                                </li>            
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="col-9 pr-4">
+                        <form>    
+                            <div class="form-group">
+                                <label for="oldInputPassword">Пароль</label>
+                                <input type="password" class="form-control" id="oldInputPassword" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-check-label" for="newInputPassword">Новый пароль</label>
+                                <input type="password" class="form-control" id="newInputPassword" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-check-label" for="confirmedInputPassword">Подтвердить новый пароль</label>
+                                <input type="password" class="form-control" id="confirmedInputPassword" required="required">
+                            </div>
+                            <button type="submit" class="btn btn-success">обновить пароль</button>
+                        </form>
+                    </div>
                 
                 </div>    
               </div>
