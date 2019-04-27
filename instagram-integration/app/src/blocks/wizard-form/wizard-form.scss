@@ -255,5 +255,10 @@ $border-radius-follow: 4px;
         &--remove-btn {
 
         }
+        &::after {
+            content: '';
+            clear: both;
+            display: table-cell;
+        }
     }
 }

@@ -56,7 +56,7 @@ function imageSelectHandler($list, modal, targetButton) {
             targetButton.closest('.col').find(imageBoxSelector).remove();
         }
 
-        const tplImageBox = $(`<div class="${imageBoxCls} uploaded-img-from-posts" 
+        const tplImageBox = $(`<div class="${imageBoxCls} uploaded-img-from-posts mb-3" 
                 data-post-id="${postId}" data-post-type="${postType}">
                     <button class="btn btn-warning uploaded-img-from-posts--remove-btn ml-2 ${imageDelBtnCls}">Удалить</button>
                 </div`).prepend($btnLi.find('img'));

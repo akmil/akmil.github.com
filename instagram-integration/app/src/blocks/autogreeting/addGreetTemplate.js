@@ -1,8 +1,8 @@
 export const tplTextFieldGreet = (mainCls) =>
 $(`<div class="${mainCls}">
-        <div class="row">
+        <div class="row pb-3">
             <div class="col">
-                <div>                
+                <div>
                     <textarea class="form-control answer-words" rows="4" 
                         data-emoji-picker="true" placeholder="Введите сообщение"></textarea>    
                 </div>
