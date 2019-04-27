@@ -24,6 +24,7 @@ import * as chatBot from './blocks/chat-bot/chat-bot-index';
 import * as autogreeting from './blocks/autogreeting/autogreeting-main';
 import * as autocomments from './blocks/autocomments/autocomments-index';
 import * as stories from './blocks/stories/stories-index';
+import * as profile from './blocks/profile-user/profile';
 
 // const selectorCssLoginForm = {
 //     _loginBox: CONST.uiSelectors.headerLoginBox,
@@ -75,6 +76,7 @@ const init = () => {
     autocomments.init();
     chatBot.init();
     stories.init();
+    profile.init();
 };
 
 (() => init())();

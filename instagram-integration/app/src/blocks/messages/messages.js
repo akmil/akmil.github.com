@@ -104,19 +104,22 @@ $(document).ready(() => {
             keydown (editor, e) {
                 // console.log(editor.html());
                 // console.log(this.getText());
+                const event = jQuery.Event('click');
                 if (e.keyCode === 13) {
+                    const message = this.getText();
                     if (e.ctrlKey) {
-                        // console.log('ctrl+enter');
-                        e.preventDefault();
-                        // const value = this.getText();
-                        this.setText(`${this.getText()}</br>`);
-                        // e.target.value += '\n';
-                    } else {
+                        console.log('ctrl+enter');
                         if (this.getText().length) {
-                            e.target.value = this.getText();
-                            $('#sendMessageButton').trigger('click');
+                            e.target.value = message;
+                            $('#sendMessageButton').trigger(event, message);
                         }
                         e.preventDefault();
+                    } else {
+                        // if (this.getText().length) {
+                        //     e.target.value = message;
+                        //     $('#sendMessageButton').trigger(event, message);
+                        // }
+                        // e.preventDefault();
                     }
                 }
             }
@@ -333,17 +336,14 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
             $('.js_send-message-box').removeClass('d-none');
         }
         $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
-        const scrollHeightAfter = $msgList[0].scrollHeight;
-        console.log('scrollHeightAfter', scrollHeightAfter - 50);
-        console.log('scrollHeight', scrollHeight);
-        if (scrollHeight < (scrollHeightAfter - 50)) {
+        console.log('scrollHeight', scrollHeight, $($msgList[0]).height());
+        const scrollPosition = $($msgList[0]).height() + $($msgList[0]).scrollTop();
+
+        if ((scrollPosition) < 75) {
             scrollBottom();
         }
         if (isScrollDown) {
             setTimeout(() => {
-                // $msgList.animate({
-                //     scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
-                // }, TIME_SCROLL);
                 scrollBottom();
             }, 200);
             // save first value
@@ -388,10 +388,10 @@ function imageLoadSubmitCb(input, token) {
 function addHandlers() {
     let conversationId = '';
 
-    $('#sendMessageButton').on('click', (e) => {
+    $('#sendMessageButton').on('click', (e, message) => {
         const emojioneareaEditor = $('.js_send-message-box .emojionearea-editor');
         const $textArea = $('#sendMessageTextArea');
-        const value = (e.isTriggered) ? emojioneareaEditor.val() : $textArea.val();
+        const value = (e.isTrigger) ? message : $textArea.val();
         emojioneareaEditor.empty();
         const userData = $msgList.data('conversation');
         const {username, conversationId, useravatar} = userData;

@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>Завершение регистрации</title>
+  <title>User profile</title>
   <link rel="shortcut icon" href="/instagram-integration/favicon.ico"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link href="index.css" rel="stylesheet"></head>
@@ -126,20 +126,40 @@
         
         
             
-              <div class="container-fluid confirm-registration">
-            
-                <div class="сonfirm-page-component">
-                  <div class="row">
+              <div class="container-fluid">
                 
-                    <div class="сonfirm-page--confirm-msg">
-                        <p>Регистрация успешно завершена!</p>
-                        <p>Теперь Вы можете добавить свой Instagram аккаунт: [<a href="/instagram-integration/">Добавить</a>]</p>
+                <div class="profile-user row">
+                        
+                    <div class="col-3 pr-4">
+                        <div class="card">
+                            <div class="card-header">Персональные настройки</div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a class="js-selected-navigation-item selected menu-item" aria-current="page" data-selected-links=" /profile" href="/profile.html">Account</a>
+                                </li>            
+                            </ul>
+                        </div>
                     </div>
                 
-                  </div>
+                    <div class="col-9 pr-4">
+                        <form>    
+                            <div class="form-group">
+                                <label for="oldInputPassword">Пароль</label>
+                                <input type="password" class="form-control" id="oldInputPassword" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-check-label" for="newInputPassword">Новый пароль</label>
+                                <input type="password" class="form-control" id="newInputPassword" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-check-label" for="confirmedInputPassword">Подтвердить новый пароль</label>
+                                <input type="password" class="form-control" id="confirmedInputPassword" required="required">
+                            </div>
+                            <button type="submit" class="btn btn-success">обновить пароль</button>
+                        </form>
+                    </div>
                 
-                </div>
-                
+                </div>    
               </div>
             
             

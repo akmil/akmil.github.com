@@ -56,7 +56,9 @@ export const CONST = {
         instagramTaskManager_delRemoveTaskByID: id => `instagram-task-manager/task/${id}`,
         instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
         instagramTaskManager_postTextAttachment: 'instagram-task-manager/task/attachment/users_list',
-        instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/' // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
+        instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/', // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
+        // ---------------
+        editProfile: 'profile'
     },
     user: {
         defaulAvatar: 'https://i.imgur.com/jNNT4LE.png', // todo: get from designer

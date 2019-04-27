@@ -66,6 +66,11 @@ const pages = [
         title: 'Автокомментарии',
         name: 'autocomments',
         source: '_autocomments/autocomments'
+    },
+    {
+        title: 'User profile',
+        name: 'profile',
+        source: '_profile/profile-page'
     }
 // unused
 /*
@@ -94,11 +99,6 @@ const pages = [
         name: 'notifications',
         source: '_notifications/notifications'
     },
-    {
-        title: 'User profile',
-        name: 'profile',
-        source: '_profile/profile-page'
-    }
 */
 ];
 

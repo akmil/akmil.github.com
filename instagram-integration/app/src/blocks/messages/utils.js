@@ -51,7 +51,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
                 str = `<div class="chat-post-message">
                     <a target="_blank" href="${value}" class="text-body text-decoration-none">
                         <div class="chat-post-message--header">
-                            <img src="${message.post_author.profilePicUrl}" alt="Content Image" class="user-avatar mr-3">
+                            <img src="${message.post_author.profile_pic_url}" alt="Content Image" class="user-avatar mr-3">
                             ${message.post_author.username}
                             <i class="fas fa-chevron-right"></i>
                         </div>
@@ -100,7 +100,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
                     <p class="chat-username text-muted">${message.username}</p>
                     ${insertMsg(value, message, 'text-left')}
                 </div>
-                    <small class="chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
+                    <small class="chat-time-text align-self-end">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                 </div>
                 </div>
             </li>`);
@@ -109,7 +109,7 @@ export function fillMassagesList({$list, dataArray, isAppendPrevMsg, stateCfg, c
             const $li = $(`<li class="chat-item chat-item-right col flex-column-reverse" value="${message.value}">
                 <div class="d-flex justify-content-end">
                     ${insertMsg(value, message, 'text-right')}
-                    <small class="pull-right chat-time-text">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
+                    <small class="pull-right chat-time-text align-self-end">${viewUtils.getFormattedDateUtil(message.timestamp)}</small>
                     </div>
             </li>`);
             addToList(isAppendPrevMsg, $li, cList); // toDo refactor me, less DOM manipulation
