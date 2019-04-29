@@ -296,9 +296,6 @@ function scrollHandler(scrollDelay, pagination) {
                 } else if (scrollTop <= 45) {
                     // $messages.text('Top reached');
                     // console.log('pagination');
-                    // if (pagination) {
-                    //     checkIsOnce(pagination);
-                    // }
                     if (pagination && makeReqOnce) {
                         makeReqOnce = false;
                         addPagination(pagination, checkIsOnce);

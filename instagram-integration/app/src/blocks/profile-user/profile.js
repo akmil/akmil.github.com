@@ -27,17 +27,33 @@ function initSteps(formSelector, wizardCfg) {
         //         $(this).removeClass('input-error');
         //     }
         // });
+        const fields = $('input[type="password"]', $(this));
+        const old_value = fields.get(0).value;
+        const new_value_1 = fields.get(1).value;
+        const new_value_2 = fields.get(2).value;
+
+        if (new_value_1 !== new_value_2) {
+            $(fields.get(2)).addClass('input-error');
+            return;
+        } else {
+            $(fields.get(2)).removeClass('input-error');
+        }
+
         const body = {
             password: {
-                'old_value': 'pass',
-                'new_value_1': 'pass',
-                'new_value_2': 'pass'
+                old_value,
+                new_value_1,
+                new_value_2
             }
         };
 
         UserProfileManager.updatePassword(body, cbError).then((result) => {
             if (result.status.state === 'ok') {
                 console.log(JSON.stringify(result));
+                // "incorrect password in 'old_value' field"
+                if (result.data) {
+                    console.log(result.data);
+                }
             }
         });
         console.log('SubmitHandler END');
@@ -49,7 +65,7 @@ export function init() {
         return;
     }
     console.log(clsConst.currentPageCls);
-    initSteps('form');
+    initSteps('form.password-change-form');
     window.PubSub.subscribe(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, (e, res) => {
         $('.js_validate-txt-file-is-uploaded').removeAttr('disabled');
     });
