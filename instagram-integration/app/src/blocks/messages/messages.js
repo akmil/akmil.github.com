@@ -260,7 +260,7 @@ function addPagination(pagination, cbFn) {
         if (newCursor) {
             // console.log('**', scrollLoaderState.cursor);
             scrollLoaderState.cursor = newCursor;
-            $msgList.scrollTop($msgList.scrollTop() + 30);
+            $msgList.scrollTop($msgList.scrollTop() + 50);
         } else {
             // all msg loaded
             scrollLoaderState.allMsgLoaded = true;
@@ -296,6 +296,9 @@ function scrollHandler(scrollDelay, pagination) {
                 } else if (scrollTop <= 45) {
                     // $messages.text('Top reached');
                     // console.log('pagination');
+                    // if (pagination) {
+                    //     checkIsOnce(pagination);
+                    // }
                     if (pagination && makeReqOnce) {
                         makeReqOnce = false;
                         addPagination(pagination, checkIsOnce);
@@ -309,7 +312,7 @@ function scrollHandler(scrollDelay, pagination) {
                 recentScroll = true;
                 window.setTimeout(() => {
                     recentScroll = false;
-                }, 50);
+                }, 100);
             }
         });
     }, (scrollDelay + 200));
@@ -407,6 +410,20 @@ function addHandlers() {
     });
 
     function userShowConversetionHandler(e, userData) {
+        const decreaseConversationNumber = (e) => {
+            const $conversationHead = $(e.target).closest('li.list-group-item').find('.conversation-head');
+            const $badge = $conversationHead.find('.badge');
+            const badgeVal = parseInt($badge.text(), 10) - 1;
+
+            if (!isNaN(badgeVal)) {
+                return;
+            }
+            $badge.text(badgeVal);
+
+            if (!badgeVal) {
+                $badge.remove();
+            }
+        };
         console.log('click');
         const isClickFromRequestConfirm = userData;
         let userDataFromLiGroup = '';
@@ -427,6 +444,7 @@ function addHandlers() {
             $title.removeClass('font-weight-bold');
             $targetBtn.find('.summary-dot').addClass('d-none');
         }
+        decreaseConversationNumber(e);
         Spinner.remove();
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
         getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown', isClickFromRequestConfirm);

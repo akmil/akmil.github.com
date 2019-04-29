@@ -140,15 +140,15 @@ export const addConversations = function(conversations) {
                     ${conversationDetail(item.to)}
                     <div class="media-body">
                         ${(isAddDot || isUnread)
-            ? '<span class="summary-dot"></span>'
-            : ''
-            }
+                            ? '<span class="summary-dot"></span>'
+                            : ''
+                        }
                         <!-- {isUnread ? '<span class="summary-dot"></span>' : ''} -->
                         <h5 class="title ${isUnread ? 'font-weight-bold' : ''} ${(isAddDot) ? 'mr-2' : ''}">${item.title}</h5>
                         ${(isLastMsg > 0 && item.to.length === 1)
-            ? `<p class="summary text-muted">${lastMessage}</p>`
-            : ''
-            }
+                            ? `<p class="summary text-muted">${lastMessage}</p>`
+                            : ''
+                        }
                     </div>
                 </div>
             `;
@@ -237,27 +237,3 @@ export const messageAreaHendler = (textAreaSelector, $sendMessageButton) => {
     });
 };
 
-// export const addMoreUsersAccordion = (conversations, conversationToAdd) => {
-    // const $btnMoreBox = $('#load-more-box');
-    // const $btnMore = $('button', $btnMoreBox);
-    // $btnMoreBox.show();
-    // console.log('start add pagination to accordioin', conversationToAdd);
-    // conversations.forEach((item, idx) => {
-    //     if (item.pagination && item.pagination.prev_cursor) {
-    //         console.log('conversation - >', item.pagination);
-    //         $btnMore.on('click', () => {
-    //             console.log('click - >', item.pagination);
-    //             const details = {
-    //                 username: '',
-    //                 cursor: item.pagination.prev_cursor
-    //             };
-    //             UserConversation.getMetadataDetailUsers(details).then((result) => {
-    //                 if (!result.data) {
-    //                     return;
-    //                 }
-    //                 console.log('**getMetadataDetailUsers** result - >', result);
-    //             });
-    //         });
-    //     }
-    // });
-// };
