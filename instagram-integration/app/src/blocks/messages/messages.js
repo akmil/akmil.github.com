@@ -408,7 +408,9 @@ function addHandlers() {
         const $textArea = $('#sendMessageTextArea');
         const value = (e.isTrigger) ? message : $textArea.val();
         emojioneareaEditor.empty();
-        const userData = $msgList.data('conversation');
+        // const userData = $msgList.data('conversation');
+        const _userData = $msgList.attr('data-conversation');
+        const userData = JSON.parse(_userData);
         const {username, conversationId, useravatar} = userData;
         Spinner.startButtonSpinner($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
@@ -427,7 +429,7 @@ function addHandlers() {
             const $badge = $conversationHead.find('.badge');
             const badgeVal = parseInt($badge.text(), 10) - 1;
 
-            if (!isNaN(badgeVal)) {
+            if (isNaN(badgeVal)) {
                 return;
             }
             $badge.text(badgeVal);
