@@ -137,6 +137,19 @@ class UserTaskManager {
         return this.network.sendRequest(`${CONST.getPathByArr('instagramTaskManager_getLogsChatBot', pathArray, page)}`,
             this.getToken('asHeader'), cbError);
     }
+    delLogs(pathArray, page, cbError) {
+        const setting = {
+            ...this.settingPost,
+            method: 'DELETE',
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        const url = `${CONST.getPathByArr('instagramTaskManager_delLogs', pathArray, page)}`;
+        return this.network.sendRequest(url,
+            setting, cbError);
+    }
 
     getPostsAutomessages(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';

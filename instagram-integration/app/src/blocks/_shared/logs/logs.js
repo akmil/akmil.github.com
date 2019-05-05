@@ -8,6 +8,7 @@ let clsConst = {
     pagination: '',
     paginationPgNumber: ''
 };
+const modalConfirm = $('#delete-logs-promt');
 let $list = '$(clsConst.tasksList)'; // set in preConfig()
 let selectCls = 'someClass';
 const getUsername = () => $(`.${selectCls} option:selected`).val();
@@ -89,10 +90,10 @@ function clearPagination($wrapper) {
 
 function fillListMeta($list, dataArray, isRuns) {
     const $wrapperPagination = $('.logs-pagination');
-    const items = dataArray.logs;
+    const items = dataArray && dataArray.logs;
     // const defaultAvatarSrc = CONST.user.defaulAvatar;
     $list.empty();
-    if (!items.length) {
+    if (!items || !items.length) {
         $(`<li class="list-group-item py-2">
             <p>Нет ни одного лога.</p>
         </li>`).appendTo($list);
@@ -159,6 +160,39 @@ function getLogsData($list, path, page) {
     });
 }
 
+// delLogs
+function delLogs($list, path, page) {
+    path.username = getUsername(selectCls);
+    const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}`];
+    UserTaskManager.delLogs(pathArr, page).then((result) => {
+        if (result.status.state === 'ok') {
+            fillListMeta($list, result.data);
+            tabStopReqHandler();
+            // const updateInterval = result.data.settings.invoke_in_millis;
+            // reset Timer request
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            modalConfirm.modal('hide');
+        } else {
+            $(`<li class="list-group-item py-2">
+                <p>Нет доступа</p>
+            </li>`).appendTo($list);
+        }
+    });
+}
+function deleteLogsHandler($list, path) {
+    const deleteBtnCls = '.js_delete-logs';
+    // let username;
+    $(deleteBtnCls).off().on('click', (e) => {
+        // username = $(e.target).closest(deleteBtnCls).data('username');
+        modalConfirm.modal('show');
+    });
+    $('.js_logs-delete-confirm').off().on('click', (e) => {
+        delLogs($list, path);
+    });
+}
+
 function preConfig(cfg) {
     clsConst = cfg;
     $list = $(clsConst.tasksList);
@@ -170,6 +204,7 @@ export function init(_selectCls, cfg) {
     if ($(cfg.currentPageCls).length) {
         selectCls = _selectCls;
         preConfig(cfg);
+        deleteLogsHandler($list, path);
         if (getUsername()) {
             // console.log(getUsername());
             getLogsData($list, path);

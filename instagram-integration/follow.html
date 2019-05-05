@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -157,13 +157,37 @@
                                       <div class="log-subype--box">
                                           <div class="log-subype"></div>
                                       </div>                    <div class="js_logs-container d-none">
+                                          <div class="log-users-list" style="z-index:-1"></div>
+                                          <div class="delete-logs-box d-flex">
+                                              <button class="btn btn-danger js_delete-logs ml-auto">Очистить логи</button>
+                                          </div>
+                                          
                                           <div class="log-tasks--box mt-2">
-                                              <div class="log-users-list"></div>
                                               <nav aria-label="Page navigation">
                                                   <ul class="logs-pagination pagination justify-content-center"></ul>
                                               </nav>
                                               <ul class="log-tasks list-unstyled">
                                               </ul>
+                                          </div>
+                                          
+                                          
+                                          <div class="modal fade" id="delete-logs-promt" tabindex="-1" role="dialog" aria-labelledby="delete-user" style="display:none">
+                                              <div class="modal-dialog">
+                                                  
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h4 class="modal-title">Очистить логи</h4>
+                                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                          <p>Вы действительно хотите удалить логи?</p>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-success js_logs-delete-confirm">Да</button>
+                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
                                           </div>                    </div>
                                   </div>
                                   <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">

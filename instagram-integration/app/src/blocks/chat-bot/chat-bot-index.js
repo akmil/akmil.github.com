@@ -116,14 +116,6 @@ function initHandlers() {
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
 
-    /*
-    $('#v-pills-logs-tab').on('click', (e) => {
-        // at this point of time setInterval is working
-        const $wrapper = $('.log-users-list');
-        getMetaLazy($wrapper, fillListUsers);
-        // chatBotLogs.init(selectCls, clsConst);
-    });
-    */
     tabs.init(fillListUsers);
 }
 

@@ -23,10 +23,11 @@ class UserProfileManager {
 
     updatePassword(body, cbError) {
         const setting = {
-            ...this.settingPost,
+            // ...this.settingPost,
             method: 'PUT',
             headers: {
-                ...this.settingPost.headers,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'token': this.getToken()
             },
             body
