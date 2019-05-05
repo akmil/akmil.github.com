@@ -181,7 +181,31 @@ function delLogs($list, path, page) {
         }
     });
 }
-function deleteLogsHandler($list, path) {
+
+// downloadLogs
+function downloadLogs($list, path, page) {
+    path.username = getUsername(selectCls);
+    // const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}`];
+    /*
+    UserTaskManager.delLogs(pathArr, page).then((result) => {
+        if (result.status.state === 'ok') {
+            fillListMeta($list, result.data);
+            tabStopReqHandler();
+            // const updateInterval = result.data.settings.invoke_in_millis;
+            // reset Timer request
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            modalConfirm.modal('hide');
+        } else {
+            $(`<li class="list-group-item py-2">
+                <p>Нет доступа</p>
+            </li>`).appendTo($list);
+        }
+    });
+    */
+}
+function manageLogsHandler($list, path) {
     const deleteBtnCls = '.js_delete-logs';
     // let username;
     $(deleteBtnCls).off().on('click', (e) => {
@@ -190,6 +214,11 @@ function deleteLogsHandler($list, path) {
     });
     $('.js_logs-delete-confirm').off().on('click', (e) => {
         delLogs($list, path);
+    });
+
+    $('.js_download-logs').off().on('click', (e) => {
+        console.log('download ');
+        downloadLogs();
     });
 }
 
@@ -204,7 +233,7 @@ export function init(_selectCls, cfg) {
     if ($(cfg.currentPageCls).length) {
         selectCls = _selectCls;
         preConfig(cfg);
-        deleteLogsHandler($list, path);
+        manageLogsHandler($list, path);
         if (getUsername()) {
             // console.log(getUsername());
             getLogsData($list, path);
