@@ -93,6 +93,17 @@ function addSmoothStart(defaultCfg) {
     });
 }
 
+function addPostsForActiveCompetitors(defaultCfg) {
+    const {cfg: {posts}} = defaultCfg;
+    if (!posts) {
+        $('.js_post-count').addClass('d-none');
+        return;
+    }
+    // state.user_default_config.posts = posts;
+    $('#post-count').val(posts);
+    $('.js_post-count').removeClass('d-none');
+}
+
 function getDataStepSpeed(stepNumber) {
     const fillSpeedList = viewUtils.fillRadioGroupList;
     const path = {
@@ -141,6 +152,9 @@ function getDataStepSpeed(stepNumber) {
                     task_mode: value.toUpperCase()
                 };
             });
+
+            // Количество публикаций
+            addPostsForActiveCompetitors(result.data.found);
         }
     });
 }
@@ -290,10 +304,12 @@ function initSteps(formSelector) {
             };
         }
         if (state.subtype === CONST.url.tmTypes.followingSubT[1]) {
-            // const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
-            // state.user_custom_config = {
-            //     competitors: 'competitors'
-            // };
+            const posts = $('#post-count').val();
+            state.user_custom_config = {
+                ...state.user_custom_config,
+                posts
+            };
+            // competitors added before
         }
         console.log('make request**  post: StartFollowingList', state);
 

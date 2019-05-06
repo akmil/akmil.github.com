@@ -58,8 +58,10 @@ function onSubmitHandler(e) {
 
     if (body.subtype === CONST.url.tmTypes.storiesSubT[2]) {
         const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
+        const posts = $('#post-count').val();
         body.user_custom_config = {
-            competitors
+            competitors,
+            posts
         };
     }
     if (body.subtype === CONST.url.tmTypes.storiesSubT[0]) {
@@ -172,6 +174,17 @@ function addSmoothStart(defaultCfg) {
     });
 }
 
+function addPostsForActiveCompetitors(defaultCfg) {
+    const {cfg: {posts}} = defaultCfg;
+    if (!posts) {
+        $('.js_post-count').addClass('d-none');
+        return;
+    }
+    // state.user_default_config.posts = posts;
+    $('#post-count').val(posts);
+    $('.js_post-count').removeClass('d-none');
+}
+
 function getConfig() {
     const path = {
         type: clsConst.pathType,
@@ -198,6 +211,9 @@ function getConfig() {
 
         // Плавный старт
         addSmoothStart(found);
+
+        // Количество публикаций
+        addPostsForActiveCompetitors(found);
     });
 }
 

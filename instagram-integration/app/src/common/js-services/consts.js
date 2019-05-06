@@ -19,7 +19,7 @@ export const CONST = {
         // DEV
         base: 'http://api-dev.luxgram.ru/v1/',
         // PROD
-        // base: 'http://api.luxgram.ru/v1/',
+        // base: 'http://api.luxgram.net/v1/',
         registration: 'registration/basic/',
         login: 'registration/basic/login',
         confirmation: 'registration/basic/confirmation?token',
