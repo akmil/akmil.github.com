@@ -17,7 +17,7 @@ export const CONST = {
             autocommentsSubT: ['DEFAULT_AUTO_COMMENT']
         },
         // DEV
-        base: 'http://api-dev.luxgram.ru/v1/',
+        base: 'http://api-dev.luxgram.net/v1/',
         // PROD
         // base: 'http://api.luxgram.net/v1/',
         registration: 'registration/basic/',
