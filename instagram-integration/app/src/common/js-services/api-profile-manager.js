@@ -30,7 +30,7 @@ class UserProfileManager {
                 'Accept': 'application/json',
                 'token': this.getToken()
             },
-            body
+            body: JSON.stringify(body)
         };
         const url = CONST.getPath('editProfile');
         return this.network.sendRequest(url,

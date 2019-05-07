@@ -60,7 +60,9 @@ function onSubmitHandler(e) {
         const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
         const posts = $('#post-count').val();
         body.user_custom_config = {
-            competitors,
+            competitors
+        };
+        body.user_default_config = {
             posts
         };
     }

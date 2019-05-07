@@ -305,8 +305,8 @@ function initSteps(formSelector) {
         }
         if (state.subtype === CONST.url.tmTypes.followingSubT[1]) {
             const posts = $('#post-count').val();
-            state.user_custom_config = {
-                ...state.user_custom_config,
+            state.user_default_config = {
+                ...state.user_default_config,
                 posts
             };
             // competitors added before
