@@ -63,6 +63,7 @@ function onSubmitHandler(e) {
             competitors
         };
         body.user_default_config = {
+            ...body.user_default_config,
             posts
         };
     }
