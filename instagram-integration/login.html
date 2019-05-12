@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -17,7 +17,7 @@
             <form class="form-signin">
               <div class="form-label-group">
                 <input type="email" name="mail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputEmail">Email адресс</label>
+                <label for="inputEmail">Email</label>
               </div>
 
               <div class="form-label-group">
@@ -54,7 +54,12 @@
             </button>
         </div>
         <div class="modal-body">
-            Не найден аккаунт с даным e-mail адрессом
+            <div class="js_account-mail-msg">
+                Учетная запись не найдена
+            </div>
+            <div class="js_account-password-msg">
+                Неправильный пароль
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

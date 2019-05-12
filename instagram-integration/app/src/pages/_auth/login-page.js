@@ -23,6 +23,13 @@ export function LoginPage(selectorCss) {
             // $(_loginBox).append(`<p>${result.status.message}</p>`);
             const modal = $('#error-modal');
             modal.modal('show');
+            if (result.status.message.includes('profile')) {
+                modal.find('.js_account-mail-msg').removeClass('d-none');
+                modal.find('.js_account-password-msg').addClass('d-none');
+            } else {
+                modal.find('.js_account-mail-msg').addClass('d-none');
+                modal.find('.js_account-password-msg').removeClass('d-none');
+            }
             console.log(result.status.message);
         };
 
