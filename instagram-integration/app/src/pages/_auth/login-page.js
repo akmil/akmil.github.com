@@ -23,7 +23,7 @@ export function LoginPage(selectorCss) {
             // $(_loginBox).append(`<p>${result.status.message}</p>`);
             const modal = $('#error-modal');
             modal.modal('show');
-            if (result.status.message.includes('profile')) {
+            if (result.status.message.includes('cannot find a profile by email')) {
                 modal.find('.js_account-mail-msg').removeClass('d-none');
                 modal.find('.js_account-password-msg').addClass('d-none');
             } else {
