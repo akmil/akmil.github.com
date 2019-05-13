@@ -418,6 +418,7 @@ function addHandlers() {
                 getAndFillConversation({username, conversationId, useravatar});
                 $textArea.val('');
                 Spinner.remove();
+                $msgList.scrollTop($msgList[0].scrollHeight);
                 // window.PubSub.publish(CONST.events.messages.RECIEVE_NEW_MESSAGE, {username, conversationId, value, result});
             }
         });
