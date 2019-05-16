@@ -1,14 +1,15 @@
 import User from '../../common/js-services/user';
 // import Spinner from '../../common/js-services/spinner';
-// import PubSub from 'pubsub-js';
 import viewUtils from '../../common/js-services/view';
 import {CONST} from '../../common/js-services/consts';
 import {settingButtonsHandler} from './accounts-list-btn-settings';
+import {addSlotInit} from './accounts-list-slot';
 
 const InstagramAccPageCls = '.instagram-accounts-page';
 const isInstagramAccPage = $(InstagramAccPageCls).length;
 const $msgList = $('.accounts-list');
 const INSTAGRAM_ACCOUNTS_HREF = 'instagram-accounts';
+const errMessageFront = 'Не получилось загрузить доступные Instagram аккаунты';
 
 function addListHandler() {
     let checkpointType = '';
@@ -239,6 +240,7 @@ function fillList($list, dataArray) {
     items.forEach((item) => {
         renderItem(item, cList, defaultAvatarSrc).appendTo(cList);
     });
+    addSlotInit($list);
     window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
@@ -268,7 +270,7 @@ function checkResponse (result /* , isResendRequest*/) {
     fillList($msgList, result.data.accounts);
     addListHandler();
 }
-const errMessageFront = 'Не получилось загрузить доступные Instagram аккаунты';
+
 function cbError() {
     viewUtils.showInfoMessage($('.error-msg'),
         '',
@@ -277,11 +279,11 @@ function cbError() {
 
 function reloadList() {
     const $msgList = $('.accounts-list');
-    // TODO: add spinner
+    // add spinner
     $('.profile-user .spinner-box').removeClass('d-none');
     User.getMetadata(cbError).then((result) => {
         $msgList.empty();
-        // todo : reload list
+        // reload list
         checkResponse(result);
     }).catch((err) => {
         setTimeout(() => {
@@ -398,7 +400,6 @@ export function init() {
     if (!$msgList.length) {
         return;
     }
-    // const token = User.getToken();
     const metadata = User.getMetadata(cbError);
     // const resendRequest = () => User.getMetadata(token);
     // let isSendReqOnce = false;
