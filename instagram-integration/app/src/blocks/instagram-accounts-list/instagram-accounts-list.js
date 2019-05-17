@@ -238,7 +238,7 @@ function fillList($list, dataArray) {
 
     cList.empty().addClass('border-light-color');
     items.forEach((item) => {
-        renderItem(item, cList, defaultAvatarSrc).appendTo(cList);
+        renderItem(item.account, cList, defaultAvatarSrc).appendTo(cList);
     });
     addSlotInit($list);
     window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
@@ -267,7 +267,7 @@ function checkResponse (result /* , isResendRequest*/) {
     */
     // вывод результатов (data.accounts.info)
     $('.profile-user .spinner-box').addClass('d-none');
-    fillList($msgList, result.data.accounts);
+    fillList($msgList, result.data.slots);
     addListHandler();
 }
 
