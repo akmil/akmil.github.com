@@ -3,7 +3,7 @@ import User from '../../common/js-services/user';
 import {addInstagramAccount} from './instagram-accounts-list';
 // import Spinner from '../../common/js-services/spinner';
 // import addInstagramAccount from '../_shared/image-upload/image-upload';
-
+let slotsAll = '';
 function addAccount ($list /* , slot*/) {
     const monthCount = (mounthDefaultCount) => `<div class="form-body js_form-count d-none">
             <div class="slidecontainer">
@@ -11,6 +11,9 @@ function addAccount ($list /* , slot*/) {
                 <p>Количество месяцев: <span class="mounth-count-value">${mounthDefaultCount}</span></p>
             </div>
             <button type="button" class="btn btn-success js_add-mounth-count" data-dismiss="modal">Добавить</button>
+        </div>`;
+    const timerCountdown = () => `<div class="form-countdown js_time-left-box d-none">
+            <span class='js_time-left'></span>
         </div>`;
 
     const formAddUser = (mounthDefaultCount) => `<div class="form-body js_form-body d-none">
@@ -24,6 +27,14 @@ function addAccount ($list /* , slot*/) {
                 <input type="password" class="form-control" name="pass" placeholder="Пароль" required="">
             </div>
             <h3 class="mt-4 text-center">Прокси (IPv4)</h3>
+            <div class="form-row">
+                <div class="form-group col-md-6 col-sm-6">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="use-proxy-fields" checked="checked" disabled>
+                        <label class="custom-control-label" for="use-proxy-fields">Использовать прокси</label>
+                    </div>
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-8">
                     <label class="sr-only">IP (добавить валидацию)</label>
@@ -46,7 +57,7 @@ function addAccount ($list /* , slot*/) {
         </form>
     </div>`;
     const addSettingBtn = () => {
-        const mounthDefaultCount = 3;
+        const mounthDefaultCount = 1;
         const editBtn = `<! --
         <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" 
             data-username="{username}"
@@ -66,6 +77,7 @@ function addAccount ($list /* , slot*/) {
                 <button class="btn btn-success js_add-acc-slot"><i class="fas fa-plus"></i>Добавить аккаунт</button>
             </div>
             ${monthCount(mounthDefaultCount)}
+            ${timerCountdown()}
             ${formAddUser()}
             `;
         }
@@ -75,7 +87,73 @@ function addAccount ($list /* , slot*/) {
     renderAddBtn().appendTo($list);
 }
 
-function initHandler() {
+const myTimer = {};
+
+// eslint-disable-next-line max-params
+function clock($timeLeft, countDownDate, slotIndex, $liSlot) {
+    // eslint-disable-next-line no-use-before-define
+    myTimer[slotIndex] = setInterval(countD, 1000);
+    // let c = countDownDate; // Initially set to 1 hour
+
+    function countD() {
+        // Get today's date and time
+        const now = new Date().getTime();
+
+        const delta = 4000 * 60 * 60; // use for test ONLY  // 4000 * 60 * 60;
+        // Find the distance between now and the count down date
+        const distance = countDownDate + delta - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
+        // Display the result in the element with id="demo"
+        $timeLeft.text(`${minutesZero}мин. ${seconds}cек. `);
+        // console.log('myTimer', myTimer);
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(myTimer[slotIndex]);
+            $liSlot.find('>div').addClass('d-none').removeClass('d-flex');
+            $liSlot.find('.js_form-add-count').addClass('d-flex');
+            // $timeLeft.text('Время для оплаты закончилось');
+        }
+
+    }
+}
+
+function updateInProgressSlot($list, slotIndex) {
+    const isInProgress = slotsAll[slotIndex].payment_status === 'IN_PROGRESS';
+    if (isInProgress) {
+        const {last_modified_at, settings, index} = slotsAll[slotIndex];
+        console.log(last_modified_at, settings);
+        const liSlot = $list.find('>li')[index];
+        const $liSlot = $(liSlot);
+        console.log($liSlot);
+        $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
+        $liSlot.find('.js_form-count').addClass('d-none');
+        const $activeSlot = $liSlot.find('.js_time-left-box');
+        // const secLeft = settings.payment_waiting_dialogue_time_in_millis / 1000;
+        $activeSlot.removeClass('d-none');
+            // .find('.js_time-left')
+            // .text(`${secLeft / 60} мин.`);
+
+        const $timeLeft = $activeSlot.find('.js_time-left');
+        // const now = new Date(last_modified_at);
+        const countDownDate = new Date(last_modified_at).getTime();
+        // const n = now.getSeconds();
+        clock($timeLeft, countDownDate, index, $liSlot);
+    }
+    if (slotsAll[slotIndex].payment_status === 'PAID') {
+        console.log(slotsAll[slotIndex].payment_status);
+        console.log('show form');
+    }
+}
+
+function initHandler($list, slot) {
 
     // show month count
     $('.js_add-acc-slot').on('click', (e) => {
@@ -89,14 +167,22 @@ function initHandler() {
     $('.js_add-mounth-count').off().on('click', (e) => {
         const addAccBtn = $(e.target);
         const $liParent = addAccBtn.closest('li');
-        addAccBtn.parent().removeClass('d-flex').addClass('d-none');
-        $liParent.find('.js_form-body').removeClass('d-none');
+        addAccBtn.parent().removeClass('d-flex').addClass('d-none'); // hide current step
+        $liParent.find('.js_time-left-box').removeClass('d-none'); // show timer
         const slotIndex = $liParent.index();
         console.log(slotIndex);
-        // http://localhost:8081/v1/instagram-accounts/slots/{slotIndex}
-        // console.log(instagram-accounts/slots/{slotIndex});
         User.postSlotAdd(slotIndex, {months: slotIndex}).then((res) => {
             console.log(res);
+
+            User.getMetadata().then((resultMeta) => {
+                console.log(resultMeta);
+                slotsAll = resultMeta.data.slots;
+                slotsAll[2] = {
+                    ...slotsAll[2],
+                    payment_status: 'PAID'
+                };
+                updateInProgressSlot($list, slotIndex);
+            });
             window.open(res.data.payment_url, '_blank');
         });
     });
@@ -158,63 +244,11 @@ function initHandler() {
     });
 }
 
-const myTimer = {};
-function clock($timeLeft, countDownDate, slotIndex) {
-    // eslint-disable-next-line no-use-before-define
-    myTimer[slotIndex] = setInterval(countD, 1000);
-    // let c = countDownDate; // Initially set to 1 hour
-
-    function countD() {
-        // Get today's date and time
-        const now = new Date().getTime();
-
-        const delta = 4000 * 60 * 60;
-        // Find the distance between now and the count down date
-        const distance = countDownDate + delta - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
-        // Display the result in the element with id="demo"
-        $timeLeft.text(`${minutesZero}m ${seconds}s `);
-        // console.log('myTimer', myTimer);
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(myTimer[slotIndex]);
-            $timeLeft.text('Время для оплаты закончилось');
-        }
-
-    }
-}
-
-function updateInProgressSlot($list, slot) {
-    const isInProgress = slot.payment_status === 'IN_PROGRESS';
-    if (isInProgress) {
-        const {last_modified_at, settings, index} = slot;
-        console.log(last_modified_at, settings);
-        const liSlot = $list.find('>li')[index];
-        const $liSlot = $(liSlot);
-        console.log($liSlot);
-        $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
-        $liSlot.find('.js_form-count').addClass('d-none');
-        const $activeSlot = $liSlot.find('.js_form-body');
-        const secLeft = settings.payment_waiting_dialogue_time_in_millis / 1000;
-        $activeSlot.removeClass('d-none').append(`<span class='js_time-left'>${secLeft / 60} мин.</span>`);
-
-        const $timeLeft = $activeSlot.find('.js_time-left');
-        // const now = new Date(last_modified_at);
-        const countDownDate = new Date(last_modified_at).getTime();
-        // const n = now.getSeconds();
-        clock($timeLeft, countDownDate, index);
-    }
-}
-export function addSlotInit($list, slot) {
+export function addSlotInit($list, slot, slots) {
+    slotsAll = slots;
     addAccount($list /* , slot*/);
-    updateInProgressSlot($list, slot);
-    initHandler();
+    initHandler($list, slot);
+    slots.forEach((slot) => {
+        updateInProgressSlot($list, slot.index);
+    });
 }

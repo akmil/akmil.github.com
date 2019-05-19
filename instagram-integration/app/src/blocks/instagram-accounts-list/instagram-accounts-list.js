@@ -243,7 +243,7 @@ function fillList($list, dataArray) {
 
         if (!item || !item.account) {
             if (isInstagramAccPage) {
-                addSlotInit($list, item);
+                addSlotInit($list, item, items);
             }
         } else {
             renderItem(item.account, $list, defaultAvatarSrc).appendTo($list);
