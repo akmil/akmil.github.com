@@ -99,7 +99,7 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot) {
         // Get today's date and time
         const now = new Date().getTime();
 
-        const delta = 4000 * 60 * 60; // use for test ONLY  // 4000 * 60 * 60;
+        const delta = 0;// 1000 * 60 * 60; // use for test ONLY  // 4000 * 60 * 60;
         // Find the distance between now and the count down date
         const distance = countDownDate + delta - now;
 
