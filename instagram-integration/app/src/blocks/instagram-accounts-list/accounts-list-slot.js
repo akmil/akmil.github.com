@@ -1,4 +1,4 @@
-// import User from '../../common/js-services/user';
+import User from '../../common/js-services/user';
 // import {CONST} from '../../common/js-services/consts';
 // import {renderItem} from './instagram-accounts-list';
 // import Spinner from '../../common/js-services/spinner';
@@ -58,6 +58,11 @@ function addAccount ($list) {
 }
 
 function initHandler() {
+    // const newWnd = window.open();
+    // console.log('newWnd.opener');
+    // newWnd.opener = null;
+    // console.log(newWnd.opener);
+
     // show month count
     $('.js_add-acc-slot').on('click', (e) => {
         const addAccBtn = $(e.target);
@@ -67,11 +72,19 @@ function initHandler() {
         console.log('hide me, show month count');
     });
     // show login form
-    $('.js_add-mounth-count').on('click', (e) => {
+    $('.js_add-mounth-count').off().on('click', (e) => {
         const addAccBtn = $(e.target);
         const $liParent = addAccBtn.closest('li');
         addAccBtn.parent().removeClass('d-flex').addClass('d-none');
         $liParent.find('.js_form-body').removeClass('d-none');
+        const slotIndex = $liParent.index();
+        console.log(slotIndex);
+        // http://localhost:8081/v1/instagram-accounts/slots/{slotIndex}
+        // console.log(instagram-accounts/slots/{slotIndex});
+        User.postSlotAdd(slotIndex, {months: slotIndex}).then((res) => {
+            console.log(res);
+            window.open(res.data.payment_url, '_blank');
+        });
     });
     // submit req login form
     $('.js_add-instagram-account-slot').on('click', (e) => {

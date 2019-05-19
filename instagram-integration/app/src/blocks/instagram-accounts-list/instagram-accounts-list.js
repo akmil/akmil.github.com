@@ -233,14 +233,22 @@ export const renderItem = (item, cList, _defaultAvatarSrc) => {
 
 function fillList($list, dataArray) {
     const items = dataArray;
-    const cList = $list;
+    // const cList = $list;
     const defaultAvatarSrc = CONST.user.defaulAvatar;
 
-    cList.empty().addClass('border-light-color');
+    $list.empty().addClass('border-light-color');
+    console.log('items', items);
     items.forEach((item) => {
-        renderItem(item.account, cList, defaultAvatarSrc).appendTo(cList);
+        console.log('item', item.index);
+
+        if (!item || !item.account) {
+            if (isInstagramAccPage) {
+                addSlotInit($list);
+            }
+        } else {
+            renderItem(item.account, $list, defaultAvatarSrc).appendTo($list);
+        }
     });
-    addSlotInit($list);
     window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }

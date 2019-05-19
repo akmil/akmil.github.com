@@ -30,6 +30,8 @@ export const CONST = {
         instagram_getAccountByUser: username => `instagram-accounts/meta/${username}`,
         instagram_modifyAccount: username => `instagram-accounts/${username}`,
         instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
+            // slots
+        slots_addSlotByIdx: slotIndex => `instagram-accounts/slots/${slotIndex}`,
 
         // -instagram-accounts------------------------
         instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',

@@ -183,27 +183,27 @@ function delLogs($list, path, page) {
 }
 
 // downloadLogs
-function downloadLogs($list, path, page) {
+function downloadLogs($list, path) {
     path.username = getUsername(selectCls);
-    // const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}`];
-    /*
-    UserTaskManager.delLogs(pathArr, page).then((result) => {
+    // ...logs/type/{type}/subtype/{subtype}/account/{username}/download
+    const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}/download`];
+    UserTaskManager.downloadLogs(pathArr).then((result) => {
         if (result.status.state === 'ok') {
-            fillListMeta($list, result.data);
-            tabStopReqHandler();
+            // fillListMeta($list, result.data);
+            // tabStopReqHandler();
             // const updateInterval = result.data.settings.invoke_in_millis;
             // reset Timer request
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-            modalConfirm.modal('hide');
+            // if (intervalId) {
+            //     clearInterval(intervalId);
+            // }
+            // modalConfirm.modal('hide');
+            console.log('download ok', result);
         } else {
             $(`<li class="list-group-item py-2">
                 <p>Нет доступа</p>
             </li>`).appendTo($list);
         }
     });
-    */
 }
 function manageLogsHandler($list, path) {
     const deleteBtnCls = '.js_delete-logs';
@@ -218,7 +218,7 @@ function manageLogsHandler($list, path) {
 
     $('.js_download-logs').off().on('click', (e) => {
         console.log('download ');
-        downloadLogs();
+        downloadLogs($list, path);
     });
 }
 

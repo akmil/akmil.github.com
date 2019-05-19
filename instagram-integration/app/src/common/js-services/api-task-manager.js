@@ -150,6 +150,11 @@ class UserTaskManager {
         return this.network.sendRequest(url,
             setting, cbError);
     }
+    downloadLogs(pathArray, cbError) {
+        const url = `${CONST.getPathByArr('instagramTaskManager_getLogsChatBot', pathArray)}`;
+        return this.network.sendRequest(url,
+            this.getToken('asHeader'), cbError);
+    }
 
     getPostsAutomessages(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';

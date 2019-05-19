@@ -157,6 +157,17 @@ class User {
         return this.network.sendRequest(`${CONST.getPath('instagramAccount_confirmKey')}${username}`, setting);
     }
 
+    postSlotAdd(slotIndex, body, cbError) {
+        const setting = {
+            ...this.settingPost,
+            body: JSON.stringify(body),
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        return this.network.sendRequest(CONST.getPath('slots_addSlotByIdx', slotIndex), setting);
+    }
 }
 
 let userInstance = null;
