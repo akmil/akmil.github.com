@@ -243,7 +243,7 @@ function fillList($list, dataArray) {
 
         if (!item || !item.account) {
             if (isInstagramAccPage) {
-                addSlotInit($list);
+                addSlotInit($list, item);
             }
         } else {
             renderItem(item.account, $list, defaultAvatarSrc).appendTo($list);
@@ -312,7 +312,7 @@ function reloadList() {
 }
 
 // После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
-const addInstagramAccount = (newFormData) => {
+export const addInstagramAccount = (newFormData, slotIndex) => {
     const cbError = (result) => {
         console.log('ERROR', result);
         viewUtils.showInfoMessage($('.error-msg'),
@@ -320,7 +320,7 @@ const addInstagramAccount = (newFormData) => {
             result.status.message || 'Login error');
         // $(_loginBox).addClass(closeClass).removeClass(openedClass);
     };
-    User.addInstagramAccount(newFormData, cbError).then((result) => {
+    User.addInstagramAccount(newFormData, slotIndex, cbError).then((result) => {
         if (result && result.status) {
             console.log(result, result.status);
             reloadList();

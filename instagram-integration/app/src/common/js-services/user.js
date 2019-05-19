@@ -35,7 +35,7 @@ class User {
         return this.network.sendRequest(CONST.getPath('login'), setting, cbError);
     }
 
-    addInstagramAccount(formData, cbError) {
+    addInstagramAccount(formData, slotIndex, cbError) {
         const {username, password, ip, port, usernameProxy, passwordProxy} = formData;
 
         // TODO: del proxyTMP after beta-testing
@@ -60,7 +60,7 @@ class User {
             }
         };
 
-        return this.network.sendRequest(CONST.getPath('instagram_addAccount'), setting, cbError);
+        return this.network.sendRequest(CONST.getPath('instagram_addAccount', slotIndex), setting, cbError);
     }
     editInstagramAccount(username, body) {
         const setting = {
@@ -158,6 +158,17 @@ class User {
     }
 
     postSlotAdd(slotIndex, body, cbError) {
+        const setting = {
+            ...this.settingPost,
+            body: JSON.stringify(body),
+            headers: {
+                ...this.settingPost.headers,
+                'token': this.getToken()
+            }
+        };
+        return this.network.sendRequest(CONST.getPath('slots_addSlotByIdx', slotIndex), setting);
+    }
+    postSlotAddAccount(slotIndex, body, cbError) {
         const setting = {
             ...this.settingPost,
             body: JSON.stringify(body),

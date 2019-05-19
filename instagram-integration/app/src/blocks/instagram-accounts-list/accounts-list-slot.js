@@ -1,10 +1,10 @@
 import User from '../../common/js-services/user';
 // import {CONST} from '../../common/js-services/consts';
-// import {renderItem} from './instagram-accounts-list';
+import {addInstagramAccount} from './instagram-accounts-list';
 // import Spinner from '../../common/js-services/spinner';
-// import * as imageUpload from '../_shared/image-upload/image-upload';
+// import addInstagramAccount from '../_shared/image-upload/image-upload';
 
-function addAccount ($list) {
+function addAccount ($list /* , slot*/) {
     const monthCount = (mounthDefaultCount) => `<div class="form-body js_form-count d-none">
             <div class="slidecontainer">
                 <input type="range" min="1" max="12" value="${mounthDefaultCount}" class="slider js_mounth-count">
@@ -17,14 +17,32 @@ function addAccount ($list) {
         <form>
             <div class="form-group">
                 <label class="sr-only">Логин</label>
-                <input type="text" class="form-control" name="username" placeholder="Логин" required>
+                <input class="form-control" name="username" placeholder="Логин" required="">
             </div>
             <div class="form-group">
                 <label class="sr-only">Пароль</label>
-                <input type="password" class="form-control" name="pass" placeholder="Пароль" required>
+                <input type="password" class="form-control" name="pass" placeholder="Пароль" required="">
             </div>
-            
-            <button type="button" class="btn btn-success js_add-instagram-account-slot" data-dismiss="modal">Добавить</button>            
+            <h3 class="mt-4 text-center">Прокси (IPv4)</h3>
+            <div class="form-row">
+                <div class="form-group col-8">
+                    <label class="sr-only">IP (добавить валидацию)</label>
+                    <input class="form-control" name="ip" placeholder="IP" pattern="\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}" required="">
+                </div>
+                <div class="form-group col-4">
+                    <label class="sr-only">Порт</label>
+                    <input type="number" class="form-control" name="port" min="0" max="9999" placeholder="Порт" required="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Логин</label>
+                <input class="form-control" name="usernameProxy" placeholder="Логин" required="">
+            </div>
+            <div class="form-group">
+                <label class="sr-only">Пароль</label>
+                <input type="password" class="form-control" name="passProxy" placeholder="Пароль" required="">
+            </div>
+            <button type="button" class="btn btn-success js_add-instagram-account-slot">Добавить</button>
         </form>
     </div>`;
     const addSettingBtn = () => {
@@ -44,7 +62,7 @@ function addAccount ($list) {
             data-is_private="{is_private}"
         ><i class="fas fa-pen m-0"></i></button> -->`;
         if (editBtn) {
-            return `<div class="col d-flex justify-content-center">                
+            return `<div class="col d-flex justify-content-center js_form-add-count">
                 <button class="btn btn-success js_add-acc-slot"><i class="fas fa-plus"></i>Добавить аккаунт</button>
             </div>
             ${monthCount(mounthDefaultCount)}
@@ -58,10 +76,6 @@ function addAccount ($list) {
 }
 
 function initHandler() {
-    // const newWnd = window.open();
-    // console.log('newWnd.opener');
-    // newWnd.opener = null;
-    // console.log(newWnd.opener);
 
     // show month count
     $('.js_add-acc-slot').on('click', (e) => {
@@ -87,14 +101,48 @@ function initHandler() {
         });
     });
     // submit req login form
-    $('.js_add-instagram-account-slot').on('click', (e) => {
+    $('.js_add-instagram-account-slot').off().on('click', (e) => {
         const addAccBtn = $(e.target);
         const $liParent = addAccBtn.closest('li');
+        const slotIndex = $liParent.index();
         const username = $liParent.find('input[name="username"]').val().trim();
         const password = $liParent.find('input[name="pass"]').val().trim();
+
+        const ip = $liParent.find('input[name="ip"]').val().trim(); // TMP solution
+        const port = $liParent.find('input[name="port"]').val().trim(); // TMP solution
+        const usernameProxy = $liParent.find('input[name="usernameProxy"]').val().trim(); // TMP solution
+        const passwordProxy = $liParent.find('input[name="passProxy"]').val().trim(); // TMP solution
+        const $form = $('form', $liParent);
+        const form = $form.get(0);
+        const cssValidationClass = 'form-validation';
+
         console.log('send req --username', username);
         console.log('send req --password', password);
         console.log('show account from resp');
+        e.preventDefault();
+        function isValidIpv4Addr(ip) {
+            return (/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/).test(ip);
+        }
+        function isValidPort(port) {
+            return (/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/).test(port);
+        }
+        // const validator = new Validator($form);
+        // console.log(validator.validate());
+        if (form.checkValidity()) {
+            addInstagramAccount({username, password, usernameProxy, passwordProxy, ip, port}, slotIndex);
+        } else {
+            // Highlight errors
+            if (form.reportValidity) {
+                form.reportValidity();
+            }
+            $form.addClass(cssValidationClass);
+        }
+
+        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port) || !usernameProxy || !passwordProxy) {
+            e.stopPropagation();
+            console.log('not valid fields');
+            return;
+        }
     });
     // mounth count slider
     $('.js_mounth-count').on('input change', function(e) {
@@ -110,7 +158,63 @@ function initHandler() {
     });
 }
 
-export function addSlotInit($list) {
-    addAccount($list);
+const myTimer = {};
+function clock($timeLeft, countDownDate, slotIndex) {
+    // eslint-disable-next-line no-use-before-define
+    myTimer[slotIndex] = setInterval(countD, 1000);
+    // let c = countDownDate; // Initially set to 1 hour
+
+    function countD() {
+        // Get today's date and time
+        const now = new Date().getTime();
+
+        const delta = 4000 * 60 * 60;
+        // Find the distance between now and the count down date
+        const distance = countDownDate + delta - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        // const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
+        // Display the result in the element with id="demo"
+        $timeLeft.text(`${minutesZero}m ${seconds}s `);
+        // console.log('myTimer', myTimer);
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(myTimer[slotIndex]);
+            $timeLeft.text('Время для оплаты закончилось');
+        }
+
+    }
+}
+
+function updateInProgressSlot($list, slot) {
+    const isInProgress = slot.payment_status === 'IN_PROGRESS';
+    if (isInProgress) {
+        const {last_modified_at, settings, index} = slot;
+        console.log(last_modified_at, settings);
+        const liSlot = $list.find('>li')[index];
+        const $liSlot = $(liSlot);
+        console.log($liSlot);
+        $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
+        $liSlot.find('.js_form-count').addClass('d-none');
+        const $activeSlot = $liSlot.find('.js_form-body');
+        const secLeft = settings.payment_waiting_dialogue_time_in_millis / 1000;
+        $activeSlot.removeClass('d-none').append(`<span class='js_time-left'>${secLeft / 60} мин.</span>`);
+
+        const $timeLeft = $activeSlot.find('.js_time-left');
+        // const now = new Date(last_modified_at);
+        const countDownDate = new Date(last_modified_at).getTime();
+        // const n = now.getSeconds();
+        clock($timeLeft, countDownDate, index);
+    }
+}
+export function addSlotInit($list, slot) {
+    addAccount($list /* , slot*/);
+    updateInProgressSlot($list, slot);
     initHandler();
 }

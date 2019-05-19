@@ -25,7 +25,7 @@ export const CONST = {
         confirmation: 'registration/basic/confirmation?token',
 
         // -------------------------
-        instagram_addAccount: 'instagram-accounts/',
+        instagram_addAccount: slotIndex => `instagram-accounts/slots/${slotIndex}/account`,
         instagramAccount_getMetaData: 'instagram-accounts/meta',
         instagram_getAccountByUser: username => `instagram-accounts/meta/${username}`,
         instagram_modifyAccount: username => `instagram-accounts/${username}`,
