@@ -27,22 +27,25 @@ export const CONST = {
 
         // -------------------------
         instagram_addAccount: slotIndex => `instagram-accounts/slots/${slotIndex}/account`,
-        instagramAccount_getMetaData: 'instagram-accounts/meta',
-        instagram_getAccountByUser: username => `instagram-accounts/meta/${username}`,
-        instagram_modifyAccount: username => `instagram-accounts/${username}`,
-        instagramTaskManager_getPosts: accountName => `instagram-accounts/${accountName}/posts`,
+        instagramAccount_getMetaData: 'instagram-accounts/slots/meta',
+        instagram_getMetaDataBySlot: slotIndex => `instagram-accounts/slots/${slotIndex}/meta`,
+        instagram_modifyAccount: slotIndex => `instagram-accounts/slots/${slotIndex}/account`,
+        instagram_modifyAccountPhoto: slotIndex => `instagram-accounts/slots/${slotIndex}/account/photo`,
+        instagramTaskManager_getPosts: slotIndex => `instagram-accounts/slots/${slotIndex}/posts`,
             // slots
-        slots_addSlotByIdx: slotIndex => `instagram-accounts/slots/${slotIndex}`,
+        slots_buySlotByIndex: slotIndex => `instagram-accounts/slots/${slotIndex}`,
 
         // -instagram-accounts------------------------
-        instagramAccount_checkpoint: 'instagram-accounts/checkpoint/',
-        instagramAccount_confirmKey: 'instagram-accounts/checkpoint/',
+        instagramAccount_startCheckpoint: slotIndex => `instagram-accounts/slots/${slotIndex}/checkpoint/`,
+        instagramAccount_confirmCheckpoint: slotIndex => `instagram-accounts/slots/${slotIndex}/checkpoint/`,
 
         // -instagram-direct------------------------
         instagramDirect_Basic: 'instagram-direct',
         instagramDirect_postMessage: 'instagram-direct/',
-        instagramDirect_getMetaData: 'instagram-direct/meta',
-        instagramDirect_RequestPending: 'instagram-direct/pending',
+        instagramDirect_getMetaData: 'instagram-direct/slots/{slotIndex}/meta',
+        instagramDirect_RequestPending: 'instagram-direct//slots/{slotIndex}/pending', // todo!!
+        // todo: /slots/{slotIndex}/text/{id}
+        // todo: /slots/{slotIndex}/photo/{id}
         // http://api.luxgram.ru/v1/instagram-direct/{username}/{id}/photo
 
         // -instagram-task-manager------------------------
@@ -60,8 +63,8 @@ export const CONST = {
         instagramTaskManager_postImageAttachment: 'instagram-task-manager/task/attachment/image',
         instagramTaskManager_postTextAttachment: 'instagram-task-manager/task/attachment/users_list',
         // -----------------
-        instagramTaskManager_delLogs: 'instagram-task-manager/logs/type/', // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
-        instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/', // {TYPE}/subtype/{SUBTYPE}/account/{username}?page={page}
+        instagramTaskManager_delLogs: 'instagram-task-manager/logs/type/', // todo: {TYPE}/subtype/{SUBTYPE}/slot/{slotIndex}?page={page}
+        instagramTaskManager_getLogsChatBot: 'instagram-task-manager/logs/type/', // todo: {TYPE}/subtype/{SUBTYPE}/slot/{slotIndex}?page={page}
         // ---------------
         editProfile: 'profile/'
     },

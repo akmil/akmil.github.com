@@ -147,7 +147,7 @@ function updateInProgressSlot($list, slotIndex) {
         // const n = now.getSeconds();
         clock($timeLeft, countDownDate, index, $liSlot);
     }
-    if (slotsAll[slotIndex].payment_status === 'PAID') {
+    if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
         console.log(slotsAll[slotIndex].payment_status);
         console.log('show form');
     }
