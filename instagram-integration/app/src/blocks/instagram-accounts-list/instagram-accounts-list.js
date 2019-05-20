@@ -285,13 +285,24 @@ function cbError() {
         errMessageFront);
 }
 
-function reloadList() {
+function reloadList(cfgUpdate) {
     const $msgList = $('.accounts-list');
     // add spinner
-    $('.profile-user .spinner-box').removeClass('d-none');
+    if (!cfgUpdate.isHideSpiner) {
+        $('.profile-user .spinner-box').removeClass('d-none');
+    }
     User.getMetadata(cbError).then((result) => {
-        $msgList.empty();
         // reload list
+
+        // https://stackoverflow.com/questions/32965688/comparing-two-arrays-of-objects-and-exclude-the-elements-who-match-values-into
+        // const isSame = cfgUpdate.slotsAll.filter(o1 => result.data.slots.some(o2 => o1.payment_status === o2.payment_status));
+        const oldDataSlots = JSON.stringify(cfgUpdate.slotsAll).length;
+        const newDataSlots = JSON.stringify(result.data.slots).length;
+        if (oldDataSlots === newDataSlots) {
+            console.log('return', oldDataSlots === newDataSlots);
+            return;
+        }
+        $msgList.empty();
         checkResponse(result);
     }).catch((err) => {
         setTimeout(() => {
@@ -463,7 +474,8 @@ export function init() {
     });
 
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, (eventName, data) => {
-        reloadList();
+        console.log(data.isHideSpiner, data.slotsAll);
+        reloadList(data);
     });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
         const {dataArray} = data;

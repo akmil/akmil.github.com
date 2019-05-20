@@ -1,5 +1,5 @@
 import User from '../../common/js-services/user';
-// import {CONST} from '../../common/js-services/consts';
+import {CONST} from '../../common/js-services/consts';
 import {addInstagramAccount} from './instagram-accounts-list';
 // import Spinner from '../../common/js-services/spinner';
 // import addInstagramAccount from '../_shared/image-upload/image-upload';
@@ -195,7 +195,8 @@ function initHandler($list, slot) {
                     payment_status: 'PAID'
                 };
                 updateInProgressSlot($list, slotIndex);
-                document.location.reload(true);
+                // document.location.reload(true);
+                window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH);
             });
             window.open(res.data.payment_url, '_blank');
         });
@@ -256,10 +257,26 @@ function initHandler($list, slot) {
         }
     });
 }
+function scanUpdates(delay) {
+    console.log(delay);
+    setInterval(
+        () => window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, {isHideSpiner: 'isHideSpiner', slotsAll}),
+        delay
+    );
+}
+let runOnce = true;
 
 export function addSlotInit($list, slot, slots) {
     slotsAll = slots;
     addAccount($list /* , slot*/);
     initHandler($list, slot);
     updateInProgressSlot($list, slot.index);
+
+    const inProgresSlots = slots.filter((item) => item.payment_status === 'IN_PROGRESS');
+    const lastIdx = slots[slots.length - 1];
+    console.log(inProgresSlots.length, slot.index === lastIdx);
+    if (inProgresSlots.length && runOnce) {
+        runOnce = false;
+        scanUpdates(inProgresSlots[0].settings.invoke_in_millis);
+    }
 }
