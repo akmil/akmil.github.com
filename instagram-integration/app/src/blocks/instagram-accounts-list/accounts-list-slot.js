@@ -16,7 +16,7 @@ function addAccount ($list /* , slot*/) {
             <span class='js_time-left'></span>
         </div>`;
 
-    const formAddUser = (mounthDefaultCount) => `<div class="form-body js_form-body d-none">
+    const formAddUser = (mounthDefaultCount) => `<div class="col-md-6 form-body js_form-body mx-auto d-none">
         <form>
             <div class="form-group">
                 <label class="sr-only">Логин</label>
@@ -87,19 +87,24 @@ function addAccount ($list /* , slot*/) {
     renderAddBtn().appendTo($list);
 }
 
-const myTimer = {};
+const myTimer = [];
+// const myTimerId = [];
 
 // eslint-disable-next-line max-params
-function clock($timeLeft, countDownDate, slotIndex, $liSlot) {
+function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta) {
+    // eslint-disable-next-line no-use-before-define
+    // myTimer.push(setInterval(countD, 1000));
+
     // eslint-disable-next-line no-use-before-define
     myTimer[slotIndex] = setInterval(countD, 1000);
+
     // let c = countDownDate; // Initially set to 1 hour
 
     function countD() {
         // Get today's date and time
         const now = new Date().getTime();
 
-        const delta = 0; // 1000 * 60 * 60; // use for test ONLY  // 4000 * 60 * 60;
+        // const delta = 1000 * 60; // use for test ONLY  // 4000 * 60 * 60;
         // Find the distance between now and the count down date
         const distance = countDownDate + delta - now;
 
@@ -110,16 +115,19 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot) {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
-        // Display the result in the element with id="demo"
-        $timeLeft.text(`${minutesZero}мин. ${seconds}cек. `);
-        // console.log('myTimer', myTimer);
 
         // If the count down is finished, write some text
         if (distance < 0) {
+            // myTimer.forEach((item, idx) => {
+            //     clearInterval(item);
+            // });
             clearInterval(myTimer[slotIndex]);
             $liSlot.find('>div').addClass('d-none').removeClass('d-flex');
             $liSlot.find('.js_form-add-count').addClass('d-flex');
             // $timeLeft.text('Время для оплаты закончилось');
+        } else {
+            // Display the result in the element with id="demo"
+            $timeLeft.text(`${minutesZero}мин. ${seconds}cек. `);
         }
 
     }
@@ -129,14 +137,14 @@ function updateInProgressSlot($list, slotIndex) {
     const isInProgress = slotsAll[slotIndex].payment_status === 'IN_PROGRESS';
     if (isInProgress) {
         const {last_modified_at, settings, index} = slotsAll[slotIndex];
-        console.log(last_modified_at, settings);
+        console.log(last_modified_at, 'IN_PROGRESS');
         const liSlot = $list.find('>li')[index];
         const $liSlot = $(liSlot);
-        console.log($liSlot);
+        // console.log($liSlot);
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-count').addClass('d-none');
         const $activeSlot = $liSlot.find('.js_time-left-box');
-        // const secLeft = settings.payment_waiting_dialogue_time_in_millis / 1000;
+        const delta = settings.payment_waiting_dialogue_time_in_millis;
         $activeSlot.removeClass('d-none');
             // .find('.js_time-left')
             // .text(`${secLeft / 60} мин.`);
@@ -145,11 +153,16 @@ function updateInProgressSlot($list, slotIndex) {
         // const now = new Date(last_modified_at);
         const countDownDate = new Date(last_modified_at).getTime();
         // const n = now.getSeconds();
-        clock($timeLeft, countDownDate, index, $liSlot);
+        clock($timeLeft, countDownDate, index, $liSlot, delta);
     }
     if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
         console.log(slotsAll[slotIndex].payment_status);
         console.log('show form');
+        const {index} = slotsAll[slotIndex];
+        const liSlot = $list.find('>li')[index];
+        const $liSlot = $(liSlot);
+        $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
+        $liSlot.find('.js_form-body').removeClass('d-none');
     }
 }
 
@@ -182,6 +195,7 @@ function initHandler($list, slot) {
                     payment_status: 'PAID'
                 };
                 updateInProgressSlot($list, slotIndex);
+                document.location.reload(true);
             });
             window.open(res.data.payment_url, '_blank');
         });
@@ -240,7 +254,6 @@ function initHandler($list, slot) {
         if (count > 3) {
             $liParent.find('.mounth-count-value').append('<span></span>');
         }
-        // do something
     });
 }
 
@@ -248,7 +261,5 @@ export function addSlotInit($list, slot, slots) {
     slotsAll = slots;
     addAccount($list /* , slot*/);
     initHandler($list, slot);
-    slots.forEach((slot) => {
-        updateInProgressSlot($list, slot.index);
-    });
+    updateInProgressSlot($list, slot.index);
 }

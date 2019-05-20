@@ -420,6 +420,16 @@ export function init() {
 
     // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
     metadata.then((result) => {
+
+        // test only
+        /*
+        result.data.slots[2] = {
+            ...result.data.slots[2],
+            payment_status: 'PAID'
+        };
+        console.log('reloadList', result);
+        */
+
         // проверям один раз наличие result.data.accounts.info
         /*
         let isResendRequest = false;

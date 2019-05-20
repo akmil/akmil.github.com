@@ -166,7 +166,7 @@ class User {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(CONST.getPath('slots_addSlotByIdx', slotIndex), setting);
+        return this.network.sendRequest(CONST.getPath('slots_buySlotByIndex', slotIndex), setting);
     }
     postSlotAddAccount(slotIndex, body, cbError) {
         const setting = {
@@ -177,7 +177,7 @@ class User {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(CONST.getPath('slots_addSlotByIdx', slotIndex), setting);
+        return this.network.sendRequest(CONST.getPath('slots_buySlotByIndex', slotIndex), setting);
     }
 }
 
