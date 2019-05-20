@@ -185,12 +185,14 @@ const addSettingBtn = (account) => {
     }
 };
 
-export const renderItem = (item, cList, _defaultAvatarSrc) => {
+export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
+    const item = itemData.account;
+    const {index} = itemData;
     const info = item.info;
     const checkpoint = item.checkpoint || item;
     const defaultAvatarSrc = _defaultAvatarSrc || CONST.user.defaulAvatar;
     if (!info) {
-        return $(`<li class="media py-3" data-username="${item.username}">
+        return $(`<li class="media py-3" data-username="${item.username}" data-slotIndex="${index}">
             <img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">
             <div class="media-body d-flex">
                 <div class="col user-info">
@@ -203,7 +205,7 @@ export const renderItem = (item, cList, _defaultAvatarSrc) => {
             </div>
         </li>`).appendTo(cList);
     } else {
-        return $(`<li class="media py-3" data-username="${item.username}">
+        return $(`<li class="media py-3" data-username="${item.username}" data-slotIndex="${index}">
         ${(info['profile_pic_url'])
             ? `<img class="ml-3 rounded" alt="User photo" src="${info['profile_pic_url']}">`
             : `<img class="ml-3 rounded" alt="default avatar" src="${defaultAvatarSrc}">`}
@@ -246,7 +248,7 @@ function fillList($list, dataArray) {
                 addSlotInit($list, item, items);
             }
         } else {
-            renderItem(item.account, $list, defaultAvatarSrc).appendTo($list);
+            renderItem(item, $list, defaultAvatarSrc).appendTo($list);
         }
     });
     window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});

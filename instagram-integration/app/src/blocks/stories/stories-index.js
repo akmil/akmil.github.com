@@ -9,6 +9,7 @@ import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/
 
 const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';
+let slotSelected = '';
 const logsState = CONST.logsState;
 const clsConst = {
     currentPageCls: '.stories-page',
@@ -53,7 +54,8 @@ function onSubmitHandler(e) {
         },
         user_custom_config: {},
         type: clsConst.pathType,
-        username: usernameSelected
+        username: usernameSelected,
+        slot_index: slotSelected
     };
 
     if (body.subtype === CONST.url.tmTypes.storiesSubT[2]) {
@@ -102,12 +104,14 @@ function onSubmitHandler(e) {
     });
 }
 
-function setUserNameCb(_usernameSelected) {
+function setUserNameCb(_usernameSelected, _slotSelected) {
     usernameSelected = _usernameSelected;
+    slotSelected = _slotSelected;
 }
 
 function setUserNameFirstStep(state) {
     usernameSelected = state.username;
+    slotSelected = state.slot_index;
 }
 
 // todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
@@ -203,6 +207,7 @@ function getConfig() {
         if (result.status.state !== 'ok') {
             return;
         }
+        console.log('getStoriesConfig');
         const {
             data: {
                 found

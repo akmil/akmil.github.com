@@ -27,6 +27,7 @@ function initSteps(formSelector, wizardCfg) {
 
         if (radioBtnActive.length > 0) {
             state.username = radioBtnActive.parents('li').data('username');
+            state.slot_index = radioBtnActive.parents('li').data('slotindex');
         }
 
         if (stepReducer) {

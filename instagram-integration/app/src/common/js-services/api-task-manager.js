@@ -103,6 +103,7 @@ class UserTaskManager {
         setting.body = JSON.stringify(body);
         const url = path ? `${CONST.getPath(path)}` : `${CONST.getPath('instagramTaskManager_postStartFollowingList')}`;
 
+        console.log('postStartFollowingList', body);
         return this.network.sendRequest(url,
             setting, cbError);
     }

@@ -35,7 +35,8 @@ export function initLogsTab({logsState, logsSubtypes, clsConst, setUserNameCb, t
 
     function OnChangeSelect() {
         const usernameSelected = $(`.${selectCls} option:selected`).val();
-        setUserNameCb(usernameSelected);
+        const slotIndexSelected = $(`.${selectCls} option:selected`).val();
+        setUserNameCb(usernameSelected, slotIndexSelected);
         logs.init(selectCls, clsConst);
     }
     function handleLogsDropdowns() {

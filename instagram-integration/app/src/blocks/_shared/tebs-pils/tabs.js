@@ -20,9 +20,9 @@ function getMetaLazy() {
     User.getMetadataLazy().then((res) => {
         if (res.status.state === 'ok' && res.data && res.data.accounts) {
             const cfg = fillDropdownUsersCfg;
-            const {accounts} = res.data;
+            const {accounts} = res.data.slots;
             fillDropdownUsers(cfg, accounts);
-            window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, res.data.accounts);
+            window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, res.data.accounts.slots);
         }
     });
 }

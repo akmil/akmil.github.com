@@ -57,7 +57,7 @@ export function settingButtonsHandler(classCfg) {
         const defaultAvatarSrc = CONST.user.defaulAvatar;
         Spinner.add($li, '');
         User.updateInstagramAccount(username).then((result) => {
-            console.log(result);
+            console.log('updateInstagramAccount', result);
             const {data: {account}} = result;
             $li.replaceWith(renderItem(account, $li, defaultAvatarSrc));
 
@@ -176,9 +176,11 @@ export function settingButtonsHandler(classCfg) {
             console.info('about.value is empty');
         }
 
+        // toDO !
         User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
                 console.log('/*UPDATE VIEW HERE*/');
+                // toDO !
                 const {data: {profile}} = result;
                 profile.info = result.data.profile;
                 profile.info = {
