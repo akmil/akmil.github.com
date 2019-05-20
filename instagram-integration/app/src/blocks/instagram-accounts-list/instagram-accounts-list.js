@@ -296,10 +296,17 @@ function reloadList(cfgUpdate) {
 
         // https://stackoverflow.com/questions/32965688/comparing-two-arrays-of-objects-and-exclude-the-elements-who-match-values-into
         // const isSame = cfgUpdate.slotsAll.filter(o1 => result.data.slots.some(o2 => o1.payment_status === o2.payment_status));
-        const oldDataSlots = JSON.stringify(cfgUpdate.slotsAll).length;
-        const newDataSlots = JSON.stringify(result.data.slots).length;
-        if (oldDataSlots === newDataSlots) {
-            console.log('return', oldDataSlots === newDataSlots);
+        // const oldDataSlots = JSON.stringify(cfgUpdate.slotsAll).length;
+        // const newDataSlots = JSON.stringify(result.data.slots).length;
+        const arrNew = result.data.slots.map((i) => (i.payment_status === 'IN_PROGRESS'));
+        // console.log('arrNew', arrNew);
+        const oldNew = cfgUpdate.slotsAll.map((i) => (i.payment_status === 'IN_PROGRESS'));
+        // console.log('oldNew', oldNew);
+
+        const isSame = arrNew.some((i, idx) => i === oldNew[idx]);
+        console.log('isSame', isSame);
+        if (isSame) {
+            // console.log('return', oldDataSlots === newDataSlots);
             return;
         }
         $msgList.empty();
