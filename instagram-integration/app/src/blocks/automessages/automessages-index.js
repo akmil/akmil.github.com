@@ -13,6 +13,7 @@ import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
+let slotIndex = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
     currentPageCls: '.automessages-page',
@@ -120,6 +121,7 @@ function onSubmitHandler(e) {
 
     const nReqBody = {
         'username': usernameSelected,
+        'slot_index': slotIndex,
         'type': clsConst.pathType,
         'subtype': clsConst.pathSubType,
         'user_default_config': {
@@ -246,6 +248,7 @@ function initHandlers() {
 function setUserName(state) {
     // console.log('getTasksData', state.username);
     usernameSelected = state.username;
+    slotIndex = state.slot_index;
 }
 
 function addSmoothStart(/* defaultCfg */) {

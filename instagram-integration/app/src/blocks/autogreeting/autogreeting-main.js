@@ -10,6 +10,7 @@ import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextFieldGreet} from './addGreetTemplate';
 
 let usernameSelected = '';
+let slotIndex = '';
 const selectCls = 'js_logs-accounts';
 const speedType = '.js_autogreeting-speed';
 const clsConst = {
@@ -63,7 +64,8 @@ function onSubmitHandler(e) {
         }
     });
     const nReqBody = {
-        'username': usernameSelected || 'the_rostyslav',
+        'username': usernameSelected,
+        'slot_index': slotIndex,
         'type': CONST.url.tmTypes.autogreetT,
         'subtype': CONST.url.tmTypes.autogreetSubT[0],
         'user_default_config': {
@@ -177,6 +179,7 @@ function initHandlers() {
 function setUserName(state) {
     // console.log('getTasksData', state.username);
     usernameSelected = state.username;
+    slotIndex = state.slot_index;
 }
 
 function addSmoothStart(defaultCfg) {
