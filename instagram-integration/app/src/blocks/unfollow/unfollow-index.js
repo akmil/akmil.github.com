@@ -9,6 +9,7 @@ import * as tabStatus from './unfollow-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 
 let usernameSelected = '';
+let slotIndexSelected = '';
 const logsSubtypes = CONST.url.tmTypes.unfollowingSubT;
 const clsConst = {
     currentPageCls: '.unfollow-page',
@@ -47,7 +48,8 @@ function onSubmitHandler(e) {
             ...state.user_default_config.smooth_starting_enabled
         },
         type: clsConst.pathType,
-        username: usernameSelected
+        username: usernameSelected,
+        'slot_index': slotIndexSelected
     };
 
     if (state.subtype === CONST.url.tmTypes.unfollowingSubT[0]) {
@@ -181,12 +183,14 @@ function getConfig() {
     });
 }
 
-function setUserNameCb(_usernameSelected) {
+function setUserNameCb(_usernameSelected, _slot_index) {
     usernameSelected = _usernameSelected;
+    slotIndexSelected = _slot_index;
 }
 
 function setUserNameFirstStep(state) {
     usernameSelected = state.username;
+    slotIndexSelected = state.slot_index;
 }
 
 function checkTitleStep3(stepNumber) {

@@ -215,6 +215,7 @@ function initSteps(formSelector) {
 
         if (radioBtnActive.length > 0) {
             state.username = radioBtnActive.parents('li').data('username');
+            state.slot_index = radioBtnActive.parents('li').data('slotindex');
         }
         stepReducer(parent_fieldset.index(), state);
 
@@ -347,6 +348,7 @@ function initSteps(formSelector) {
 
 // eslint-disable-next-line no-unused-vars
 let usernameSelected = '';
+// let slotIndexSelected = '';
 const clsConst = {
     currentPageCls: '.follow',
     tasksList: '.log-tasks',
@@ -357,8 +359,9 @@ const clsConst = {
     pathSubType: CONST.url.tmTypes.followingSubT[0]
 };
 
-function setUserNameCb(_usernameSelected) {
+function setUserNameCb(_usernameSelected, _slot_index) {
     usernameSelected = _usernameSelected;
+    // slotIndexSelected = _slot_index;
 }
 
 /*

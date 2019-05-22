@@ -13,7 +13,8 @@ let $list = '$(clsConst.tasksList)'; // set in preConfig()
 let selectCls = 'someClass';
 const getUsername = () => $(`.${selectCls} option:selected`).val();
 const path = {
-    username: getUsername()
+    username: getUsername(),
+    slotIndex: getUsername()
 };
 let currentPage = null;
 let intervalId = '';
@@ -135,8 +136,8 @@ function tabStopReqHandler() {
 }
 
 function getLogsData($list, path, page) {
-    path.username = getUsername(selectCls);
-    const pathArr = [path.type, `subtype/${path.subtype}`, `account/${path.username}`];
+    path.slotIndex = getUsername(selectCls);
+    const pathArr = [path.type, `subtype/${path.subtype}`, `slot/${path.slotIndex}`];
     UserTaskManager.getLogsChatBot(pathArr, page).then((result) => {
         if (result.status.state === 'ok') {
             fillListMeta($list, result.data);

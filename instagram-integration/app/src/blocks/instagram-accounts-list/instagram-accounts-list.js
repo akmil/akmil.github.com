@@ -489,8 +489,11 @@ export function init() {
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
         const {dataArray} = data;
         dataArray.forEach(item => {
-            const avatar = item.info && item.info.profile_pic_url || CONST.user.defaulAvatar;
-            sessionStorage.setItem(item.username, avatar);
+            if (!item.account || !item.account.info) {
+                return;
+            }
+            const avatar = item.account.info.profile_pic_url || CONST.user.defaulAvatar;
+            sessionStorage.setItem(item.account.username, avatar);
         });
     });
 }
