@@ -178,6 +178,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
         console.log(item.pending_requests);
         tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#collapse-${idx}" 
                 data-username="${item.username}"
+                data-slotIndex="${item.slot_index}"
                 data-userAvatar="${item.profile_pic_url}"
                 aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="conversation-head mb-1 media pb-2" id="heading-${idx}">

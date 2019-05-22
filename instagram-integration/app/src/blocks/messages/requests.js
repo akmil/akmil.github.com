@@ -1,5 +1,4 @@
 import UserConversation from '../../common/js-services/api-user-direct';
-import User from '../../common/js-services/user';
 
 /*
 Endpoint на получение запросов: GET instagram-direct/pending/{username}
@@ -113,7 +112,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
     // });
 }
 
-const token = User.getToken();
+// const token = User.getToken();
 function getAndFillUserList(isActiveFirst, userList) {
     const $userList = userList || $('.messages-user-list');
     let prevActiveDialogId = '';
@@ -121,7 +120,7 @@ function getAndFillUserList(isActiveFirst, userList) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
     }
 
-    UserConversation.getMetadata(token).then((result) => {
+    UserConversation.getMetadata().then((result) => {
         if (!result.data) {
             return;
         }

@@ -41,9 +41,10 @@ export const CONST = {
 
         // -instagram-direct------------------------
         instagramDirect_Basic: 'instagram-direct',
-        instagramDirect_postMessage: 'instagram-direct/',
-        instagramDirect_getMetaData: 'instagram-direct/slots/{slotIndex}/meta',
-        instagramDirect_RequestPending: 'instagram-direct//slots/{slotIndex}/pending', // todo!!
+        instagramDirect_postMessage: 'instagram-direct/slots',
+        instagramDirect_getMetaData: 'instagram-direct/slots/meta',
+        instagramDirect_getMetaDataConversation: slotIndex => `instagram-direct/slots/${slotIndex}`,
+        instagramDirect_RequestPending: slotIndex => `instagram-direct/slots/${slotIndex}/pending`, // todo!!
         // todo: /slots/{slotIndex}/text/{id}
         // todo: /slots/{slotIndex}/photo/{id}
         // http://api.luxgram.ru/v1/instagram-direct/{username}/{id}/photo
@@ -122,7 +123,7 @@ export const CONST = {
         wrapperSubtype: '.log-subype'
     },
     getPath(name, id) {
-        if (typeof this.url[name] === 'function' && id) {
+        if (typeof this.url[name] === 'function' && id !== undefined) {
             return this.url.base + this.url[name](id);
         }
         return this.url.base + this.url[name];

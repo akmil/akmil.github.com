@@ -25,24 +25,26 @@ class UserConversation {
         return (this.cookieStorage.get(CONST.cookieStorage.emailConfirmed) === 'confirmed');
     }
 
-    getToken() {
+    getToken(asHeader) {
         const cookieToken = this.cookieStorage.get(CONST.cookieStorage.token);
-        return cookieToken;
+        return (asHeader) ? {headers: {token: cookieToken}} : cookieToken;
     }
 
-    getMetadata(token, cbError) {
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}`, {headers: {'token': this.getToken()}}, cbError);
+    getMetadata(slotIndex, cbError) {
+        // const getPath = CONST.getPath;
+        const url = CONST.getPath('instagramDirect_getMetaData');
+        return this.network.sendRequest(url, this.getToken('asHeader'), cbError);
     }
 
     getMetadataDetailUsers(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}${cursor}`,
-         {headers: {'token': this.getToken()}}, cbError);
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.slotindex}${cursor}`,
+            this.getToken('asHeader'), cbError);
     }
 
     getMetadataDetailConversation(token, details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.username}/${details.conversationId}${cursor}`,
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaDataConversation', details.slotindex)}/meta/${details.conversationId}${cursor}`,
             {headers: {token}}, cbError);
     }
     postMetadataDetailConversation(token, details, cbError) {
@@ -54,14 +56,14 @@ class UserConversation {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.username}/${details.conversationId}/text`,
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.slotindex}/${details.conversationId}/text`,
             setting, cbError);
     }
     // --- Request Pending
     getRequestPending(username, cbError) {
         // const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
         return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}`,
-        {headers: {'token': this.getToken()}}, cbError);
+        this.getToken('asHeader'), cbError);
     }
     putRequestPending(confirmUserData, cbError) {
         const setting = {

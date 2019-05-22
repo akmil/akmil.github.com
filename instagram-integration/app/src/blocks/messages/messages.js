@@ -196,7 +196,7 @@ function getAndFillUserList(isActiveFirst, userList) {
         prevActiveDialogId = $userList.find('li .collapse.show').attr('id');
     }
 
-    UserConversation.getMetadata(token).then((result) => {
+    UserConversation.getMetadata().then((result) => {
         if (!result.data) {
             return;
         }
@@ -315,13 +315,13 @@ function scrollHandler(scrollDelay, pagination) {
     }, (scrollDelay + 200));
 }
 
-function getAndFillConversation({username, conversationId, useravatar}, isScrollDown, isClickFromRequestConfirm) {
+function getAndFillConversation({username, conversationId, useravatar, slotindex}, isScrollDown, isClickFromRequestConfirm) {
     const TIME_SCROLL = 10;
     const scrollHeight = $msgList[0].scrollHeight;
     const scrollBottom = () => $msgList.animate({
         scrollTop: $msgList[0].scrollHeight - $msgList[0].clientHeight
     }, TIME_SCROLL);
-    UserConversation.getMetadataDetailConversation(token, {username, conversationId}).then((result) => {
+    UserConversation.getMetadataDetailConversation(token, {username, conversationId, slotindex}).then((result) => {
         // messages-list from utils
         currentUserData.useravatar = useravatar;
         currentUserData.username = username;
@@ -335,7 +335,7 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
             // clicked on normal conversation
             $('.js_send-message-box').removeClass('d-none');
         }
-        $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId}));
+        $('.messages-list').attr('data-conversation', JSON.stringify({username, conversationId, slotindex}));
         console.log('scrollHeight', scrollHeight, $($msgList[0]).height());
         const scrollPosition = $($msgList[0]).height() + $($msgList[0]).scrollTop();
 
@@ -411,9 +411,9 @@ function addHandlers() {
         // const userData = $msgList.data('conversation');
         const _userData = $msgList.attr('data-conversation');
         const userData = JSON.parse(_userData);
-        const {username, conversationId, useravatar} = userData;
+        const {username, conversationId, useravatar, slotindex} = userData;
         Spinner.startButtonSpinner($(e.target), 'spinner-box--sendMsg');
-        UserConversation.postMetadataDetailConversation(token, {username, conversationId, value}).then((result) => {
+        UserConversation.postMetadataDetailConversation(token, {username, conversationId, value, slotindex}).then((result) => {
             if (result && result.status && result.status.state === 'ok') {
                 getAndFillConversation({username, conversationId, useravatar});
                 $textArea.val('');
@@ -450,7 +450,7 @@ function addHandlers() {
             $('.confirm-buttons-box').addClass('d-none');
             $('.js_send-message-box').removeClass('d-none');
         }
-        const {username, useravatar} = userData || userDataFromLiGroup;
+        const {username, useravatar, slotindex} = userData || userDataFromLiGroup;
         e.stopPropagation();
         const $targetBtn = $(e.target).closest('.media');
         const $title = $targetBtn.find('.title');
@@ -462,7 +462,7 @@ function addHandlers() {
         decreaseConversationNumber(e);
         Spinner.remove();
         Spinner.add($('#mainChatPart'), 'my-5 py-5');
-        getAndFillConversation({username, conversationId, useravatar}, 'isScrollDown', isClickFromRequestConfirm);
+        getAndFillConversation({username, conversationId, useravatar, slotindex}, 'isScrollDown', isClickFromRequestConfirm);
         flagInitialVal = true; // reset first value flag
         // resend request
         if (intervalId) {
@@ -471,7 +471,7 @@ function addHandlers() {
         intervalId = setInterval(() => {
             conversationId = $(e.target).closest('.media').data('conversation-id');
             console.log(intervalId, conversationId);
-            getAndFillConversation({username, conversationId, useravatar}, false, isClickFromRequestConfirm);
+            getAndFillConversation({username, conversationId, useravatar, slotindex}, false, isClickFromRequestConfirm);
         }, updateInterval);
 
     }
@@ -479,6 +479,7 @@ function addHandlers() {
     $(document).on('click', '.list-group-item .collapse', userShowConversetionHandler);
     $(document).on('click', '.js_messages-request', function(e) {
         const userData = $(e.target).closest('.list-group-item').data();
+        console.log('*******userData', userData);
         userShowConversetionHandler(e, userData);
         console.log('addConfigButtons', conversationId);
         addConfirgButtons(conversationId, userData.username);
@@ -512,7 +513,7 @@ export function init() {
     getAndFillUserList('setActiveFirst');
     addHandlers();
     const cfg = {
-        username: 'your_dieta',
+        username: 'username??',
         fillUserListFn: fillUserList
     };
     initRequests(cfg);
