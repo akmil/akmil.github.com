@@ -10,6 +10,7 @@ import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
 import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
@@ -238,7 +239,8 @@ function initHandlers() {
     initLogsTab();
 }
 
-function addSmoothStart(/* defaultCfg */) {
+/*
+function addSmoothStart() {
     // const {cfg: {smooth_starting}} = defaultCfg;
     // if (!smooth_starting) {
     //     return;
@@ -251,6 +253,7 @@ function addSmoothStart(/* defaultCfg */) {
         state.user_default_config.smooth_starting_enabled = e.target.checked;
     });
 }
+*/
 
 function setUserName(state) {
     // console.log('getTasksData', state.username);
@@ -263,7 +266,8 @@ function stepReducer(stepNumber, state) {
         case 0:
             setUserName(state);
             // console.log(state, stepNumber);
-            addSmoothStart();
+            state.user_default_config = {};
+            smoothStarting.addSmoothStart({cfg: {smooth_starting: true}}, state);
             break;
         default:
             console.log('default', stepNumber);

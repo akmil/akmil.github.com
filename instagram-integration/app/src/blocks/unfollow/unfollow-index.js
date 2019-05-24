@@ -7,6 +7,7 @@ import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as tabStatus from './unfollow-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
+import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 let usernameSelected = '';
 let slotIndexSelected = '';
@@ -139,9 +140,14 @@ function renderTaskMode(defaultCfg) {
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
         state.user_default_config.task_mode = value.toUpperCase();
+        console.log(value);
+        if (value === 'AGGRESSIVE') {
+            $('.js_toast-task-mode').toast('show');
+        }
     });
 }
 
+/*
 function addSmoothStart(defaultCfg) {
     const {cfg: {smooth_starting}} = defaultCfg;
     if (!smooth_starting) {
@@ -155,6 +161,7 @@ function addSmoothStart(defaultCfg) {
         state.user_default_config.smooth_starting_enabled = e.target.checked;
     });
 }
+*/
 
 function getConfig() {
     const path = {
@@ -179,7 +186,7 @@ function getConfig() {
         // $('#limit').val(limitVal);
         // const limitVal = found.cfg.criteria.max_views;
         renderTaskMode(found);
-        addSmoothStart(found);
+        smoothStarting.addSmoothStart(found, state);
     });
 }
 

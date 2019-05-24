@@ -8,6 +8,7 @@ import {emoji} from '../../common/js-services/emoji';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextFieldGreet} from './addGreetTemplate';
+import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 let usernameSelected = '';
 let slotIndex = '';
@@ -182,19 +183,19 @@ function setUserName(state) {
     slotIndex = state.slot_index;
 }
 
-function addSmoothStart(defaultCfg) {
-    const {cfg: {smooth_starting}} = defaultCfg;
-    if (!smooth_starting) {
-        return;
-    }
-    state.user_default_config.smooth_starting_enabled = true;
-    $('.js_smooth-starting').removeClass('d-none');
+// function addSmoothStart(defaultCfg) {
+//     const {cfg: {smooth_starting}} = defaultCfg;
+//     if (!smooth_starting) {
+//         return;
+//     }
+//     state.user_default_config.smooth_starting_enabled = true;
+//     $('.js_smooth-starting').removeClass('d-none');
 
-    $('.js_smooth-starting').on('change', (e) => {
-        // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting_enabled = e.target.checked;
-    });
-}
+//     $('.js_smooth-starting').on('change', (e) => {
+//         // console.log(e.target.checked, smooth_starting);
+//         state.user_default_config.smooth_starting_enabled = e.target.checked;
+//     });
+// }
 
 function getDataStepSpeed() {
 
@@ -236,12 +237,15 @@ function getDataStepSpeed() {
         // console.log('getDefaultConfigs');
         if (result.status.state === 'ok') {
             fillSpeedList($(speedType), result.data.found);
-            addSmoothStart(result.data.found);
+            smoothStarting.addSmoothStart(result.data.found, state);
             // speed radio-btn group
             $(`${speedType} input[type=radio]`).on('click', (e) => {
                 const value = $(e.target).attr('value');
                 state.user_default_config.task_mode = value.toUpperCase();
                 console.log(state);
+                if (value === 'AGGRESSIVE') {
+                    $('.js_toast-task-mode').toast('show');
+                }
             });
         }
     });

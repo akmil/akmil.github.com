@@ -1,9 +1,12 @@
 <div class="wrapper__content {{#if modificator}}wrapper__content--{{modificator}}{{/if}}">
+
+  {{> toast-notification}}
+
   <div class="container-fluid ">
     <div class="row">
 
       {{>sidebar-menu}}
-      <!--{{>r-sidebar-menu}}-->
+      {{!-- {{>r-sidebar-menu}} --}}
 
       <main role="main" class="js_main col-md-9 ml-sm-auto col-lg-10 px-0 px-sm-4">
         <!--todo: del this info block-->

@@ -6,6 +6,8 @@ import * as storiesStatus from './stories-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+// import Notification from '../../common/js-services/notification-toast';
+import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 const {getValByCommaSeparator, fillRadioGroupList} = viewUtils;
 let usernameSelected = '';
@@ -164,22 +166,29 @@ function renderTaskMode(defaultCfg) {
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
         state.user_default_config.task_mode = value.toUpperCase();
+        console.log(value);
+        if (value === 'AGGRESSIVE') {
+            $('.js_toast-task-mode').toast('show');
+        }
     });
 }
 
-function addSmoothStart(defaultCfg) {
-    const {cfg: {smooth_starting}} = defaultCfg;
-    if (!smooth_starting) {
-        return;
-    }
-    state.user_default_config.smooth_starting_enabled = true;
-    $('.js_smooth-starting').removeClass('d-none');
+// function addSmoothStart(defaultCfg) {
+//     const {cfg: {smooth_starting}} = defaultCfg;
+//     if (!smooth_starting) {
+//         return;
+//     }
+//     state.user_default_config.smooth_starting_enabled = true;
+//     $('.js_smooth-starting').removeClass('d-none');
 
-    $('.js_smooth-starting').on('change', (e) => {
-        // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting_enabled = e.target.checked;
-    });
-}
+//     $('.js_smooth-starting').on('change', (e) => {
+//         // console.log(e.target.checked, smooth_starting);
+//         state.user_default_config.smooth_starting_enabled = e.target.checked;
+//         if (!e.target.checked) {
+//             $('.js_toast-smooth-start').toast('show');
+//         }
+//     });
+// }
 
 function addPostsForActiveCompetitors(defaultCfg) {
     const {cfg: {posts}} = defaultCfg;
@@ -207,7 +216,7 @@ function getConfig() {
         if (result.status.state !== 'ok') {
             return;
         }
-        console.log('getStoriesConfig');
+        // console.log('getStoriesConfig');
         const {
             data: {
                 found
@@ -218,7 +227,7 @@ function getConfig() {
         $('#limit').val(limitVal);
 
         // Плавный старт
-        addSmoothStart(found);
+        smoothStarting.addSmoothStart(found, state);
 
         // Количество публикаций
         addPostsForActiveCompetitors(found);

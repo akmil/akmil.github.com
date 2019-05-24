@@ -162,12 +162,14 @@ const checkPointText = (checkpoint, item) => {
 
 const addSettingBtn = (account) => {
     const {username = '',
+        slotIndex = '-1',
         info: {name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count, is_business, is_private}
     } = account;
     if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
         return `<div class="account-setting col-1 d-flex flex-column">
             <button class="btn btn-outline-success p-1 mb-1 js_acc-edit" 
                 data-username="${username}"
+                data-slotIndex="${slotIndex}"
                 data-name="${name}"
                 data-email="${email}"
                 data-url="${url}"
@@ -179,8 +181,8 @@ const addSettingBtn = (account) => {
                 data-is_business="${is_business}"
                 data-is_private="${is_private}"
             ><i class="fas fa-pen m-0"></i></button>
-            <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}"><i class="fas fa-retweet m-0"></i></button>
-            <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}"><i class="fas fa-trash m-0"></i></button>
+            <button class="btn btn-outline-secondary p-1 mb-1 js_acc-refresh" data-username="${username}" data-slotIndex="${slotIndex}"><i class="fas fa-retweet m-0"></i></button>
+            <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}" data-slotIndex="${slotIndex}"><i class="fas fa-trash m-0"></i></button>
         </div>`;
     }
 };
@@ -227,7 +229,7 @@ export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
                 : ''}
             </div>
             ${stats(info)}
-            ${addSettingBtn(item) || ''}
+            ${addSettingBtn({...item, slotIndex: index}) || ''}
         </div>
     </li>`);
     }

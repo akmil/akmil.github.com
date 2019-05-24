@@ -19,7 +19,8 @@ function updateButtonsDataAttr (settingButtonsHandlerCb) {
 export function settingButtonsHandler(classCfg) {
     const {deleteBtnCls, updateBtnCls, editBtnCls} = classCfg;
     const modalConfirm = $('#delete-user-promt');
-    let username = '';
+    // let username = '';
+    let slotindex = '';
     let userOriginal = {};
     const replaceWithCfg = {
         replaceWith: true,
@@ -37,11 +38,11 @@ export function settingButtonsHandler(classCfg) {
     });
     // DELETE .../instagram-accounts/{username}
     $(deleteBtnCls).on('click', (e) => {
-        username = $(e.target).closest(deleteBtnCls).data('username');
+        slotindex = $(e.target).closest(deleteBtnCls).data('slotindex');
         modalConfirm.modal('show');
     });
     $('.js_acc-delete-confirm').on('click', (e) => {
-        User.delInstagramAccount(username).then((result) => {
+        User.delInstagramAccount(slotindex).then((result) => {
             console.log(result);
             if (result.status.state === 'ok') {
                 modalConfirm.hide();
@@ -53,13 +54,13 @@ export function settingButtonsHandler(classCfg) {
     // GET instagram-accounts/meta/{username}
     $(updateBtnCls).on('click', (e) => {
         const $li = $(e.target).closest('li');
-        const username = $(e.target).closest(updateBtnCls).data('username');
+        const slotIndex = $(e.target).closest(updateBtnCls).data('slotindex');
         const defaultAvatarSrc = CONST.user.defaulAvatar;
         Spinner.add($li, '');
-        User.updateInstagramAccount(username).then((result) => {
+        User.updateInstagramAccount(slotIndex).then((result) => {
             console.log('updateInstagramAccount', result);
-            const {data: {account}} = result;
-            $li.replaceWith(renderItem(account, $li, defaultAvatarSrc));
+            const {data: {slot}} = result;
+            $li.replaceWith(renderItem(slot, $li, defaultAvatarSrc));
 
             /*
             const cfg = {
@@ -83,6 +84,7 @@ export function settingButtonsHandler(classCfg) {
         const $li = $(e.target).closest('li');
         const $editBtn = $li.find(editBtnCls);
         const username = $editBtn.data('username');
+        const slotIndex = $editBtn.data('slotindex');
         const login = $editBtn.data('name');
         const site = $editBtn.data('url');
         const about = $editBtn.data('biography');
@@ -102,6 +104,7 @@ export function settingButtonsHandler(classCfg) {
         userOriginal = {
             login,
             username,
+            slotIndex,
             site,
             about,
             $li,
@@ -141,7 +144,7 @@ export function settingButtonsHandler(classCfg) {
         });
         modalEdit.modal('show');
     });
-    $('.js_edit-profile-modify').on('click', (e) => {
+    $('.js_edit-profile-modify').off().on('click', (e) => {
         const $form = modalEdit.find('form').get(0);
         const formFields = {
             login: $form['login'],
@@ -177,7 +180,7 @@ export function settingButtonsHandler(classCfg) {
         }
 
         // toDO !
-        User.editInstagramAccount(userOriginal.username || '', JSON.stringify(body)).then((result) => {
+        User.editInstagramAccount(parseInt(userOriginal.slotIndex, 10), JSON.stringify(body)).then((result) => {
             if (result.status.state === 'ok') {
                 console.log('/*UPDATE VIEW HERE*/');
                 // toDO !

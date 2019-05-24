@@ -44,9 +44,17 @@ function initTooltip() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
+function initToast() {
+    $('.toast').toast({
+        autohide: false,
+        delay: 2000
+    });
+}
+
 const init = () => {
     setPubSub(PubSub);
     initTooltip();
+    initToast();
     // console.log('init js here', CONST.user);
     (new RegisterForm()).init();
     // LoginForm(selectorCssLoginForm).init();

@@ -62,7 +62,7 @@ class User {
 
         return this.network.sendRequest(CONST.getPath('instagram_addAccount', slotIndex), setting, cbError);
     }
-    editInstagramAccount(username, body) {
+    editInstagramAccount(slotindex, body) {
         const setting = {
             method: 'PUT',
             headers: {
@@ -71,11 +71,11 @@ class User {
             },
             body
         };
-        const url = `${CONST.getPath('instagram_modifyAccount', username)}`;
+        const url = `${CONST.getPath('instagram_modifyAccount', slotindex)}`;
         console.log(url);
-        return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', username)}`, setting);
+        return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', slotindex)}`, setting);
     }
-    updateInstagramAccount(username, body) {
+    updateInstagramAccount(slotIndex, body) {
         const setting = {
             headers: {
                 ...this.settingPost.headers,
@@ -85,7 +85,7 @@ class User {
         };
         // const url = `${CONST.getPath('instagram_modifyAccount', username)}`;
         // console.log(url);
-        return this.network.sendRequest(`${CONST.getPath('instagram_getAccountByUser', username)}`, setting);
+        return this.network.sendRequest(`${CONST.getPath('instagram_getMetaDataBySlot', slotIndex)}`, setting);
     }
     delInstagramAccount(username) {
         const setting = {

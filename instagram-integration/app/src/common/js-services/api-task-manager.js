@@ -87,8 +87,15 @@ class UserTaskManager {
 
     getDefaultConfigs(path, cbError) {
         const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
-        return this.network.sendRequest(url,
-            this.getToken('asHeader'), cbError);
+        const reqPromise = this.network.sendRequest(url, this.getToken('asHeader'), cbError);
+        reqPromise.then(res => {
+            console.log('getStoriesConfig', res.status.state);
+            if (res.status.state && (res.data.active_tasks > 2)) {
+                $('.js_toast-active-task').toast('show');
+            }
+        });
+
+        return reqPromise;
     }
 
     postStartFollowingList(body, cbError, path) {
@@ -167,6 +174,14 @@ class UserTaskManager {
 
     getStoriesConfig(path, cbError) {
         const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
+
+        this.network.sendRequest(url, this.getToken('asHeader'), cbError).then(res => {
+            console.log('getStoriesConfig', res.status.state);
+            if (res.status.state && (res.data.active_tasks > 2)) {
+                $('.js_toast-active-task').toast('show');
+            }
+
+        });
         return this.network.sendRequest(url,
           this.getToken('asHeader'), cbError);
     }
