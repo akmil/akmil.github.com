@@ -261,6 +261,20 @@ function setUserName(state) {
     slotIndex = state.slot_index;
 }
 
+function getConfig() {
+    const path = {
+        type: clsConst.pathType,
+        subtype: clsConst.pathSubType
+    };
+    const cbError = function(res) {
+        const msg = res.status.message;
+        $('.form-submit-finish--error').addClass('d-block')
+      .find('.alert').append(`<p>${msg}</p>`);
+    };
+
+    UserTaskManager.getDefaultConfigs(path, cbError);
+}
+
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
         case 0:
@@ -268,6 +282,7 @@ function stepReducer(stepNumber, state) {
             // console.log(state, stepNumber);
             state.user_default_config = {};
             smoothStarting.addSmoothStart({cfg: {smooth_starting: true}}, state);
+            getConfig();
             break;
         default:
             console.log('default', stepNumber);

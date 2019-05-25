@@ -267,6 +267,19 @@ function addSmoothStart() {
     });
 }
 */
+function getConfig() {
+    const path = {
+        type: clsConst.pathType,
+        subtype: clsConst.pathSubType
+    };
+    const cbError = function(res) {
+        const msg = res.status.message;
+        $('.form-submit-finish--error').addClass('d-block')
+      .find('.alert').append(`<p>${msg}</p>`);
+    };
+
+    UserTaskManager.getDefaultConfigs(path, cbError);
+}
 
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
@@ -275,6 +288,7 @@ function stepReducer(stepNumber, state) {
             state.user_default_config = {};
             smoothStarting.addSmoothStart({cfg: {smooth_starting: true}}, state);
             // console.log(state, stepNumber);
+            getConfig();
             break;
         default:
             console.log('default', stepNumber);

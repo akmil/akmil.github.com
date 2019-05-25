@@ -212,11 +212,11 @@ function getConfig() {
       .find('.alert').append(`<p>${msg}</p>`);
     };
 
-    UserTaskManager.getStoriesConfig(path, cbError).then((result) => {
+    UserTaskManager.getDefaultConfigs(path, cbError).then((result) => {
         if (result.status.state !== 'ok') {
             return;
         }
-        // console.log('getStoriesConfig');
+        // console.log('getDefaultConfigs');
         const {
             data: {
                 found
