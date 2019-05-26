@@ -160,10 +160,15 @@ const checkPointText = (checkpoint, item) => {
     }
 };
 
-const addSettingBtn = (account) => {
-    const {username = '',
-        slotIndex = '-1',
-        info: {name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count, is_business, is_private}
+const addSettingBtn = (account, isBtnDelOnly) => {
+    const {username = '', slotIndex = '-1'} = account;
+    if ((isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) && isBtnDelOnly) {
+        return `<div class="account-setting col-1 d-flex flex-column">
+            <button class="btn btn-outline-danger p-1 js_acc-delete" data-username="${username}" data-slotIndex="${slotIndex}"><i class="fas fa-trash m-0"></i></button>
+        </div>`;
+    }
+    const {info: {
+        name = '', email = '', url = '', biography = '', profile_pic_url = '', follower_count, following_count, media_count, is_business, is_private}
     } = account;
     if (isInstagramAccPage || window.location.href.includes(INSTAGRAM_ACCOUNTS_HREF)) {
         return `<div class="account-setting col-1 d-flex flex-column">
@@ -204,6 +209,7 @@ export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
                     ${checkPointText(checkpoint, item)}
                 </div>
                 ${stats()}
+                ${addSettingBtn({...item, slotIndex: index}, 'showOnlyDelButton') || ''}
             </div>
         </li>`).appendTo(cList);
     } else {
