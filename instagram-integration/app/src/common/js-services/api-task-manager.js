@@ -89,7 +89,7 @@ class UserTaskManager {
         const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
         const reqPromise = this.network.sendRequest(url, this.getToken('asHeader'), cbError);
         reqPromise.then(res => {
-            console.log('getStoriesConfig', res.status.state);
+            console.log('getDefaultConfigs', res.status.state);
             if (res.status.state && (res.data.active_tasks > 2)) {
                 $('.js_toast-active-task').toast('show');
             }
@@ -172,19 +172,19 @@ class UserTaskManager {
             this.getToken('asHeader'), cbError);
     }
 
-    getStoriesConfig(path, cbError) {
-        const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
+    // getStoriesConfig(path, cbError) {
+    //     const url = `${CONST.getPath('instagramTaskManager_getDefaultConfigs')}/${path.type}/subtype/${path.subtype}`;
 
-        this.network.sendRequest(url, this.getToken('asHeader'), cbError).then(res => {
-            console.log('getStoriesConfig', res.status.state);
-            if (res.status.state && (res.data.active_tasks > 2)) {
-                $('.js_toast-active-task').toast('show');
-            }
+    //     this.network.sendRequest(url, this.getToken('asHeader'), cbError).then(res => {
+    //         console.log('getStoriesConfig', res.status.state);
+    //         if (res.status.state && (res.data.active_tasks > 2)) {
+    //             $('.js_toast-active-task').toast('show');
+    //         }
 
-        });
-        return this.network.sendRequest(url,
-          this.getToken('asHeader'), cbError);
-    }
+    //     });
+    //     return this.network.sendRequest(url,
+    //       this.getToken('asHeader'), cbError);
+    // }
 
 }
 

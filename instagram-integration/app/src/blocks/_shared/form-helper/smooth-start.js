@@ -14,4 +14,9 @@ export function addSmoothStart(defaultCfg, state) {
             $('.js_toast-smooth-start').toast('show');
         }
     });
+    $('.js_not-confirm').on('click', (e) => {
+        console.log('click');
+        console.log(e.target);
+        $('.js_smooth-starting #smooth_starting').prop('checked', true);
+    });
 }

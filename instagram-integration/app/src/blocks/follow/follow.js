@@ -7,6 +7,7 @@ import {attachTxtFileHandler} from './follow-read-file-txt';
 import 'brutusin-json-forms';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 const state = {
     username: '',
@@ -79,6 +80,7 @@ function getDataStep2() {
     getTasksData(path);
 }
 
+/*
 function addSmoothStart(defaultCfg) {
     const {cfg: {smooth_starting}} = defaultCfg;
     if (!smooth_starting) {
@@ -92,7 +94,7 @@ function addSmoothStart(defaultCfg) {
         state.user_default_config.smooth_starting_enabled = e.target.checked;
     });
 }
-
+*/
 function addPostsForActiveCompetitors(defaultCfg) {
     const {cfg: {posts}} = defaultCfg;
     if (!posts) {
@@ -144,7 +146,10 @@ function getDataStepSpeed(stepNumber) {
               }
             } = result;
 
-            addSmoothStart(result.data.found);
+            // addSmoothStart(result.data.found);
+            const defaultCfg = result.data.found;
+            state.user_default_config = {};
+            smoothStarting.addSmoothStart(defaultCfg, state);
             fillSpeedList($('.js_follow-speed'), task_modes);
             $('.js_follow-speed input[type=radio]').on('click', function () {
                 const value = $(this).attr('value');
