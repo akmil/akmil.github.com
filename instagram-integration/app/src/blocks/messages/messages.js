@@ -201,7 +201,7 @@ function getAndFillUserList(isActiveFirst, userList) {
             return;
         }
         const {data} = result;
-        // data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
+        data.meta.sort((a, b) => parseInt(a['slot_index'], 10) > parseInt(b['slot_index'], 10));
         // messages-user-list from utils.js
         fillUserList($userList, data.meta, getAndFillUserListCursor);
         if (data.settings && data.settings.invoke_in_millis) {
@@ -242,10 +242,10 @@ function addPagination(pagination, cbFn) {
         scrollLoaderState.firstLoad = false;
     }
     const userData = $msgList.data('conversation');
-    const {username, conversationId} = userData;
-    // console.log('cursor: ', scrollLoaderState.cursor);
+    const {username, conversationId, slotindex} = userData;
+    console.log('addPagination-->slotindex: ', slotindex);
     Spinner.add($('#mainChatPart'), 'my-5 py-5');
-    UserConversation.getMetadataDetailConversation(token, {username, conversationId, cursor: scrollLoaderState.cursor}).then((result) => {
+    UserConversation.getMetadataDetailConversation(token, {username, conversationId, slotindex, cursor: scrollLoaderState.cursor}).then((result) => {
         // console.log('firstLoad:', scrollLoaderState.firstLoad, result.data.meta);
         const newCursor = result.data.meta.pagination && result.data.meta.pagination.prev_cursor;
         Spinner.remove();
@@ -415,7 +415,7 @@ function addHandlers() {
         Spinner.startButtonSpinner($(e.target), 'spinner-box--sendMsg');
         UserConversation.postMetadataDetailConversation(token, {username, conversationId, value, slotindex}).then((result) => {
             if (result && result.status && result.status.state === 'ok') {
-                getAndFillConversation({username, conversationId, useravatar});
+                getAndFillConversation({username, conversationId, useravatar, slotindex});
                 $textArea.val('');
                 Spinner.remove();
                 $msgList.scrollTop($msgList[0].scrollHeight);

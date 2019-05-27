@@ -56,7 +56,7 @@ class UserConversation {
                 'token': this.getToken()
             }
         };
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.slotindex}/${details.conversationId}/text`,
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_postMessage')}/${details.slotindex}/text/${details.conversationId}`,
             setting, cbError);
     }
     // --- Request Pending
