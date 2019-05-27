@@ -75,7 +75,7 @@ class User {
         console.log(url);
         return this.network.sendRequest(`${CONST.getPath('instagram_modifyAccount', slotindex)}`, setting);
     }
-    updateInstagramAccount(slotIndex, body) {
+    updateInstagramAccount(slotIndex, body, cbError) {
         const setting = {
             headers: {
                 ...this.settingPost.headers,
@@ -85,7 +85,7 @@ class User {
         };
         // const url = `${CONST.getPath('instagram_modifyAccount', username)}`;
         // console.log(url);
-        return this.network.sendRequest(`${CONST.getPath('instagram_getMetaDataBySlot', slotIndex)}`, setting);
+        return this.network.sendRequest(`${CONST.getPath('instagram_getMetaDataBySlot', slotIndex)}`, setting, cbError);
     }
     delInstagramAccount(username) {
         const setting = {

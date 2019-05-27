@@ -263,7 +263,7 @@ function fillList($list, dataArray) {
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
 
-function checkResponse (result /* , isResendRequest*/) {
+export function checkResponse (result /* , isResendRequest*/) {
 
     /*
     if (!result.status.state === 'ok' || !result.data || !$msgList.length || isResendRequest) {
@@ -298,8 +298,9 @@ function cbError() {
 function reloadList(cfgUpdate) {
     const $msgList = $('.accounts-list');
     // add spinner
-    if (!cfgUpdate.isHideSpiner) {
+    if (!cfgUpdate || !cfgUpdate.isHideSpiner) {
         $('.profile-user .spinner-box').removeClass('d-none');
+        return;
     }
     User.getMetadata(cbError).then((result) => {
         // reload list
@@ -339,94 +340,48 @@ function reloadList(cfgUpdate) {
     }
 }
 
-// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
-export const addInstagramAccount = (newFormData, slotIndex) => {
-    const cbError = (result) => {
-        console.log('ERROR', result);
-        viewUtils.showInfoMessage($('.error-msg'),
-            result.status.state,
-            result.status.message || 'Login error');
-        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-    };
-    User.addInstagramAccount(newFormData, slotIndex, cbError).then((result) => {
-        if (result && result.status) {
-            console.log(result, result.status);
-            reloadList();
+export function reloadMetaBySlot(slotIndex, cfgUpdate) {
+    const errMessageFront = 'Не получилось загрузить доступные Instagram аккаунты';
+    const $msgList = $('.accounts-list');
+    // todo: add spinner
+    if (!cfgUpdate || !cfgUpdate.isHideSpiner) {
+        $('.profile-user .spinner-box').removeClass('d-none');
+        return;
+    }
+    User.updateInstagramAccount(slotIndex, null).then((result) => {
+        // reload list
+        const arrNew = result.data.slot;
+        // console.log('arrNew', arrNew);
+        const oldNew = cfgUpdate.slotsAll.map((i) => (i.payment_status === 'IN_PROGRESS'));
+        // console.log('oldNew', oldNew);
 
-            /*
-            const $msgList = $('.accounts-list');
-            User.getMetadata().then((result) => {
-                $msgList.empty();
-                // todo : reload list
-                console.log(result.data, result.data.accounts);
-                checkResponse(result);
-            }).catch((err) => {
-                setTimeout(() => {
-                    viewUtils.showInfoMessage($('.error-msg'),
-                        err.status || '',
-                        'Не получилось загрузить доступные Instagram аккаунты');
-                }, 3000);
-                $('.spinner-box').addClass('d-none');
-            });
-            */
-
-            // viewUtils.showInfoMessage($textAreaDescription,
-            //     result.status.state,
-            //     result.status.message || 'Login error');
-            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
-        }
-    }).catch((err) => {
-        // todo: render for user
-        console.log(err);
-    });
-
-    console.log('submit', newFormData);
-};
-
-function addOnLoadHandlers() {
-    // $('.js_repeat-security-code').on('click', (e) => {
-
-    // });
-
-    $('.js_add-instagram-account').on('click', (e) => {
-        const btn = $(e.target);
-        const $modalBody = btn.closest('.modal').find('.modal-dialog .modal-body');
-        const username = $modalBody.find('input[name="username"]').val().trim();
-        const password = $modalBody.find('input[name="pass"]').val().trim();
-        const ip = $modalBody.find('input[name="ip"]').val().trim(); // TMP solution
-        const port = $modalBody.find('input[name="port"]').val().trim(); // TMP solution
-        const usernameProxy = $modalBody.find('input[name="usernameProxy"]').val().trim(); // TMP solution
-        const passwordProxy = $modalBody.find('input[name="passProxy"]').val().trim(); // TMP solution
-        const $form = $('form', $modalBody);
-        const form = $form.get(0);
-        const cssValidationClass = 'form-validation';
-
-        e.preventDefault();
-        function isValidIpv4Addr(ip) {
-            return (/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/).test(ip);
-        }
-        function isValidPort(port) {
-            return (/^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/).test(port);
-        }
-        // const validator = new Validator($form);
-        // console.log(validator.validate());
-        if (form.checkValidity()) {
-            addInstagramAccount({username, password, usernameProxy, passwordProxy, ip, port});
-        } else {
-            // Highlight errors
-            if (form.reportValidity) {
-                form.reportValidity();
-            }
-            $form.addClass(cssValidationClass);
-        }
-
-        if (!username || !password || !ip || !isValidIpv4Addr(ip) || !port || !isValidPort(port) || !usernameProxy || !passwordProxy) {
-            e.stopPropagation();
-            console.log('not valid fields');
+        const isSame = arrNew.some((i, idx) => i === oldNew[idx]);
+        console.log('isSame', isSame);
+        if (isSame) {
+            // console.log('return', oldDataSlots === newDataSlots);
             return;
         }
+        $msgList.empty();
+        checkResponse(result);
+    }).catch((err) => {
+        setTimeout(() => {
+            viewUtils.showInfoMessage($('.error-msg'),
+                err.status || '',
+                errMessageFront);
+        }, 3000);
+        $('.spinner-box').addClass('d-none');
     });
+    const cfg = {
+        deleteBtnCls: '.js_acc-delete',
+        updateBtnCls: '.js_acc-refresh',
+        editBtnCls: '.js_acc-edit'
+    };
+    if (isInstagramAccPage) { // avoid calling image-upload on other pages
+        settingButtonsHandler(cfg);
+    }
 }
+
+// function addOnLoadHandlers() { }
 
 /**
  * Init header
@@ -444,7 +399,7 @@ export function init() {
         return;
     }
 
-    addOnLoadHandlers();
+    // addOnLoadHandlers();
 
     // может инфо отсутсвовать - сделать еще раз запрос через 3 сек.
     metadata.then((result) => {
@@ -491,7 +446,9 @@ export function init() {
     });
 
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, (eventName, data) => {
-        console.log(data.isHideSpiner, data.slotsAll);
+        if (data && data.isHideSpiner && data.slotsAll) {
+            console.log(data.isHideSpiner, data.slotsAll);
+        }
         reloadList(data);
     });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

@@ -58,7 +58,6 @@ export function LoginForm(selectorCss) {
 
         if (selectorCss.isLoginInstagram) {
             // todo: delete me
-            // addInstagramAccount({username: $form.find('input[name="username"]').val(), password});
         } else {
             $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData).then(() => {

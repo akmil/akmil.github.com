@@ -148,7 +148,9 @@ function getDataStepSpeed(stepNumber) {
 
             // addSmoothStart(result.data.found);
             const defaultCfg = result.data.found;
-            state.user_default_config = {};
+            state.user_default_config = {
+                ...state.user_default_config
+            };
             smoothStarting.addSmoothStart(defaultCfg, state);
             fillSpeedList($('.js_follow-speed'), task_modes);
             $('.js_follow-speed input[type=radio]').on('click', function () {

@@ -1,8 +1,8 @@
 import User from '../../common/js-services/user';
 import {CONST} from '../../common/js-services/consts';
-import {addInstagramAccount} from './instagram-accounts-list';
-// import Spinner from '../../common/js-services/spinner';
-// import addInstagramAccount from '../_shared/image-upload/image-upload';
+import viewUtils from '../../common/js-services/view';
+import {reloadMetaBySlot} from './instagram-accounts-list';
+
 let slotsAll = '';
 function addAccount ($list /* , slot*/) {
     const monthCount = (mounthDefaultCount) => `<div class="form-body js_form-count d-none">
@@ -164,7 +164,54 @@ function updateInProgressSlot($list, slotIndex) {
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-body').removeClass('d-none');
     }
+    if (slotsAll[slotIndex].payment_status === 'EXPIRED' && !slotsAll[slotIndex].account) {
+        console.info('EXPIRED');
+    }
 }
+
+// После добавления аккаунта снова дернуть МЕТА и перерисовать список аккаунтов
+const addInstagramAccount = (newFormData, slotIndex) => {
+    const cbError = (result) => {
+        console.log('ERROR', result);
+        viewUtils.showInfoMessage($('.error-msg'),
+            result.status.state,
+            result.status.message || 'Login error');
+        // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+    };
+    User.addInstagramAccount(newFormData, slotIndex, cbError).then((result) => {
+        if (result && result.status) {
+            console.log(result, result.status);
+            reloadMetaBySlot(slotIndex);
+
+            /*
+            const $msgList = $('.accounts-list');
+            User.getMetadata().then((result) => {
+                $msgList.empty();
+                // todo : reload list
+                console.log(result.data, result.data.accounts);
+                checkResponse(result);
+            }).catch((err) => {
+                setTimeout(() => {
+                    viewUtils.showInfoMessage($('.error-msg'),
+                        err.status || '',
+                        'Не получилось загрузить доступные Instagram аккаунты');
+                }, 3000);
+                $('.spinner-box').addClass('d-none');
+            });
+            */
+
+            // viewUtils.showInfoMessage($textAreaDescription,
+            //     result.status.state,
+            //     result.status.message || 'Login error');
+            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
+        }
+    }).catch((err) => {
+        // todo: render for user
+        console.log(err);
+    });
+
+    console.log('submit', newFormData);
+};
 
 function initHandler($list, slot) {
     let monthCount = '1';
