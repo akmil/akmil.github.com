@@ -17,6 +17,6 @@ export function addSmoothStart(defaultCfg, state) {
     $('.js_not-confirm').on('click', (e) => {
         console.log('click');
         console.log(e.target);
-        $('.js_smooth-starting').prop('checked', true);
+        $('.js_smooth-starting #smooth_starting').prop('checked', true);
     });
 }
