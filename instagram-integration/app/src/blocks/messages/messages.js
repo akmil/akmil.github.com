@@ -201,7 +201,7 @@ function getAndFillUserList(isActiveFirst, userList) {
             return;
         }
         const {data} = result;
-        data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
+        // data.meta.sort((a, b) => a['username'].localeCompare(b['username']));
         // messages-user-list from utils.js
         fillUserList($userList, data.meta, getAndFillUserListCursor);
         if (data.settings && data.settings.invoke_in_millis) {
