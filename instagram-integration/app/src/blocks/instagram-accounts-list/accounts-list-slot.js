@@ -167,6 +167,7 @@ function updateInProgressSlot($list, slotIndex) {
 }
 
 function initHandler($list, slot) {
+    let monthCount = '1';
 
     // show month count
     $('.js_add-acc-slot').on('click', (e) => {
@@ -184,7 +185,7 @@ function initHandler($list, slot) {
         $liParent.find('.js_time-left-box').removeClass('d-none'); // show timer
         const slotIndex = $liParent.index();
         console.log(slotIndex);
-        User.postSlotAdd(slotIndex, {months: slotIndex}).then((res) => {
+        User.postSlotAdd(slotIndex, {months: monthCount}).then((res) => {
             console.log(res);
 
             User.getMetadata().then((resultMeta) => {
@@ -252,6 +253,7 @@ function initHandler($list, slot) {
         const count = $input.val();
         console.log('$input.val()', $input.val());
         $liParent.find('.mounth-count-value').text(count);
+        monthCount = count;
         if (count > 3) {
             $liParent.find('.mounth-count-value').append('<span></span>');
         }
