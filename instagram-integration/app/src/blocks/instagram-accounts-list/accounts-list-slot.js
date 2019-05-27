@@ -189,11 +189,11 @@ function initHandler($list, slot) {
 
             User.getMetadata().then((resultMeta) => {
                 console.log(resultMeta);
-                slotsAll = resultMeta.data.slots;
-                slotsAll[2] = {
-                    ...slotsAll[2],
-                    payment_status: 'PAID'
-                };
+                // slotsAll = resultMeta.data.slots;
+                // slotsAll[2] = {
+                //     ...slotsAll[2],
+                //     payment_status: 'PAID'
+                // };
                 updateInProgressSlot($list, slotIndex);
                 // document.location.reload(true);
                 window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH);
