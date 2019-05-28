@@ -160,11 +160,12 @@ $(document).ready(() => {
     */
 });
 let isTimeOutRunned = false;
-function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username) {
+// eslint-disable-next-line max-params
+function getAndFillUserListCursor(loadMoreCbArgsCursor, section, username, slotindex) {
     const $userList = $('.messages-user-list');
     if (loadMoreCbArgsCursor) {
-        console.log('UserConversation', username);
-        UserConversation.getMetadataDetailUsers({cursor: loadMoreCbArgsCursor, username}).then((result) => {
+        console.log('UserConversation', username, slotindex);
+        UserConversation.getMetadataDetailUsers({cursor: loadMoreCbArgsCursor, username, slotindex}).then((result) => {
             if (!result.data) {
                 return;
             }
@@ -375,8 +376,9 @@ function getAndFillConversation({username, conversationId, useravatar, slotindex
 
 function imageLoadSubmitCb(input, token) {
     const userData = $msgList.data('conversation');
-    const {username, conversationId} = userData;
-    const url = `${CONST.getPath('instagramDirect_Basic')}/${username}/${conversationId}/photo`;
+    const {conversationId, slotindex} = userData;
+    // send image: /slots/{slotIndex}/photo/{id}
+    const url = `${CONST.getPath('instagramDirect_Basic')}/slots/${slotindex}/photo/${conversationId}`;
     const acceptedFile = input.files[0];
     console.log('**handleSubmitCb');
     const formData = new FormData();

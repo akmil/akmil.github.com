@@ -86,8 +86,8 @@ function handleSubmit(input, replaceWithCfg) {
         // PUT .../instagram-accounts/{username}/photo
         // form-data: "photo" (jpg)
         formData.append('photo', acceptedFile, acceptedFile.name);
-        const {username} = replaceWithCfg;
-        request.open('PUT', `${CONST.url.base}instagram-accounts/${username}/photo`);
+        const {slotindex} = replaceWithCfg;
+        request.open('PUT', `${CONST.url.base}instagram-accounts/slots/${slotindex}/photo`);
         // request.withCredentials = true;
         request.setRequestHeader('token', token);
         request.setRequestHeader('Accept', 'application/json');

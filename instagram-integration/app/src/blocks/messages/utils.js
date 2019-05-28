@@ -168,7 +168,7 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
     const items = dataArray;
     const cList = $list;
     let tpl = '';
-    const loadMoreBox = (idx, prev_cursor) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}">
+    const loadMoreBox = (idx, prev_cursor, slotindex) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}" data-slotindex="${slotindex}">
         <button type="button" class="btn btn-outline-secondary btn-sm btn-submit">Загрузить еще</button>
     </div>`;
     cList.empty().addClass('border-light-color');
@@ -197,19 +197,19 @@ export function fillUserList($list, dataArray, loadMoreCbFunction) {
             <div id="collapse-${idx}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion">
                 ${addConversations(item.conversations)}
             </div>
-            ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor) : ''}
+            ${(pagination && pagination.prev_cursor) ? loadMoreBox(idx, pagination.prev_cursor, item.slot_index) : ''}
         </li>`;
     });
     $(tpl).appendTo(cList);
     $('.js_load-more-box button').on('click', (e) => {
         const $btn = $(e.target);
         const $btnBox = $btn.closest('.js_load-more-box');
-        const section = $btnBox.data('idx');
-        const cursor = $btnBox.data('cursor');
+        const userConversationData = $btnBox.data();
+        const {idx: section, cursor, slotindex} = userConversationData;
         const username = $btnBox.closest('li').data('username');
 
         console.log('click', section, cursor);
-        loadMoreCbFunction(cursor, section, username);
+        loadMoreCbFunction(cursor, section, username, slotindex);
         e.stopPropagation();
     });
     $('.js_show-request-box').on('click', (e) => {
