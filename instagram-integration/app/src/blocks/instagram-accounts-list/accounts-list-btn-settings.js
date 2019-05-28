@@ -31,9 +31,12 @@ export function settingButtonsHandler(classCfg) {
     imageUpload.init(replaceWithCfg);
     // image-upload subscriber
     window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED_AVATAR, (e, res) => {
+        console.log(res);
         const result = JSON.parse(res.response);
         const {profile_pic_url} = result.data.profile;
-        userOriginal.$li.find('img').attr('src', profile_pic_url);
+        if (userOriginal.$li) {
+            userOriginal.$li.find('img').attr('src', profile_pic_url);
+        }
         console.log('userOriginal', userOriginal);
     });
     // DELETE .../instagram-accounts/{username}
@@ -113,6 +116,7 @@ export function settingButtonsHandler(classCfg) {
             mediaC: $editBtn.data('media_count')
         };
         replaceWithCfg.username = username;
+        replaceWithCfg.slotIndex = slotIndex;
 
         formFields.login.value = login;
         formFields.username.value = username;
