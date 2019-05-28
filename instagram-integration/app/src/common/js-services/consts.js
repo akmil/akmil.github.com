@@ -45,9 +45,8 @@ export const CONST = {
         instagramDirect_getMetaData: 'instagram-direct/slots/meta',
         instagramDirect_getMetaDataConversation: slotIndex => `instagram-direct/slots/${slotIndex}`,
         instagramDirect_RequestPending: slotIndex => `instagram-direct/slots/${slotIndex}/pending`, // todo!!
-        // todo: /slots/{slotIndex}/text/{id}
-        // todo: /slots/{slotIndex}/photo/{id}
-        // http://api.luxgram.ru/v1/instagram-direct/{username}/{id}/photo
+        // send message /slots/{slotIndex}/text/{id}
+        // send image: /slots/{slotIndex}/photo/{id}
 
         // -instagram-task-manager------------------------
         instagramTaskManager: 'instagram-task-manager/',
