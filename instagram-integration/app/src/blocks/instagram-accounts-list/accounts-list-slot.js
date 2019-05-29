@@ -91,7 +91,7 @@ const myTimer = [];
 // const myTimerId = [];
 
 // eslint-disable-next-line max-params
-function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta) {
+function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount) {
     // eslint-disable-next-line no-use-before-define
     // myTimer.push(setInterval(countD, 1000));
 
@@ -107,6 +107,16 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta) {
         // const delta = 1000 * 60; // use for test ONLY  // 4000 * 60 * 60;
         // Find the distance between now and the count down date
         const distance = countDownDate + delta - now;
+
+        // Если ((currentMillis -  last_modified_at) <= payment_waiting_dialogue_time_in_millis)
+        // тогда показываем таймер. Иначе показываем кнопку "Добавить аккаунт".
+        if ((now - countDownDate) <= delta) {
+            if (hasAccount) {
+                console.error('hasAccount', hasAccount);
+            } else {
+                console.error('hasAccount', hasAccount);
+            }
+        }
 
         // Time calculations for days, hours, minutes and seconds
         // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -135,6 +145,7 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta) {
 
 function updateInProgressSlot($list, slotIndex) {
     const isInProgress = slotsAll[slotIndex].payment_status === 'IN_PROGRESS';
+    const hasAccount = slotsAll[slotIndex].has_account;
     if (isInProgress) {
         const {last_modified_at, settings, index} = slotsAll[slotIndex];
         console.log(last_modified_at, 'IN_PROGRESS');
@@ -153,7 +164,7 @@ function updateInProgressSlot($list, slotIndex) {
         // const now = new Date(last_modified_at);
         const countDownDate = new Date(last_modified_at).getTime();
         // const n = now.getSeconds();
-        clock($timeLeft, countDownDate, index, $liSlot, delta);
+        clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount);
     }
     if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
         console.log(slotsAll[slotIndex].payment_status);
