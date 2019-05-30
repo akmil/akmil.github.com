@@ -9,11 +9,11 @@ Endpoint на получение запросов: GET instagram-direct/pending/
 //     getAndFillUserListFn: 'getAndFillUserList_Function'
 // };
 const confirmUserData = {};
-export const addConfirgButtons = (conversationId, username) => {
-    console.log('addConfirgButtons proceed', username, conversationId);
+export const addConfirgButtons = (conversationId, userData) => {
+    console.log('addConfirgButtons proceed', userData, conversationId);
     const $confirmBtnBox = $('.js_request-confirm-box');
     $confirmBtnBox.removeClass('d-none');
-    confirmUserData.username = username;
+    confirmUserData.slotindex = userData.slotindex;
     confirmUserData.conversationId = conversationId;
 };
 const conversationDetail = function(items) {
@@ -49,9 +49,9 @@ const addConversations = function(conversations) {
     return tpl;
 };
 
-const getRequestPending = function(username, elId) {
+const getRequestPending = function(slotindex, elId) {
     // const username = 'your_dieta';
-    UserConversation.getRequestPending(username).then((result) => {
+    UserConversation.getRequestPending(slotindex).then((result) => {
         const {data: {requests}} = result;
         console.log('result', requests);
         const tpl = addConversations(requests, elId);
@@ -74,9 +74,10 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
         // const {conversations} = item;
         console.log(item.pending_requests);
         if (item.pending_requests) {
-            getRequestPending(item.username, elId);
+            getRequestPending(item.slot_index, elId);
             tpl += `<li class="list-group-item" data-toggle="collapse" data-target="#${elId}" 
                 data-username="${item.username}"
+                data-slotindex="${item.slot_index}"
                 data-userAvatar="${item.profile_pic_url}"
                 aria-expanded="true" aria-controls="collapse-${idx}">
             <div class="conversation-head mb-1 media pb-2" id="heading-${idx}">
@@ -91,7 +92,7 @@ function fillUserList($list, dataArray, loadMoreCbFunction) {
                 </div>
             </div>
             <div id="${elId}" class="collapse" aria-labelledby="heading-${idx}" data-parent="#accordion-requests">
-                <!-- getRequestPending(item.username, elId) -->
+                <!-- getRequestPending(item.slot_index, elId) -->
             </div>
             <!-- {(pagination && pagination.prev_cursor) ? 'loadMoreBox(idx, pagination.prev_cursor)' : ''} -->
         </li>`;

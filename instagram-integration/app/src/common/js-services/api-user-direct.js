@@ -38,13 +38,14 @@ class UserConversation {
 
     getMetadataDetailUsers(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaData')}/${details.slotindex}${cursor}`,
+        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetadataDetailUsers', details.slotindex)}/${cursor}`,
             this.getToken('asHeader'), cbError);
     }
 
     getMetadataDetailConversation(token, details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_getMetaDataConversation', details.slotindex)}/meta/${details.conversationId}${cursor}`,
+        const url = `${CONST.getPath('instagramDirect_getMetaDataConversation', details.slotindex)}/meta/${details.conversationId}${cursor}`;
+        return this.network.sendRequest(url,
             {headers: {token}}, cbError);
     }
     postMetadataDetailConversation(token, details, cbError) {
@@ -60,9 +61,11 @@ class UserConversation {
             setting, cbError);
     }
     // --- Request Pending
-    getRequestPending(username, cbError) {
+    getRequestPending(slotindex, cbError) {
         // const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}`,
+        const url = `${CONST.getPath('instagramDirect_RequestPending', slotindex)}`;
+        console.log('url', url);
+        return this.network.sendRequest(url,
         this.getToken('asHeader'), cbError);
     }
     putRequestPending(confirmUserData, cbError) {
@@ -74,8 +77,9 @@ class UserConversation {
                 'token': this.getToken()
             }
         };
-        const {username, conversationId} = confirmUserData;
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}/${conversationId}`,
+        const {slotindex, conversationId} = confirmUserData;
+        const url = `${CONST.getPath('instagramDirect_RequestPending', slotindex)}/${conversationId}`;
+        return this.network.sendRequest(url,
             setting, cbError);
     }
     delRequestPending(confirmUserData, cbError) {
@@ -86,8 +90,9 @@ class UserConversation {
                 'token': this.getToken()
             }
         };
-        const {username, conversationId} = confirmUserData;
-        return this.network.sendRequest(`${CONST.getPath('instagramDirect_RequestPending')}/${username}/${conversationId}`,
+        const {slotindex, conversationId} = confirmUserData;
+        const url = `${CONST.getPath('instagramDirect_RequestPending', slotindex)}/${conversationId}`;
+        return this.network.sendRequest(url,
             setting, cbError);
     }
 

@@ -484,7 +484,7 @@ function addHandlers() {
         console.log('*******userData', userData);
         userShowConversetionHandler(e, userData);
         console.log('addConfigButtons', conversationId);
-        addConfirgButtons(conversationId, userData.username);
+        addConfirgButtons(conversationId, userData);
     });
 
     const $showUserList = $('.js_show-messages-user-list');

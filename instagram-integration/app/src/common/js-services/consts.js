@@ -43,6 +43,7 @@ export const CONST = {
         instagramDirect_Basic: 'instagram-direct',
         instagramDirect_postMessage: 'instagram-direct/slots',
         instagramDirect_getMetaData: 'instagram-direct/slots/meta',
+        instagramDirect_getMetadataDetailUsers: slotIndex => `instagram-direct/slots/${slotIndex}/meta`,
         instagramDirect_getMetaDataConversation: slotIndex => `instagram-direct/slots/${slotIndex}`,
         instagramDirect_RequestPending: slotIndex => `instagram-direct/slots/${slotIndex}/pending`, // todo!!
         // send message /slots/{slotIndex}/text/{id}
