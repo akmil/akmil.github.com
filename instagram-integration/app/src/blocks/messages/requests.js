@@ -20,7 +20,7 @@ export const addConfirgButtons = (conversationId, username) => {
 const conversationDetail = function(items) {
     let tpl = '';
     items.forEach((item) => {
-        const {profilePicUrl: srcImg} = item;
+        const {profile_pic_url: srcImg} = item;
         if (items.length > 1) {
             tpl += `<img src="${srcImg}" alt='image' class="media-photo mr-1 media-photo--group" style="width: 24px;">`;
         } else {

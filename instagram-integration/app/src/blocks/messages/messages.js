@@ -327,7 +327,7 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
         currentUserData.username = username;
         fillMassagesList({$list: $msgList, dataArray: result.data.meta.messages, stateCfg, currentUserData});
         $('#mainChatPart').removeClass('d-none');
-        Spinner.remove();
+
         if (isClickFromRequestConfirm) {
             // clicked on request
             $('.js_send-message-box').addClass('d-none');
@@ -339,22 +339,37 @@ function getAndFillConversation({username, conversationId, useravatar}, isScroll
         console.log('scrollHeight', scrollHeight, $($msgList[0]).height());
         const scrollPosition = $($msgList[0]).height() + $($msgList[0]).scrollTop();
 
-        if ((scrollPosition) < 75) {
-            scrollBottom();
-        }
-        if (isScrollDown) {
-            setTimeout(() => {
-                scrollBottom();
-            }, 200);
-            // save first value
-            if (flagInitialVal) {
-                initialVal = result.data.meta.messages[result.data.meta.messages.length - 1];
-                console.log(initialVal);
-                flagInitialVal = false;
+        const deferreds = [];
+        $('.chat-img img').each(function() {
+            if (!this.complete) {
+                const deferred = $.Deferred();
+                $(this).one('load', deferred.resolve);
+                deferreds.push(deferred);
             }
-        }
+        });
+        $.when(...deferreds).done(function() {
+            Spinner.remove();
 
-        scrollHandler(TIME_SCROLL, result.data.meta.pagination);
+            /* things to do when all images loaded */
+            console.log('all img loaded');
+            if ((scrollPosition) < 75) {
+                scrollBottom();
+            }
+            if (isScrollDown) {
+                setTimeout(() => {
+                    scrollBottom();
+                }, 200);
+                // save first value
+                if (flagInitialVal) {
+                    initialVal = result.data.meta.messages[result.data.meta.messages.length - 1];
+                    console.log(initialVal);
+                    flagInitialVal = false;
+                }
+            }
+
+            scrollHandler(TIME_SCROLL, result.data.meta.pagination);
+        });
+
     });
 }
 

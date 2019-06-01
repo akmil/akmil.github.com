@@ -68,7 +68,7 @@ const pages = [
         source: '_autocomments/autocomments'
     },
     {
-        title: 'User profile',
+        title: 'Кабинет пользователя',
         name: 'profile',
         source: '_profile/profile-page'
     }
