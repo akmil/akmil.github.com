@@ -481,6 +481,14 @@ function addHandlers() {
         addConfirgButtons(conversationId, userData.username);
     });
 
+    const $showUserList = $('.js_show-messages-user-list');
+    $showUserList.on('click', (e, message) => {
+        console.log('clear requests');
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+    });
+
     window.PubSub.subscribe(CONST.events.messages.RECIEVE_NEW_MESSAGE, (eventName, data) => {
         const {username, conversationId, value, resultFromServer} = data;
         const $dialog = $(`.messages-user-list .list-group-item[data-username="${username}"] div[data-conversation-id="${conversationId}"]`);
