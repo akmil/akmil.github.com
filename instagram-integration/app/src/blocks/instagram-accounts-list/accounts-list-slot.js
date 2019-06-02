@@ -116,7 +116,13 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount, 
         const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
 
         // If the count down is finished, write some text
-        if ((countDownDate + delta > now || distance < 0) || isHideTimer) {
+        console.info(
+            countDownDate + delta > now, isHideTimer
+        );
+        console.info(
+            (distance + delta) < 0
+        );
+        if ((countDownDate + delta < now || (distance + delta) < 0)) {
             // myTimer.forEach((item, idx) => {
             //     clearInterval(item);
             // });
@@ -135,11 +141,11 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount, 
 function updateInProgressSlot($list, slotIndex) {
     const isInProgress = slotsAll[slotIndex].payment_status === 'IN_PROGRESS';
     const hasAccount = slotsAll[slotIndex].has_account;
+    const {last_modified_at, settings, index} = slotsAll[slotIndex];
+    const liSlot = $list.find('>li')[index];
+    const $liSlot = $(liSlot);
     if (isInProgress) {
-        const {last_modified_at, settings, index} = slotsAll[slotIndex];
-        console.log(last_modified_at, 'IN_PROGRESS');
-        const liSlot = $list.find('>li')[index];
-        const $liSlot = $(liSlot);
+        console.log('IN_PROGRESS last_modified_at-- ', last_modified_at);
         // console.log($liSlot);
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-count').addClass('d-none');
@@ -158,15 +164,16 @@ function updateInProgressSlot($list, slotIndex) {
 
         // Если ((currentMillis -  last_modified_at) <= payment_waiting_dialogue_time_in_millis)
         // has_account": false - тогда показываем таймер. Иначе показываем кнопку "Добавить аккаунт".
-        if ((now - countDownDate) <= delta) {
+        if ((now - countDownDate) > delta) {
             if (!hasAccount) {
                 console.error('hasAccount', hasAccount);
                 console.error('show timer');
-                // clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer);
+                clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer);
                 // renderTimer({distance, $timeLeft, minutesZero, seconds, $liSlot});
             } else {
                 console.error('hasAccount', hasAccount);
                 console.error('show month selector');
+                $liSlot.find('.js_add-acc-slot').trigger('click');
             }
         } else {
             console.error('show add Btn');
@@ -176,14 +183,18 @@ function updateInProgressSlot($list, slotIndex) {
     if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
         console.log(slotsAll[slotIndex].payment_status);
         console.log('show form');
-        const {index} = slotsAll[slotIndex];
-        const liSlot = $list.find('>li')[index];
-        const $liSlot = $(liSlot);
+        // const {index} = slotsAll[slotIndex];
+        // const liSlot = $list.find('>li')[index];
+        // const $liSlot = $(liSlot);
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-body').removeClass('d-none');
     }
     if (slotsAll[slotIndex].payment_status === 'EXPIRED' && !slotsAll[slotIndex].account) {
         console.info('EXPIRED');
+        $liSlot.find('.js_add-acc-slot').trigger('click');
+    } else {
+        // Показываем полноценный слот с данными об аккаунте.
+        // console.info('EXPIRED', slotsAll[slotIndex].account);
     }
 }
 
@@ -213,7 +224,7 @@ function initHandler($list, slot) {
     let monthCount = '1';
 
     // show month count
-    $('.js_add-acc-slot').on('click', (e) => {
+    $('.js_add-acc-slot').off().on('click', (e) => {
         const addAccBtn = $(e.target);
         const $liParent = addAccBtn.closest('li');
         addAccBtn.parent().removeClass('d-flex').addClass('d-none');
@@ -232,12 +243,8 @@ function initHandler($list, slot) {
             console.log(res);
 
             User.getMetadata().then((resultMeta) => {
-                console.log(resultMeta);
-                // slotsAll = resultMeta.data.slots;
-                // slotsAll[2] = {
-                //     ...slotsAll[2],
-                //     payment_status: 'PAID'
-                // };
+                slotsAll = resultMeta.data.slots;
+
                 updateInProgressSlot($list, slotIndex);
                 // document.location.reload(true);
                 window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH);
@@ -313,6 +320,21 @@ let runOnce = true;
 
 export function addSlotInit($list, slot, slots) {
     slotsAll = slots;
+
+    /*
+    console.log(slots, '**TODO** remove mock');
+    slotsAll[2] = {
+        ...slotsAll[2],
+        payment_status: 'PAID',
+        account: null
+    };
+    if (slot.index === 2) {
+        slot.payment_status = 'PAID';
+        slot.index = 2;
+        slot.accoun = null;
+    }
+    */
+    //
     addAccount($list /* , slot*/);
     initHandler($list, slot);
     updateInProgressSlot($list, slot.index);

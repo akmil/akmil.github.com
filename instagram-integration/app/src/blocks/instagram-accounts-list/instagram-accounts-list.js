@@ -253,6 +253,7 @@ function fillList($list, dataArray) {
         console.log('item', item.index);
 
         if (!item || !item.account) {
+            // show slot withput 'account' field
             if (isInstagramAccPage) {
                 addSlotInit($list, item, items);
             }
