@@ -78,13 +78,14 @@ export function getPosts(modal, details, {loadMoreHandler, targetButton}) {
             const $list = $('.modal-body .posts-list', modal);
             if (!data.posts.length) {
                 // show message 'no posts found'
+                targetButton.popover(); // init ??
                 targetButton.popover({
                     container: 'body',
                     content: 'У текущего аккаунта нет ни одного поста',
                     placement: 'bottom'
                 });
                 setTimeout(() => {
-                    targetButton.popover('destroy');
+                    targetButton.popover('dispose');
                 }, 4000);
                 return;
             }

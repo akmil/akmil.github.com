@@ -167,8 +167,8 @@ class UserTaskManager {
     getPostsAutomessages(details, cbError) {
         const cursor = (details.cursor) ? `?cursor=${details.cursor}` : '';
         // eslint-disable-next-line no-param-reassign
-        const urlByUserName = `${CONST.getPath('instagramTaskManager_getPosts', details.userName || 'user_not_selected')}${cursor}`;
-        return this.network.sendRequest(urlByUserName,
+        const urlBySlotIndex = `${CONST.getPath('instagramTaskManager_getPosts', details.slotIndex)}${cursor}`;
+        return this.network.sendRequest(urlBySlotIndex,
             this.getToken('asHeader'), cbError);
     }
 

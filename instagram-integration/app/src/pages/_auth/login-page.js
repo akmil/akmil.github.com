@@ -26,9 +26,15 @@ export function LoginPage(selectorCss) {
             if (result.status.message.includes('cannot find a profile by email')) {
                 modal.find('.js_account-mail-msg').removeClass('d-none');
                 modal.find('.js_account-password-msg').addClass('d-none');
+                modal.find('.js_account-mail-invalid-msg').addClass('d-none');
+            } else if (result.status.message.includes('incorrect value in \'email\' field')) {
+                modal.find('.js_account-mail-invalid-msg').removeClass('d-none');
+                modal.find('.js_account-mail-msg').addClass('d-none');
+                modal.find('.js_account-password-msg').addClass('d-none');
             } else {
                 modal.find('.js_account-mail-msg').addClass('d-none');
                 modal.find('.js_account-password-msg').removeClass('d-none');
+                modal.find('.js_account-mail-invalid-msg').addClass('d-none');
             }
             console.log(result.status.message);
         };

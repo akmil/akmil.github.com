@@ -40,7 +40,7 @@ export function settingButtonsHandler(classCfg) {
         console.log('userOriginal', userOriginal);
     });
     // DELETE .../instagram-accounts/{username}
-    $(deleteBtnCls).on('click', (e) => {
+    $(deleteBtnCls).off().on('click', (e) => {
         slotindex = $(e.target).closest(deleteBtnCls).data('slotindex');
         modalConfirm.modal('show');
     });
@@ -63,6 +63,7 @@ export function settingButtonsHandler(classCfg) {
         User.updateInstagramAccount(slotIndex).then((result) => {
             console.log('updateInstagramAccount', result);
             const {data: {slot}} = result;
+            slot.slotIndexLocal = slotIndex;
             $li.replaceWith(renderItem(slot, $li, defaultAvatarSrc));
 
             /*
@@ -83,7 +84,7 @@ export function settingButtonsHandler(classCfg) {
 
     // PUT instagram-accounts/{username}
     const modalEdit = $('#edit-user-promt');
-    $(editBtnCls).on('click', (e) => {
+    $(editBtnCls).off().on('click', (e) => {
         const $li = $(e.target).closest('li');
         const $editBtn = $li.find(editBtnCls);
         const username = $editBtn.data('username');
@@ -189,17 +190,20 @@ export function settingButtonsHandler(classCfg) {
                 console.log('/*UPDATE VIEW HERE*/');
                 // toDO !
                 const {data: {profile}} = result;
-                profile.info = result.data.profile;
+                // profile.info = result.data.profile;
                 profile.info = {
-                    ...profile.info,
+                    ...result.data.profile,
                     follower_count: userOriginal.followerC,
                     following_count: userOriginal.followingC,
                     media_count: userOriginal.mediaC
                 };
+                profile.slotIndexLocal = userOriginal.slotIndex;
                 userOriginal.$li.replaceWith(renderItem(profile, userOriginal.$li, false));
                 updateButtonsDataAttr(settingButtonsHandler);
+                const $editBtn = userOriginal.$li.find(editBtnCls);
+                $editBtn.data('slotindex', userOriginal.slotIndex);
                 if (updateDataAttrUsername) {
-                    const $editBtn = userOriginal.$li.find(editBtnCls);
+                    // const $editBtn = userOriginal.$li.find(editBtnCls);
                     $editBtn.data('username', profile.info.username);
                     updateDataAttrUsername = false;
                 }

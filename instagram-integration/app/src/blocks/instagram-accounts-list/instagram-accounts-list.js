@@ -193,10 +193,11 @@ const addSettingBtn = (account, isBtnDelOnly) => {
 };
 
 export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
-    const item = itemData.account;
-    const {index} = itemData;
-    const info = item.info;
-    const checkpoint = item.checkpoint || item;
+    const isUpdateAccFromModal = !!itemData.account;
+    const item = itemData.account || itemData;
+    const index = (typeof itemData.slotIndexLocal === 'number') ? itemData.slotIndexLocal : itemData.index;
+    const info = (isUpdateAccFromModal) ? item.info : itemData.info;
+    const checkpoint = (isUpdateAccFromModal) ? item.checkpoint || item : itemData;
     const defaultAvatarSrc = _defaultAvatarSrc || CONST.user.defaulAvatar;
     if (!info) {
         return $(`<li class="media py-3" data-username="${item.username}" data-slotIndex="${index}">

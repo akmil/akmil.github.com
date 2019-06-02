@@ -127,7 +127,7 @@ function loadMoreHandler(getPosts) {
         const $btn = $(e.target);
         const cursor = $btn.attr('cursor');
         console.log('load more click');
-        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
+        getPosts(null, {slotIndex, cursor}, {loadMoreHandler: this, targetButton});
     });
 }
 
@@ -136,7 +136,7 @@ function initModalHandler() {
         targetButton = $(this); // Button that triggered the modal
         // Update the modal's content
         const modal = $('#postsGridModal');
-        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        getPosts(modal, {slotIndex}, {loadMoreHandler, targetButton});
         modal.find('.modal-title').text('Публикации');
     });
 }

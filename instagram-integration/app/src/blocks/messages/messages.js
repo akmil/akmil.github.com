@@ -386,7 +386,7 @@ function imageLoadSubmitCb(input, token) {
 
     Spinner.startButtonSpinner($('.file-upload-btn'), 'spinner-box--sendMsg');
 
-    formData.append('photo', acceptedFile, acceptedFile.name);
+    formData.append('file', acceptedFile, acceptedFile.name);
     request.open('POST', url);
     // request.withCredentials = true;
     request.setRequestHeader('token', token);
