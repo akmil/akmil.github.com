@@ -165,8 +165,8 @@ function updateInProgressSlot($list, slotIndex) {
                 $liSlot.find('.js_add-acc-slot').trigger('click');
             }
         } else {
-            // console.error('show add Btn');
-            // clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer});
+            console.error('show timer/Add Btn');
+            clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer});
         }
     }
     if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
