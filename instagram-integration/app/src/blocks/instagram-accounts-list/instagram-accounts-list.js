@@ -430,7 +430,7 @@ export function init() {
             });
         }
         */
-    //    checkResponse(result, isResendRequest);
+    // checkResponse(result, isResendRequest);
         checkResponse(result);
         if (isInstagramAccPage) { // avoid calling image-upload on other pages
             const cfg = {
