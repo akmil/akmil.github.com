@@ -123,6 +123,7 @@ function clock({$timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount,
             $liSlot.find('>div').addClass('d-none').removeClass('d-flex');
             $liSlot.find('.js_form-add-count').addClass('d-flex');
             // $timeLeft.text('Время для оплаты закончилось');
+            console.log('clearInterval', myTimer[slotIndex]);
         } else {
             // Display the result in the element with id="demo"
             $timeLeft.text(`${minutesZero}мин. ${seconds}cек. `);
@@ -139,7 +140,7 @@ function updateInProgressSlot($list, slotIndex) {
     const $liSlot = $(liSlot);
     if (isInProgress) {
         console.log('IN_PROGRESS last_modified_at-- ', last_modified_at);
-        // console.log($liSlot);
+        
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-count').addClass('d-none');
         const $activeSlot = $liSlot.find('.js_time-left-box');
