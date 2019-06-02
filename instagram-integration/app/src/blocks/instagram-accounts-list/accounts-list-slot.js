@@ -92,10 +92,19 @@ function addAccount ($list /* , slot*/) {
 const myTimer = [];
 
 // eslint-disable-next-line max-params
-function clock({$timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount, isHideTimer}) {
+function clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer}) {
 
-    // eslint-disable-next-line no-use-before-define
-    myTimer[slotIndex] = setInterval(countD, 1000);
+    if (!index) {
+        const currIndex = $liSlot.index();
+        // eslint-disable-next-line no-use-before-define
+        const timerId = setInterval(countD, 1000);
+        // myTimer[currIndex] = [];
+        myTimer[currIndex].push(timerId);
+    } else {
+        // eslint-disable-next-line no-use-before-define
+        const timerId = setInterval(countD, 1000);
+        myTimer[index].push(timerId);
+    }
 
     // let c = countDownDate; // Initially set to 1 hour
     function countD() {
@@ -113,17 +122,17 @@ function clock({$timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount,
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
-
+        console.log('distance --- ', distance, minutes, seconds);
         // If the count down is finished, write some text
         if ((countDownDate + delta < now || (distance + delta) < 0)) {
-            // myTimer.forEach((item, idx) => {
-            //     clearInterval(item);
-            // });
-            clearInterval(myTimer[slotIndex]);
+            myTimer[index].forEach((id) => {
+                clearInterval(id);
+                console.log('clearInterval', id);
+            });
+
             $liSlot.find('>div').addClass('d-none').removeClass('d-flex');
             $liSlot.find('.js_form-add-count').addClass('d-flex');
             // $timeLeft.text('Время для оплаты закончилось');
-            console.log('clearInterval', myTimer[slotIndex]);
         } else {
             // Display the result in the element with id="demo"
             $timeLeft.text(`${minutesZero}мин. ${seconds}cек. `);
@@ -140,7 +149,6 @@ function updateInProgressSlot($list, slotIndex) {
     const $liSlot = $(liSlot);
     if (isInProgress) {
         console.log('IN_PROGRESS last_modified_at-- ', last_modified_at);
-        
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-count').addClass('d-none');
         const $activeSlot = $liSlot.find('.js_time-left-box');
@@ -158,8 +166,10 @@ function updateInProgressSlot($list, slotIndex) {
             if (!hasAccount) {
                 console.error('hasAccount', hasAccount);
                 console.error('show timer/Add Btn');
-                clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer});
+                // clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer});
                 // renderTimer({distance, $timeLeft, minutesZero, seconds, $liSlot});
+                $liSlot.find('>div').addClass('d-none').removeClass('d-flex');
+                $liSlot.find('.js_form-add-count').addClass('d-flex');
             } else {
                 console.error('hasAccount', hasAccount);
                 console.error('show month selector');
@@ -256,7 +266,7 @@ function initHandler($list, slot) {
             User.updateInstagramAccount(slotIndex).then((resultMeta) => {
                 slotsAll[resultMeta.data.slot.index] = resultMeta.data.slot;
 
-                updateInProgressSlot($list, slotIndex);
+                updateInProgressSlot($list, resultMeta.data.slot.index);
                 // document.location.reload(true);
                 // window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH);
                 // const inProgresSlots = slot.filter((item) => slotsAll[slotIndex].payment_status === 'IN_PROGRESS');
@@ -347,5 +357,6 @@ export function addSlotInit($list, slot, slots) {
     //
     addAccount($list /* , slot*/);
     initHandler($list, slot);
+    myTimer[slot.index] = [];
     updateInProgressSlot($list, slot.index);
 }
