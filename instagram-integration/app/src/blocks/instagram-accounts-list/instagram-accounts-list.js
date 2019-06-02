@@ -245,6 +245,7 @@ function fillList($list, dataArray) {
     const items = dataArray;
     // const cList = $list;
     const defaultAvatarSrc = CONST.user.defaulAvatar;
+    const dataArrayValidSlots = [];
 
     $list.empty().addClass('border-light-color');
     console.log('items', items);
@@ -256,10 +257,11 @@ function fillList($list, dataArray) {
                 addSlotInit($list, item, items);
             }
         } else {
+            dataArrayValidSlots.push(item);
             renderItem(item, $list, defaultAvatarSrc).appendTo($list);
         }
     });
-    window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArray});
+    window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, {name, dataArrayValidSlots});
     console.log('INSTAGRAM_ACCOUNS_RENDERED');
 }
 
@@ -448,11 +450,14 @@ export function init() {
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, (eventName, data) => {
         if (data && data.isHideSpiner && data.slotsAll) {
             console.log(data.isHideSpiner, data.slotsAll);
+            console.log('isReloadAllList', data.isReloadAllList);
+            if (data.isReloadAllList) {
+                reloadList(data);
+            }
         }
-        reloadList(data);
     });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {
-        const {dataArray} = data;
+        const {dataArrayValidSlots: dataArray} = data;
         dataArray.forEach(item => {
             if (!item.account || !item.account.info) {
                 return;

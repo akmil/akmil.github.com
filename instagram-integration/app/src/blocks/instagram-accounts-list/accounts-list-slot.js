@@ -91,7 +91,7 @@ const myTimer = [];
 // const myTimerId = [];
 
 // eslint-disable-next-line max-params
-function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount) {
+function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount, isHideTimer) {
     // eslint-disable-next-line no-use-before-define
     // myTimer.push(setInterval(countD, 1000));
 
@@ -99,24 +99,13 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount) 
     myTimer[slotIndex] = setInterval(countD, 1000);
 
     // let c = countDownDate; // Initially set to 1 hour
-
     function countD() {
         // Get today's date and time
         const now = new Date().getTime();
 
-        // const delta = 1000 * 60; // use for test ONLY  // 4000 * 60 * 60;
+        // const delta = 1000 * 60 * 30; // use for test ONLY  // 4000 * 60 * 60;
         // Find the distance between now and the count down date
-        const distance = countDownDate + delta - now;
-
-        // Если ((currentMillis -  last_modified_at) <= payment_waiting_dialogue_time_in_millis)
-        // тогда показываем таймер. Иначе показываем кнопку "Добавить аккаунт".
-        if ((now - countDownDate) <= delta) {
-            if (hasAccount) {
-                console.error('hasAccount', hasAccount);
-            } else {
-                console.error('hasAccount', hasAccount);
-            }
-        }
+        const distance = countDownDate - now + delta;
 
         // Time calculations for days, hours, minutes and seconds
         // const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -127,7 +116,7 @@ function clock($timeLeft, countDownDate, slotIndex, $liSlot, delta, hasAccount) 
         const minutesZero = minutes < 10 ? `0${minutes}` : minutes;
 
         // If the count down is finished, write some text
-        if (distance < 0) {
+        if ((countDownDate + delta > now || distance < 0) || isHideTimer) {
             // myTimer.forEach((item, idx) => {
             //     clearInterval(item);
             // });
@@ -162,9 +151,27 @@ function updateInProgressSlot($list, slotIndex) {
 
         const $timeLeft = $activeSlot.find('.js_time-left');
         // const now = new Date(last_modified_at);
-        const countDownDate = new Date(last_modified_at).getTime();
+        const countDownDate = last_modified_at;
+        const now = new Date().getTime();
+        const isHideTimer = ((now - countDownDate) <= delta);
         // const n = now.getSeconds();
-        clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount);
+
+        // Если ((currentMillis -  last_modified_at) <= payment_waiting_dialogue_time_in_millis)
+        // has_account": false - тогда показываем таймер. Иначе показываем кнопку "Добавить аккаунт".
+        if ((now - countDownDate) <= delta) {
+            if (!hasAccount) {
+                console.error('hasAccount', hasAccount);
+                console.error('show timer');
+                // clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer);
+                // renderTimer({distance, $timeLeft, minutesZero, seconds, $liSlot});
+            } else {
+                console.error('hasAccount', hasAccount);
+                console.error('show month selector');
+            }
+        } else {
+            console.error('show add Btn');
+            clock($timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer);
+        }
     }
     if (slotsAll[slotIndex].payment_status === 'PAID' && !slotsAll[slotIndex].account) {
         console.log(slotsAll[slotIndex].payment_status);
@@ -193,28 +200,6 @@ const addInstagramAccount = (newFormData, slotIndex) => {
         if (result && result.status) {
             console.log(result, result.status);
             reloadMetaBySlot(slotIndex);
-
-            /*
-            const $msgList = $('.accounts-list');
-            User.getMetadata().then((result) => {
-                $msgList.empty();
-                // todo : reload list
-                console.log(result.data, result.data.accounts);
-                checkResponse(result);
-            }).catch((err) => {
-                setTimeout(() => {
-                    viewUtils.showInfoMessage($('.error-msg'),
-                        err.status || '',
-                        'Не получилось загрузить доступные Instagram аккаунты');
-                }, 3000);
-                $('.spinner-box').addClass('d-none');
-            });
-            */
-
-            // viewUtils.showInfoMessage($textAreaDescription,
-            //     result.status.state,
-            //     result.status.message || 'Login error');
-            // $(_loginBox).addClass(closeClass).removeClass(openedClass);
         }
     }).catch((err) => {
         // todo: render for user
