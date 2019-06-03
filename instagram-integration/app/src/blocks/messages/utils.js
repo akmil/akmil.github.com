@@ -165,14 +165,13 @@ export function appendUserList($list, item, details) {
 }
 
 export function fillUserList($list, dataArray, loadMoreCbFunction) {
-    const items = dataArray;
+    const items = dataArray.sort((a, b) => parseInt(a.slot_index, 10) - parseInt(b.slot_index, 10));
     const cList = $list;
     let tpl = '';
     const loadMoreBox = (idx, prev_cursor, slotindex) => `<div class="list-footer text-center js_load-more-box" data-idx="${idx}" data-cursor="${prev_cursor}" data-slotindex="${slotindex}">
         <button type="button" class="btn btn-outline-secondary btn-sm btn-submit">Загрузить еще</button>
     </div>`;
     cList.empty().addClass('border-light-color');
-    // todo: fix hard-code  img src="https://i.imgur.com/jNNT4LE.png"
     items.forEach((item, idx) => {
         const {pagination} = item;
         console.log(item.pending_requests);

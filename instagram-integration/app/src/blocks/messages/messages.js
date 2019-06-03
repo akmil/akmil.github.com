@@ -202,7 +202,7 @@ function getAndFillUserList(isActiveFirst, userList) {
             return;
         }
         const {data} = result;
-        data.meta.sort((a, b) => parseInt(a['slot_index'], 10) > parseInt(b['slot_index'], 10));
+        // data.meta.sort((a, b) => parseInt(a['slot_index'], 10) - parseInt(b['slot_index'], 10));
         // messages-user-list from utils.js
         fillUserList($userList, data.meta, getAndFillUserListCursor);
         if (data.settings && data.settings.invoke_in_millis) {

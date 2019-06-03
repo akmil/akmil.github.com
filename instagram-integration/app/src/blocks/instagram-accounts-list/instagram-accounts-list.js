@@ -243,7 +243,7 @@ export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
 };
 
 function fillList($list, dataArray) {
-    const items = dataArray;
+    const items = dataArray.sort((a, b) => parseInt(a.slot_index, 10) - parseInt(b.slot_index, 10));
     // const cList = $list;
     const defaultAvatarSrc = CONST.user.defaulAvatar;
     const dataArrayValidSlots = [];
