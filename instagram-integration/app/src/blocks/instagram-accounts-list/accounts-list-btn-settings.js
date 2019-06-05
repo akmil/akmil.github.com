@@ -58,10 +58,10 @@ export function settingButtonsHandler(classCfg) {
     $(updateBtnCls).on('click', (e) => {
         const $li = $(e.target).closest('li');
         const slotIndex = $(e.target).closest(updateBtnCls).data('slotindex');
-        const defaultAvatarSrc = CONST.user.defaulAvatar;
         Spinner.add($li, '');
         User.updateInstagramAccount(slotIndex).then((result) => {
             console.log('updateInstagramAccount', result);
+            const defaultAvatarSrc = CONST.user.defaulAvatar;
             const {data: {slot}} = result;
             slot.slotIndexLocal = slotIndex;
             $li.replaceWith(renderItem(slot, $li, defaultAvatarSrc));

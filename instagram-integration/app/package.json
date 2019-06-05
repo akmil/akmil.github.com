@@ -7,7 +7,7 @@
     "build": "SET NODE_ENV=production & webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src"
   },
-  "author": "Service",
+  "author": "Azam Luxgram Service",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "emojionearea": "^3.0.0",

@@ -1,7 +1,7 @@
 import User from '../../common/js-services/user';
-// import {CONST} from '../../common/js-services/consts';
+import {CONST} from '../../common/js-services/consts';
 import viewUtils from '../../common/js-services/view';
-import {reloadMetaBySlot} from './instagram-accounts-list';
+import {reloadMetaBySlot, renderItem} from './instagram-accounts-list';
 
 let slotsAll = '';
 let runOnce = true;
@@ -189,6 +189,15 @@ function updateInProgressSlot($list, slotIndex) {
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-body').removeClass('d-none');
         clearInterval(setIntervalIdMetaLazy[slotIndex]);
+    }
+    if (slotsAll[slotIndex].payment_status === 'PAID' && slotsAll[slotIndex].account) {
+        // Показываем полноценный слот с данными об аккаунте.
+        console.log('updateInstagramAccount', slotsAll);
+        const defaultAvatarSrc = CONST.user.defaulAvatar;
+        const slot = slotsAll[slotIndex];
+        slot.slotIndexLocal = slotIndex;
+        $liSlot.replaceWith(renderItem(slot, $liSlot, defaultAvatarSrc));
+        // renderItem();
     }
     if (slotsAll[slotIndex].payment_status === 'EXPIRED' && !slotsAll[slotIndex].account) {
         clearInterval(setIntervalIdMetaLazy[slotIndex]);
