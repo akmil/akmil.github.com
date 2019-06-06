@@ -313,12 +313,22 @@ function reloadList(cfgUpdate) {
         // const isSame = cfgUpdate.slotsAll.filter(o1 => result.data.slots.some(o2 => o1.payment_status === o2.payment_status));
         // const oldDataSlots = JSON.stringify(cfgUpdate.slotsAll).length;
         // const newDataSlots = JSON.stringify(result.data.slots).length;
-        const arrNew = result.data.slots.map((i) => (i.payment_status === 'IN_PROGRESS'));
+        const arrNew = result.data.slots.map((i) => (i.payment_status === 'IN_PROGRESS' || !!(i.payment_status === 'PAID' && i.account)));
+        //  {
+        //     console.log(i);
+        //     console.log(i.payment_status === 'IN_PROGRESS' && !!(i.payment_status === 'PAID' && i.account));
+        //     return (i.payment_status === 'IN_PROGRESS' && !!(i.payment_status === 'PAID' && i.account));
+        // });
         // console.log('arrNew', arrNew);
-        const oldNew = cfgUpdate.slotsAll.map((i) => (i.payment_status === 'IN_PROGRESS'));
+        const oldNew = cfgUpdate.slotsAll.map((i) => (i.payment_status === 'IN_PROGRESS' || !!(i.payment_status === 'PAID' && i.account)));
+        // {
+        //     console.log(i);
+        //     console.log(i.payment_status === 'IN_PROGRESS' || !!(i.payment_status === 'PAID' && i.account));
+        //     return (i.payment_status === 'IN_PROGRESS' || !!(i.payment_status === 'PAID' && i.account));
+        // });
         // console.log('oldNew', oldNew);
 
-        const isSame = arrNew.some((i, idx) => i === oldNew[idx]);
+        const isSame = arrNew.every((i, idx) => i === oldNew[idx]);
         console.log('isSame', isSame);
         if (isSame) {
             // console.log('return', oldDataSlots === newDataSlots);
@@ -395,6 +405,7 @@ export function init() {
     if (!$msgList.length) {
         return;
     }
+    let slotsAll = [];
     const metadata = User.getMetadata(cbError);
     // const resendRequest = () => User.getMetadata(token);
     // let isSendReqOnce = false;
@@ -431,6 +442,7 @@ export function init() {
         }
         */
     // checkResponse(result, isResendRequest);
+        slotsAll = result.data.slots;
         checkResponse(result);
         if (isInstagramAccPage) { // avoid calling image-upload on other pages
             const cfg = {
@@ -449,6 +461,17 @@ export function init() {
         $('.spinner-box').addClass('d-none');
     });
 
+    // window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH_SLOT, (eventName, data) => {
+    //     const {slotIndex} = data;
+    //     console.log('INSTAGRAM_ACCOUNS_NEED_REFRESH_SLOT', slotsAll);
+    //     console.log('INSTAGRAM_ACCOUNS_NEED_REFRESH_SLOT', data);
+    //     const defaultAvatarSrc = CONST.user.defaulAvatar;
+    //     const slot = slotsAll[slotIndex];
+    //     slot.slotIndexLocal = slotIndex;
+    //     const liSlot = $msgList.find('>li')[slotIndex];
+    //     const $liSlot = $(liSlot);
+    //     $liSlot.replaceWith(renderItem(slot, $liSlot, defaultAvatarSrc));
+    // });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, (eventName, data) => {
         if (data && data.isHideSpiner && data.slotsAll) {
             console.log(data.isHideSpiner, data.slotsAll);
@@ -456,6 +479,9 @@ export function init() {
             if (data.isReloadAllList) {
                 reloadList(data);
             }
+        }
+        if (data.isReloadAllListAfterDelete) {
+            reloadList({isHideSpiner: true, slotsAll});
         }
     });
     window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED, (eventName, data) => {

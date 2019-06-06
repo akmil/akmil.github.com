@@ -48,8 +48,8 @@ export function settingButtonsHandler(classCfg) {
         User.delInstagramAccount(slotindex).then((result) => {
             console.log(result);
             if (result.status.state === 'ok') {
-                modalConfirm.hide();
-                window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH);
+                modalConfirm.modal('hide');
+                window.PubSub.publish(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_NEED_REFRESH, {isReloadAllListAfterDelete: true});
             }
         });
     });

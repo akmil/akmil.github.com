@@ -188,7 +188,14 @@ function updateInProgressSlot($list, slotIndex) {
         // const $liSlot = $(liSlot);
         $liSlot.find('.js_form-add-count').addClass('d-none').removeClass('d-flex');
         $liSlot.find('.js_form-body').removeClass('d-none');
-        clearInterval(setIntervalIdMetaLazy[slotIndex]);
+
+        // const $activeSlot = $liSlot.find('.js_time-left-box');
+        // const delta = settings && settings.payment_waiting_dialogue_time_in_millis || 0;
+        // const $timeLeft = $activeSlot.find('.js_time-left');
+        // const countDownDate = last_modified_at;
+        // const now = new Date().getTime();
+        // const isHideTimer = ((now - countDownDate) <= delta);
+        // clock({$timeLeft, countDownDate, index, $liSlot, delta, hasAccount, isHideTimer});
     }
     if (slotsAll[slotIndex].payment_status === 'PAID' && slotsAll[slotIndex].account) {
         // Показываем полноценный слот с данными об аккаунте.
@@ -197,7 +204,7 @@ function updateInProgressSlot($list, slotIndex) {
         const slot = slotsAll[slotIndex];
         slot.slotIndexLocal = slotIndex;
         $liSlot.replaceWith(renderItem(slot, $liSlot, defaultAvatarSrc));
-        // renderItem();
+        clearInterval(setIntervalIdMetaLazy[slotIndex]);
     }
     if (slotsAll[slotIndex].payment_status === 'EXPIRED' && !slotsAll[slotIndex].account) {
         clearInterval(setIntervalIdMetaLazy[slotIndex]);

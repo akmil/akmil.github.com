@@ -99,6 +99,7 @@ export const CONST = {
         },
         instagramAccouns: {
             INSTAGRAM_ACCOUNS_NEED_REFRESH: 'instagram_accouns_need_refresh',
+            // INSTAGRAM_ACCOUNS_NEED_REFRESH_SLOT: 'instagram_accouns_need_refresh_slot',
             INSTAGRAM_ACCOUNS_RENDERED: 'instagram_accouns_rendered',
             INSTAGRAM_ACCOUNS_RENDERED_LAZY: 'instagram_accouns_rendered_lazy'
         },
