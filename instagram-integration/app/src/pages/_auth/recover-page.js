@@ -10,7 +10,8 @@ export function RecoverPage(selectorCss) {
     const user = User, // service
         $form = $(_formId),
         $email = $form.find('input[name="mail"]'),
-        $textAreaDescription = $('#description');
+        $textAreaDescription = $('#description'),
+        $sendMsg = $form.find('.send-done');
     // const openedClass = 'd-block';
     // const closeClass = 'd-none';
 
@@ -35,7 +36,7 @@ export function RecoverPage(selectorCss) {
             console.log(result.status.message);
         };
 
-        return user.login(_formData, cbError)
+        return user.recovering(_formData, cbError)
             .then((result) => {
                 if (result && result.data && result.data.token) {
                     // save the item
@@ -45,10 +46,10 @@ export function RecoverPage(selectorCss) {
                     // console.log('request succeeded with JSON response', result);
                     viewUtils.showInfoMessage($textAreaDescription,
                         result.status.state,
-                        result.status.message || 'Login succsess');
+                        result.status.message || 'Пароль отправлен');
                 } else if (result.status) {
                     console.log(result);
-                    viewUtils.showInfoMessage(this.$textAreaDescription,
+                    viewUtils.showInfoMessage($textAreaDescription,
                         `<p>status: ${result.status.state}</p><p> message: ${result.status.message}</p>`);
                 } else {
                     console.log(result);
@@ -58,7 +59,7 @@ export function RecoverPage(selectorCss) {
                     console.log(result);
                     viewUtils.showInfoMessage($textAreaDescription,
                         result.status.state,
-                        result.status.message || 'Login error');
+                        result.status.message || 'Пароль отправлен');
                 }
             });
     };
@@ -74,7 +75,8 @@ export function RecoverPage(selectorCss) {
             $email.val($email.val().toLocaleLowerCase());
             userLoginHeader(_formData).then(() => {
                 // PubSub.publish(CONST.events.USER_LOGGED, 'login');
-                window.location.href = './instagram-accounts.html';
+                // window.location.href = './instagram-accounts.html';
+                $sendMsg.removeClass('d-none');
             });
         }
     };
