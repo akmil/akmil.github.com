@@ -13,6 +13,11 @@ const pages = [
         source: '_auth/login'
     },
     {
+        title: 'Восстановление пароля',
+        name: 'recover',
+        source: '_auth/recover'
+    },
+    {
         title: 'Регистрация',
         name: 'register',
         source: '_auth/register'

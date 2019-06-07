@@ -34,6 +34,11 @@ class User {
         const setting = {...this.settingPost, body: JSON.stringify(formData)};
         return this.network.sendRequest(CONST.getPath('login'), setting, cbError);
     }
+    // /v1/registration/basic/password/recovering
+    recovering(formData, cbError) {
+        const setting = {...this.settingPost, body: JSON.stringify(formData)};
+        return this.network.sendRequest(CONST.getPath('recovering'), setting, cbError);
+    }
 
     addInstagramAccount(formData, slotIndex, cbError) {
         const {username, password, ip, port, usernameProxy, passwordProxy} = formData;

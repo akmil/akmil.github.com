@@ -23,6 +23,7 @@ export const CONST = {
         // base: 'http://api.luxgram.net/v1/',
         registration: 'registration/basic/',
         login: 'registration/basic/login',
+        recovering: 'registration/basic/password/recovering',
         confirmation: 'registration/basic/confirmation?token',
 
         // -------------------------

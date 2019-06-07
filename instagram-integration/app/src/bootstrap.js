@@ -11,6 +11,7 @@ import PubSub from 'pubsub-js';
 import {LoginForm} from './blocks/login-form/login-form';
 import RegisterForm from './blocks/register-form/register-form';
 import {LoginPage} from './pages/_auth/login-page';
+import {RecoverPage} from './pages/_auth/recover-page';
 import {confirmationWithRedirect} from './blocks/confirm-reg/confirm-reg';
 import * as header from './blocks/header/header';
 import * as sidebarMenu from './blocks/sidebar-menu/sidebar-menu';
@@ -67,6 +68,11 @@ const init = () => {
     }).init(); // init instagram login form *!/
     LoginPage({
         _loginBox: '.auth.login .card-signin',
+        _formId: '.form-signin',
+        _buttonSubmitId: '.form-signin [type="submit"]'
+    }).init();
+    RecoverPage({
+        _loginBox: '.auth.recovering .card-signin',
         _formId: '.form-signin',
         _buttonSubmitId: '.form-signin [type="submit"]'
     }).init();
