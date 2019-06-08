@@ -73,6 +73,11 @@ const pages = [
         source: '_autocomments/autocomments'
     },
     {
+        title: 'Оживлятор',
+        name: 'reviver',
+        source: '_reviver/reviver'
+    },
+    {
         title: 'Кабинет пользователя',
         name: 'profile',
         source: '_profile/profile-page'

@@ -14,7 +14,9 @@ export const CONST = {
             storiesT: 'STORIES',
             storiesSubT: ['STORIES_BY_LIST', 'STORIES_BY_FOLLOWERS', 'STORIES_BY_ACTIVE_AUDIENCE'],
             autocommentsT: 'AUTO_COMMENT',
-            autocommentsSubT: ['DEFAULT_AUTO_COMMENT']
+            autocommentsSubT: ['DEFAULT_AUTO_COMMENT'],
+            reviverT: 'REVIVER',
+            reviverSubT: ['DEFAULT_REVIVER']
         },
 
         // DEV
