@@ -17,6 +17,7 @@ function addListHandler() {
     $('.js_pass-checkpoint-btn').on('click', (e) => {
         const $button = $(e.target);
         const username = $button.data('username');
+        const slotindex = $button.data('slotindex');
         checkpointType = $button.data('checkpointType') || checkpointType;
         // $('#security-code').data('checkpointType', checkpointType);
         // todo add 'checkpointType' to modal
@@ -35,7 +36,7 @@ function addListHandler() {
             return;
         }
 
-        User.getSecurityKey(username, checkpointType).then((result) => {
+        User.getSecurityKey(`slot/${slotindex}`, checkpointType).then((result) => {
             console.log('SecurityKey received:', result.status.state);
             if (result.status.state === 'ok') {
                 const $modal = $('#security-code');
@@ -153,6 +154,7 @@ const checkPointText = (checkpoint, item) => {
         return `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto" 
             data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
             data-username="${item.username || ''}"
+            data-slotindex="${item.index || ''}"
             data-toggle="modal" data-target="#security-code">
             <i class="fas fa-key"></i>Пройти чекпоинт</button>`;
     } else {
@@ -231,6 +233,7 @@ export const renderItem = (itemData, cList, _defaultAvatarSrc) => {
                 ? `<button class="btn btn-outline-secondary js_pass-checkpoint-btn d-block mx-auto"
                         data-checkpoint-type="${checkpoint.type || 'EMAIL'}"
                         data-username="${item.username || ''}"
+                        data-slotindex="${index || ''}"
                         data-toggle="modal" data-target="#security-code">
                     <i class="fas fa-key"></i>Пройти чекпоинт</button>`
                 : ''}
