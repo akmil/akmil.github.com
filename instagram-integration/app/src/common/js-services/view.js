@@ -90,6 +90,45 @@ function viewUtils() {
         }
     }
 
+    function fillRadioGroupActionsList($wrapper, taskModes, _actionText) {
+        if (isEmpty(taskModes)) {
+            console.info('taskModes is empty');
+        }
+        // const actionText = _actionText || 'подписок';
+        const radioBtnReducer = function (item, idx) {
+            return `<input type="radio" id="${item}-${idx}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}-${idx}">${item}</label>`;
+            // switch (item) {
+            //     case 'AGGRESSIVE':
+            //         return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+            //         <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> ${val} ${actionText} в час</label>`;
+            //     case 'MIDDLE':
+            //         return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+            //         <label class="custom-control-label" for="${item}"><strong>Средний:</strong> ${val} ${actionText} в час</label>`);
+            //     case 'LIKE':
+            //         return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
+            //         <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> ${val} ${actionText} в час</label>`;
+            //     default:
+            //         console.log('default', item);
+            // }
+        };
+    // console.log('draw speed radioBtn');
+        $wrapper.empty();
+        taskModes.forEach((item, idx) => {
+            $(`<div class="custom-control custom-radio">
+                ${radioBtnReducer(item, idx)}
+            </div>`).appendTo($wrapper);
+        });
+    //     for (const item in taskModes) {
+    //   // console.log('structure: ' + item);
+    //         if (Object.prototype.hasOwnProperty.call(taskModes, item)) {
+    //             $(`<div class="custom-control custom-radio">
+    //             ${radioBtnReducer(item, taskModes[item])}
+    //         </div>`).appendTo($wrapper);
+    //         }
+    //     }
+    }
+
     function getValByCommaSeparator($el) {
         return $el.val()
                 .trim()
@@ -142,6 +181,7 @@ function viewUtils() {
         showInfoMessage,
         fillList,
         fillRadioGroupList,
+        fillRadioGroupActionsList,
         isEmail,
         getFormattedDateUtil,
         getValByCommaSeparator,
