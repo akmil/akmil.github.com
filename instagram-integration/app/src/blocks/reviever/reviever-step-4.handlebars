@@ -1,15 +1,21 @@
 {{>step-header title=titleHeader subTitle=subTitle}}
 <div class="form-bottom">
-    <div class="row">
+    {{!-- <div class="row">
         <div class="form-group col-md-6 col-sm-6">
-            <label class="" for="limit">Лимит просмотров</label>
+            <label class="" for="limit">Количество дней активности подписчика</label>
             <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
         </div>
-    </div>
-    <div class="row js_post-count d-none">
+    </div> --}}
+    <div class="row js_post-count">
         <div class="form-group col-md-6 col-sm-6">
             <label class="" for="post-count">Количество публикаций для мониторинга</label>
             <input type="number" class="form-control" placeholder="Количество публикаций" name="post-count" id="post-count" min="1" max="20" value="3">
+        </div>
+    </div>
+    <div class="row js_activity_days">
+        <div class="form-group col-md-6 col-sm-6">
+            <label class="" for="activity_days">Количество дней активности подписчика</label>
+            <input type="number" class="form-control" placeholder="Количество дней активности подписчика" name="activity_days" id="activity_days" min="1" max="20" value="3">
         </div>
     </div>
     <div class="row js_stories-competitors d-none">

@@ -160,6 +160,7 @@ function renderActionsMode(defaultCfg) {
     const {cfg: {actions}} = defaultCfg;
     // const {taskMode: taskModeSelector} = elSelector;
     const taskModeSelector = '.js_action-mode';
+    const typesMode = {like: 'LIKE', likeMsg: 'LIKE_AND_MESSAGE', message: 'MESSAGE', remove: 'REMOVE'};
 
     fillRadioGroupActionsList($(taskModeSelector), actions, 'просмотров');
 
@@ -167,8 +168,22 @@ function renderActionsMode(defaultCfg) {
         const value = $(e.target).attr('value');
         state.user_default_config.action = value.toUpperCase();
         console.log(value);
-        if (value === 'LIKE') {
-            $('.js_toast-task-mode').toast('show');
+        if (value === typesMode.like || value === typesMode.likeMsg) {
+            // show label 'Лайкать случайную публикацию'
+            $('.js_show-like-or-messages').addClass('d-none');
+            $('.js_like-random').removeClass('d-none');
+        }
+        if (value === typesMode.likeMsg || value === typesMode.message) {
+            $('.js_like-random').addClass('d-none');
+            $('.js_show-like-or-messages').removeClass('d-none');
+        }
+        if (value === typesMode.likeMsg) {
+            $('.js_like-random').removeClass('d-none');
+            $('.js_show-like-or-messages').removeClass('d-none');
+        }
+        if (value === typesMode.remove) {
+            $('.js_like-random').addClass('d-none');
+            $('.js_show-like-or-messages').addClass('d-none');
         }
     });
 }
@@ -245,24 +260,43 @@ function addTextArea(stepNumber) {
     }
 }
 
-function addFileUploadBox(stepNumber) {
+/*
+function addMessageBox(elements) {
+    const {$fileUploadBox, $titleStepBox, $addSettings} = elements;
+    // $fileUploadBox.removeClass('d-none');
+    $('.js_validate-txt-file-is-uploaded').attr('disabled', 'disabled');
+    // $titleStepBox.removeClass('d-none');
+    // $addSettings.addClass('d-none');
+}
+
+function hideMessageBox(elements) {
+    const {$fileUploadBox, $titleStepBox, $addSettings} = elements;
+    // $fileUploadBox.addClass('d-none');
+    // $titleStepBox.addClass('d-none');
+    // $addSettings.removeClass('d-none');
+}
+
+function addLabelBox(elements) {
+    console.log('addLabelBox');
+}
+
+function addGenericBox(stepNumber) {
     const {wizardForm} = elSelector;
     const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
     const $fileUploadBox = $(fieldLast).find('.stories__file-upload-box');
     const $titleStepBox = $(fieldLast).find('.js_add-file-title');
     const $addSettings = $(fieldLast).find('.js_add-settings-step-4');
+
     if (state.subtype === CONST.url.tmTypes.reviverSubT[0]) {
-        $fileUploadBox.removeClass('d-none');
-        $('.js_validate-txt-file-is-uploaded').attr('disabled', 'disabled');
-        $titleStepBox.removeClass('d-none');
-        $addSettings.addClass('d-none');
+        console.log('state.subtype ', state.subtype);
+        addMessageBox(stepNumber);
     } else {
-        $fileUploadBox.addClass('d-none');
-        $titleStepBox.addClass('d-none');
-        $addSettings.removeClass('d-none');
+        hideMessageBox({$fileUploadBox, $titleStepBox, $addSettings});
+        addLabelBox();
     }
-    console.log('addFileUploadBox done');
+    console.log('addMessageBox done');
 }
+*/
 
 function stepReducer(stepNumber, state) {
     switch (stepNumber) {
@@ -278,7 +312,7 @@ function stepReducer(stepNumber, state) {
         case 2:
             console.log(state, stepNumber);
             addTextArea(stepNumber);
-            addFileUploadBox(stepNumber);
+            // addGenericBox(stepNumber);
             break;
         default:
             console.log('default', stepNumber);
