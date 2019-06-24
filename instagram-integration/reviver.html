@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -165,6 +165,9 @@
                   <li class="nav-item"><a class="nav-link text-light" href="./stories.html">
                       <i class="fas fa-history mr-1"></i>Просмотр Stories</a>
                   </li>
+                  <li class="nav-item"><a class="nav-link text-light" href="./reviver.html">
+                      <i class="fas fa-history mr-1"></i>Оживлятор</a>
+                  </li>
               </ul>
       
           </div>
@@ -192,10 +195,6 @@
                       <div class="col-9">
                           <div class="tab-content" id="v-pills-tabContent">
                               <div class="tab-pane fade show" id="all" role="tabpanel" aria-labelledby="v-pills-all-tab">
-                                  <div class="subtype--box">
-                                      <h3>Тип</h3>
-                                      <div class="subtype-select-wrapper"></div>
-                                  </div>
                                   <div class="tasks tasks-all--box">
                                       <h3></h3>
                                       <ul class="tasks-all list-unstyled"></ul>
@@ -308,6 +307,49 @@
                                                                   <div class="col-9 js_action-mode"> 
                                                                   </div>
                                                               </div>
+                                                              <div class="row js_like-random my-3 d-none">
+                                                                  <div class="form-group col-md-6 col-sm-6">
+                                                                      <div class="custom-control custom-checkbox">
+                                                                          <input type="checkbox" class="custom-control-input" id="like-random">
+                                                                          <label class="custom-control-label" for="like-random">Лайкать случайную публикацию</label>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              
+                                                              <div class="row my-3 js_show-like-or-messages d-none">
+                                                                      <div class="col">
+                                                                              <textarea class="form-control answer-messages" rows="4" data-emoji-picker="true" style="padding:.25rem 1.75rem .25rem .25rem;width:100%;min-height:42px" placeholder="Введите сообщение"></textarea>
+                                                          
+                                                                              <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                                                                                  <button class="file-upload-btn btn btn-success" type="button">
+                                                                                      <i class="far fa-image fa-lg"></i>
+                                                                                  </button>
+                                                                              </div>
+                                                          
+                                                                              <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post" title="Добавить публикацию" data-toggle="tooltip" data-placement="top" data-post-info="todo: get req to user: ">
+                                                                                  <span class="js_open-posts-gridModal" data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                                                                                  <i class="far fa-images fa-lg"></i>
+                                                                                  </span>
+                                                                              </button>
+                                                                              <div class="mt-2">
+                                                                                  <div class="file-upload">
+                                                                                  
+                                                                                    <div class="image-upload-wrap">
+                                                                                      <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                                                    </div>
+                                                                                    <div class="file-upload-content">
+                                                                                      <img class="file-upload-image" src="#" alt="your image"/>
+                                                                                      <div class="image-title-wrap">
+                                                                                        <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                  
+                                                                                  
+                                                                              </div>
+                                                                          </div>
+                                                              </div>
+                                                              
                                                               
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
                                                               <button type="button" class="btn btn-blue btn-next">Дальше</button>
@@ -322,16 +364,16 @@
                                                                   </div>
                                                               </div>
                                                               <div class="form-bottom">
-                                                                  <div class="row">
-                                                                      <div class="form-group col-md-6 col-sm-6">
-                                                                          <label for="limit">Лимит просмотров</label>
-                                                                          <input type="number" class="form-control" placeholder="Лимит подписок" name="limit" id="limit" min="0" max="100000" value="9999">
-                                                                      </div>
-                                                                  </div>
-                                                                  <div class="row js_post-count d-none">
+                                                                  <div class="row js_post-count">
                                                                       <div class="form-group col-md-6 col-sm-6">
                                                                           <label for="post-count">Количество публикаций для мониторинга</label>
                                                                           <input type="number" class="form-control" placeholder="Количество публикаций" name="post-count" id="post-count" min="1" max="20" value="3">
+                                                                      </div>
+                                                                  </div>
+                                                                  <div class="row js_activity_days">
+                                                                      <div class="form-group col-md-6 col-sm-6">
+                                                                          <label for="activity_days">Количество дней активности подписчика</label>
+                                                                          <input type="number" class="form-control" placeholder="Количество дней активности подписчика" name="activity_days" id="activity_days" min="1" max="20" value="3">
                                                                       </div>
                                                                   </div>
                                                                   <div class="row js_stories-competitors d-none">
@@ -361,14 +403,6 @@
                                                               </div>
                                                           </div>
                                                           <div class="form-bottom">
-                                                              <div class="row stories__file-upload-box add-file d-none">
-                                                                  <div class="form-group col-md-8 col-sm-8">
-                                                                      <div class="file-upload-container">
-                                                                          <label for="txt-file" class="label-chous btn btn-success">Добавить</label>
-                                                                          <input type="file" accept=".txt, .rtf" class="input-txt-file" id="txt-file" name="txt-file"/>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
                                                               <div class="row js_smooth-starting my-3 d-none">
                                                                   <div class="form-group col-md-6 col-sm-6">
                                                                       <div class="custom-control custom-checkbox">
@@ -376,6 +410,39 @@
                                                                           <label class="custom-control-label" for="smooth_starting">Плавный старт</label>
                                                                       </div>
                                                                   </div>
+                                                              </div>
+                                                              <div class="row my-3">
+                                                                  <div class="col">
+                                                                          <textarea class="form-control answer-messages" rows="4" data-emoji-picker="true" style="padding:.25rem 1.75rem .25rem .25rem;width:100%;min-height:42px" placeholder="Введите сообщение"></textarea>
+                                                          
+                                                                          <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                                                                              <button class="file-upload-btn btn btn-success" type="button">
+                                                                                  <i class="far fa-image fa-lg"></i>
+                                                                              </button>
+                                                                          </div>
+                                                          
+                                                                          <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post" title="Добавить публикацию" data-toggle="tooltip" data-placement="top" data-post-info="todo: get req to user: ">
+                                                                              <span class="js_open-posts-gridModal" data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                                                                              <i class="far fa-images fa-lg"></i>
+                                                                              </span>
+                                                                          </button>
+                                                                          <div class="mt-2">
+                                                                              <div class="file-upload">
+                                                                              
+                                                                                <div class="image-upload-wrap">
+                                                                                  <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                                                </div>
+                                                                                <div class="file-upload-content">
+                                                                                  <img class="file-upload-image" src="#" alt="your image"/>
+                                                                                  <div class="image-title-wrap">
+                                                                                    <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                              
+                                                                              
+                                                                          </div>
+                                                                      </div>
                                                               </div>
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
                                                               <button type="submit" class="btn btn-blue js_validate-txt-file-is-uploaded">Запустить</button>

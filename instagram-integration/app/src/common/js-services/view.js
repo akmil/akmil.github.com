@@ -90,27 +90,31 @@ function viewUtils() {
         }
     }
 
-    function fillRadioGroupActionsList($wrapper, taskModes, _actionText) {
+    function fillRadioGroupActionsList($wrapper, taskModes) {
+        const typesMode = {like: 'LIKE', likeMsg: 'LIKE_AND_MESSAGE', message: 'MESSAGE', remove: 'REMOVE'};
         if (isEmpty(taskModes)) {
-            console.info('taskModes is empty');
+            console.info('typesMode is empty');
         }
         // const actionText = _actionText || 'подписок';
-        const radioBtnReducer = function (item, idx) {
-            return `<input type="radio" id="${item}-${idx}" name="customRadio" value="${item}" class="custom-control-input">
-                    <label class="custom-control-label" for="${item}-${idx}">${item}</label>`;
-            // switch (item) {
-            //     case 'AGGRESSIVE':
-            //         return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-            //         <label class="custom-control-label" for="${item}"><strong>Агрессивный:</strong> ${val} ${actionText} в час</label>`;
-            //     case 'MIDDLE':
-            //         return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
-            //         <label class="custom-control-label" for="${item}"><strong>Средний:</strong> ${val} ${actionText} в час</label>`);
-            //     case 'LIKE':
-            //         return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
-            //         <label class="custom-control-label" for="${item}"><strong>Безопасный:</strong> ${val} ${actionText} в час</label>`;
-            //     default:
-            //         console.log('default', item);
-            // }
+        const radioBtnReducer = function (item) {
+            // return `<input type="radio" id="${item}-${idx}" name="customRadio" value="${item}" class="custom-control-input">
+            //         <label class="custom-control-label" for="${item}-${idx}">${item}</label>`;
+            switch (item) {
+                case typesMode.like:
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Лайк</strong></label>`;
+                case typesMode.message:
+                    return (`<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input">
+                    <label class="custom-control-label" for="${item}"><strong>Сообщение</strong></label>`);
+                case typesMode.likeMsg:
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="${item}"><strong>Лайк и сообщение</strong></label>`;
+                case typesMode.remove:
+                    return `<input type="radio" id="${item}" name="customRadio" value="${item}" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="${item}"><strong>Удаление из подписчиков</strong></label>`;
+                default:
+                    console.log('default', item);
+            }
         };
     // console.log('draw speed radioBtn');
         $wrapper.empty();

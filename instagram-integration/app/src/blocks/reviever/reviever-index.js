@@ -5,11 +5,11 @@ import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './reviever-status';
 import {initLogsTab} from '../_shared/logs/logs-tabs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
-import {/* initTagsInput, */nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+// import {nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 // import Notification from '../../common/js-services/notification-toast';
 import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
-const {getValByCommaSeparator, fillRadioGroupList, fillRadioGroupActionsList} = viewUtils;
+const {/* getValByCommaSeparator, */fillRadioGroupList, fillRadioGroupActionsList} = viewUtils;
 let usernameSelected = '';
 let slotSelected = '';
 const logsState = CONST.logsState;
@@ -39,33 +39,37 @@ const state = {
 function onSubmitHandler(e) {
     const {wizardFormName} = elSelector;
     const form = document.forms[wizardFormName];
-    const limit = form['limit'];
+    const activityDays = form['activity_days'];
+    // const limit = form['limit'];
 
-    // if (limit.value === '') {
-    //     limit.focus();
-    //     return false;
-    // }
+    if (activityDays.value === '') {
+        activityDays.focus();
+        return false;
+    }
 
     const body = {
         ...state,
         user_default_config: {
             ...state.user_default_config,
             criteria: {
-                max_views: limit.value
-            }
+                // max_views: limit.value
+            },
+            activity_days: activityDays.value
         },
-        user_custom_config: {},
+        user_custom_config: {
+            forms: []
+        },
         type: clsConst.pathType,
         username: usernameSelected,
         slot_index: slotSelected
     };
 
     if (body.subtype === CONST.url.tmTypes.reviverSubT[0]) {
-        const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
+        // const competitors = getValByCommaSeparator($(form).find(elSelector.competitors));
         const posts = $('#post-count').val();
-        body.user_custom_config = {
-            competitors
-        };
+        // body.user_custom_config = {
+            // competitors
+        // };
         body.user_default_config = {
             ...body.user_default_config,
             posts
@@ -73,10 +77,12 @@ function onSubmitHandler(e) {
     }
     if (body.subtype === CONST.url.tmTypes.reviverSubT[0]) {
         // text file should be added
-        body['user_custom_config'].attachment = {
-            'list_id': $('.stories__file-upload-box .file-upload-container').attr('attached-txt-id')
+        body['user_custom_config'] = {
+            ...body.user_custom_config,
+            attachment: {
+                'list_id': $('.stories__file-upload-box .file-upload-container').attr('attached-txt-id')
+            }
         };
-        delete body.user_default_config.criteria.max_views;
     }
 
     $(form).find('input[type="text"],input[type="number"],input[type="email"]').each(function () {
@@ -117,10 +123,10 @@ function setUserNameFirstStep(state) {
 }
 
 // todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
-const containerCls = '.js_add-settings-step-4';
-const $container = $(containerCls);
-const $competitorsTextArea = $container.find('input[data-role="tagsinput"]');
-const nextStepBtn = $container.find('.js_stories-competitors-btn');
+// const containerCls = '.js_add-settings-step-4';
+// const $container = $(containerCls);
+// const $competitorsTextArea = $container.find('input[data-role="tagsinput"]');
+// const nextStepBtn = $container.find('.js_stories-competitors-btn');
 
 /**
  * Init Handlers
@@ -128,18 +134,22 @@ const nextStepBtn = $container.find('.js_stories-competitors-btn');
 function initHandlers() {
 
     attachTxtFileHandler('.file-upload-container');
-    nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
 
     // radio-group step 2
-    $('.js_get-stories-type input[type=radio]').on('click', (e) => {
-        const value = $(e.target).attr('value');
-        state.subtype = value.toUpperCase();
-        if (state.subtype === CONST.url.tmTypes.reviverSubT[1]) {
-            nextStepBtn.removeAttr('disabled', 'disabled'); // enable button 'Запустить'
-        } else {
-            nextStepBtn.attr('disabled', 'disabled');
-        }
-        console.log(state);
+    // $('.js_get-stories-type input[type=radio]').on('click', (e) => {
+    //     const value = $(e.target).attr('value');
+    //     state.subtype = value.toUpperCase();
+    //     if (state.subtype === CONST.url.tmTypes.reviverSubT[1]) {
+    //         nextStepBtn.removeAttr('disabled', 'disabled'); // enable button 'Запустить'
+    //     } else {
+    //         nextStepBtn.attr('disabled', 'disabled');
+    //     }
+    //     console.log(state);
+    // });
+
+    $('#like-random').on('change', (e) => {
+        state.user_default_config.do_like_random_post = e.target.checked;
+        console.log(e.target.checked);
     });
 
     // alert close
@@ -162,12 +172,14 @@ function renderActionsMode(defaultCfg) {
     const taskModeSelector = '.js_action-mode';
     const typesMode = {like: 'LIKE', likeMsg: 'LIKE_AND_MESSAGE', message: 'MESSAGE', remove: 'REMOVE'};
 
-    fillRadioGroupActionsList($(taskModeSelector), actions, 'просмотров');
+    fillRadioGroupActionsList($(taskModeSelector), actions);
 
     $(`${taskModeSelector} input[type=radio]`).on('click', (e) => {
         const value = $(e.target).attr('value');
         state.user_default_config.action = value.toUpperCase();
+        state.user_default_config.do_like_random_post = false;
         console.log(value);
+
         if (value === typesMode.like || value === typesMode.likeMsg) {
             // show label 'Лайкать случайную публикацию'
             $('.js_show-like-or-messages').addClass('d-none');
@@ -248,17 +260,17 @@ function getConfig() {
     });
 }
 
-function addTextArea(stepNumber) {
-    const {wizardForm} = elSelector;
-    const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
-    if (state.subtype === CONST.url.tmTypes.reviverSubT[2]) {
-        nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
-        $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
-        console.log('end');
-    } else {
-        $(fieldLast).find('.js_stories-competitors').addClass('d-none');
-    }
-}
+// function addTextArea(stepNumber) {
+//     const {wizardForm} = elSelector;
+//     const fieldLast = $(`${wizardForm} fieldset`).get(stepNumber + 1);
+//     if (state.subtype === CONST.url.tmTypes.reviverSubT[2]) {
+//         nextBtnvalidateCompetitorsHandler($competitorsTextArea, nextStepBtn);
+//         $(fieldLast).find('.js_stories-competitors').removeClass('d-none');
+//         console.log('end');
+//     } else {
+//         $(fieldLast).find('.js_stories-competitors').addClass('d-none');
+//     }
+// }
 
 /*
 function addMessageBox(elements) {
@@ -311,7 +323,7 @@ function stepReducer(stepNumber, state) {
             break;
         case 2:
             console.log(state, stepNumber);
-            addTextArea(stepNumber);
+            // addTextArea(stepNumber);
             // addGenericBox(stepNumber);
             break;
         default:
