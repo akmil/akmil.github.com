@@ -202,45 +202,41 @@
                                   
                               </div>
                               <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
-                                  <div class="log-subype--box">
-                                      <div class="log-subype"></div>
-                                  </div>                      <div class="js_logs-container d-none">
-                                    
-                                    <div class="d-flex manage-logs-box position-absolute" style="right:0">
-                                        <button class="btn btn-success js_download-logs ml-auto">Скачать</button>
-                                        <button class="btn btn-danger js_delete-logs ml-auto">Очистить логи</button>
-                                    </div>
-                                    <div class="log-users-list"></div>
-                                    
-                                    
-                                    <div class="log-tasks--box mt-2">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="logs-pagination pagination justify-content-center"></ul>
-                                        </nav>
-                                        <ul class="log-tasks list-unstyled">
-                                        </ul>
-                                    </div>
-                                    
-                                    
-                                    <div class="modal fade" id="delete-logs-promt" tabindex="-1" role="dialog" aria-labelledby="delete-user" style="display:none">
-                                        <div class="modal-dialog">
-                                            
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Очистить логи</h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Вы действительно хотите удалить логи?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success js_logs-delete-confirm">Да</button>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                      </div>
-                              </div>
+                                  
+                                  <div class="d-flex manage-logs-box position-absolute" style="right:0">
+                                      <button class="btn btn-success js_download-logs ml-auto">Скачать</button>
+                                      <button class="btn btn-danger js_delete-logs ml-auto">Очистить логи</button>
+                                  </div>
+                                  <div class="log-users-list"></div>
+                                  
+                                  
+                                  <div class="log-tasks--box mt-2">
+                                      <nav aria-label="Page navigation">
+                                          <ul class="logs-pagination pagination justify-content-center"></ul>
+                                      </nav>
+                                      <ul class="log-tasks list-unstyled">
+                                      </ul>
+                                  </div>
+                                  
+                                  
+                                  <div class="modal fade" id="delete-logs-promt" tabindex="-1" role="dialog" aria-labelledby="delete-user" style="display:none">
+                                      <div class="modal-dialog">
+                                          
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h4 class="modal-title">Очистить логи</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <p>Вы действительно хотите удалить логи?</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-success js_logs-delete-confirm">Да</button>
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>                  </div>
                               <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
                                   <div class="js_add-new-task add-new-task-box">
                                       <div class="row">
@@ -349,6 +345,49 @@
                                                                               </div>
                                                                           </div>
                                                               </div>
+                                                          
+                                                          <div class="js_show-like-or-messages d-none">
+                                                              <div class="automessages-text-fields">
+                                                                  <div class="row my-3">
+                                                                      <div class="col">
+                                                                              <textarea class="form-control answer-messages" rows="4" data-emoji-picker="true" style="padding:.25rem 1.75rem .25rem .25rem;width:100%;min-height:42px" placeholder="Введите сообщение"></textarea>
+                                                          
+                                                                              <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                                                                                  <button class="file-upload-btn btn btn-success" type="button">
+                                                                                      <i class="far fa-image fa-lg"></i>
+                                                                                  </button>
+                                                                              </div>
+                                                          
+                                                                              <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post" title="Добавить публикацию" data-toggle="tooltip" data-placement="top" data-post-info="todo: get req to user: ">
+                                                                                  <span class="js_open-posts-gridModal" data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                                                                                  <i class="far fa-images fa-lg"></i>
+                                                                                  </span>
+                                                                              </button>
+                                                                              <div class="mt-2">
+                                                                                  <div class="file-upload">
+                                                                                  
+                                                                                    <div class="image-upload-wrap">
+                                                                                      <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                                                    </div>
+                                                                                    <div class="file-upload-content">
+                                                                                      <img class="file-upload-image" src="#" alt="your image"/>
+                                                                                      <div class="image-title-wrap">
+                                                                                        <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                  
+                                                                                  
+                                                                              </div>
+                                                                          </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row py-3">
+                                                                  <div class="col">
+                                                                      <button type="button" class="btn btn-outline-success js_add-automessages">+Добавить еще</button>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
                                                               
                                                               
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
@@ -403,46 +442,53 @@
                                                               </div>
                                                           </div>
                                                           <div class="form-bottom">
-                                                              <div class="row js_smooth-starting my-3 d-none">
-                                                                  <div class="form-group col-md-6 col-sm-6">
-                                                                      <div class="custom-control custom-checkbox">
-                                                                          <input type="checkbox" class="custom-control-input" id="smooth_starting" checked="checked">
-                                                                          <label class="custom-control-label" for="smooth_starting">Плавный старт</label>
+                                                              <div class="automessages-text-fields">
+                                                                  <div class="row js_smooth-starting my-3 d-none">
+                                                                      <div class="form-group col-md-6 col-sm-6">
+                                                                          <div class="custom-control custom-checkbox">
+                                                                              <input type="checkbox" class="custom-control-input" id="smooth_starting" checked="checked">
+                                                                              <label class="custom-control-label" for="smooth_starting">Плавный старт</label>
+                                                                          </div>
                                                                       </div>
                                                                   </div>
-                                                              </div>
-                                                              <div class="row my-3">
-                                                                  <div class="col">
-                                                                          <textarea class="form-control answer-messages" rows="4" data-emoji-picker="true" style="padding:.25rem 1.75rem .25rem .25rem;width:100%;min-height:42px" placeholder="Введите сообщение"></textarea>
+                                                                  <div class="row my-3">
+                                                                      <div class="col">
+                                                                              <textarea class="form-control answer-messages" rows="4" data-emoji-picker="true" style="padding:.25rem 1.75rem .25rem .25rem;width:100%;min-height:42px" placeholder="Введите сообщение"></textarea>
                                                           
-                                                                          <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
-                                                                              <button class="file-upload-btn btn btn-success" type="button">
-                                                                                  <i class="far fa-image fa-lg"></i>
-                                                                              </button>
-                                                                          </div>
-                                                          
-                                                                          <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post" title="Добавить публикацию" data-toggle="tooltip" data-placement="top" data-post-info="todo: get req to user: ">
-                                                                              <span class="js_open-posts-gridModal" data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
-                                                                              <i class="far fa-images fa-lg"></i>
-                                                                              </span>
-                                                                          </button>
-                                                                          <div class="mt-2">
-                                                                              <div class="file-upload">
-                                                                              
-                                                                                <div class="image-upload-wrap">
-                                                                                  <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
-                                                                                </div>
-                                                                                <div class="file-upload-content">
-                                                                                  <img class="file-upload-image" src="#" alt="your image"/>
-                                                                                  <div class="image-title-wrap">
-                                                                                    <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
-                                                                                  </div>
-                                                                                </div>
+                                                                              <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                                                                                  <button class="file-upload-btn btn btn-success" type="button">
+                                                                                      <i class="far fa-image fa-lg"></i>
+                                                                                  </button>
                                                                               </div>
-                                                                              
-                                                                              
+                                                          
+                                                                              <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post" title="Добавить публикацию" data-toggle="tooltip" data-placement="top" data-post-info="todo: get req to user: ">
+                                                                                  <span class="js_open-posts-gridModal" data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                                                                                  <i class="far fa-images fa-lg"></i>
+                                                                                  </span>
+                                                                              </button>
+                                                                              <div class="mt-2">
+                                                                                  <div class="file-upload">
+                                                                                  
+                                                                                    <div class="image-upload-wrap">
+                                                                                      <input class="file-upload-input" type="file" accept=".jpg, .jpeg"/>
+                                                                                    </div>
+                                                                                    <div class="file-upload-content">
+                                                                                      <img class="file-upload-image" src="#" alt="your image"/>
+                                                                                      <div class="image-title-wrap">
+                                                                                        <button type="button" class="remove-image btn btn-warning">Удалить <span class="image-title">Загрузить</span></button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                  
+                                                                                  
+                                                                              </div>
                                                                           </div>
-                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="row py-3">
+                                                                  <div class="col">
+                                                                      <button type="button" class="btn btn-outline-success js_add-automessages">+Добавить еще</button>
+                                                                  </div>
                                                               </div>
                                                               <button type="button" class="btn btn-blue btn-previous">Назад</button>
                                                               <button type="submit" class="btn btn-blue js_validate-txt-file-is-uploaded">Запустить</button>

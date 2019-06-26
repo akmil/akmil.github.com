@@ -183,20 +183,6 @@ function setUserName(state) {
     slotIndex = state.slot_index;
 }
 
-// function addSmoothStart(defaultCfg) {
-//     const {cfg: {smooth_starting}} = defaultCfg;
-//     if (!smooth_starting) {
-//         return;
-//     }
-//     state.user_default_config.smooth_starting_enabled = true;
-//     $('.js_smooth-starting').removeClass('d-none');
-
-//     $('.js_smooth-starting').on('change', (e) => {
-//         // console.log(e.target.checked, smooth_starting);
-//         state.user_default_config.smooth_starting_enabled = e.target.checked;
-//     });
-// }
-
 function getDataStepSpeed() {
 
     // TODO: refactor get from - view.fillRadioGroupList

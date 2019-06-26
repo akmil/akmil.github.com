@@ -3,11 +3,18 @@ import UserTaskManager from '../../common/js-services/api-task-manager';
 import viewUtils from '../../common/js-services/view';
 import * as wizardForm from '../../blocks/wizard-form/wizard-form';
 import * as storiesStatus from './reviever-status';
-import {initLogsTab} from '../_shared/logs/logs-tabs';
+// import {initLogsTab} from '../_shared/logs/logs-tabs';
+import * as tabs from '../_shared/tebs-pils/tabs';
+import * as logs from '../_shared/logs/logs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
 // import {nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 // import Notification from '../../common/js-services/notification-toast';
 import * as smoothStarting from '../_shared/form-helper/smooth-start';
+import * as imageUpload from '../_shared/image-upload/image-upload';
+import {emoji} from '../../common/js-services/emoji';
+import {getPosts} from '../_shared/getPostsModal/utils-modal';
+import {tplTextField} from './addAnswerTemplate';
+import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {/* getValByCommaSeparator, */fillRadioGroupList, fillRadioGroupActionsList} = viewUtils;
 let usernameSelected = '';
@@ -27,7 +34,12 @@ const elSelector = {
     wizardFormName: 'wizard-form',
     fields: '.automessages-text-fields',
     taskMode: '.js_task-mode',
-    competitors: '.js_stories-competitors input[data-role="tagsinput"]'
+    competitors: '.js_stories-competitors input[data-role="tagsinput"]',
+    // addPostBtns
+    keyWord: 'input.answer-words',
+    answer: 'textarea.answer-messages',
+    fileUploadBox: '.file-upload',
+    addPostBtns: '.js_automessages-add-post'
 };
 const state = {
     subtype: CONST.url.tmTypes.reviverSubT[0],
@@ -112,40 +124,72 @@ function onSubmitHandler(e) {
     });
 }
 
-function setUserNameCb(_usernameSelected, _slotSelected) {
-    usernameSelected = _usernameSelected;
-    slotSelected = _slotSelected;
-}
+// function setUserNameCb(_usernameSelected, _slotSelected) {
+//     usernameSelected = _usernameSelected;
+//     slotSelected = _slotSelected;
+// }
 
 function setUserNameFirstStep(state) {
     usernameSelected = state.username;
     slotSelected = state.slot_index;
 }
 
-// todo: refactor with follow.js -- 'nextBtnvalidateCompetitorsHandler()'
-// const containerCls = '.js_add-settings-step-4';
-// const $container = $(containerCls);
-// const $competitorsTextArea = $container.find('input[data-role="tagsinput"]');
-// const nextStepBtn = $container.find('.js_stories-competitors-btn');
+function initLogsTabByUser() {
+    function OnChangeSelect() {
+        const {selectCls} = logsState;
+        $(`.${selectCls}`).on('change', function () {
+            usernameSelected = $(`.${selectCls} option:selected`).val();
+            // clsConst.pathSubType = logsState.activeSubType;
+            logs.init(selectCls, clsConst);
+        });
+    }
+    // addDropdown($(logsState.wrapperSubtype), logsSubtypes, {logsState, dropdownOnSelectCb});
+    tabs.init(OnChangeSelect, logsState); // makes double request : OPTION and GET
+}
+
+function initEmojii() {
+    emoji({
+        page: clsConst.currentPageCls,
+        styles: {old: 'bottom: 30px;', new: 'top: -210px;'}
+    });
+}
+
+/* TODO: refactor -> move initModalHandler to separate file, remove initModalHandler in autogreeting-main.js */
+let targetButton = {};
+
+function loadMoreHandler(getPosts) {
+    $('#load-more').off().on('click', (e) => {
+        const $btn = $(e.target);
+        const cursor = $btn.attr('cursor');
+        console.log('load more click');
+        getPosts(null, {userName: usernameSelected, cursor, slotIndex: slotSelected}, {loadMoreHandler: this, targetButton});
+    });
+}
+
+function initModalHandler() {
+
+    $('.js_open-posts-gridModal').on('click', function (event) {
+        targetButton = $(this); // Button that triggered the modal
+        // Update the modal's content
+        const modal = $('#postsGridModal');
+        getPosts(modal, {userName: usernameSelected, slotIndex: slotSelected}, {loadMoreHandler, targetButton});
+        modal.find('.modal-title').text('Публикации');
+    });
+}
+
+/* TODO: refactor -> move initModalHandler to separate file END */
 
 /**
  * Init Handlers
  */
 function initHandlers() {
+    const $competitorsInput = $('.automessages-text-fields input.answer-words[data-role="tagsinput"]');
+    const $blackListInput = $('.automessages-text-fields input.blacklist-words[data-role="tagsinput"]');
+    const nextStepBtn = $('form button[type="submit"]');
+    nextBtnvalidateCompetitorsHandler($competitorsInput, nextStepBtn, 'ignoreRegexCheck');
+    nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
 
     attachTxtFileHandler('.file-upload-container');
-
-    // radio-group step 2
-    // $('.js_get-stories-type input[type=radio]').on('click', (e) => {
-    //     const value = $(e.target).attr('value');
-    //     state.subtype = value.toUpperCase();
-    //     if (state.subtype === CONST.url.tmTypes.reviverSubT[1]) {
-    //         nextStepBtn.removeAttr('disabled', 'disabled'); // enable button 'Запустить'
-    //     } else {
-    //         nextStepBtn.attr('disabled', 'disabled');
-    //     }
-    //     console.log(state);
-    // });
 
     $('#like-random').on('change', (e) => {
         state.user_default_config.do_like_random_post = e.target.checked;
@@ -165,9 +209,36 @@ function initHandlers() {
         $('#v-pills-all-tab').trigger('click');
         window.PubSub.publish(CONST.events.tasks.NEW_TASK_CREATED);
     });
+
+    // TODO: refactor with autogreet.js initHandlers
+    // $('[data-toggle="popover"]').popover(); // init
+    $('.js_add-automessages').on('click', (e) => {
+        const lastTextField = $(elSelector.fields).last();
+        tplTextField(elSelector.fields.substr(1)).insertAfter(lastTextField);
+        initEmojii();
+        imageUpload.init();
+        // $('[data-toggle="popover"]').popover(); // reinit
+        $('[data-toggle="tooltip"]').tooltip(); // reinit
+        initModalHandler();
+
+        // const $input = $('input[data-role="tagsinput"]', lastTextField);
+        // initTagsInput();
+        // nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
+
+        const lastTextFieldAfterInsert = $(elSelector.fields).last();
+        const $inputAnswerWords = $('input.answer-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+        const $blackListInput = $('input.blacklist-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+
+        initTagsInput($inputAnswerWords); // reinit answer-words
+        initTagsInput($blackListInput); // reinit blacklist-words
+        // nextBtnvalidateCompetitorsHandler($inputAnswerWords, nextStepBtn, 'ignoreRegexCheck');
+        // nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
+    });
+
+    initLogsTabByUser();
 }
 function renderActionsMode(defaultCfg) {
-    const {cfg: {actions}} = defaultCfg;
+    const {config: {actions}} = defaultCfg;
     // const {taskMode: taskModeSelector} = elSelector;
     const taskModeSelector = '.js_action-mode';
     const typesMode = {like: 'LIKE', likeMsg: 'LIKE_AND_MESSAGE', message: 'MESSAGE', remove: 'REMOVE'};
@@ -200,7 +271,7 @@ function renderActionsMode(defaultCfg) {
     });
 }
 function renderTaskMode(defaultCfg) {
-    const {cfg: {task_modes}} = defaultCfg;
+    const {config: {task_modes}} = defaultCfg;
     const {taskMode: taskModeSelector} = elSelector;
 
     fillRadioGroupList($(taskModeSelector), task_modes, 'действий');
@@ -216,7 +287,7 @@ function renderTaskMode(defaultCfg) {
 }
 
 function addPostsForActiveCompetitors(defaultCfg) {
-    const {cfg: {posts}} = defaultCfg;
+    const {config: {posts}} = defaultCfg;
     if (!posts) {
         $('.js_post-count').addClass('d-none');
         return;
@@ -247,7 +318,7 @@ function getConfig() {
                 found
             }
         } = result;
-        const limitVal = found.cfg.criteria.max_views;
+        const limitVal = found.config.criteria.max_views;
         renderTaskMode(found);
         renderActionsMode(found);
         $('#limit').val(limitVal);
@@ -343,8 +414,19 @@ export function init() {
     };
     wizardForm.init(wizardCfg);
     initHandlers();
-    const textRusArray = ['По списку', 'По подписчикам', 'По активной аудитории конкурентов'];
-    initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.reviverSubT, clsConst, setUserNameCb, textRusArray});
+    initModalHandler();
+    initEmojii();
+    imageUpload.init();
+    // const textRusArray = ['По списку', 'По подписчикам', 'По активной аудитории конкурентов'];
+    // initLogsTab({logsState, logsSubtypes: CONST.url.tmTypes.reviverSubT, clsConst, setUserNameCb, textRusArray});
+
+    window.PubSub.subscribe(CONST.events.instagramAccouns.INSTAGRAM_ACCOUNS_RENDERED_LAZY, (e, accounts) => {
+        const selectCls = 'js_logs-accounts';
+        logs.init(selectCls, clsConst);
+    });
+
+    // const selectCls = 'js_logs-accounts';
+    // logs.init(selectCls, clsConst);
     storiesStatus.init({
         isInStoriesPage: isInCurrentPage
     });

@@ -1,6 +1,6 @@
 
 export function addSmoothStart(defaultCfg, state) {
-    const {cfg: {smooth_starting}} = defaultCfg;
+    const {config: {smooth_starting}} = defaultCfg;
     if (!smooth_starting) {
         return;
     }

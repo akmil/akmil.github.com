@@ -1,44 +1,51 @@
 {{>step-header title=titleHeader subTitle=subTitle}}
 <div class="form-bottom">
-    <div class="row js_smooth-starting my-3 d-none">
-        <div class="form-group col-md-6 col-sm-6">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="smooth_starting" checked>
-                <label class="custom-control-label" for="smooth_starting">Плавный старт</label>
+    <div class="automessages-text-fields">
+        <div class="row js_smooth-starting my-3 d-none">
+            <div class="form-group col-md-6 col-sm-6">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="smooth_starting" checked>
+                    <label class="custom-control-label" for="smooth_starting">Плавный старт</label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row my-3">
-        <div class="col">
-                <textarea class="form-control answer-messages" rows="4"
-                    data-emoji-picker="true"
-                    style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
-                    placeholder="Введите сообщение"
-                ></textarea>
+        <div class="row my-3">
+            <div class="col">
+                    <textarea class="form-control answer-messages" rows="4"
+                        data-emoji-picker="true"
+                        style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
+                        placeholder="Введите сообщение"
+                    ></textarea>
 
-                {{!-- file-upload --}}
-                <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
-                    <button class="file-upload-btn btn btn-success" type="button">
-                        <i class="far fa-image fa-lg"></i>
+                    {{!-- file-upload --}}
+                    <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                        <button class="file-upload-btn btn btn-success" type="button">
+                            <i class="far fa-image fa-lg"></i>
+                        </button>
+                    </div>
+
+                    {{!-- post-upload --}}
+                    <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post"
+                        title="Добавить публикацию"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-post-info="todo: get req to user: ">
+                        <span class="js_open-posts-gridModal"
+                            data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                        <i class="far fa-images fa-lg"></i>
+                        </span>
                     </button>
+                    <div class="mt-2">
+                        {{> image-upload }}
+                        <!-- Button trigger modal -->
+                    </div>
                 </div>
-
-                {{!-- post-upload --}}
-                <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post"
-                    title="Добавить публикацию"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    data-post-info="todo: get req to user: ">
-                    <span class="js_open-posts-gridModal"
-                        data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
-                    <i class="far fa-images fa-lg"></i>
-                    </span>
-                </button>
-                <div class="mt-2">
-                    {{> image-upload }}
-                    <!-- Button trigger modal -->
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <button type="button" class="btn btn-outline-success js_add-automessages">+Добавить еще</button>
+        </div>
     </div>
     <button type="button" class="btn btn-blue btn-previous">Назад</button>
     <button type="submit" class="btn btn-blue js_validate-txt-file-is-uploaded">Запустить</button>

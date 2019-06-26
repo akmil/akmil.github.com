@@ -47,6 +47,48 @@
                     </div>
                 </div>
     </div>
+
+<div class="js_show-like-or-messages d-none">
+    <div class="automessages-text-fields">
+        <div class="row my-3">
+            <div class="col">
+                    <textarea class="form-control answer-messages" rows="4"
+                        data-emoji-picker="true"
+                        style="padding: 0.25rem 1.75rem 0.25rem 0.25rem; width: 100%;min-height: 42px;"
+                        placeholder="Введите сообщение"
+                    ></textarea>
+
+                    {{!-- file-upload --}}
+                    <div class="file-upload-btn-box" data-toggle="tooltip" data-placement="top" title="Добавить изображение">
+                        <button class="file-upload-btn btn btn-success" type="button">
+                            <i class="far fa-image fa-lg"></i>
+                        </button>
+                    </div>
+
+                    {{!-- post-upload --}}
+                    <button type="button" class="btn btn-success post-upload-btn js_automessages-add-post"
+                        title="Добавить публикацию"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-post-info="todo: get req to user: ">
+                        <span class="js_open-posts-gridModal"
+                            data-container="body" data-toggle="popover" data-placement="bottom" data-content="У текущего аккаунта нет ни одного поста">
+                        <i class="far fa-images fa-lg"></i>
+                        </span>
+                    </button>
+                    <div class="mt-2">
+                        {{> image-upload }}
+                        <!-- Button trigger modal -->
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <button type="button" class="btn btn-outline-success js_add-automessages">+Добавить еще</button>
+        </div>
+    </div>
+</div>
     
     
     <button type="button" class="btn btn-blue btn-previous">Назад</button>

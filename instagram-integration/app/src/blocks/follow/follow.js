@@ -80,23 +80,8 @@ function getDataStep2() {
     getTasksData(path);
 }
 
-/*
-function addSmoothStart(defaultCfg) {
-    const {cfg: {smooth_starting}} = defaultCfg;
-    if (!smooth_starting) {
-        return;
-    }
-    state.user_default_config.smooth_starting_enabled = true;
-    $('.js_smooth-starting').removeClass('d-none');
-
-    $('.js_smooth-starting').on('change', (e) => {
-        // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting_enabled = e.target.checked;
-    });
-}
-*/
 function addPostsForActiveCompetitors(defaultCfg) {
-    const {cfg: {posts}} = defaultCfg;
+    const {config: {posts}} = defaultCfg;
     if (!posts) {
         $('.js_post-count').addClass('d-none');
         return;
@@ -139,7 +124,7 @@ function getDataStepSpeed(stepNumber) {
             const {
               data: {
                 found: {
-                  cfg: {
+                    config: {
                     task_modes
                   }
                 }

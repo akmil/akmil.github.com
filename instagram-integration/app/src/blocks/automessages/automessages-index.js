@@ -14,7 +14,7 @@ import * as smoothStarting from '../_shared/form-helper/smooth-start';
 
 const {getValByCommaSeparator} = viewUtils;
 let usernameSelected = '';
-let slotIndex = '';
+let slotSelected = '';
 const selectCls = 'js_logs-accounts';
 const clsConst = {
     currentPageCls: '.automessages-page',
@@ -122,7 +122,7 @@ function onSubmitHandler(e) {
 
     const nReqBody = {
         'username': usernameSelected,
-        'slot_index': slotIndex,
+        'slot_index': slotSelected,
         'type': clsConst.pathType,
         'subtype': clsConst.pathSubType,
         'user_default_config': {
@@ -174,7 +174,7 @@ function loadMoreHandler(getPosts) {
         const $btn = $(e.target);
         const cursor = $btn.attr('cursor');
         console.log('load more click');
-        getPosts(null, {userName: usernameSelected, cursor}, {loadMoreHandler: this, targetButton});
+        getPosts(null, {userName: usernameSelected, cursor, slotIndex: slotSelected}, {loadMoreHandler: this, targetButton});
     });
 }
 
@@ -184,7 +184,7 @@ function initModalHandler() {
         targetButton = $(this); // Button that triggered the modal
         // Update the modal's content
         const modal = $('#postsGridModal');
-        getPosts(modal, {userName: usernameSelected}, {loadMoreHandler, targetButton});
+        getPosts(modal, {userName: usernameSelected, slotIndex: slotSelected}, {loadMoreHandler, targetButton});
         modal.find('.modal-title').text('Публикации');
     });
 }
@@ -249,24 +249,9 @@ function initHandlers() {
 function setUserName(state) {
     // console.log('getTasksData', state.username);
     usernameSelected = state.username;
-    slotIndex = state.slot_index;
+    slotSelected = state.slot_index;
 }
 
-/*
-function addSmoothStart() {
-    // const {cfg: {smooth_starting}} = defaultCfg;
-    // if (!smooth_starting) {
-    //     return;
-    // }
-    state.user_default_config.smooth_starting_enabled = true;
-    $('.js_smooth-starting').removeClass('d-none');
-
-    $('.js_smooth-starting').on('change', (e) => {
-        // console.log(e.target.checked, smooth_starting);
-        state.user_default_config.smooth_starting_enabled = e.target.checked;
-    });
-}
-*/
 function getConfig() {
     const path = {
         type: clsConst.pathType,
@@ -286,7 +271,7 @@ function stepReducer(stepNumber, state) {
         case 0:
             setUserName(state);
             state.user_default_config = {};
-            smoothStarting.addSmoothStart({cfg: {smooth_starting: true}}, state);
+            smoothStarting.addSmoothStart({config: {smooth_starting: true}}, state);
             // console.log(state, stepNumber);
             getConfig();
             break;

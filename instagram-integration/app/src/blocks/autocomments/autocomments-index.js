@@ -145,7 +145,7 @@ function onSubmitHandler(e) {
     });
 }
 
-function initLogsTab() {
+function initLogsTabByUser() {
     function OnChangeSelect() {
         const {selectCls} = logsState;
         $(`.${selectCls}`).on('change', function () {
@@ -236,24 +236,8 @@ function initHandlers() {
     });
 
     // tabs.init(fillListUsers);
-    initLogsTab();
+    initLogsTabByUser();
 }
-
-/*
-function addSmoothStart() {
-    // const {cfg: {smooth_starting}} = defaultCfg;
-    // if (!smooth_starting) {
-    //     return;
-    // }
-    state.user_default_config.smooth_starting_enabled = true;
-    $('.js_smooth-starting').removeClass('d-none');
-
-    $('.js_smooth-starting').on('change', (e) => {
-        // console.log(e.target.checked, smooth_starting_enabled);
-        state.user_default_config.smooth_starting_enabled = e.target.checked;
-    });
-}
-*/
 
 function setUserName(state) {
     // console.log('getTasksData', state.username);
@@ -281,7 +265,7 @@ function stepReducer(stepNumber, state) {
             setUserName(state);
             // console.log(state, stepNumber);
             state.user_default_config = {};
-            smoothStarting.addSmoothStart({cfg: {smooth_starting: true}}, state);
+            smoothStarting.addSmoothStart({config: {smooth_starting: true}}, state);
             getConfig();
             break;
         default:

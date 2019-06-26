@@ -26,10 +26,11 @@
                       {{>task-status wrapperCls='tasks-stopped--box' listCls='tasks-stopped' title='Остановленные'}}
                   </div> --}}
                   <div class="tab-pane fade show" id="logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
-                      {{>logs-subtype}}
+                      {{>logs}}
+                      {{!-- {{>logs-subtype}}
                       <div class="js_logs-container d-none">
                         {{>logs}}
-                      </div>
+                      </div> --}}
                   </div>
                   <div class="tab-pane fade show active" id="create-task" role="tabpanel" aria-labelledby="v-pills-create-task-tab">
                       <div class="js_add-new-task add-new-task-box">
