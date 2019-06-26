@@ -7,14 +7,15 @@ import * as storiesStatus from './reviever-status';
 import * as tabs from '../_shared/tebs-pils/tabs';
 import * as logs from '../_shared/logs/logs';
 import {attachTxtFileHandler} from '../follow/follow-read-file-txt';
-// import {nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+
 // import Notification from '../../common/js-services/notification-toast';
 import * as smoothStarting from '../_shared/form-helper/smooth-start';
 import * as imageUpload from '../_shared/image-upload/image-upload';
 import {emoji} from '../../common/js-services/emoji';
 import {getPosts} from '../_shared/getPostsModal/utils-modal';
 import {tplTextField} from './addAnswerTemplate';
-import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+import {nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
+// import {initTagsInput, nextBtnvalidateCompetitorsHandler} from '../_shared/tags-input/tags-input';
 
 const {/* getValByCommaSeparator, */fillRadioGroupList, fillRadioGroupActionsList} = viewUtils;
 let usernameSelected = '';
@@ -48,10 +49,80 @@ const state = {
     }
 };
 
+function validateIsEmpty($elements, e) {
+    $elements.each(function () {
+        if ($(this).val() === '') {
+            e.preventDefault();
+            $(this).addClass('input-error');
+            // validation = false;
+            return;
+        } else {
+            $(this).removeClass('input-error');
+        }
+    });
+}
+
 function onSubmitHandler(e) {
     const {wizardFormName} = elSelector;
     const form = document.forms[wizardFormName];
     const activityDays = form['activity_days'];
+
+    /* */
+    const fields = $(elSelector.fields);
+    const reqBody = [];
+    // let validation = true;
+    // const $elementsKeyWord = fields.find(elSelector.keyWord);
+    const $elementsAnswer = fields.find(elSelector.answer);
+
+    // validateIsEmpty($elementsKeyWord, e);
+    validateIsEmpty($elementsAnswer, e);
+
+    fields.each((idx, item) => {
+        // const keyWord = getValByCommaSeparator($(item).find(elSelector.keyWord));
+        const answer = $(item).find(elSelector.answer).val();
+        const imageId = $(item).find(elSelector.fileUploadBox).attr('attached-img-id');
+        const $imagePostBox = $(item).find('.js_uploaded-img-from-posts');
+        const postItemId = $imagePostBox.data('postId');
+        const postItemType = $imagePostBox.data('postType');
+        // const blacklistWords = $(item).find('input.blacklist-words');
+        // const blacklistWordsArr = getValByCommaSeparator(blacklistWords);
+
+        // if (!keyWord.length || !answer.length) {
+        //     $(item).append(`
+        //         <p class="msg-empty-field text-danger">Пустое поле не валидно</p>
+        //     `);
+        //     setTimeout(() => {
+        //         $('.msg-empty-field').addClass('d-none');
+        //     }, 5000);
+        //     validation = false;
+        //     return;
+        // }
+        const submitBodyItem = {
+            // 'key_words': keyWord,
+            answer,
+            // blacklist: blacklistWordsArr,
+            'attachment': imageId ? {
+                'image_id': imageId
+            } : undefined
+        };
+
+        if (postItemId) {
+            submitBodyItem.attachment = {
+                ...submitBodyItem.attachment,
+                post: {
+                    id: postItemId,
+                    type: postItemType || 'type-error'
+                }
+            };
+        }
+        reqBody.push(submitBodyItem);
+    });
+    // if (!validation) {
+        // console.log('**alarm **', elSelector.keyWord);
+        // return;
+    // }
+
+    /* */
     // const limit = form['limit'];
 
     if (activityDays.value === '') {
@@ -69,7 +140,7 @@ function onSubmitHandler(e) {
             activity_days: activityDays.value
         },
         user_custom_config: {
-            forms: []
+            forms: reqBody
         },
         type: clsConst.pathType,
         username: usernameSelected,
@@ -85,15 +156,6 @@ function onSubmitHandler(e) {
         body.user_default_config = {
             ...body.user_default_config,
             posts
-        };
-    }
-    if (body.subtype === CONST.url.tmTypes.reviverSubT[0]) {
-        // text file should be added
-        body['user_custom_config'] = {
-            ...body.user_custom_config,
-            attachment: {
-                'list_id': $('.stories__file-upload-box .file-upload-container').attr('attached-txt-id')
-            }
         };
     }
 
@@ -183,11 +245,11 @@ function initModalHandler() {
  * Init Handlers
  */
 function initHandlers() {
-    const $competitorsInput = $('.automessages-text-fields input.answer-words[data-role="tagsinput"]');
-    const $blackListInput = $('.automessages-text-fields input.blacklist-words[data-role="tagsinput"]');
-    const nextStepBtn = $('form button[type="submit"]');
-    nextBtnvalidateCompetitorsHandler($competitorsInput, nextStepBtn, 'ignoreRegexCheck');
-    nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
+    // const $competitorsInput = $('.automessages-text-fields input.answer-words[data-role="tagsinput"]');
+    // const $blackListInput = $('.automessages-text-fields input.blacklist-words[data-role="tagsinput"]');
+    // const nextStepBtn = $('form button[type="submit"]');
+    // nextBtnvalidateCompetitorsHandler($competitorsInput, nextStepBtn, 'ignoreRegexCheck');
+    // nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
 
     attachTxtFileHandler('.file-upload-container');
 
@@ -225,12 +287,12 @@ function initHandlers() {
         // initTagsInput();
         // nextBtnvalidateCompetitorsHandler($input, nextStepBtn);
 
-        const lastTextFieldAfterInsert = $(elSelector.fields).last();
-        const $inputAnswerWords = $('input.answer-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
-        const $blackListInput = $('input.blacklist-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+        // const lastTextFieldAfterInsert = $(elSelector.fields).last();
+        // const $inputAnswerWords = $('input.answer-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
+        // const $blackListInput = $('input.blacklist-words[data-role="tagsinput"]', lastTextFieldAfterInsert);
 
-        initTagsInput($inputAnswerWords); // reinit answer-words
-        initTagsInput($blackListInput); // reinit blacklist-words
+        // initTagsInput($inputAnswerWords); // reinit answer-words
+        // initTagsInput($blackListInput); // reinit blacklist-words
         // nextBtnvalidateCompetitorsHandler($inputAnswerWords, nextStepBtn, 'ignoreRegexCheck');
         // nextBtnvalidateCompetitorsHandler($blackListInput, null, 'ignoreRegexCheck');
     });
@@ -437,7 +499,29 @@ export function init() {
     //     console.log('logsSubtypes', logsSubtypes);
     //     console.log('accounts', accounts);
     // });
-    window.PubSub.subscribe(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, (e, res) => {
-        $('.js_validate-txt-file-is-uploaded').removeAttr('disabled');
+    // window.PubSub.subscribe(CONST.events.autoarnswer.TEXT_FILE_UPLOADED, (e, res) => {
+    //     $('.js_validate-txt-file-is-uploaded').removeAttr('disabled');
+    // });
+
+    /* image loaded*/
+    window.PubSub.subscribe(CONST.events.autoarnswer.IMAGE_UPLOADED, (e, res) => {
+        const {response} = res;
+        const result = (response.length) ? JSON.parse(response) : '';
+        const imageId = result && result.data && result.data.image_id;
+        $(res.el).closest('.file-upload').attr('attached-img-id', imageId);
+        console.log('image_loaded', res);
+
+        // todo: make as callBack
+        const $imageBox = $(res.el).closest('.col').find('.js_uploaded-img-from-posts');
+        if ($imageBox.length) {
+            $imageBox.remove();
+        }
+    });
+    window.PubSub.subscribe(CONST.events.modal.IMAGE_POST_SELECTED, (e, data) => {
+        const $imageBox = $(data.closestCol).find('.file-upload-content');
+        console.log('$imageBox', $imageBox);
+        if ($imageBox.length) {
+            $imageBox.hide();
+        }
     });
 }
