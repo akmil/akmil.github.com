@@ -23,7 +23,8 @@ var uiHandler = {
       $button = $(".js_calculate", $filterBox),
       me = this;
 
-    function sortByFilter(json, categoryRange, gender, belt , age) { //args : jsonArray,{'from':23,'to':31},'м'
+    function sortByFilter(json, categoryRange, gender, belt , age) { 
+      //args : jsonArray,{'from':23,'to':31},'м'      
 
       return json.filter(function (subarray, i, array) {
           var _weight = subarray[2],
@@ -112,7 +113,7 @@ var uiHandler = {
       me.scrollTo($wrapper);
     };
 
-    this.addButton($wrapper,buildStageOneHandler, 'To pairs');
+    this.addButton($wrapper,buildStageOneHandler, 'Show price');
   },
 
   /**

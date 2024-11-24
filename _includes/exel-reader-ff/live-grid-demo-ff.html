@@ -1,0 +1,48 @@
+<script src="../../scripts/exel-reader/life-grid/alertify.js"></script>
+<script src="../../scripts/exel-reader/life-grid/jquery.min.js"></script>
+<script src="../../scripts/exel-reader/life-grid/jquery.handsontable.full.js"></script>
+
+<link rel="stylesheet" href="../../scripts/exel-reader/life-grid/sheetjs.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/jquery.handsontable.full.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/samples.css">
+<link rel="stylesheet" media="screen" href="../../scripts/exel-reader/life-grid/alertify.css">
+
+<div id="body" class="container-fluid">
+    <div id="left">
+        <div id="drop">Drop a file here</div>
+
+
+        <p class="text-center">or</p>
+        <div>
+            <button id="load-demo-file" class="btn btn-success mt-1 mb-3 w-100">load-demo-file</button>
+        </div>
+        <!--<h3> Choose a worksheet:</h3>-->
+        <div id="buttons"></div>
+    </div>
+    <div id="right">
+        <div id="hot" style="overflow: scroll" class="handsontable"></div>
+        <div class="js_calculate-box calculate-box" style="display: none">
+            <p>calculate results</p>
+            <div>
+                <button class="btn btn-warning js_calculate w-100">calculate</button>
+            </div>
+        </div>
+        <div id="buttons"></div>
+        <div id="calc-result" class="mt-4 mb-4"></div>
+    </div>
+
+
+    <script src="../../scripts/exel-reader-ff/vendors/shim.js"></script>
+    <script src="../../scripts/exel-reader-ff/vendors/xlsx.full.min.js"></script>
+    <script src="../../scripts/exel-reader-ff/vendors/dropsheet.js"></script>
+    <!-- <script src="../../scripts/exel-reader/life-grid/src/generatePairs.js"></script> -->
+    
+    <script src="../../scripts/exel-reader-ff/dataMock.js"></script>
+    <script src="../../scripts/exel-reader-ff/ui-handle.js"></script>
+    <script src="../../scripts/exel-reader-ff/main.js"></script>
+
+    <script src="../../scripts/exel-reader-ff/vendors/spin.js"></script>
+
+
+</div>
+

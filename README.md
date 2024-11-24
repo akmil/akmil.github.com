@@ -1,3 +1,8 @@
+## run
+`npm i`
+`sudo apt install ruby-full`
+`sudo apt install jekyll`
+
 ## Name Color Automaticaly
  
 [Demo](http://akmil.github.io/color-namer/)
